@@ -27,8 +27,9 @@
    "id": "accraexats",
    "name": "ACCRA EXPATS MARKETPLACE",
    "url": "https://www.facebook.com/groups/accraexats/",
-   "active": true,
-   "added": "2026-10-01"
+   "active": false,
+   "added": "2026-10-01",
+   "off_why": "Not a member of this group"
   },
   {
    "id": "456467567894267",
@@ -62,8 +63,9 @@
    "id": "1781509128744735",
    "name": "Fans who love NANA AMA AGYEAMAN",
    "url": "https://www.facebook.com/groups/1781509128744735/",
-   "active": true,
-   "added": "2026-10-01"
+   "active": false,
+   "added": "2026-10-01",
+   "off_why": "Not a member of this group"
   },
   {
    "id": "dealsformamasofficial",
@@ -76,8 +78,9 @@
    "id": "247630922377452",
    "name": "Aluminium profiles and glass buy and sell",
    "url": "https://www.facebook.com/groups/247630922377452/",
-   "active": true,
-   "added": "2026-10-01"
+   "active": false,
+   "added": "2026-10-01",
+   "off_why": "Not a member of this group"
   },
   {
    "id": "966583207420627",
@@ -156,8 +159,9 @@
    "id": "613910549123146",
    "name": "Singles and Married Corner group",
    "url": "https://www.facebook.com/groups/613910549123146/",
-   "active": true,
-   "added": "2026-10-01"
+   "active": false,
+   "added": "2026-10-01",
+   "off_why": "Not a member of this group"
   },
   {
    "id": "theheiress",
@@ -448,6 +452,146 @@
    "g": "613910549123146",
    "ok": false,
    "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-06",
+   "t": "2026-10-06T09:01:58.215Z",
+   "p": "FAV-003",
+   "g": "762804364052457",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-06",
+   "t": "2026-10-06T09:25:15.951Z",
+   "p": "FAV-003",
+   "g": "688229241385954",
+   "ok": true
+  },
+  {
+   "d": "2026-10-06",
+   "t": "2026-10-06T09:27:17.086Z",
+   "p": "FAV-003",
+   "g": "accraexats",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-06",
+   "t": "2026-10-06T09:27:40.963Z",
+   "p": "FAV-003",
+   "g": "456467567894267",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-06",
+   "t": "2026-10-06T09:29:03.489Z",
+   "p": "FAV-003",
+   "g": "611599393546171",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-06",
+   "t": "2026-10-06T09:32:30.710Z",
+   "p": "FAV-003",
+   "g": "oppbiz",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-06",
+   "t": "2026-10-06T09:34:40.217Z",
+   "p": "FAV-003",
+   "g": "3295010260530139",
+   "ok": true
+  },
+  {
+   "d": "2026-10-06",
+   "t": "2026-10-06T09:36:13.379Z",
+   "p": "FAV-003",
+   "g": "1781509128744735",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-06",
+   "t": "2026-10-06T09:36:37.502Z",
+   "p": "FAV-003",
+   "g": "dealsformamasofficial",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-06",
+   "t": "2026-10-06T09:57:30.717Z",
+   "p": "FAV-003",
+   "g": "247630922377452",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-06",
+   "t": "2026-10-06T09:57:55.568Z",
+   "p": "FAV-003",
+   "g": "ghanashs",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-06",
+   "t": "2026-10-06T09:59:41.051Z",
+   "p": "FAV-003",
+   "g": "433382596714655",
+   "ok": true
+  },
+  {
+   "d": "2026-10-06",
+   "t": "2026-10-06T10:02:49.829Z",
+   "p": "FAV-003",
+   "g": "910798219668535",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-06",
+   "t": "2026-10-06T10:05:30.695Z",
+   "p": "FAV-003",
+   "g": "128000729380895",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-06",
+   "t": "2026-10-06T10:06:55.675Z",
+   "p": "FAV-003",
+   "g": "455961835149809",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-06",
+   "t": "2026-10-06T10:10:00.041Z",
+   "p": "FAV-003",
+   "g": "tltshopgroup",
+   "ok": true
+  },
+  {
+   "d": "2026-10-06",
+   "t": "2026-10-06T10:12:34.650Z",
+   "p": "FAV-003",
+   "g": "555856695137297",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-06",
+   "t": "2026-10-06T10:14:05.127Z",
+   "p": "FAV-003",
+   "g": "613910549123146",
+   "ok": false,
+   "why": "Not a member of this group"
   }
  ],
  "resets": {},
@@ -539,6 +683,13 @@
   {
    "d": "2026-10-03",
    "t": "2026-10-03T10:11:44.445Z",
+   "kind": "post",
+   "tried": 18,
+   "ok": 14
+  },
+  {
+   "d": "2026-10-06",
+   "t": "2026-10-06T10:14:15.189Z",
    "kind": "post",
    "tried": 18,
    "ok": 14
