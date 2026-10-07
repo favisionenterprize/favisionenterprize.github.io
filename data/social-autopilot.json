@@ -1,0 +1,17 @@
+{
+ "settings": {
+  "x": {
+   "on": true,
+   "daily_posts": 10,
+   "account": "FaVisionEnt"
+  },
+  "tiktok": {
+   "on": true,
+   "daily_posts": 10
+  },
+  "pause_min_s": 90,
+  "pause_max_s": 240
+ },
+ "posts": [],
+ "runs": []
+}
