@@ -280,6 +280,7 @@
       if (k === "declines" && cleanupWaiting()) return startDeclines(steps);
       if (k === "sync" && syncWaiting()) return startImport(steps);
       if (k.startsWith("allgroups:")) return postAllGroups(k.slice(10), steps);
+      if (k.startsWith("tt1:") && SOC() && SOC().state()) return startSoc("tiktok", { products: [k.slice(4)], limit: 1, full: true }, steps);
       if (k === "grow" && growWaiting()) return startGrow(steps);
       if (k === "post" && activeGroups().length && plan().groups.length) return startPosting(auto, steps);
       if (k === "ig" && IG() && IG().summary().waiting && Number(ext()) >= 4) return startIg({}, steps);
@@ -352,7 +353,7 @@
     if (Number(ext()) < 3) return A.toast("Update the add-on first (steps at the bottom of the Today tab).", true);
     if (!postable().some(x => x.id === pid)) return A.toast("That product can't be posted (it needs a price, a photo and to be in stock).", true);
     A.toast("Reading all your Facebook groups first, then posting…");
-    startImport(["allgroups:" + pid, "report"]);
+    startImport(["allgroups:" + pid, "tt1:" + pid, "report"]);   // Facebook groups, then the same product on TikTok
   }
   async function postAllGroups(pid, then) {
     const p = postable().find(x => x.id === pid);
@@ -696,7 +697,7 @@
         <p class="muted">Tick any products and post them whenever you like. Each product goes into different groups (one product per group in a session) and never twice into the same group. This is separate from the daily plan in the Today tab, which keeps running as before.</p>
         <div class="fa-actions"><button class="btn btn-ghost btn-sm" data-now="all">Tick all ${list.length}</button><button class="btn btn-ghost btn-sm" data-now="none">Clear</button></div>
         <ul class="fa-list now-list">${list.map(p => { const c = coverage(p); return `<li><label><input type="checkbox" data-now-p="${esc(p.id)}" ${on.has(p.id) ? "checked" : ""}> <img src="../${esc(p.images[0])}" alt="" width="40" height="30" loading="lazy"> ${esc(shortName(p))}</label><span class="now-right"><small>${esc(C.formatPrice(p.price_ghs))} · in ${c.done}/${c.total} groups</small><button type="button" class="btn btn-sell btn-sm" data-all-groups="${esc(p.id)}" title="This round: in ${roundOf(p.id).done.size} of ${roundOf(p.id).total} groups">Post to all groups · ${roundOf(p.id).done.size}/${roundOf(p.id).total}</button></span></li>`; }).join("")}</ul>
-        <p class="muted fa-small"><b>Post to all groups</b> first reads every group you are in on Facebook, then posts that product into each group it has not been in yet this round, with no waiting between groups (only a few seconds for each page to load). The count (e.g. 12/40) shows this round; when it reaches all your groups, the next press starts a new round from 0. Groups that declined you or that you switched off are skipped. Posting fast into many groups is what Facebook most often flags as spam, so use it for one product at a time.</p>
+        <p class="muted fa-small"><b>Post to all groups</b> first reads every group you are in on Facebook, then posts that product into each group it has not been in yet this round, with no waiting between groups (only a few seconds for each page to load). Then it posts the same product on TikTok with a full description (needs the add-on in auto-update mode). The count (e.g. 12/40) shows this round; when it reaches all your groups, the next press starts a new round from 0. Groups that declined you or that you switched off are skipped. Posting fast into many groups is what Facebook most often flags as spam, so use it for one product at a time.</p>
       </section>
 
       <section class="fa-card">

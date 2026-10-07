@@ -41,7 +41,7 @@
   const pool = () => (IG() ? IG().pool() : []);
   const shortName = p => String(p.name).split(" — ")[0];
 
-  function caption(net, it, v) {
+  function caption(net, it, v, full) {
     const B = A.business();
     const site = location.origin + "/";
     if (it.studio) {
@@ -68,6 +68,22 @@
     }
     const where = s ? `Sold by ${s.name}` : "Showroom: Odorkor, Accra · delivery available";
     const tags = s ? "#ghana #accra #fyp #ghanabusiness" : "#furnitureghana #accra #ghanatiktok #homedecor #fyp";
+    if (full) {
+      // Full description (used by "Post to all groups"): the product's own description, highlights and how to order.
+      const desc = String(p.description || "").split(/\n\s*\n/)[0].replace(/\s+/g, " ").trim().slice(0, 600);
+      const cols = [].concat(p.colors || []);
+      const extra = [p.dimensions && `Size: ${p.dimensions}`, p.material && `Material: ${p.material}`, cols.length && `Colours: ${cols.join(", ")}`].filter(Boolean);
+      return [
+        `${head} 🔥`,
+        `${name}: ${price}`,
+        desc,
+        (p.highlights || []).slice(0, 4).map(h => "✔ " + h).join("\n"),
+        extra.join("\n"),
+        s ? `${where}. WhatsApp ${wa} to order.` : `${where}. Pay 50% now and the rest on delivery (MoMo, GhanaPay or card).`,
+        `📲 WhatsApp ${wa} · link in bio`,
+        tags
+      ].filter(Boolean).join("\n").slice(0, 2000);
+    }
     const opts = [
       `${head} 🔥\n${name}: ${price}\n${hl.map(h => "✔ " + h).join("\n")}\n${where}\nWhatsApp ${wa} · link in bio\n${tags}`,
       `POV: you just found ${/s$/i.test(name) ? "" : "the perfect "}${name.toLowerCase()} 😍\n${price}\n${where}\nOrder on WhatsApp ${wa}\n${tags}`,
@@ -114,7 +130,7 @@
       url: net === "x" ? "https://x.com/compose/post" : "https://www.tiktok.com/tiktokstudio/upload?from=webapp&tab=photo",
       job: {
         kind: net, dry: !!opts.dry, mode: opts.products ? "now" : null, account: S.settings.x.account,
-        q: q.map((it, i) => ({ k: it.k, p: it.p ? it.p.id : null, img: site + it.img, text: caption(net, it, start + i), title: titleOf(it) })),
+        q: q.map((it, i) => ({ k: it.k, p: it.p ? it.p.id : null, img: site + it.img, text: caption(net, it, start + i, !!opts.full), title: titleOf(it) })),
         min: S.settings.pause_min_s, max: S.settings.pause_max_s
       }
     };
