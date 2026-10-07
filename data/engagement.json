@@ -12,7 +12,7 @@
    "fb": "FaVisionEnterprise",
    "ig": "favisionent",
    "x": "FaVisionEnt",
-   "tiktok": ""
+   "tiktok": "favisionenterprise"
   },
   "limit": 200,
   "max_comments": 60,
@@ -43,6 +43,11 @@
    "d": "2026-10-07",
    "net": "x",
    "n": 297
+  },
+  {
+   "d": "2026-10-07",
+   "net": "tiktok",
+   "n": 279
   }
  ],
  "posts": {
@@ -290,6 +295,20 @@
    "invited": 0,
    "followers": 297,
    "stopped": null,
+   "commenting": true
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T23:40:52.091Z",
+   "net": "tiktok",
+   "mode": "comment",
+   "posts": 0,
+   "checked": 0,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "followers": 279,
+   "stopped": "No posts found on your TikTok profile.",
    "commenting": true
   }
  ]
