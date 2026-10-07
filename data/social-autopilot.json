@@ -12,6 +12,105 @@
   "pause_min_s": 90,
   "pause_max_s": 240
  },
- "posts": [],
- "runs": []
+ "posts": [
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T18:38:13.153Z",
+   "net": "x",
+   "k": "ad:fav-001",
+   "p": "FAV-001",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T18:39:17.170Z",
+   "net": "x",
+   "k": "ad:fav-002",
+   "p": "FAV-002",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T18:40:20.385Z",
+   "net": "x",
+   "k": "ad:fav-003",
+   "p": "FAV-003",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T18:41:23.405Z",
+   "net": "x",
+   "k": "ad:fav-004",
+   "p": "FAV-004",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T18:42:25.059Z",
+   "net": "x",
+   "k": "ad:fav-005",
+   "p": "FAV-005",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T18:43:27.991Z",
+   "net": "x",
+   "k": "ad:fav-006",
+   "p": "FAV-006",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T18:44:31.394Z",
+   "net": "x",
+   "k": "ad:fav-007",
+   "p": "FAV-007",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T18:45:36.960Z",
+   "net": "x",
+   "k": "ad:fav-008",
+   "p": "FAV-008",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T18:46:48.390Z",
+   "net": "x",
+   "k": "ad:fav-009",
+   "p": "FAV-009",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T18:47:52.119Z",
+   "net": "x",
+   "k": "ad:fav-010",
+   "p": "FAV-010",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  }
+ ],
+ "runs": [
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T18:47:59.720Z",
+   "kind": "x",
+   "tried": 10,
+   "ok": 0
+  }
+ ]
 }
