@@ -954,6 +954,13 @@
    "kind": "post",
    "tried": 9,
    "ok": 8
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T19:32:41.487Z",
+   "kind": "declines",
+   "found": 0,
+   "left": 0
   }
  ],
  "removed": [
@@ -1009,5 +1016,8 @@
   }
  ],
  "joins": [],
- "checks": {}
+ "checks": {
+  "declines": "2026-10-07"
+ },
+ "rounds": {}
 }
