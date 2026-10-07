@@ -89,17 +89,19 @@
   const growWaiting = () => S.settings.grow_on && joinsToday() < S.settings.grow_daily && S.checks.grow !== today();
   const membersText = n => n >= 1e6 ? (n / 1e6).toFixed(n >= 1e7 ? 0 : 1) + "M" : n >= 1e3 ? Math.round(n / 1e3) + "K" : String(n || "?");
 
-  function todaysListing() {
-    const list = postable();
-    if (!list.length) return null;
-    if (S.today && S.today.d === today()) {
-      const p = list.find(x => x.id === S.today.p);
-      if (p) return p;
-    }
-    if (!S.today) return list[0];
-    const next = list.find(x => x.id > S.today.p);   // the listing after the last one that had a turn
-    return next || list[0];
+  // ------------------------------------------------------------------ what to post (chosen on the Post now tab; no daily plan)
+  // The choice is kept in this browser so it survives the trips to Facebook and back.
+  const SEL_KEY = "fa-post-sel";
+  function selection() {
+    let v = null;
+    try { v = JSON.parse(localStorage.getItem(SEL_KEY)); } catch (e) { /* none saved */ }
+    const ids = new Set(postable().map(p => p.id));
+    v = Object.assign({ ids: [...ids], fb: true, ig: true, prep: true, ig_n: 3 }, v || {});
+    v.ids = (v.ids || []).filter(id => ids.has(id));
+    return v;
   }
+  function setSelection(v) { try { localStorage.setItem(SEL_KEY, JSON.stringify(v)); } catch (e) { /* storage blocked */ } }
+  const lastPostOf = id => S.posts.filter(x => x.p === id).map(x => x.t || x.d).sort().pop() || "";
 
   function coverage(p) {
     const since = S.resets[p.id] || "";
@@ -110,19 +112,33 @@
     return { done, total: groups.length, tried, fresh: groups.length > 0 && done >= groups.length };
   }
 
-  function plan() {
-    const p = todaysListing();
-    if (!p) return { p: null, groups: [], room: 0 };
-    const room = Math.max(0, S.settings.daily_limit - attemptsToday());
-    const cov = coverage(p);
-    const usedToday = new Set(S.posts.filter(x => x.d === today()).map(x => x.g));
+  // Pairs the chosen products with groups for one posting session:
+  //  - every group gets at most one product per session (so each product lands in different groups);
+  //  - a product only goes to groups it hasn't been in yet (once it has been in all of them, it starts a new round);
+  //  - products posted least recently go first, groups rested longest go first;
+  //  - groups posted in during the last `group_rest_hours` are left to rest (cuts down declines);
+  //  - at most `daily_limit` group posts per session.
+  function plan(ids) {
+    ids = ids || selection().ids;
+    const prods = postable().filter(p => ids.includes(p.id)).sort((a, b) => lastPostOf(a.id).localeCompare(lastPostOf(b.id)));
     const lastUse = {};
-    for (const x of S.posts) if (!lastUse[x.g] || (x.t || x.d) > lastUse[x.g]) lastUse[x.g] = x.t || x.d;
-    const groups = activeGroups()
-      .filter(g => !usedToday.has(g.id) && (cov.fresh || !cov.tried.has(g.id)))
-      .sort((a, b) => (lastUse[a.id] || "").localeCompare(lastUse[b.id] || ""))
-      .slice(0, room);
-    return { p, groups, room, cov };
+    for (const x of S.posts) { const t = x.t || x.d; if (!lastUse[x.g] || t > lastUse[x.g]) lastUse[x.g] = t; }
+    const restMs = (Number(S.settings.group_rest_hours) || 0) * 36e5, now = Date.now();
+    const all = activeGroups();
+    const groups = all.filter(g => !lastUse[g.id] || now - Date.parse(lastUse[g.id]) >= restMs)
+      .sort((a, b) => (lastUse[a.id] || "").localeCompare(lastUse[b.id] || ""));
+    const cov = Object.fromEntries(prods.map(p => [p.id, coverage(p)]));
+    const pairs = [], used = new Set(), cap = S.settings.daily_limit;
+    for (let more = true; more && pairs.length < cap;) {
+      more = false;
+      for (const p of prods) {
+        if (pairs.length >= cap) break;
+        const g = groups.find(x => !used.has(x.id) && (cov[p.id].fresh || !cov[p.id].tried.has(x.id)));
+        if (g) { pairs.push({ p, g }); used.add(g.id); more = true; }
+      }
+    }
+    const products = new Set(pairs.map(x => x.p.id)).size;
+    return { pairs, prods, products, groups: all.length, resting: all.length - groups.length, fresh: prods.filter(p => cov[p.id].fresh).map(p => p.id) };
   }
 
   // ------------------------------------------------------------------ captions (3 variants, rotated)
@@ -173,9 +189,9 @@
     if (needExt()) return;
     if (Number(ext()) < 3) return A.toast("Update the add-on first (steps at the bottom of this screen), then test.", true);
     const pl = plan();
-    const g = (pl.groups[0] || activeGroups()[0]);
-    if (!pl.p || !g) return A.toast("Nothing to test: needs a listing and at least one group switched on.", true);
-    const p = pl.p, img = location.origin + "/" + p.images[0];
+    const first = pl.pairs[0] || (pl.prods[0] && activeGroups()[0] ? { p: pl.prods[0], g: activeGroups()[0] } : null);
+    if (!first) return A.toast("Nothing to test: pick a product and switch on at least one group.", true);
+    const { p, g } = first, img = location.origin + "/" + p.images[0];
     launch(g.url, { kind: "post", dry: true, q: [{ g: g.id, name: g.name, url: g.url, p: p.id, text: caption(p, 0), img }], min: 5, max: 5 });
   }
 
@@ -183,22 +199,22 @@
     if (needExt()) return;
     const pl = plan();
     if (!activeGroups().length) return A.toast("Import your groups first.", true);
-    if (!pl.p) return A.toast("No listing is ready to post (needs a price, a photo and to be in stock).", true);
-    if (!pl.groups.length) return A.toast(pl.room ? "No new groups left for today's listing." : `Today's ${S.settings.daily_limit} group posts are done. Come back tomorrow.`);
-    A.busy("Preparing today's posts…");
-    try {
-      const pid = pl.p.id, fresh = pl.cov.fresh, d = today();
-      await save(s => {
-        if (fresh) s.resets[pid] = new Date().toISOString();
-        s.today = { d, p: pid };
-        return s;
-      }, `Autopilot: ${pid} is today's group listing`);
-    } catch (err) { A.busy(null); return A.toast(A.friendly(err), true); }
-    A.busy(null);
+    if (!pl.prods.length) return A.toast("Pick at least one product to post.", true);
+    if (!pl.pairs.length) return A.toast(pl.resting ? `Every group was posted in during the last ${S.settings.group_rest_hours} hours. Try later, or lower "Rest between posts in a group" in the Facebook tab.` : "The chosen products have been in all your groups already. Add more groups or pick other products.", true);
+    if (pl.fresh.length) {
+      A.busy("Preparing the posts…");
+      try {
+        const start = new Set(pl.pairs.map(x => x.p.id));
+        await save(s => { for (const id of pl.fresh) if (start.has(id)) s.resets[id] = new Date().toISOString(); return s; }, "Autopilot: new round for products already in every group");
+      } catch (err) { A.busy(null); return A.toast(A.friendly(err), true); }
+      A.busy(null);
+    }
     await sendAlert("session");
-    const p = pl.p, start = S.posts.filter(x => x.p === p.id).length;
-    const img = location.origin + "/" + p.images[0];
-    const q = pl.groups.map((g, i) => ({ g: g.id, name: g.name, url: g.url, p: p.id, text: caption(p, start + i), img }));
+    const used = {};
+    const q = pl.pairs.map(({ p, g }) => {
+      used[p.id] = (used[p.id] || 0) + 1;
+      return { g: g.id, name: g.name, url: g.url, p: p.id, text: caption(p, S.posts.filter(x => x.p === p.id).length + used[p.id]), img: location.origin + "/" + p.images[0] };
+    });
     launch(q[0].url, { kind: "post", q, min: S.settings.pause_min_s, max: S.settings.pause_max_s, auto: !!auto, then: then || null });
   }
 
@@ -207,22 +223,26 @@
     if (needExt()) return;
     if (Number(ext()) < 4) return A.toast("Update the FA Vision add-on to post on Instagram (steps at the bottom of the Today tab).", true);
     const j = IG() && IG().job(opts);
-    if (!j) return A.toast("Today's Instagram posts are done ✓");
+    if (!j) return A.toast(opts && opts.products ? "None of the chosen products has an Instagram photo." : "Today's Instagram posts are done ✓");
     j.job.then = then || null;
     launch(j.url, j.job);
   }
 
-  // What still needs doing today, in running order.
-  function stepsToday() {
-    const dl = dueList(), steps = [];
-    if (dl === null || dl.length) steps.push("renew");
-    if (cleanupWaiting()) steps.push("declines");
-    if (syncWaiting()) steps.push("sync");
-    if (growWaiting()) steps.push("grow");
-    if (activeGroups().length && plan().groups.length) steps.push("post");
-    if (IG() && IG().state() && IG().summary().waiting) steps.push("ig");
+  // What "Post now" runs, in order: the optional tidy-up first, then the chosen channels.
+  function stepsNow() {
+    const sel = selection(), steps = [];
+    if (sel.prep) {
+      const dl = dueList();
+      if (dl === null || dl.length) steps.push("renew");
+      if (cleanupWaiting()) steps.push("declines");
+      if (syncWaiting()) steps.push("sync");
+      if (growWaiting()) steps.push("grow");
+    }
+    if (sel.fb && sel.ids.length && activeGroups().length) steps.push("post");
+    if (sel.ig && sel.ids.length && IG() && IG().state()) steps.push("ig");
     return steps;
   }
+  const stepsToday = stepsNow;   // kept for the tests
   // Runs the first step; each step hands the rest of the list to the add-on, which
   // passes it back when it returns, and receive() carries on with it.
   function runStep(steps, auto) {
