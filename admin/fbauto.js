@@ -24,13 +24,15 @@
     settings: {
       daily_limit: 20, renew_after_days: 7, renew_batch: 20, pause_min_s: 60, pause_max_s: 180, auto_run: false, auto_time: "09:00",
       cleanup_on: true,                         // find groups that decline our posts, leave them and drop them from the list
-      grow_on: true, grow_daily: 20, grow_min_members: 1000000,
-      grow_keywords: ["buy and sell ghana", "accra buy and sell", "ghana online market", "buy and sell", "furniture for sale", "home decor", "interior design", "furniture", "home furniture ideas", "ghana business"]
+      grow_on: true, grow_daily: 20,
+      grow_min_members: 10000,                 // Ghana/Accra groups qualify from this size…
+      grow_min_global: 100000,                 // …any other group from this size (1M+ always qualifies)
+      grow_keywords: ["buy and sell ghana", "accra buy and sell", "accra market", "ghana online market", "furniture ghana", "home decor ghana", "kasoa buy and sell", "furniture", "home decor", "interior design", "furniture for sale", "ghana business"]
     },
     groups: [], posts: [], resets: {}, today: null, renewals: {}, removed: [], joins: [], checks: {}
   };
   // Groups whose names say they aren't for selling furniture: never joined.
-  const GROW_DENY = "dating|singles|married|crypto|forex|bitcoin|betting|lotto|pubg|gaming|game|sugar|hookup|loan|ponzi|pi ?network|army|police|church|prayer|politic|fans? of|fan club|nsfw|18\\+";
+  const GROW_DENY = "dating|singles|married|crypto|forex|bitcoin|betting|lotto|pubg|gaming|game|sugar|hookup|loan|ponzi|pi ?network|army|police|church|prayer|politic|fans? of|fan club|nsfw|18\\+|news|rent|lands?\\b|houses?\\b|apartments?|rooms?\\b";
   const screen = $("#screen-fbauto");
   const today = () => new Date().toLocaleDateString("en-CA");
   const days = (a, b) => Math.floor((Date.parse(b) - Date.parse(a)) / 864e5);
@@ -309,7 +311,7 @@
     const shift = Math.floor(Date.now() / 864e5) % kws.length;
     const q = kws.slice(shift).concat(kws.slice(0, shift)).map(kw => ({ kw, url: `https://www.facebook.com/search/groups/?q=${encodeURIComponent(kw)}` }));
     const skip = [...new Set([...S.groups.map(g => g.id), ...S.removed.map(r => r.id), ...S.joins.map(j => j.g)])];
-    launch(q[0].url, { kind: "grow", q, skip, limit: room, min: S.settings.grow_min_members, deny: GROW_DENY, pmin: 40, pmax: 100, then: then || null });
+    launch(q[0].url, { kind: "grow", q, skip, limit: room, min: S.settings.grow_min_members, minGlobal: Math.max(S.settings.grow_min_global, S.settings.grow_min_members), deny: GROW_DENY, pmin: 40, pmax: 100, then: then || null });
   }
 
   // Alert before every posting session (email via the backend, plus the badge here).
@@ -433,7 +435,7 @@
           return s;
         }, `Autopilot: joined ${res.filter(r => r.status !== "failed").length} new Facebook groups`);
         const n = joinsToday();
-        A.toast(`${plural(n, "new group")} today (${res.filter(r => r.status === "joined").length} joined now, ${res.filter(r => /pending|questions/.test(r.status)).length} waiting for approval).${res.length ? "" : ` No new groups with ${membersText(S.settings.grow_min_members)}+ members turned up: add keywords or lower the size in Settings.`}${out.stopped ? " Stopped: " + out.stopped : ""}`, !!out.stopped);
+        A.toast(`${plural(n, "new group")} today (${res.filter(r => r.status === "joined").length} joined now, ${res.filter(r => /pending|questions/.test(r.status)).length} waiting for approval).${res.length ? "" : ` No new groups big enough turned up: add search words or lower the sizes in Settings.`}${out.stopped ? " Stopped: " + out.stopped : ""}`, !!out.stopped);
         if (before < S.settings.grow_daily && n >= S.settings.grow_daily) await sendAlert("milestone");
       }
     } catch (err) {
@@ -498,7 +500,7 @@
 
       <section class="fa-card">
         <header><h2>New big groups</h2><span class="fa-big ${joinsToday() >= S.settings.grow_daily ? "" : "hot"}">${joinsToday()}/${S.settings.grow_daily}</span></header>
-        <p class="muted">Every day the run searches Facebook and joins up to ${S.settings.grow_daily} groups with at least ${membersText(S.settings.grow_min_members)} members that fit furniture selling. You get an email before each posting session, and a special one the day ${S.settings.grow_daily} are added.${pendingGroups().length ? ` ${plural(pendingGroups().length, "join request")} waiting for group admins.` : ""}</p>
+        <p class="muted">Every day the run searches Facebook and joins up to ${S.settings.grow_daily} groups that fit furniture selling, biggest first: any group with ${membersText(S.settings.grow_min_global)}+ members (1M+ always), and Ghana/Accra groups from ${membersText(S.settings.grow_min_members)}. You get an email before each posting session, and a special one the day ${S.settings.grow_daily} are added.${pendingGroups().length ? ` ${plural(pendingGroups().length, "join request")} waiting for group admins.` : ""}</p>
         <div class="fa-actions"><button class="btn btn-primary" data-fa="grow" ${S.settings.grow_on && joinsToday() < S.settings.grow_daily ? "" : "disabled"}>Find &amp; join groups now</button></div>
         ${S.joins.length ? `<details class="fa-more"><summary>Recently added (${S.joins.length})</summary><ul class="fa-list">${S.joins.slice(-30).reverse().map(j => `<li class="${j.status === "failed" ? "bad" : ""}"><span>${j.status === "joined" ? "✓" : j.status === "failed" ? "✗" : "…"} ${j.url ? `<a href="${esc(j.url)}" target="_blank" rel="noopener">${esc(j.name)}</a>` : esc(j.name)}</span><small>${membersText(j.members)} members · ${esc(j.d)} · ${esc({ joined: "joined", pending: "waiting for admin", questions: "answer the group's questions", failed: j.why || "failed" }[j.status] || j.status)}</small></li>`).join("")}</ul></details>` : ""}
       </section>
@@ -518,7 +520,8 @@
           <label class="fa-check"><input name="cleanup_on" type="checkbox" ${S.settings.cleanup_on ? "checked" : ""}> Leave and remove groups that decline our posts</label>
           <label class="fa-check"><input name="grow_on" type="checkbox" ${S.settings.grow_on ? "checked" : ""}> Join new big groups every day</label>
           <label>New groups a day <input name="grow_daily" type="number" min="1" max="30" value="${S.settings.grow_daily}"></label>
-          <label>Smallest group (members) <input name="grow_min_members" type="number" min="1000" step="1000" value="${S.settings.grow_min_members}"></label>
+          <label>Smallest Ghana/Accra group (members) <input name="grow_min_members" type="number" min="1000" step="1000" value="${S.settings.grow_min_members}"></label>
+          <label>Smallest other group (members) <input name="grow_min_global" type="number" min="1000" step="1000" value="${S.settings.grow_min_global}"></label>
           <label>Search words (comma separated) <input name="grow_keywords" type="text" value="${esc(S.settings.grow_keywords.join(", "))}"></label>
           <p class="muted fa-small">The daily run itself is switched on and off in the Today tab.</p>
           <button class="btn btn-ghost btn-sm" type="submit">Save settings</button>
@@ -577,7 +580,7 @@
             : cleanupWaiting() ? step("wait", "Declined-post clean-up", "Checks which groups declined our posts, leaves them and drops them from the list")
             : step("done", "Declined-post clean-up", `Checked today · ${plural(S.removed.length, "group")} removed so far`)}
           ${!S.settings.grow_on ? step("off", "New big groups", "Switched off (Facebook tab → Settings)")
-            : growWaiting() ? step("wait", "New big groups", `Joins up to ${S.settings.grow_daily - joinsToday()} more groups with ${membersText(S.settings.grow_min_members)}+ members · ${joinsToday()}/${S.settings.grow_daily} today`)
+            : growWaiting() ? step("wait", "New big groups", `Joins up to ${S.settings.grow_daily - joinsToday()} more groups (${membersText(S.settings.grow_min_global)}+, or ${membersText(S.settings.grow_min_members)}+ in Ghana) · ${joinsToday()}/${S.settings.grow_daily} today`)
             : step(joinsToday() >= S.settings.grow_daily ? "done" : "warn", "New big groups", `${joinsToday()}/${S.settings.grow_daily} added today${pendingGroups().length ? ` · ${pendingGroups().length} waiting for admins` : ""}`)}
           ${!activeGroups().length ? step("off", "Facebook groups", "No groups yet. Import them in the Facebook tab.")
             : pl.groups.length ? step("wait", "Facebook groups", `${plural(pl.groups.length, "group post")} waiting · ${esc(shortName(pl.p))}`)
@@ -693,7 +696,7 @@
     const next = {
       daily_limit: clamp(f.daily_limit.value, 1, 50), renew_batch: clamp(f.renew_batch.value, 1, 50),
       cleanup_on: f.cleanup_on.checked, grow_on: f.grow_on.checked,
-      grow_daily: clamp(f.grow_daily.value, 1, 30), grow_min_members: clamp(f.grow_min_members.value, 1000, 1e9),
+      grow_daily: clamp(f.grow_daily.value, 1, 30), grow_min_members: clamp(f.grow_min_members.value, 1000, 1e9), grow_min_global: clamp(f.grow_min_global.value, 1000, 1e9),
       grow_keywords: f.grow_keywords.value.split(",").map(x => x.trim()).filter(Boolean).slice(0, 30)
     };
     if (!next.grow_keywords.length) next.grow_keywords = EMPTY.settings.grow_keywords.slice();

@@ -333,11 +333,13 @@
     }
     if (it.type === "check") {
       box(`Checking ${it.name} for declined posts…`);
-      const main = document.querySelector("[role=main]") || document.body;
+      // The page shows either "No posts to show" or a header "Declined · N" (checked live, Oct 2026).
+      const main = await waitFor(() => { const m = document.querySelector("[role=main]"); return m && /no posts to show|nothing to show|declined|removed/i.test(m.innerText || "") ? m : null; }, 12000) || document.querySelector("[role=main]") || document.body;
       const text = main.innerText || "";
-      const empty = /no (declined|removed|rejected) (posts|content)|nothing to show|you don('|’)t have any|no posts/i.test(text);
+      const count = text.match(/(Declined|Removed)[\s|]*·\s*(\d+)/i);
+      const empty = /no posts to show|nothing to show|you don('|’)t have any/i.test(text);
       const posts = [...main.querySelectorAll("[role=article]")].filter(visible).length;
-      if (!empty && posts > 0 && /declined|removed|rejected/i.test(text)) markDeclined(it.g, it.name, it.what === "removed" ? "Removed our post" : "Declined our post");
+      if ((count && +count[2] > 0) || (!empty && posts > 0 && /declined|removed|rejected/i.test(text))) markDeclined(it.g, it.name, `${it.what === "removed" ? "Removed" : "Declined"} ${count ? count[2] + " of our posts" : "our posts"}`);
       step(); return go();
     }
     if (it.type === "leave") {
@@ -350,7 +352,7 @@
       const leave = await waitFor(() => [...document.querySelectorAll('[role=menuitem],[role=button]')].find(x => visible(x) && /^leave group$/i.test((x.innerText || "").trim())), 5000);
       if (!leave) { f.why += " · no Leave option"; document.body.click(); step(); return go(); }
       leave.click();
-      const confirm = await waitFor(() => findBtn(/^leave( group)?$/i, document.querySelector("[role=dialog]") || undefined), 6000);
+      const confirm = await waitFor(() => findBtn(/^leave( group)?$/i, document.querySelector("[role=dialog]") || undefined), 12000);
       if (confirm) { confirm.click(); await sleep(2500); }
       f.left = !!confirm && !!(await waitFor(() => findBtn(/^join group$/i), 6000));
       if (!f.left) f.why += " · leave not confirmed";
@@ -393,11 +395,15 @@
     window.scrollTo(0, 0); await sleep(800);
     const all = rows();
     job.seen = (job.seen || 0) + all.length;
-    const found = all.filter(r => r.name && r.members >= job.min && !skip.has(r.id) && !(deny && deny.test(r.name)));
+    // Size tiers: any group with job.minGlobal+ members (1M+ always qualifies), or a
+    // local (Ghana/Accra) group with job.min+ members. Biggest first.
+    const local = new RegExp(job.local || "ghana|accra|kumasi|tema|kasoa|odorkor|weija|madina|legon|ashaiman|takoradi|\\bgh\\b", "i");
+    const fits = r => r.members >= (job.minGlobal || job.min) || (r.members >= job.min && local.test(r.name));
+    const found = all.filter(r => r.name && fits(r) && !skip.has(r.id) && !(deny && deny.test(r.name))).sort((a, b) => b.members - a.members);
     for (const r of found) {
       if (stopAsked || added() >= job.limit) break;
       skip.add(r.id); job.skip = [...skip];
-      box(`Joining ${r.name} (${(r.members / 1e6).toFixed(1)}M members)… ${added()}/${job.limit} today`);
+      box(`Joining ${r.name} (${r.members >= 1e6 ? (r.members / 1e6).toFixed(1) + "M" : Math.round(r.members / 1e3) + "K"} members)… ${added()}/${job.limit} today`);
       r.btn.scrollIntoView({ block: "center" });
       await sleep(rand(900, 1800));
       r.btn.click();

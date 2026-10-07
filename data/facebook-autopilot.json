@@ -32,27 +32,6 @@
    "off_why": "Not a member of this group"
   },
   {
-   "id": "456467567894267",
-   "name": "Building My Own",
-   "url": "https://www.facebook.com/groups/456467567894267/",
-   "active": true,
-   "added": "2026-10-01"
-  },
-  {
-   "id": "611599393546171",
-   "name": "Marketplace Facebook App",
-   "url": "https://www.facebook.com/groups/611599393546171/",
-   "active": true,
-   "added": "2026-10-01"
-  },
-  {
-   "id": "oppbiz",
-   "name": "Online Business Opportunities",
-   "url": "https://www.facebook.com/groups/oppbiz/",
-   "active": true,
-   "added": "2026-10-01"
-  },
-  {
    "id": "3295010260530139",
    "name": "Friends of Weja",
    "url": "https://www.facebook.com/groups/3295010260530139/",
@@ -66,13 +45,6 @@
    "active": false,
    "added": "2026-10-01",
    "off_why": "Not a member of this group"
-  },
-  {
-   "id": "dealsformamasofficial",
-   "name": "Deals for Mamas",
-   "url": "https://www.facebook.com/groups/dealsformamasofficial/",
-   "active": true,
-   "added": "2026-10-01"
   },
   {
    "id": "247630922377452",
@@ -117,13 +89,6 @@
    "id": "433382596714655",
    "name": "Christian Entertainment Review",
    "url": "https://www.facebook.com/groups/433382596714655/",
-   "active": true,
-   "added": "2026-10-01"
-  },
-  {
-   "id": "910798219668535",
-   "name": "Tell It All",
-   "url": "https://www.facebook.com/groups/910798219668535/",
    "active": true,
    "added": "2026-10-01"
   },
@@ -810,6 +775,58 @@
    "kind": "post",
    "tried": 14,
    "ok": 6
+  }
+ ],
+ "removed": [
+  {
+   "id": "456467567894267",
+   "name": "Building My Own",
+   "url": "https://www.facebook.com/groups/456467567894267/",
+   "why": "Declined 5 of our posts",
+   "d": "2026-10-07",
+   "left": true,
+   "left_d": "2026-10-07",
+   "tries": 1
+  },
+  {
+   "id": "611599393546171",
+   "name": "Marketplace Facebook App",
+   "url": "https://www.facebook.com/groups/611599393546171/",
+   "why": "Declined 4 of our posts",
+   "d": "2026-10-07",
+   "left": true,
+   "left_d": "2026-10-07",
+   "tries": 1
+  },
+  {
+   "id": "oppbiz",
+   "name": "Online Business Opportunities",
+   "url": "https://www.facebook.com/groups/oppbiz/",
+   "why": "Declined 1 of our posts",
+   "d": "2026-10-07",
+   "left": true,
+   "left_d": "2026-10-07",
+   "tries": 1
+  },
+  {
+   "id": "dealsformamasofficial",
+   "name": "Deals for Mamas",
+   "url": "https://www.facebook.com/groups/dealsformamasofficial/",
+   "why": "Declined 2 of our posts",
+   "d": "2026-10-07",
+   "left": true,
+   "left_d": "2026-10-07",
+   "tries": 1
+  },
+  {
+   "id": "910798219668535",
+   "name": "Tell It All",
+   "url": "https://www.facebook.com/groups/910798219668535/",
+   "why": "Declined 3 of our posts",
+   "d": "2026-10-07",
+   "left": true,
+   "left_d": "2026-10-07",
+   "tries": 1
   }
  ]
 }
