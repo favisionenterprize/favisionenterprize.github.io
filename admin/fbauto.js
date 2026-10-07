@@ -41,6 +41,8 @@
   const plural = (n, w) => `${n} ${w}${n === 1 ? "" : "s"}`;
   const ext = () => document.documentElement.dataset.favautoExt;
   const IG = () => window.FAV_IGAUTO;
+  const SOC = () => window.FAV_SOCAUTO;          // X and TikTok (admin/socauto.js + extension/social.js)
+  const liveAddon = () => document.documentElement.dataset.favautoMode === "live";
   const REPORT_TO = "nanaotengdonkor1@gmail.com";
   let S = null, tab = "today";
 
@@ -134,7 +136,7 @@
     let v = null;
     try { v = JSON.parse(localStorage.getItem(SEL_KEY)); } catch (e) { /* none saved */ }
     const ok = new Set(postable().map(p => p.id));
-    v = Object.assign({ ids: [...ok], fb: true, ig: true, ig_n: 3 }, v || {});
+    v = Object.assign({ ids: [...ok], fb: true, ig: true, ig_n: 3, x: true, x_n: 2, tt: true, tt_n: 2 }, v || {});
     v.ids = (v.ids || []).filter(id => ok.has(id));
     return v;
   }
@@ -265,6 +267,7 @@
     if (growWaiting()) steps.push("grow");
     if (activeGroups().length && plan().groups.length) steps.push("post");
     if (IG() && IG().state() && IG().summary().waiting) steps.push("ig");
+    for (const net of ["x", "tiktok"]) if (SOC() && SOC().state() && SOC().summary(net).waiting && liveAddon()) steps.push(net);
     return steps;
   }
   // Runs the first step; each step hands the rest of the list to the add-on, which
@@ -281,6 +284,8 @@
       if (k === "ig" && IG() && IG().summary().waiting && Number(ext()) >= 4) return startIg({}, steps);
       if (k === "postnow" && activeGroups().length) return startPostNow(steps);
       if (k === "ignow" && IG() && Number(ext()) >= 4) { const sel = selection(); return startIg({ products: sel.ids, limit: sel.ig_n }, steps); }
+      if ((k === "x" || k === "tiktok") && SOC() && SOC().summary(k).waiting && liveAddon()) return startSoc(k, {}, steps);
+      if ((k === "xnow" || k === "ttnow") && SOC() && liveAddon()) { const sel = selection(), net = k === "xnow" ? "x" : "tiktok"; return startSoc(net, { products: sel.ids, limit: net === "x" ? sel.x_n : sel.tt_n }, steps); }
       if (k === "report") return sendReport(true);
     }
   }
@@ -320,6 +325,16 @@
     });
     launch(q[0].url, { kind: "post", mode: "now", q, min: S.settings.pause_min_s, max: S.settings.pause_max_s, then: then || null });
   }
+  // X / TikTok: the add-on's social.js does the posting (downloaded from the site, so it needs live mode).
+  function startSoc(net, opts, then) {
+    if (needExt()) return;
+    const name = SOC().NETS[net];
+    if (!liveAddon()) { A.toast(`${name} needs the add-on's automatic updates switched on (Today tab, top).`, true); if (then && then.length) setTimeout(() => runStep(then, true), 1500); return; }
+    const j = SOC().job(net, opts || {});
+    if (!j) { A.toast(opts && opts.products ? `None of the ticked products has a photo for ${name}.` : `Today's ${name} posts are done ✓`); if (then && then.length) setTimeout(() => runStep(then, true), 1500); return; }
+    j.job.then = then || null;
+    launch(j.url, j.job);
+  }
   function runNow() {
     if (needExt()) return;
     if (Number(ext()) < 3) return A.toast("Update the add-on first (steps at the bottom of the Today tab).", true);
@@ -327,7 +342,10 @@
     if (!sel.ids.length) return A.toast("Tick at least one product to post.", true);
     if (sel.fb) steps.push("postnow");
     if (sel.ig && IG() && IG().state()) steps.push("ignow");
-    if (!steps.length) return A.toast("Tick Facebook groups or Instagram (or use the share buttons below).", true);
+    if (sel.x && SOC() && SOC().state()) steps.push("xnow");
+    if (sel.tt && SOC() && SOC().state()) steps.push("ttnow");
+    if ((sel.x || sel.tt) && !liveAddon()) A.toast("X and TikTok need the add-on's automatic updates switched on (Today tab, top); they'll be skipped until then.", true);
+    if (!steps.length) return A.toast("Tick at least one place to post (or use the share buttons below).", true);
     runStep(steps.concat("report"), false);
   }
 
@@ -426,7 +444,11 @@
     A.busy("Saving what the add-on did…");
     const runLog = (s, extra) => { s.runs = (s.runs || []).concat([{ d, t: new Date().toISOString(), kind: out.kind, ...extra, ...(out.stopped ? { stopped: out.stopped } : {}) }]).slice(-200); };
     try {
-      if (out.kind === "ig") {
+      if ((out.kind === "x" || out.kind === "tiktok") && SOC()) {
+        const r = await SOC().receive(out);
+        A.toast(r.text, r.bad);
+        if (out.dry) { A.busy(null); render(); return; }
+      } else if (out.kind === "ig") {
         const r = await IG().receive(out);
         A.toast(r.text, r.bad);
       } else if (out.kind === "renew") {
@@ -624,7 +646,7 @@
   const shortName = p => String(p.name).split(" — ")[0];
   function renderNow() {
     const sel = selection(), list = postable(), on = new Set(sel.ids), pl = planNow(sel.ids);
-    const mins = Math.round(pl.pairs.length * (S.settings.pause_min_s + S.settings.pause_max_s) / 120) + (sel.ig ? sel.ig_n * 4 : 0);
+    const mins = Math.round(pl.pairs.length * (S.settings.pause_min_s + S.settings.pause_max_s) / 120) + (sel.ig ? sel.ig_n * 4 : 0) + (sel.x ? sel.x_n * 3 : 0) + (sel.tt ? sel.tt_n * 4 : 0);
     const fbLine = !activeGroups().length ? "no groups yet (import them in the Facebook tab)"
       : pl.pairs.length ? `${plural(pl.pairs.length, "post")}: ${plural(pl.products, "product")} into ${plural(pl.pairs.length, "different group")}`
       : !sel.ids.length ? "tick some products"
@@ -643,7 +665,10 @@
         <header><h2>Where to post</h2></header>
         <label class="fa-check now-opt"><input type="checkbox" data-now-opt="fb" ${sel.fb ? "checked" : ""}> <span><b>Facebook groups</b> · ${esc(fbLine)}</span></label>
         <label class="fa-check now-opt"><input type="checkbox" data-now-opt="ig" ${sel.ig ? "checked" : ""}> <span><b>Instagram</b> · up to <input type="number" min="1" max="10" data-now-ign value="${sel.ig_n}" class="now-num" aria-label="Instagram photos"> photos of the ticked products</span></label>
-        <button class="btn btn-sell run-btn" data-now="go" ${sel.ids.length && (sel.fb || sel.ig) ? "" : "disabled"}>Post now</button>
+        <label class="fa-check now-opt"><input type="checkbox" data-now-opt="x" ${sel.x ? "checked" : ""}> <span><b>X (Twitter)</b> · up to <input type="number" min="1" max="10" data-now-n="x_n" value="${sel.x_n}" class="now-num" aria-label="X posts"> posts of the ticked products</span></label>
+        <label class="fa-check now-opt"><input type="checkbox" data-now-opt="tt" ${sel.tt ? "checked" : ""}> <span><b>TikTok</b> · up to <input type="number" min="1" max="10" data-now-n="tt_n" value="${sel.tt_n}" class="now-num" aria-label="TikTok posts"> photo posts of the ticked products</span></label>
+        ${(sel.x || sel.tt) && !liveAddon() ? `<p class="fa-small" style="color:var(--err)">X and TikTok need the add-on's automatic updates switched on (Today tab, top).</p>` : ""}
+        <button class="btn btn-sell run-btn" data-now="go" ${sel.ids.length && (sel.fb || sel.ig || sel.x || sel.tt) ? "" : "disabled"}>Post now</button>
         <p class="muted fa-small">About ${Math.max(3, mins)} minutes, in this Edge tab. Keep it open and in front. You get the alert email as it starts and the report when it ends. It stops by itself if Facebook or Instagram shows a warning.</p>
         ${pl.pairs.length ? `<details class="fa-more"><summary>See which product goes to which group</summary><ul class="fa-list">${pl.pairs.map(x => `<li><span>${esc(x.g.name)}</span><small>${esc(shortName(x.p))}</small></li>`).join("")}</ul></details>` : ""}
       </section>
@@ -679,7 +704,7 @@
     }
   }
 
-  const TABS = [["today", "Today"], ["now", "Post now"], ["facebook", "Facebook"], ["instagram", "Instagram"]];
+  const TABS = [["today", "Today"], ["now", "Post now"], ["facebook", "Facebook"], ["instagram", "Instagram"], ["social", "X & TikTok"]];
   function step(state, title, detail) {
     const icon = { done: "✓", wait: "•", off: "–", warn: "!" }[state];
     return `<li class="run-step ${state}"><span class="run-icon" aria-hidden="true">${icon}</span><div><b>${title}</b><small>${detail}</small></div></li>`;
@@ -704,7 +729,7 @@
     const dl = dueList(), pl = plan(), ig = IG() && IG().state() ? IG().summary() : null;
     const limit = S.settings.daily_limit, doneFb = attemptsToday();
     const steps = stepsToday();
-    const mins = (steps.includes("renew") ? 5 : 0) + (steps.includes("post") ? Math.round(pl.groups.length * (S.settings.pause_min_s + S.settings.pause_max_s) / 120) : 0) + (steps.includes("ig") && ig ? ig.mins : 0)
+    const mins = (steps.includes("renew") ? 5 : 0) + (steps.includes("post") ? Math.round(pl.groups.length * (S.settings.pause_min_s + S.settings.pause_max_s) / 120) : 0) + (steps.includes("ig") && ig ? ig.mins : 0) + ["x", "tiktok"].reduce((m, n) => m + (steps.includes(n) && SOC() ? SOC().summary(n).mins : 0), 0)
       + (steps.includes("declines") ? 5 : 0) + (steps.includes("sync") ? 3 : 0) + (steps.includes("grow") ? Math.round((S.settings.grow_daily - joinsToday()) * 1.3) + 5 : 0);
     const shortName = p => String(p.name).split(" — ")[0];
     const ds = document.documentElement.dataset;
@@ -736,10 +761,13 @@
             : ig.waiting ? step("wait", "Instagram", `${plural(ig.waiting, "photo")} waiting · ${ig.done}/${ig.target} posted today`)
             : step("done", "Instagram", `${ig.done}/${ig.target} posted today`)}
           ${step(steps.includes("post") ? "wait" : "done", "Alert before posting", `Email to ${esc(REPORT_TO)} just before the group posts start (and a special one when ${S.settings.grow_daily} new groups are added in a day)`)}
+          ${["x", "tiktok"].map(net => { const sm = SOC() && SOC().state() ? SOC().summary(net) : null, name = net === "x" ? "X (Twitter)" : "TikTok";
+            return !sm ? step("off", name, "Loading…") : !sm.on ? step("off", name, "Switched off (X & TikTok tab)") : !liveAddon() ? step("warn", name, "Needs the add-on's automatic updates switched on (top of this tab)")
+              : sm.waiting ? step("wait", name, `${plural(sm.waiting, "photo")} waiting · ${sm.done}/${sm.target} posted today`) : step("done", name, `${sm.done}/${sm.target} posted today`); }).join("")}
           ${step(steps.length ? "wait" : "done", "Email report", `Breakdown sent to ${esc(REPORT_TO)} when the run ends (and every night at 9 pm)`)}
         </ol>
         ${steps.length ? `<button class="btn btn-sell run-btn" data-fa="run">Run everything for today</button>
-          <p class="muted fa-small">About ${Math.max(5, mins)} minutes. It runs in this Edge tab, one site after the other. Keep the tab open and in front. It stops by itself if Facebook or Instagram shows a warning.</p>`
+          <p class="muted fa-small">About ${Math.max(5, mins)} minutes. It runs in this Edge tab, one site after the other. Keep the tab open and in front. It stops by itself if Facebook, Instagram, X or TikTok shows a warning.</p>`
         : `<p class="run-done">All done for today ✓</p>`}
         <div class="run-foot">
           <label class="fa-check"><input type="checkbox" data-fa-autorun ${S.settings.auto_run ? "checked" : ""}> Run by itself every day at <input type="time" data-fa-autotime value="${esc(S.settings.auto_time)}"></label>
@@ -768,7 +796,7 @@
 
   function render() {
     if (!S) return;
-    const body = tab === "facebook" ? renderFacebook() : tab === "instagram" ? (IG() ? IG().renderTab() : "") : tab === "now" ? renderNow() : renderToday();
+    const body = tab === "facebook" ? renderFacebook() : tab === "instagram" ? (IG() ? IG().renderTab() : "") : tab === "now" ? renderNow() : tab === "social" ? (SOC() ? SOC().renderTab() : "") : renderToday();
     $("#fa-body").innerHTML = `<nav class="fa-tabs" role="tablist">${TABS.map(([k, t]) => `<button type="button" role="tab" aria-selected="${tab === k}" data-fa-tab="${k}">${t}</button>`).join("")}</nav>` + body;
   }
 
@@ -777,7 +805,7 @@
     if (!S) return;
     const dl = dueList(), due = dl ? dl.length : 0;
     const postsWaiting = activeGroups().length > 0 && plan().groups.length > 0;
-    const igWaiting = !!(IG() && IG().state() && IG().summary().waiting);
+    const igWaiting = !!(IG() && IG().state() && IG().summary().waiting) || (liveAddon() && !!SOC() && !!SOC().state() && ["x", "tiktok"].some(n => SOC().summary(n).waiting));
     const n = (dl === null ? 1 : due) + (postsWaiting ? 1 : 0) + (igWaiting ? 1 : 0);
     if (b) { b.hidden = !n; b.textContent = n; }
     if (alert) {
@@ -793,6 +821,8 @@
   screen.addEventListener("click", e => {
     const t = e.target.closest("[data-fa-tab]");
     if (t) { tab = t.dataset.faTab; render(); return; }
+    const so = e.target.closest("[data-soc],[data-soc-test]");
+    if (so) { if (so.dataset.soc) startSoc(so.dataset.soc, {}); else startSoc(so.dataset.socTest, { dry: true }); return; }
     const ib = e.target.closest("[data-ig]");
     if (ib) { if (ib.dataset.ig === "post") startIg({}); else startIg({ dry: true }); return; }
     const nb = e.target.closest("[data-now]");
@@ -827,11 +857,12 @@
   }
   screen.addEventListener("change", async e => {
     if (e.target.closest("[data-fa-autorun],[data-fa-autotime]")) return saveAutoRun();
-    if (e.target.closest("[data-now-p],[data-now-opt],[data-now-ign]")) {
+    if (e.target.closest("[data-now-p],[data-now-opt],[data-now-ign],[data-now-n]")) {
       const sel = selection(), el = e.target;
       if (el.dataset.nowP) sel.ids = el.checked ? [...new Set(sel.ids.concat(el.dataset.nowP))] : sel.ids.filter(id => id !== el.dataset.nowP);
       if (el.dataset.nowOpt) sel[el.dataset.nowOpt] = el.checked;
       if (el.hasAttribute("data-now-ign")) sel.ig_n = Math.min(10, Math.max(1, parseInt(el.value, 10) || 3));
+      if (el.dataset.nowN) sel[el.dataset.nowN] = Math.min(10, Math.max(1, parseInt(el.value, 10) || 2));
       setSelection(sel);
       const y = window.scrollY; render(); window.scrollTo(0, y);
       return;
@@ -846,6 +877,14 @@
     } catch (err) { A.toast(A.friendly(err), true); c.checked = !on; }
   });
   screen.addEventListener("submit", async e => {
+    if (e.target.id === "soc-settings") {
+      e.preventDefault();
+      A.busy("Saving X and TikTok settings…");
+      try { await SOC().saveSettings(e.target); A.toast("X and TikTok settings saved"); render(); updateBadge(); }
+      catch (err) { A.toast(A.friendly(err), true); }
+      finally { A.busy(null); }
+      return;
+    }
     if (e.target.id === "ig-settings") {
       e.preventDefault();
       A.busy("Saving Instagram settings…");
@@ -878,7 +917,7 @@
     $("#top-actions").hidden = false;
     window.scrollTo(0, 0);
     if (location.hash !== "#fbauto") history.replaceState(null, "", "#fbauto");
-    if (!S || (IG() && !IG().state())) { $("#fa-body").innerHTML = `<p class="muted">Loading…</p>`; await Promise.all([load(), IG() ? IG().load() : null]).catch(err => A.toast(A.friendly(err), true)); }
+    if (!S || (IG() && !IG().state()) || (SOC() && !SOC().state())) { $("#fa-body").innerHTML = `<p class="muted">Loading…</p>`; await Promise.all([load(), IG() ? IG().load() : null, SOC() ? SOC().load() : null]).catch(err => A.toast(A.friendly(err), true)); }
     render();
   }
   document.addEventListener("click", e => {
@@ -893,7 +932,7 @@
   const wait = setInterval(async () => {
     if (!A.signedIn() || !A.products().length) return;
     clearInterval(wait);
-    try { await Promise.all([load(), IG() ? IG().load() : null]); } catch (err) { return; }
+    try { await Promise.all([load(), IG() ? IG().load() : null, SOC() ? SOC().load() : null]); } catch (err) { return; }
     updateBadge();
     const m = hash.match(/^#favauto-done=(.+)$/);
     if (m) {
