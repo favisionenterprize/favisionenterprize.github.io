@@ -590,3 +590,16 @@ input.now-num { width: 4.5em !important; display: inline-block; padding: 2px 6px
 .seek-desc { font-size: 14px; }
 .seek-approve { position: sticky; bottom: 10px; box-shadow: 0 8px 24px rgba(0,0,0,.12); }
 #fa-body { grid-template-columns: minmax(0, 1fr); }
+
+/* Engagement tab (engage.js) */
+.eng-table-wrap { overflow-x: auto; }
+.eng-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.eng-table th, .eng-table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; vertical-align: middle; }
+.eng-table th { font-size: 12px; color: var(--muted); font-weight: 600; }
+.eng-table td.up { color: #1b7a3a; font-weight: 700; }
+.eng-table td.down { color: var(--err); font-weight: 700; }
+.eng-table a { color: inherit; }
+.eng-spark { vertical-align: middle; color: var(--sell); margin-left: 6px; }
+.eng-nets { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+#eng-form textarea { width: 100%; box-sizing: border-box; font: inherit; padding: 10px; border: 1px solid var(--line); border-radius: 8px; }
+.eng-preview { color: var(--ink, #14171a); }

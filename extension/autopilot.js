@@ -23,6 +23,7 @@
     else job = stored;
   } catch (e) { job = null; }
   if (!job || !job.kind) return;                       // not an autopilot tab: do nothing
+  if (job.kind === "engage" || job.kind === "ig" || job.kind === "x" || job.kind === "tiktok" || job.kind === "youtube") return;   // handled by engage.js / other scripts
   if (m) history.replaceState(history.state, "", location.pathname + location.search);
   job.i = job.i || 0;
   job.res = job.res || [];

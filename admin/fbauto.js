@@ -42,7 +42,8 @@
   const ext = () => document.documentElement.dataset.favautoExt;
   const IG = () => window.FAV_IGAUTO;
   const SOC = () => window.FAV_SOCAUTO;
-  const VID = () => window.FAV_VIDAUTO;          // Videos & YouTube (admin/vidauto.js + extension/youtube.js)          // X and TikTok (admin/socauto.js + extension/social.js)
+  const VID = () => window.FAV_VIDAUTO;
+  const ENG = () => window.FAV_ENGAGE;           // Engagement: comment on all posts + followers/likes (admin/engage.js + extension/engage.js)          // Videos & YouTube (admin/vidauto.js + extension/youtube.js)          // X and TikTok (admin/socauto.js + extension/social.js)
   const liveAddon = () => document.documentElement.dataset.favautoMode === "live";
   const REPORT_TO = "nanaotengdonkor1@gmail.com";
   let S = null, tab = "today";
@@ -292,6 +293,7 @@
       if (k === "ignow" && IG() && Number(ext()) >= 4) { const sel = selection(); return startIg({ products: sel.ids, limit: sel.ig_n }, steps); }
       if ((k === "x" || k === "tiktok") && SOC() && SOC().summary(k).waiting && liveAddon()) return startSoc(k, {}, steps);
       if ((k === "xnow" || k === "ttnow") && SOC() && liveAddon()) { const sel = selection(), net = k === "xnow" ? "x" : "tiktok"; return startSoc(net, { products: sel.ids, limit: net === "x" ? sel.x_n : sel.tt_n }, steps); }
+      if (k.startsWith("engage:") && ENG() && ENG().state()) return ENG().start(k.slice(7), steps);
       if (k === "report") return sendReport(true);
     }
   }
@@ -486,7 +488,11 @@
     A.busy("Saving what the add-on did…");
     const runLog = (s, extra) => { s.runs = (s.runs || []).concat([{ d, t: new Date().toISOString(), kind: out.kind, ...extra, ...(out.stopped ? { stopped: out.stopped } : {}) }]).slice(-200); };
     try {
-      if (out.kind === "youtube" && VID()) {
+      if (out.kind === "engage" && ENG()) {
+        const r = await ENG().receive(out);
+        A.toast(r.text, r.bad);
+        tab = "engage";
+      } else if (out.kind === "youtube" && VID()) {
         const r = await VID().receive(out);
         A.toast(r.text, r.bad);
         tab = "videos";
@@ -752,7 +758,7 @@
     }
   }
 
-  const TABS = [["today", "Today"], ["now", "Post now"], ["facebook", "Facebook"], ["instagram", "Instagram"], ["social", "X & TikTok"], ["videos", "Videos & YouTube"]];
+  const TABS = [["today", "Today"], ["now", "Post now"], ["facebook", "Facebook"], ["instagram", "Instagram"], ["social", "X & TikTok"], ["videos", "Videos & YouTube"], ["engage", "Engagement"]];
   function step(state, title, detail) {
     const icon = { done: "✓", wait: "•", off: "–", warn: "!" }[state];
     return `<li class="run-step ${state}"><span class="run-icon" aria-hidden="true">${icon}</span><div><b>${title}</b><small>${detail}</small></div></li>`;
@@ -844,7 +850,7 @@
 
   function render() {
     if (!S) return;
-    const body = tab === "facebook" ? renderFacebook() : tab === "instagram" ? (IG() ? IG().renderTab() : "") : tab === "now" ? renderNow() : tab === "social" ? (SOC() ? SOC().renderTab() : "") : tab === "videos" ? (VID() ? VID().renderTab() : "") : renderToday();
+    const body = tab === "facebook" ? renderFacebook() : tab === "instagram" ? (IG() ? IG().renderTab() : "") : tab === "now" ? renderNow() : tab === "social" ? (SOC() ? SOC().renderTab() : "") : tab === "videos" ? (VID() ? VID().renderTab() : "") : tab === "engage" ? (ENG() ? ENG().renderTab() : "") : renderToday();
     $("#fa-body").innerHTML = `<nav class="fa-tabs" role="tablist">${TABS.map(([k, t]) => `<button type="button" role="tab" aria-selected="${tab === k}" data-fa-tab="${k}">${t}</button>`).join("")}</nav>` + body;
   }
 
@@ -967,7 +973,7 @@
     $("#top-actions").hidden = false;
     window.scrollTo(0, 0);
     if (location.hash !== "#fbauto") history.replaceState(null, "", "#fbauto");
-    if (!S || (IG() && !IG().state()) || (SOC() && !SOC().state()) || (VID() && !VID().state())) { $("#fa-body").innerHTML = `<p class="muted">Loading…</p>`; await Promise.all([load(), IG() ? IG().load() : null, SOC() ? SOC().load() : null, VID() ? VID().load().catch(() => null) : null]).catch(err => A.toast(A.friendly(err), true)); }
+    if (!S || (IG() && !IG().state()) || (SOC() && !SOC().state()) || (VID() && !VID().state()) || (ENG() && !ENG().state())) { $("#fa-body").innerHTML = `<p class="muted">Loading…</p>`; await Promise.all([load(), IG() ? IG().load() : null, SOC() ? SOC().load() : null, VID() ? VID().load().catch(() => null) : null, ENG() ? ENG().load().catch(() => null) : null]).catch(err => A.toast(A.friendly(err), true)); }
     render();
   }
   document.addEventListener("click", e => {
@@ -982,7 +988,7 @@
   const wait = setInterval(async () => {
     if (!A.signedIn() || !A.products().length) return;
     clearInterval(wait);
-    try { await Promise.all([load(), IG() ? IG().load() : null, SOC() ? SOC().load() : null, VID() ? VID().load().catch(() => null) : null]); } catch (err) { return; }
+    try { await Promise.all([load(), IG() ? IG().load() : null, SOC() ? SOC().load() : null, VID() ? VID().load().catch(() => null) : null, ENG() ? ENG().load().catch(() => null) : null]); } catch (err) { return; }
     updateBadge();
     const m = hash.match(/^#favauto-done=(.+)$/);
     if (m) {
@@ -1009,5 +1015,5 @@
     }
     if (e.source === window && e.data && e.data.type === "favauto-start-failed") A.toast("The add-on couldn't start the run. Reload the add-on in edge://extensions and try again.", true);
   });
-  window.FAV_FBAUTO = { open, launch, needExt, liveAddon, render: () => { if (!screen.hidden || tab === "videos") render(); }, _test: { set: s => { S = normalise(s); }, dueList, plan, caption, receive, state: () => S, stepsToday, runStep, setTab: t => { tab = t; render(); } } };
+  window.FAV_FBAUTO = { open, launch, needExt, liveAddon, render: () => { if (!screen.hidden || tab === "videos" || tab === "engage") render(); }, _test: { set: s => { S = normalise(s); }, dueList, plan, caption, receive, state: () => S, stepsToday, runStep, setTab: t => { tab = t; render(); } } };
 })();

@@ -160,17 +160,22 @@
     if (net === "youtube") t = t.slice(0, 4900);
     return t;
   }
-  // Engagement ask under every post: where are you seeing this from, then like and follow.
+  // Engagement ask under every post: where are you seeing this from, then like, share and follow.
+  const ASK_LINKS = " 👉 Page: facebook.com/FaVisionEnterprise · 🌐 Shop: favisionenterprize.github.io";
   function comment(net, kind) {
+    const base = commentBase(net, kind);
+    return net === "x" ? base : base + ASK_LINKS;
+  }
+  function commentBase(net, kind) {
     const what = kind || pick(["this", "this ad", "this post", "this video"]);
     const page = net === "x" ? "us" : pick(["our page", "the page", "F.A Vision Enterprise"]);
-    if (net === "x") return pick([`📍 Where are you seeing ${what} from? Reply, then like & follow ${page}!`, `Where are you watching ${what} from? 👇 Like & follow ${page}!`, `📍 Tell us where you're seeing ${what} from, then like & follow!`]);
+    if (net === "x") return pick([`📍 Where are you seeing ${what} from? Reply, then like, share & follow ${page}!`, `Where are you watching ${what} from? 👇 Like, share & follow ${page}!`, `📍 Tell us where you're seeing ${what} from, then like, share & follow!`]);
     return pick([
-      `📍 Where are you seeing ${what} from? Tell us in the comments 👇 Then like and follow ${page} for more.`,
-      `👀 Where are you watching ${what} from? Drop your town or city below, then hit like and follow ${page}!`,
-      `Quick question: where are you seeing ${what} from? 🌍 Comment your location, then like and follow ${page} ❤️`,
-      `Comment where you're watching ${what} from 📍 (Accra? Kasoa? Kumasi? abroad?) and don't forget to like and follow ${page}!`,
-      `Which town are you seeing ${what} from? Let us know in the comments, then like 👍 and follow ${page} for new arrivals.`
+      `📍 Where are you seeing ${what} from? Tell us in the comments 👇 Then like, share and follow ${page} for more.`,
+      `👀 Where are you watching ${what} from? Drop your town or city below, then hit like, share and follow ${page}!`,
+      `Quick question: where are you seeing ${what} from? 🌍 Comment your location, then like, share and follow ${page} ❤️`,
+      `Comment where you're watching ${what} from 📍 (Accra? Kasoa? Kumasi? abroad?) and don't forget to like, share and follow ${page}!`,
+      `Which town are you seeing ${what} from? Let us know in the comments, then like 👍 share and follow ${page} for new arrivals.`
     ]);
   }
   // Put the ask after the call to action, before the hashtags (X: keep within 280 characters).
