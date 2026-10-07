@@ -34,8 +34,9 @@
    "id": "762804364052457",
    "name": "Ghana Buy Sell Swap & Free Market",
    "url": "https://www.facebook.com/groups/762804364052457/",
-   "active": true,
-   "added": "2026-10-01"
+   "active": false,
+   "added": "2026-10-01",
+   "off_why": "Not a member of this group"
   },
   {
    "id": "688229241385954",
@@ -760,6 +761,76 @@
    "g": "555856695137297",
    "ok": true,
    "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T18:07:56.577Z",
+   "p": "FAV-014",
+   "g": "762804364052457",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T18:08:30.188Z",
+   "p": "FAV-014",
+   "g": "688229241385954",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T18:08:53.826Z",
+   "p": "FAV-014",
+   "g": "3295010260530139",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T18:09:18.085Z",
+   "p": "FAV-014",
+   "g": "ghanashs",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T18:09:38.915Z",
+   "p": "FAV-014",
+   "g": "433382596714655",
+   "ok": true
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T18:10:00.566Z",
+   "p": "FAV-014",
+   "g": "128000729380895",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T18:10:22.477Z",
+   "p": "FAV-014",
+   "g": "455961835149809",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T18:10:42.856Z",
+   "p": "FAV-014",
+   "g": "tltshopgroup",
+   "ok": true
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T18:11:06.787Z",
+   "p": "FAV-014",
+   "g": "555856695137297",
+   "ok": true,
+   "why": "Waiting for admin approval"
   }
  ],
  "resets": {},
@@ -875,6 +946,13 @@
    "kind": "post",
    "tried": 9,
    "ok": 7
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T18:11:39.902Z",
+   "kind": "post",
+   "tried": 9,
+   "ok": 8
   }
  ],
  "removed": [
