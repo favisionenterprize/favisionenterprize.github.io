@@ -1,0 +1,25 @@
+{
+ "settings": {
+  "text": "📍 Where are you seeing this from? Tell us in the comments 👇 Then like, share and follow F.A Vision Enterprise for more.",
+  "links": true,
+  "nets": {
+   "fb": true,
+   "ig": true,
+   "x": true,
+   "tiktok": true
+  },
+  "handles": {
+   "fb": "FaVisionEnterprise",
+   "ig": "favisionent",
+   "x": "FaVisionEnt",
+   "tiktok": ""
+  },
+  "limit": 200,
+  "max_comments": 60,
+  "min": 20,
+  "max": 45
+ },
+ "followers": [],
+ "posts": {},
+ "runs": []
+}
