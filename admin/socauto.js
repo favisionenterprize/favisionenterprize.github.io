@@ -42,6 +42,7 @@
   const shortName = p => String(p.name).split(" — ")[0];
 
   function caption(net, it, v, full) {
+    if (window.FAV_CAPTIONS) return window.FAV_CAPTIONS.write(it.studio ? null : it.p, { net, ad: it.ad, studio: !!it.studio, full: !!full });
     const B = A.business();
     const site = location.origin + "/";
     if (it.studio) {
@@ -91,7 +92,7 @@
     ];
     return opts[v % opts.length].replace(/\n{2,}/g, "\n").trim();
   }
-  const titleOf = it => it.studio ? "Design your room free" : `${shortName(it.p)} · ${C.formatPrice(it.p.price_ghs)}`;
+  const titleOf = it => window.FAV_CAPTIONS ? window.FAV_CAPTIONS.title(it.studio ? null : it.p, { net: "tiktok" }).slice(0, 90) : it.studio ? "Design your room free" : `${shortName(it.p)} · ${C.formatPrice(it.p.price_ghs)}`;
 
   // ------------------------------------------------------------------ what to post
   function plan(net) {

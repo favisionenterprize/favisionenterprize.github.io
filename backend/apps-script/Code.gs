@@ -139,6 +139,8 @@ function doPost(e) {
   if (data.action === 'posting_report') return postingReportNow_(data);
   if (data.action === 'session_alert') return sessionAlert_(data);
   if (data.action === 'muse') return museAsk_(data);
+  if (data.action === 'seek') return seek_(data);
+  if (data.action === 'seek_fetch') return seekFetch_(data);
   if (data.action === 'update_order') return updateOrder_(data);
   if (data.action === 'save_invoice') return saveInvoice_(data);
   if (data.action === 'update_enquiry') return updateEnquiry_(data);
@@ -1311,5 +1313,135 @@ function museAsk_(data) {
     return json_({ ok: true, text: text || '(no answer)', mode });
   } catch (err) {
     return json_({ ok: false, error: String(err && err.message || err).slice(0, 200) });
+  }
+}
+
+
+// ===================================================================== SEEK (admin → Seek)
+// Finds fresh photos and copy on the web for one product so the owner can review them in
+// the admin and approve what goes on the website. Nothing is changed here: this only searches.
+// Photos: Openverse (public domain / CC0, no key needed) and Pexels (free licence; Script
+// property PEXELS_API_KEY, optional). Copy: Gemini with Google Search grounding
+// (GEMINI_API_KEY) or Claude with web search (ANTHROPIC_API_KEY), held to the product's own facts.
+function seekBudget_() {
+  const cache = CacheService.getScriptCache();
+  const slot = 'seek_' + Utilities.formatDate(new Date(), 'GMT', 'yyyyMMddHH');
+  const n = Number(cache.get(slot) || 0);
+  if (n >= 200) return false;
+  cache.put(slot, String(n + 1), 3600);
+  return true;
+}
+function seek_(data) {
+  if (!sessionValid_(data.session)) return json_({ ok: false, error: 'signed_out' });
+  if (!seekBudget_()) return json_({ ok: false, error: 'busy' });
+  const props = authProps_();
+  const p = data.product || {};
+  const q = String(data.query || p.type || p.name || 'furniture').slice(0, 120);
+  const out = { ok: true, query: q, images: [], descriptions: [], highlights: [], sources: [], notes: [] };
+  const UA = { 'User-Agent': 'FAVisionAdmin/1.0 (+https://favisionenterprize.github.io)' };
+  if (data.images !== false) {
+    // Openverse matches every word, so if the full search finds few photos, also try the simple product type.
+    const words = q.split(/\s+/);
+    const tries = [q].concat(words.length > 2 ? [words.slice(-2).join(' ')] : []).concat(p.type && p.type.toLowerCase() !== q ? [String(p.type).toLowerCase()] : []);
+    const seen = {};
+    for (let t = 0; t < tries.length && out.images.length < 12; t++) {
+      try {
+        const r = UrlFetchApp.fetch('https://api.openverse.org/v1/images/?q=' + encodeURIComponent(tries[t]) + '&license=cc0,pdm&category=photograph&page_size=20&mature=false', { muteHttpExceptions: true, headers: UA });
+        if (r.getResponseCode() < 300) {
+          (JSON.parse(r.getContentText()).results || []).forEach((x) => {
+            if (seen[x.id]) return;
+            seen[x.id] = 1;
+            out.images.push({
+              src: 'Openverse', url: x.url, thumb: x.thumbnail || x.url, page: x.foreign_landing_url || '', creator: x.creator || '',
+              license: String(x.license || '').toUpperCase() === 'PDM' ? 'Public domain' : 'CC0', title: x.title || '', w: x.width || 0, h: x.height || 0,
+            });
+          });
+        } else out.notes.push('Openverse answered ' + r.getResponseCode());
+      } catch (e) { out.notes.push('Openverse: ' + String(e.message || e).slice(0, 80)); }
+    }
+    const pk = props.getProperty('PEXELS_API_KEY');
+    if (pk) {
+      try {
+        const r = UrlFetchApp.fetch('https://api.pexels.com/v1/search?per_page=20&query=' + encodeURIComponent(q), { muteHttpExceptions: true, headers: { Authorization: pk } });
+        if (r.getResponseCode() < 300) {
+          (JSON.parse(r.getContentText()).photos || []).forEach((x) => out.images.push({
+            src: 'Pexels', url: x.src.large2x || x.src.large || x.src.original, thumb: x.src.medium, page: x.url, creator: x.photographer || '',
+            license: 'Pexels licence', title: x.alt || '', w: x.width || 0, h: x.height || 0,
+          }));
+        } else out.notes.push('Pexels answered ' + r.getResponseCode());
+      } catch (e) { out.notes.push('Pexels: ' + String(e.message || e).slice(0, 80)); }
+    } else out.notes.push('no_pexels_key');
+  }
+  if (data.text !== false) {
+    const facts = {
+      name: p.name, type: p.type, category: p.category, material: p.material, size: p.dimensions, colours: p.colors,
+      price_ghs: p.price_ghs, condition: p.condition, current_description: p.description, current_highlights: p.highlights,
+      sold_by: p.seller ? p.seller.name : BUSINESS.name,
+    };
+    const prompt = 'Search the web for how this kind of product is described and what buyers look for, then write fresh copy for our own listing in Ghana.\n' +
+      'Our product facts (the only facts you may state about it):\n' + JSON.stringify(facts) + '\n\n' +
+      'Rules: never invent sizes, brands, warranties, prices or features that are not in our facts; general, true benefits of this kind of product are fine. ' +
+      'British English, plain text, no markdown, no emojis. Write 3 different descriptions (2 to 3 sentences, under 60 words each, each with a different angle) ' +
+      'and 6 short highlights (max 6 words each). Reply with JSON only: {"descriptions":["..."],"highlights":["..."]}';
+    try {
+      const gem = props.getProperty('GEMINI_API_KEY');
+      const claude = props.getProperty('ANTHROPIC_API_KEY');
+      let text = '';
+      if (gem) {
+        const model = props.getProperty('GEMINI_MODEL') || 'gemini-2.5-flash';
+        const res = UrlFetchApp.fetch('https://generativelanguage.googleapis.com/v1beta/models/' + encodeURIComponent(model) + ':generateContent', {
+          method: 'post', contentType: 'application/json', muteHttpExceptions: true, headers: { 'x-goog-api-key': gem },
+          payload: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: prompt }] }], tools: [{ google_search: {} }], generationConfig: { temperature: 0.9, maxOutputTokens: 2048 } }),
+        });
+        const o = JSON.parse(res.getContentText() || '{}');
+        if (res.getResponseCode() >= 300) throw new Error((o.error && o.error.message) || res.getResponseCode());
+        const c = (o.candidates || [])[0] || {};
+        text = ((c.content || {}).parts || []).map((x) => x.text || '').join('');
+        ((c.groundingMetadata || {}).groundingChunks || []).forEach((g) => { if (g.web) out.sources.push({ url: g.web.uri, title: g.web.title || '' }); });
+      } else if (claude) {
+        const call = (tools) => UrlFetchApp.fetch('https://api.anthropic.com/v1/messages', {
+          method: 'post', contentType: 'application/json', muteHttpExceptions: true,
+          headers: { 'x-api-key': claude, 'anthropic-version': '2023-06-01' },
+          payload: JSON.stringify({ model: props.getProperty('CLAUDE_MODEL') || 'claude-haiku-4-5-20251001', max_tokens: 2048, messages: [{ role: 'user', content: prompt }], tools }),
+        });
+        let res = call([{ type: 'web_search_20250305', name: 'web_search', max_uses: 3 }]);
+        if (res.getResponseCode() >= 300) { out.notes.push('web search not available for this key; wrote from the product facts'); res = call([]); }
+        const o = JSON.parse(res.getContentText() || '{}');
+        if (res.getResponseCode() >= 300) throw new Error((o.error && o.error.message) || res.getResponseCode());
+        (o.content || []).forEach((b) => {
+          if (b.type === 'text') text += b.text;
+          if (b.type === 'web_search_tool_result' && Array.isArray(b.content)) b.content.forEach((x) => { if (x.url) out.sources.push({ url: x.url, title: x.title || '' }); });
+        });
+      } else {
+        out.notes.push('no_ai_key');
+      }
+      if (text) {
+        const m = text.match(/\{[\s\S]*\}/);
+        const j = m ? JSON.parse(m[0]) : {};
+        out.descriptions = (j.descriptions || []).map(String).filter(Boolean).slice(0, 5);
+        out.highlights = (j.highlights || []).map(String).filter(Boolean).slice(0, 8);
+      }
+    } catch (e) { out.notes.push('copy: ' + String(e.message || e).slice(0, 120)); }
+    out.sources = out.sources.slice(0, 8);
+  }
+  return json_(out);
+}
+// Download one approved photo (the admin resizes it and commits it to the website).
+function seekFetch_(data) {
+  if (!sessionValid_(data.session)) return json_({ ok: false, error: 'signed_out' });
+  if (!seekBudget_()) return json_({ ok: false, error: 'busy' });
+  const url = String(data.url || '');
+  if (!/^https:\/\/[^\s/]+\.[^\s/]+\//.test(url) || /^https:\/\/(localhost|127\.|10\.|192\.168\.|169\.254\.)/.test(url)) return json_({ ok: false, error: 'bad_url' });
+  try {
+    const r = UrlFetchApp.fetch(url, { muteHttpExceptions: true, followRedirects: true, headers: { 'User-Agent': 'FAVisionAdmin/1.0 (+https://favisionenterprize.github.io)' } });
+    if (r.getResponseCode() >= 300) return json_({ ok: false, error: 'HTTP ' + r.getResponseCode() });
+    const blob = r.getBlob();
+    const type = String(blob.getContentType() || '');
+    if (!/^image\/(jpeg|png|webp)/.test(type)) return json_({ ok: false, error: 'not_an_image' });
+    const bytes = blob.getBytes();
+    if (bytes.length > 12 * 1024 * 1024) return json_({ ok: false, error: 'too_big' });
+    return json_({ ok: true, type, b64: Utilities.base64Encode(bytes) });
+  } catch (e) {
+    return json_({ ok: false, error: String(e.message || e).slice(0, 120) });
   }
 }

@@ -15,6 +15,7 @@ function hello(force) {
       d.favautoMode = st.mode;                // "live" = updates itself, "bundled" = using the copy in the folder
       d.favautoUs = st.userScripts ? "1" : "";
       d.favautoVersion = st.version || "";
+      d.favautoShell = st.shell || "";        // add-on version itself (5.1+ may open YouTube)
       d.favautoError = st.error || "";
       window.postMessage({ type: "favauto-status", status: st }, location.origin);
     });

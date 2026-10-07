@@ -542,3 +542,51 @@ input.now-num { width: 4.5em !important; display: inline-block; padding: 2px 6px
 .now-right { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; white-space: nowrap; overflow: visible !important; }
 .now-right .btn-sm { padding: 5px 10px; }
 @media (max-width: 640px) { .now-list li { flex-wrap: wrap; } .now-right { width: 100%; justify-content: space-between; } }
+
+/* Videos & YouTube tab (vidauto.js) */
+.vid-view { margin: 18px 0 8px; }
+.vid-src { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; }
+.vid-chip { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 6px 12px; font: 600 13px/1.2 inherit; font-family: inherit; cursor: pointer; color: var(--muted); }
+.vid-chip.on { background: var(--ink, #14171a); border-color: var(--ink, #14171a); color: #fff; }
+.vid-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.vid-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
+.vid-card video { width: 100%; aspect-ratio: 9 / 16; max-height: 420px; background: #111; object-fit: contain; display: block; }
+.vid-info { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 10px; }
+.vid-info h3 { margin: 0; font-size: 16px; }
+.vid-info p { margin: 0; }
+.vid-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.vid-tag { font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 999px; background: #eef1f5; color: var(--muted); }
+.vid-tag.ok { background: #e5f6ea; color: #1b7a3a; }
+.vid-tag.bad { background: #fdeaea; color: var(--err); }
+.vid-desc { display: flex; flex-direction: column; gap: 4px; font-size: 13px; font-weight: 600; }
+.vid-desc textarea { width: 100%; font: 400 13px/1.45 inherit; font-family: inherit; border: 1px solid var(--line); border-radius: 8px; padding: 8px; resize: vertical; box-sizing: border-box; }
+.vid-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.vid-actions .btn, .vid-more .btn { white-space: normal; }
+.vid-more summary { cursor: pointer; font-weight: 600; font-size: 13px; color: var(--muted); }
+.vid-more > * + * { margin-top: 10px; }
+.vid-edit { display: flex; flex-direction: column; gap: 8px; font-size: 13px; }
+.vid-edit input, .vid-edit select { width: 100%; box-sizing: border-box; }
+.vid-pick { cursor: pointer; align-self: flex-start; }
+@media (max-width: 600px) { .vid-grid { grid-template-columns: 1fr; } }
+.fa-tabs { overflow-x: auto; scrollbar-width: none; }
+.fa-tabs::-webkit-scrollbar { display: none; }
+.fa-tabs button { flex: 0 0 auto; }
+.vid-grid { grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); }
+.fa-actions .btn { white-space: normal; }
+
+/* Seek screen (seek.js) */
+.seek-bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; margin: 10px 0 4px; }
+.seek-bar label { display: flex; flex-direction: column; gap: 4px; font-size: 13px; font-weight: 600; flex: 1 1 220px; min-width: 0; }
+.seek-bar select, .seek-bar input { width: 100%; box-sizing: border-box; padding: 9px 10px; border: 1px solid var(--line); border-radius: 8px; font: inherit; }
+.seek-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin-top: 8px; }
+.seek-img { display: flex; flex-direction: column; border: 2px solid var(--line); border-radius: 10px; overflow: hidden; cursor: pointer; background: #fff; font-size: 12px; }
+.seek-img img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; background: #eef1f5; }
+.seek-img span { padding: 6px 8px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.seek-img.on { border-color: var(--sell); box-shadow: 0 0 0 2px rgba(0,0,0,.04); }
+.seek-img.drop { border-color: var(--err); opacity: .6; }
+.seek-texts { display: flex; flex-direction: column; gap: 8px; }
+.seek-text { display: flex; gap: 8px; align-items: flex-start; border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; cursor: pointer; line-height: 1.45; }
+.seek-hl { display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; }
+.seek-desc { font-size: 14px; }
+.seek-approve { position: sticky; bottom: 10px; box-shadow: 0 8px 24px rgba(0,0,0,.12); }
+#fa-body { grid-template-columns: minmax(0, 1fr); }

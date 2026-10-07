@@ -192,6 +192,36 @@
     catch (err) { if (fallback !== undefined && (err.status === 404 || /not found/i.test(err.message))) return fallback; throw err; }
   }
 
+  // Upload files (base64) and update one JSON file in a single commit (used by the
+  // Videos library). `deletes` = repo paths to remove in the same commit.
+  async function commitFiles({ files = [], deletes = [], jsonPath, mutate, message, fallback }) {
+    const blobs = [];
+    for (let i = 0; i < files.length; i++) {
+      busy(`Uploading ${files[i].label || "file"} (${i + 1} of ${files.length})…`);
+      const b = await gh("/git/blobs", { method: "POST", body: JSON.stringify({ content: files[i].b64, encoding: "base64" }) });
+      blobs.push({ path: files[i].path, mode: "100644", type: "blob", sha: b.sha });
+    }
+    for (let attempt = 0; attempt < 3; attempt++) {
+      busy("Saving to your website…");
+      const head = (await gh(`/git/ref/heads/${BRANCH}`)).object.sha;
+      const baseTree = (await gh(`/git/commits/${head}`)).tree.sha;
+      let current;
+      try { current = await readJson(jsonPath, head); }
+      catch (err) { if (fallback === undefined) throw err; current = JSON.parse(JSON.stringify(fallback)); }
+      const next = mutate(current);
+      const tree = [{ path: jsonPath, mode: "100644", type: "blob", content: JSON.stringify(next, null, 1) + "\n" }, ...blobs,
+        ...deletes.map(path => ({ path, mode: "100644", type: "blob", sha: null }))];
+      const newTree = await gh("/git/trees", { method: "POST", body: JSON.stringify({ base_tree: baseTree, tree }) });
+      const newCommit = await gh("/git/commits", { method: "POST", body: JSON.stringify({ message, tree: newTree.sha, parents: [head] }) });
+      try {
+        await gh(`/git/refs/heads/${BRANCH}`, { method: "PATCH", body: JSON.stringify({ sha: newCommit.sha }) });
+        return next;
+      } catch (err) {
+        if (err.status !== 422 || attempt === 2) throw err;
+      }
+    }
+  }
+
   // Apply `mutate` to the latest copy of one JSON file and commit it on its own
   // (used by the Facebook autopilot log). Retries if the branch moved meanwhile.
   async function saveJson(path, mutate, message, fallback) {
@@ -1061,7 +1091,7 @@
   // Shared with admin/pricesync.js (Facebook price sync screen).
   window.FAV_ADMIN = {
     commit: opts => commit(opts),
-    readJsonFile, saveJson, productUrl, friendly,
+    readJsonFile, saveJson, commitFiles, productUrl, friendly,
     // backend call with this browser's sign-in (email sign-in only; GitHub-token sign-in has none)
     backendSigned: payload => session ? backend({ ...payload, session }) : Promise.resolve({ ok: false, error: "no_session" }),
     products: () => products,

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Videos · F.A Vision Enterprise · Furniture in Accra</title>
+  <meta name="description" content="Watch F.A Vision Enterprise furniture videos: sofas, beds, dining sets, wardrobes and more from our Odorkor showroom in Accra. WhatsApp 057 264 6176 to order.">
+  <link rel="canonical" href="https://favisionenterprize.github.io/videos/">
+  <meta name="theme-color" content="#0d55af">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="F.A Vision Enterprise">
+  <meta property="og:title" content="Furniture videos · F.A Vision Enterprise">
+  <meta property="og:description" content="See our furniture in action, then WhatsApp 057 264 6176 to order. Delivery across Accra.">
+  <meta property="og:url" content="https://favisionenterprize.github.io/videos/">
+  <link rel="icon" type="image/png" sizes="48x48" href="../assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/site.css?v=20260930a">
+  <style>
+    .vids-hero { padding: 48px 0 24px; }
+    .vids-hero h1 { font: 700 clamp(28px, 5vw, 44px)/1.15 "Poppins", sans-serif; margin: 0 0 10px; }
+    .vids-hero p { color: var(--muted, #5b6470); max-width: 640px; margin: 0; }
+    .vids-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 22px; padding: 12px 0 56px; }
+    .vids-card { background: #fff; border: 1px solid var(--line, #e3e7ee); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; }
+    .vids-card video { width: 100%; aspect-ratio: 9 / 16; max-height: 520px; background: #111; object-fit: contain; display: block; }
+    .vids-body { padding: 14px 16px 18px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .vids-body h2 { font: 600 17px/1.3 "Poppins", sans-serif; margin: 0; }
+    .vids-desc { white-space: pre-line; color: var(--muted, #5b6470); font-size: 14px; line-height: 1.5; max-height: 7.5em; overflow: hidden; overflow-wrap: anywhere; }
+    .vids-desc.open { max-height: none; }
+    .vids-more { background: none; border: 0; padding: 0; color: var(--espresso, #0d55af); font: 600 13px "Inter", sans-serif; cursor: pointer; align-self: flex-start; }
+    .vids-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+    .vids-empty { padding: 40px 0 80px; color: var(--muted, #5b6470); }
+    @media (max-width: 600px) { .vids-grid { grid-template-columns: 1fr; } .vids-card video { max-height: 70vh; } }
+  </style>
+</head>
+<body>
+  <header class="nav" id="top">
+    <div class="wrap nav-inner">
+      <a href="../" class="logo" aria-label="F.A Vision Enterprise home">
+        <img src="../assets/images/logo.png" alt="F.A Vision Enterprise logo" width="46" height="46">
+        <span class="logo-text"><span><b>F.A</b> Vision</span><small>Enterprise</small></span>
+      </a>
+      <nav class="nav-links" id="nav-links">
+        <a href="../#deals">Deals</a>
+        <a href="../#shop">Shop</a>
+        <a href="../studio/">AI Studio</a>
+        <a href="./" aria-current="page">Videos</a>
+        <a href="../#visit">Locations</a>
+      </nav>
+      <a class="btn btn-gold btn-sm nav-cta" href="https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%20saw%20your%20videos%20and%20I%27d%20like%20to%20order." target="_blank" rel="noopener">WhatsApp us</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="vids-hero">
+      <h1>See it in action</h1>
+      <p>Short videos of the furniture in our Odorkor showroom. Like what you see? WhatsApp <b>057 264 6176</b> and we'll deliver it across Accra.</p>
+    </section>
+    <div class="vids-grid" id="vids"></div>
+    <p class="vids-empty" id="vids-empty" hidden>New videos are on the way. Meanwhile, <a href="../#shop">browse the shop</a> or <a href="https://wa.me/233572646176" target="_blank" rel="noopener">WhatsApp us</a>.</p>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-inner">
+        <span>© <span id="year"></span> F.A Vision Enterprise · Odorkor · Omanjor · Kasoa · <a href="../">Back to the furniture shop</a></span>
+        <span class="footer-tag">Bringing love to your Homes, Offices &amp; Schools</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/products-data.js?v=20260930e"></script>
+  <script>
+  (function () {
+    document.getElementById("year").textContent = new Date().getFullYear();
+    const t = document.getElementById("nav-toggle"), links = document.getElementById("nav-links");
+    if (t) t.addEventListener("click", () => { const o = links.classList.toggle("open"); t.setAttribute("aria-expanded", o); });
+    const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    const linkify = s => esc(s).replace(/https?:\/\/[^\s<]+/g, u => `<a href="${u}" rel="noopener">${u}</a>`);
+    const products = ((window.FAV_DATA || {}).products) || [];
+    const find = id => products.find(p => p.id === id);
+    const safeUrl = u => /^https:\/\/(www\.)?(youtube\.com|youtu\.be)\//.test(String(u || "")) ? u : "";
+    fetch("../data/videos.json?t=" + Date.now(), { cache: "no-store" }).then(r => r.json()).then(lib => {
+      const vids = (lib.videos || []).filter(v => v.website && v.website.status === "posted")
+        .sort((a, b) => String(b.website.d || "").localeCompare(String(a.website.d || "")));
+      if (!vids.length) { document.getElementById("vids-empty").hidden = false; return; }
+      document.getElementById("vids").innerHTML = vids.map(v => {
+        const p = v.product && find(v.product);
+        const name = p ? String(p.name).split(" — ")[0] : "";
+        const title = v.website.title || v.title || name || "F.A Vision Enterprise";
+        const desc = v.website.description || v.description || "";
+        const msg = encodeURIComponent(`Hello F.A Vision, I saw your video "${title}" and I'd like to order${name ? " the " + name : ""}.`);
+        const yt = safeUrl(v.youtube && v.youtube.url);
+        return `<article class="vids-card">
+          <video src="../${esc(v.file)}" ${v.poster ? `poster="../${esc(v.poster)}"` : ""} controls preload="none" playsinline></video>
+          <div class="vids-body">
+            <h2>${esc(title)}</h2>
+            ${desc ? `<div class="vids-desc">${linkify(desc)}</div><button class="vids-more" type="button">Read more</button>` : ""}
+            <div class="vids-actions">
+              <a class="btn btn-gold btn-sm" href="https://wa.me/233572646176?text=${msg}" target="_blank" rel="noopener">Order on WhatsApp</a>
+              ${v.product ? `<a class="btn btn-ghost btn-sm" href="../p/${esc(v.product)}.html">See the product</a>` : ""}
+              ${yt ? `<a class="btn btn-ghost btn-sm" href="${esc(yt)}" target="_blank" rel="noopener">Watch on YouTube</a>` : ""}
+            </div>
+          </div>
+        </article>`;
+      }).join("");
+      document.querySelectorAll(".vids-more").forEach(b => b.addEventListener("click", () => { const d = b.previousElementSibling; b.textContent = d.classList.toggle("open") ? "Show less" : "Read more"; }));
+    }).catch(() => { document.getElementById("vids-empty").hidden = false; });
+  })();
+  </script>
+</body>
+</html>

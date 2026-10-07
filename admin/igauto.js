@@ -123,6 +123,7 @@
   // ------------------------------------------------------------------ captions (3 variants, rotated)
   function caption(it, v) {
     const B = A.business();
+    if (window.FAV_CAPTIONS) return window.FAV_CAPTIONS.write(it.studio ? null : it.p, { net: "ig", ad: it.ad, studio: !!it.studio, tags: it.studio ? S.settings.audiences.home : S.settings.audiences[audienceOf(it.p)] });
     const brand = "#FAVisionEnterprise #AccraFurniture #FurnitureGhana";
     if (it.studio) {
       return `See your room before you buy it ✨\n\nDesign your room free with F.A Vision AI Studio: pick sofas, dining sets, wardrobes and wallpaper, and see them in your space. You only pay for the pieces you order.\n\n🔗 favisionenterprize.github.io/studio (link in bio)\n📲 WhatsApp ${C.localPhone(B.whatsapp)}\n📍 Odorkor, Accra\n\n${S.settings.audiences.home} ${brand}`;

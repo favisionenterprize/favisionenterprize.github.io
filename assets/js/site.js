@@ -431,6 +431,7 @@
       <div class="gallery">
         <div class="media" id="pd-main">${media(p)}</div>
         ${imgs.length > 1 ? `<div class="thumbs">${imgs.map((src, i) => `<button data-src="${esc(src)}" aria-current="${i === 0}" aria-label="Photo ${i + 1}"><img src="${esc(src)}" alt=""></button>`).join("")}</div>` : ""}
+        ${(() => { const cr = (p.image_credits || []).filter(c => imgs.includes(c.path)); return cr.length ? `<p class="pd-credit">Some photos show the same style of ${esc((p.type || "item").toLowerCase())}: ${cr.map(c => c.page ? `<a href="${esc(c.page)}" target="_blank" rel="noopener nofollow">${esc(c.creator || c.src)}</a>` : esc(c.creator || c.src)).join(", ")} (${esc([...new Set(cr.map(c => c.src))].join(", "))}).</p>` : ""; })()}
       </div>
       <div class="pd-info">
         <span class="card-type">${esc(p.type || p.category)}</span>

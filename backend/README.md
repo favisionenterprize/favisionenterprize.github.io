@@ -135,3 +135,11 @@ Limits and rules:
 ## Moving to Cloud Run / BigQuery later
 
 When a billing account is linked to the Google Cloud project, the Sheet can feed BigQuery (**Connected Sheets**, or a BigQuery external table on the Sheet) for heavier reporting, and the enquiry endpoint can move to Cloud Run. Nothing on the website changes except `enquiry_endpoint`.
+
+## Seek (fresh photos and descriptions)
+
+The admin's **🔎 Seek** screen calls two backend actions: `seek` (searches photos and writes new descriptions) and `seek_fetch` (downloads the photos you approve). After pasting the new Code.gs, deploy it again (Deploy → Manage deployments → edit → New version).
+
+- Photos: Openverse public-domain/CC0 photos work with no key. For many more furniture photos, get a free key at pexels.com/api and add the Script property `PEXELS_API_KEY`.
+- Descriptions: uses `GEMINI_API_KEY` (Google Search grounding) or `ANTHROPIC_API_KEY` (web search), the same keys as Muse AI.
+- Nothing is changed on the website by the backend; only your "Approve & publish" in the admin does that.

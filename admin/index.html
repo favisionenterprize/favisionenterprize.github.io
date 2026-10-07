@@ -126,6 +126,7 @@
       </div>
       <div class="dash-head-actions">
         <button class="btn btn-ghost" data-fbauto>Social autopilot <span class="ps-badge" id="fa-badge" hidden></span></button>
+        <button class="btn btn-ghost" data-seek>🔎 Seek <span class="ps-badge" id="seek-badge" hidden></span></button>
         <button class="btn btn-ghost" data-pricesync>Price sync <span class="ps-badge" id="ps-badge" hidden></span></button>
         <button class="btn btn-ghost" data-orders>Orders &amp; payments</button>
         <button class="btn btn-ghost" data-customers>Customers</button>
@@ -216,6 +217,20 @@
       </div>
     </div>
     <div id="fa-body"></div>
+  </main>
+
+  <!-- ============ SEEK (fresh photos and descriptions from the web, approved by you) ============ -->
+  <main class="screen" id="screen-seek" hidden>
+    <div class="dash-head">
+      <div>
+        <h1>Seek</h1>
+        <p class="muted">Find fresh photos and descriptions on the web for the products on your website. You see everything first; only what you approve goes live.</p>
+      </div>
+      <div class="dash-head-actions">
+        <button class="btn btn-ghost btn-sm" data-go="dash">← My products</button>
+      </div>
+    </div>
+    <div id="seek-body"></div>
   </main>
 
   <!-- ============ INVOICES ============ -->
@@ -400,9 +415,12 @@
   <script src="orders.js"></script>
   <script src="customers.js?v=1"></script>
   <script src="pricesync.js?v=5"></script>
-  <script src="igauto.js?v=2"></script>
-  <script src="socauto.js?v=2"></script>
-  <script src="fbauto.js?v=9"></script>
+  <script src="igauto.js?v=3"></script>
+  <script src="captions.js?v=1"></script>
+  <script src="socauto.js?v=3"></script>
+  <script src="vidauto.js?v=1"></script>
+  <script src="fbauto.js?v=10"></script>
+  <script src="seek.js?v=1"></script>
   <script src="../assets/js/invoice.js"></script>
   <script src="invoices.js"></script>
 </body>

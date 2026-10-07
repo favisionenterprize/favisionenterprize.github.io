@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-07.1",
+  "version": "2026-10-07.2",
   "note": "The FA Vision add-on (5.0+) downloads these scripts from the live site and runs them, so pushing a change here updates everyone's add-on within the hour. Changing the version is optional (it is only shown in the admin); any change to a file is picked up.",
   "scripts": [
     {
@@ -30,6 +30,14 @@
       "matches": [
         "https://x.com/*",
         "https://www.tiktok.com/*"
+      ]
+    },
+    {
+      "id": "youtube",
+      "file": "youtube.js",
+      "matches": [
+        "https://www.youtube.com/*",
+        "https://studio.youtube.com/*"
       ]
     }
   ]
