@@ -2,7 +2,7 @@
  "settings": {
   "on": true,
   "account": "favisionent",
-  "daily_posts": 3,
+  "daily_posts": 10,
   "pause_min_s": 120,
   "pause_max_s": 300,
   "spotlight_day": 1,
