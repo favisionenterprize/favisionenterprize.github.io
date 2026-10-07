@@ -19,7 +19,97 @@
   "min": 20,
   "max": 45
  },
- "followers": [],
- "posts": {},
- "runs": []
+ "followers": [
+  {
+   "d": "2026-10-07",
+   "net": "fb",
+   "n": 549
+  }
+ ],
+ "posts": {
+  "https://www.facebook.com/FaVisionEnterprise/posts/pfbid02xZsgqY16R3444BWZdHMg5ZRCBxLgp2GXQhYKEniXt9AMohacmr7N99PNfKqAyYvtl": {
+   "net": "fb",
+   "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid02xZsgqY16R3444BWZdHMg5ZRCBxLgp2GXQhYKEniXt9AMohacmr7N99PNfKqAyYvtl",
+   "first": "2026-10-07",
+   "commented": [
+    {
+     "d": "before",
+     "text": ""
+    }
+   ],
+   "title": "Fresh stock, just arrived! 🎒📚 Our new... - F.A Vision Enterprise",
+   "checked": "2026-10-07",
+   "likes": 8
+  },
+  "https://www.facebook.com/FaVisionEnterprise/posts/pfbid02bNVjAsK1vBuPHAQjobXiPpqPKrbXXbxUZB63iWJJsyUsRACjLuQ9uwHSNQ7C5DKel": {
+   "net": "fb",
+   "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid02bNVjAsK1vBuPHAQjobXiPpqPKrbXXbxUZB63iWJJsyUsRACjLuQ9uwHSNQ7C5DKel",
+   "first": "2026-10-07",
+   "commented": [],
+   "title": "Tertiary Student Desk is available. Hurry... - F.A Vision Enterprise",
+   "checked": "2026-10-07",
+   "likes": 8
+  },
+  "https://www.facebook.com/FaVisionEnterprise/videos/442786224559428/": {
+   "net": "fb",
+   "url": "https://www.facebook.com/FaVisionEnterprise/videos/442786224559428/",
+   "first": "2026-10-07",
+   "commented": [],
+   "title": "Video",
+   "checked": "2026-10-07",
+   "likes": 55,
+   "comments": 1,
+   "views": 129
+  },
+  "https://www.facebook.com/1708341757799442": {
+   "net": "fb",
+   "url": "https://www.facebook.com/1708341757799442",
+   "first": "2026-10-07",
+   "commented": [
+    {
+     "d": "before",
+     "text": ""
+    }
+   ],
+   "title": "See your room before you buy it ✨ Design... - F.A Vision Enterprise",
+   "checked": "2026-10-07",
+   "likes": 8
+  },
+  "https://www.facebook.com/1708338391133112": {
+   "net": "fb",
+   "url": "https://www.facebook.com/1708338391133112",
+   "first": "2026-10-07",
+   "commented": [
+    {
+     "d": "before",
+     "text": ""
+    }
+   ],
+   "title": "Your office, sorted 💼 Swipe for our office... - F.A Vision Enterprise",
+   "checked": "2026-10-07",
+   "likes": 8
+  },
+  "https://www.facebook.com/1708330401133911": {
+   "net": "fb",
+   "url": "https://www.facebook.com/1708330401133911",
+   "first": "2026-10-07",
+   "commented": [],
+   "title": "Dinner time, upgraded 🍽️ Swipe through our... - F.A Vision Enterprise",
+   "checked": "2026-10-07",
+   "likes": 8
+  }
+ },
+ "runs": [
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T22:55:54.750Z",
+   "net": "fb",
+   "posts": 6,
+   "checked": 6,
+   "commented": 0,
+   "followers": 549,
+   "stopped": null,
+   "commenting": true
+  }
+ ]
 }
