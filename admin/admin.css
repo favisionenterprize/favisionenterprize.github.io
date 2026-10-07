@@ -538,3 +538,7 @@ ol.fa-list { counter-reset: none; }
 input.now-num { width: 4.5em !important; display: inline-block; padding: 2px 6px; margin: 0 4px; }
 .fa-list li.share-li { flex-wrap: wrap; align-items: center; }
 .share-row { display: flex; flex-wrap: wrap; gap: 6px; white-space: normal !important; overflow: visible !important; }
+.now-list li { align-items: center; }
+.now-right { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; white-space: nowrap; overflow: visible !important; }
+.now-right .btn-sm { padding: 5px 10px; }
+@media (max-width: 640px) { .now-list li { flex-wrap: wrap; } .now-right { width: 100%; justify-content: space-between; } }

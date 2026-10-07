@@ -335,6 +335,19 @@
     j.job.then = then || null;
     launch(j.url, j.job);
   }
+  // One product → every active group, once, back to back (no pause between groups).
+  async function startAllGroups(pid) {
+    if (needExt()) return;
+    if (Number(ext()) < 3) return A.toast("Update the add-on first (steps at the bottom of the Today tab).", true);
+    const p = postable().find(x => x.id === pid), groups = activeGroups();
+    if (!p) return A.toast("That product can't be posted (it needs a price, a photo and to be in stock).", true);
+    if (!groups.length) return A.toast("Import your groups first (Facebook tab).", true);
+    await sendAlert("session", { products: 1, pairs: groups.map(g => ({ p, g })) });
+    const start = S.posts.filter(x => x.p === p.id).length, img = location.origin + "/" + p.images[0];
+    const q = groups.map((g, i) => ({ g: g.id, name: g.name, url: g.url, p: p.id, text: caption(p, start + i), img }));
+    A.toast(`Posting ${shortName(p)} into all ${groups.length} groups now…`);
+    launch(q[0].url, { kind: "post", mode: "now", q, min: 2, max: 4, then: ["report"] });
+  }
   function runNow() {
     if (needExt()) return;
     if (Number(ext()) < 3) return A.toast("Update the add-on first (steps at the bottom of the Today tab).", true);
@@ -658,7 +671,8 @@
         <header><h2>Post now</h2><span class="fa-big">${sel.ids.length}/${list.length}</span></header>
         <p class="muted">Tick any products and post them whenever you like. Each product goes into different groups (one product per group in a session) and never twice into the same group. This is separate from the daily plan in the Today tab, which keeps running as before.</p>
         <div class="fa-actions"><button class="btn btn-ghost btn-sm" data-now="all">Tick all ${list.length}</button><button class="btn btn-ghost btn-sm" data-now="none">Clear</button></div>
-        <ul class="fa-list now-list">${list.map(p => { const c = coverage(p); return `<li><label><input type="checkbox" data-now-p="${esc(p.id)}" ${on.has(p.id) ? "checked" : ""}> <img src="../${esc(p.images[0])}" alt="" width="40" height="30" loading="lazy"> ${esc(shortName(p))}</label><small>${esc(C.formatPrice(p.price_ghs))} · in ${c.done}/${c.total} groups</small></li>`; }).join("")}</ul>
+        <ul class="fa-list now-list">${list.map(p => { const c = coverage(p); return `<li><label><input type="checkbox" data-now-p="${esc(p.id)}" ${on.has(p.id) ? "checked" : ""}> <img src="../${esc(p.images[0])}" alt="" width="40" height="30" loading="lazy"> ${esc(shortName(p))}</label><span class="now-right"><small>${esc(C.formatPrice(p.price_ghs))} · in ${c.done}/${c.total} groups</small><button type="button" class="btn btn-sell btn-sm" data-all-groups="${esc(p.id)}" ${activeGroups().length ? "" : "disabled"}>Post to all ${activeGroups().length} groups</button></span></li>`; }).join("")}</ul>
+        <p class="muted fa-small"><b>Post to all groups</b> posts that one product once into every group on your list, straight away, with no waiting between groups (only a few seconds for each page to load). Posting fast into many groups is what Facebook most often flags as spam, so use it for one product at a time.</p>
       </section>
 
       <section class="fa-card">
@@ -825,6 +839,8 @@
     if (so) { if (so.dataset.soc) startSoc(so.dataset.soc, {}); else startSoc(so.dataset.socTest, { dry: true }); return; }
     const ib = e.target.closest("[data-ig]");
     if (ib) { if (ib.dataset.ig === "post") startIg({}); else startIg({ dry: true }); return; }
+    const ag = e.target.closest("[data-all-groups]");
+    if (ag) { e.preventDefault(); return startAllGroups(ag.dataset.allGroups); }
     const nb = e.target.closest("[data-now]");
     if (nb) {
       const sel = selection();
