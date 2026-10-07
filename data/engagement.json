@@ -17,7 +17,16 @@
   "limit": 200,
   "max_comments": 60,
   "min": 20,
-  "max": 45
+  "max": 45,
+  "reply_text": "Thank you {name}! 🙏 Please like, share and follow F.A Vision Enterprise for more deals.",
+  "reply_nets": {
+   "fb": true,
+   "ig": true,
+   "x": true,
+   "tiktok": true
+  },
+  "max_replies": 60,
+  "max_invites": 100
  },
  "followers": [
   {
@@ -29,6 +38,11 @@
    "d": "2026-10-07",
    "net": "ig",
    "n": 890
+  },
+  {
+   "d": "2026-10-07",
+   "net": "x",
+   "n": 297
   }
  ],
  "posts": {
@@ -198,6 +212,47 @@
    "commented": [],
    "title": "Instagram",
    "checked": "2026-10-07"
+  },
+  "https://x.com/FaVisionEnt/status/1662447925388099587": {
+   "net": "x",
+   "url": "https://x.com/FaVisionEnt/status/1662447925388099587",
+   "first": "2026-10-07",
+   "commented": [],
+   "checked": "2026-10-07"
+  },
+  "https://x.com/FaVisionEnt/status/2105579931896004691": {
+   "net": "x",
+   "url": "https://x.com/FaVisionEnt/status/2105579931896004691",
+   "first": "2026-10-07",
+   "commented": [],
+   "checked": "2026-10-07",
+   "likes": 1,
+   "views": 55
+  },
+  "https://x.com/FaVisionEnt/status/2105579357196673113": {
+   "net": "x",
+   "url": "https://x.com/FaVisionEnt/status/2105579357196673113",
+   "first": "2026-10-07",
+   "commented": [],
+   "checked": "2026-10-07",
+   "likes": 2,
+   "views": 80
+  },
+  "https://x.com/FaVisionEnt/status/2105579126166012159": {
+   "net": "x",
+   "url": "https://x.com/FaVisionEnt/status/2105579126166012159",
+   "first": "2026-10-07",
+   "commented": [],
+   "checked": "2026-10-07",
+   "views": 55
+  },
+  "https://x.com/FaVisionEnt/status/2105552733029752985": {
+   "net": "x",
+   "url": "https://x.com/FaVisionEnt/status/2105552733029752985",
+   "first": "2026-10-07",
+   "commented": [],
+   "checked": "2026-10-07",
+   "views": 74
   }
  },
  "runs": [
@@ -220,6 +275,20 @@
    "checked": 12,
    "commented": 0,
    "followers": 890,
+   "stopped": null,
+   "commenting": true
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T23:40:01.823Z",
+   "net": "x",
+   "mode": "comment",
+   "posts": 5,
+   "checked": 5,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "followers": 297,
    "stopped": null,
    "commenting": true
   }
