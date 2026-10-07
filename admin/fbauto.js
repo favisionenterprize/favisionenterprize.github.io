@@ -50,7 +50,7 @@
     s = s || JSON.parse(JSON.stringify(EMPTY));
     s.settings = { ...EMPTY.settings, ...(s.settings || {}) };
     for (const k of ["groups", "posts", "removed", "joins"]) s[k] = s[k] || [];
-    for (const k of ["resets", "renewals", "checks"]) s[k] = s[k] || {};
+    for (const k of ["resets", "renewals", "checks", "rounds"]) s[k] = s[k] || {};
     if (!Array.isArray(s.settings.grow_keywords) || !s.settings.grow_keywords.length) s.settings.grow_keywords = EMPTY.settings.grow_keywords.slice();
     return s;
   }
@@ -279,6 +279,7 @@
       if (k === "renew") return startRenew(steps);
       if (k === "declines" && cleanupWaiting()) return startDeclines(steps);
       if (k === "sync" && syncWaiting()) return startImport(steps);
+      if (k.startsWith("allgroups:")) return postAllGroups(k.slice(10), steps);
       if (k === "grow" && growWaiting()) return startGrow(steps);
       if (k === "post" && activeGroups().length && plan().groups.length) return startPosting(auto, steps);
       if (k === "ig" && IG() && IG().summary().waiting && Number(ext()) >= 4) return startIg({}, steps);
@@ -336,17 +337,40 @@
     launch(j.url, j.job);
   }
   // One product → every active group, once, back to back (no pause between groups).
-  async function startAllGroups(pid) {
+  // "Post to all groups": rounds per product. Each press first re-reads every group you're in
+  // on Facebook (so newly joined groups count), then posts the product into each group it
+  // hasn't been in yet this round, back to back. When it has been in all of them, the next
+  // press starts a new round (count back to 0).
+  function roundOf(pid) {
+    const since = S.rounds[pid] || "9999";   // no round yet: nothing counted
+    const ids = new Set(activeGroups().map(g => g.id));
+    const done = new Set(S.posts.filter(x => x.p === pid && x.ok && (x.t || x.d) >= since && ids.has(x.g)).map(x => x.g));
+    return { since, done, total: ids.size, left: activeGroups().filter(g => !done.has(g.id)) };
+  }
+  function startAllGroups(pid) {
     if (needExt()) return;
     if (Number(ext()) < 3) return A.toast("Update the add-on first (steps at the bottom of the Today tab).", true);
-    const p = postable().find(x => x.id === pid), groups = activeGroups();
-    if (!p) return A.toast("That product can't be posted (it needs a price, a photo and to be in stock).", true);
-    if (!groups.length) return A.toast("Import your groups first (Facebook tab).", true);
-    await sendAlert("session", { products: 1, pairs: groups.map(g => ({ p, g })) });
+    if (!postable().some(x => x.id === pid)) return A.toast("That product can't be posted (it needs a price, a photo and to be in stock).", true);
+    A.toast("Reading all your Facebook groups first, then posting…");
+    startImport(["allgroups:" + pid, "report"]);
+  }
+  async function postAllGroups(pid, then) {
+    const p = postable().find(x => x.id === pid);
+    if (!p || !activeGroups().length) { A.toast(!p ? "That product can't be posted." : "No groups switched on (Facebook tab).", true); return runStep(then, true); }
+    let r = roundOf(pid);
+    if (!r.left.length) {   // every group done: start the count again
+      try { await save(s => { s.rounds[pid] = new Date().toISOString(); return s; }, `Autopilot: new round of all groups for ${pid}`); } catch (err) { return A.toast(A.friendly(err), true); }
+      r = roundOf(pid);
+      A.toast(`${shortName(p)} has been in all your groups: starting a new round.`);
+    } else if (!S.rounds[pid]) {
+      try { await save(s => { s.rounds[pid] = new Date().toISOString(); return s; }, `Autopilot: first round of all groups for ${pid}`); } catch (err) { return A.toast(A.friendly(err), true); }
+      r = roundOf(pid);
+    }
+    await sendAlert("session", { products: 1, pairs: r.left.map(g => ({ p, g })) });
     const start = S.posts.filter(x => x.p === p.id).length, img = location.origin + "/" + p.images[0];
-    const q = groups.map((g, i) => ({ g: g.id, name: g.name, url: g.url, p: p.id, text: caption(p, start + i), img }));
-    A.toast(`Posting ${shortName(p)} into all ${groups.length} groups now…`);
-    launch(q[0].url, { kind: "post", mode: "now", q, min: 2, max: 4, then: ["report"] });
+    const q = r.left.map((g, i) => ({ g: g.id, name: g.name, url: g.url, p: p.id, text: caption(p, start + i), img }));
+    A.toast(`Posting ${shortName(p)} into ${q.length} group${q.length === 1 ? "" : "s"} (${r.done.size}/${r.total} done this round)…`);
+    launch(q[0].url, { kind: "post", mode: "now", q, min: 2, max: 4, then: then || null });
   }
   function runNow() {
     if (needExt()) return;
@@ -671,8 +695,8 @@
         <header><h2>Post now</h2><span class="fa-big">${sel.ids.length}/${list.length}</span></header>
         <p class="muted">Tick any products and post them whenever you like. Each product goes into different groups (one product per group in a session) and never twice into the same group. This is separate from the daily plan in the Today tab, which keeps running as before.</p>
         <div class="fa-actions"><button class="btn btn-ghost btn-sm" data-now="all">Tick all ${list.length}</button><button class="btn btn-ghost btn-sm" data-now="none">Clear</button></div>
-        <ul class="fa-list now-list">${list.map(p => { const c = coverage(p); return `<li><label><input type="checkbox" data-now-p="${esc(p.id)}" ${on.has(p.id) ? "checked" : ""}> <img src="../${esc(p.images[0])}" alt="" width="40" height="30" loading="lazy"> ${esc(shortName(p))}</label><span class="now-right"><small>${esc(C.formatPrice(p.price_ghs))} · in ${c.done}/${c.total} groups</small><button type="button" class="btn btn-sell btn-sm" data-all-groups="${esc(p.id)}" ${activeGroups().length ? "" : "disabled"}>Post to all ${activeGroups().length} groups</button></span></li>`; }).join("")}</ul>
-        <p class="muted fa-small"><b>Post to all groups</b> posts that one product once into every group on your list, straight away, with no waiting between groups (only a few seconds for each page to load). Posting fast into many groups is what Facebook most often flags as spam, so use it for one product at a time.</p>
+        <ul class="fa-list now-list">${list.map(p => { const c = coverage(p); return `<li><label><input type="checkbox" data-now-p="${esc(p.id)}" ${on.has(p.id) ? "checked" : ""}> <img src="../${esc(p.images[0])}" alt="" width="40" height="30" loading="lazy"> ${esc(shortName(p))}</label><span class="now-right"><small>${esc(C.formatPrice(p.price_ghs))} · in ${c.done}/${c.total} groups</small><button type="button" class="btn btn-sell btn-sm" data-all-groups="${esc(p.id)}" title="This round: in ${roundOf(p.id).done.size} of ${roundOf(p.id).total} groups">Post to all groups · ${roundOf(p.id).done.size}/${roundOf(p.id).total}</button></span></li>`; }).join("")}</ul>
+        <p class="muted fa-small"><b>Post to all groups</b> first reads every group you are in on Facebook, then posts that product into each group it has not been in yet this round, with no waiting between groups (only a few seconds for each page to load). The count (e.g. 12/40) shows this round; when it reaches all your groups, the next press starts a new round from 0. Groups that declined you or that you switched off are skipped. Posting fast into many groups is what Facebook most often flags as spam, so use it for one product at a time.</p>
       </section>
 
       <section class="fa-card">
