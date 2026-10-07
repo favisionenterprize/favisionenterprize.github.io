@@ -194,6 +194,8 @@
   // ------------------------------------------------------------------ jobs for the add-on
   function launch(url, job) {
     job.id = Date.now().toString(36);
+    // First comment under each Facebook group post (where are you seeing this from + like & follow).
+    if (job.kind === "post" && Array.isArray(job.q) && window.FAV_CAPTIONS) job.q.forEach(x => { if (!x.comment) x.comment = window.FAV_CAPTIONS.comment("fb", "this post"); });
     job.back = location.origin + location.pathname;
     if (Number(ext()) >= 3) {
       job.navFor = 0;                                   // the add-on opens the first page itself

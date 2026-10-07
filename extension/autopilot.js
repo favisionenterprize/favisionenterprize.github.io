@@ -94,6 +94,34 @@
     return false;
   }
 
+  // First comment under our own new group post: find the post in the feed by its first line,
+  // open its comment box, type the comment and press Enter. Best effort: a miss never fails the post.
+  async function firstComment(caption, text, n) {
+    try {
+      box(`${n}: adding the first comment…`);
+      const key = String(caption).split("\n").map(x => x.trim()).find(x => x.length > 12) || "";
+      const probe = key.slice(0, 40);
+      const post = await waitFor(() => [...document.querySelectorAll('[role=feed] [role=article], [role=article]')]
+        .find(a => visible(a) && !a.closest('[role=article] [role=article]') && (a.innerText || "").includes(probe)), 20000);
+      if (!post) return "first comment not added (post not found)";
+      post.scrollIntoView({ block: "center" });
+      await sleep(rand(1200, 2200));
+      const boxFor = () => [...post.querySelectorAll('[contenteditable=true][role=textbox]')].find(e => visible(e) && /comment/i.test(e.getAttribute("aria-label") || e.getAttribute("aria-placeholder") || "comment"));
+      let input = boxFor();
+      if (!input) { const cb = findBtn(/^(leave a )?comment$/i, post); if (cb) { cb.click(); input = await waitFor(boxFor, 6000); } }
+      if (!input) return "first comment not added (no comment box)";
+      input.focus();
+      await sleep(400);
+      document.execCommand("insertText", false, text);
+      await sleep(600);
+      if (!(input.innerText || "").trim()) return "first comment not added (couldn't type)";
+      input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", code: "Enter", keyCode: 13, which: 13, bubbles: true, cancelable: true }));
+      const sent = await waitFor(() => !(input.innerText || "").trim(), 8000);
+      await sleep(1200);
+      return sent ? "first comment added" : "first comment not added (Enter didn't send)";
+    } catch (e) { return "first comment not added"; }
+  }
+
   await sleep(1500);
   box("Starting…");
 
@@ -181,7 +209,9 @@
     w = warning(); if (w) { record(false, w); return finish(`Facebook showed "${w}". Nothing more was posted.`); }
     if (!closed) { record(false, "Facebook didn't confirm the post"); return next(false); }
     const pending = /pending|admin approval|submitted|will be reviewed/i.test(document.body.innerText.slice(0, 5000));
-    record(true, [pending && "Waiting for admin approval", photoNote].filter(Boolean).join(" · "));
+    let commentNote = "";
+    if (it.comment && !pending) commentNote = await firstComment(it.text, it.comment, n);
+    record(true, [pending && "Waiting for admin approval", photoNote, commentNote].filter(Boolean).join(" · "));
     return next(true);
   }
 

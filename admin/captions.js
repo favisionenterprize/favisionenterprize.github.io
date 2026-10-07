@@ -111,9 +111,12 @@
     if (net === "x") {
       let t = [hook, `${name}: ${price}.`, hl[0] && hl[0] + ".", cta(p, o)].filter(Boolean).join(" ");
       if (!t.includes(f.link)) t += " " + f.link;
+      const ROOM = 200;   // leave room for the "where are you seeing this from" ask (withAsk)
+      if (t.length > ROOM) t = [hook, `${name}: ${price}.`, cta(p, o), f.link].join(" ");
+      if (t.length > ROOM) t = `${name}: ${price}. WhatsApp ${f.wa} to order 👉 ${f.link}`;
       const tg = tags(p, "x");
-      if ((t + " " + tg).length <= 280) t += " " + tg;
-      return t.length <= 280 ? t : `${name}: ${price}. WhatsApp ${f.wa} to order 👉 ${f.link}`.slice(0, 280);
+      if ((t + " " + tg).length <= ROOM) t += " " + tg;
+      return t;
     }
     const body = shuffle([blurb, hl.map(h => `${bullet} ${h}`).join("\n")]).filter(Boolean);
     return [hook, "", ...body.flatMap(b => [b, ""]), priceLine, extra, place, pay, "", cta(p, o), link, "", tags(p, net, o.tags)].join("\n");
@@ -157,11 +160,38 @@
     if (net === "youtube") t = t.slice(0, 4900);
     return t;
   }
+  // Engagement ask under every post: where are you seeing this from, then like and follow.
+  function comment(net, kind) {
+    const what = kind || pick(["this", "this ad", "this post", "this video"]);
+    const page = net === "x" ? "us" : pick(["our page", "the page", "F.A Vision Enterprise"]);
+    if (net === "x") return pick([`📍 Where are you seeing ${what} from? Reply, then like & follow ${page}!`, `Where are you watching ${what} from? 👇 Like & follow ${page}!`, `📍 Tell us where you're seeing ${what} from, then like & follow!`]);
+    return pick([
+      `📍 Where are you seeing ${what} from? Tell us in the comments 👇 Then like and follow ${page} for more.`,
+      `👀 Where are you watching ${what} from? Drop your town or city below, then hit like and follow ${page}!`,
+      `Quick question: where are you seeing ${what} from? 🌍 Comment your location, then like and follow ${page} ❤️`,
+      `Comment where you're watching ${what} from 📍 (Accra? Kasoa? Kumasi? abroad?) and don't forget to like and follow ${page}!`,
+      `Which town are you seeing ${what} from? Let us know in the comments, then like 👍 and follow ${page} for new arrivals.`
+    ]);
+  }
+  // Put the ask after the call to action, before the hashtags (X: keep within 280 characters).
+  function withAsk(t, net) {
+    const ask = comment(net);
+    if (net === "x") {
+      if ((t + " " + ask).length <= 280) return t + " " + ask;
+      const bare = t.replace(/(\s#\w+)+\s*$/, "");
+      if ((bare + " " + ask).length <= 280) return bare + " " + ask;
+      return bare.slice(0, 279 - ask.length).replace(/\s+\S*$/, "") + " " + ask;
+    }
+    const lines = t.split("\n");
+    const last = lines[lines.length - 1] || "";
+    if (/^#/.test(last.trim())) { lines.splice(lines.length - 1, 0, ask, ""); return lines.join("\n"); }
+    return t + "\n\n" + ask;
+  }
   function write(p, o) {
     o = o || {};
     let t = "";
     for (let i = 0; i < 6; i++) {
-      t = tidy(o.studio ? studio(o) : p ? product(p, o) : general(o), o.net);
+      t = tidy(withAsk(o.studio ? studio(o) : p ? product(p, o) : general(o), o.net), o.net);
       if (!recent.includes(t)) break;
     }
     recent.push(t); if (recent.length > 300) recent.shift();
@@ -175,5 +205,5 @@
     const name = short(p), price = money(p.price_ghs);
     return pick([`${name} – ${price} in Ghana`, `${name} for ${price} 🔥`, `Look at this ${name.toLowerCase()} 😍`, `${name} | Furniture in Accra`, `${name}: worth ${price}?`, `${name} at F.A Vision, Odorkor`]).slice(0, 100 - sh.length) + sh;
   }
-  window.FAV_CAPTIONS = { write, title, cta, tags };
+  window.FAV_CAPTIONS = { write, title, cta, tags, comment };
 })();
