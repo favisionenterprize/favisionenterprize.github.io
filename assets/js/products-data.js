@@ -1815,6 +1815,42 @@ window.FAV_DATA = {
         "whatsapp": "+233555434994",
         "note": "Sold and delivered by ANAC Essentials (formerly ANAC Ventures), a partner business. Contact them directly to order."
       }
+    },
+    {
+      "id": "FAV-027",
+      "name": "3D Wallpaper — Brick, Stone & Pattern (per roll)",
+      "category": "Walls & Decor",
+      "type": "Wallpaper",
+      "marketplace_category": "Home & Garden > Home Decor > Wallpaper",
+      "price_ghs": 650,
+      "negotiable": true,
+      "icon": "🧱",
+      "description": "3D wallpaper that gives any wall a fresh look in a day: brick, stone and modern square patterns for living rooms, bedrooms, offices, shops and salons. GH₵650 per roll. Not sure how many rolls you need? Try your room free in our AI Studio and it works it out for you, or WhatsApp us your wall size.",
+      "condition": "Brand New",
+      "custom_order": false,
+      "in_stock": true,
+      "images": [
+        "assets/images/products/fav-027-1.jpg",
+        "assets/images/products/fav-027-2.jpg",
+        "assets/images/products/fav-027-3.jpg",
+        "assets/images/products/fav-027-4.jpg",
+        "assets/images/products/fav-027-5.jpg"
+      ],
+      "highlights": [
+        "GH₵650 per roll",
+        "Brick, stone & pattern designs",
+        "Living rooms, offices, shops",
+        "Rolls worked out free in AI Studio"
+      ],
+      "colors": [
+        "Grey stone",
+        "Brown brick",
+        "Beige squares",
+        "Blue squares",
+        "Red brick"
+      ],
+      "roll_m2": 5.3,
+      "placeholder": false
     }
   ]
 };

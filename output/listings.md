@@ -1,6 +1,6 @@
 # F.A Vision Enterprise: ready-to-paste listings
 
-Generated 2026-10-02. Regenerate after editing `data/products.json`.
+Generated 2026-10-07. Regenerate after editing `data/products.json`.
 
 ## FAV-001 · Rainbow Glass-Top Dining Set — 6 Chairs
 
@@ -1864,4 +1864,81 @@ DM or call 055 543 4994 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 Kavukçu Wheat Flour — 50kg Baking Flour 🔥
 GH₵ 650
 Order: https://wa.me/233555434994?text=Hello%20ANAC%20Essentials%20%28formerly%20ANAC%20Ventures%29%2C%20I%27m%20interested%20in%20the%20Kavuk%C3%A7u%20Wheat%20Flour%20%E2%80%94%2050kg%20Baking%20Flour%20%28FAV-026%29.
+```
+
+## FAV-027 · 3D Wallpaper — Brick, Stone & Pattern (per roll)
+
+### Facebook Marketplace
+
+- **Title:** 3D Wallpaper — Brick, Stone & Pattern (per roll)
+- **Price:** 650
+- **Category:** Home & Garden > Home Decor > Wallpaper
+- **Condition:** Brand New
+- **Location:** Odorkor, Accra
+- **Photos:** assets/images/products/fav-027-1.jpg, assets/images/products/fav-027-2.jpg, assets/images/products/fav-027-3.jpg, assets/images/products/fav-027-4.jpg, assets/images/products/fav-027-5.jpg
+
+**Description:**
+
+```
+3D Wallpaper — Brick, Stone & Pattern (per roll) by F.A Vision Enterprise.
+
+3D wallpaper that gives any wall a fresh look in a day: brick, stone and modern square patterns for living rooms, bedrooms, offices, shops and salons. GH₵650 per roll. Not sure how many rolls you need? Try your room free in our AI Studio and it works it out for you, or WhatsApp us your wall size.
+
+👉 See all photos, price and order online: https://favisionenterprize.github.io/#product/FAV-027
+
+✔ GH₵650 per roll
+✔ Brick, stone & pattern designs
+✔ Living rooms, offices, shops
+✔ Rolls worked out free in AI Studio
+
+Colours: Grey stone, Brown brick, Beige squares, Blue squares, Red brick
+
+Price negotiable for bulk orders.
+💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
+🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
+📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
+📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+🌐 https://favisionenterprize.github.io/
+Ref: FAV-027
+```
+
+### Group posts (use a different variant in each group)
+
+**Variant 1**
+
+```
+🧱 3D Wallpaper — Brick, Stone & Pattern (per roll) available now!
+• GH₵650 per roll
+• Brick, stone & pattern designs
+• Living rooms, offices, shops
+• Rolls worked out free in AI Studio
+💰 GH₵ 650
+📍 Odorkor, Accra, delivery available
+📞 WhatsApp 057 264 6176
+#FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+**Variant 2**
+
+```
+Looking for a quality 3d wallpaper — brick, stone & pattern (per roll)? GH₵650 per roll.
+Available at Odorkor, Accra. GH₵ 650.
+Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+**Variant 3**
+
+```
+NEW FROM F.A VISION ✨ 3D Wallpaper — Brick, Stone & Pattern (per roll)
+GH₵ 650 | Ready for pickup
+Homes • Offices • Schools
+DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+### WhatsApp status
+
+```
+3D Wallpaper — Brick, Stone & Pattern (per roll) 🔥
+GH₵ 650
+Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%203D%20Wallpaper%20%E2%80%94%20Brick%2C%20Stone%20%26%20Pattern%20%28per%20roll%29%20%28FAV-027%29.
 ```
