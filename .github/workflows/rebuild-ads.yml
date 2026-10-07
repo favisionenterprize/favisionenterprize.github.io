@@ -12,6 +12,7 @@ on:
       - "data/products.json"
       - "data/business.json"
       - "scripts/make_ads.py"
+      - "scripts/make_ad_models.py"
       - "scripts/make_share_cards.py"
       - "scripts/generate_listings.py"
   workflow_dispatch:
@@ -42,6 +43,7 @@ jobs:
       - name: Rebuild ads and listing texts
         run: |
           python3 scripts/make_ads.py
+          python3 scripts/make_ad_models.py
           python3 scripts/make_share_cards.py
           python3 scripts/generate_listings.py
 

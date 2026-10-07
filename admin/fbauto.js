@@ -192,6 +192,12 @@
     return variants[v % variants.length].replace(/\n{3,}/g, "\n\n").trim();
   }
 
+  // Picture for a group post: the product photo or one of its ad designs (classic, tile, presence), at random.
+  function postImg(p) {
+    const ad = ((A.business().promos || {}).ads || []).find(a => a.product === p.id && !/-arrived$/.test(a.id));
+    const pics = [p.images[0]].concat(ad ? [`assets/images/ads/${ad.id}.jpg`, `assets/images/ads/models/tile-${ad.id}.jpg`, `assets/images/ads/models/presence-${ad.id}.jpg`] : []);
+    return location.origin + "/" + pics[Math.floor(Math.random() * pics.length)];
+  }
   // ------------------------------------------------------------------ jobs for the add-on
   function launch(url, job) {
     job.id = Date.now().toString(36);
@@ -226,7 +232,7 @@
     const pl = plan();
     const g = (pl.groups[0] || activeGroups()[0]);
     if (!pl.p || !g) return A.toast("Nothing to test: needs a listing and at least one group switched on.", true);
-    const p = pl.p, img = location.origin + "/" + p.images[0];
+    const p = pl.p, img = postImg(p);
     launch(g.url, { kind: "post", dry: true, q: [{ g: g.id, name: g.name, url: g.url, p: p.id, text: caption(p, 0), img }], min: 5, max: 5 });
   }
 
@@ -248,7 +254,7 @@
     A.busy(null);
     await sendAlert("session");
     const p = pl.p, start = S.posts.filter(x => x.p === p.id).length;
-    const img = location.origin + "/" + p.images[0];
+    const img = postImg(p);
     const q = pl.groups.map((g, i) => ({ g: g.id, name: g.name, url: g.url, p: p.id, text: caption(p, start + i), img }));
     launch(q[0].url, { kind: "post", q, min: S.settings.pause_min_s, max: S.settings.pause_max_s, auto: !!auto, then: then || null });
   }
@@ -329,7 +335,7 @@
     const used = {};
     const q = pl.pairs.map(({ p, g }) => {
       used[p.id] = (used[p.id] || 0) + 1;
-      return { g: g.id, name: g.name, url: g.url, p: p.id, text: caption(p, S.posts.filter(x => x.p === p.id).length + used[p.id]), img: location.origin + "/" + p.images[0] };
+      return { g: g.id, name: g.name, url: g.url, p: p.id, text: caption(p, S.posts.filter(x => x.p === p.id).length + used[p.id]), img: postImg(p) };
     });
     launch(q[0].url, { kind: "post", mode: "now", q, min: S.settings.pause_min_s, max: S.settings.pause_max_s, then: then || null });
   }
@@ -374,7 +380,7 @@
       r = roundOf(pid);
     }
     await sendAlert("session", { products: 1, pairs: r.left.map(g => ({ p, g })) });
-    const start = S.posts.filter(x => x.p === p.id).length, img = location.origin + "/" + p.images[0];
+    const start = S.posts.filter(x => x.p === p.id).length, img = postImg(p);
     const q = r.left.map((g, i) => ({ g: g.id, name: g.name, url: g.url, p: p.id, text: caption(p, start + i), img }));
     A.toast(`Posting ${shortName(p)} into ${q.length} group${q.length === 1 ? "" : "s"} (${r.done.size}/${r.total} done this round)…`);
     launch(q[0].url, { kind: "post", mode: "now", q, min: 2, max: 4, then: then || null });
