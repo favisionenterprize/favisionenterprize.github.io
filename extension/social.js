@@ -91,6 +91,19 @@
       if (i < lines.length - 1) document.execCommand("insertParagraph", false, null) || document.execCommand("insertLineBreak", false, null);
     });
   }
+  // TikTok's description box sometimes copies the hashtag line over the first line when
+  // the text is inserted (seen live Oct 2026). Put the first line back if that happened.
+  async function fixFirstLine(ed, text) {
+    const want = (String(text).split("\n").find(l => l.trim()) || "").trim();
+    for (let tries = 0; tries < 2; tries++) {
+      const blk = ed.querySelector('[data-block="true"]');
+      if (!want || !blk || blk.innerText.trim() === want) return;
+      const r = document.createRange(); r.selectNodeContents(blk);
+      const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      document.execCommand("insertText", false, want);
+      await sleep(600);
+    }
+  }
   function setInput(input, value) {
     const set = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value").set;
     set.call(input, value);
@@ -185,6 +198,7 @@
   typeInto(ed, it.text);
   await sleep(1200);
   ed.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));   // close the #hashtag suggestions
+  await fixFirstLine(ed, it.text);
   if (!ed.innerText.trim()) { await record(it, false, "Couldn't type the description"); return next(false); }
   w = warning(); if (w) return finish(`TikTok showed "${w}". Nothing more was posted.`);
   const post = await waitFor(() => { const b = [...document.querySelectorAll("button")].find(x => visible(x) && (x.innerText || "").trim() === "Post"); return b && !b.disabled && b.getAttribute("aria-disabled") !== "true" ? b : null; }, 30000);
