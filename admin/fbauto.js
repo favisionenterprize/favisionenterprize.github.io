@@ -23,6 +23,8 @@
   const EMPTY = {
     settings: {
       daily_limit: 20, renew_after_days: 7, renew_batch: 20, pause_min_s: 60, pause_max_s: 180, auto_run: false, auto_time: "09:00",
+      now_limit: 20,                            // "Post now": most group posts per session
+      group_rest_hours: 6,                      // "Post now": skip groups posted in within this many hours
       cleanup_on: true,                         // find groups that decline our posts, leave them and drop them from the list
       grow_on: true, grow_daily: 20,
       grow_min_members: 10000,                 // Ghana/Accra groups qualify from this size…
@@ -79,7 +81,7 @@
     .filter(p => !p.placeholder && p.in_stock !== false && !p.seller && (p.images || []).length && p.price_ghs)
     .sort((a, b) => a.id.localeCompare(b.id));
   const activeGroups = () => S.groups.filter(g => g.active !== false);
-  const attemptsToday = () => S.posts.filter(x => x.d === today()).length;
+  const attemptsToday = () => S.posts.filter(x => x.d === today() && !x.now).length;   // daily plan only; "Post now" has its own limit
 
   // ------------------------------------------------------------------ clean-up (groups that decline us) and growth (new big groups)
   const joinsToday = () => S.joins.filter(j => j.d === today() && j.status !== "failed").length;
@@ -123,6 +125,48 @@
       .sort((a, b) => (lastUse[a.id] || "").localeCompare(lastUse[b.id] || ""))
       .slice(0, room);
     return { p, groups, room, cov };
+  }
+
+  // ------------------------------------------------------------------ "Post now": any products, any time (alongside the daily plan)
+  // The choice is kept in this browser so it survives the trips to Facebook and Instagram and back.
+  const SEL_KEY = "fa-post-now";
+  function selection() {
+    let v = null;
+    try { v = JSON.parse(localStorage.getItem(SEL_KEY)); } catch (e) { /* none saved */ }
+    const ok = new Set(postable().map(p => p.id));
+    v = Object.assign({ ids: [...ok], fb: true, ig: true, ig_n: 3 }, v || {});
+    v.ids = (v.ids || []).filter(id => ok.has(id));
+    return v;
+  }
+  function setSelection(v) { try { localStorage.setItem(SEL_KEY, JSON.stringify(v)); } catch (e) { /* storage blocked */ } }
+  const lastPostOf = id => S.posts.filter(x => x.p === id).map(x => x.t || x.d).sort().pop() || "";
+
+  // Pairs the chosen products with groups for one session:
+  //  - each group gets one product per session, so the products land in different groups;
+  //  - a product only goes to groups it hasn't been in yet (when it has been in all, it starts a new round);
+  //  - products posted least recently and groups rested longest go first;
+  //  - groups posted in during the last `group_rest_hours` rest (fewer declines);
+  //  - at most `now_limit` group posts per session.
+  function planNow(ids) {
+    ids = ids || selection().ids;
+    const prods = postable().filter(p => ids.includes(p.id)).sort((a, b) => lastPostOf(a.id).localeCompare(lastPostOf(b.id)));
+    const lastUse = {};
+    for (const x of S.posts) { const t = x.t || x.d; if (!lastUse[x.g] || t > lastUse[x.g]) lastUse[x.g] = t; }
+    const restMs = (Number(S.settings.group_rest_hours) || 0) * 36e5, now = Date.now();
+    const all = activeGroups();
+    const groups = all.filter(g => !lastUse[g.id] || now - Date.parse(lastUse[g.id]) >= restMs)
+      .sort((a, b) => (lastUse[a.id] || "").localeCompare(lastUse[b.id] || ""));
+    const cov = Object.fromEntries(prods.map(p => [p.id, coverage(p)]));
+    const pairs = [], used = new Set(), cap = S.settings.now_limit;
+    for (let more = true; more && pairs.length < cap;) {
+      more = false;
+      for (const p of prods) {
+        if (pairs.length >= cap) break;
+        const g = groups.find(x => !used.has(x.id) && (cov[p.id].fresh || !cov[p.id].tried.has(x.id)));
+        if (g) { pairs.push({ p, g }); used.add(g.id); more = true; }
+      }
+    }
+    return { pairs, prods, products: new Set(pairs.map(x => x.p.id)).size, groups: all.length, resting: all.length - groups.length, fresh: prods.filter(p => cov[p.id].fresh).map(p => p.id) };
   }
 
   // ------------------------------------------------------------------ captions (3 variants, rotated)
@@ -235,6 +279,8 @@
       if (k === "grow" && growWaiting()) return startGrow(steps);
       if (k === "post" && activeGroups().length && plan().groups.length) return startPosting(auto, steps);
       if (k === "ig" && IG() && IG().summary().waiting && Number(ext()) >= 4) return startIg({}, steps);
+      if (k === "postnow" && activeGroups().length) return startPostNow(steps);
+      if (k === "ignow" && IG() && Number(ext()) >= 4) { const sel = selection(); return startIg({ products: sel.ids, limit: sel.ig_n }, steps); }
       if (k === "report") return sendReport(true);
     }
   }
@@ -244,6 +290,45 @@
     const steps = stepsToday();
     if (!steps.length) return A.toast("Everything for today is done ✓");
     runStep(steps.concat("report"), auto);
+  }
+
+  // "Post now": posts the chosen products into different groups straight away.
+  async function startPostNow(then) {
+    if (needExt()) return;
+    if (Number(ext()) < 3) return A.toast("Update the add-on first (steps at the bottom of the Today tab).", true);
+    const pl = planNow();
+    if (!activeGroups().length) return A.toast("Import your groups first (Facebook tab).", true);
+    if (!pl.prods.length) return A.toast("Tick at least one product to post.", true);
+    if (!pl.pairs.length) {
+      A.toast(pl.resting ? `Every group was posted in during the last ${S.settings.group_rest_hours} hours. Try later, or lower "Rest between posts in a group" in the Facebook tab.` : "The ticked products have been in all your groups already. Join more groups or tick other products.", true);
+      if (then && then.length) setTimeout(() => runStep(then, true), 1500);
+      return;
+    }
+    if (pl.fresh.length) {
+      A.busy("Preparing the posts…");
+      try {
+        const going = new Set(pl.pairs.map(x => x.p.id));
+        await save(s => { for (const id of pl.fresh) if (going.has(id)) s.resets[id] = new Date().toISOString(); return s; }, "Autopilot: new round for products already in every group");
+      } catch (err) { A.busy(null); return A.toast(A.friendly(err), true); }
+      A.busy(null);
+    }
+    await sendAlert("session", pl);
+    const used = {};
+    const q = pl.pairs.map(({ p, g }) => {
+      used[p.id] = (used[p.id] || 0) + 1;
+      return { g: g.id, name: g.name, url: g.url, p: p.id, text: caption(p, S.posts.filter(x => x.p === p.id).length + used[p.id]), img: location.origin + "/" + p.images[0] };
+    });
+    launch(q[0].url, { kind: "post", mode: "now", q, min: S.settings.pause_min_s, max: S.settings.pause_max_s, then: then || null });
+  }
+  function runNow() {
+    if (needExt()) return;
+    if (Number(ext()) < 3) return A.toast("Update the add-on first (steps at the bottom of the Today tab).", true);
+    const sel = selection(), steps = [];
+    if (!sel.ids.length) return A.toast("Tick at least one product to post.", true);
+    if (sel.fb) steps.push("postnow");
+    if (sel.ig && IG() && IG().state()) steps.push("ignow");
+    if (!steps.length) return A.toast("Tick Facebook groups or Instagram (or use the share buttons below).", true);
+    runStep(steps.concat("report"), false);
   }
 
   // Email the day's posting report (built and sent by the Apps Script backend).
@@ -316,12 +401,13 @@
 
   // Alert before every posting session (email via the backend, plus the badge here).
   // kind "milestone" = the special alert when today's new groups reach grow_daily.
-  async function sendAlert(kind) {
+  async function sendAlert(kind, nowPlan) {
     const pl = plan(), d = today();
+    const short = p => String(p.name).split(" — ")[0];
     const payload = {
       action: "session_alert", kind: kind || "session", day: d,
-      listing: pl.p ? String(pl.p.name).split(" — ")[0] : "",
-      groups: pl.groups.map(g => g.name),
+      listing: nowPlan ? `Post now: ${nowPlan.products} product${nowPlan.products === 1 ? "" : "s"}` : pl.p ? short(pl.p) : "",
+      groups: nowPlan ? nowPlan.pairs.map(x => `${x.g.name} ← ${short(x.p)}`) : pl.groups.map(g => g.name),
       joins: S.joins.filter(j => j.d === d).map(j => ({ name: j.name, members: j.members, status: j.status, url: j.url || "" })),
       removed: S.removed.filter(r => r.d === d).map(r => ({ name: r.name, why: r.why, left: !!r.left })),
       totals: { active: activeGroups().length, pending: pendingGroups().length, removed: S.removed.length, joined_today: joinsToday(), target: S.settings.grow_daily }
@@ -373,7 +459,7 @@
         const ok = out.res.filter(r => r.ok).length;
         await save(s => {
           runLog(s, { tried: out.res.length, ok });
-          for (const r of out.res) s.posts.push({ d, t: r.t, p: r.p, g: r.g, ok: r.ok, ...(r.why ? { why: r.why } : {}) });
+          for (const r of out.res) s.posts.push({ d, t: r.t, p: r.p, g: r.g, ok: r.ok, ...(out.mode === "now" ? { now: true } : {}), ...(r.why ? { why: r.why } : {}) });
           // a group that failed 3 times in a row is switched off
           for (const r of out.res.filter(x => !x.ok)) {
             const last3 = s.posts.filter(x => x.g === r.g).slice(-3);
@@ -517,6 +603,8 @@
         <form class="fa-settings" id="fa-settings">
           <label>Group posts a day <input id="fa-daily" name="daily_limit" type="number" min="1" max="50" value="${limit}"></label>
           <label>Renew in batches of <input id="fa-batch" name="renew_batch" type="number" min="1" max="50" value="${S.settings.renew_batch}"></label>
+          <label>Post now: most group posts a session <input name="now_limit" type="number" min="1" max="50" value="${S.settings.now_limit}"></label>
+          <label>Rest between posts in a group (hours) <input name="group_rest_hours" type="number" min="0" max="72" value="${S.settings.group_rest_hours}"></label>
           <label class="fa-check"><input name="cleanup_on" type="checkbox" ${S.settings.cleanup_on ? "checked" : ""}> Leave and remove groups that decline our posts</label>
           <label class="fa-check"><input name="grow_on" type="checkbox" ${S.settings.grow_on ? "checked" : ""}> Join new big groups every day</label>
           <label>New groups a day <input name="grow_daily" type="number" min="1" max="30" value="${S.settings.grow_daily}"></label>
@@ -532,7 +620,66 @@
   }
 
   // ------------------------------------------------------------------ Today tab: one button
-  const TABS = [["today", "Today"], ["facebook", "Facebook"], ["instagram", "Instagram"]];
+  // ------------------------------------------------------------------ Post now tab
+  const shortName = p => String(p.name).split(" — ")[0];
+  function renderNow() {
+    const sel = selection(), list = postable(), on = new Set(sel.ids), pl = planNow(sel.ids);
+    const mins = Math.round(pl.pairs.length * (S.settings.pause_min_s + S.settings.pause_max_s) / 120) + (sel.ig ? sel.ig_n * 4 : 0);
+    const fbLine = !activeGroups().length ? "no groups yet (import them in the Facebook tab)"
+      : pl.pairs.length ? `${plural(pl.pairs.length, "post")}: ${plural(pl.products, "product")} into ${plural(pl.pairs.length, "different group")}`
+      : !sel.ids.length ? "tick some products"
+      : pl.resting ? `every group was posted in during the last ${S.settings.group_rest_hours} hours; try later`
+      : "the ticked products are already in all your groups";
+    const chosen = list.filter(p => on.has(p.id));
+    return `
+      <section class="fa-card">
+        <header><h2>Post now</h2><span class="fa-big">${sel.ids.length}/${list.length}</span></header>
+        <p class="muted">Tick any products and post them whenever you like. Each product goes into different groups (one product per group in a session) and never twice into the same group. This is separate from the daily plan in the Today tab, which keeps running as before.</p>
+        <div class="fa-actions"><button class="btn btn-ghost btn-sm" data-now="all">Tick all ${list.length}</button><button class="btn btn-ghost btn-sm" data-now="none">Clear</button></div>
+        <ul class="fa-list now-list">${list.map(p => { const c = coverage(p); return `<li><label><input type="checkbox" data-now-p="${esc(p.id)}" ${on.has(p.id) ? "checked" : ""}> <img src="../${esc(p.images[0])}" alt="" width="40" height="30" loading="lazy"> ${esc(shortName(p))}</label><small>${esc(C.formatPrice(p.price_ghs))} · in ${c.done}/${c.total} groups</small></li>`; }).join("")}</ul>
+      </section>
+
+      <section class="fa-card">
+        <header><h2>Where to post</h2></header>
+        <label class="fa-check now-opt"><input type="checkbox" data-now-opt="fb" ${sel.fb ? "checked" : ""}> <span><b>Facebook groups</b> · ${esc(fbLine)}</span></label>
+        <label class="fa-check now-opt"><input type="checkbox" data-now-opt="ig" ${sel.ig ? "checked" : ""}> <span><b>Instagram</b> · up to <input type="number" min="1" max="10" data-now-ign value="${sel.ig_n}" class="now-num" aria-label="Instagram photos"> photos of the ticked products</span></label>
+        <button class="btn btn-sell run-btn" data-now="go" ${sel.ids.length && (sel.fb || sel.ig) ? "" : "disabled"}>Post now</button>
+        <p class="muted fa-small">About ${Math.max(3, mins)} minutes, in this Edge tab. Keep it open and in front. You get the alert email as it starts and the report when it ends. It stops by itself if Facebook or Instagram shows a warning.</p>
+        ${pl.pairs.length ? `<details class="fa-more"><summary>See which product goes to which group</summary><ul class="fa-list">${pl.pairs.map(x => `<li><span>${esc(x.g.name)}</span><small>${esc(shortName(x.p))}</small></li>`).join("")}</ul></details>` : ""}
+      </section>
+
+      <section class="fa-card">
+        <header><h2>Other socials</h2></header>
+        <p class="muted">One tap opens each with the caption ready. <b>Facebook Page:</b> choose "Share to a Page" in the window that opens (caption is copied, paste it). <b>TikTok:</b> the caption is copied and the photo saved; add both in TikTok Studio.</p>
+        ${chosen.length ? `<ul class="fa-list">${chosen.map(p => `<li class="share-li"><span>${esc(shortName(p))}</span><span class="share-row">
+          <button class="btn btn-ghost btn-sm" data-share="page" data-pid="${esc(p.id)}">Facebook Page</button>
+          <button class="btn btn-ghost btn-sm" data-share="x" data-pid="${esc(p.id)}">X</button>
+          <button class="btn btn-ghost btn-sm" data-share="wa" data-pid="${esc(p.id)}">WhatsApp</button>
+          <button class="btn btn-ghost btn-sm" data-share="tt" data-pid="${esc(p.id)}">TikTok</button>
+          <button class="btn btn-ghost btn-sm" data-share="copy" data-pid="${esc(p.id)}">Copy caption</button></span></li>`).join("")}</ul>` : `<p class="fa-empty">Tick products above to share them.</p>`}
+      </section>`;
+  }
+  async function copyText(t) {
+    try { await navigator.clipboard.writeText(t); return true; }
+    catch (e) { const a = document.createElement("textarea"); a.value = t; document.body.appendChild(a); a.select(); const ok = document.execCommand("copy"); a.remove(); return ok; }
+  }
+  async function share(kind, p) {
+    const B = A.business(), page = location.origin + "/p/" + p.id + ".html";
+    const text = caption(p, S.posts.filter(x => x.p === p.id).length);
+    const price = C.formatPrice(p.price_ghs) + (p.negotiable ? " (negotiable)" : "");
+    if (kind === "x") return window.open("https://x.com/intent/post?text=" + encodeURIComponent(`🛋️ ${shortName(p)} in stock: ${price}. WhatsApp ${C.localPhone(B.whatsapp)} 👉 ${page} #FAVisionEnterprise #AccraFurniture`.slice(0, 280)), "_blank", "noopener");
+    if (kind === "wa") return window.open("https://wa.me/?text=" + encodeURIComponent(text), "_blank", "noopener");
+    await copyText(text);
+    if (kind === "copy") return A.toast("Caption copied ✓");
+    if (kind === "page") { window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(page), "_blank", "width=680,height=640"); return A.toast("Caption copied: choose “Share to a Page”, paste it, then Post."); }
+    if (kind === "tt") {
+      const a = document.createElement("a"); a.href = "../" + p.images[0]; a.download = p.id + ".jpg"; document.body.appendChild(a); a.click(); a.remove();
+      window.open("https://www.tiktok.com/tiktokstudio/upload", "_blank", "noopener");
+      return A.toast("Caption copied and photo saved: add them in TikTok Studio (Photos).");
+    }
+  }
+
+  const TABS = [["today", "Today"], ["now", "Post now"], ["facebook", "Facebook"], ["instagram", "Instagram"]];
   function step(state, title, detail) {
     const icon = { done: "✓", wait: "•", off: "–", warn: "!" }[state];
     return `<li class="run-step ${state}"><span class="run-icon" aria-hidden="true">${icon}</span><div><b>${title}</b><small>${detail}</small></div></li>`;
@@ -621,7 +768,7 @@
 
   function render() {
     if (!S) return;
-    const body = tab === "facebook" ? renderFacebook() : tab === "instagram" ? (IG() ? IG().renderTab() : "") : renderToday();
+    const body = tab === "facebook" ? renderFacebook() : tab === "instagram" ? (IG() ? IG().renderTab() : "") : tab === "now" ? renderNow() : renderToday();
     $("#fa-body").innerHTML = `<nav class="fa-tabs" role="tablist">${TABS.map(([k, t]) => `<button type="button" role="tab" aria-selected="${tab === k}" data-fa-tab="${k}">${t}</button>`).join("")}</nav>` + body;
   }
 
@@ -648,6 +795,15 @@
     if (t) { tab = t.dataset.faTab; render(); return; }
     const ib = e.target.closest("[data-ig]");
     if (ib) { if (ib.dataset.ig === "post") startIg({}); else startIg({ dry: true }); return; }
+    const nb = e.target.closest("[data-now]");
+    if (nb) {
+      const sel = selection();
+      if (nb.dataset.now === "go") return runNow();
+      sel.ids = nb.dataset.now === "all" ? postable().map(p => p.id) : [];
+      setSelection(sel); render(); return;
+    }
+    const sb = e.target.closest("[data-share]");
+    if (sb) { const p = postable().find(x => x.id === sb.dataset.pid); if (p) share(sb.dataset.share, p); return; }
     const b = e.target.closest("[data-fa]");
     if (!b) return;
     const k = b.dataset.fa;
@@ -671,6 +827,15 @@
   }
   screen.addEventListener("change", async e => {
     if (e.target.closest("[data-fa-autorun],[data-fa-autotime]")) return saveAutoRun();
+    if (e.target.closest("[data-now-p],[data-now-opt],[data-now-ign]")) {
+      const sel = selection(), el = e.target;
+      if (el.dataset.nowP) sel.ids = el.checked ? [...new Set(sel.ids.concat(el.dataset.nowP))] : sel.ids.filter(id => id !== el.dataset.nowP);
+      if (el.dataset.nowOpt) sel[el.dataset.nowOpt] = el.checked;
+      if (el.hasAttribute("data-now-ign")) sel.ig_n = Math.min(10, Math.max(1, parseInt(el.value, 10) || 3));
+      setSelection(sel);
+      const y = window.scrollY; render(); window.scrollTo(0, y);
+      return;
+    }
     const c = e.target.closest("[data-fa-group]");
     if (!c) return;
     const id = c.dataset.faGroup, on = c.checked;
@@ -695,6 +860,7 @@
     const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, parseInt(v, 10) || lo));
     const next = {
       daily_limit: clamp(f.daily_limit.value, 1, 50), renew_batch: clamp(f.renew_batch.value, 1, 50),
+      now_limit: clamp(f.now_limit.value, 1, 50), group_rest_hours: clamp(f.group_rest_hours.value, 0, 72),
       cleanup_on: f.cleanup_on.checked, grow_on: f.grow_on.checked,
       grow_daily: clamp(f.grow_daily.value, 1, 30), grow_min_members: clamp(f.grow_min_members.value, 1000, 1e9), grow_min_global: clamp(f.grow_min_global.value, 1000, 1e9),
       grow_keywords: f.grow_keywords.value.split(",").map(x => x.trim()).filter(Boolean).slice(0, 30)

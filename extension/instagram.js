@@ -40,7 +40,7 @@
   }
 
   async function finish(stopped) {
-    const out = { kind: "ig", id: job.id, res: job.res, stats: job.stats || null, spot: job.spot || [], stopped: stopped || null, then: job.then || null, dry: !!job.dry };
+    const out = { kind: "ig", id: job.id, res: job.res, stats: job.stats || null, spot: job.spot || [], stopped: stopped || null, then: job.then || null, dry: !!job.dry, mode: job.mode || null };
     await bg({ type: "clearJob" });
     location.href = job.back + "#favauto-done=" + encodeURIComponent(JSON.stringify(out));
   }

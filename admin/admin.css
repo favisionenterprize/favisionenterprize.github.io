@@ -528,3 +528,13 @@ ol.fa-list { counter-reset: none; }
 .fa-settings select, .fa-settings input[type=text] { padding: 6px 8px; border: 1px solid var(--line); border-radius: 8px; font: inherit; }
 .fa-upd { padding: 12px 14px; border-radius: var(--radius); background: #fff6e5; border: 1px solid #f3d9a4; font-size: 14px; }
 .fa-upd p { margin: 0 0 8px; }
+
+/* Social autopilot: Post now tab */
+.now-list { max-height: 420px; overflow-y: auto; margin-top: 8px; }
+.now-list li label { display: flex; align-items: center; gap: 8px; min-width: 0; cursor: pointer; }
+.now-list li img { border-radius: 4px; object-fit: cover; flex: 0 0 auto; }
+.now-opt { display: flex !important; align-items: center; gap: 8px; margin: 10px 0; flex-wrap: wrap; }
+.now-opt > input[type=checkbox] { flex: 0 0 auto; }
+input.now-num { width: 4.5em !important; display: inline-block; padding: 2px 6px; margin: 0 4px; }
+.fa-list li.share-li { flex-wrap: wrap; align-items: center; }
+.share-row { display: flex; flex-wrap: wrap; gap: 6px; white-space: normal !important; overflow: visible !important; }

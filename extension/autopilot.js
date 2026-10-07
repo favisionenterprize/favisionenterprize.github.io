@@ -50,7 +50,7 @@
   }
 
   async function finish(stopped) {
-    const out = { kind: job.kind, id: job.id, res: job.res, stopped: stopped || null, then: job.then || null, groups: job.groups || null, dry: !!job.dry, snapshot: job.snapshot || null };
+    const out = { kind: job.kind, id: job.id, res: job.res, stopped: stopped || null, then: job.then || null, groups: job.groups || null, dry: !!job.dry, snapshot: job.snapshot || null, mode: job.mode || null };
     await bg({ type: "clearJob" });
     location.href = job.back + "#favauto-done=" + encodeURIComponent(JSON.stringify(out));
   }

@@ -90,7 +90,7 @@
 
   function plan() {
     const items = pool(), d = today();
-    const okToday = S.posts.filter(x => x.d === d && x.ok);
+    const okToday = S.posts.filter(x => x.d === d && x.ok && !x.now);   // "Post now" posts don't use up the daily plan
     const room = S.settings.on ? Math.max(0, S.settings.daily_posts - okToday.length) : 0;
     const last = {};
     for (const x of S.posts) if (x.ok && (!last[x.k] || x.t > last[x.k])) last[x.k] = x.t;
@@ -151,13 +151,24 @@
     const pl = plan();
     const site = location.origin + "/";
     let q = pl.queue;
+    if (opts.products) {
+      // "Post now": the chosen products (their ad if there is one, else the deal card),
+      // least recently posted on Instagram first, up to opts.limit.
+      const items = pool(), last = {};
+      for (const x of S.posts) if (x.ok && x.p && (!last[x.p] || x.t > last[x.p])) last[x.p] = x.t;
+      q = opts.products
+        .map(id => items.find(i => i.p && i.p.id === id && i.ad) || items.find(i => i.k === "card:" + id))
+        .filter(Boolean)
+        .sort((a, b) => (last[a.p.id] || "").localeCompare(last[b.p.id] || ""))
+        .slice(0, Math.max(1, opts.limit || 3));
+    }
     if (opts.dry) q = (q.length ? q : pool()).slice(0, 1);
     if (!q.length) return null;
     const start = S.posts.length;
     return {
       url: `https://www.instagram.com/${S.settings.account}/`,
       job: {
-        kind: "ig", account: S.settings.account, dry: !!opts.dry,
+        kind: "ig", account: S.settings.account, dry: !!opts.dry, mode: opts.products ? "now" : null,
         spot: q.filter(it => it.spot).map(it => it.k),
         q: q.map((it, i) => ({ k: it.k, p: it.p ? it.p.id : null, img: site + it.img, text: caption(it, start + i) })),
         min: S.settings.pause_min_s, max: S.settings.pause_max_s
@@ -174,7 +185,7 @@
     const ok = out.res.filter(r => r.ok).length;
     const spot = new Set(out.spot || []);
     await save(s => {
-      for (const r of out.res) s.posts.push({ d, t: r.t, k: r.k, p: r.p, ok: r.ok, ...(r.ok && spot.has(r.k) ? { spot: true } : {}), ...(r.why ? { why: r.why } : {}) });
+      for (const r of out.res) s.posts.push({ d, t: r.t, k: r.k, p: r.p, ok: r.ok, ...(r.ok && spot.has(r.k) ? { spot: true } : {}), ...(out.mode === "now" ? { now: true } : {}), ...(r.why ? { why: r.why } : {}) });
       if (out.stats && (out.stats.followers != null || out.stats.posts != null)) {
         s.profile = s.profile.filter(x => x.d !== d).concat([{ d, followers: out.stats.followers, following: out.stats.following, posts: out.stats.posts }]).slice(-400);
       }
