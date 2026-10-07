@@ -44,7 +44,7 @@
   }
   async function finish(stopped) {
     const out = { kind: "engage", net: NET, id: job.id, res: job.res, followers: job.followers == null ? null : job.followers, posts: job.urls.length,
-      stopped: stopped || null, then: job.then || null, commenting: !!job.text && !job.statsOnly, handle: job.handle || null };
+      stopped: stopped || null, then: job.then || null, commenting: !!job.text && !job.statsOnly && job.mode !== "reply" && job.mode !== "invite", mode: job.mode || "comment", handle: job.handle || null };
     await bg({ type: "clearJob" });
     location.href = job.back + "#favauto-done=" + encodeURIComponent(JSON.stringify(out));
   }
@@ -206,9 +206,154 @@
     return cleared ? "" : "not confirmed";
   }
 
+  // ------------------------------------------------------------- replies to everyone who commented
+  const OWN = new RegExp(`F\\.A Vision|FaVision|^@?${(handle || "favisionent").replace(/[.]/g, "\\.")}$`, "i");
+  const firstName = nm => String(nm || "").replace(/^@/, "").trim().split(/\s+/)[0] || "there";
+  const replyText = nm => String(job.reply_text || "Thank you {name}! 🙏").replace(/\{name\}/g, firstName(nm));
+  async function expandComments() {
+    for (let i = 0; i < 6; i++) {
+      const more = [...document.querySelectorAll("[role=button],button")].find(b => visible(b) && /^(View (more|all|previous|\d+ more) (comments?|replies)|View \d+ repl(y|ies)|See more comments|Load more comments|View more replies)/i.test((b.innerText || "").trim()));
+      if (!more) break;
+      more.click(); await sleep(rand(1500, 2500));
+    }
+  }
+  // Returns [{ name, el }] for comments by other people, in page order.
+  function commenters() {
+    const out = [], seen = new Set();
+    if (NET === "fb") {
+      document.querySelectorAll("[role=article][aria-label^='Comment by'], [role=article][aria-label^='Reply by']").forEach(a => {
+        const label = a.getAttribute("aria-label");
+        const name = label.replace(/^(Comment|Reply) by /, "").replace(/\s+(about\s+)?(a|an|\d+)\s+(second|minute|hour|day|week|month|year)s?\s+ago$/i, "").trim();
+        const key = label + "|" + (a.innerText || "").slice(0, 80);
+        if (seen.has(key) || OWN.test(name) || !visible(a)) return;
+        seen.add(key); out.push({ name, el: a });
+      });
+    } else if (NET === "ig") {
+      [...document.querySelectorAll("[role=button],button")].filter(b => visible(b) && /^Reply$/i.test((b.innerText || "").trim())).forEach(b => {
+        let c = b; for (let i = 0; i < 8 && c && !c.querySelector("a[href^='/'][role=link], h3 a, span a[href^='/']"); i++) c = c.parentElement;
+        const a = c && c.querySelector("a[href^='/'][role=link], h3 a, span a[href^='/']");
+        const name = a ? (a.getAttribute("href") || "").replace(/\//g, "") : "";
+        const key = name + "|" + (c.innerText || "").slice(0, 80);
+        if (!name || seen.has(key) || OWN.test(name)) return;
+        seen.add(key); out.push({ name, el: c, btn: b });
+      });
+    } else if (NET === "x") {
+      [...document.querySelectorAll("article[data-testid=tweet]")].slice(1).forEach(a => {
+        const h = ([...a.querySelectorAll("[data-testid='User-Name'] a span")].map(x => x.innerText).find(t => /^@/.test(t)) || "").trim();
+        const key = h + "|" + (a.innerText || "").slice(0, 80);
+        if (!h || seen.has(key) || OWN.test(h)) return;
+        seen.add(key); out.push({ name: h, el: a });
+      });
+    } else if (NET === "tiktok") {
+      document.querySelectorAll("[data-e2e='comment-username-1']").forEach(u => {
+        let c = u; for (let i = 0; i < 8 && c && !c.querySelector("[data-e2e^='comment-reply']"); i++) c = c.parentElement;
+        const name = (u.innerText || "").trim();
+        const key = name + "|" + ((c && c.innerText) || "").slice(0, 80);
+        if (!c || !name || seen.has(key) || OWN.test(name)) return;
+        seen.add(key); out.push({ name, el: c });
+      });
+    }
+    return out;
+  }
+  async function replyTo(cm, text) {
+    let input, send;
+    cm.el.scrollIntoView({ block: "center" }); await sleep(700);
+    if (NET === "fb") {
+      const b = [...cm.el.querySelectorAll("[role=button]")].find(x => /^Reply$/i.test((x.innerText || "").trim()) && x.closest("[role=article]") === cm.el);
+      if (!b) return "no Reply button";
+      const replyBoxes = () => [...document.querySelectorAll("[contenteditable=true][role=textbox]")].filter(e => visible(e) && /^Reply to/i.test(e.getAttribute("aria-label") || ""));
+      const before = new Set(replyBoxes());
+      b.click();
+      // the box that opened for this person: labelled with their name, or new since the click, or inside their comment
+      input = await waitFor(() => { const all = replyBoxes(); return all.find(e => (e.getAttribute("aria-label") || "") === "Reply to " + cm.name && !(e.innerText || "").trim()) || all.find(e => !before.has(e)) || all.find(e => cm.el.contains(e) && !(e.innerText || "").trim()); }, 6000);
+      if (!input) return "reply box didn't open";
+      input.focus(); await sleep(400);
+      document.execCommand("insertText", false, text); await sleep(700);
+      if (!contentOf(input)) return "couldn't type";
+      input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", code: "Enter", keyCode: 13, which: 13, bubbles: true, cancelable: true }));
+    } else if (NET === "ig") {
+      cm.btn.click(); await sleep(800);
+      input = await waitFor(() => [...document.querySelectorAll("textarea")].find(e => visible(e) && /comment/i.test(e.getAttribute("aria-label") || e.placeholder || "")), 6000);
+      if (!input) return "no comment box";
+      input.focus(); input.setSelectionRange(input.value.length, input.value.length);
+      document.execCommand("insertText", false, (input.value && !/\s$/.test(input.value) ? " " : "") + text); await sleep(700);
+      send = await waitFor(() => [...(input.closest("form") || document).querySelectorAll("[role=button],button")].find(b => visible(b) && /^post$/i.test((b.innerText || "").trim()) && b.getAttribute("aria-disabled") !== "true"), 6000);
+      if (!send) return "Post button stayed off";
+      send.click();
+    } else if (NET === "x") {
+      const b = cm.el.querySelector("[data-testid=reply]");
+      if (!b) return "no reply button";
+      b.click();
+      const dlg = await waitFor(() => [...document.querySelectorAll("[role=dialog] [data-testid=tweetTextarea_0]")].find(visible), 8000);
+      if (!dlg) return "reply box didn't open";
+      dlg.click(); await sleep(500);
+      input = dlg.querySelector("[contenteditable=true]") || dlg;
+      input.focus(); document.execCommand("insertText", false, text); await sleep(900);
+      send = await waitFor(() => { const x = document.querySelector("[role=dialog] [data-testid=tweetButton]"); return x && x.getAttribute("aria-disabled") !== "true" && !x.disabled ? x : null; }, 6000);
+      if (!send) return "Reply button stayed off";
+      send.click();
+      const closed = await waitFor(() => !document.querySelector("[role=dialog] [data-testid=tweetTextarea_0]"), 10000);
+      await sleep(1200);
+      return closed ? "" : "not confirmed";
+    } else if (NET === "tiktok") {
+      const b = cm.el.querySelector("[data-e2e^='comment-reply']");
+      if (!b) return "no Reply button";
+      b.click(); await sleep(900);
+      input = await waitFor(() => [...cm.el.querySelectorAll("[contenteditable=true]")].find(visible) || [...document.querySelectorAll("[data-e2e='comment-input'] [contenteditable=true]")].find(visible), 6000);
+      if (!input) return "reply box didn't open";
+      input.focus(); document.execCommand("insertText", false, text); await sleep(900);
+      send = await waitFor(() => { const x = [...cm.el.querySelectorAll("[data-e2e='comment-post']")].find(visible) || document.querySelector("[data-e2e='comment-post']"); return x && x.getAttribute("aria-disabled") !== "true" ? x : null; }, 6000);
+      if (!send) return "Post button stayed off";
+      send.click();
+    }
+    const cleared = await waitFor(() => !contentOf(input) || !document.contains(input), 10000);
+    await sleep(1200);
+    const w2 = warning(); if (w2) return "warning: " + w2;
+    return cleared ? "" : "not confirmed";
+  }
+
+  // ------------------------------------------------------------- invite your Facebook friends to like/follow the Page
+  async function inviteFriends() {
+    if (!job.navved) { job.navved = 1; await save(); go(PROFILE); return; }
+    box("opening “Invite people to connect”…");
+    await sleep(3000);
+    const menuBtn = await waitFor(() => [...document.querySelectorAll("[role=button][aria-label]")].find(b => visible(b) && /^(Profile settings see more options|See options|See more options)$/i.test(b.getAttribute("aria-label"))), 15000);
+    if (!menuBtn) return finish("Couldn't find the Page's ••• menu.");
+    menuBtn.click(); await sleep(1500);
+    const item = await waitFor(() => [...document.querySelectorAll("[role=menuitem],[role=menu] [role=button],[role=dialog] [role=button],[role=listitem]")].find(e => visible(e) && /^(Invite people to connect|Invite friends)$/i.test((e.innerText || "").trim())), 8000);
+    if (!item) return finish("Facebook didn't show “Invite people to connect” in the Page menu.");
+    item.click(); await sleep(3500);
+    const dlg = () => { const ds = [...document.querySelectorAll("[role=dialog]")].filter(visible); return ds[ds.length - 1]; };
+    let d = await waitFor(dlg, 8000);
+    if (!d) return finish("The invite window didn't open.");
+    if (/switch profiles|switch to .* for more features/i.test(d.innerText || "")) return finish("Facebook is acting as your Page. Switch to your personal profile (Alexander Awuku) in this browser, then press “Invite my Facebook friends” again.");
+    const max = job.max_invites || 100;
+    let picked = 0;
+    const unchecked = () => [...d.querySelectorAll("[role=checkbox][aria-checked=false], input[type=checkbox]:not(:checked)")].filter(visible);
+    const scroller = () => [...d.querySelectorAll("div")].filter(x => x.scrollHeight > x.clientHeight + 40 && /auto|scroll/.test(getComputedStyle(x).overflowY)).sort((a, b) => b.scrollHeight - a.scrollHeight)[0];
+    let idle = 0;
+    while (picked < max && idle < 4 && !stopAsked) {
+      const list = unchecked();
+      if (!list.length) { const sc = scroller(); if (!sc) break; sc.scrollTop += sc.clientHeight; await sleep(1500); idle++; continue; }
+      idle = 0;
+      for (const c of list) { if (picked >= max) break; c.click(); picked++; if (picked % 10 === 0) box(`selected ${picked} friends…`); await sleep(rand(150, 350)); }
+      const sc = scroller(); if (sc) { sc.scrollTop += sc.clientHeight; await sleep(1500); }
+    }
+    if (!picked) return finish("No friends left to invite (everyone may already be invited or connected).");
+    const send = await waitFor(() => [...d.querySelectorAll("[role=button],button")].find(b => visible(b) && /^(Send invites?|Send Invites|Invite|Send)$/i.test((b.innerText || b.getAttribute("aria-label") || "").trim()) && b.getAttribute("aria-disabled") !== "true"), 6000);
+    if (!send) return finish(`Selected ${picked} friends but Facebook's Send button didn't appear. Nothing was sent.`);
+    send.click(); await sleep(3000);
+    const w3 = warning();
+    job.res.push({ url: PROFILE, title: "Invite friends", invited: w3 ? 0 : picked, why: w3 || "", t: new Date().toISOString() });
+    await save();
+    return finish(w3 ? `Facebook showed "${w3}".` : null);
+  }
+
   await sleep(3500);
   if (/\/login|accounts\/login|i\/flow\/login/.test(location.pathname)) return finish(`${NAME} isn't logged in in this browser. Log in, then press the button again.`);
   let w = warning(); if (w) return finish(`${NAME} showed "${w}". Stopped.`);
+
+  if (job.mode === "invite") { if (NET === "fb") return inviteFriends(); return finish(`${NAME} has no invite-friends feature.`); }
 
   // ------------------------------------------------------------- 1. collect
   if (job.stage === "collect") {
@@ -253,7 +398,7 @@
   const ours = NET !== "fb" || /F\.A Vision|FaVision/i.test(document.title);
   const s = stats();
   let commented = false, why = "";
-  if (job.text && !job.statsOnly) {
+  if (job.text && !job.statsOnly && (job.mode || "comment") === "comment") {
     if (!ours) why = "not our post (shared)";
     else if (hasOurs(job.text)) why = "already has our comment";
     else if ((job.done || 0) >= (job.max_comments || 60)) why = "comment limit for this run reached";
@@ -265,7 +410,23 @@
       if (commented) { job.done = (job.done || 0) + 1; if (s.comments != null) s.comments++; }
     }
   }
-  job.res.push({ url, title, ...s, commented, why, t: new Date().toISOString() });
+  let replied = 0;
+  if (job.mode === "reply" && ours) {
+    box(`${n}: opening the comments…`);
+    await expandComments();
+    const list = commenters();
+    for (const cm of list) {
+      if (stopAsked) return;
+      if ((job.rdone || 0) >= (job.max_replies || 60)) { why = "reply limit for this run reached"; break; }
+      box(`${n}: replying to ${cm.name} (${replied + 1} of ${list.length})…`);
+      const err = await replyTo(cm, replyText(cm.name));
+      if (err.startsWith("warning:")) { job.res.push({ url, title, ...s, commented, replied, why: err }); job.i++; await save(); return finish(`${NAME} showed "${err.slice(9)}". Stopped so the account stays safe.`); }
+      if (!err) { replied++; job.rdone = (job.rdone || 0) + 1; await save(); await countdown(rand(job.rmin || 12, job.rmax || 25), `${n}: replied to ${cm.name} ✓. Next reply in`); }
+      else why = err;
+    }
+    if (!list.length) why = "no comments from other people";
+  }
+  job.res.push({ url, title, ...s, commented, replied, why, t: new Date().toISOString() });
   job.i++;
   await save();
   if (job.i >= job.urls.length) { box("All done. Going back to your admin…"); await sleep(1200); return finish(); }

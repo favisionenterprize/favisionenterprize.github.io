@@ -20,7 +20,9 @@
       text: "📍 Where are you seeing this from? Tell us in the comments 👇 Then like, share and follow F.A Vision Enterprise for more.",
       links: true, nets: { fb: true, ig: true, x: true, tiktok: true },
       handles: { fb: "FaVisionEnterprise", ig: "favisionent", x: "FaVisionEnt", tiktok: "" },
-      limit: 200, max_comments: 60, min: 20, max: 45
+      limit: 200, max_comments: 60, min: 20, max: 45,
+      reply_text: "Thank you {name}! 🙏 Please like, share and follow F.A Vision Enterprise for more deals.",
+      reply_nets: { fb: true, ig: true, x: true, tiktok: true }, max_replies: 60, max_invites: 100
     },
     followers: [], posts: {}, runs: []
   };
@@ -33,7 +35,7 @@
   function normalise(s) {
     s = s || JSON.parse(JSON.stringify(EMPTY));
     const st = s.settings || {};
-    s.settings = { ...EMPTY.settings, ...st, nets: { ...EMPTY.settings.nets, ...(st.nets || {}) }, handles: { ...EMPTY.settings.handles, ...(st.handles || {}) } };
+    s.settings = { ...EMPTY.settings, ...st, nets: { ...EMPTY.settings.nets, ...(st.nets || {}) }, reply_nets: { ...EMPTY.settings.reply_nets, ...(st.reply_nets || {}) }, handles: { ...EMPTY.settings.handles, ...(st.handles || {}) } };
     s.followers = s.followers || []; s.posts = s.posts || {}; s.runs = s.runs || [];
     return s;
   }
@@ -48,6 +50,13 @@
     return t;
   }
 
+  function replyTemplate(st) {
+    st = st || S.settings;
+    let t = String(st.reply_text || "").trim();
+    if (st.links && !t.includes(SITE)) t += LINKS;
+    return t;
+  }
+
   // ------------------------------------------------------------------ run (one network after the other)
   const RUN_KEY = "fa-engage-run";
   function start(net, then) {
@@ -58,15 +67,21 @@
     try { run = JSON.parse(localStorage.getItem(RUN_KEY) || "{}"); } catch (e) { run = {}; }
     const st = S.settings;
     fb.launch({ fb: "https://www.facebook.com/", ig: "https://www.instagram.com/", x: "https://x.com/", tiktok: "https://www.tiktok.com/" }[net], {
-      kind: "engage", net, handle: st.handles[net] || "", text: run.statsOnly ? "" : (run.text || commentText()), statsOnly: !!run.statsOnly,
-      limit: st.limit, max_comments: st.max_comments, min: st.min, max: st.max, then: then && then.length ? then : null
+      kind: "engage", net, mode: run.mode || (run.statsOnly ? "stats" : "comment"), handle: st.handles[net] || "",
+      text: run.statsOnly ? "" : (run.text || commentText()), statsOnly: !!run.statsOnly, reply_text: run.reply_text || replyTemplate(),
+      limit: st.limit, max_comments: st.max_comments, min: st.min, max: st.max, max_replies: st.max_replies, max_invites: st.max_invites,
+      then: then && then.length ? then : null
     });
   }
-  function runAll(statsOnly) {
-    const nets = Object.keys(NETS).filter(n => S.settings.nets[n]);
+  // mode: "comment" (default), "stats", "reply" (reply to everyone who commented), "invite" (Facebook friends)
+  function runAll(mode) {
+    mode = mode === true ? "stats" : (mode || "comment");
+    const st = S.settings;
+    const nets = mode === "invite" ? ["fb"] : Object.keys(NETS).filter(n => (mode === "reply" ? st.reply_nets : st.nets)[n]);
     if (!nets.length) return A.toast("Tick at least one network.", true);
-    if (!statsOnly && !String(S.settings.text || "").trim()) return A.toast("Type the comment first.", true);
-    try { localStorage.setItem(RUN_KEY, JSON.stringify({ text: statsOnly ? "" : commentText(), statsOnly: !!statsOnly, d: today() })); } catch (e) { /* private mode */ }
+    if (mode === "comment" && !String(st.text || "").trim()) return A.toast("Type the comment first.", true);
+    if (mode === "reply" && !String(st.reply_text || "").trim()) return A.toast("Type the reply first.", true);
+    try { localStorage.setItem(RUN_KEY, JSON.stringify({ mode, text: mode === "comment" ? commentText() : "", reply_text: replyTemplate(), statsOnly: mode === "stats", d: today() })); } catch (e) { /* private mode */ }
     F()._test.runStep(nets.map(n => "engage:" + n));
   }
   async function receive(out) {
@@ -83,12 +98,17 @@
         ["likes", "comments", "shares", "views"].forEach(k => { if (r[k] != null) p[k] = r[k]; });
         if (r.commented) p.commented = (p.commented || []).concat([{ d, text: Array.from(text).slice(0, 60).join("") }]).slice(-10);
         if (r.why === "already has our comment" && !(p.commented || []).length) p.commented = [{ d: "before", text: "" }];
+        if (r.replied) p.replies = (p.replies || 0) + r.replied;
+        if (r.invited != null) { s.invites = (s.invites || []).concat([{ d, n: r.invited }]).slice(-200); continue; }
         s.posts[r.url] = p;
       }
-      s.runs = s.runs.concat([{ d, t: new Date().toISOString(), net, posts: out.posts || res.length, checked: res.length, commented: res.filter(r => r.commented).length, followers: out.followers, stopped: out.stopped || null, commenting: !!out.commenting }]).slice(-300);
+      s.runs = s.runs.concat([{ d, t: new Date().toISOString(), net, mode: out.mode || "comment", posts: out.posts || res.length, checked: res.filter(r => r.invited == null).length, commented: res.filter(r => r.commented).length, replied: res.reduce((a, r) => a + (r.replied || 0), 0), invited: res.reduce((a, r) => a + (r.invited || 0), 0), followers: out.followers, stopped: out.stopped || null, commenting: !!out.commenting }]).slice(-300);
       return s;
     }, `Engagement: ${NETS[net]} (${res.filter(r => r.commented).length} comments, ${res.length} posts checked)`);
     const c = res.filter(r => r.commented).length;
+    const rep = res.reduce((a, r) => a + (r.replied || 0), 0), inv = res.reduce((a, r) => a + (r.invited || 0), 0);
+    if (out.mode === "invite") return { text: out.stopped ? "Invite friends: " + out.stopped : `Invited ${plural(inv, "friend")} to like and follow your Page ✓`, bad: !!out.stopped && !inv };
+    if (out.mode === "reply") return { text: `${NETS[net]}: replied to ${plural(rep, "comment")} on ${plural(res.length, "post")}${out.stopped ? ". " + out.stopped : " ✓"}`, bad: !!out.stopped };
     const fails = res.filter(r => !r.commented && r.why && !/already|not our|limit/.test(r.why)).length;
     return { text: `${NETS[net]}: ${out.commenting ? `${plural(c, "comment")} added, ` : ""}${plural(res.length, "post")} checked${out.followers != null ? `, ${fmt(out.followers)} followers` : ""}${fails ? ` · ${fails} couldn't be commented` : ""}${out.stopped ? ". " + out.stopped : " ✓"}`, bad: !!out.stopped };
   }
@@ -174,11 +194,32 @@
           <p class="muted fa-small">Comments go out as F.A Vision Enterprise, ${st.min}–${st.max} s apart, at most ${st.max_comments} per network per run, so the accounts don't get flagged. Posts that already have it, and posts you shared from other people, are skipped. Press again later to carry on where it stopped. Make sure Facebook is set to act as your Page.</p>
         </form>
       </section>
+      <section class="fa-card">
+        <header><h2>Reply to everyone who commented</h2></header>
+        <form class="fa-settings" id="eng-reply">
+          <label>Your reply ({name} becomes each person's first name)
+            <textarea name="reply_text" rows="3" maxlength="600">${esc(st.reply_text)}</textarea></label>
+          <div class="eng-nets">${Object.entries(NETS).map(([k, t]) => `<label class="fa-check"><input type="checkbox" name="rnet_${k}" ${st.reply_nets[k] ? "checked" : ""}> ${t}</label>`).join("")}</div>
+          <label>Most replies per network per run <input name="max_replies" type="number" min="1" max="300" value="${st.max_replies}"></label>
+          <p class="muted fa-small">Example: <span class="eng-rpreview">${esc(replyTemplate().replace(/\{name\}/g, "Ama"))}</span></p>
+          <div class="fa-actions"><button class="btn btn-sell" type="submit">↩️ Reply to all commenters</button></div>
+          <p class="muted fa-small">Goes through every post and replies under each comment from other people (also people you replied to before), 12–25 s apart. Facebook likers and sharers can't be messaged: Facebook no longer shows Pages who they are.</p>
+        </form>
+      </section>
+      <section class="fa-card">
+        <header><h2>Invite my Facebook friends</h2>${(S.invites || []).length ? `<span class="muted fa-small">${fmt((S.invites || []).reduce((a, x) => a + (x.n || 0), 0))} invited so far</span>` : ""}</header>
+        <form class="fa-settings" id="eng-invite">
+          <p class="muted">Uses Facebook's own “Invite people to connect” on your Page: it ticks your friends who haven't liked or followed the Page yet and sends the invitations.</p>
+          <label>Most invitations per run <input name="max_invites" type="number" min="1" max="500" value="${st.max_invites}"></label>
+          <div class="fa-actions"><button class="btn btn-sell" type="submit">👥 Invite my Facebook friends</button></div>
+          <p class="muted fa-small">In Edge, switch Facebook to your personal profile (Alexander Awuku) first: invitations come from you, not the Page. Facebook limits how many invitations you can send a day; if it shows a limit, try again tomorrow.</p>
+        </form>
+      </section>
       ${top.length ? `<section class="fa-card"><header><h2>Best posts</h2></header><div class="eng-table-wrap"><table class="eng-table">
         <thead><tr><th>Post</th><th>Likes</th><th>Comments</th><th>Shares</th><th>Views</th></tr></thead>
         <tbody>${top.map(p => `<tr><td><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(NETS[p.net] || p.net)} · ${esc((p.title || p.url).slice(0, 60))}</a></td><td>${fmt(p.likes)}</td><td>${fmt(p.comments)}</td><td>${fmt(p.shares)}</td><td>${fmt(p.views)}</td></tr>`).join("")}</tbody>
       </table></div></section>` : ""}
-      ${S.runs.length ? `<section class="fa-card"><header><h2>Recent runs</h2></header><ul class="fa-list">${S.runs.slice(-12).reverse().map(r => `<li class="${r.stopped ? "bad" : ""}"><span>${esc(NETS[r.net] || r.net)} · ${r.commenting ? `${plural(r.commented, "comment")}, ` : ""}${plural(r.checked || 0, "post")} checked${r.followers != null ? ` · ${fmt(r.followers)} followers` : ""}</span><small>${esc(r.d)}${r.stopped ? " · " + esc(r.stopped) : ""}</small></li>`).join("")}</ul></section>` : ""}`;
+      ${S.runs.length ? `<section class="fa-card"><header><h2>Recent runs</h2></header><ul class="fa-list">${S.runs.slice(-12).reverse().map(r => `<li class="${r.stopped ? "bad" : ""}"><span>${esc(NETS[r.net] || r.net)} · ${r.mode === "invite" ? `${plural(r.invited || 0, "friend")} invited` : r.mode === "reply" ? `${(r.replied || 0) + (r.replied === 1 ? " reply" : " replies")} on ${plural(r.checked || 0, "post")}` : `${r.commenting ? `${plural(r.commented, "comment")}, ` : ""}${plural(r.checked || 0, "post")} checked`}${r.followers != null ? ` · ${fmt(r.followers)} followers` : ""}</span><small>${esc(r.d)}${r.stopped ? " · " + esc(r.stopped) : ""}</small></li>`).join("")}</ul></section>` : ""}`;
   }
 
   function readForm(f) {
@@ -202,10 +243,28 @@
     try { await save(s => { s.settings = next; return s; }, "Engagement: settings"); }
     catch (err) { A.busy(null); return A.toast(A.friendly(err), true); }
     A.busy(null);
-    runAll(which === "stats");
+    runAll(which === "stats" ? "stats" : "comment");
+  });
+  document.addEventListener("submit", async e => {
+    const f = e.target;
+    if (!f || !S || (f.id !== "eng-reply" && f.id !== "eng-invite")) return;
+    e.preventDefault();
+    const el = f.elements, st = S.settings;
+    const next = f.id === "eng-reply"
+      ? { ...st, reply_text: el.reply_text.value.trim(), reply_nets: Object.fromEntries(Object.keys(NETS).map(k => [k, el["rnet_" + k].checked])), max_replies: Math.min(300, Math.max(1, parseInt(el.max_replies.value, 10) || 60)) }
+      : { ...st, max_invites: Math.min(500, Math.max(1, parseInt(el.max_invites.value, 10) || 100)) };
+    A.busy("Saving…");
+    try { await save(s => { s.settings = next; return s; }, "Engagement: settings"); }
+    catch (err) { A.busy(null); return A.toast(A.friendly(err), true); }
+    A.busy(null);
+    runAll(f.id === "eng-reply" ? "reply" : "invite");
   });
   const preview = f => { const p = f.querySelector(".eng-preview"); if (p) p.textContent = commentText({ text: f.elements.text.value, links: f.elements.links.checked }); };
-  document.addEventListener("input", e => { const f = e.target.closest && e.target.closest("#eng-form"); if (f && S) preview(f); });
+  document.addEventListener("input", e => {
+    const f = e.target.closest && e.target.closest("#eng-form"); if (f && S) preview(f);
+    const r = e.target.closest && e.target.closest("#eng-reply");
+    if (r && S) { const p = r.querySelector(".eng-rpreview"); if (p) p.textContent = replyTemplate({ reply_text: r.elements.reply_text.value, links: S.settings.links }).replace(/\{name\}/g, "Ama"); }
+  });
   document.addEventListener("change", e => { const f = e.target.closest && e.target.closest("#eng-form"); if (f && S) preview(f); });
 
   window.FAV_ENGAGE = { load, state: () => S, renderTab, receive, start, commentText, _set: s => { S = normalise(s); } };
