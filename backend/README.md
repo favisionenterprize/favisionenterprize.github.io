@@ -107,6 +107,19 @@ Every day the backend emails a breakdown of what the Social autopilot did: Marke
 - **To switch it on:** paste the latest `Code.gs` into Apps Script, **Deploy → Manage deployments → Edit → New version → Deploy**, then run `setup()` once (it adds the 9 pm trigger). Run `testPostingReport()` to get a sample straight away.
 - The "after the run" email needs you signed in to the admin with email and password. With GitHub-token sign-in you still get the 9 pm one.
 
+## Posting alerts (before every posting session)
+
+The admin calls `session_alert` just before the Facebook group posts start. It emails REPORT_EMAIL with today's listing, the groups being posted into, new groups joined today and groups removed for declining our posts. On the day the daily new-group target (20) is reached, a separate 🎉 email goes out, once per day. This needs the latest Code.gs and a new deployment. No extra setup.
+
+## Muse AI (phone app at /muse/)
+
+Muse signs in with the same email and password as /admin/ and asks the backend (`muse` action) for its AI answers, so no key is stored on the phone. To switch the AI on, add **one** Script property (Apps Script → Project settings → Script properties):
+
+- `GEMINI_API_KEY`: free key from https://aistudio.google.com/apikey (recommended). Optional `GEMINI_MODEL`, default `gemini-2.5-flash`.
+- or `ANTHROPIC_API_KEY`: Claude key from https://console.anthropic.com. Optional `CLAUDE_MODEL`, default `claude-haiku-4-5-20251001`.
+
+Without a key, Muse's Create tab still works using built-in templates. Usage is capped at 120 AI requests an hour.
+
 ## Sending a batch email campaign
 
 1. Fill the **Clients** tab. You can paste from [`marketing/clients-template.csv`](../marketing/clients-template.csv). Set **Segment** to `Proprietor` for school owners.

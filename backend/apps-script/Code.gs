@@ -137,6 +137,8 @@ function doPost(e) {
   if (data.action === 'session') return json_(sessionValid_(data.session) ? { ok: true } : { ok: false, error: 'signed_out' });
   if (data.action === 'github') return githubProxy_(data);
   if (data.action === 'posting_report') return postingReportNow_(data);
+  if (data.action === 'session_alert') return sessionAlert_(data);
+  if (data.action === 'muse') return museAsk_(data);
   if (data.action === 'update_order') return updateOrder_(data);
   if (data.action === 'save_invoice') return saveInvoice_(data);
   if (data.action === 'update_enquiry') return updateEnquiry_(data);
@@ -1204,4 +1206,110 @@ function buildPostingReport_(day, fb, ig, products) {
 function testPostingReport() {
   authProps_().deleteProperty('LAST_POSTING_REPORT');
   sendPostingReport();
+}
+
+// ---------- Posting alerts (Social autopilot) ----------
+// The admin calls action "session_alert" just before each posting session starts
+// (kind "session"), and once on the day the new-group target is reached (kind "milestone").
+// Emailed to REPORT_EMAIL like the posting report.
+function sessionAlert_(data) {
+  if (!sessionValid_(data.session)) return json_({ ok: false, error: 'signed_out' });
+  try {
+    const h = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const day = /^\d{4}-\d{2}-\d{2}$/.test(data.day) ? data.day : Utilities.formatDate(new Date(), 'Africa/Accra', 'yyyy-MM-dd');
+    const t = data.totals || {};
+    const joins = (data.joins || []).slice(0, 60);
+    const removed = (data.removed || []).slice(0, 60);
+    const groups = (data.groups || []).slice(0, 60);
+    const mb = (n) => (n >= 1e6 ? (n / 1e6).toFixed(1) + 'M' : n >= 1e3 ? Math.round(n / 1e3) + 'K' : String(n || '?'));
+    const milestone = data.kind === 'milestone';
+    if (milestone) {
+      const k = 'ALERT20_' + day;
+      if (authProps_().getProperty(k)) return json_({ ok: true, to: reportEmail_(), already: true });
+      authProps_().setProperty(k, '1');
+    }
+    const subject = milestone
+      ? `🎉 ${t.joined_today || joins.length} new Facebook groups added today (${day})`
+      : `FA Vision: posting session starting — ${groups.length} group post${groups.length === 1 ? '' : 's'} (${day})`;
+    const list = (rows) => rows.length ? '<ul>' + rows.join('') + '</ul>' : '<p style="color:#777">None.</p>';
+    const statusText = { joined: 'joined', pending: 'waiting for the group admin', questions: 'answer the group\'s questions on Facebook', failed: 'failed' };
+    const html = `<div style="font-family:Arial,sans-serif;max-width:620px">` +
+      (milestone
+        ? `<h2 style="margin:0 0 8px">🎉 ${h(t.joined_today)} of ${h(t.target)} new groups added today</h2>`
+        : `<h2 style="margin:0 0 8px">Posting session starting now</h2><p>Today's listing: <b>${h(data.listing || '—')}</b>, into ${groups.length} group${groups.length === 1 ? '' : 's'}.</p>`) +
+      `<p>Groups on the list: <b>${h(t.active)}</b> active · ${h(t.pending || 0)} waiting for admins · ${h(t.removed || 0)} removed for declining our posts. New today: <b>${h(t.joined_today || 0)}/${h(t.target)}</b>.</p>` +
+      (milestone ? '' : `<h3>Posting into</h3>${list(groups.map((g) => `<li>${h(g)}</li>`))}`) +
+      `<h3>New groups today</h3>${list(joins.map((j) => `<li>${j.url ? `<a href="${h(j.url)}">${h(j.name)}</a>` : h(j.name)} — ${mb(j.members)} members · ${h(statusText[j.status] || j.status)}</li>`))}` +
+      `<h3>Removed today (declined our posts)</h3>${list(removed.map((r) => `<li>${h(r.name)} — ${h(r.why)} · ${r.left ? 'left on Facebook' : 'still to leave on Facebook'}</li>`))}` +
+      `<p style="color:#777;font-size:12px">Sent by your FA Vision admin (Social autopilot). The full day's report follows when the run ends.</p></div>`;
+    MailApp.sendEmail({ to: reportEmail_(), subject, htmlBody: html, body: subject, name: BUSINESS.name });
+    return json_({ ok: true, to: reportEmail_() });
+  } catch (err) {
+    return json_({ ok: false, error: String(err && err.message || err).slice(0, 200) });
+  }
+}
+
+// ---------- Muse AI (phone app at /muse/) ----------
+// Muse sends { action: "muse", session, mode, messages: [{ role: "user"|"assistant", text }], context }.
+// Signed-in sessions only (same email + password as /admin/). The AI key stays here:
+//   GEMINI_API_KEY     free key from aistudio.google.com (used if set), model GEMINI_MODEL (default gemini-2.5-flash)
+//   ANTHROPIC_API_KEY  Claude key from console.anthropic.com (used when there's no Gemini key),
+//                      model CLAUDE_MODEL (default claude-haiku-4-5-20251001)
+// Capped at 120 requests an hour.
+const MUSE_MODES = {
+  content: 'You write social media and marketplace content for F.A Vision Enterprise: captions, ad copy, hashtags, WhatsApp broadcasts, TikTok/Reel scripts and posting plans. Write ready-to-post text in a warm Ghanaian business voice. Always include price, WhatsApp number and the website link when a product is given. Say "we sell", never "we make".',
+  assistant: 'You are Muse, a practical personal assistant for Alexander Awuku: business owner (F.A Vision Enterprise and partner businesses) and banking operations professional in Accra. Give clear, direct, action-ready answers. Use tables or steps when they help.',
+  code: 'You are Muse in code mode. Write complete, working code the user can copy and run (HTML/CSS/JS, Python, Google Apps Script, Excel/Sheets formulas, Bash). Put each file in one fenced code block with the language, then 1-3 short lines on how to run it. Prefer simple, dependency-free solutions that work on a phone or a basic laptop.',
+};
+function museAsk_(data) {
+  if (!sessionValid_(data.session)) return json_({ ok: false, error: 'signed_out' });
+  const cache = CacheService.getScriptCache();
+  const slot = 'muse_' + Utilities.formatDate(new Date(), 'GMT', 'yyyyMMddHH');
+  const n = Number(cache.get(slot) || 0);
+  if (n >= 120) return json_({ ok: false, error: 'busy' });
+  cache.put(slot, String(n + 1), 3600);
+  const props = authProps_();
+  const mode = MUSE_MODES[data.mode] ? data.mode : 'assistant';
+  const system = MUSE_MODES[mode] + '\n\nBusiness facts: ' + BUSINESS.name + ', ' + BUSINESS.address + '. Phones ' + BUSINESS.phones +
+    '. WhatsApp 057 264 6176. Website ' + BUSINESS.website + '.' + (data.context ? '\n\nContext from the app:\n' + String(data.context).slice(0, 6000) : '');
+  const msgs = (Array.isArray(data.messages) ? data.messages : []).slice(-16)
+    .map((m) => ({ role: m.role === 'assistant' ? 'assistant' : 'user', text: String(m.text || '').slice(0, 8000) }))
+    .filter((m) => m.text);
+  if (!msgs.length || msgs[msgs.length - 1].role !== 'user') return json_({ ok: false, error: 'empty' });
+  try {
+    const gem = props.getProperty('GEMINI_API_KEY');
+    const claude = props.getProperty('ANTHROPIC_API_KEY');
+    let text = '';
+    if (gem) {
+      const model = props.getProperty('GEMINI_MODEL') || 'gemini-2.5-flash';
+      const res = UrlFetchApp.fetch('https://generativelanguage.googleapis.com/v1beta/models/' + encodeURIComponent(model) + ':generateContent', {
+        method: 'post', contentType: 'application/json', muteHttpExceptions: true, headers: { 'x-goog-api-key': gem },
+        payload: JSON.stringify({
+          systemInstruction: { parts: [{ text: system }] },
+          contents: msgs.map((m) => ({ role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.text }] })),
+          generationConfig: { maxOutputTokens: 4096, temperature: mode === 'code' ? 0.3 : 0.8 },
+        }),
+      });
+      const out = JSON.parse(res.getContentText() || '{}');
+      if (res.getResponseCode() >= 300) return json_({ ok: false, error: 'ai: ' + ((out.error && out.error.message) || res.getResponseCode()) });
+      text = ((((out.candidates || [])[0] || {}).content || {}).parts || []).map((p) => p.text || '').join('');
+    } else if (claude) {
+      const res = UrlFetchApp.fetch('https://api.anthropic.com/v1/messages', {
+        method: 'post', contentType: 'application/json', muteHttpExceptions: true,
+        headers: { 'x-api-key': claude, 'anthropic-version': '2023-06-01' },
+        payload: JSON.stringify({
+          model: props.getProperty('CLAUDE_MODEL') || 'claude-haiku-4-5-20251001', max_tokens: 4096, system,
+          messages: msgs.map((m) => ({ role: m.role, content: m.text })),
+        }),
+      });
+      const out = JSON.parse(res.getContentText() || '{}');
+      if (res.getResponseCode() >= 300) return json_({ ok: false, error: 'ai: ' + ((out.error && out.error.message) || res.getResponseCode()) });
+      text = (out.content || []).filter((c) => c.type === 'text').map((c) => c.text).join('');
+    } else {
+      return json_({ ok: false, error: 'no_ai_key' });
+    }
+    return json_({ ok: true, text: text || '(no answer)', mode });
+  } catch (err) {
+    return json_({ ok: false, error: String(err && err.message || err).slice(0, 200) });
+  }
 }

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Muse AI</title>
+<meta name="description" content="Muse AI for F.A Vision Enterprise: ready-to-post captions, answers and working code on your phone.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0b2f5e">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Muse AI">
+<style>
+  :root {
+    --navy: #0b2f5e; --blue: #0d55af; --blue-2: #1a6ad6;
+    --ring: linear-gradient(135deg, #e6506e, #b03ea6 55%, #0d55af);
+    --bg: #f3f6fb; --card: #fff; --ink: #1d2433; --muted: #5f6878; --line: #dde3ec; --wa: #25d366;
+    --r: 16px; --shadow: 0 1px 2px rgba(16,32,64,.08), 0 6px 20px rgba(16,32,64,.08);
+    --safe-b: env(safe-area-inset-bottom, 0px); --safe-t: env(safe-area-inset-top, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0a1424; --card: #111e33; --ink: #e8edf6; --muted: #9aa6ba; --line: #22324d; --shadow: none; --blue-2: #7fb0ff; }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-text-size-adjust: 100%; }
+  button, input, select, textarea { font: inherit; color: inherit; }
+  a { color: var(--blue-2); }
+  .top { position: sticky; top: 0; z-index: 5; background: var(--navy); color: #fff; padding: calc(10px + var(--safe-t)) 16px 10px; display: flex; align-items: center; gap: 12px; }
+  .logo { width: 34px; height: 34px; border-radius: 50%; background: var(--ring); display: grid; place-items: center; font-weight: 800; flex: 0 0 auto; }
+  .top h1 { font-size: 18px; margin: 0; flex: 1; letter-spacing: .2px; }
+  .top small { display: block; font-weight: 400; opacity: .75; font-size: 12px; }
+  .pill { border: 1px solid rgba(255,255,255,.35); background: transparent; color: #fff; border-radius: 999px; padding: 5px 12px; font-size: 13px; cursor: pointer; }
+  main { padding: 16px 16px calc(96px + var(--safe-b)); max-width: 720px; margin: 0 auto; }
+  main.chatting { padding-bottom: calc(170px + var(--safe-b)); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow); padding: 16px; margin-bottom: 14px; }
+  .card h2 { font-size: 17px; margin: 0 0 4px; }
+  .muted { color: var(--muted); font-size: 14px; }
+  label { display: block; font-size: 13px; color: var(--muted); margin: 10px 0 4px; }
+  input, select, textarea { width: 100%; border: 1px solid var(--line); border-radius: 12px; padding: 11px 12px; background: var(--bg); }
+  textarea { min-height: 84px; resize: vertical; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .row > * { flex: 1 1 140px; }
+  .btn { border: 0; border-radius: 12px; padding: 12px 16px; font-weight: 700; cursor: pointer; background: var(--blue); color: #fff; }
+  .btn:disabled { opacity: .5; }
+  .btn.ghost { background: transparent; color: var(--blue-2); border: 1px solid var(--line); }
+  .btn.wa { background: var(--wa); color: #06331b; }
+  .btn.sm { padding: 7px 12px; font-size: 13px; border-radius: 10px; }
+  .btn.block { width: 100%; margin-top: 14px; }
+  .chips { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+  .chip { flex: 0 0 auto; border: 1px solid var(--line); background: var(--card); border-radius: 999px; padding: 7px 14px; font-size: 14px; cursor: pointer; }
+  .chip[aria-pressed="true"] { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .out { white-space: pre-wrap; word-wrap: break-word; background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 12px; margin-top: 10px; font-size: 15px; }
+  .out-actions { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+  .tabs { position: fixed; left: 0; right: 0; bottom: 0; z-index: 6; display: flex; background: var(--card); border-top: 1px solid var(--line); padding-bottom: var(--safe-b); }
+  .tabs button { flex: 1; border: 0; background: none; padding: 9px 0 10px; font-size: 12px; color: var(--muted); display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; }
+  .tabs button span { font-size: 20px; line-height: 1; }
+  .tabs button[aria-selected="true"] { color: var(--blue-2); font-weight: 700; }
+  .chat { display: flex; flex-direction: column; gap: 10px; }
+  .msg { max-width: 92%; padding: 10px 13px; border-radius: 16px; white-space: pre-wrap; word-wrap: break-word; }
+  .msg.u { align-self: flex-end; background: var(--blue); color: #fff; border-bottom-right-radius: 4px; }
+  .msg.a { align-self: flex-start; background: var(--card); border: 1px solid var(--line); border-bottom-left-radius: 4px; }
+  .msg pre { white-space: pre; overflow-x: auto; background: #0b1424; color: #dbe6ff; padding: 10px; border-radius: 10px; font: 13px/1.45 ui-monospace, Menlo, Consolas, monospace; margin: 8px 0 4px; }
+  .codebar { display: flex; gap: 6px; margin: 2px 0 6px; flex-wrap: wrap; }
+  .composer { position: fixed; left: 0; right: 0; bottom: calc(60px + var(--safe-b)); z-index: 5; background: var(--bg); padding: 8px 12px; border-top: 1px solid var(--line); }
+  .composer form { display: flex; gap: 8px; max-width: 720px; margin: 0 auto; align-items: flex-end; }
+  .composer textarea { min-height: 46px; max-height: 140px; margin: 0; }
+  .stat { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .stat div { background: var(--bg); border-radius: 12px; padding: 10px 6px; text-align: center; }
+  .stat b { display: block; font-size: 22px; }
+  .stat small { color: var(--muted); font-size: 12px; }
+  .banner { border-radius: 12px; padding: 12px 14px; margin-bottom: 14px; font-weight: 600; }
+  .banner.good { background: #e3f6ee; color: #0b5b40; }
+  .banner.info { background: #e6effc; color: #0b3b80; }
+  .banner.bad { background: #fde8e8; color: #8a1414; }
+  @media (prefers-color-scheme: dark) { .banner.good { background: #0f3a2b; color: #a6f0cf; } .banner.info { background: #12305a; color: #cfe0ff; } .banner.bad { background: #4a1616; color: #ffd0d0; } }
+  ul.list { list-style: none; padding: 0; margin: 8px 0 0; }
+  ul.list li { padding: 8px 0; border-top: 1px solid var(--line); font-size: 14px; display: flex; justify-content: space-between; gap: 10px; }
+  ul.list li small { color: var(--muted); text-align: right; flex: 0 0 auto; }
+  .toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(140px + var(--safe-b)); background: #1d2433; color: #fff; padding: 10px 16px; border-radius: 12px; font-size: 14px; z-index: 20; max-width: 90vw; box-shadow: 0 8px 24px rgba(0,0,0,.3); }
+  .thinking::after { content: "Thinking…"; color: var(--muted); }
+  iframe.preview { width: 100%; height: 380px; border: 1px solid var(--line); border-radius: 12px; background: #fff; margin-top: 8px; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+  <header class="top">
+    <div class="logo" aria-hidden="true">M</div>
+    <h1>Muse AI <small id="ver">F.A Vision</small></h1>
+    <button class="pill" id="install" hidden>Install</button>
+    <button class="pill" id="signout" hidden>Sign out</button>
+  </header>
+
+  <main id="app"><p class="muted">Loading…</p></main>
+  <div class="composer" id="composer" hidden>
+    <form id="ask-form"><textarea id="ask-input" rows="1" placeholder="Ask Muse…" aria-label="Message"></textarea><button class="btn" id="ask-send">Send</button></form>
+  </div>
+
+  <nav class="tabs" id="tabs" role="tablist" hidden>
+    <button role="tab" data-tab="create" aria-selected="true"><span aria-hidden="true">✍️</span>Create</button>
+    <button role="tab" data-tab="ask" aria-selected="false"><span aria-hidden="true">💬</span>Ask</button>
+    <button role="tab" data-tab="code" aria-selected="false"><span aria-hidden="true">⌨️</span>Code</button>
+    <button role="tab" data-tab="today" aria-selected="false"><span aria-hidden="true">📊</span>Today</button>
+  </nav>
+
+  <script src="muse.js"></script>
+</body>
+</html>

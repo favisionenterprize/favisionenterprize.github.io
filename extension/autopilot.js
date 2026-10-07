@@ -292,6 +292,144 @@
     return finish();
   }
 
+  // ============================================================= declined posts: find groups that decline us, then leave them
+  // job.q starts with the notifications page and the "declined" / "removed" pages of the
+  // groups we posted in lately. Each group found declining us gets a "leave" step added.
+  //   res: [{ g, name, why, left }]
+  if (job.kind === "declines") {
+    job.found = job.found || {};
+    const markDeclined = (id, name, why) => {
+      if (!id || job.found[id] || (job.keep || []).includes(id)) return;
+      job.found[id] = { g: id, name: name || id, why, left: false };
+      job.q.push({ type: "leave", g: id, name: name || id, url: `https://www.facebook.com/groups/${id}/` });
+    };
+    const done = async () => {
+      job.res = Object.values(job.found);
+      box(`Done: ${job.res.length} group${job.res.length === 1 ? "" : "s"} declined our posts, ${job.res.filter(r => r.left).length} left. Going back…`);
+      await sleep(1500);
+      return finish();
+    };
+    if (job.i >= job.q.length) return done();
+    const it = job.q[job.i];
+    if (!(await arrive(it.url))) return;
+    const step = () => { job.i++; save(); };
+    const go = async () => { if (job.i >= job.q.length) return done(); await sleep(rand(2500, 5000)); if (!stopAsked) await arrive(job.q[job.i].url); };
+    await sleep(rand(3000, 4500));
+    let w = warning(); if (w) { job.res = Object.values(job.found); return finish(`Facebook showed "${w}". Clean-up stopped.`); }
+
+    if (it.type === "notif") {
+      box("Reading your notifications for declined posts…");
+      const DECL = /declined your post|declined your request to post|didn('|’)t approve your post|removed your post|post (was|has been) (declined|removed|rejected)|rejected your post/i;
+      for (let t = 0; t < 6 && !stopAsked; t++) { window.scrollBy(0, 1400); await sleep(1300); }
+      for (const a of document.querySelectorAll('a[href*="/groups/"]')) {
+        const row = a.closest('[role=row],[role=listitem],[role=article]') || a;
+        const text = row.innerText || "";
+        if (!DECL.test(text)) continue;
+        const mm = a.href.match(/\/groups\/([^/?#]+)/);
+        if (!mm || /^(joins|feed|discover)$/i.test(mm[1])) continue;
+        markDeclined(mm[1], (job.names || {})[mm[1]] || (a.innerText || "").trim().split("\n")[0], "Declined our post (notification)");
+      }
+      step(); return go();
+    }
+    if (it.type === "check") {
+      box(`Checking ${it.name} for declined posts…`);
+      const main = document.querySelector("[role=main]") || document.body;
+      const text = main.innerText || "";
+      const empty = /no (declined|removed|rejected) (posts|content)|nothing to show|you don('|’)t have any|no posts/i.test(text);
+      const posts = [...main.querySelectorAll("[role=article]")].filter(visible).length;
+      if (!empty && posts > 0 && /declined|removed|rejected/i.test(text)) markDeclined(it.g, it.name, it.what === "removed" ? "Removed our post" : "Declined our post");
+      step(); return go();
+    }
+    if (it.type === "leave") {
+      const f = job.found[it.g];
+      box(`Leaving ${it.name} (it declined our posts)…`);
+      if (job.dry) { f.why += " · test only, not left"; step(); return go(); }
+      const joined = await waitFor(() => findBtn(/^joined$|^member$|^joined group$/i), 10000);
+      if (!joined) { const gone = !!findBtn(/^join group$/i); f.why += gone ? " · already left" : " · couldn't find the Joined button"; f.left = gone; step(); return go(); }
+      joined.click();
+      const leave = await waitFor(() => [...document.querySelectorAll('[role=menuitem],[role=button]')].find(x => visible(x) && /^leave group$/i.test((x.innerText || "").trim())), 5000);
+      if (!leave) { f.why += " · no Leave option"; document.body.click(); step(); return go(); }
+      leave.click();
+      const confirm = await waitFor(() => findBtn(/^leave( group)?$/i, document.querySelector("[role=dialog]") || undefined), 6000);
+      if (confirm) { confirm.click(); await sleep(2500); }
+      f.left = !!confirm && !!(await waitFor(() => findBtn(/^join group$/i), 6000));
+      if (!f.left) f.why += " · leave not confirmed";
+      step(); return go();
+    }
+    step(); return go();
+  }
+
+  // ============================================================= grow: join large groups that fit, up to job.limit today
+  // job.q = search pages (one per keyword). job.skip = group ids not to join (already in,
+  // removed for declining). Each join is { g, name, members, status: "joined" | "pending" | "questions" | "failed" }.
+  if (job.kind === "grow") {
+    const added = () => job.res.filter(r => r.status !== "failed").length;
+    const done = async why => { box(`Done: ${added()} new group${added() === 1 ? "" : "s"} today. Going back…`); await sleep(1500); return finish(why); };
+    if (job.i >= job.q.length || added() >= job.limit) return done();
+    const it = job.q[job.i];
+    if (!(await arrive(it.url))) return;
+    await sleep(rand(3500, 5000));
+    let w = warning(); if (w) return finish(`Facebook showed "${w}". Joining stopped for today.`);
+    const skip = new Set(job.skip || []);
+    const deny = job.deny ? new RegExp(job.deny, "i") : null;
+    const num = s => { const m = String(s).match(/([\d.,]+)\s*([KkMm])?\s*members/); if (!m) return 0; const n = parseFloat(m[1].replace(/,/g, "")); return Math.round(n * ({ k: 1e3, m: 1e6 }[(m[2] || "").toLowerCase()] || 1)); };
+    function rows() {
+      const out = [], seen = new Set();
+      for (const b of document.querySelectorAll('[role=button],button')) {
+        if (!visible(b) || !/^join( group)?$/i.test((b.innerText || b.getAttribute("aria-label") || "").trim())) continue;
+        let c = b;
+        for (let k = 0; k < 12 && c; k++) { c = c.parentElement; if (c && /members/i.test(c.innerText || "") && c.querySelector('a[href*="/groups/"]')) break; }
+        if (!c) continue;
+        const a = c.querySelector('a[href*="/groups/"]');
+        const mm = a && a.href.match(/\/groups\/([^/?#]+)/);
+        if (!mm || seen.has(mm[1])) continue;
+        seen.add(mm[1]);
+        out.push({ id: mm[1], name: (a.innerText || "").trim().split("\n")[0], members: num(c.innerText), btn: b, row: c });
+      }
+      return out;
+    }
+    box(`Searching "${it.kw}" for big groups…`);
+    for (let t = 0; t < 4 && !stopAsked; t++) { window.scrollBy(0, 1500); await sleep(1500); }
+    window.scrollTo(0, 0); await sleep(800);
+    const all = rows();
+    job.seen = (job.seen || 0) + all.length;
+    const found = all.filter(r => r.name && r.members >= job.min && !skip.has(r.id) && !(deny && deny.test(r.name)));
+    for (const r of found) {
+      if (stopAsked || added() >= job.limit) break;
+      skip.add(r.id); job.skip = [...skip];
+      box(`Joining ${r.name} (${(r.members / 1e6).toFixed(1)}M members)… ${added()}/${job.limit} today`);
+      r.btn.scrollIntoView({ block: "center" });
+      await sleep(rand(900, 1800));
+      r.btn.click();
+      await sleep(3000);
+      w = warning();
+      const dlgText = ([...document.querySelectorAll("[role=dialog]")].find(visible) || {}).innerText || "";
+      if (!w && /can('|’)t join|joined too many|join.*limit/i.test(dlgText)) w = "You can't join more groups right now";
+      if (w) { job.res.push({ g: r.id, name: r.name, members: r.members, status: "failed", why: w }); await save(); return finish(`Facebook showed "${w}". Joining stopped for today.`); }
+      let status = "joined";
+      const dlg = [...document.querySelectorAll("[role=dialog]")].find(visible);
+      if (dlg && /question|answer|rules|agree/i.test(dlg.innerText || "")) {
+        // Membership questions: agree to group rules if that's all it asks, otherwise close and leave it pending.
+        const agree = findBtn(/^(i agree|agree|submit)$/i, dlg);
+        const textNeeded = dlg.querySelector("textarea,[contenteditable=true],input[type=text]");
+        if (agree && !textNeeded) { agree.click(); await sleep(2000); status = "pending"; }
+        else { const close = findBtn(/^close$|^cancel$|^not now$/i, dlg); if (close) close.click(); await sleep(1200); const exit = findBtn(/^(exit|leave|discard)$/i); if (exit) exit.click(); status = "questions"; }
+      } else {
+        const t = (r.row.innerText || "");
+        status = /cancel request|pending|requested/i.test(t) ? "pending" : /joined|visit|view group|member/i.test(t) ? "joined" : "pending";
+      }
+      job.res.push({ g: r.id, name: r.name, members: r.members, status, url: `https://www.facebook.com/groups/${r.id}/`, t: new Date().toISOString() });
+      await save();
+      if (added() < job.limit) await countdown(rand(job.pmin || 40, job.pmax || 100), `Joined ${added()}/${job.limit} today. Next in`);
+    }
+    if (stopAsked) return;
+    job.i++; await save();
+    if (job.i >= job.q.length || added() >= job.limit) return done();
+    await sleep(rand(3000, 6000));
+    await arrive(job.q[job.i].url);
+    return;
+  }
+
   // ============================================================= import joined groups
   if (job.kind === "import") {
     if (!/^\/groups\/joins/.test(location.pathname) && !(await arrive("https://www.facebook.com/groups/joins/?nav_source=tab"))) return;

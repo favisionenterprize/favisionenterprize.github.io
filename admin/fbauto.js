@@ -21,9 +21,16 @@
   const $ = s => document.querySelector(s);
   const FILE = "data/facebook-autopilot.json";
   const EMPTY = {
-    settings: { daily_limit: 20, renew_after_days: 7, renew_batch: 20, pause_min_s: 60, pause_max_s: 180, auto_run: false, auto_time: "09:00" },
-    groups: [], posts: [], resets: {}, today: null, renewals: {}
+    settings: {
+      daily_limit: 20, renew_after_days: 7, renew_batch: 20, pause_min_s: 60, pause_max_s: 180, auto_run: false, auto_time: "09:00",
+      cleanup_on: true,                         // find groups that decline our posts, leave them and drop them from the list
+      grow_on: true, grow_daily: 20, grow_min_members: 1000000,
+      grow_keywords: ["buy and sell ghana", "accra buy and sell", "ghana online market", "buy and sell", "furniture for sale", "home decor", "interior design", "furniture", "home furniture ideas", "ghana business"]
+    },
+    groups: [], posts: [], resets: {}, today: null, renewals: {}, removed: [], joins: [], checks: {}
   };
+  // Groups whose names say they aren't for selling furniture: never joined.
+  const GROW_DENY = "dating|singles|married|crypto|forex|bitcoin|betting|lotto|pubg|gaming|game|sugar|hookup|loan|ponzi|pi ?network|army|police|church|prayer|politic|fans? of|fan club|nsfw|18\\+";
   const screen = $("#screen-fbauto");
   const today = () => new Date().toLocaleDateString("en-CA");
   const days = (a, b) => Math.floor((Date.parse(b) - Date.parse(a)) / 864e5);
@@ -36,8 +43,9 @@
   function normalise(s) {
     s = s || JSON.parse(JSON.stringify(EMPTY));
     s.settings = { ...EMPTY.settings, ...(s.settings || {}) };
-    for (const k of ["groups", "posts"]) s[k] = s[k] || [];
-    for (const k of ["resets", "renewals"]) s[k] = s[k] || {};
+    for (const k of ["groups", "posts", "removed", "joins"]) s[k] = s[k] || [];
+    for (const k of ["resets", "renewals", "checks"]) s[k] = s[k] || {};
+    if (!Array.isArray(s.settings.grow_keywords) || !s.settings.grow_keywords.length) s.settings.grow_keywords = EMPTY.settings.grow_keywords.slice();
     return s;
   }
   async function load(force) {
@@ -70,6 +78,14 @@
     .sort((a, b) => a.id.localeCompare(b.id));
   const activeGroups = () => S.groups.filter(g => g.active !== false);
   const attemptsToday = () => S.posts.filter(x => x.d === today()).length;
+
+  // ------------------------------------------------------------------ clean-up (groups that decline us) and growth (new big groups)
+  const joinsToday = () => S.joins.filter(j => j.d === today() && j.status !== "failed").length;
+  const pendingGroups = () => S.groups.filter(g => g.pending);
+  const cleanupWaiting = () => S.settings.cleanup_on && S.groups.length > 0 && S.checks.declines !== today();
+  const syncWaiting = () => pendingGroups().length > 0 && S.checks.sync !== today();
+  const growWaiting = () => S.settings.grow_on && joinsToday() < S.settings.grow_daily && S.checks.grow !== today();
+  const membersText = n => n >= 1e6 ? (n / 1e6).toFixed(n >= 1e7 ? 0 : 1) + "M" : n >= 1e3 ? Math.round(n / 1e3) + "K" : String(n || "?");
 
   function todaysListing() {
     const list = postable();
@@ -177,6 +193,7 @@
       }, `Autopilot: ${pid} is today's group listing`);
     } catch (err) { A.busy(null); return A.toast(A.friendly(err), true); }
     A.busy(null);
+    await sendAlert("session");
     const p = pl.p, start = S.posts.filter(x => x.p === p.id).length;
     const img = location.origin + "/" + p.images[0];
     const q = pl.groups.map((g, i) => ({ g: g.id, name: g.name, url: g.url, p: p.id, text: caption(p, start + i), img }));
@@ -197,6 +214,9 @@
   function stepsToday() {
     const dl = dueList(), steps = [];
     if (dl === null || dl.length) steps.push("renew");
+    if (cleanupWaiting()) steps.push("declines");
+    if (syncWaiting()) steps.push("sync");
+    if (growWaiting()) steps.push("grow");
     if (activeGroups().length && plan().groups.length) steps.push("post");
     if (IG() && IG().state() && IG().summary().waiting) steps.push("ig");
     return steps;
@@ -208,6 +228,9 @@
     while (steps.length) {
       const k = steps.shift();
       if (k === "renew") return startRenew(steps);
+      if (k === "declines" && cleanupWaiting()) return startDeclines(steps);
+      if (k === "sync" && syncWaiting()) return startImport(steps);
+      if (k === "grow" && growWaiting()) return startGrow(steps);
       if (k === "post" && activeGroups().length && plan().groups.length) return startPosting(auto, steps);
       if (k === "ig" && IG() && IG().summary().waiting && Number(ext()) >= 4) return startIg({}, steps);
       if (k === "report") return sendReport(true);
@@ -250,9 +273,62 @@
     finally { A.busy(null); }
   }
 
-  function startImport() {
+  function startImport(then) {
     if (needExt()) return;
-    launch("https://www.facebook.com/groups/joins/?nav_source=tab", { kind: "import" });
+    launch("https://www.facebook.com/groups/joins/?nav_source=tab", { kind: "import", then: then || null });
+  }
+
+  // Groups that decline our posts: read notifications, then each group we posted in over the
+  // last 3 weeks (its "declined" page). The add-on leaves every group it finds. Groups removed
+  // earlier but not yet left on Facebook are tried again (up to 3 times).
+  function startDeclines(then) {
+    if (needExt()) return;
+    const since = new Date(Date.now() - 21 * 864e5).toLocaleDateString("en-CA");
+    const recent = [...new Set(S.posts.filter(x => x.d >= since).map(x => x.g))];
+    const names = Object.fromEntries(S.groups.map(g => [g.id, g.name]));
+    const q = [{ type: "notif", url: "https://www.facebook.com/notifications" }];
+    for (const id of recent.slice(-30)) {
+      const g = S.groups.find(x => x.id === id);
+      if (g) q.push({ type: "check", g: id, name: g.name, what: "declined", url: `https://www.facebook.com/groups/${id}/my_declined_content` });
+    }
+    const found = {};
+    for (const r of S.removed.filter(r => !r.left && (r.tries || 0) < 3).slice(0, 10)) {
+      found[r.id] = { g: r.id, name: r.name, why: r.why, left: false, retry: true };
+      q.push({ type: "leave", g: r.id, name: r.name, url: `https://www.facebook.com/groups/${r.id}/` });
+    }
+    launch(q[0].url, { kind: "declines", q, names, found, keep: [], then: then || null });
+  }
+
+  // Join big groups: search Facebook with the growth keywords (a different starting keyword
+  // each day) and join groups with at least grow_min_members members, up to grow_daily a day.
+  function startGrow(then) {
+    if (needExt()) return;
+    const room = S.settings.grow_daily - joinsToday();
+    if (room <= 0) return A.toast(`Today's ${S.settings.grow_daily} new groups are done ✓`);
+    const kws = S.settings.grow_keywords;
+    const shift = Math.floor(Date.now() / 864e5) % kws.length;
+    const q = kws.slice(shift).concat(kws.slice(0, shift)).map(kw => ({ kw, url: `https://www.facebook.com/search/groups/?q=${encodeURIComponent(kw)}` }));
+    const skip = [...new Set([...S.groups.map(g => g.id), ...S.removed.map(r => r.id), ...S.joins.map(j => j.g)])];
+    launch(q[0].url, { kind: "grow", q, skip, limit: room, min: S.settings.grow_min_members, deny: GROW_DENY, pmin: 40, pmax: 100, then: then || null });
+  }
+
+  // Alert before every posting session (email via the backend, plus the badge here).
+  // kind "milestone" = the special alert when today's new groups reach grow_daily.
+  async function sendAlert(kind) {
+    const pl = plan(), d = today();
+    const payload = {
+      action: "session_alert", kind: kind || "session", day: d,
+      listing: pl.p ? String(pl.p.name).split(" — ")[0] : "",
+      groups: pl.groups.map(g => g.name),
+      joins: S.joins.filter(j => j.d === d).map(j => ({ name: j.name, members: j.members, status: j.status, url: j.url || "" })),
+      removed: S.removed.filter(r => r.d === d).map(r => ({ name: r.name, why: r.why, left: !!r.left })),
+      totals: { active: activeGroups().length, pending: pendingGroups().length, removed: S.removed.length, joined_today: joinsToday(), target: S.settings.grow_daily }
+    };
+    try {
+      const r = await A.backendSigned(payload);
+      if (r.ok) return A.toast(kind === "milestone" ? `🎉 ${joinsToday()} new groups today. Alert emailed to ${r.to || REPORT_TO}.` : `Alert emailed to ${r.to || REPORT_TO}: posting session starting.`);
+      if (/unknown action|bad request|name required/i.test(r.error || "")) return A.toast("Posting alerts need the latest Code.gs in Apps Script (backend/README.md). Posting carries on.", true);
+    } catch (err) { /* never block posting because of the alert */ }
   }
 
   // ------------------------------------------------------------------ results coming back from the add-on
@@ -306,16 +382,59 @@
         A.toast(`Posted in ${plural(ok, "group")}${out.res.length - ok ? `, ${out.res.length - ok} skipped` : ""}.${out.stopped ? " Stopped: " + out.stopped : ""}`, !!out.stopped);
       } else if (out.kind === "import") {
         const found = (out.groups || []).filter(g => g.id && g.name);
-        let added = 0;
+        let added = 0, accepted = 0;
         await save(s => {
+          const gone = new Set(s.removed.map(r => r.id));
           for (const g of found) {
+            if (gone.has(g.id)) continue;                // removed for declining our posts: never back on the list
             const have = s.groups.find(x => x.id === g.id);
-            if (have) have.name = g.name;
+            if (have) {
+              have.name = g.name;
+              if (have.pending) { delete have.pending; delete have.off_why; have.active = true; accepted++; }
+            }
             else { s.groups.push({ id: g.id, name: g.name, url: g.url, active: true, added: d }); added++; }
           }
+          if (found.length) s.checks.sync = d;
           return s;
         }, `Autopilot: imported ${found.length} Facebook groups`);
-        A.toast(found.length ? `Found ${plural(found.length, "group")} (${added} new).` : "No groups found. Make sure you're logged in to Facebook and try again.", !found.length);
+        A.toast(found.length ? `Found ${plural(found.length, "group")} (${added} new${accepted ? `, ${plural(accepted, "join request")} accepted` : ""}).` : "No groups found. Make sure you're logged in to Facebook and try again.", !found.length);
+      } else if (out.kind === "declines") {
+        const res = out.res || [];
+        const fresh = res.filter(r => !r.retry);
+        await save(s => {
+          runLog(s, { found: fresh.length, left: res.filter(r => r.left).length });
+          if (!out.stopped) s.checks.declines = d;
+          for (const r of res) {
+            const old = s.removed.find(x => x.id === r.g);
+            if (old) { old.left = !!r.left; old.tries = (old.tries || 0) + 1; if (r.left) old.left_d = d; continue; }
+            const g = s.groups.find(x => x.id === r.g);
+            s.groups = s.groups.filter(x => x.id !== r.g);
+            s.removed.push({ id: r.g, name: (g && g.name) || r.name, url: (g && g.url) || `https://www.facebook.com/groups/${r.g}/`, why: r.why, d, left: !!r.left, tries: 1, ...(r.left ? { left_d: d } : {}) });
+          }
+          return s;
+        }, `Autopilot: ${fresh.length} groups declined our posts and were removed`);
+        const notLeft = fresh.filter(r => !r.left).length;
+        A.toast(fresh.length ? `${plural(fresh.length, "group")} declined our posts: removed from your list${notLeft ? `, ${notLeft} still to leave on Facebook (tried again next run)` : " and left on Facebook"} ✓` : `No group declined our posts ✓${out.stopped ? " Stopped: " + out.stopped : ""}`, !!out.stopped);
+      } else if (out.kind === "grow") {
+        const res = out.res || [];
+        const before = joinsToday();
+        await save(s => {
+          runLog(s, { joined: res.filter(r => r.status === "joined").length, requested: res.filter(r => /pending|questions/.test(r.status)).length });
+          s.checks.grow = d;
+          for (const r of res) {
+            s.joins.push({ d, t: r.t || new Date().toISOString(), g: r.g, name: r.name, members: r.members, status: r.status, url: r.url, ...(r.why ? { why: r.why } : {}) });
+            if (r.status === "failed" || s.groups.some(x => x.id === r.g)) continue;
+            const g = { id: r.g, name: r.name, url: r.url, added: d, members: r.members, source: "autopilot" };
+            if (r.status === "joined") g.active = true;
+            else Object.assign(g, { active: false, pending: true, off_why: r.status === "questions" ? "Join request needs answers: open the group on Facebook and answer its questions" : "Waiting for the group's admin to accept us" });
+            s.groups.push(g);
+          }
+          s.joins = s.joins.slice(-1000);
+          return s;
+        }, `Autopilot: joined ${res.filter(r => r.status !== "failed").length} new Facebook groups`);
+        const n = joinsToday();
+        A.toast(`${plural(n, "new group")} today (${res.filter(r => r.status === "joined").length} joined now, ${res.filter(r => /pending|questions/.test(r.status)).length} waiting for approval).${res.length ? "" : ` No new groups with ${membersText(S.settings.grow_min_members)}+ members turned up: add keywords or lower the size in Settings.`}${out.stopped ? " Stopped: " + out.stopped : ""}`, !!out.stopped);
+        if (before < S.settings.grow_daily && n >= S.settings.grow_daily) await sendAlert("milestone");
       }
     } catch (err) {
       A.toast(A.friendly(err), true);
@@ -378,10 +497,29 @@
       </section>
 
       <section class="fa-card">
+        <header><h2>New big groups</h2><span class="fa-big ${joinsToday() >= S.settings.grow_daily ? "" : "hot"}">${joinsToday()}/${S.settings.grow_daily}</span></header>
+        <p class="muted">Every day the run searches Facebook and joins up to ${S.settings.grow_daily} groups with at least ${membersText(S.settings.grow_min_members)} members that fit furniture selling. You get an email before each posting session, and a special one the day ${S.settings.grow_daily} are added.${pendingGroups().length ? ` ${plural(pendingGroups().length, "join request")} waiting for group admins.` : ""}</p>
+        <div class="fa-actions"><button class="btn btn-primary" data-fa="grow" ${S.settings.grow_on && joinsToday() < S.settings.grow_daily ? "" : "disabled"}>Find &amp; join groups now</button></div>
+        ${S.joins.length ? `<details class="fa-more"><summary>Recently added (${S.joins.length})</summary><ul class="fa-list">${S.joins.slice(-30).reverse().map(j => `<li class="${j.status === "failed" ? "bad" : ""}"><span>${j.status === "joined" ? "✓" : j.status === "failed" ? "✗" : "…"} ${j.url ? `<a href="${esc(j.url)}" target="_blank" rel="noopener">${esc(j.name)}</a>` : esc(j.name)}</span><small>${membersText(j.members)} members · ${esc(j.d)} · ${esc({ joined: "joined", pending: "waiting for admin", questions: "answer the group's questions", failed: j.why || "failed" }[j.status] || j.status)}</small></li>`).join("")}</ul></details>` : ""}
+      </section>
+
+      <section class="fa-card">
+        <header><h2>Groups that declined us</h2><span class="fa-big">${S.removed.length}</span></header>
+        <p class="muted">Before posting, the run checks your notifications and each group's declined posts. Any group that declines us is left on Facebook and taken off your list for good (it's never re-imported or re-joined).${S.checks.declines ? ` Last checked ${esc(S.checks.declines)}.` : ""}</p>
+        <div class="fa-actions"><button class="btn btn-ghost" data-fa="declines">Check for declined posts now</button></div>
+        ${S.removed.length ? `<details class="fa-more"><summary>Show the ${plural(S.removed.length, "removed group")}</summary><ul class="fa-list">${S.removed.slice().reverse().map(r => `<li class="${r.left ? "off" : "bad"}"><span><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.name)}</a></span><small>${esc(r.d)} · ${esc(r.why)} · ${r.left ? "left on Facebook ✓" : (r.tries || 0) >= 3 ? "couldn't leave: open it and tap Joined → Leave group" : "leaving on the next run"}</small></li>`).join("")}</ul></details>` : ""}
+      </section>
+
+      <section class="fa-card">
         <header><h2>Settings</h2></header>
         <form class="fa-settings" id="fa-settings">
           <label>Group posts a day <input id="fa-daily" name="daily_limit" type="number" min="1" max="50" value="${limit}"></label>
           <label>Renew in batches of <input id="fa-batch" name="renew_batch" type="number" min="1" max="50" value="${S.settings.renew_batch}"></label>
+          <label class="fa-check"><input name="cleanup_on" type="checkbox" ${S.settings.cleanup_on ? "checked" : ""}> Leave and remove groups that decline our posts</label>
+          <label class="fa-check"><input name="grow_on" type="checkbox" ${S.settings.grow_on ? "checked" : ""}> Join new big groups every day</label>
+          <label>New groups a day <input name="grow_daily" type="number" min="1" max="30" value="${S.settings.grow_daily}"></label>
+          <label>Smallest group (members) <input name="grow_min_members" type="number" min="1000" step="1000" value="${S.settings.grow_min_members}"></label>
+          <label>Search words (comma separated) <input name="grow_keywords" type="text" value="${esc(S.settings.grow_keywords.join(", "))}"></label>
           <p class="muted fa-small">The daily run itself is switched on and off in the Today tab.</p>
           <button class="btn btn-ghost btn-sm" type="submit">Save settings</button>
         </form>
@@ -416,7 +554,8 @@
     const dl = dueList(), pl = plan(), ig = IG() && IG().state() ? IG().summary() : null;
     const limit = S.settings.daily_limit, doneFb = attemptsToday();
     const steps = stepsToday();
-    const mins = (steps.includes("renew") ? 5 : 0) + (steps.includes("post") ? Math.round(pl.groups.length * (S.settings.pause_min_s + S.settings.pause_max_s) / 120) : 0) + (steps.includes("ig") && ig ? ig.mins : 0);
+    const mins = (steps.includes("renew") ? 5 : 0) + (steps.includes("post") ? Math.round(pl.groups.length * (S.settings.pause_min_s + S.settings.pause_max_s) / 120) : 0) + (steps.includes("ig") && ig ? ig.mins : 0)
+      + (steps.includes("declines") ? 5 : 0) + (steps.includes("sync") ? 3 : 0) + (steps.includes("grow") ? Math.round((S.settings.grow_daily - joinsToday()) * 1.3) + 5 : 0);
     const shortName = p => String(p.name).split(" — ")[0];
     const ds = document.documentElement.dataset;
     const extMsg = !ext() ? "The FA Vision add-on isn't installed in this Edge browser yet. Install it first (steps below)."
@@ -434,12 +573,19 @@
           ${dl === null ? step("wait", "Marketplace renewals", "Your listings haven't been checked yet. The run checks and renews them.")
             : dl.length ? step("wait", "Marketplace renewals", `${plural(dl.length, "listing")} due for renewal`)
             : step("done", "Marketplace renewals", `Nothing due${nextRenewal() ? ` · next on ${esc(nextRenewal())}` : ""}`)}
+          ${!S.settings.cleanup_on ? step("off", "Declined-post clean-up", "Switched off (Facebook tab → Settings)")
+            : cleanupWaiting() ? step("wait", "Declined-post clean-up", "Checks which groups declined our posts, leaves them and drops them from the list")
+            : step("done", "Declined-post clean-up", `Checked today · ${plural(S.removed.length, "group")} removed so far`)}
+          ${!S.settings.grow_on ? step("off", "New big groups", "Switched off (Facebook tab → Settings)")
+            : growWaiting() ? step("wait", "New big groups", `Joins up to ${S.settings.grow_daily - joinsToday()} more groups with ${membersText(S.settings.grow_min_members)}+ members · ${joinsToday()}/${S.settings.grow_daily} today`)
+            : step(joinsToday() >= S.settings.grow_daily ? "done" : "warn", "New big groups", `${joinsToday()}/${S.settings.grow_daily} added today${pendingGroups().length ? ` · ${pendingGroups().length} waiting for admins` : ""}`)}
           ${!activeGroups().length ? step("off", "Facebook groups", "No groups yet. Import them in the Facebook tab.")
             : pl.groups.length ? step("wait", "Facebook groups", `${plural(pl.groups.length, "group post")} waiting · ${esc(shortName(pl.p))}`)
             : step("done", "Facebook groups", `${doneFb}/${limit} posted today`)}
           ${!ig ? step("off", "Instagram", "Loading…") : !ig.on ? step("off", "Instagram", "Switched off (Instagram tab)")
             : ig.waiting ? step("wait", "Instagram", `${plural(ig.waiting, "photo")} waiting · ${ig.done}/${ig.target} posted today`)
             : step("done", "Instagram", `${ig.done}/${ig.target} posted today`)}
+          ${step(steps.includes("post") ? "wait" : "done", "Alert before posting", `Email to ${esc(REPORT_TO)} just before the group posts start (and a special one when ${S.settings.grow_daily} new groups are added in a day)`)}
           ${step(steps.length ? "wait" : "done", "Email report", `Breakdown sent to ${esc(REPORT_TO)} when the run ends (and every night at 9 pm)`)}
         </ol>
         ${steps.length ? `<button class="btn btn-sell run-btn" data-fa="run">Run everything for today</button>
@@ -485,7 +631,9 @@
     const n = (dl === null ? 1 : due) + (postsWaiting ? 1 : 0) + (igWaiting ? 1 : 0);
     if (b) { b.hidden = !n; b.textContent = n; }
     if (alert) {
-      const bits = [dl === null ? `<b>Your Marketplace listings haven't been checked for renewal yet.</b>` : due && `<b>${plural(due, "Marketplace listing")} ready to renew.</b>`, postsWaiting && `<b>Today's group posts haven't run yet.</b>`, igWaiting && `<b>Today's Instagram posts haven't run yet.</b>`].filter(Boolean);
+      const bits = [dl === null ? `<b>Your Marketplace listings haven't been checked for renewal yet.</b>` : due && `<b>${plural(due, "Marketplace listing")} ready to renew.</b>`, postsWaiting && `<b>Today's group posts haven't run yet.</b>`, igWaiting && `<b>Today's Instagram posts haven't run yet.</b>`,
+        joinsToday() >= S.settings.grow_daily && `<b>🎉 ${joinsToday()} new big groups added today.</b>`,
+        S.removed.filter(r => r.d === today()).length && `<b>${plural(S.removed.filter(r => r.d === today()).length, "group")} removed today for declining our posts.</b>`].filter(Boolean);
       alert.hidden = !bits.length;
       alert.innerHTML = bits.join(" ") + " Open Social autopilot and tap Run →";
     }
@@ -507,6 +655,8 @@
     else if (k === "post") startPosting(false);
     else if (k === "test") startTest();
     else if (k === "import") startImport();
+    else if (k === "declines") startDeclines();
+    else if (k === "grow") startGrow();
   });
   async function saveAutoRun() {
     const on = !!(screen.querySelector("[data-fa-autorun]") || {}).checked;
@@ -540,7 +690,13 @@
     e.preventDefault();
     const f = e.target.elements;
     const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, parseInt(v, 10) || lo));
-    const next = { daily_limit: clamp(f.daily_limit.value, 1, 50), renew_batch: clamp(f.renew_batch.value, 1, 50) };
+    const next = {
+      daily_limit: clamp(f.daily_limit.value, 1, 50), renew_batch: clamp(f.renew_batch.value, 1, 50),
+      cleanup_on: f.cleanup_on.checked, grow_on: f.grow_on.checked,
+      grow_daily: clamp(f.grow_daily.value, 1, 30), grow_min_members: clamp(f.grow_min_members.value, 1000, 1e9),
+      grow_keywords: f.grow_keywords.value.split(",").map(x => x.trim()).filter(Boolean).slice(0, 30)
+    };
+    if (!next.grow_keywords.length) next.grow_keywords = EMPTY.settings.grow_keywords.slice();
     A.busy("Saving settings…");
     try { await save(s => { Object.assign(s.settings, next); return s; }, "Autopilot: settings"); A.toast("Settings saved"); render(); updateBadge(); }
     catch (err) { A.toast(A.friendly(err), true); }
