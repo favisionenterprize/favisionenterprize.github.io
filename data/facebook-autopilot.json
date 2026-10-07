@@ -961,6 +961,13 @@
    "kind": "declines",
    "found": 0,
    "left": 0
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T19:37:08.033Z",
+   "kind": "grow",
+   "joined": 0,
+   "requested": 0
   }
  ],
  "removed": [
@@ -1017,7 +1024,8 @@
  ],
  "joins": [],
  "checks": {
-  "declines": "2026-10-07"
+  "declines": "2026-10-07",
+  "grow": "2026-10-07"
  },
  "rounds": {}
 }
