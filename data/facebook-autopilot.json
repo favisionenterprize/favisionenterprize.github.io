@@ -6,7 +6,28 @@
   "pause_min_s": 60,
   "pause_max_s": 180,
   "auto_run": true,
-  "auto_time": "09:00"
+  "auto_time": "09:00",
+  "now_limit": 20,
+  "group_rest_hours": 6,
+  "cleanup_on": true,
+  "grow_on": true,
+  "grow_daily": 20,
+  "grow_min_members": 10000,
+  "grow_min_global": 100000,
+  "grow_keywords": [
+   "buy and sell ghana",
+   "accra buy and sell",
+   "accra market",
+   "ghana online market",
+   "furniture ghana",
+   "home decor ghana",
+   "kasoa buy and sell",
+   "furniture",
+   "home decor",
+   "interior design",
+   "furniture for sale",
+   "ghana business"
+  ]
  },
  "groups": [
   {
@@ -667,6 +688,78 @@
    "g": "555856695137297",
    "ok": false,
    "why": "Post box didn't open"
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T16:45:59.016Z",
+   "p": "FAV-010",
+   "g": "762804364052457",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T16:48:04.248Z",
+   "p": "FAV-011",
+   "g": "688229241385954",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T16:51:36.610Z",
+   "p": "FAV-014",
+   "g": "3295010260530139",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T16:56:25.513Z",
+   "p": "FAV-015",
+   "g": "ghanashs",
+   "ok": false,
+   "why": "Post button stayed off"
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T16:56:57.491Z",
+   "p": "FAV-016",
+   "g": "433382596714655",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T16:59:32.005Z",
+   "p": "FAV-017",
+   "g": "128000729380895",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T17:02:34.562Z",
+   "p": "FAV-018",
+   "g": "455961835149809",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T17:05:18.909Z",
+   "p": "FAV-019",
+   "g": "tltshopgroup",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T17:08:12.195Z",
+   "p": "FAV-020",
+   "g": "555856695137297",
+   "ok": true,
+   "why": "Waiting for admin approval"
   }
  ],
  "resets": {},
@@ -775,6 +868,13 @@
    "kind": "post",
    "tried": 14,
    "ok": 6
+  },
+  {
+   "d": "2026-10-07",
+   "t": "2026-10-07T17:08:45.305Z",
+   "kind": "post",
+   "tried": 9,
+   "ok": 7
   }
  ],
  "removed": [
@@ -828,5 +928,7 @@
    "left_d": "2026-10-07",
    "tries": 1
   }
- ]
+ ],
+ "joins": [],
+ "checks": {}
 }
