@@ -1655,7 +1655,7 @@ window.FAV_DATA = {
       "in_stock": true,
       "images": [
         "assets/images/products/fav-023-mp-1.jpg",
-        "assets/images/products/fav-023-mp-2.jpg"
+        "assets/images/products/fav-023-mp-2-p6500.jpg"
       ],
       "highlights": [
         "1.5HP split unit",
