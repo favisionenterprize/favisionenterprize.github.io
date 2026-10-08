@@ -1570,7 +1570,7 @@ Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interes
 - **Category:** Home & Garden > Appliances
 - **Condition:** Brand New
 - **Location:** Odorkor, Accra
-- **Photos:** assets/images/products/fav-023-mp-1.jpg, assets/images/products/fav-023-mp-2.jpg
+- **Photos:** assets/images/products/fav-023-mp-1.jpg, assets/images/products/fav-023-mp-2-p6500.jpg
 
 **Description:**
 
