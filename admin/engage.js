@@ -23,8 +23,8 @@
       limit: 200, max_comments: 60, min: 20, max: 45,
       reply_text: "Thank you {name}! 🙏 Please like, share and follow F.A Vision Enterprise for more deals.",
       reply_nets: { fb: true, ig: true, x: true, tiktok: true }, max_replies: 60, max_invites: 100,
-      likers_text: "{names} thank you for liking our ad 🙏 Follow F.A Vision Enterprise and like the page for more deals!",
-      likers_per_comment: 4, max_likers: 60
+      likers_text: "{names} thank you for viewing, liking and sharing 🙏 Follow F.A Vision Enterprise and like the page for more deals!",
+      likers_per_comment: 4, max_likers: 60, thank_nets: { fb: true, ig: true, x: true, tiktok: true }
     },
     followers: [], posts: {}, runs: [], liked: {}
   };
@@ -38,9 +38,9 @@
   function normalise(s) {
     s = s || JSON.parse(JSON.stringify(EMPTY));
     const st = s.settings || {};
-    s.settings = { ...EMPTY.settings, ...st, nets: { ...EMPTY.settings.nets, ...(st.nets || {}) }, reply_nets: { ...EMPTY.settings.reply_nets, ...(st.reply_nets || {}) }, handles: { ...EMPTY.settings.handles, ...(st.handles || {}) } };
+    s.settings = { ...EMPTY.settings, ...st, nets: { ...EMPTY.settings.nets, ...(st.nets || {}) }, reply_nets: { ...EMPTY.settings.reply_nets, ...(st.reply_nets || {}) }, thank_nets: { ...EMPTY.settings.thank_nets, ...(st.thank_nets || {}) }, handles: { ...EMPTY.settings.handles, ...(st.handles || {}) } };
     s.followers = s.followers || []; s.posts = s.posts || {}; s.runs = s.runs || [];
-    s.liked = s.liked || {}; // TikTok username → date we thanked them (never tagged twice)
+    s.liked = s.liked || {}; // "net:username" → date we thanked them (never tagged twice)
     return s;
   }
   async function load(force) { if (!S || force) S = normalise(await A.readJsonFile(FILE, EMPTY)); return S; }
@@ -75,7 +75,7 @@
       text: run.statsOnly ? "" : (run.text || commentText()), statsOnly: !!run.statsOnly, reply_text: run.reply_text || replyTemplate(),
       limit: st.limit, max_comments: st.max_comments, min: st.min, max: st.max, max_replies: st.max_replies, max_invites: st.max_invites,
       likers_text: likersTemplate(st), likers_per_comment: st.likers_per_comment, max_likers: st.max_likers,
-      skip: net === "tiktok" ? Object.keys(S.liked || {}) : [],
+      skip: Object.keys(S.liked || {}).filter(k => k.startsWith(net + ":")).map(k => k.slice(net.length + 1)),
       then: then && then.length ? then : null
     });
   }
@@ -86,15 +86,15 @@
     return t.includes("{names}") ? t : "{names} " + t;
   }
   // mode: "comment" (default), "stats", "reply" (reply to everyone who commented), "invite" (Facebook friends),
-  // "likers" (TikTok: tag the people who liked each ad in a thank-you comment under it)
+  // "likers" (all networks: on every post, @mention the people seen there in a thank-you comment)
   function runAll(mode) {
     mode = mode === true ? "stats" : (mode || "comment");
     const st = S.settings;
-    const nets = mode === "invite" ? ["fb"] : mode === "likers" ? ["tiktok"] : Object.keys(NETS).filter(n => (mode === "reply" ? st.reply_nets : st.nets)[n]);
+    const nets = mode === "invite" ? ["fb"] : mode === "likers" ? Object.keys(NETS).filter(n => st.thank_nets[n]) : Object.keys(NETS).filter(n => (mode === "reply" ? st.reply_nets : st.nets)[n]);
     if (!nets.length) return A.toast("Tick at least one network.", true);
     if (mode === "comment" && !String(st.text || "").trim()) return A.toast("Type the comment first.", true);
     if (mode === "reply" && !String(st.reply_text || "").trim()) return A.toast("Type the reply first.", true);
-    if (mode === "likers" && likersTemplate(st).replace("{names}", "@abcdefghijkl").length > TT_MAX) return A.toast(`Shorten the thank-you: TikTok comments can't be longer than ${TT_MAX} characters, and the names need room.`, true);
+    if (mode === "likers" && st.thank_nets.tiktok && likersTemplate(st).replace("{names}", "@abcdefghijkl").length > TT_MAX) return A.toast(`Shorten the thank-you: TikTok comments can't be longer than ${TT_MAX} characters, and the names need room.`, true);
     try { localStorage.setItem(RUN_KEY, JSON.stringify({ mode, text: mode === "comment" ? commentText() : "", reply_text: replyTemplate(), statsOnly: mode === "stats", d: today() })); } catch (e) { /* private mode */ }
     F()._test.runStep(nets.map(n => "engage:" + n));
   }
@@ -114,7 +114,7 @@
         if (r.why === "already has our comment" && !(p.commented || []).length) p.commented = [{ d: "before", text: "" }];
         if (r.replied) p.replies = (p.replies || 0) + r.replied;
         if (r.invited != null) { s.invites = (s.invites || []).concat([{ d, n: r.invited }]).slice(-200); continue; }
-        if (r.thanked && r.thanked.length) { r.thanked.forEach(u => { s.liked[u] = d; }); p.thanked = (p.thanked || 0) + r.thanked.length; }
+        if (r.thanked && r.thanked.length) { r.thanked.forEach(u => { s.liked[net + ":" + String(u).toLowerCase()] = d; }); p.thanked = (p.thanked || 0) + r.thanked.length; }
         s.posts[r.url] = p;
       }
       s.runs = s.runs.concat([{ d, t: new Date().toISOString(), net, mode: out.mode || "comment", posts: out.posts || res.length, checked: res.filter(r => r.invited == null).length, commented: res.filter(r => r.commented).length, replied: res.reduce((a, r) => a + (r.replied || 0), 0), invited: res.reduce((a, r) => a + (r.invited || 0), 0), thanked: res.reduce((a, r) => a + ((r.thanked || []).length), 0), followers: out.followers, stopped: out.stopped || null, commenting: !!out.commenting }]).slice(-300);
@@ -125,7 +125,7 @@
     if (out.mode === "invite") return { text: out.stopped ? "Invite friends: " + out.stopped : `Invited ${plural(inv, "friend")} to like and follow your Page ✓`, bad: !!out.stopped && !inv };
     if (out.mode === "likers") {
       const th = res.reduce((a, r) => a + ((r.thanked || []).length), 0);
-      return { text: `TikTok: thanked ${plural(th, "liker")} in ${plural(res.filter(r => r.commented).length, "comment")} on ${plural(new Set(res.map(r => r.url)).size, "ad")}${out.stopped ? ". " + out.stopped : " ✓"}`, bad: !!out.stopped && !th };
+      return { text: `${NETS[net]}: thanked ${plural(th, "person")} on ${plural(res.filter(r => r.commented).length, "post")}${out.stopped ? ". " + out.stopped : " ✓"}`.replace("persons", "people"), bad: !!out.stopped && !th };
     }
     if (out.mode === "reply") return { text: `${NETS[net]}: replied to ${plural(rep, "comment")} on ${plural(res.length, "post")}${out.stopped ? ". " + out.stopped : " ✓"}`, bad: !!out.stopped };
     const fails = res.filter(r => !r.commented && r.why && !/already|not our|limit/.test(r.why)).length;
@@ -226,16 +226,17 @@
         </form>
       </section>
       <section class="fa-card">
-        <header><h2>Thank my TikTok likers</h2>${Object.keys(S.liked).length ? `<span class="muted fa-small">${fmt(Object.keys(S.liked).length)} thanked so far</span>` : ""}</header>
+        <header><h2>Thank everyone who engaged (@mention)</h2>${Object.keys(S.liked).length ? `<span class="muted fa-small">${fmt(Object.keys(S.liked).length)} thanked so far</span>` : ""}</header>
         <form class="fa-settings" id="eng-likers">
-          <p class="muted">Opens TikTok's Inbox → Likes, sees who liked each of your ads, then comments under that ad tagging them (@name) with your thank-you, asking them to follow and like the page. Tagged people get a notification. Nobody is tagged twice.</p>
-          <label>Your thank-you ({names} becomes the @names; max ${TT_MAX} characters in total)
-            <textarea name="likers_text" rows="3" maxlength="${TT_MAX}">${esc(st.likers_text)}</textarea></label>
-          <label>People tagged per comment <input name="likers_per_comment" type="number" min="1" max="6" value="${st.likers_per_comment}"></label>
-          <label>Most likers to thank per run <input name="max_likers" type="number" min="1" max="200" value="${st.max_likers}"></label>
+          <p class="muted">Goes through every post on the ticked networks and comments a thank-you that @mentions the people who engaged there, for viewing, liking and sharing, asking them to follow and like the page. Posts where nobody new shows get one general thank-you. Nobody is tagged twice.</p>
+          <label>Your thank-you ({names} becomes the @names)
+            <textarea name="likers_text" rows="3" maxlength="600">${esc(st.likers_text)}</textarea></label>
+          <div class="eng-nets">${Object.entries(NETS).map(([k, t]) => `<label class="fa-check"><input type="checkbox" name="tnet_${k}" ${st.thank_nets[k] ? "checked" : ""}> ${t}</label>`).join("")}</div>
+          <label>People tagged per comment <input name="likers_per_comment" type="number" min="1" max="10" value="${st.likers_per_comment}"></label>
+          <label>Most people to thank per network per run <input name="max_likers" type="number" min="1" max="200" value="${st.max_likers}"></label>
           <p class="muted fa-small">Example: <span class="eng-lpreview">${esc(likersTemplate().replace("{names}", "@ama.k @kojo_furniture"))}</span></p>
-          <div class="fa-actions"><button class="btn btn-sell" type="submit">🙏 Thank my TikTok likers</button></div>
-          <p class="muted fa-small">Comments go out ${st.min}–${st.max} s apart and stop at once if TikTok shows any warning. TikTok's Inbox only keeps recent likes, so run it every day or two. Fewer names per comment fits more of your message.</p>
+          <div class="fa-actions"><button class="btn btn-sell" type="submit">🙏 Thank everyone (@mention)</button></div>
+          <p class="muted fa-small">Comments go out ${st.min}–${st.max} s apart and stop at once on any warning. TikTok comments are cut to ${TT_MAX} characters, X to 280, so fewer names fit there. The networks only show who commented, not the full list of likers and sharers, so those are the people tagged; everyone else gets the general thank-you.</p>
         </form>
       </section>
       <section class="fa-card">
@@ -251,7 +252,7 @@
         <thead><tr><th>Post</th><th>Likes</th><th>Comments</th><th>Shares</th><th>Views</th></tr></thead>
         <tbody>${top.map(p => `<tr><td><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(NETS[p.net] || p.net)} · ${esc((p.title || p.url).slice(0, 60))}</a></td><td>${fmt(p.likes)}</td><td>${fmt(p.comments)}</td><td>${fmt(p.shares)}</td><td>${fmt(p.views)}</td></tr>`).join("")}</tbody>
       </table></div></section>` : ""}
-      ${S.runs.length ? `<section class="fa-card"><header><h2>Recent runs</h2></header><ul class="fa-list">${S.runs.slice(-12).reverse().map(r => `<li class="${r.stopped ? "bad" : ""}"><span>${esc(NETS[r.net] || r.net)} · ${r.mode === "invite" ? `${plural(r.invited || 0, "friend")} invited` : r.mode === "likers" ? `${plural(r.thanked || 0, "liker")} thanked` : r.mode === "reply" ? `${(r.replied || 0) + (r.replied === 1 ? " reply" : " replies")} on ${plural(r.checked || 0, "post")}` : `${r.commenting ? `${plural(r.commented, "comment")}, ` : ""}${plural(r.checked || 0, "post")} checked`}${r.followers != null ? ` · ${fmt(r.followers)} followers` : ""}</span><small>${esc(r.d)}${r.stopped ? " · " + esc(r.stopped) : ""}</small></li>`).join("")}</ul></section>` : ""}`;
+      ${S.runs.length ? `<section class="fa-card"><header><h2>Recent runs</h2></header><ul class="fa-list">${S.runs.slice(-12).reverse().map(r => `<li class="${r.stopped ? "bad" : ""}"><span>${esc(NETS[r.net] || r.net)} · ${r.mode === "invite" ? `${plural(r.invited || 0, "friend")} invited` : r.mode === "likers" ? `${r.thanked || 0} thanked` : r.mode === "reply" ? `${(r.replied || 0) + (r.replied === 1 ? " reply" : " replies")} on ${plural(r.checked || 0, "post")}` : `${r.commenting ? `${plural(r.commented, "comment")}, ` : ""}${plural(r.checked || 0, "post")} checked`}${r.followers != null ? ` · ${fmt(r.followers)} followers` : ""}</span><small>${esc(r.d)}${r.stopped ? " · " + esc(r.stopped) : ""}</small></li>`).join("")}</ul></section>` : ""}`;
   }
 
   function readForm(f) {
@@ -285,7 +286,7 @@
     const next = f.id === "eng-reply"
       ? { ...st, reply_text: el.reply_text.value.trim(), reply_nets: Object.fromEntries(Object.keys(NETS).map(k => [k, el["rnet_" + k].checked])), max_replies: Math.min(300, Math.max(1, parseInt(el.max_replies.value, 10) || 60)) }
       : f.id === "eng-likers"
-        ? { ...st, likers_text: el.likers_text.value.trim() || EMPTY.settings.likers_text, likers_per_comment: Math.min(6, Math.max(1, parseInt(el.likers_per_comment.value, 10) || 4)), max_likers: Math.min(200, Math.max(1, parseInt(el.max_likers.value, 10) || 60)) }
+        ? { ...st, likers_text: el.likers_text.value.trim() || EMPTY.settings.likers_text, likers_per_comment: Math.min(10, Math.max(1, parseInt(el.likers_per_comment.value, 10) || 4)), thank_nets: Object.fromEntries(Object.keys(NETS).map(k => [k, el["tnet_" + k].checked])), max_likers: Math.min(200, Math.max(1, parseInt(el.max_likers.value, 10) || 60)) }
         : { ...st, max_invites: Math.min(500, Math.max(1, parseInt(el.max_invites.value, 10) || 100)) };
     A.busy("Saving…");
     try { await save(s => { s.settings = next; return s; }, "Engagement: settings"); }

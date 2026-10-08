@@ -349,115 +349,26 @@
     return finish(w3 ? `Facebook showed "${w3}".` : null);
   }
 
-  // ------------------------------------------------------------- TikTok: thank the people who liked each ad
-  // 1. inbox – open TikTok's Inbox, pick the "Likes" filter, scroll and read "X liked your video" items;
-  // 2. thank – go to each ad and comment "@a @b … thank-you" (≤150 chars), people never tagged twice.
-  // Selectors follow TikTok's web Inbox (Oct 2026) but weren't checked live.
-  const TT_MAX = 150;
-  function inboxItems() {
-    const panel = [...document.querySelectorAll("[data-e2e='inbox-list'],[data-e2e='inbox-notifications'],[class*='InboxContent'],[class*='DivInboxContainer'],[role=dialog]")].filter(visible).pop() || document;
-    const out = [];
-    [...panel.querySelectorAll("a[href*='/@']")].forEach(a => {
-      let c = a; for (let i = 0; i < 6 && c && !/liked your (video|post|photo)/i.test(c.innerText || ""); i++) c = c.parentElement;
-      if (!c || !/liked your (video|post|photo)/i.test(c.innerText || "")) return;
-      const m = (a.getAttribute("href") || "").match(/\/@([\w.]+)(?:[/?]|$)/);
-      if (!m || /\/(video|photo)\//.test(a.getAttribute("href"))) return;
-      const post = [...c.querySelectorAll("a[href]")].map(x => x.href).find(h => /\/@[\w.]+\/(video|photo)\/\d+/.test(h));
-      out.push({ user: m[1], post: post ? post.split("?")[0] : "" });
-    });
-    return out;
+  // ------------------------------------------------------------- thank-you comments with @mentions (all networks)
+  // On each post: open the comments, @mention the people seen there (not thanked before) in a thank-you
+  // for viewing, liking and sharing; if nobody new is there, leave one general thank-you (once per post).
+  const MAXLEN = { tiktok: 150, x: 280, ig: 2200, fb: 2000 }[NET] || 150;
+  const thanksTpl = () => String(job.likers_text || "{names} thank you for viewing, liking and sharing 🙏 Follow us and like the page!");
+  function thanksGeneral() {
+    const t = thanksTpl().replace("{names}", "").replace(/\s+/g, " ").trim();
+    return t.charAt(0).toUpperCase() + t.slice(1);
   }
   function mentionsFor(users) {
-    const tpl = String(job.likers_text || "{names} thank you for liking our ad 🙏 Follow us and like the page!");
-    const build = list => tpl.replace("{names}", list.map(u => "@" + u).join(" ")).trim();
+    const build = list => thanksTpl().replace("{names}", list.map(u => "@" + u).join(" ")).trim();
     const per = Math.max(1, job.likers_per_comment || 4);
     const chunks = [];
     let cur = [];
     users.forEach(u => {
-      if (cur.length && (cur.length >= per || Array.from(build(cur.concat(u))).length > TT_MAX)) { chunks.push(cur); cur = []; }
-      if (Array.from(build([u])).length <= TT_MAX) cur.push(u);
+      if (cur.length && (cur.length >= per || Array.from(build(cur.concat(u))).length > MAXLEN)) { chunks.push(cur); cur = []; }
+      if (Array.from(build([u])).length <= MAXLEN) cur.push(u);
     });
     if (cur.length) chunks.push(cur);
     return chunks.map(list => ({ users: list, text: build(list) }));
-  }
-  async function thankLikers() {
-    const me = (handle || "").replace(/^@/, "").toLowerCase();
-    if (job.stage !== "thank" && job.stage !== "latest") {
-      if (!job.navved) { job.navved = 1; await save(); return go("https://www.tiktok.com/"); }
-      box("opening your Inbox → Likes…");
-      await sleep(2500);
-      const inbox = await waitFor(() => [...document.querySelectorAll("[data-e2e='inbox-icon'],[data-e2e='nav-inbox'],[aria-label='Inbox'],[aria-label='Activity'],a[href*='/inbox']")].find(visible), 12000);
-      if (!inbox) return finish("Couldn't find TikTok's Inbox button. Make sure you're logged in to TikTok in this browser.");
-      inbox.click(); await sleep(2500);
-      const tab = await waitFor(() => [...document.querySelectorAll("[role=tab],[role=button],button,span")].find(e => visible(e) && /^Likes$/i.test((e.innerText || "").trim())), 8000);
-      if (tab) { tab.click(); await sleep(2500); }
-      const seen = new Map(), skip = new Set((job.skip || []).map(u => u.toLowerCase()));
-      let same = 0;
-      for (let i = 0; i < 25 && same < 4 && !stopAsked && seen.size < (job.max_likers || 60); i++) {
-        const before = seen.size;
-        inboxItems().forEach(it => {
-          const k = it.user.toLowerCase();
-          if (k === me || skip.has(k) || seen.has(k) || seen.size >= (job.max_likers || 60)) return;
-          seen.set(k, it);
-        });
-        same = seen.size === before ? same + 1 : 0;
-        box(`reading who liked your ads… ${seen.size} new likers`);
-        const sc = [...document.querySelectorAll("div")].filter(x => visible(x) && x.scrollHeight > x.clientHeight + 40 && /auto|scroll/.test(getComputedStyle(x).overflowY) && /liked your/i.test(x.innerText || "")).sort((a, b) => a.scrollHeight - b.scrollHeight)[0];
-        if (sc) sc.scrollTop += sc.clientHeight; else window.scrollBy(0, innerHeight);
-        await sleep(rand(1500, 2500));
-        const wi = warning(); if (wi) return finish(`TikTok showed "${wi}". Stopped.`);
-      }
-      if (stopAsked) return;
-      if (!seen.size) return finish(`No new likers in your TikTok Inbox${(job.skip || []).length ? " (everyone there was thanked before)" : ""}.`);
-      const groups = {};
-      [...seen.values()].forEach(it => { (groups[it.post] = groups[it.post] || []).push(it.user); });
-      job.groups = Object.entries(groups).map(([url, users]) => ({ url, users }));
-      job.stage = job.groups.some(g => !g.url) ? "latest" : "thank";
-      job.gi = 0; job.ci = 0; job.at = -1; job.navved = 0;
-      await save();
-    }
-    // Likes whose Inbox item had no link go under your latest post.
-    if (job.stage === "latest") {
-      if (!handle && !job.handle) {
-        if (!job.navved) { job.navved = 1; await save(); return go("https://www.tiktok.com/"); }
-        const meLink = await waitFor(() => document.querySelector("a[data-e2e='nav-profile'][href*='/@']"), 10000);
-        if (!meLink) return finish("Couldn't find your TikTok profile. Type your TikTok username in the Engagement settings, then try again.");
-        job.handle = meLink.getAttribute("href").match(/@([\w.]+)/)[1]; job.navved = 0; await save();
-      }
-      const prof = `https://www.tiktok.com/@${(handle || job.handle).replace(/^@/, "")}`;
-      if (!job.navved) { job.navved = 1; await save(); return go(prof); }
-      box("finding your latest ad…"); await sleep(3000);
-      const latest = links()[0];
-      const loose = job.groups.filter(g => !g.url).flatMap(g => g.users);
-      job.groups = job.groups.filter(g => g.url);
-      if (latest) { const g = job.groups.find(x => x.url === latest); if (g) g.users = g.users.concat(loose); else job.groups.unshift({ url: latest, users: loose }); }
-      job.stage = "thank"; job.at = -1; await save();
-      if (!job.groups.length) return finish("Couldn't tell which ads were liked.");
-    }
-    // 2. thank, one ad after the other
-    if (job.gi >= job.groups.length) { box("All done. Going back to your admin…"); await sleep(1200); return finish(); }
-    const g = job.groups[job.gi];
-    if (job.at !== job.gi) { job.at = job.gi; job.ci = 0; await save(); return go(g.url); }
-    await sleep(rand(3000, 4500));
-    const wt = warning(); if (wt) return finish(`TikTok showed "${wt}". Stopped.`);
-    const title = (document.title || "").replace(/\s*[|·-]\s*TikTok.*$/i, "").slice(0, 90);
-    const chunks = mentionsFor(g.users);
-    for (; job.ci < chunks.length; job.ci++) {
-      if (stopAsked) return;
-      const ch = chunks[job.ci];
-      box(`Ad ${job.gi + 1} of ${job.groups.length}: thanking ${ch.users.map(u => "@" + u).join(" ")}…`);
-      const err = await comment(ch.text);
-      if (err.startsWith("warning:")) { job.res.push({ url: g.url, title, thanked: [], commented: false, why: err }); await save(); return finish(`TikTok showed "${err.slice(9)}". Stopped so the account stays safe.`); }
-      job.res.push({ url: g.url, title, thanked: err ? [] : ch.users, commented: !err, why: err, t: new Date().toISOString() });
-      await save();
-      if (err) continue;
-      const last = job.ci === chunks.length - 1 && job.gi === job.groups.length - 1;
-      if (!last) await countdown(rand(job.min || 20, job.max || 45), `thanked ${ch.users.length} ✓. Next comment in`);
-    }
-    job.gi++; await save();
-    if (job.gi >= job.groups.length) { box("All done. Going back to your admin…"); await sleep(1200); return finish(); }
-    job.at = job.gi; job.ci = 0; await save();
-    return go(job.groups[job.gi].url);
   }
 
   await sleep(3500);
@@ -465,7 +376,6 @@
   let w = warning(); if (w) return finish(`${NAME} showed "${w}". Stopped.`);
 
   if (job.mode === "invite") { if (NET === "fb") return inviteFriends(); return finish(`${NAME} has no invite-friends feature.`); }
-  if (job.mode === "likers") { if (NET === "tiktok") return thankLikers(); return finish("Thanking likers works on TikTok only."); }
 
   // ------------------------------------------------------------- 1. collect
   if (job.stage === "collect") {
@@ -522,6 +432,29 @@
       if (commented) { job.done = (job.done || 0) + 1; if (s.comments != null) s.comments++; }
     }
   }
+  let thanked = [];
+  if (job.mode === "likers" && ours) {
+    box(`${n}: opening the comments…`);
+    await expandComments();
+    const skip = new Set((job.skip || []).map(u => u.toLowerCase()));
+    const names = [];
+    commenters().forEach(cm => { const u = String(cm.name || "").replace(/^@/, "").trim(); const k = u.toLowerCase(); if (u && !skip.has(k) && !names.some(x => x.toLowerCase() === k)) names.push(u); });
+    const room = Math.max(0, (job.max_likers || 60) - (job.tdone || 0));
+    const chunks = mentionsFor(names.slice(0, room));
+    if (!chunks.length && !document.body.innerText.includes(thanksGeneral().replace(/^[^\w]+/, "").slice(0, 30)) && room > 0) chunks.push({ users: [], text: thanksGeneral() });
+    if (!chunks.length) why = room ? "everyone here was thanked before" : "thank-you limit for this run reached";
+    for (const ch of chunks) {
+      if (stopAsked) return;
+      box(`${n}: thanking ${ch.users.length ? ch.users.map(u => "@" + u).join(" ") : "everyone"}…`);
+      const err = await comment(ch.text);
+      if (err.startsWith("warning:")) { job.res.push({ url, title, ...s, thanked, commented, why: err }); job.i++; await save(); return finish(`${NAME} showed "${err.slice(9)}". Stopped so the account stays safe.`); }
+      if (err) { why = err; continue; }
+      commented = true; thanked = thanked.concat(ch.users); job.tdone = (job.tdone || 0) + Math.max(1, ch.users.length);
+      ch.users.forEach(u => (job.skip = job.skip || []).push(u));
+      await save();
+      await countdown(rand(job.min || 20, job.max || 45), `${n}: thank-you posted ✓. Next in`);
+    }
+  }
   let replied = 0;
   if (job.mode === "reply" && ours) {
     box(`${n}: opening the comments…`);
@@ -538,7 +471,7 @@
     }
     if (!list.length) why = "no comments from other people";
   }
-  job.res.push({ url, title, ...s, commented, replied, why, t: new Date().toISOString() });
+  job.res.push({ url, title, ...s, commented, replied, thanked, why, t: new Date().toISOString() });
   job.i++;
   await save();
   if (job.i >= job.urls.length) { box("All done. Going back to your admin…"); await sleep(1200); return finish(); }
