@@ -5863,6 +5863,15 @@
    "ok": true,
    "now": true,
    "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-08",
+   "t": "2026-10-08T23:15:40.917Z",
+   "p": null,
+   "g": "page",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
   }
  ],
  "resets": {},
@@ -6020,6 +6029,13 @@
    "kind": "post",
    "tried": 28,
    "ok": 26
+  },
+  {
+   "d": "2026-10-08",
+   "t": "2026-10-08T23:15:49.684Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 0
   }
  ],
  "removed": [
