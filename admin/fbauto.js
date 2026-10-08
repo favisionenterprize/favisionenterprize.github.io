@@ -84,6 +84,10 @@
   const postable = () => A.products()
     .filter(p => !p.placeholder && p.in_stock !== false && !p.seller && (p.images || []).length && p.price_ghs)
     .sort((a, b) => a.id.localeCompare(b.id));
+  // "Post now" also lists partner products (seller block: AGOODMANN, ANAC, MANYE OYE); captions use the seller's contacts.
+  const nowPostable = () => A.products()
+    .filter(p => !p.placeholder && p.in_stock !== false && (p.images || []).length && p.price_ghs)
+    .sort((a, b) => a.id.localeCompare(b.id));
   const activeGroups = () => S.groups.filter(g => g.active !== false);
   const attemptsToday = () => S.posts.filter(x => x.d === today() && !x.now).length;   // daily plan only; "Post now" has its own limit
 
@@ -137,7 +141,7 @@
   function selection() {
     let v = null;
     try { v = JSON.parse(localStorage.getItem(SEL_KEY)); } catch (e) { /* none saved */ }
-    const ok = new Set(postable().map(p => p.id));
+    const ok = new Set(nowPostable().map(p => p.id));
     v = Object.assign({ ids: [...ok], fb: true, ig: true, ig_n: 3, x: true, x_n: 2, tt: true, tt_n: 2 }, v || {});
     v.ids = (v.ids || []).filter(id => ok.has(id));
     return v;
@@ -153,7 +157,7 @@
   //  - at most `now_limit` group posts per session.
   function planNow(ids) {
     ids = ids || selection().ids;
-    const prods = postable().filter(p => ids.includes(p.id)).sort((a, b) => lastPostOf(a.id).localeCompare(lastPostOf(b.id)));
+    const prods = nowPostable().filter(p => ids.includes(p.id)).sort((a, b) => lastPostOf(a.id).localeCompare(lastPostOf(b.id)));
     const lastUse = {};
     for (const x of S.posts) { const t = x.t || x.d; if (!lastUse[x.g] || t > lastUse[x.g]) lastUse[x.g] = t; }
     const restMs = (Number(S.settings.group_rest_hours) || 0) * 36e5, now = Date.now();
@@ -375,12 +379,12 @@
   function startAllGroups(pid) {
     if (needExt()) return;
     if (Number(ext()) < 3) return A.toast("Update the add-on first (steps at the bottom of the Today tab).", true);
-    if (!postable().some(x => x.id === pid)) return A.toast("That product can't be posted (it needs a price, a photo and to be in stock).", true);
+    if (!nowPostable().some(x => x.id === pid)) return A.toast("That product can't be posted (it needs a price, a photo and to be in stock).", true);
     A.toast("Reading all your Facebook groups first, then posting…");
     startImport(["allgroups:" + pid, "tt1:" + pid, "report"]);   // Facebook groups, then the same product on TikTok
   }
   async function postAllGroups(pid, then) {
-    const p = postable().find(x => x.id === pid);
+    const p = nowPostable().find(x => x.id === pid);
     if (!p || !activeGroups().length) { A.toast(!p ? "That product can't be posted." : "No groups switched on (Facebook tab).", true); return runStep(then, true); }
     let r = roundOf(pid);
     if (!r.left.length) {   // every group done: start the count again
@@ -717,7 +721,7 @@
   // ------------------------------------------------------------------ Post now tab
   const shortName = p => String(p.name).split(" — ")[0];
   function renderNow() {
-    const sel = selection(), list = postable(), on = new Set(sel.ids), pl = planNow(sel.ids);
+    const sel = selection(), list = nowPostable(), on = new Set(sel.ids), pl = planNow(sel.ids);
     const mins = Math.round(pl.pairs.length * (S.settings.pause_min_s + S.settings.pause_max_s) / 120) + (sel.ig ? sel.ig_n * 4 : 0) + (sel.x ? sel.x_n * 3 : 0) + (sel.tt ? sel.tt_n * 4 : 0);
     const fbLine = !activeGroups().length ? "no groups yet (import them in the Facebook tab)"
       : pl.pairs.length ? `${plural(pl.pairs.length, "post")}: ${plural(pl.products, "product")} into ${plural(pl.pairs.length, "different group")}`
@@ -914,11 +918,11 @@
     if (nb) {
       const sel = selection();
       if (nb.dataset.now === "go") return runNow();
-      sel.ids = nb.dataset.now === "all" ? postable().map(p => p.id) : [];
+      sel.ids = nb.dataset.now === "all" ? nowPostable().map(p => p.id) : [];
       setSelection(sel); render(); return;
     }
     const sb = e.target.closest("[data-share]");
-    if (sb) { const p = postable().find(x => x.id === sb.dataset.pid); if (p) share(sb.dataset.share, p); return; }
+    if (sb) { const p = nowPostable().find(x => x.id === sb.dataset.pid); if (p) share(sb.dataset.share, p); return; }
     const b = e.target.closest("[data-fa]");
     if (!b) return;
     const k = b.dataset.fa;
