@@ -15,9 +15,9 @@
    "tiktok": "favisionenterprise"
   },
   "limit": 200,
-  "max_comments": 60,
-  "min": 20,
-  "max": 45,
+  "max_comments": 100,
+  "min": 10,
+  "max": 11,
   "reply_text": "Thank you {name}! 🙏 Please like, share and follow F.A Vision Enterprise for more deals.",
   "reply_nets": {
    "fb": true,
