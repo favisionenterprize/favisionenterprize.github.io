@@ -730,6 +730,21 @@
    "followers": null,
    "stopped": null,
    "commenting": false
+  },
+  {
+   "d": "2026-10-08",
+   "t": "2026-10-08T23:07:29.401Z",
+   "net": "fb",
+   "mode": "invite",
+   "posts": 0,
+   "checked": 0,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": null,
+   "stopped": "No friends left to invite (everyone may already be invited or connected).",
+   "commenting": false
   }
  ],
  "liked": {}
