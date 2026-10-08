@@ -89,6 +89,7 @@ async function liveScripts(force) {
   try {
     const man = await nocache(SITE + "extension/live.json").then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); });
     const scripts = await Promise.all((man.scripts || []).map(async x => {
+      if (!/^[a-z0-9-]+\.js$/.test(String(x.file || ""))) throw new Error("bad script name in live.json");
       const r = await nocache(SITE + "extension/" + x.file);
       if (!r.ok) throw new Error(x.file + ": HTTP " + r.status);
       return { ...x, code: await r.text() };

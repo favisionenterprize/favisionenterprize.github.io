@@ -52,7 +52,7 @@
     <!-- Step B: send a reset code to the owner's email -->
     <div class="card narrow" id="auth-forgot" hidden>
       <h1>Reset your password</h1>
-      <p class="muted">We'll email a 6-digit code to your admin email address. It works for 10 minutes.</p>
+      <p class="muted">We'll email a reset code to your admin email address. It works for 10 minutes.</p>
       <form id="forgot-form" class="stack">
         <label class="field">
           <span>Admin email</span>
@@ -70,8 +70,8 @@
       <p class="muted" id="reset-sub">If that's the admin email, a code is on its way. Check your inbox (and Spam), then enter it below.</p>
       <form id="reset-form" class="stack">
         <label class="field">
-          <span>6-digit code</span>
-          <input id="reset-code" class="code-input" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="7" placeholder="123456" required>
+          <span>Code from the email</span>
+          <input id="reset-code" class="code-input" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="9" placeholder="12345678" required>
         </label>
         <label class="field">
           <span>New password <small class="muted">(at least 8 characters)</small></span>

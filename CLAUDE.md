@@ -23,6 +23,11 @@ Static GitHub Pages site, live at https://favisionenterprize.github.io (push to 
 - Leads (admin dash "📥 Leads", `admin/leads.js`, deep link `#leads`; Privyr-style): one list from backend `?action=customers` (enquiries by source, orders, invoice requests) + "Add a lead" (posts a plain enquiry with source facebook/instagram/tiktok/x/call/walk-in/referral). Polls every 60 s while the admin is open: sound, browser notification, toast, `#leads-badge`. One-tap WhatsApp/Text/Call (moves New → Contacted). Team + round-robin assignment saved as an "Assigned to X" note via `update_enquiry`; "Send to X" forwards on WhatsApp. Nothing about customers goes into the public repo; team list and seen markers are in localStorage (`fa-leads-team`, `fa-leads-seen`).
 - Muse AI (`/muse/`): installable phone app (PWA) for Android + iPhone. Network-first `sw.js` + `version.json` check makes it self-update; bump `version.json` when shipping Muse changes. AI goes through Code.gs `muse` action (Script property `GEMINI_API_KEY` or `ANTHROPIC_API_KEY`); without a key, Create falls back to templates.
 
+## Checks (run before pushing admin changes)
+- `node scripts/admin_smoke.js` (skill `/admin-smoke`, workflow `admin-smoke.yml`): every Social autopilot tab + Leads with the real data, today and each seasonal ad's first/last day. Add new screens/tabs to it.
+- Hooks in `.claude/settings.json`: `guard_generated.py` blocks hand-edits of `assets/js/products-data.js` and `output/`; `rebuild_listings.py` runs `generate_listings.py` after `data/products.json` / `data/business.json` change.
+- Subagent `.claude/agents/security-reviewer.md` after changes to sign-in, the GitHub proxy, orders, forms or the add-on. Code.gs `githubWriteRefused_`: the admin session may only write `data/*.json`, `assets/images/`, `assets/videos/uploads/` and a pure-data `products-data.js`; add a pattern to `GITHUB_WRITABLE` if the admin ever needs a new path.
+
 ## Business facts
 - Phones: 020 747 3267 · 057 264 6176 · 054 614 8923 (WhatsApp 057 264 6176)
 - Locations: Odorkor (showroom), Omanjor (printing press), Kasoa

@@ -1,0 +1,27 @@
+# Opens every Social autopilot tab and the Leads screen with the real data files (scripts/admin_smoke.js)
+# after admin or data changes. A failed run emails the repo owner, so a blank admin screen gets noticed.
+name: Admin smoke test
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "admin/**"
+      - "data/**"
+      - "scripts/admin_smoke.js"
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install Playwright Chromium
+        run: |
+          npm i --no-save playwright@1.56.0
+          npx playwright install --with-deps chromium
+      - name: Run the admin smoke test
+        run: node scripts/admin_smoke.js

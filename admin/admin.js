@@ -294,7 +294,7 @@
 
   // =========================================================== sign in
   // Email + password (checked by the Apps Script backend). "Forgot password"
-  // emails a 6-digit code to the admin email; the code sets a new password.
+  // emails an 8-digit code to the admin email; the code sets a new password.
   function authStep(which) {
     ["login", "forgot", "reset"].forEach(s => { $("#auth-" + s).hidden = s !== which; });
     $("#auth-token").hidden = which !== "login";
@@ -358,7 +358,7 @@
     try {
       const r = await backend({ action: "forgot", email });
       if (!r.ok) { showError($("#auth-reset").hidden ? "#forgot-error" : "#reset-error", authMessage(r)); return false; }
-      $("#reset-sub").textContent = `If ${email} is the admin email, a 6-digit code is on its way. Check your inbox (and Spam), then enter it below.`;
+      $("#reset-sub").textContent = `If ${email} is the admin email, a reset code is on its way. Check your inbox (and Spam), then enter it below.`;
       return true;
     } catch (ex) {
       showError($("#auth-reset").hidden ? "#forgot-error" : "#reset-error", ex.status === 0 ? ex.message : "Couldn't reach the backend. Check your connection and try again.");
@@ -374,13 +374,13 @@
     if (await sendCode()) toast("New code sent. Use the latest email.");
   });
 
-  $("#reset-code").addEventListener("input", e => { e.target.value = e.target.value.replace(/\D/g, "").slice(0, 6); });
+  $("#reset-code").addEventListener("input", e => { e.target.value = e.target.value.replace(/\D/g, "").slice(0, 8); });
 
   $("#reset-form").addEventListener("submit", async e => {
     e.preventDefault();
     const code = $("#reset-code").value.replace(/\D/g, "");
     const pw = $("#reset-password").value, pw2 = $("#reset-password2").value;
-    if (code.length !== 6) return showError("#reset-error", "Enter the 6-digit code from the email.");
+    if (code.length !== 6 && code.length !== 8) return showError("#reset-error", "Enter the code from the email.");
     if (pw.length < 8) return showError("#reset-error", AUTH_ERRORS.short);
     if (pw !== pw2) return showError("#reset-error", "The two passwords don't match.");
     const remember = $("#remember").checked;
