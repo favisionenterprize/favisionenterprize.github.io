@@ -1776,7 +1776,7 @@ window.FAV_DATA = {
       "category": "Groceries",
       "type": "Flour",
       "marketplace_category": "Groceries",
-      "price_ghs": 650,
+      "price_ghs": 640,
       "negotiable": false,
       "icon": "🌾",
       "description": "Kavukçu wheat flour, the professional baker's choice: strong dough, reliable yield, consistent quality batch after batch. Made in Turkey, est. 1920. 50kg professional pack. For butter, sugar and tea bread, rolls, burger buns, doughnuts and pizza dough. Sold by ANAC Essentials (formerly ANAC Ventures).",
@@ -1814,7 +1814,10 @@ window.FAV_DATA = {
         ],
         "whatsapp": "+233555434994",
         "note": "Sold and delivered by ANAC Essentials (formerly ANAC Ventures), a partner business. Contact them directly to order."
-      }
+      },
+      "was_price_ghs": 650,
+      "sale_until": "2026-12-31",
+      "sale_from": "2026-10-08"
     },
     {
       "id": "FAV-027",
