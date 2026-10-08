@@ -114,7 +114,7 @@
     const spotDone = S.posts.some(x => x.d === d && x.ok && x.spot);
     if (room && isSpot && spotItem && !spotDone) { queue.push({ ...spotItem, spot: true }); if (spotItem.p) usedProducts.add(spotItem.p.id); }
     // Variety: different product types first (dining, office, school…), then anything left.
-    const cat = it => it.studio ? "studio" : String(it.p.category || "");
+    const cat = it => it.studio ? "studio" : it.seasonal ? "seasonal" : String((it.p && it.p.category) || "");
     const usedCats = new Set(queue.map(cat).concat(okToday.map(x => { const it = items.find(i => i.k === x.k); return it ? cat(it) : ""; })));
     for (const mixed of [true, false]) {
       for (const it of sorted) {
