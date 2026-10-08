@@ -1942,3 +1942,522 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 GH₵ 650
 Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%203D%20Wallpaper%20%E2%80%94%20Brick%2C%20Stone%20%26%20Pattern%20%28per%20roll%29%20%28FAV-027%29.
 ```
+
+## FAV-028 · Kids Plastic Chair — Stackable, Assorted Colours
+
+### Facebook Marketplace
+
+- **Title:** Kids Plastic Chair — Stackable, Assorted Colours
+- **Price:** 550
+- **Category:** Home & Garden > Furniture > Chairs
+- **Condition:** Brand New
+- **Location:** Odorkor, Accra
+- **Photos:** assets/images/products/fav-028-mv00kf41-1.jpg
+
+**Description:**
+
+```
+Kids Plastic Chair — Stackable, Assorted Colours by F.A Vision Enterprise.
+
+Strong, lightweight stackable plastic chairs for kids — ideal for nurseries, schools, churches and homes. Available in assorted bright colours. Bulk and wholesale orders welcome.
+
+👉 See all photos, price and order online: https://favisionenterprize.github.io/#product/FAV-028
+
+✔ Stackable, saves space
+✔ Bright assorted colours
+✔ Bulk orders welcome
+
+
+Price negotiable for bulk orders.
+💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
+🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
+📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
+📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+🌐 https://favisionenterprize.github.io/
+Ref: FAV-028
+```
+
+### Group posts (use a different variant in each group)
+
+**Variant 1**
+
+```
+🛋️ Kids Plastic Chair — Stackable, Assorted Colours available now!
+• Stackable, saves space
+• Bright assorted colours
+• Bulk orders welcome
+💰 GH₵ 550
+📍 Odorkor, Accra, delivery available
+📞 WhatsApp 057 264 6176
+#FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+**Variant 2**
+
+```
+Looking for a quality kids plastic chair — stackable, assorted colours? Stackable, saves space.
+Available at Odorkor, Accra. GH₵ 550.
+Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+**Variant 3**
+
+```
+NEW FROM F.A VISION ✨ Kids Plastic Chair — Stackable, Assorted Colours
+GH₵ 550 | Ready for pickup
+Homes • Offices • Schools
+DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+### WhatsApp status
+
+```
+Kids Plastic Chair — Stackable, Assorted Colours 🔥
+GH₵ 550
+Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Kids%20Plastic%20Chair%20%E2%80%94%20Stackable%2C%20Assorted%20Colours%20%28FAV-028%29.
+```
+
+## FAV-029 · Salon Chair — Hydraulic, Red or Black
+
+### Facebook Marketplace
+
+- **Title:** Salon Chair — Hydraulic, Red or Black
+- **Price:** 12500
+- **Category:** Home & Garden > Furniture > Other Furniture
+- **Condition:** Brand New
+- **Location:** Odorkor, Accra
+- **Photos:** assets/images/products/fav-029-mv00kf41-1.jpg
+
+**Description:**
+
+```
+Salon Chair — Hydraulic, Red or Black by F.A Vision Enterprise.
+
+Professional hydraulic salon / barber chair with padded leather seat, chrome footrest and swivel base. Available in red and black.
+
+👉 See all photos, price and order online: https://favisionenterprize.github.io/#product/FAV-029
+
+✔ Hydraulic height adjustment
+✔ Swivel base with chrome footrest
+✔ Red or black finish
+
+Colours: Red, Black
+
+Price negotiable for bulk orders.
+💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
+🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
+📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
+📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+🌐 https://favisionenterprize.github.io/
+Ref: FAV-029
+```
+
+### Group posts (use a different variant in each group)
+
+**Variant 1**
+
+```
+🛋️ Salon Chair — Hydraulic, Red or Black available now!
+• Hydraulic height adjustment
+• Swivel base with chrome footrest
+• Red or black finish
+💰 GH₵ 12,500
+📍 Odorkor, Accra, delivery available
+📞 WhatsApp 057 264 6176
+#FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+**Variant 2**
+
+```
+Looking for a quality salon chair — hydraulic, red or black? Hydraulic height adjustment.
+Available at Odorkor, Accra. GH₵ 12,500.
+Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+**Variant 3**
+
+```
+NEW FROM F.A VISION ✨ Salon Chair — Hydraulic, Red or Black
+GH₵ 12,500 | Ready for pickup
+Homes • Offices • Schools
+DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+### WhatsApp status
+
+```
+Salon Chair — Hydraulic, Red or Black 🔥
+GH₵ 12,500
+Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Salon%20Chair%20%E2%80%94%20Hydraulic%2C%20Red%20or%20Black%20%28FAV-029%29.
+```
+
+## FAV-030 · Hair Dressers Washing Bowl with Bar Chair
+
+### Facebook Marketplace
+
+- **Title:** Hair Dressers Washing Bowl with Bar Chair
+- **Price:** 9300
+- **Category:** Home & Garden > Furniture > Other Furniture
+- **Condition:** Brand New
+- **Location:** Odorkor, Accra
+- **Photos:** assets/images/products/fav-030-mv00kf41-1.jpg
+
+**Description:**
+
+```
+Hair Dressers Washing Bowl with Bar Chair by F.A Vision Enterprise.
+
+Salon backwash unit: hair washing bowl with attached padded chair, for hairdressers and barbering shops. Priced from GH₵9,300 to GH₵10,950 depending on model and finish.
+
+👉 See all photos, price and order online: https://favisionenterprize.github.io/#product/FAV-030
+
+✔ Washing bowl with attached chair
+✔ From GH₵9,300 to GH₵10,950
+✔ For salons and barbering shops
+
+
+Price negotiable for bulk orders.
+💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
+🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
+📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
+📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+🌐 https://favisionenterprize.github.io/
+Ref: FAV-030
+```
+
+### Group posts (use a different variant in each group)
+
+**Variant 1**
+
+```
+🛋️ Hair Dressers Washing Bowl with Bar Chair available now!
+• Washing bowl with attached chair
+• From GH₵9,300 to GH₵10,950
+• For salons and barbering shops
+💰 GH₵ 9,300
+📍 Odorkor, Accra, delivery available
+📞 WhatsApp 057 264 6176
+#FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+**Variant 2**
+
+```
+Looking for a quality hair dressers washing bowl with bar chair? Washing bowl with attached chair.
+Available at Odorkor, Accra. GH₵ 9,300.
+Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+**Variant 3**
+
+```
+NEW FROM F.A VISION ✨ Hair Dressers Washing Bowl with Bar Chair
+GH₵ 9,300 | Ready for pickup
+Homes • Offices • Schools
+DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+### WhatsApp status
+
+```
+Hair Dressers Washing Bowl with Bar Chair 🔥
+GH₵ 9,300
+Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Hair%20Dressers%20Washing%20Bowl%20with%20Bar%20Chair%20%28FAV-030%29.
+```
+
+## FAV-031 · 10 Seater Foldable Round Table with Chairs
+
+### Facebook Marketplace
+
+- **Title:** 10 Seater Foldable Round Table with Chairs
+- **Price:** 9650
+- **Category:** Home & Garden > Furniture > Tables
+- **Condition:** Brand New
+- **Location:** Odorkor, Accra
+- **Photos:** assets/images/products/fav-031-mv00kf41-1.jpg
+
+**Description:**
+
+```
+10 Seater Foldable Round Table with Chairs by F.A Vision Enterprise.
+
+Large round foldable table that seats 10, with matching white folding chairs. Ideal for events, churches, restaurants and family gatherings — folds flat for easy storage.
+
+👉 See all photos, price and order online: https://favisionenterprize.github.io/#product/FAV-031
+
+✔ Seats 10 people
+✔ Folds flat for storage
+✔ Great for events
+
+
+Price negotiable for bulk orders.
+💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
+🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
+📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
+📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+🌐 https://favisionenterprize.github.io/
+Ref: FAV-031
+```
+
+### Group posts (use a different variant in each group)
+
+**Variant 1**
+
+```
+🛋️ 10 Seater Foldable Round Table with Chairs available now!
+• Seats 10 people
+• Folds flat for storage
+• Great for events
+💰 GH₵ 9,650
+📍 Odorkor, Accra, delivery available
+📞 WhatsApp 057 264 6176
+#FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+**Variant 2**
+
+```
+Looking for a quality 10 seater foldable round table with chairs? Seats 10 people.
+Available at Odorkor, Accra. GH₵ 9,650.
+Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+**Variant 3**
+
+```
+NEW FROM F.A VISION ✨ 10 Seater Foldable Round Table with Chairs
+GH₵ 9,650 | Ready for pickup
+Homes • Offices • Schools
+DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+### WhatsApp status
+
+```
+10 Seater Foldable Round Table with Chairs 🔥
+GH₵ 9,650
+Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%2010%20Seater%20Foldable%20Round%20Table%20with%20Chairs%20%28FAV-031%29.
+```
+
+## FAV-032 · TV Stand — Black Marble Top with Drawer
+
+### Facebook Marketplace
+
+- **Title:** TV Stand — Black Marble Top with Drawer
+- **Price:** 6950
+- **Category:** Home & Garden > Furniture > TV Stands
+- **Condition:** Brand New
+- **Location:** Odorkor, Accra
+- **Photos:** assets/images/products/fav-032-mv00kf41-1.jpg
+
+**Description:**
+
+```
+TV Stand — Black Marble Top with Drawer by F.A Vision Enterprise.
+
+Modern black TV stand with a marble-effect glass top, gold trim, side cabinet and a large pull-out drawer.
+
+👉 See all photos, price and order online: https://favisionenterprize.github.io/#product/FAV-032
+
+✔ Marble-effect top
+✔ Pull-out storage drawer
+✔ Side cabinet
+
+
+Price negotiable for bulk orders.
+💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
+🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
+📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
+📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+🌐 https://favisionenterprize.github.io/
+Ref: FAV-032
+```
+
+### Group posts (use a different variant in each group)
+
+**Variant 1**
+
+```
+🛋️ TV Stand — Black Marble Top with Drawer available now!
+• Marble-effect top
+• Pull-out storage drawer
+• Side cabinet
+💰 GH₵ 6,950
+📍 Odorkor, Accra, delivery available
+📞 WhatsApp 057 264 6176
+#FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+**Variant 2**
+
+```
+Looking for a quality tv stand — black marble top with drawer? Marble-effect top.
+Available at Odorkor, Accra. GH₵ 6,950.
+Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+**Variant 3**
+
+```
+NEW FROM F.A VISION ✨ TV Stand — Black Marble Top with Drawer
+GH₵ 6,950 | Ready for pickup
+Homes • Offices • Schools
+DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+### WhatsApp status
+
+```
+TV Stand — Black Marble Top with Drawer 🔥
+GH₵ 6,950
+Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20TV%20Stand%20%E2%80%94%20Black%20Marble%20Top%20with%20Drawer%20%28FAV-032%29.
+```
+
+## FAV-033 · TV Stand + Centre Table Set — Marble Top
+
+### Facebook Marketplace
+
+- **Title:** TV Stand + Centre Table Set — Marble Top
+- **Price:** 16800
+- **Category:** Home & Garden > Furniture > TV Stands
+- **Condition:** Brand New
+- **Location:** Odorkor, Accra
+- **Photos:** assets/images/products/fav-033-mv00kf41-1.jpg
+
+**Description:**
+
+```
+TV Stand + Centre Table Set — Marble Top by F.A Vision Enterprise.
+
+Matching TV stand and centre table set with a marble-effect top and white drawers. Sold as a set.
+
+👉 See all photos, price and order online: https://favisionenterprize.github.io/#product/FAV-033
+
+✔ TV stand and centre table set
+✔ Marble-effect tops
+✔ Storage drawers
+
+
+Price negotiable for bulk orders.
+💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
+🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
+📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
+📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+🌐 https://favisionenterprize.github.io/
+Ref: FAV-033
+```
+
+### Group posts (use a different variant in each group)
+
+**Variant 1**
+
+```
+🛋️ TV Stand + Centre Table Set — Marble Top available now!
+• TV stand and centre table set
+• Marble-effect tops
+• Storage drawers
+💰 GH₵ 16,800
+📍 Odorkor, Accra, delivery available
+📞 WhatsApp 057 264 6176
+#FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+**Variant 2**
+
+```
+Looking for a quality tv stand + centre table set — marble top? TV stand and centre table set.
+Available at Odorkor, Accra. GH₵ 16,800.
+Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+**Variant 3**
+
+```
+NEW FROM F.A VISION ✨ TV Stand + Centre Table Set — Marble Top
+GH₵ 16,800 | Ready for pickup
+Homes • Offices • Schools
+DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+### WhatsApp status
+
+```
+TV Stand + Centre Table Set — Marble Top 🔥
+GH₵ 16,800
+Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20TV%20Stand%20%2B%20Centre%20Table%20Set%20%E2%80%94%20Marble%20Top%20%28FAV-033%29.
+```
+
+## FAV-034 · Student Mattress — 2 Sizes
+
+### Facebook Marketplace
+
+- **Title:** Student Mattress — 2 Sizes
+- **Price:** 1200
+- **Category:** Home & Garden > Furniture > Mattresses
+- **Condition:** Brand New
+- **Location:** Odorkor, Accra
+- **Photos:** assets/images/products/fav-034-mv00kf41-1.jpg
+
+**Description:**
+
+```
+Student Mattress — 2 Sizes by F.A Vision Enterprise.
+
+Brand new student mattress (27 by 75 inches and a larger size) for boarding schools, hostels and homes. GH₵1,200 to GH₵1,300 depending on size. Bulk orders for schools welcome.
+
+👉 See all photos, price and order online: https://favisionenterprize.github.io/#product/FAV-034
+
+✔ GH₵1,200 – GH₵1,300 by size
+✔ Ideal for boarding schools & hostels
+✔ Bulk orders welcome
+
+
+Price negotiable for bulk orders.
+💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
+🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
+📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
+📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+🌐 https://favisionenterprize.github.io/
+Ref: FAV-034
+```
+
+### Group posts (use a different variant in each group)
+
+**Variant 1**
+
+```
+🛋️ Student Mattress — 2 Sizes available now!
+• GH₵1,200 – GH₵1,300 by size
+• Ideal for boarding schools & hostels
+• Bulk orders welcome
+💰 GH₵ 1,200
+📍 Odorkor, Accra, delivery available
+📞 WhatsApp 057 264 6176
+#FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+**Variant 2**
+
+```
+Looking for a quality student mattress — 2 sizes? GH₵1,200 – GH₵1,300 by size.
+Available at Odorkor, Accra. GH₵ 1,200.
+Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+**Variant 3**
+
+```
+NEW FROM F.A VISION ✨ Student Mattress — 2 Sizes
+GH₵ 1,200 | Ready for pickup
+Homes • Offices • Schools
+DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+### WhatsApp status
+
+```
+Student Mattress — 2 Sizes 🔥
+GH₵ 1,200
+Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Student%20Mattress%20%E2%80%94%202%20Sizes%20%28FAV-034%29.
+```
