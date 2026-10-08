@@ -2,7 +2,9 @@
 // The catalog itself is fed by output/meta-catalog.csv, which scripts/generate_listings.py
 // rebuilds from data/products.json after every change (rebuild-ads.yml). So a price, stock
 // or offer saved here reaches the website at once and Facebook on its next hourly feed fetch.
-// Tabs: Overview · Products · Fix problems · Sets · Tag & post · Catalog ads · Offers · More.
+// Tabs: Overview · Products · Fix problems · Sets · Post with link · WhatsApp catalog · Catalog ads · Offers · More.
+// Facebook/Instagram Shops (and product tags) are not available in Ghana, so posts carry the
+// product link instead and the WhatsApp Business catalog takes the Shop's place.
 // Offers: price_ghs becomes the offer price and was_price_ghs keeps the normal price
 // (optional sale_from / sale_until, YYYY-MM-DD), so website, checkout and feed all agree.
 (function () {
@@ -36,7 +38,7 @@
     pixel: `https://business.facebook.com/events_manager2/list/dataset/${PIXEL}/overview${q_}`
   };
   const TABS = [["overview", "Overview"], ["products", "Products"], ["health", "Fix problems"], ["sets", "Sets"],
-    ["tag", "Tag & post"], ["ads", "Catalog ads"], ["offers", "Offers"], ["more", "Templates, insights & access"]];
+    ["tag", "Post with link"], ["wa", "WhatsApp catalog"], ["ads", "Catalog ads"], ["offers", "Offers"], ["more", "Templates, insights & access"]];
   const BANDS = [[1000, "Under GH₵1,000"], [5000, "GH₵1,000 – 5,000"], [10000, "GH₵5,000 – 10,000"], [Infinity, "GH₵10,000 and above"]];
 
   let tab = "overview", q = "", busyNow = false, tagId = "", feedInfo = null;
@@ -81,7 +83,7 @@
     if ((p.name || "").length > 65) out.push(["warn", `Title is ${p.name.length} characters: under 65 shows in full on ads`]);
     if ((p.description || "").length < 60) out.push(["warn", "Short description: give size, material and what it's for"]);
     if (!p.category || !p.type) out.push(["warn", "No category/type: it won't land in a product set"]);
-    if (!p.in_stock && !p.custom_order) out.push(["info", "Out of stock: Facebook hides it from ads and the Shop"]);
+    if (!p.in_stock && !p.custom_order) out.push(["info", "Out of stock: Facebook hides it from ads"]);
     if (onOffer(p) && p.sale_until && p.sale_until < today()) out.push(["err", `Offer ended on ${p.sale_until}: end it in Offers so the website goes back to the normal price`]);
     if (/(gh[c₵s]|cedis?)\s*[\d,]{2,}/i.test((p.name || "") + " " + (p.description || ""))) out.push(["warn", "A price is written in the title/description: it goes stale when prices change"]);
     return out;
@@ -90,7 +92,7 @@
   // ---------------------------------------------------------------- render
   function render() {
     const body = $("#cat-body");
-    const panels = { overview, products: productsTab, health, sets, tag: tagTab, ads, offers, more };
+    const panels = { overview, products: productsTab, health, sets, tag: tagTab, wa: waTab, ads, offers, more };
     body.innerHTML = `
       <nav class="ch-tabs" role="tablist">${TABS.map(([k, t]) => `<button role="tab" data-tab="${k}" aria-selected="${k === tab}">${t}${k === "health" ? badge() : ""}</button>`).join("")}</nav>
       <div class="ch-panel">${panels[tab]()}</div>`;
@@ -119,7 +121,7 @@
       </div>
       <div class="card ch-sec">
         <h2>1 · Website feed <span class="pill ok">connected</span></h2>
-        <p class="muted small">Facebook reads this file every hour. Prices, photos, stock and offers you save in this admin reach your catalog, Shop, product tags and catalog ads by themselves.</p>
+        <p class="muted small">Facebook reads this file every hour. Prices, photos, stock and offers you save in this admin reach your catalog and catalog ads by themselves (Shops and product tags are not available in Ghana).</p>
         <div class="leads-inline"><input readonly value="${esc(FEED)}" aria-label="Catalog feed link"><button class="btn btn-primary btn-sm" data-cat="copy">Copy link</button></div>
         <p class="small">${f ? (f.ok ? `Live file: <b>${f.rows}</b> products${f.modified ? `, rebuilt ${esc(new Date(f.modified).toLocaleString())}` : ""}. ${f.hasLabels ? "Set &amp; ad labels ✓" : "<span class='due'>Set labels not in the file yet: they appear after the next rebuild.</span>"}` : "<span class='due'>Couldn't read the feed file.</span>") : "Checking the live file…"}</p>
         <div class="ch-actions">${ext(L.sources, "Data sources")} ${ext(L.products, "Catalog products")} ${ext(L.issues, "Facebook's issue list")}</div>
@@ -128,7 +130,8 @@
       <div class="card ch-sec">
         <h2>2 · Your three main jobs</h2>
         <div class="ch-steps">
-          <button class="ch-step" data-tab="tag"><b>🏷 Tag products in posts</b><span>Pick a product, copy a ready caption, tag it in Facebook/Instagram.</span></button>
+          <button class="ch-step" data-tab="tag"><b>🔗 Post with link</b><span>Pick a product, copy a caption with its website link, post it on Facebook, Instagram or WhatsApp Status.</span></button>
+          <button class="ch-step" data-tab="wa"><b>💬 WhatsApp catalog</b><span>Download your products ready to add to the WhatsApp Business catalog.</span></button>
           <button class="ch-step" data-tab="ads"><b>📣 Catalog ads</b><span>Step-by-step Advantage+ catalog ad with your sets and ad text.</span></button>
           <button class="ch-step" data-tab="health"><b>🛠 Fix problems</b><span>${errs} must-fix · ${warns} to improve</span></button>
         </div>
@@ -180,7 +183,7 @@
     return `
       <div class="card ch-sec">
         <h2>Fix problems</h2>
-        <p class="small muted">Checked here, before Facebook sees them. Red = missing from the catalog or showing a wrong price. Amber = works, but ads and the Shop do better once fixed. Facebook's own list (policy, image and pixel issues) is in Commerce Manager.</p>
+        <p class="small muted">Checked here, before Facebook sees them. Red = missing from the catalog or showing a wrong price. Amber = works, but ads do better once fixed. Facebook's own list (policy, image and pixel issues) is in Commerce Manager.</p>
         <div class="ch-actions">${ext(L.issues, "Facebook's issue list")} ${ext(L.events, "Pixel match rate")}</div>
       </div>
       ${rows.length ? `<div class="cat-list">${rows.map(([p, pr]) => `
@@ -209,7 +212,7 @@
     return `
       <div class="card ch-sec">
         <h2>Product sets</h2>
-        <p class="small muted">Sets group products into Shop collections and catalog-ad audiences (e.g. show "Dining" to people who looked at dining sets). Every product in your feed is labelled, so each set is one rule and keeps itself up to date.</p>
+        <p class="small muted">Sets group products for catalog ads (e.g. show "Dining" to people who looked at dining sets). Every product in your feed is labelled, so each set is one rule and keeps itself up to date.</p>
         <ol class="small">
           <li>Open ${ext(L.sets, "Sets")} → <b>Create set</b> → <b>Use filters</b>.</li>
           <li>Choose the attribute and value shown on the card (Copy value), name the set, <b>Create</b>.</li>
@@ -230,7 +233,7 @@
     const phones = (b.phones || []).slice(0, 2).map(n => C.localPhone(n)).join(" / ");
     const price = p.price_ghs ? (onOffer(p) ? `🔥 Offer: ${C.formatPrice(p.price_ghs)} (was ${C.formatPrice(p.was_price_ghs)})${p.sale_until ? " until " + p.sale_until : ""}` : `💰 ${C.formatPrice(p.price_ghs)}${p.negotiable ? " (negotiable)" : ""}`) : "💰 Price on request";
     const hl = (p.highlights || []).slice(0, 3).map(h => `✅ ${h}`).join("\n");
-    return `${p.name}\n\n${price}\n${hl ? hl + "\n" : ""}\n🛒 Tap the product tag for details, or order on WhatsApp${phones ? ": " + phones : ""}.\n📍 Odorkor · Omanjor · Kasoa | Delivery available\n\n${productLink(p)}\n\n#FAVisionEnterprise #FurnitureGhana #Accra #${(p.category || "Furniture").replace(/\W+/g, "")}`;
+    return `${p.name}\n\n${price}\n${hl ? hl + "\n" : ""}\n🛒 See details & order here 👇 or WhatsApp${phones ? ": " + phones : ""}.\n📍 Odorkor · Omanjor · Kasoa | Delivery available\n\n${productLink(p)}\n\n#FAVisionEnterprise #FurnitureGhana #Accra #${(p.category || "Furniture").replace(/\W+/g, "")}`;
   }
 
   function tagTab() {
@@ -240,8 +243,8 @@
     tagId = p.id;
     return `
       <div class="card ch-sec">
-        <h2>Tag products in posts</h2>
-        <p class="small muted">Posts with a product tag let people tap straight to the product. Pick it, copy the caption and photo, then tag it.</p>
+        <h2>Post with link</h2>
+        <p class="small muted">Product tags and Shops aren't available in Ghana, so every post carries the product's own website link. People tap it, see the price and photos, and order on WhatsApp or Buy now. Each visit also feeds your pixel, so catalog ads can show that product again.</p>
         <label class="small">Product <select data-tag-pick>${list.map(x => `<option value="${esc(x.id)}" ${x.id === p.id ? "selected" : ""}>${esc(x.id)} · ${esc(x.name)}</option>`).join("")}</select></label>
         <div class="ch-tag">
           ${(p.images || [])[0] ? `<img src="../${esc(p.images[0])}" alt="">` : ""}
@@ -249,20 +252,58 @@
             <textarea rows="11" readonly id="ch-caption">${esc(caption(p))}</textarea>
             <div class="ch-actions">
               <button class="btn btn-primary btn-sm" data-copy-el="#ch-caption">Copy caption</button>
+              <button class="btn btn-ghost btn-sm" data-copy="${esc(productLink(p))}">Copy link only</button>
               <a class="btn btn-ghost btn-sm" href="../${esc((p.images || [])[0] || "")}" download="${esc(p.id)}.jpg">Download photo</a>
               ${ext(L.composer, "Open post composer", "btn-sell")}
             </div>
           </div>
         </div>
-        <details open><summary><b>How to tag it</b></summary>
+        <details open><summary><b>Where to post it</b></summary>
           <ol class="small">
-            <li><b>Meta Business Suite</b> (composer button): add the photo, paste the caption, tick Facebook and Instagram → <b>Tag products</b> → search <b>${esc(p.id)}</b> or the name → Publish.</li>
-            <li><b>Facebook app</b>: create a post on your Page → add the photo → tap the 🏷 icon → <b>Tag products</b>.</li>
-            <li><b>Instagram app</b>: new post → Next → <b>Tag products</b>. For reels and stories use the product sticker.</li>
+            <li><b>Facebook Page + Instagram</b> (composer button): add the photo, paste the caption, tick both, Publish. Instagram doesn't make caption links clickable, so add "Link in bio 👆" there and keep your website in your Instagram bio.</li>
+            <li><b>WhatsApp Status</b>: post the photo with the caption; the link is clickable there.</li>
+            <li><b>Facebook groups / Marketplace</b>: same photo and caption; Price sync keeps Marketplace prices right.</li>
           </ol>
-          <p class="small muted">Clicks from tagged posts show in ${ext(L.tagged, "Tagged content insights")}.</p>
         </details>
       </div>`;
+  }
+
+  // WhatsApp Business catalog: Meta Shops aren't offered in Ghana, so this is the in-chat shop.
+  const waDesc = p => [p.description, ...(p.highlights || []).slice(0, 4).map(h => "✅ " + h),
+    (onOffer(p) ? `Offer price (was GH₵${Number(p.was_price_ghs).toLocaleString("en-GH")})` : p.negotiable ? "Price negotiable" : "Fixed price") + ". Delivery across Accra.",
+    "📍 Odorkor · Omanjor · Kasoa", "📞 020 747 3267 · 057 264 6176"].filter(Boolean).join("\n");
+  function waCsv() {
+    const q = v => `"${String(v == null ? "" : v).replace(/"/g, '""')}"`;
+    const rows = [["Item code", "Item name", "Price (GHS)", "Description", "Website link", "Photo links"]]
+      .concat(all().filter(inFeed).map(p => [p.id, (p.name || "").slice(0, 60), p.price_ghs, waDesc(p), productLink(p), (p.images || []).map(i => SITE + "/" + i).join(" ")]));
+    return "\ufeff" + rows.map(r => r.map(q).join(",")).join("\r\n");
+  }
+  function waTab() {
+    const list = all().filter(inFeed);
+    return `
+      <div class="card ch-sec">
+        <h2>WhatsApp catalog</h2>
+        <p class="small muted">Your in-chat shop: customers browse it from your WhatsApp profile and you can send any item in a chat (📎 → Catalog). Add your best 20–30 products; when a price changes here, change it there too.</p>
+        <ol class="small">
+          <li>WhatsApp Business app → <b>Tools</b> → <b>Catalog</b> → <b>Add new item</b>.</li>
+          <li>For each product below: <b>Save photo</b>, then copy the name, price and description into the item. Item code = the FAV number; Link = Copy link.</li>
+          <li>Save. To share: in a chat tap 📎 → <b>Catalog</b>, or post the catalog link on your Status.</li>
+        </ol>
+        <div class="ch-actions"><button class="btn btn-primary btn-sm" data-wa-csv>Download all as spreadsheet (CSV)</button></div>
+      </div>
+      <div class="cat-list">${list.map(p => `
+        <article class="cat-row ch-issue" data-id="${esc(p.id)}">
+          ${(p.images || [])[0] ? `<img src="../${esc(p.images[0])}" alt="" loading="lazy">` : `<div class="cat-noimg">📦</div>`}
+          <div class="cat-info"><div class="item-name">${esc(p.name)}</div>
+            <div class="item-meta">${esc(p.id)} · <b>${esc(C.formatPrice(p.price_ghs))}</b> · ${(p.images || []).length} photo${(p.images || []).length === 1 ? "" : "s"}</div></div>
+          <div class="ch-actions">
+            <button class="btn btn-ghost btn-sm" data-copy="${esc((p.name || "").slice(0, 60))}">Name</button>
+            <button class="btn btn-ghost btn-sm" data-copy="${esc(p.price_ghs)}">Price</button>
+            <button class="btn btn-ghost btn-sm" data-copy="${esc(waDesc(p))}">Description</button>
+            <button class="btn btn-ghost btn-sm" data-copy="${esc(productLink(p))}">Link</button>
+            ${(p.images || []).slice(0, 4).map((im, i) => `<a class="btn btn-ghost btn-sm" href="../${esc(im)}" download="${esc(p.id)}-${i + 1}.jpg">Save photo ${i + 1}</a>`).join("")}
+          </div>
+        </article>`).join("")}</div>`;
   }
 
   function ads() {
@@ -305,7 +346,7 @@ Order on WhatsApp: 020 747 3267 · 057 264 6176</textarea>
     return `
       <div class="card ch-sec">
         <h2>Offers</h2>
-        <p class="small muted">Put a product on offer: the website shows the offer price with the normal price struck through, Buy now charges the offer price, and the catalog feed sends Facebook a sale price, so ads and the Shop show the discount. End it any time to go back to the normal price.</p>
+        <p class="small muted">Put a product on offer: the website shows the offer price with the normal price struck through, Buy now charges the offer price, and the catalog feed sends Facebook a sale price, so ads show the discount. End it any time to go back to the normal price.</p>
         ${active.length ? `<h3>On offer now</h3><div class="cat-list">${active.map(p => `
           <article class="cat-row" data-id="${esc(p.id)}">
             ${(p.images || [])[0] ? `<img src="../${esc(p.images[0])}" alt="" loading="lazy">` : `<div class="cat-noimg">📦</div>`}
@@ -333,9 +374,9 @@ Order on WhatsApp: 020 747 3267 · 057 264 6176</textarea>
           <ol class="small"><li>Open ${ext(L.templates, "Image templates")} → <b>Create template</b>.</li>
           <li>Frame colour <b>#0d55af</b> (brand blue); add a <b>Price</b> overlay (red <b>#f42c2c</b>, white text) top-left; add the text <b>“Order on WhatsApp · 057 264 6176”</b> at the bottom.</li>
           <li>Apply it to the set <b>All furniture</b>; pick it in a catalog ad under <b>Creative → Catalog options</b>.</li></ol></div>
-        <div class="card ch-sec"><h2>🛍 Shop</h2>
-          <p class="small">Your Facebook and Instagram Shop shows these catalog products. Organise it into collections, one per set from the Sets tab.</p>
-          <div class="ch-actions">${ext(L.shops, "Shops")}</div></div>
+        <div class="card ch-sec"><h2>💬 WhatsApp catalog</h2>
+          <p class="small">Meta Shops aren't available in Ghana (Commerce Manager shows the shop as Hidden; leave it connected, don't press Disconnect). Your WhatsApp Business catalog is the in-chat shop instead.</p>
+          <div class="ch-actions"><button class="btn btn-primary btn-sm" data-tab="wa">Open WhatsApp catalog</button></div></div>
         <div class="card ch-sec"><h2>📊 Insights</h2>
           <p class="small">Product views, clicks, saves and your best performers, plus results from tagged posts.</p>
           <div class="ch-actions">${ext(L.insights, "Overview")} ${ext(L.insightsProducts, "By product")} ${ext(L.tagged, "Tagged content")}</div></div>
@@ -371,6 +412,12 @@ Order on WhatsApp: 020 747 3267 · 057 264 6176</textarea>
   screen.addEventListener("click", async e => {
     const t = e.target.closest("[data-tab]");
     if (t) { tab = t.dataset.tab; render(); window.scrollTo(0, 0); return; }
+    if (e.target.closest("[data-wa-csv]")) {
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([waCsv()], { type: "text/csv;charset=utf-8" }));
+      a.download = "FA-Vision-WhatsApp-catalog.csv"; document.body.appendChild(a); a.click(); a.remove();
+      return;
+    }
     const c = e.target.closest("[data-copy]");
     if (c) return copy(c.dataset.copy, c);
     const ce = e.target.closest("[data-copy-el]");

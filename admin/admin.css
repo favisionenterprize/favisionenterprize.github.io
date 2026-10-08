@@ -683,3 +683,5 @@ input.now-num { width: 4.5em !important; display: inline-block; padding: 2px 6px
   .ch-issue { grid-template-columns: 56px minmax(0, 1fr); }
   .ch-issue > button { grid-column: 1 / -1; }
 }
+.ch-issue > .ch-actions { max-width: 380px; justify-content: flex-end; }
+@media (max-width: 760px) { .ch-issue > .ch-actions { grid-column: 1 / -1; max-width: none; justify-content: flex-start; } }
