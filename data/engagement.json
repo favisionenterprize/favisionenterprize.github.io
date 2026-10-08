@@ -54,13 +54,13 @@
   },
   {
    "d": "2026-10-08",
-   "net": "ig",
-   "n": 890
+   "net": "fb",
+   "n": 549
   },
   {
    "d": "2026-10-08",
-   "net": "fb",
-   "n": 549
+   "net": "ig",
+   "n": 890
   }
  ],
  "posts": {
@@ -775,6 +775,21 @@
    "followers": null,
    "stopped": null,
    "commenting": false
+  },
+  {
+   "d": "2026-10-08",
+   "t": "2026-10-08T23:13:51.482Z",
+   "net": "ig",
+   "mode": "comment",
+   "posts": 12,
+   "checked": 12,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 890,
+   "stopped": null,
+   "commenting": true
   }
  ],
  "liked": {}
