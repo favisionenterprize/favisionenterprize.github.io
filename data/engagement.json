@@ -26,7 +26,10 @@
    "tiktok": true
   },
   "max_replies": 60,
-  "max_invites": 100
+  "max_invites": 100,
+  "likers_text": "{names} thank you for liking our ad 🙏 Follow F.A Vision Enterprise and like the page for more deals!",
+  "likers_per_comment": 4,
+  "max_likers": 60
  },
  "followers": [
   {
@@ -48,6 +51,11 @@
    "d": "2026-10-07",
    "net": "tiktok",
    "n": 279
+  },
+  {
+   "d": "2026-10-08",
+   "net": "fb",
+   "n": 549
   }
  ],
  "posts": {
@@ -80,8 +88,8 @@
    "first": "2026-10-07",
    "commented": [],
    "title": "Video",
-   "checked": "2026-10-07",
-   "likes": 55,
+   "checked": "2026-10-08",
+   "likes": 10000,
    "comments": 1,
    "views": 129
   },
@@ -96,8 +104,8 @@
     }
    ],
    "title": "See your room before you buy it ✨ Design... - F.A Vision Enterprise",
-   "checked": "2026-10-07",
-   "likes": 8
+   "checked": "2026-10-08",
+   "likes": 511
   },
   "https://www.facebook.com/1708338391133112": {
    "net": "fb",
@@ -110,17 +118,22 @@
     }
    ],
    "title": "Your office, sorted 💼 Swipe for our office... - F.A Vision Enterprise",
-   "checked": "2026-10-07",
-   "likes": 8
+   "checked": "2026-10-08",
+   "likes": 516
   },
   "https://www.facebook.com/1708330401133911": {
    "net": "fb",
    "url": "https://www.facebook.com/1708330401133911",
    "first": "2026-10-07",
-   "commented": [],
+   "commented": [
+    {
+     "d": "2026-10-08",
+     "text": "📍 Where are you seeing this from? Tell us in the comments 👇 "
+    }
+   ],
    "title": "Dinner time, upgraded 🍽️ Swipe through our... - F.A Vision Enterprise",
-   "checked": "2026-10-07",
-   "likes": 8
+   "checked": "2026-10-08",
+   "likes": 517
   },
   "https://www.instagram.com/p/Dd8TbyNiKK8/": {
    "net": "ig",
@@ -258,6 +271,157 @@
    "commented": [],
    "checked": "2026-10-07",
    "views": 74
+  },
+  "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0u2EVvNNjZgMczGZZWRJAwC1NFBZ9j4S4HwvyPtyfhVncZDNFuUnhd24yC1G3ZHtel": {
+   "net": "fb",
+   "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0u2EVvNNjZgMczGZZWRJAwC1NFBZ9j4S4HwvyPtyfhVncZDNFuUnhd24yC1G3ZHtel",
+   "first": "2026-10-08",
+   "commented": [
+    {
+     "d": "before",
+     "text": ""
+    }
+   ],
+   "title": "Fresh stock, just arrived! 🎒📚 Our new... - F.A Vision Enterprise",
+   "checked": "2026-10-08",
+   "likes": 508
+  },
+  "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0XprYFhgf51L99Qy5G5MRb5eGS1FnEeQJfC7GjWt2bN9i5QKR8uQAcSmVXDigcfewl": {
+   "net": "fb",
+   "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0XprYFhgf51L99Qy5G5MRb5eGS1FnEeQJfC7GjWt2bN9i5QKR8uQAcSmVXDigcfewl",
+   "first": "2026-10-08",
+   "commented": [
+    {
+     "d": "before",
+     "text": ""
+    }
+   ],
+   "title": "Tertiary Student Desk is available. Hurry... - F.A Vision Enterprise",
+   "checked": "2026-10-08",
+   "likes": 509
+  },
+  "https://www.facebook.com/FaVisionEnterprise/posts/pfbid09JV2adBfkWb6CFfuH2vuqgSwQG15cKehduVpp6bn7Qd656qicTCT6rKrAT1yVsFWl": {
+   "net": "fb",
+   "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid09JV2adBfkWb6CFfuH2vuqgSwQG15cKehduVpp6bn7Qd656qicTCT6rKrAT1yVsFWl",
+   "first": "2026-10-08",
+   "commented": [
+    {
+     "d": "before",
+     "text": ""
+    }
+   ],
+   "title": "See your room before you buy it ✨ Design... - F.A Vision Enterprise",
+   "checked": "2026-10-08",
+   "likes": 514
+  },
+  "https://www.facebook.com/FaVisionEnterprise/posts/pfbid02cih48SyrK1jr2Q2shVKGgSPAyhEHqXsTQ3agtqDtmogLmvDYEgHGqxLA7UcyzX8el": {
+   "net": "fb",
+   "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid02cih48SyrK1jr2Q2shVKGgSPAyhEHqXsTQ3agtqDtmogLmvDYEgHGqxLA7UcyzX8el",
+   "first": "2026-10-08",
+   "commented": [
+    {
+     "d": "before",
+     "text": ""
+    }
+   ],
+   "title": "Your office, sorted 💼 Swipe for our office... - F.A Vision Enterprise",
+   "checked": "2026-10-08"
+  },
+  "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0Y8SNKZqUNp3kvSnPRBoTQkXf7ibJU9qzfNHunFeoAS7zZiHRLCQw5zLat7uewLjtl": {
+   "net": "fb",
+   "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0Y8SNKZqUNp3kvSnPRBoTQkXf7ibJU9qzfNHunFeoAS7zZiHRLCQw5zLat7uewLjtl",
+   "first": "2026-10-08",
+   "commented": [
+    {
+     "d": "before",
+     "text": ""
+    }
+   ],
+   "title": "Dinner time, upgraded 🍽️ Swipe through our... - F.A Vision Enterprise",
+   "checked": "2026-10-08",
+   "likes": 517
+  },
+  "https://www.facebook.com/1512869214013365": {
+   "net": "fb",
+   "url": "https://www.facebook.com/1512869214013365",
+   "first": "2026-10-08",
+   "commented": [],
+   "title": "🧾 Premium Quality A4 & A3 Copy Paper –... - F.A Vision Enterprise",
+   "checked": "2026-10-08",
+   "likes": 519
+  },
+  "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0GM9XbmmDsU1RsMVVZPbeAEHk1AquTbcazvjP5WXDQ1fbXAG4x9dGZtuLEPAFQvRYl": {
+   "net": "fb",
+   "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0GM9XbmmDsU1RsMVVZPbeAEHk1AquTbcazvjP5WXDQ1fbXAG4x9dGZtuLEPAFQvRYl",
+   "first": "2026-10-08",
+   "commented": [],
+   "title": "🧾 Premium Quality A4 & A3 Copy Paper –... - F.A Vision Enterprise",
+   "checked": "2026-10-08",
+   "likes": 520
+  },
+  "https://www.facebook.com/1342452667721688": {
+   "net": "fb",
+   "url": "https://www.facebook.com/1342452667721688",
+   "first": "2026-10-08",
+   "commented": [
+    {
+     "d": "before",
+     "text": ""
+    }
+   ],
+   "title": "🎓 Back-to-School Deals Are Here! 🪑📚 Fresh... - F.A Vision Enterprise",
+   "checked": "2026-10-08",
+   "likes": 520
+  },
+  "https://www.facebook.com/FaVisionEnterprise/posts/pfbid026zvFwYF8vgkVa5ppkKk4pojKh24aHzQYv6URTQCeFawKXBQR2xvV3fLo34DMQ9E7l": {
+   "net": "fb",
+   "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid026zvFwYF8vgkVa5ppkKk4pojKh24aHzQYv6URTQCeFawKXBQR2xvV3fLo34DMQ9E7l",
+   "first": "2026-10-08",
+   "commented": [
+    {
+     "d": "before",
+     "text": ""
+    }
+   ],
+   "title": "🎓 Back-to-School Deals Are Here! 🪑📚 Fresh... - F.A Vision Enterprise",
+   "checked": "2026-10-08",
+   "likes": 520
+  },
+  "https://www.facebook.com/1248760037090952": {
+   "net": "fb",
+   "url": "https://www.facebook.com/1248760037090952",
+   "first": "2026-10-08",
+   "commented": [],
+   "title": "On Sale ! ! ! Jasmine Rice at MANYE OYE... - F.A Vision Enterprise",
+   "checked": "2026-10-08",
+   "likes": 522
+  },
+  "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0ox8Y2asfTzDy6o6m4hq6P146F35wNrN28FssmKRmtehRA3cm2cYqgPdA1Tv9osTvl": {
+   "net": "fb",
+   "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0ox8Y2asfTzDy6o6m4hq6P146F35wNrN28FssmKRmtehRA3cm2cYqgPdA1Tv9osTvl",
+   "first": "2026-10-08",
+   "commented": [],
+   "title": "On Sale ! ! ! Jasmine Rice at MANYE OYE... - F.A Vision Enterprise",
+   "checked": "2026-10-08",
+   "likes": 523
+  },
+  "https://www.facebook.com/1247254353908187": {
+   "net": "fb",
+   "url": "https://www.facebook.com/1247254353908187",
+   "first": "2026-10-08",
+   "commented": [],
+   "title": "On Sale ! ! ! Jasmine Rice at MANYE OYE... - F.A Vision Enterprise",
+   "checked": "2026-10-08",
+   "likes": 525
+  },
+  "https://www.facebook.com/FaVisionEnterprise/posts/pfbid02AJukuq4vzooq3Zovs2q6WbEair78ePC7we3H988E68zWAgs8KLdZLX4G5HVzEemtl": {
+   "net": "fb",
+   "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid02AJukuq4vzooq3Zovs2q6WbEair78ePC7we3H988E68zWAgs8KLdZLX4G5HVzEemtl",
+   "first": "2026-10-08",
+   "commented": [],
+   "title": "On Sale ! ! ! Jasmine Rice at MANYE OYE... - F.A Vision Enterprise",
+   "checked": "2026-10-08",
+   "likes": 526
   }
  },
  "runs": [
@@ -310,6 +474,22 @@
    "followers": 279,
    "stopped": "No posts found on your TikTok profile.",
    "commenting": true
+  },
+  {
+   "d": "2026-10-08",
+   "t": "2026-10-08T22:51:12.144Z",
+   "net": "fb",
+   "mode": "comment",
+   "posts": 17,
+   "checked": 17,
+   "commented": 1,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 549,
+   "stopped": null,
+   "commenting": true
   }
- ]
+ ],
+ "liked": {}
 }
