@@ -173,7 +173,7 @@
     document.body.appendChild(a); a.click(); a.remove();
     window.open("https://www.tiktok.com/tiktokstudio/upload?from=webapp", "_blank", "noopener");
     reroll(v); rerender();
-    A.toast("Description copied ✓ and the video is downloading. In TikTok Studio: Select video → pick it → paste the description → Post. Then tap “Mark posted on TikTok” (under More).");
+    A.toast("Description copied ✓ and the video is downloading. In TikTok Studio: Select video → pick it → paste the description → Post. Then tap “Mark posted on TikTok” (under More). Tip: it already has an Afrobeat + voice-over; to ride a trend, tap Sounds in TikTok and add a hit at low volume.");
   }
 
   // ------------------------------------------------------------------ screen
@@ -191,6 +191,7 @@
       <div class="vid-info">
         <h3>${esc(junkName(v.title) ? (p ? String(p.name).split(" — ")[0] : "Video " + (v.created || "")) : v.title)}</h3>
         <p class="muted fa-small">${esc(SRC[v.source] || v.source || "")} · ${esc(v.created || "")}${p ? " · " + esc(p.id) : ""}${v.size_mb ? " · " + v.size_mb + " MB" : ""}</p>
+        ${v.audio ? `<p class="fa-small vid-audio">♪ ${esc(String(v.audio.music || "").replace("fa-afrobeat-", "Afrobeat beat "))}${v.audio.voiceover ? ` · 🎙 “${esc(v.audio.voiceover)}”` : v.audio.own_sound ? " under your own sound" : ""}</p>` : `<p class="fa-small muted">♪ Afrobeat + voice-over are being added (a few minutes after upload)</p>`}
         <div class="vid-tags">${badge(v, "website")}${badge(v, "youtube")}${badge(v, "tiktok")}</div>
         <label class="vid-desc">Description for the next posting <small class="muted">(a new one is written after each posting; edit it if you like)</small>
           <textarea rows="6" data-vid-draft="${esc(v.id)}">${esc(d.text)}</textarea></label>

@@ -1,0 +1,65 @@
+# Adds an Afrobeats background track and a short voice-over to every new video in
+# data/videos.json (scripts/add_soundtrack.py). Runs when a video is added in the admin.
+name: Video soundtracks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "data/videos.json"
+      - "scripts/add_soundtrack.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: soundtrack
+  cancel-in-progress: false
+
+jobs:
+  soundtrack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install ffmpeg and Piper (offline voice)
+        run: |
+          sudo apt-get install -y --no-install-recommends ffmpeg >/dev/null
+          pip install --quiet numpy piper-tts
+
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/piper
+          key: piper-en_US-ryan-high
+
+      - name: Add soundtracks to new videos
+        run: python3 scripts/add_soundtrack.py
+
+      - name: Commit if anything changed
+        id: commit
+        run: |
+          git add -A data/videos.json assets/videos assets/audio
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Add Afrobeats soundtrack and voice-over to new videos"
+          for i in 1 2 3; do
+            git pull --rebase --quiet origin main && git push --quiet origin HEAD:main && break
+            sleep 5
+          done
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Republish the website
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" >/dev/null || echo "Pages will pick the change up on its next build"

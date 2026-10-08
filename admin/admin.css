@@ -623,3 +623,4 @@ input.now-num { width: 4.5em !important; display: inline-block; padding: 2px 6px
 .leads-forms li { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 .leads-forms li span { flex: 1 1 200px; }
 .order.lead .order-actions { flex-wrap: wrap; }
+.vid-audio { margin: 4px 0; color: var(--muted); }
