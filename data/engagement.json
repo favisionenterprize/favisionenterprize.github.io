@@ -559,6 +559,21 @@
    "followers": 890,
    "stopped": null,
    "commenting": true
+  },
+  {
+   "d": "2026-10-08",
+   "t": "2026-10-08T22:55:41.698Z",
+   "net": "fb",
+   "mode": "invite",
+   "posts": 0,
+   "checked": 0,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": null,
+   "stopped": "Facebook is acting as your Page. Switch to your personal profile (Alexander Awuku) in this browser, then press “Invite my Facebook friends” again.",
+   "commenting": false
   }
  ],
  "liked": {}
