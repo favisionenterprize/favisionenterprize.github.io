@@ -1797,7 +1797,7 @@ Order: https://wa.me/233277477752?text=Hello%20AGOODMANN%20VENTURES%2C%20I%27m%2
 ### Facebook Marketplace
 
 - **Title:** Kavukçu Wheat Flour — 50kg Baking Flour
-- **Price:** 650
+- **Price:** 640
 - **Category:** Groceries
 - **Condition:** Brand New
 - **Location:** Odorkor, Accra
@@ -1835,7 +1835,7 @@ Ref: FAV-026
 • Strong dough, reliable yield
 • Bread, buns, doughnuts & pizza
 • Made in Turkey, est. 1920
-💰 GH₵ 650
+💰 GH₵ 640
 📍 Accra, Ghana, delivery available
 📞 WhatsApp 055 543 4994
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
@@ -1845,7 +1845,7 @@ Ref: FAV-026
 
 ```
 Looking for a quality kavukçu wheat flour — 50kg baking flour? 50kg professional pack.
-Available at Accra, Ghana. GH₵ 650.
+Available at Accra, Ghana. GH₵ 640.
 Send us a message or WhatsApp 055 543 4994 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -1853,7 +1853,7 @@ Send us a message or WhatsApp 055 543 4994 to order. #FAVisionEnterprise #Furnit
 
 ```
 NEW FROM ANAC ESSENTIALS (FORMERLY ANAC VENTURES) ✨ Kavukçu Wheat Flour — 50kg Baking Flour
-GH₵ 650 | Ready for pickup
+GH₵ 640 | Ready for pickup
 Homes • Offices • Schools
 DM or call 055 543 4994 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
@@ -1862,7 +1862,7 @@ DM or call 055 543 4994 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 
 ```
 Kavukçu Wheat Flour — 50kg Baking Flour 🔥
-GH₵ 650
+GH₵ 640
 Order: https://wa.me/233555434994?text=Hello%20ANAC%20Essentials%20%28formerly%20ANAC%20Ventures%29%2C%20I%27m%20interested%20in%20the%20Kavuk%C3%A7u%20Wheat%20Flour%20%E2%80%94%2050kg%20Baking%20Flour%20%28FAV-026%29.
 ```
 
