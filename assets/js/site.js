@@ -20,8 +20,12 @@
     if (img) return `<img src="${esc(img)}" alt="${esc(alt || p.name)}" loading="lazy">`;
     return `<div class="ph" data-cat="${esc(p.category)}">${C.iconSvg(C.categoryIcon(p))}</div>`;
   }
+  // Offer set in admin → Facebook catalog → Offers: price_ghs is the offer price,
+  // was_price_ghs the normal price (shown struck through).
+  const wasOf = p => (p.was_price_ghs && p.price_ghs && p.was_price_ghs > p.price_ghs) ? p.was_price_ghs : 0;
   function priceHtml(p, cls) {
     if (!p.price_ghs) return `<span class="price request ${cls || ""}">Price on request</span>`;
+    if (wasOf(p)) return `<span class="price ${cls || ""}"><small>Offer</small>${C.formatPrice(p.price_ghs)} <s style="opacity:.6;font-weight:500;font-size:.8em">${C.formatPrice(wasOf(p))}</s></span>`;
     return `<span class="price ${cls || ""}"><small>${p.custom_order ? "From" : "Price"}</small>${C.formatPrice(p.price_ghs)}</span>`;
   }
   function toast(msg) {
@@ -436,7 +440,7 @@
       <div class="pd-info">
         <span class="card-type">${esc(p.type || p.category)}</span>
         <h2 id="pd-title">${esc(p.name)}</h2>
-        <div class="pd-price">${p.price_ghs ? `${C.formatPrice(p.price_ghs)}<small>${p.negotiable ? "Negotiable" : "Fixed price"}</small>` : `<span class="price request">Price on request</span>`}</div>
+        <div class="pd-price">${p.price_ghs ? `${C.formatPrice(p.price_ghs)}${wasOf(p) ? ` <s style="opacity:.6;font-size:.7em;font-weight:500">${C.formatPrice(wasOf(p))}</s>` : ""}<small>${wasOf(p) ? "Offer price" + (p.sale_until ? " until " + esc(p.sale_until) : "") : p.negotiable ? "Negotiable" : "Fixed price"}</small>` : `<span class="price request">Price on request</span>`}</div>
         <p class="pd-desc">${esc(p.description)}</p>
         ${p.seller ? `<p class="pd-seller"><b>Sold by ${esc(sellerName(p))}</b>, a partner business. Call / WhatsApp ${p.seller.phones.map(n => `<a href="tel:${esc(n)}">${esc(C.localPhone(n))}</a>`).join(" · ")}${p.seller.address ? `<br>📍 ${esc(p.seller.address)}` : ""}</p>` : ""}
         ${(p.highlights || []).length ? `<ul class="features">${p.highlights.map(h => `<li>${esc(h)}</li>`).join("")}</ul>` : ""}

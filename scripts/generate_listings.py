@@ -205,7 +205,9 @@ def write_catalog(business, products):
     """Meta Commerce Manager data-feed columns. Products without a price or
     photo are skipped because Meta rejects them."""
     fields = ["id", "title", "description", "availability", "condition",
-              "price", "link", "image_link", "additional_image_link", "brand"]
+              "price", "sale_price", "sale_price_effective_date", "link",
+              "image_link", "additional_image_link", "brand", "product_type",
+              "custom_label_0", "custom_label_1", "custom_label_2", "custom_label_3"]
     skipped = []
     with (OUT / "meta-catalog.csv").open("w", encoding="utf-8", newline="") as f:
         w = csv.DictWriter(f, fieldnames=fields)
@@ -226,8 +228,49 @@ def write_catalog(business, products):
                 "image_link": image,
                 "additional_image_link": ",".join(image_url(business, x) for x in p.get("images", [])[1:10]),
                 "brand": for_product(business, p)["name"],
+                **catalog_extras(p),
             })
     return skipped
+
+
+PRICE_BANDS = [(1000, "Under GH₵1,000"), (5000, "GH₵1,000 – 5,000"),
+               (10000, "GH₵5,000 – 10,000"), (None, "GH₵10,000 and above")]
+
+
+def active_sale(p):
+    """The offer set in admin → Facebook catalog → Offers: price_ghs is the offer
+    price and was_price_ghs the normal price. Returns (normal, offer) or None."""
+    was, now = p.get("was_price_ghs"), p.get("price_ghs")
+    if not was or not now or was <= now:
+        return None
+    return was, now
+
+
+def catalog_extras(p):
+    """Columns Commerce Manager uses for sets and catalog ads:
+    custom_label_0 category, custom_label_1 price band, custom_label_2 stock / offer,
+    custom_label_3 product type. Sets are made with rules like
+    "Custom label 0 is Dining"."""
+    price = p.get("price_ghs") or 0
+    band = next(label for limit, label in PRICE_BANDS if limit is None or price < limit)
+    sale = active_sale(p)
+    stock = "On offer" if sale else ("In stock" if p.get("in_stock") else ("Made to order" if p.get("custom_order") else "Out of stock"))
+    out = {
+        "product_type": " > ".join(x for x in [p.get("category"), p.get("type")] if x),
+        "custom_label_0": p.get("category") or "",
+        "custom_label_1": band,
+        "custom_label_2": stock,
+        "custom_label_3": p.get("type") or "",
+        "sale_price": "",
+        "sale_price_effective_date": "",
+    }
+    if sale:
+        out["price"] = f"{sale[0]:.2f} GHS"
+        out["sale_price"] = f"{sale[1]:.2f} GHS"
+        if p.get("sale_until"):
+            start = p.get("sale_from") or date.today().isoformat()
+            out["sale_price_effective_date"] = f"{start}T00:00+00:00/{p['sale_until']}T23:59+00:00"
+    return out
 
 
 def product_page(business, p):
