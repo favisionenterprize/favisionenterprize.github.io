@@ -56,14 +56,14 @@
   },
   {
    "id": "3295010260530139",
-   "name": "Friends of Weja",
+   "name": "Friends of weja Elizabeth",
    "url": "https://www.facebook.com/groups/3295010260530139/",
    "active": true,
    "added": "2026-10-01"
   },
   {
    "id": "1781509128744735",
-   "name": "Fans who love NANA AMA AGYEAMAN",
+   "name": "Fans who love NANA AMA AGYEAMAN MCBROWN",
    "url": "https://www.facebook.com/groups/1781509128744735/",
    "active": false,
    "added": "2026-10-01",
@@ -79,7 +79,7 @@
   },
   {
    "id": "966583207420627",
-   "name": "Buy and sell cars in Ghana",
+   "name": "Buy and sell cars 🚘 in Ghana",
    "url": "https://www.facebook.com/groups/966583207420627/",
    "active": false,
    "added": "2026-10-01",
@@ -117,7 +117,7 @@
   },
   {
    "id": "128000729380895",
-   "name": "PiNetwork",
+   "name": "PiNetwork 🪙",
    "url": "https://www.facebook.com/groups/128000729380895/",
    "active": true,
    "added": "2026-10-01"
@@ -131,7 +131,7 @@
   },
   {
    "id": "tltshopgroup",
-   "name": "Cộng Đồng PUBG PC Việt Nam - Mua Bán Giao Dịch Tại TonLonTon",
+   "name": "Cộng Đồng PUBG PC Việt Nam - Mua Bán Giao Dịch Tại TonLonTon",
    "url": "https://www.facebook.com/groups/tltshopgroup/",
    "active": true,
    "added": "2026-10-01"
@@ -1400,7 +1400,8 @@
  ],
  "checks": {
   "declines": "2026-10-08",
-  "grow": "2026-10-08"
+  "grow": "2026-10-08",
+  "sync": "2026-10-08"
  },
  "rounds": {}
 }
