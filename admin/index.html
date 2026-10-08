@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="admin.css?v=20261002b">
+  <link rel="stylesheet" href="admin.css?v=20261008c">
 </head>
 <body>
   <header class="top">
@@ -125,6 +125,7 @@
         <p class="muted" id="dash-sub">Loading…</p>
       </div>
       <div class="dash-head-actions">
+        <button class="btn btn-ghost" data-catalog>🏷 Facebook catalog</button>
         <button class="btn btn-ghost" data-leads>📥 Leads <span class="ps-badge" id="leads-badge" hidden></span></button>
         <button class="btn btn-ghost" data-fbauto>Social autopilot <span class="ps-badge" id="fa-badge" hidden></span></button>
         <button class="btn btn-ghost" data-seek>🔎 Seek <span class="ps-badge" id="seek-badge" hidden></span></button>
@@ -206,6 +207,21 @@
       </div>
     </div>
     <div id="leads-body"></div>
+  </main>
+
+  <!-- ============ FACEBOOK CATALOG (product tags, Shop) ============ -->
+  <main class="screen" id="screen-catalog" hidden>
+    <div class="dash-head">
+      <div>
+        <h1>Facebook catalog</h1>
+        <p class="muted">The products you tag in Facebook and Instagram posts and show in your Shop. Prices here are your website prices; Facebook copies them from your catalog feed.</p>
+      </div>
+      <div class="dash-head-actions">
+        <button class="btn btn-ghost btn-sm" data-go="dash">← My products</button>
+        <button class="btn btn-sell btn-sm" data-go="post">+ Add product</button>
+      </div>
+    </div>
+    <div id="cat-body"></div>
   </main>
 
   <!-- ============ PRICE SYNC (website vs Facebook Marketplace) ============ -->
@@ -428,10 +444,11 @@
   <script src="photo-studio.js"></script>
   <script src="photo-editor.js"></script>
   <script src="promo.js"></script>
-  <script src="admin.js?v=20261008a"></script>
+  <script src="admin.js?v=20261008c"></script>
   <script src="orders.js"></script>
   <script src="customers.js?v=1"></script>
   <script src="leads.js?v=1"></script>
+  <script src="catalog.js?v=1"></script>
   <script src="pricesync.js?v=5"></script>
   <script src="igauto.js?v=6"></script>
   <script src="captions.js?v=2"></script>

@@ -1099,6 +1099,7 @@
     signedIn,
     toast, busy, marketplaceText, show,
     refreshDash: () => renderDash(),
+    edit: id => { const p = products.find(x => x.id === id); if (p) startPost(p); },
     reload: async () => { await load(); renderDash(); }
   };
 
@@ -1106,7 +1107,7 @@
   (async function init() {
     // Deep links: /admin/#invoices, #orders, #customers and #leads open those screens directly.
     const deepLink = () => {
-      const sel = { "#invoices": "[data-invoices]", "#orders": "[data-orders]", "#customers": "[data-customers]", "#leads": "[data-leads]" }[location.hash];
+      const sel = { "#invoices": "[data-invoices]", "#orders": "[data-orders]", "#customers": "[data-customers]", "#leads": "[data-leads]", "#catalog": "[data-catalog]" }[location.hash];
       const el = sel && document.querySelector(sel);
       if (el) el.click();
       return !!el;

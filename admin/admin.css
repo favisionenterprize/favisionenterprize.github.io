@@ -624,3 +624,16 @@ input.now-num { width: 4.5em !important; display: inline-block; padding: 2px 6px
 .leads-forms li span { flex: 1 1 200px; }
 .order.lead .order-actions { flex-wrap: wrap; }
 .vid-audio { margin: 4px 0; color: var(--muted); }
+
+/* Facebook catalog */
+.cat-feed { margin-bottom: 16px; }
+.cat-feed input[readonly] { font-size: 13px; }
+.cat-list { display: grid; gap: 10px; }
+.cat-row { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto auto auto; gap: 12px; align-items: center; padding: 10px 12px; border: 1px solid var(--line, #e5e7eb); border-radius: 12px; background: var(--card, #fff); }
+.cat-row img, .cat-noimg { width: 64px; height: 64px; object-fit: cover; border-radius: 8px; display: grid; place-items: center; font-size: 28px; background: #f3f4f6; }
+.cat-price input { width: 110px; }
+@media (max-width: 720px) {
+  .cat-row { grid-template-columns: 56px minmax(0, 1fr); }
+  .cat-row img, .cat-noimg { width: 56px; height: 56px; }
+  .cat-row > .cat-price, .cat-row > select, .cat-row > button { grid-column: 1 / -1; }
+}

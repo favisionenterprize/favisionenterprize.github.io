@@ -97,6 +97,33 @@ async function leads(browser) {
   return { leads: n, problems };
 }
 
+async function catalog(browser) {
+  const page = await browser.newPage({ viewport: { width: 390, height: 900 } });
+  const problems = [];
+  page.on("pageerror", e => problems.push("page error: " + e.message));
+  const html = fs.readFileSync(ROOT + "admin/index.html", "utf8").replace(/<script[\s\S]*?<\/script>/g, "");
+  await page.route("http://smoke.test/admin/", r => r.fulfill({ status: 200, contentType: "text/html", body: html }));
+  await page.goto("http://smoke.test/admin/");
+  await page.evaluate(({ files, ESC }) => {
+    window.__commits = [];
+    window.FAV_CONFIG = { escapeHtml: (0, eval)(ESC), formatPrice: n => "GH₵" + n };
+    let list = files["data/products.json"];
+    window.FAV_ADMIN = { products: () => list, signedIn: () => true, show: () => {}, toast: () => {}, friendly: String, refreshDash: () => {}, edit: id => { window.__edit = id; },
+      commit: async o => { list = o.mutate(list); window.__commits.push(o.message); return list; } };
+  }, { files, ESC });
+  await page.addScriptTag({ content: fs.readFileSync(ROOT + "admin/catalog.js", "utf8") });
+  await page.evaluate(() => document.querySelector("[data-catalog]").click());
+  await page.waitForTimeout(300);
+  const rows = await page.evaluate(() => document.querySelectorAll(".cat-row").length);
+  const want = files["data/products.json"].filter(p => !p.placeholder).length;
+  if (rows !== want) problems.push(`catalog shows ${rows} products, expected ${want}`);
+  await page.fill('.cat-row [data-cat-price]', "999"); await page.dispatchEvent('.cat-row [data-cat-price]', "change"); await page.waitForTimeout(200);
+  const commits = await page.evaluate(() => window.__commits);
+  if (!commits.length || !/price GH₵999/.test(commits[0])) problems.push("changing a price didn't save: " + JSON.stringify(commits));
+  await page.close();
+  return { rows, problems };
+}
+
 (async () => {
   const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
   let failed = 0;
@@ -109,6 +136,9 @@ async function leads(browser) {
   const l = await leads(browser);
   if (l.problems.length) { failed++; console.log("✗ Leads"); l.problems.forEach(p => console.log("    " + p)); }
   else console.log(`✓ Leads: ${l.leads} leads drawn`);
+  const c = await catalog(browser);
+  if (c.problems.length) { failed++; console.log("✗ Facebook catalog"); c.problems.forEach(p => console.log("    " + p)); }
+  else console.log(`✓ Facebook catalog: ${c.rows} products, price edit saves`);
   await browser.close();
   console.log(failed ? `\n${failed} check(s) FAILED` : "\nAll admin checks passed.");
   process.exit(failed ? 1 : 0);

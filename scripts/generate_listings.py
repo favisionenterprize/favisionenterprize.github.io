@@ -205,7 +205,7 @@ def write_catalog(business, products):
     """Meta Commerce Manager data-feed columns. Products without a price or
     photo are skipped because Meta rejects them."""
     fields = ["id", "title", "description", "availability", "condition",
-              "price", "link", "image_link", "brand"]
+              "price", "link", "image_link", "additional_image_link", "brand"]
     skipped = []
     with (OUT / "meta-catalog.csv").open("w", encoding="utf-8", newline="") as f:
         w = csv.DictWriter(f, fieldnames=fields)
@@ -218,15 +218,24 @@ def write_catalog(business, products):
             w.writerow({
                 "id": p["id"],
                 "title": p["name"],
-                "description": " ".join(p.get("highlights", [])) or p["name"],
-                "availability": "in stock" if p.get("in_stock") else "out of stock",
+                "description": (p.get("description") or " ".join(p.get("highlights", [])) or p["name"])[:9999],
+                "availability": "in stock" if p.get("in_stock") else ("available for order" if p.get("custom_order") else "out of stock"),
                 "condition": META_CONDITION.get(p["condition"], "new"),
                 "price": f"{p['price_ghs']:.2f} GHS",
-                "link": business.get("website") or whatsapp_link(business, p),
+                "link": product_page(business, p),
                 "image_link": image,
+                "additional_image_link": ",".join(image_url(business, x) for x in p.get("images", [])[1:10]),
                 "brand": for_product(business, p)["name"],
             })
     return skipped
+
+
+def product_page(business, p):
+    """Each catalog item opens its own product page (p/<id>.html) when it exists."""
+    site = (business.get("website") or "").rstrip("/")
+    if site and (ROOT / "p" / f"{p['id']}.html").exists():
+        return f"{site}/p/{p['id']}.html"
+    return business.get("website") or whatsapp_link(business, p)
 
 
 def image_url(business, path):
