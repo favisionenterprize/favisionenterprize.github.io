@@ -1800,9 +1800,9 @@ window.FAV_DATA = {
         {
           "id": "1482547360305966",
           "title": "🌾 Kavukçu Wheat Flour — Baking Flour",
-          "price": 650,
-          "checked": "2026-10-01",
-          "synced": "2026-10-01"
+          "price": 640,
+          "checked": "2026-10-08",
+          "synced": "2026-10-08"
         }
       ],
       "seller": {
