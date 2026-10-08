@@ -608,3 +608,18 @@ input.now-num { width: 4.5em !important; display: inline-block; padding: 2px 6px
 .season-row { display: flex; gap: 16px; align-items: flex-start; }
 .season-row img { border-radius: 10px; flex: 0 0 auto; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
 @media (max-width: 520px) { .season-row { flex-direction: column; } }
+
+/* Leads */
+.leads-hero { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; padding: 16px 18px; margin-bottom: 16px; border-radius: 14px; background: linear-gradient(135deg, #1d4ed8, #3b82f6); color: #fff; }
+.leads-hero > div:first-child { flex: 1 1 280px; min-width: 0; }
+.leads-hero-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.leads-hero .pill { background: rgba(255,255,255,.2); color: #fff; }
+.leads-add { margin-bottom: 16px; }
+.leads-inline { display: flex; flex-wrap: wrap; gap: 8px; align-items: end; }
+.leads-inline > * { flex: 1 1 160px; min-width: 0; }
+.leads-inline > button { flex: 0 0 auto; }
+.leads-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 16px; margin-top: 20px; }
+.leads-forms { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.leads-forms li { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.leads-forms li span { flex: 1 1 200px; }
+.order.lead .order-actions { flex-wrap: wrap; }

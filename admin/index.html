@@ -125,6 +125,7 @@
         <p class="muted" id="dash-sub">Loading…</p>
       </div>
       <div class="dash-head-actions">
+        <button class="btn btn-ghost" data-leads>📥 Leads <span class="ps-badge" id="leads-badge" hidden></span></button>
         <button class="btn btn-ghost" data-fbauto>Social autopilot <span class="ps-badge" id="fa-badge" hidden></span></button>
         <button class="btn btn-ghost" data-seek>🔎 Seek <span class="ps-badge" id="seek-badge" hidden></span></button>
         <button class="btn btn-ghost" data-pricesync>Price sync <span class="ps-badge" id="ps-badge" hidden></span></button>
@@ -189,6 +190,22 @@
       </div>
     </div>
     <div id="cust-body"></div>
+  </main>
+
+  <!-- ============ LEADS (every lead in one place, instant alerts, one-tap reply) ============ -->
+  <main class="screen" id="screen-leads" hidden>
+    <div class="dash-head">
+      <div>
+        <h1>Leads</h1>
+        <p class="muted">Every lead from your website, WhatsApp, Facebook, Instagram, TikTok, calls and walk-ins in one list. Reply in one tap and share them with your team.</p>
+      </div>
+      <div class="dash-head-actions">
+        <button class="btn btn-ghost btn-sm" data-go="dash">← My products</button>
+        <button class="btn btn-ghost btn-sm" data-customers>Customers</button>
+        <button class="btn btn-ghost btn-sm" id="leads-refresh">Refresh</button>
+      </div>
+    </div>
+    <div id="leads-body"></div>
   </main>
 
   <!-- ============ PRICE SYNC (website vs Facebook Marketplace) ============ -->
@@ -411,9 +428,10 @@
   <script src="photo-studio.js"></script>
   <script src="photo-editor.js"></script>
   <script src="promo.js"></script>
-  <script src="admin.js?v=20261001a"></script>
+  <script src="admin.js?v=20261008a"></script>
   <script src="orders.js"></script>
   <script src="customers.js?v=1"></script>
+  <script src="leads.js?v=1"></script>
   <script src="pricesync.js?v=5"></script>
   <script src="igauto.js?v=5"></script>
   <script src="captions.js?v=2"></script>

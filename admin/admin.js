@@ -1104,9 +1104,9 @@
 
   // =========================================================== start
   (async function init() {
-    // Deep links: /admin/#invoices, #orders and #customers open those screens directly.
+    // Deep links: /admin/#invoices, #orders, #customers and #leads open those screens directly.
     const deepLink = () => {
-      const sel = { "#invoices": "[data-invoices]", "#orders": "[data-orders]", "#customers": "[data-customers]" }[location.hash];
+      const sel = { "#invoices": "[data-invoices]", "#orders": "[data-orders]", "#customers": "[data-customers]", "#leads": "[data-leads]" }[location.hash];
       const el = sel && document.querySelector(sel);
       if (el) el.click();
       return !!el;
