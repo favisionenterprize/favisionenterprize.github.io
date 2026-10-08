@@ -1111,5 +1111,190 @@
     ],
     "roll_m2": 5.3,
     "placeholder": false
+  },
+  {
+    "id": "FAV-028",
+    "icon": "",
+    "condition": "Brand New",
+    "material": "",
+    "dimensions": "",
+    "colors": [],
+    "custom_order": false,
+    "in_stock": true,
+    "placeholder": false,
+    "name": "Kids Plastic Chair — Stackable, Assorted Colours",
+    "category": "School",
+    "type": "Student Chair",
+    "price_ghs": 550,
+    "negotiable": true,
+    "description": "Strong, lightweight stackable plastic chairs for kids — ideal for nurseries, schools, churches and homes. Available in assorted bright colours. Bulk and wholesale orders welcome.",
+    "highlights": [
+      "Stackable, saves space",
+      "Bright assorted colours",
+      "Bulk orders welcome"
+    ],
+    "marketplace_category": "Home & Garden > Furniture > Chairs",
+    "images": [
+      "assets/images/products/fav-028-mv00kf41-1.jpg"
+    ]
+  },
+  {
+    "id": "FAV-029",
+    "icon": "",
+    "condition": "Brand New",
+    "material": "",
+    "dimensions": "",
+    "colors": [
+      "Red",
+      "Black"
+    ],
+    "custom_order": false,
+    "in_stock": true,
+    "placeholder": false,
+    "name": "Salon Chair — Hydraulic, Red or Black",
+    "category": "Custom",
+    "type": "Other",
+    "price_ghs": 12500,
+    "negotiable": true,
+    "description": "Professional hydraulic salon / barber chair with padded leather seat, chrome footrest and swivel base. Available in red and black.",
+    "highlights": [
+      "Hydraulic height adjustment",
+      "Swivel base with chrome footrest",
+      "Red or black finish"
+    ],
+    "marketplace_category": "Home & Garden > Furniture > Other Furniture",
+    "images": [
+      "assets/images/products/fav-029-mv00kf41-1.jpg"
+    ]
+  },
+  {
+    "id": "FAV-030",
+    "icon": "",
+    "condition": "Brand New",
+    "material": "",
+    "dimensions": "",
+    "colors": [],
+    "custom_order": false,
+    "in_stock": true,
+    "placeholder": false,
+    "name": "Hair Dressers Washing Bowl with Bar Chair",
+    "category": "Custom",
+    "type": "Other",
+    "price_ghs": 9300,
+    "negotiable": true,
+    "description": "Salon backwash unit: hair washing bowl with attached padded chair, for hairdressers and barbering shops. Priced from GH₵9,300 to GH₵10,950 depending on model and finish.",
+    "highlights": [
+      "Washing bowl with attached chair",
+      "From GH₵9,300 to GH₵10,950",
+      "For salons and barbering shops"
+    ],
+    "marketplace_category": "Home & Garden > Furniture > Other Furniture",
+    "images": [
+      "assets/images/products/fav-030-mv00kf41-1.jpg"
+    ]
+  },
+  {
+    "id": "FAV-031",
+    "icon": "",
+    "condition": "Brand New",
+    "material": "",
+    "dimensions": "",
+    "colors": [],
+    "custom_order": false,
+    "in_stock": true,
+    "placeholder": false,
+    "name": "10 Seater Foldable Round Table with Chairs",
+    "category": "Dining",
+    "type": "Dining Table",
+    "price_ghs": 9650,
+    "negotiable": true,
+    "description": "Large round foldable table that seats 10, with matching white folding chairs. Ideal for events, churches, restaurants and family gatherings — folds flat for easy storage.",
+    "highlights": [
+      "Seats 10 people",
+      "Folds flat for storage",
+      "Great for events"
+    ],
+    "marketplace_category": "Home & Garden > Furniture > Tables",
+    "images": [
+      "assets/images/products/fav-031-mv00kf41-1.jpg"
+    ]
+  },
+  {
+    "id": "FAV-032",
+    "icon": "",
+    "condition": "Brand New",
+    "material": "",
+    "dimensions": "",
+    "colors": [],
+    "custom_order": false,
+    "in_stock": true,
+    "placeholder": false,
+    "name": "TV Stand — Black Marble Top with Drawer",
+    "category": "Living Room",
+    "type": "TV Stand",
+    "price_ghs": 6950,
+    "negotiable": true,
+    "description": "Modern black TV stand with a marble-effect glass top, gold trim, side cabinet and a large pull-out drawer.",
+    "highlights": [
+      "Marble-effect top",
+      "Pull-out storage drawer",
+      "Side cabinet"
+    ],
+    "marketplace_category": "Home & Garden > Furniture > TV Stands",
+    "images": [
+      "assets/images/products/fav-032-mv00kf41-1.jpg"
+    ]
+  },
+  {
+    "id": "FAV-033",
+    "icon": "",
+    "condition": "Brand New",
+    "material": "",
+    "dimensions": "",
+    "colors": [],
+    "custom_order": false,
+    "in_stock": true,
+    "placeholder": false,
+    "name": "TV Stand + Centre Table Set — Marble Top",
+    "category": "Living Room",
+    "type": "TV Stand",
+    "price_ghs": 16800,
+    "negotiable": true,
+    "description": "Matching TV stand and centre table set with a marble-effect top and white drawers. Sold as a set.",
+    "highlights": [
+      "TV stand and centre table set",
+      "Marble-effect tops",
+      "Storage drawers"
+    ],
+    "marketplace_category": "Home & Garden > Furniture > TV Stands",
+    "images": [
+      "assets/images/products/fav-033-mv00kf41-1.jpg"
+    ]
+  },
+  {
+    "id": "FAV-034",
+    "icon": "",
+    "condition": "Brand New",
+    "material": "",
+    "dimensions": "",
+    "colors": [],
+    "custom_order": false,
+    "in_stock": true,
+    "placeholder": false,
+    "name": "Student Mattress — 2 Sizes",
+    "category": "Bedroom",
+    "type": "Mattress",
+    "price_ghs": 1200,
+    "negotiable": true,
+    "description": "Brand new student mattress (27 by 75 inches and a larger size) for boarding schools, hostels and homes. GH₵1,200 to GH₵1,300 depending on size. Bulk orders for schools welcome.",
+    "highlights": [
+      "GH₵1,200 – GH₵1,300 by size",
+      "Ideal for boarding schools & hostels",
+      "Bulk orders welcome"
+    ],
+    "marketplace_category": "Home & Garden > Furniture > Mattresses",
+    "images": [
+      "assets/images/products/fav-034-mv00kf41-1.jpg"
+    ]
   }
 ]
