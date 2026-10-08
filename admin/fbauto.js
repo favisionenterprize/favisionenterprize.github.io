@@ -260,6 +260,15 @@
   }
 
   // ------------------------------------------------------------------ Instagram, the one-button run and the report
+  // Post one pool item (a seasonal ad) on the Facebook Page itself, with the same add-on job as group posts.
+  function startPagePost(key, then) {
+    if (needExt()) return;
+    const it = IG() && IG().pool().find(i => i.k === key);
+    if (!it) { A.toast("That seasonal ad isn't running any more."); if (then && then.length) setTimeout(() => runStep(then, true), 1200); return; }
+    const page = "https://www.facebook.com/FaVisionEnterprise";
+    const text = window.FAV_CAPTIONS ? window.FAV_CAPTIONS.write(null, { net: "fb", subject: it.subject }) : it.subject;
+    launch(page, { kind: "post", mode: "now", q: [{ g: "page", name: "F.A Vision Enterprise (Page)", url: page, p: null, text, img: location.origin + "/" + it.img }], min: 5, max: 5, then: then || null });
+  }
   function startIg(opts, then) {
     if (needExt()) return;
     if (Number(ext()) < 4) return A.toast("Update the FA Vision add-on to post on Instagram (steps at the bottom of the Today tab).", true);
@@ -300,6 +309,9 @@
       if ((k === "x" || k === "tiktok") && SOC() && SOC().summary(k).waiting && liveAddon()) return startSoc(k, {}, steps);
       if ((k === "xnow" || k === "ttnow") && SOC() && liveAddon()) { const sel = selection(), net = k === "xnow" ? "x" : "tiktok"; return startSoc(net, { products: sel.ids, limit: net === "x" ? sel.x_n : sel.tt_n }, steps); }
       if (k.startsWith("engage:") && ENG() && ENG().state()) return ENG().start(k.slice(7), steps);
+      if (k.startsWith("page:")) return startPagePost(k.slice(5), steps);
+      if (k.startsWith("igs:") && IG() && Number(ext()) >= 4) return startIg({ keys: [k.slice(4)] }, steps);
+      if ((k.startsWith("xs:") || k.startsWith("tts:")) && SOC() && SOC().state() && liveAddon()) return startSoc(k.startsWith("xs:") ? "x" : "tiktok", { keys: [k.slice(k.indexOf(":") + 1)] }, steps);
       if (k === "report") return sendReport(true);
     }
   }
@@ -548,7 +560,8 @@
           }
           return s;
         }, `Autopilot: posted in ${ok} of ${out.res.length} groups`);
-        A.toast(`Posted in ${plural(ok, "group")}${out.res.length - ok ? `, ${out.res.length - ok} skipped` : ""}.${out.stopped ? " Stopped: " + out.stopped : ""}`, !!out.stopped);
+        if (out.res.length === 1 && out.res[0].g === "page") A.toast(out.res[0].ok ? "Posted on your Facebook Page ✓" : "Facebook Page post failed: " + (out.res[0].why || out.stopped || ""), !out.res[0].ok);
+        else A.toast(`Posted in ${plural(ok, "group")}${out.res.length - ok ? `, ${out.res.length - ok} skipped` : ""}.${out.stopped ? " Stopped: " + out.stopped : ""}`, !!out.stopped);
       } else if (out.kind === "import") {
         const found = (out.groups || []).filter(g => g.id && g.name);
         let added = 0, accepted = 0;
@@ -712,7 +725,15 @@
       : pl.resting ? `every group was posted in during the last ${S.settings.group_rest_hours} hours; try later`
       : "the ticked products are already in all your groups";
     const chosen = list.filter(p => on.has(p.id));
-    return `
+    const seasonal = IG() && IG().state() ? IG().pool().filter(i => i.seasonal) : [];
+    return `${seasonal.map(it => `
+      <section class="fa-card season-card">
+        <header><h2>📣 ${esc(it.subject.split(/[!.]/)[0])}</h2></header>
+        <div class="season-row"><img src="../${esc(it.img)}" alt="" width="120" height="150" loading="lazy">
+          <div><p class="muted">Seasonal ad, live this week. One press posts it on your <b>Facebook Page</b>, <b>Instagram</b>, <b>X</b> and <b>TikTok</b>, each with its own caption, call to action and links.</p>
+          <div class="fa-actions"><button class="btn btn-sell" data-season="${esc(it.k)}">📣 Share everywhere now</button></div>
+          <p class="muted fa-small">In Edge, set Facebook to act as your F.A Vision Page first, so the post comes from the Page.</p></div></div>
+      </section>`).join("")}
       <section class="fa-card">
         <header><h2>Post now</h2><span class="fa-big">${sel.ids.length}/${list.length}</span></header>
         <p class="muted">Tick any products and post them whenever you like. Each product goes into different groups (one product per group in a session) and never twice into the same group. This is separate from the daily plan in the Today tab, which keeps running as before.</p>
@@ -885,6 +906,8 @@
     if (so) { if (so.dataset.soc) startSoc(so.dataset.soc, {}); else startSoc(so.dataset.socTest, { dry: true }); return; }
     const ib = e.target.closest("[data-ig]");
     if (ib) { if (ib.dataset.ig === "post") startIg({}); else startIg({ dry: true }); return; }
+    const ss = e.target.closest("[data-season]");
+    if (ss) { e.preventDefault(); const k = ss.dataset.season; return runStep(["page:" + k, "igs:" + k, "xs:" + k, "tts:" + k, "report"]); }
     const ag = e.target.closest("[data-all-groups]");
     if (ag) { e.preventDefault(); return startAllGroups(ag.dataset.allGroups); }
     const nb = e.target.closest("[data-now]");

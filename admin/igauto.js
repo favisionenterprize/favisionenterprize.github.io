@@ -175,13 +175,14 @@
         .sort((a, b) => (last[a.p.id] || "").localeCompare(last[b.p.id] || ""))
         .slice(0, Math.max(1, opts.limit || 3));
     }
+    if (opts.keys) q = pool().filter(i => opts.keys.includes(i.k));
     if (opts.dry) q = (q.length ? q : pool()).slice(0, 1);
     if (!q.length) return null;
     const start = S.posts.length;
     return {
       url: `https://www.instagram.com/${S.settings.account}/`,
       job: {
-        kind: "ig", account: S.settings.account, dry: !!opts.dry, mode: opts.products ? "now" : null,
+        kind: "ig", account: S.settings.account, dry: !!opts.dry, mode: opts.products || opts.keys ? "now" : null,
         spot: q.filter(it => it.spot).map(it => it.k),
         q: q.map((it, i) => ({ k: it.k, p: it.p ? it.p.id : null, img: site + it.img, text: caption(it, start + i) })),
         min: S.settings.pause_min_s, max: S.settings.pause_max_s

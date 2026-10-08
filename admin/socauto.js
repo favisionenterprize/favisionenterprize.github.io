@@ -92,7 +92,7 @@
     ];
     return opts[v % opts.length].replace(/\n{2,}/g, "\n").trim();
   }
-  const titleOf = it => window.FAV_CAPTIONS ? window.FAV_CAPTIONS.title(it.studio ? null : it.p, { net: "tiktok" }).slice(0, 90) : it.studio ? "Design your room free" : `${shortName(it.p)} · ${C.formatPrice(it.p.price_ghs)}`;
+  const titleOf = it => it.seasonal ? String(it.subject || "").split(/[!.]/)[0].slice(0, 90) : window.FAV_CAPTIONS ? window.FAV_CAPTIONS.title(it.studio ? null : it.p, { net: "tiktok" }).slice(0, 90) : it.studio ? "Design your room free" : `${shortName(it.p)} · ${C.formatPrice(it.p.price_ghs)}`;
 
   // ------------------------------------------------------------------ what to post
   function plan(net) {
@@ -126,13 +126,14 @@
         .sort((a, b) => (last[a.p.id] || "").localeCompare(last[b.p.id] || ""))
         .slice(0, Math.max(1, opts.limit || 2));
     }
+    if (opts.keys) q = pool().filter(i => opts.keys.includes(i.k));
     if (opts.dry) q = (q.length ? q : pool()).slice(0, 1);
     if (!q.length) return null;
     const site = location.origin + "/", start = S.posts.filter(x => x.net === net).length;
     return {
       url: net === "x" ? "https://x.com/compose/post" : "https://www.tiktok.com/tiktokstudio/upload?from=webapp&tab=photo",
       job: {
-        kind: net, dry: !!opts.dry, mode: opts.products ? "now" : null, account: S.settings.x.account,
+        kind: net, dry: !!opts.dry, mode: opts.products || opts.keys ? "now" : null, account: S.settings.x.account,
         q: q.map((it, i) => ({ k: it.k, p: it.p ? it.p.id : null, img: site + it.img, text: caption(net, it, start + i, !!opts.full), title: titleOf(it) })),
         min: S.settings.pause_min_s, max: S.settings.pause_max_s
       }
