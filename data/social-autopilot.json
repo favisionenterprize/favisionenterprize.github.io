@@ -239,6 +239,95 @@
    "p": "FAV-028",
    "ok": true,
    "now": true
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:23:57.008Z",
+   "net": "x",
+   "k": "ad:fav-001",
+   "p": "FAV-001",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:25:49.492Z",
+   "net": "x",
+   "k": "ad:fav-002",
+   "p": "FAV-002",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:27:42.429Z",
+   "net": "x",
+   "k": "ad:fav-003",
+   "p": "FAV-003",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:29:06.471Z",
+   "net": "x",
+   "k": "ad:fav-004",
+   "p": "FAV-004",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:30:29.088Z",
+   "net": "x",
+   "k": "ad:fav-005",
+   "p": "FAV-005",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:32:16.111Z",
+   "net": "x",
+   "k": "ad:fav-006",
+   "p": "FAV-006",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:33:38.445Z",
+   "net": "x",
+   "k": "ad:fav-007",
+   "p": "FAV-007",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:34:58.400Z",
+   "net": "x",
+   "k": "ad:fav-008",
+   "p": "FAV-008",
+   "ok": true
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:38:54.296Z",
+   "net": "x",
+   "k": "ad:fav-009",
+   "p": "FAV-009",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T01:16:15.891Z",
+   "net": "x",
+   "k": "ad:fav-010",
+   "p": "FAV-010",
+   "ok": false,
+   "why": "X didn't confirm the post"
   }
  ],
  "runs": [
@@ -269,6 +358,13 @@
    "kind": "tiktok",
    "tried": 3,
    "ok": 3
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T01:16:57.316Z",
+   "kind": "x",
+   "tried": 10,
+   "ok": 1
   }
  ]
 }
