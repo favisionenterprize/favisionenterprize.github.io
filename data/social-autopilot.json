@@ -328,6 +328,87 @@
    "p": "FAV-010",
    "ok": false,
    "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T18:45:00.870Z",
+   "net": "x",
+   "k": "ad:fav-001",
+   "p": "FAV-001",
+   "ok": false,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T18:45:36.741Z",
+   "net": "x",
+   "k": "ad:fav-002",
+   "p": "FAV-002",
+   "ok": false,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T18:46:13.827Z",
+   "net": "x",
+   "k": "ad:fav-003",
+   "p": "FAV-003",
+   "ok": false,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T18:46:51.605Z",
+   "net": "x",
+   "k": "ad:fav-004",
+   "p": "FAV-004",
+   "ok": false,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T18:47:30.995Z",
+   "net": "x",
+   "k": "ad:fav-005",
+   "p": "FAV-005",
+   "ok": false,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T18:49:26.406Z",
+   "net": "x",
+   "k": "ad:fav-006",
+   "p": "FAV-006",
+   "ok": false,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T18:50:03.898Z",
+   "net": "x",
+   "k": "ad:fav-007",
+   "p": "FAV-007",
+   "ok": false,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T18:50:45.289Z",
+   "net": "x",
+   "k": "ad:fav-009",
+   "p": "FAV-009",
+   "ok": false,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T18:51:23.707Z",
+   "net": "x",
+   "k": "ad:fav-010",
+   "p": "FAV-010",
+   "ok": false,
+   "why": "Couldn't find X's post box"
   }
  ],
  "runs": [
@@ -365,6 +446,13 @@
    "kind": "x",
    "tried": 10,
    "ok": 1
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T18:51:54.963Z",
+   "kind": "x",
+   "tried": 9,
+   "ok": 0
   }
  ]
 }
