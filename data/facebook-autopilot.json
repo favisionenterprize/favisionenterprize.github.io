@@ -232,15 +232,6 @@
    "active": true
   },
   {
-   "id": "523491985727729",
-   "name": "JOBS IN ACCRA ✅",
-   "url": "https://www.facebook.com/groups/523491985727729/",
-   "added": "2026-10-08",
-   "members": 124000,
-   "source": "autopilot",
-   "active": true
-  },
-  {
    "id": "994523464506238",
    "name": "JOBS IN ACCRA",
    "url": "https://www.facebook.com/groups/994523464506238/",
@@ -6077,6 +6068,13 @@
    "kind": "renew",
    "tried": 5,
    "ok": 1
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:16:55.043Z",
+   "kind": "declines",
+   "found": 1,
+   "left": 0
   }
  ],
  "removed": [
@@ -6128,6 +6126,15 @@
    "d": "2026-10-07",
    "left": true,
    "left_d": "2026-10-07",
+   "tries": 1
+  },
+  {
+   "id": "523491985727729",
+   "name": "JOBS IN ACCRA ✅",
+   "url": "https://www.facebook.com/groups/523491985727729/",
+   "why": "Declined 4 of our posts · leave not confirmed",
+   "d": "2026-10-09",
+   "left": false,
    "tries": 1
   }
  ],
@@ -6314,7 +6321,7 @@
   }
  ],
  "checks": {
-  "declines": "2026-10-08",
+  "declines": "2026-10-09",
   "grow": "2026-10-08",
   "sync": "2026-10-09"
  },
