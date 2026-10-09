@@ -6,7 +6,7 @@
   "pause_min_s": 60,
   "pause_max_s": 180,
   "auto_run": true,
-  "auto_time": "09:00",
+  "auto_time": "11:00",
   "now_limit": 20,
   "group_rest_hours": 6,
   "cleanup_on": true,
