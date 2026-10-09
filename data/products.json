@@ -1299,5 +1299,39 @@
     "images": [
       "assets/images/products/fav-034-mv00kf41-1.jpg"
     ]
+  },
+  {
+    "id": "FAV-035",
+    "name": "Jasmine Rice — Long Grain Fragrant Rice",
+    "category": "Groceries",
+    "type": "Rice",
+    "marketplace_category": "Groceries",
+    "price_ghs": 400,
+    "negotiable": false,
+    "icon": "🍚",
+    "description": "Natural, fragrant long-grain jasmine rice (Thai Hom Mali) with a sweet aroma. 25 lb bags. Wholesale and retail. Sold by MANYE OYE REHOBOTH store, Kasoa, near Amanfrom Taxi Rank.",
+    "condition": "Brand New",
+    "custom_order": false,
+    "in_stock": true,
+    "images": [
+      "assets/images/products/fav-035-1.jpg",
+      "assets/images/products/fav-035-2.jpg"
+    ],
+    "highlights": [
+      "Fragrant long-grain Thai Hom Mali rice",
+      "25 lb bags",
+      "Wholesale and retail",
+      "Kasoa, near Amanfrom Taxi Rank"
+    ],
+    "placeholder": false,
+    "seller": {
+      "name": "MANYE OYE REHOBOTH",
+      "phones": [
+        "+233535700722"
+      ],
+      "whatsapp": "+233535700722",
+      "address": "Kasoa, near Amanfrom Taxi Rank",
+      "note": "Sold and delivered by MANYE OYE REHOBOTH (a partner business). Contact them directly to order."
+    }
   }
 ]
