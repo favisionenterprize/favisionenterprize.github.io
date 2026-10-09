@@ -19,7 +19,7 @@ function setup() {
   install(true);
   check();
 }
-chrome.alarms.onAlarm.addListener(a => { if (a.name === "check") { install(false); check(); } });
+chrome.alarms.onAlarm.addListener(a => { if (a.name === "check") { install(false); check(); awake(); } });
 chrome.action.onClicked.addListener(() => chrome.tabs.create({ url: ADMIN + "#fbauto" }));
 chrome.notifications.onClicked.addListener(id => { chrome.notifications.clear(id); chrome.tabs.create({ url: ADMIN + "#fbauto" }); });
 
@@ -196,4 +196,27 @@ listen((msg, sender, reply) => {
   if (msg.type === "saveJob") { chrome.storage.session.set({ [key]: msg.job }).then(() => reply({ ok: true })); return true; }
   if (msg.type === "clearJob") { chrome.storage.session.remove(key).then(() => reply({ ok: true })); return true; }
 });
-chrome.tabs.onRemoved.addListener(tabId => chrome.storage.session.remove("job" + tabId));
+chrome.tabs.onRemoved.addListener(tabId => chrome.storage.session.remove("job" + tabId).then(awake));
+
+// Keep running when Edge is minimised or the screen is locked (5.2+):
+//  - while any run is going, ask Windows to keep the screen and PC awake (no sleep, no screen-off lock);
+//  - run tabs are never put to sleep / discarded by the browser;
+//  - "sleep" messages: the run scripts wait here in short steps, because the browser slows timers in
+//    hidden tabs to once a minute (each message also keeps this background awake).
+async function awake() {
+  if (!chrome.power) return;
+  const all = await chrome.storage.session.get(null);
+  const running = Object.keys(all).some(k => /^job\d+$/.test(k) && all[k]);
+  if (running) chrome.power.requestKeepAwake("display"); else chrome.power.releaseKeepAwake();
+}
+listen((msg, sender, reply) => {
+  if (!msg || msg.type !== "sleep") return;
+  const ms = Math.max(0, Math.min(Number(msg.ms) || 0, 25000));
+  setTimeout(() => reply({ slept: true }), ms);
+  return true;
+});
+listen((msg, sender) => {
+  if (!msg || !/^(start|saveJob|clearJob)$/.test(msg.type) || !sender.tab) return;
+  if (msg.type !== "clearJob") { try { chrome.tabs.update(sender.tab.id, { autoDiscardable: false }); } catch (e) { /* older browser */ } }
+  setTimeout(awake, 500);   // after the job is stored or removed
+});

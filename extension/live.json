@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-07.3",
+  "version": "2026-10-09.1",
   "note": "The FA Vision add-on (5.0+) downloads these scripts from the live site and runs them, so pushing a change here updates everyone's add-on within the hour. Changing the version is optional (it is only shown in the admin); any change to a file is picked up.",
   "scripts": [
     {

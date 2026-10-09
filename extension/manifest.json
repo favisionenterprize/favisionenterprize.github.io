@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "FA Vision Autopilot",
-  "version": "5.1.0",
-  "description": "Works with your FA Vision admin: renews Facebook Marketplace listings, posts into Facebook groups on Instagram, X, TikTok and YouTube, and syncs prices. Updates itself from your website.",
+  "version": "5.2.0",
+  "description": "Works with your FA Vision admin: renews Facebook Marketplace listings, posts into Facebook groups on Instagram, X, TikTok and YouTube, and syncs prices. Updates itself from your website. Keeps running when the browser is minimised or the screen is locked.",
   "icons": {
     "128": "icon128.png"
   },
@@ -18,7 +18,8 @@
     "notifications",
     "storage",
     "scripting",
-    "userScripts"
+    "userScripts",
+    "power"
   ],
   "host_permissions": [
     "https://favisionenterprize.github.io/*",

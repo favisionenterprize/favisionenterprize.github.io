@@ -20,6 +20,16 @@ If user scripts aren't allowed, or the site can't be reached, the add-on falls b
 
 Only changes to `background.js`, `admin.js` or `manifest.json` (the add-on's frame, which rarely changes) need the folder replaced and ↻ reload clicked in `edge://extensions`.
 
+## Runs when minimised or the screen is locked (version 5.2+)
+
+- While a run is going, the add-on asks Windows to keep the screen and PC awake, so the PC doesn't fall asleep or lock itself by timeout mid-run. When the run ends this is released.
+- You can minimise Edge or lock the screen yourself (Windows key + L): the run keeps going. The scripts wait through the add-on's background, because Edge slows timers in hidden tabs to once a minute.
+- Run tabs are marked so Edge doesn't put them to sleep.
+- It can't run while the PC is asleep, hibernating or shut down. On a laptop, keep it plugged in and set **Settings → System → Power → When plugged in, put my device to sleep after: Never** (and the lid action to **Do nothing** if you close the lid).
+- In Edge, also add `facebook.com`, `instagram.com`, `x.com`, `tiktok.com`, `youtube.com` and `favisionenterprize.github.io` to **Settings → System and performance → Never put these sites to sleep**.
+
+Updating from 5.1: replace the folder with the new `extension` folder and click **↻ Reload** in `edge://extensions` once (5.2 adds the "keep awake" permission).
+
 ## What it does
 
 - **Badge and reminder.** Once an hour it reads your live site's `data/facebook-autopilot.json` and `data/products.json`. The red number on its icon shows Marketplace listings due for renewal, plus 1 if today's group posts haven't run. It sends one reminder a day. Click the icon to open the autopilot screen.

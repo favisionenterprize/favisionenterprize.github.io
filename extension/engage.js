@@ -9,7 +9,25 @@
 // Facebook commenting was checked live (Oct 2026, as the Page: "Comment as F.A Vision Enterprise",
 // type, Enter). Instagram, X and TikTok selectors follow their current pages but weren't checked live.
 (async () => {
-  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  // Sleep that keeps time when the tab is hidden, minimised or the screen is locked: the add-on's
+  // background (5.2+) does the waiting in short steps, because the browser slows timers in hidden tabs
+  // to once a minute. Older add-ons don't answer, so it falls back to a normal timer.
+  let bgSleepOk = true;
+  const sleep = ms => new Promise(done => {
+    const end = Date.now() + ms;
+    const tick = () => {
+      const left = end - Date.now();
+      if (left <= 0) return done();
+      if (!bgSleepOk) return setTimeout(done, left);
+      try {
+        chrome.runtime.sendMessage({ type: "sleep", ms: Math.min(left, 20000) }, r => {
+          if (chrome.runtime.lastError || !r || !r.slept) bgSleepOk = false;
+          tick();
+        });
+      } catch (e) { bgSleepOk = false; tick(); }
+    };
+    tick();
+  });
   const rand = (a, b) => Math.round(a + Math.random() * (b - a));
   const bg = msg => new Promise(res => { try { chrome.runtime.sendMessage(msg, r => res(r || {})); } catch (e) { res({}); } });
   let job = null;
