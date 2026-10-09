@@ -6030,6 +6030,186 @@
    "g": "382522171847495",
    "ok": false,
    "why": "Post box didn't open"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:05:04.576Z",
+   "p": "FAV-009",
+   "g": "1260426287321668",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:06:30.464Z",
+   "p": "FAV-024",
+   "g": "980376278667360",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:07:56.131Z",
+   "p": "FAV-026",
+   "g": "139560271489581",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:15:24.596Z",
+   "p": "FAV-028",
+   "g": "180212603087458",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:17:19.020Z",
+   "p": "FAV-034",
+   "g": "195199285857356",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:18:28.299Z",
+   "p": "FAV-011",
+   "g": "324168798801822",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:23:01.787Z",
+   "p": "FAV-015",
+   "g": "kofitv",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:25:44.894Z",
+   "p": "FAV-019",
+   "g": "397641595383636",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:27:01.881Z",
+   "p": "FAV-014",
+   "g": "495508180829744",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:28:10.468Z",
+   "p": "FAV-009",
+   "g": "497509459086362",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:29:53.895Z",
+   "p": "FAV-024",
+   "g": "535325930759843",
+   "ok": false,
+   "now": true,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:31:29.347Z",
+   "p": "FAV-026",
+   "g": "582376070602961",
+   "ok": false,
+   "now": true,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:32:11.045Z",
+   "p": "FAV-028",
+   "g": "613870175328566",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:32:52.867Z",
+   "p": "FAV-034",
+   "g": "661332781128349",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:34:00.389Z",
+   "p": "FAV-011",
+   "g": "694644710640007",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:35:57.309Z",
+   "p": "FAV-015",
+   "g": "732658637184181",
+   "ok": false,
+   "now": true,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:36:34.585Z",
+   "p": "FAV-019",
+   "g": "748111992059254",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:37:59.626Z",
+   "p": "FAV-014",
+   "g": "928755090542065",
+   "ok": false,
+   "now": true,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:39:20.234Z",
+   "p": "FAV-009",
+   "g": "977797772413869",
+   "ok": false,
+   "now": true,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:39:57.041Z",
+   "p": "FAV-024",
+   "g": "1024060211323777",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
   }
  ],
  "resets": {},
@@ -6249,6 +6429,13 @@
    "kind": "post",
    "tried": 20,
    "ok": 16
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T00:41:11.798Z",
+   "kind": "post",
+   "tried": 20,
+   "ok": 4
   }
  ],
  "removed": [
