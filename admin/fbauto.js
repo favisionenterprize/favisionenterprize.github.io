@@ -88,6 +88,10 @@
   const nowPostable = () => A.products()
     .filter(p => !p.placeholder && p.in_stock !== false && (p.images || []).length && p.price_ghs)
     .sort((a, b) => a.id.localeCompare(b.id));
+  // Add-on 5.2+ keeps runs going when Edge is minimised or the screen is locked.
+  const bgRun = () => { const v = String(document.documentElement.dataset.favautoShell || "0").split(".").map(Number); return v[0] > 5 || (v[0] === 5 && (v[1] || 0) >= 2); };
+  const keepNote = () => bgRun() ? "You can minimise Edge or lock the screen and it keeps running; just don't let the PC sleep or shut down."
+    : "Keep it open and in front, or reload the add-on once (edge://extensions → FA Vision Autopilot → ↻ Reload) so it keeps running when Edge is minimised or the screen is locked.";
   const activeGroups = () => S.groups.filter(g => g.active !== false);
   const attemptsToday = () => S.posts.filter(x => x.d === today() && !x.now).length;   // daily plan only; "Post now" has its own limit
 
@@ -667,7 +671,7 @@
             <span class="muted">${pl.groups.length ? `${plural(pl.groups.length, "new group")} queued` : doneToday >= limit ? "Done for today ✓" : "No new groups left today"} · been in ${pl.cov.done} of ${pl.cov.total} groups${pl.cov.fresh ? " (starting a new round)" : ""}</span></div>
           </div>
           <div class="fa-actions"><button class="btn btn-sell" data-fa="post" ${pl.groups.length ? "" : "disabled"}>Start today's ${pl.groups.length || limit} group posts</button><button class="btn btn-ghost" data-fa="test">Test without posting</button></div>
-          <p class="muted fa-small" ${pl.groups.length ? "" : "hidden"}>Runs by itself in a Facebook tab, ${S.settings.pause_min_s / 60}–${S.settings.pause_max_s / 60} minutes between groups (about ${Math.round(pl.groups.length * (S.settings.pause_min_s + S.settings.pause_max_s) / 120)} minutes). Keep that tab open and in front (Edge slows background tabs a lot). It stops at once if Facebook shows any warning.</p>
+          <p class="muted fa-small" ${pl.groups.length ? "" : "hidden"}>Runs by itself in a Facebook tab, ${S.settings.pause_min_s / 60}–${S.settings.pause_max_s / 60} minutes between groups (about ${Math.round(pl.groups.length * (S.settings.pause_min_s + S.settings.pause_max_s) / 120)} minutes). ${keepNote()} It stops at once if Facebook shows any warning.</p>
           <details class="fa-more"><summary>Rotation order (${order.length} listings, one a day)</summary><ol class="fa-list">${order.map((p, i) => { const c = coverage(p); return `<li class="${i === cur ? "now" : ""}"><span>${i === cur ? "▶ " : ""}${esc(p.name)}</span><small>${c.done}/${c.total} groups</small></li>`; }).join("")}</ol></details>`
         : `<p class="fa-empty">No listing is ready (each needs a price, a photo and to be in stock).</p>`}
       </section>
@@ -754,7 +758,7 @@
         <label class="fa-check now-opt"><input type="checkbox" data-now-opt="tt" ${sel.tt ? "checked" : ""}> <span><b>TikTok</b> · up to <input type="number" min="1" max="10" data-now-n="tt_n" value="${sel.tt_n}" class="now-num" aria-label="TikTok posts"> photo posts of the ticked products</span></label>
         ${(sel.x || sel.tt) && !liveAddon() ? `<p class="fa-small" style="color:var(--err)">X and TikTok need the add-on's automatic updates switched on (Today tab, top).</p>` : ""}
         <button class="btn btn-sell run-btn" data-now="go" ${sel.ids.length && (sel.fb || sel.ig || sel.x || sel.tt) ? "" : "disabled"}>Post now</button>
-        <p class="muted fa-small">About ${Math.max(3, mins)} minutes, in this Edge tab. Keep it open and in front. You get the alert email as it starts and the report when it ends. It stops by itself if Facebook or Instagram shows a warning.</p>
+        <p class="muted fa-small">About ${Math.max(3, mins)} minutes, in this Edge tab. ${keepNote()} You get the alert email as it starts and the report when it ends. It stops by itself if Facebook or Instagram shows a warning.</p>
         ${pl.pairs.length ? `<details class="fa-more"><summary>See which product goes to which group</summary><ul class="fa-list">${pl.pairs.map(x => `<li><span>${esc(x.g.name)}</span><small>${esc(shortName(x.p))}</small></li>`).join("")}</ul></details>` : ""}
       </section>
 
@@ -852,7 +856,7 @@
           ${step(steps.length ? "wait" : "done", "Email report", `Breakdown sent to ${esc(REPORT_TO)} when the run ends (and every night at 9 pm)`)}
         </ol>
         ${steps.length ? `<button class="btn btn-sell run-btn" data-fa="run">Run everything for today</button>
-          <p class="muted fa-small">About ${Math.max(5, mins)} minutes. It runs in this Edge tab, one site after the other. Keep the tab open and in front. It stops by itself if Facebook, Instagram, X or TikTok shows a warning.</p>`
+          <p class="muted fa-small">About ${Math.max(5, mins)} minutes. It runs in this Edge tab, one site after the other. ${keepNote()} It stops by itself if Facebook, Instagram, X or TikTok shows a warning.</p>`
         : `<p class="run-done">All done for today ✓</p>`}
         <div class="run-foot">
           <label class="fa-check"><input type="checkbox" data-fa-autorun ${S.settings.auto_run ? "checked" : ""}> Run by itself every day at <input type="time" data-fa-autotime value="${esc(S.settings.auto_time)}"></label>
