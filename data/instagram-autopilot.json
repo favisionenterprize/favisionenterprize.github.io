@@ -403,6 +403,15 @@
    "k": "card:FAV-022",
    "p": "FAV-022",
    "ok": true
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-08T23:16:59.600Z",
+   "k": "season:customer-service-week-2026",
+   "p": null,
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find Create"
   }
  ],
  "profile": [
@@ -434,7 +443,7 @@
    "d": "2026-10-09",
    "followers": 890,
    "following": 2008,
-   "posts": 173
+   "posts": 166
   }
  ],
  "runs": [
@@ -500,6 +509,13 @@
    "kind": "ig",
    "tried": 10,
    "ok": 10
+  },
+  {
+   "d": "2026-10-09",
+   "t": "2026-10-09T01:31:49.070Z",
+   "kind": "ig",
+   "tried": 1,
+   "ok": 0
   }
  ]
 }
