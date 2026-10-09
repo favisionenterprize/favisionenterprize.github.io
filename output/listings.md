@@ -1,6 +1,6 @@
 # F.A Vision Enterprise: ready-to-paste listings
 
-Generated 2026-10-08. Regenerate after editing `data/products.json`.
+Generated 2026-10-09. Regenerate after editing `data/products.json`.
 
 ## FAV-001 · Rainbow Glass-Top Dining Set — 6 Chairs
 
@@ -2460,4 +2460,80 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 Student Mattress — 2 Sizes 🔥
 GH₵ 1,200
 Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Student%20Mattress%20%E2%80%94%202%20Sizes%20%28FAV-034%29.
+```
+
+## FAV-035 · Jasmine Rice — Long Grain Fragrant Rice
+
+> Partner product: sold by MANYE OYE REHOBOTH. Their contacts are used below.
+
+### Facebook Marketplace
+
+- **Title:** Jasmine Rice — Long Grain Fragrant Rice
+- **Price:** 400
+- **Category:** Groceries
+- **Condition:** Brand New
+- **Location:** Odorkor, Accra
+- **Photos:** assets/images/products/fav-035-1.jpg, assets/images/products/fav-035-2.jpg
+
+**Description:**
+
+```
+Jasmine Rice — Long Grain Fragrant Rice by MANYE OYE REHOBOTH.
+
+Natural, fragrant long-grain jasmine rice (Thai Hom Mali) with a sweet aroma. 25 lb bags. Wholesale and retail. Sold by MANYE OYE REHOBOTH store, Kasoa, near Amanfrom Taxi Rank.
+
+👉 See all photos, price and order online: https://favisionenterprize.github.io/#product/FAV-035
+
+✔ Fragrant long-grain Thai Hom Mali rice
+✔ 25 lb bags
+✔ Wholesale and retail
+✔ Kasoa, near Amanfrom Taxi Rank
+
+
+🚚 Contact us for delivery.
+📍 Kasoa, near Amanfrom Taxi Rank
+📞 Call / WhatsApp: 053 570 0722
+🌐 https://favisionenterprize.github.io/
+Ref: FAV-035
+```
+
+### Group posts (use a different variant in each group)
+
+**Variant 1**
+
+```
+🍚 Jasmine Rice — Long Grain Fragrant Rice available now!
+• Fragrant long-grain Thai Hom Mali rice
+• 25 lb bags
+• Wholesale and retail
+• Kasoa, near Amanfrom Taxi Rank
+💰 GH₵ 400
+📍 Kasoa, near Amanfrom Taxi Rank, delivery available
+📞 WhatsApp 053 570 0722
+#FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+**Variant 2**
+
+```
+Looking for a quality jasmine rice — long grain fragrant rice? Fragrant long-grain Thai Hom Mali rice.
+Available at Kasoa, near Amanfrom Taxi Rank. GH₵ 400.
+Send us a message or WhatsApp 053 570 0722 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+**Variant 3**
+
+```
+NEW FROM MANYE OYE REHOBOTH ✨ Jasmine Rice — Long Grain Fragrant Rice
+GH₵ 400 | Ready for pickup
+Homes • Offices • Schools
+DM or call 053 570 0722 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+### WhatsApp status
+
+```
+Jasmine Rice — Long Grain Fragrant Rice 🔥
+GH₵ 400
+Order: https://wa.me/233535700722?text=Hello%20MANYE%20OYE%20REHOBOTH%2C%20I%27m%20interested%20in%20the%20Jasmine%20Rice%20%E2%80%94%20Long%20Grain%20Fragrant%20Rice%20%28FAV-035%29.
 ```
