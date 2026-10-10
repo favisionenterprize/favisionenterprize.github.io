@@ -307,10 +307,6 @@ function recordOrder_(data) {
     if (!v.ok && !v.configured) verification = 'UNVERIFIED: check your MoMo wallet / Paystack dashboard';
   }
   if (paidNow && data.plan === 'full' && paidNow + 0.01 < total) notes.push(`UNDERPAID: expected GHS ${total}.`);
-  if (paidNow && data.plan === 'deposit') {
-    const pct = Math.min(90, Math.max(10, Number(sitePayments_().deposit_percent) || 50));
-    if (paidNow + 0.01 < total * pct / 100) notes.push(`UNDERPAID DEPOSIT: expected at least GHS ${Math.round(total * pct) / 100} (${pct}%).`);
-  }
 
   const row = [
     new Date(), ref, cleanCell_(data.name), cleanCell_(data.phone), cleanCell_(data.email),
@@ -331,11 +327,10 @@ function recordOrder_(data) {
       const cur = sh.getRange(r, 1, 1, row.length).getValues()[0];
       const merged = row.map((v, i) => {
         const h = HEADERS.Orders[i];
+        if (h === 'Timestamp' || h === 'Progress') return cur[i] || v;
+        if (h === 'Notes' || h === 'Status') return v;
         if (h === 'PaidNowGHS' || h === 'BalanceGHS' || h === 'Verification' || h === 'Method') return cur[ORDER_COL.PaidNowGHS - 1] ? cur[i] : v;
-        if (h === 'Notes') return [cur[i], v].filter(String).join(' ');
-        // A later post can only fill blanks, never overwrite what's there (name, phone, area, status...),
-        // so nobody can change an existing order by re-sending its reference.
-        return cur[i] === '' || cur[i] == null ? v : cur[i];
+        return v || cur[i];
       });
       sh.getRange(r, 1, 1, merged.length).setValues([merged]);
     } else {
@@ -446,16 +441,13 @@ function syncPaystack() {
 
 function checkAdmin_(key) {
   const want = PropertiesService.getScriptProperties().getProperty('ADMIN_KEY');
-  if (!want || tooManyTries_('admin_key', 20)) return false;
-  if (sameText_(String(key || ''), want)) return true;
-  noteFailure_('admin_key');
-  return false;
+  return !!want && String(key || '') === want;
 }
 
 // ---------- Admin sign-in: email + password, reset code by email ----------
 //
 // The website admin signs in with ADMIN_EMAIL and a password. "Forgot password"
-// emails an 8-digit code (valid 10 minutes) to ADMIN_EMAIL only; the code sets a
+// emails a 6-digit code (valid 10 minutes) to ADMIN_EMAIL only; the code sets a
 // new password. The GitHub token never leaves this script: it is stored as the
 // script property GITHUB_TOKEN and every product save goes through githubProxy_.
 //
@@ -553,16 +545,10 @@ function adminForgot_(data) {
   // Same answer whether or not the email matches, so the page can't be used to guess it.
   if (normEmail_(data.email) !== adminEmail_()) return json_({ ok: true });
   if (cache.get('reset_sent')) return json_({ ok: false, error: 'wait' });   // one code a minute
-  const day = 'reset_day_' + Utilities.formatDate(new Date(), 'GMT', 'yyyyMMdd');
-  const sentToday = Number(cache.get(day) || 0);
-  if (sentToday >= 8) return json_({ ok: false, error: 'wait' });          // at most 8 codes a day
-  cache.put(day, String(sentToday + 1), 86400);
-  // 8 digits from a secure random source (Math.random is guessable). Failed guesses are
-  // NOT forgiven when a new code is sent, so codes can't be brute-forced by re-requesting.
-  const hex = Utilities.getUuid().replace(/-/g, '');
-  const code = String(parseInt(hex.slice(0, 12), 16) % 100000000).padStart(8, '0');
+  const code = String(Math.floor(100000 + Math.random() * 900000));
   cache.put('reset_code', sha256Hex_(code), RESET_CODE_SECONDS);
   cache.put('reset_sent', '1', 60);
+  cache.remove('fail_reset');
   MailApp.sendEmail({
     to: adminEmail_(),
     subject: `${code} is your FA Vision admin reset code`,
@@ -583,13 +569,10 @@ function adminReset_(data) {
   const cache = CacheService.getScriptCache();
   if (normEmail_(data.email) !== adminEmail_()) return json_({ ok: false, error: 'bad_code' });
   if (tooManyTries_('reset', 5)) { cache.remove('reset_code'); return json_({ ok: false, error: 'locked' }); }
-  if (tooManyTries_('reset_daily', 15)) return json_({ ok: false, error: 'locked' });
   const want = cache.get('reset_code');
   if (!want) return json_({ ok: false, error: 'expired' });
   if (!sameText_(sha256Hex_(String(data.code || '').replace(/\D/g, '')), want)) {
     noteFailure_('reset');
-    const c = CacheService.getScriptCache();   // a day-long count as well as the 15-minute one
-    c.put('fail_reset_daily', String(Number(c.get('fail_reset_daily') || 0) + 1), 86400);
     return json_({ ok: false, error: 'bad_code' });
   }
   const password = String(data.password || '');
@@ -601,11 +584,6 @@ function adminReset_(data) {
   cache.remove('reset_code');
   cache.remove('fail_login');
   endAllSessions_();   // sign out every other device
-  try {
-    MailApp.sendEmail(adminEmail_(), 'FA Vision admin password was changed',
-      'Your F.A Vision admin password was just changed with a reset code, and every device was signed out.\n\n' +
-      'If this was not you, open Apps Script and run resetAdminPassword, then change ADMIN_KEY and GITHUB_TOKEN.');
-  } catch (e) { /* the reset still works without the alert */ }
   return signedIn_(!!data.remember);
 }
 
@@ -622,11 +600,9 @@ function githubProxy_(data) {
   if (!token) return json_({ ok: false, error: 'no_github_token' });
   const method = String(data.method || 'GET').toUpperCase();
   const path = String(data.path || '');
-  if (['GET', 'POST', 'PATCH'].indexOf(method) < 0 || path.charAt(0) !== '/' || /\.\.|%2e|%2f|\\/i.test(path)) {
+  if (['GET', 'POST', 'PATCH'].indexOf(method) < 0 || path.charAt(0) !== '/' || path.indexOf('..') >= 0) {
     return json_({ ok: false, error: 'bad request' });
   }
-  const refused = githubWriteRefused_(method, path, data.body);
-  if (refused) return json_({ ok: false, error: 'not allowed: ' + refused });
   const repo = authProps_().getProperty('GITHUB_REPO') || DEFAULT_GITHUB_REPO;
   const opts = {
     method: method.toLowerCase(),
@@ -639,41 +615,6 @@ function githubProxy_(data) {
   let body = null;
   try { body = text ? JSON.parse(text) : null; } catch (e) { body = { message: text.slice(0, 300) }; }
   return json_({ ok: true, status: res.getResponseCode(), body: body });
-}
-
-// The admin page only ever writes data files, product photos, uploaded videos and the
-// generated products-data.js. Anything else (the add-on, admin, scripts, backend, workflows)
-// is refused, so a stolen admin session can't plant code that runs in the social add-on.
-const GITHUB_WRITABLE = [
-  /^data\/[\w.-]+\.json$/,
-  /^assets\/images\/[\w.\/-]+\.(jpe?g|png|webp|gif)$/i,
-  /^assets\/videos\/uploads\/[\w.-]+\.(mp4|webm|mov|m4v|jpe?g)$/i,
-  /^assets\/js\/products-data\.js$/,
-];
-const PRODUCTS_DATA_HEAD = '// Generated from data/business.json and data/products.json. Do not edit by hand.\nwindow.FAV_DATA = ';
-
-function githubWriteRefused_(method, path, body) {
-  if (method === 'GET') return '';
-  const p = path.split('?')[0];
-  if (method === 'POST' && (p === '/git/blobs' || p === '/git/commits')) return '';
-  if (method === 'PATCH' && p === '/git/refs/heads/main') return '';
-  if (method !== 'POST' || p !== '/git/trees') return p;
-  let b = body;
-  try { if (typeof b === 'string') b = JSON.parse(b); } catch (e) { return 'tree'; }
-  if (!b || !b.base_tree || !Array.isArray(b.tree)) return 'tree';
-  for (let i = 0; i < b.tree.length; i++) {
-    const t = b.tree[i] || {};
-    const file = String(t.path || '');
-    if (t.type !== 'blob' || t.mode !== '100644' || file.indexOf('..') >= 0 || !GITHUB_WRITABLE.some((re) => re.test(file))) return file || 'tree';
-    if (file === 'assets/js/products-data.js' && t.content != null) {   // must stay pure data, never script
-      const c = String(t.content);
-      if (c.indexOf(PRODUCTS_DATA_HEAD) !== 0 || !/;\n?$/.test(c)) return file;
-      try { JSON.parse(c.slice(PRODUCTS_DATA_HEAD.length).replace(/;\n?$/, '')); } catch (e) { return file; }
-    } else if (file === 'assets/js/products-data.js') {
-      return file;   // only accepted as checked text, not as a raw blob
-    }
-  }
-  return '';
 }
 
 // Run once from the editor if you are ever locked out of the admin page and
@@ -732,16 +673,6 @@ const CATALOG_CACHE_ = {};
 function siteJson_(url) {
   if (!CATALOG_CACHE_[url]) CATALOG_CACHE_[url] = JSON.parse(UrlFetchApp.fetch(url, { muteHttpExceptions: true }).getContentText());
   return CATALOG_CACHE_[url];
-}
-
-// The website's payment settings (data/business.json → payments); {} if the site can't be read.
-function sitePayments_() {
-  try {
-    const url = (PropertiesService.getScriptProperties().getProperty('SITE_URL') || BUSINESS.website).replace(/\/?$/, '/');
-    return siteJson_(url + 'data/business.json').payments || {};
-  } catch (e) {
-    return {};
-  }
 }
 
 function findProduct_(id) {
@@ -1572,23 +1503,10 @@ function trends_(data) {
 function seekFetch_(data) {
   if (!sessionValid_(data.session)) return json_({ ok: false, error: 'signed_out' });
   if (!seekBudget_()) return json_({ ok: false, error: 'busy' });
-  // Public https hosts by name only (no IP addresses, no internal names); redirects are
-  // followed by hand so every hop is checked the same way.
-  const okUrl = (u) => /^https:\/\/[a-z0-9-]+(\.[a-z0-9-]+)*\.[a-z]{2,}(:443)?\//i.test(u) &&
-    !/^https:\/\/(localhost|[^/]*\.(local|internal|localdomain))(:|\/)/i.test(u);
-  let url = String(data.url || '');
-  if (!okUrl(url)) return json_({ ok: false, error: 'bad_url' });
+  const url = String(data.url || '');
+  if (!/^https:\/\/[^\s/]+\.[^\s/]+\//.test(url) || /^https:\/\/(localhost|127\.|10\.|192\.168\.|169\.254\.)/.test(url)) return json_({ ok: false, error: 'bad_url' });
   try {
-    let r = null;
-    for (let hop = 0; hop < 5; hop++) {
-      r = UrlFetchApp.fetch(url, { muteHttpExceptions: true, followRedirects: false, headers: { 'User-Agent': 'FAVisionAdmin/1.0 (+https://favisionenterprize.github.io)' } });
-      const code = r.getResponseCode();
-      if (code < 300 || code >= 400) break;
-      const h = r.getHeaders();
-      const next = String(h.Location || h.location || '');
-      url = /^https?:\/\//i.test(next) ? next : url.replace(/^(https:\/\/[^/]+).*/, '$1') + (next.charAt(0) === '/' ? next : '/' + next);
-      if (!okUrl(url)) return json_({ ok: false, error: 'bad_redirect' });
-    }
+    const r = UrlFetchApp.fetch(url, { muteHttpExceptions: true, followRedirects: true, headers: { 'User-Agent': 'FAVisionAdmin/1.0 (+https://favisionenterprize.github.io)' } });
     if (r.getResponseCode() >= 300) return json_({ ok: false, error: 'HTTP ' + r.getResponseCode() });
     const blob = r.getBlob();
     const type = String(blob.getContentType() || '');

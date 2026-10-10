@@ -29,6 +29,7 @@ Static GitHub Pages site, live at https://favisionenterprize.github.io (push to 
 ## Checks (run before pushing admin changes)
 - `node scripts/admin_smoke.js` (skill `/admin-smoke`, workflow `admin-smoke.yml`): every Social autopilot tab + Leads with the real data, today and each seasonal ad's first/last day. Add new screens/tabs to it.
 - Hooks in `.claude/settings.json`: `guard_generated.py` blocks hand-edits of `assets/js/products-data.js` and `output/`; `rebuild_listings.py` runs `generate_listings.py` after `data/products.json` / `data/business.json` change.
+- Backend version (10 Oct 2026, deployment version 5): Alexander asked to keep Code.gs as the 7 Oct version (d735df9) plus only the `trends` action. The 8 Oct hardening (GitHub write allowlist `githubWriteRefused_`, safer reset codes, admin-key limits, orders can't be overwritten, deposit underpayment flag, seek_fetch redirect checks) is NOT in Code.gs any more; it is in commit 253eecc if he wants it back. Don't re-add it without asking.
 - Subagent `.claude/agents/security-reviewer.md` after changes to sign-in, the GitHub proxy, orders, forms or the add-on. Code.gs `githubWriteRefused_`: the admin session may only write `data/*.json`, `assets/images/`, `assets/videos/uploads/` and a pure-data `products-data.js`; add a pattern to `GITHUB_WRITABLE` if the admin ever needs a new path.
 
 ## Business facts
