@@ -78,14 +78,6 @@
    "off_why": "Not a member of this group"
   },
   {
-   "id": "966583207420627",
-   "name": "Buy and sell cars 🚘 in Ghana",
-   "url": "https://www.facebook.com/groups/966583207420627/",
-   "active": false,
-   "added": "2026-10-01",
-   "off_why": "Off-topic for furniture (switched off at import)"
-  },
-  {
    "id": "2203686356548968",
    "name": "Buy and Sell Sewing Machine",
    "url": "https://www.facebook.com/groups/2203686356548968/",
@@ -6828,6 +6820,13 @@
    "tried": 0,
    "ok": 0,
    "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile in Facebook, then tap Renew again."
+  },
+  {
+   "d": "2026-10-10",
+   "t": "2026-10-10T07:54:47.113Z",
+   "kind": "declines",
+   "found": 2,
+   "left": 0
   }
  ],
  "removed": [
@@ -6887,6 +6886,24 @@
    "url": "https://www.facebook.com/groups/523491985727729/",
    "why": "Declined 4 of our posts · leave not confirmed",
    "d": "2026-10-09",
+   "left": false,
+   "tries": 2
+  },
+  {
+   "id": "230569805011332",
+   "name": "Unread",
+   "url": "https://www.facebook.com/groups/230569805011332/",
+   "why": "Declined our post (notification) · leave not confirmed",
+   "d": "2026-10-10",
+   "left": false,
+   "tries": 1
+  },
+  {
+   "id": "966583207420627",
+   "name": "Buy and sell cars 🚘 in Ghana",
+   "url": "https://www.facebook.com/groups/966583207420627/",
+   "why": "Declined our post (notification) · leave not confirmed",
+   "d": "2026-10-10",
    "left": false,
    "tries": 1
   }
@@ -7254,7 +7271,7 @@
   }
  ],
  "checks": {
-  "declines": "2026-10-09",
+  "declines": "2026-10-10",
   "grow": "2026-10-09",
   "sync": "2026-10-09"
  },
