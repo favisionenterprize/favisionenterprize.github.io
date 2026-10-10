@@ -524,6 +524,14 @@
    "tried": 0,
    "ok": 0,
    "stopped": "Instagram is logged in to a different account. Switch to @favisionent, then tap Run again."
+  },
+  {
+   "d": "2026-10-10",
+   "t": "2026-10-10T10:39:25.296Z",
+   "kind": "ig",
+   "tried": 0,
+   "ok": 0,
+   "stopped": "Stopped by you."
   }
  ]
 }
