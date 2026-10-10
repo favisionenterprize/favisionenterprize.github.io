@@ -139,6 +139,7 @@ function doPost(e) {
   if (data.action === 'posting_report') return postingReportNow_(data);
   if (data.action === 'session_alert') return sessionAlert_(data);
   if (data.action === 'muse') return museAsk_(data);
+  if (data.action === 'trends') return trends_(data);
   if (data.action === 'seek') return seek_(data);
   if (data.action === 'seek_fetch') return seekFetch_(data);
   if (data.action === 'update_order') return updateOrder_(data);
@@ -1494,6 +1495,78 @@ function seek_(data) {
     out.sources = out.sources.slice(0, 8);
   }
   return json_(out);
+}
+// Today's trending hashtags for the social autopilot captions (admin/captions.js, saved in data/trends.json).
+// Searches the web for what's trending in Ghana on X, TikTok, Instagram and Facebook, and for tags that
+// reach expats in Ghana, Ghanaians abroad and travellers to Ghana. Keeps only trends that are safe and
+// fit a home/furniture brand (no politics, tragedies, crime, religion rows, other brands' campaigns),
+// because stuffing unrelated trending tags into posts breaks X's and TikTok's spam rules.
+// Cached for the day, so the admin can ask as often as it likes.
+function trends_(data) {
+  if (!sessionValid_(data.session)) return json_({ ok: false, error: 'signed_out' });
+  const day = Utilities.formatDate(new Date(), 'GMT', 'yyyy-MM-dd');
+  const cache = CacheService.getScriptCache();
+  const hit = cache.get('trends_' + day);
+  if (hit) return ContentService.createTextOutput(hit).setMimeType(ContentService.MimeType.JSON);
+  if (!seekBudget_()) return json_({ ok: false, error: 'busy' });
+  const props = authProps_();
+  const prompt = 'Today is ' + day + '. Search the web for what is trending RIGHT NOW in Ghana on X (Twitter), TikTok, Instagram and Facebook: ' +
+    'trending hashtags and topics (try trends24.in/ghana, getdaytrends.com/ghana, TikTok Creative Center, news). ' +
+    'We are F.A Vision Enterprise, a furniture and home store in Accra, Ghana (sofas, beds, dining sets, office and school furniture, wallpaper). ' +
+    'Our audience: Ghanaians first, then expats and multinational staff working in Ghana, Ghanaians travelling or living abroad, and tourists and travellers coming to Ghana.\n' +
+    'Pick hashtags we can use on our product posts today. KEEP: Ghana-wide feel-good or lifestyle trends, holidays and seasons, events, ' +
+    'weekend/day tags (e.g. a Friday or weekend tag), home, decor, moving, interior and shopping trends, Accra/Ghana city tags, travel and diaspora tags. ' +
+    'DROP anything about politics, elections, government, protests, deaths, accidents, disasters, crime, court cases, religion disputes, ' +
+    'health scares, celebrity gossip or scandals, sports fights, adult content, or another company\'s campaign. Never invent a trend: if unsure, leave it out.\n' +
+    'Reply with JSON only, no markdown: {"nets":{"x":["#tag",...],"tiktok":[...],"instagram":[...],"facebook":[...]},' +
+    '"audiences":{"ghana":[...],"expats":[...],"diaspora":[...],"travel":[...]},' +
+    '"topics":[{"tag":"#tag","net":"x","why":"one short line"}]}. Up to 8 tags per list, each one word starting with #, no spaces.';
+  const out = { ok: true, d: day, nets: {}, audiences: {}, topics: [], sources: [] };
+  try {
+    const gem = props.getProperty('GEMINI_API_KEY');
+    const claude = props.getProperty('ANTHROPIC_API_KEY');
+    let text = '';
+    if (gem) {
+      const model = props.getProperty('GEMINI_MODEL') || 'gemini-2.5-flash';
+      const res = UrlFetchApp.fetch('https://generativelanguage.googleapis.com/v1beta/models/' + encodeURIComponent(model) + ':generateContent', {
+        method: 'post', contentType: 'application/json', muteHttpExceptions: true, headers: { 'x-goog-api-key': gem },
+        payload: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: prompt }] }], tools: [{ google_search: {} }], generationConfig: { temperature: 0.4, maxOutputTokens: 2048 } }),
+      });
+      const o = JSON.parse(res.getContentText() || '{}');
+      if (res.getResponseCode() >= 300) throw new Error((o.error && o.error.message) || res.getResponseCode());
+      const c = (o.candidates || [])[0] || {};
+      text = ((c.content || {}).parts || []).map((x) => x.text || '').join('');
+      ((c.groundingMetadata || {}).groundingChunks || []).forEach((g) => { if (g.web) out.sources.push({ url: g.web.uri, title: g.web.title || '' }); });
+    } else if (claude) {
+      const res = UrlFetchApp.fetch('https://api.anthropic.com/v1/messages', {
+        method: 'post', contentType: 'application/json', muteHttpExceptions: true,
+        headers: { 'x-api-key': claude, 'anthropic-version': '2023-06-01' },
+        payload: JSON.stringify({ model: props.getProperty('CLAUDE_MODEL') || 'claude-haiku-4-5-20251001', max_tokens: 2048,
+          messages: [{ role: 'user', content: prompt }], tools: [{ type: 'web_search_20250305', name: 'web_search', max_uses: 5 }] }),
+      });
+      const o = JSON.parse(res.getContentText() || '{}');
+      if (res.getResponseCode() >= 300) throw new Error((o.error && o.error.message) || res.getResponseCode());
+      (o.content || []).forEach((b) => {
+        if (b.type === 'text') text += b.text;
+        if (b.type === 'web_search_tool_result' && Array.isArray(b.content)) b.content.forEach((x) => { if (x.url) out.sources.push({ url: x.url, title: x.title || '' }); });
+      });
+    } else {
+      return json_({ ok: false, error: 'no_ai_key' });
+    }
+    const m = text.match(/\{[\s\S]*\}/);
+    const j = m ? JSON.parse(m[0]) : {};
+    const tag = (t) => { t = String(t || '').trim().replace(/\s+/g, ''); if (t && t.charAt(0) !== '#') t = '#' + t; return /^#[\wÀ-ɏ]{2,40}$/.test(t) ? t : ''; };
+    const list = (a) => (Array.isArray(a) ? a : []).map(tag).filter(Boolean).filter((t, i, arr) => arr.indexOf(t) === i).slice(0, 8);
+    ['x', 'tiktok', 'instagram', 'facebook'].forEach((k) => { out.nets[k] = list((j.nets || {})[k]); });
+    ['ghana', 'expats', 'diaspora', 'travel'].forEach((k) => { out.audiences[k] = list((j.audiences || {})[k]); });
+    out.topics = (Array.isArray(j.topics) ? j.topics : []).slice(0, 20).map((t) => ({ tag: tag(t.tag), net: String(t.net || '').slice(0, 12), why: String(t.why || '').slice(0, 140) })).filter((t) => t.tag);
+    out.sources = out.sources.slice(0, 10);
+  } catch (e) {
+    return json_({ ok: false, error: 'trends: ' + String(e.message || e).slice(0, 140) });
+  }
+  const body = JSON.stringify(out);
+  try { cache.put('trends_' + day, body, 6 * 3600); } catch (e) { /* too big to cache: fine */ }
+  return ContentService.createTextOutput(body).setMimeType(ContentService.MimeType.JSON);
 }
 // Download one approved photo (the admin resizes it and commits it to the website).
 function seekFetch_(data) {

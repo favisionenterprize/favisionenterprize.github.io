@@ -110,9 +110,14 @@
       const p = list.find(x => x.id === S.today.p);
       if (p) return p;
     }
-    if (!S.today) return list[0];
-    const next = list.find(x => x.id > S.today.p);   // the listing after the last one that had a turn
-    return next || list[0];
+    // A random listing each day (the same all day), from those that haven't had a turn in the last week;
+    // never yesterday's again unless it's the only one.
+    const lastOf = id => S.posts.filter(x => x.p === id && !x.now).map(x => x.t || x.d).sort().pop() || "";
+    const cands = list.filter(x => !S.today || x.id !== S.today.p || list.length === 1);
+    const ordered = window.FAV_CAPTIONS && window.FAV_CAPTIONS.dailyOrder
+      ? window.FAV_CAPTIONS.dailyOrder(cands, x => "fb:" + x.id, x => lastOf(x.id), 7)
+      : cands.slice().sort((a, b) => lastOf(a.id).localeCompare(lastOf(b.id)));
+    return ordered[0] || list[0];
   }
 
   function coverage(p) {
@@ -1010,7 +1015,7 @@
     $("#top-actions").hidden = false;
     window.scrollTo(0, 0);
     if (location.hash !== "#fbauto") history.replaceState(null, "", "#fbauto");
-    if (!S || (IG() && !IG().state()) || (SOC() && !SOC().state()) || (VID() && !VID().state()) || (ENG() && !ENG().state())) { $("#fa-body").innerHTML = `<p class="muted">Loading…</p>`; await Promise.all([load(), IG() ? IG().load() : null, SOC() ? SOC().load() : null, VID() ? VID().load().catch(() => null) : null, ENG() ? ENG().load().catch(() => null) : null]).catch(err => A.toast(A.friendly(err), true)); }
+    if (!S || (IG() && !IG().state()) || (SOC() && !SOC().state()) || (VID() && !VID().state()) || (ENG() && !ENG().state())) { $("#fa-body").innerHTML = `<p class="muted">Loading…</p>`; await Promise.all([load(), IG() ? IG().load() : null, SOC() ? SOC().load() : null, VID() ? VID().load().catch(() => null) : null, ENG() ? ENG().load().catch(() => null) : null, window.FAV_CAPTIONS && window.FAV_CAPTIONS.loadTrends ? window.FAV_CAPTIONS.loadTrends().catch(() => null) : null]).catch(err => A.toast(A.friendly(err), true)); }
     render();
   }
   document.addEventListener("click", e => {
@@ -1025,7 +1030,7 @@
   const wait = setInterval(async () => {
     if (!A.signedIn() || !A.products().length) return;
     clearInterval(wait);
-    try { await Promise.all([load(), IG() ? IG().load() : null, SOC() ? SOC().load() : null, VID() ? VID().load().catch(() => null) : null, ENG() ? ENG().load().catch(() => null) : null]); } catch (err) { return; }
+    try { await Promise.all([load(), IG() ? IG().load() : null, SOC() ? SOC().load() : null, VID() ? VID().load().catch(() => null) : null, ENG() ? ENG().load().catch(() => null) : null, window.FAV_CAPTIONS && window.FAV_CAPTIONS.loadTrends ? window.FAV_CAPTIONS.loadTrends().catch(() => null) : null]); } catch (err) { return; }
     updateBadge();
     const m = hash.match(/^#favauto-done=(.+)$/);
     if (m) {

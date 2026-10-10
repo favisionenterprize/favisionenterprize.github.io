@@ -95,6 +95,7 @@
   const titleOf = it => it.seasonal ? String(it.subject || "").split(/[!.]/)[0].slice(0, 90) : window.FAV_CAPTIONS ? window.FAV_CAPTIONS.title(it.studio ? null : it.p, { net: "tiktok" }).slice(0, 90) : it.studio ? "Design your room free" : `${shortName(it.p)} · ${C.formatPrice(it.p.price_ghs)}`;
 
   // ------------------------------------------------------------------ what to post
+  const ORDER = (items, keyOf, lastOf) => window.FAV_CAPTIONS && window.FAV_CAPTIONS.dailyOrder ? window.FAV_CAPTIONS.dailyOrder(items, keyOf, lastOf, 7) : items.slice().sort((a, b) => (lastOf(a) || "").localeCompare(lastOf(b) || ""));
   function plan(net) {
     const st = S.settings[net], d = today();
     const okToday = S.posts.filter(x => x.net === net && x.d === d && x.ok && !x.now);
@@ -103,7 +104,8 @@
     for (const x of S.posts) if (x.net === net && x.ok && (!last[x.k] || x.t > last[x.k])) last[x.k] = x.t;
     const used = new Set(okToday.map(x => x.p).filter(Boolean));
     const queue = [];
-    for (const it of pool().slice().sort((a, b) => (last[a.k] || "").localeCompare(last[b.k] || ""))) {
+    // random order each day among photos not posted on this network in the last week
+    for (const it of ORDER(pool(), i => net + ":" + i.k, i => last[i.k])) {
       if (queue.length >= room) break;
       if (it.p && used.has(it.p.id)) continue;   // one photo per product a day
       queue.push(it);
@@ -181,6 +183,7 @@
       </section>`;
     };
     return `${mode !== "live" ? `<p class="fa-ext bad">✗ X and TikTok need the add-on's automatic updates switched on (Today tab, top). Without them it can't download its X/TikTok part.</p>` : ""}
+      ${trendsCard()}
       ${card("x")}${card("tiktok")}
       <section class="fa-card">
         <header><h2>Settings</h2></header>
@@ -195,6 +198,31 @@
       </section>
       ${recent.length ? `<section class="fa-card"><header><h2>Recent X and TikTok posts</h2></header><ul class="fa-list">${recent.map(x => `<li class="${x.ok ? "" : "bad"}"><span>${x.ok ? "✓" : "✗"} ${NETS[x.net]} · ${esc(byK[x.k] ? label(byK[x.k]) : x.k)}</span><small>${esc(x.d)}${x.now ? " · post now" : ""}${x.why ? " · " + esc(x.why) : ""}</small></li>`).join("")}</ul></section>` : ""}`;
   }
+  // Today's trending hashtags (data/trends.json via admin/captions.js), used in every caption.
+  function trendsCard() {
+    const CAP = window.FAV_CAPTIONS;
+    if (!CAP || !CAP.trends) return "";
+    const T = CAP.trends(), day = today();
+    const chips = a => (a || []).length ? a.map(t => `<code>${esc(t)}</code>`).join(" ") : `<span class="muted">none yet</span>`;
+    const rows = T && T.nets ? [["X", T.nets.x], ["TikTok", T.nets.tiktok], ["Instagram", T.nets.instagram], ["Facebook", T.nets.facebook]] : [];
+    const aud = [["Ghanaians", "ghana"], ["Expats in Ghana", "expats"], ["Ghanaians abroad", "diaspora"], ["Travellers to Ghana", "travel"]];
+    return `<section class="fa-card">
+      <header><h2>Trending hashtags</h2><span class="muted fa-small">${T && T.d ? (T.d === day ? "checked today" : "last checked " + esc(T.d)) : "not checked yet"}</span></header>
+      <p class="muted">Every post mixes in today's trending tags for its network (trending tag first on X), plus tags for Ghanaians, expats in Ghana, Ghanaians abroad and travellers to Ghana. Only trends that are safe and fit a home and furniture brand are kept: no politics, tragedies or other brands' campaigns, so the posts aren't marked as spam.</p>
+      ${rows.length ? `<ul class="fa-list">${rows.map(([n, a]) => `<li><span><b>${n}</b> ${chips(a)}</span></li>`).join("")}</ul>` : ""}
+      <ul class="fa-list">${aud.map(([n, k]) => `<li><span><b>${n}</b> ${chips(((T && T.audiences) || {})[k] && T.audiences[k].length ? T.audiences[k] : CAP.AUDIENCE[k])}</span></li>`).join("")}</ul>
+      <div class="fa-actions"><button class="btn btn-ghost btn-sm" data-trends-refresh>↻ Check trends now</button></div>
+      <p class="muted fa-small">Checked automatically once a day when you open the Social autopilot.</p>
+    </section>`;
+  }
+  document.addEventListener("click", async e => {
+    const b = e.target.closest && e.target.closest("[data-trends-refresh]");
+    if (!b || !window.FAV_CAPTIONS) return;
+    A.busy("Checking today's trends on X, TikTok, Instagram and Facebook…");
+    try { await window.FAV_CAPTIONS.loadTrends(true); A.busy(null); A.toast("Trends updated ✓"); }
+    catch (err) { A.busy(null); return A.toast(/unknown|no_ai_key|not.*action/i.test(String(err && err.message)) ? "The backend needs updating first (see the note from Claude), or it has no AI key." : A.friendly(err), true); }
+    const tab = document.querySelector("[data-fa-tab][aria-selected=true]"); if (tab) tab.click();
+  });
   async function saveSettings(form) {
     const f = form.elements, clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, parseInt(v, 10) || lo));
     await save(s => {

@@ -98,6 +98,7 @@
   }
   const label = it => it.seasonal ? "Happy Customer Service Week" : it.studio ? "AI Studio: design your room free" : it.ad ? `${it.ad.headline} ${it.ad.accent} (${String(it.p.name).split(" — ")[0]})` : String(it.p.name).split(" — ")[0];
 
+  const ORDER = (items, keyOf, lastOf) => window.FAV_CAPTIONS && window.FAV_CAPTIONS.dailyOrder ? window.FAV_CAPTIONS.dailyOrder(items, keyOf, lastOf, 7) : items.slice().sort((a, b) => (lastOf(a) || "").localeCompare(lastOf(b) || ""));
   function plan() {
     const items = pool(), d = today();
     const okToday = S.posts.filter(x => x.d === d && x.ok && !x.now);   // "Post now" posts don't use up the daily plan
@@ -105,7 +106,8 @@
     const last = {};
     for (const x of S.posts) if (x.ok && (!last[x.k] || x.t > last[x.k])) last[x.k] = x.t;
     const usedProducts = new Set(okToday.map(x => x.p).filter(Boolean));
-    const sorted = items.slice().sort((a, b) => (last[a.k] || "").localeCompare(last[b.k] || ""));
+    // random order each day among photos not posted in the last week; recent ones wait at the back
+    const sorted = ORDER(items, i => i.k, i => last[i.k]);
     const queue = [];
     // Weekly spotlight: the headline promo goes first on the spotlight day
     const isSpot = new Date().getDay() === Number(S.settings.spotlight_day);

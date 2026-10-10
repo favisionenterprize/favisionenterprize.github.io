@@ -52,23 +52,99 @@
   }
 
   // ---------------------------------------------------------------- hashtags
+  // Our own tags + today's trending tags (data/trends.json, refreshed once a day by the backend
+  // "trends" action with web search, kept only when safe and relevant for a home/furniture brand)
+  // + audience tags so posts reach Ghanaians first, then expats in Ghana, Ghanaians abroad and
+  // travellers to Ghana. X gets the fewest tags (2–3 work best there), trending tag first.
   const TAGS = {
     brand: ["#FAVisionEnterprise", "#FAVision"],
     home: ["#FurnitureGhana", "#AccraFurniture", "#GhanaFurniture", "#HomeDecorGhana", "#AccraHomes", "#InteriorDesignGhana", "#OdorkorAccra", "#HomeGoals", "#LivingRoomIdeas", "#FurnitureAccra"],
     tiktok: ["#fyp", "#foryou", "#ghanatiktok", "#accra", "#furniture", "#homedecor"],
     partner: ["#Ghana", "#Accra", "#GhanaBusiness", "#ShopGhana", "#BuyGhana"]
   };
+  // Who we want to reach (always available, even before the first trend check).
+  const AUDIENCE = {
+    ghana: ["#Ghana", "#Accra", "#AccraGhana", "#GhanaToTheWorld", "#ShopGhana", "#Kasoa", "#Kumasi"],
+    expats: ["#ExpatsInGhana", "#LivingInGhana", "#AccraExpats", "#MovingToGhana", "#ExpatLife"],
+    diaspora: ["#GhanaDiaspora", "#GhanaiansAbroad", "#HomeInGhana", "#BuildingInGhana", "#ReturnToGhana"],
+    travel: ["#VisitGhana", "#ExploreGhana", "#GhanaTravel", "#AccraTravel", "#Akwaaba"]
+  };
+  let TR = null;   // today's trends: { d, nets: { x, tiktok, instagram, facebook }, audiences: {...} }
+  const okTag = t => /^#[\p{L}\p{N}_]{2,40}$/u.test(String(t || ""));
+  const clean = a => [].concat(a || []).map(t => String(t).trim()).map(t => t.startsWith("#") ? t : "#" + t).filter(okTag);
+  const NETKEY = { x: "x", tiktok: "tiktok", ig: "instagram", fb: "facebook", share: "facebook", youtube: "tiktok" };
+  function trending(net) {
+    if (!TR || !TR.nets) return [];
+    return clean(TR.nets[NETKEY[net] || "x"]);
+  }
+  function audience(k) { return clean(((TR && TR.audiences) || {})[k]).concat(AUDIENCE[k]); }
+  // Ghanaians first (half the time), the other three audiences take turns.
+  function audienceTags(n) {
+    const order = [Math.random() < 0.5 ? "ghana" : pick(["expats", "diaspora", "travel"])].concat(shuffle(["ghana", "expats", "diaspora", "travel"]));
+    const out = [];
+    for (const k of order) { if (out.length >= n) break; const t = shuffle(audience(k)).find(x => !out.includes(x)); if (t) out.push(t); }
+    return out;
+  }
   function tags(p, net, extra) {
-    if (net === "fb" || net === "share") return pick([0, 1]) ? "" : shuffle(TAGS.home).slice(0, 2).join(" ");
     const s = p && p.seller;
+    const tr = shuffle(trending(net));
+    if (net === "fb" || net === "share") {
+      if (Math.random() < 0.3) return "";
+      return [...new Set(tr.slice(0, 1).concat(audienceTags(1), shuffle(s ? TAGS.partner : TAGS.home).slice(0, 1)))].join(" ");
+    }
+    if (net === "x") {   // trending first so it survives the 280-character trim
+      return [...new Set(tr.slice(0, 1).concat(audienceTags(1), shuffle(s ? TAGS.partner : TAGS.home).slice(0, 1)))].join(" ");
+    }
     const pool = s ? TAGS.partner : TAGS.home;
-    const n = net === "x" ? 2 : net === "youtube" ? 4 : 5;
-    let t = shuffle(pool).slice(0, n);
-    if (net === "tiktok") t = t.concat(shuffle(TAGS.tiktok).slice(0, 3));
+    const n = net === "youtube" ? 3 : 4;
+    let t = shuffle(pool).slice(0, n).concat(tr.slice(0, 3), audienceTags(net === "youtube" ? 1 : 2));
+    if (net === "tiktok") t = t.concat(shuffle(TAGS.tiktok).slice(0, 2));
     if (net === "youtube") t.unshift("#Shorts");
     if (!s) t.push(pick(TAGS.brand));
     if (extra) t = String(extra).split(/\s+/).filter(Boolean).slice(0, 4).concat(t);
-    return [...new Set(t)].join(" ");
+    return [...new Set(t)].slice(0, net === "ig" ? 15 : 12).join(" ");
+  }
+
+  // ---------------------------------------------------------------- trends (data/trends.json)
+  const TFILE = "data/trends.json";
+  let refreshing = null;
+  async function loadTrends(force) {
+    const a = A(); if (!a) return TR;
+    try { TR = await a.readJsonFile(TFILE, null); } catch (e) { TR = TR || null; }
+    const day = new Date().toLocaleDateString("en-CA");
+    if ((force || !TR || TR.d !== day) && a.backendSigned && !refreshing) {
+      refreshing = (async () => {
+        try {
+          const r = await a.backendSigned({ action: "trends", day });
+          if (r && r.ok && r.nets) {
+            const next = { d: day, t: new Date().toISOString(), nets: {}, audiences: {}, topics: (r.topics || []).slice(0, 20), sources: (r.sources || []).slice(0, 10) };
+            for (const k of ["x", "tiktok", "instagram", "facebook"]) next.nets[k] = clean(r.nets[k]).slice(0, 10);
+            for (const k of ["ghana", "expats", "diaspora", "travel"]) next.audiences[k] = clean((r.audiences || {})[k]).slice(0, 8);
+            await a.saveJson(TFILE, () => next, "Trends: today's hashtags", {});
+            TR = next;
+          } else if (force) throw new Error((r && r.error) || "no_trends");
+        } finally { refreshing = null; }
+      })();
+      if (force) await refreshing; else refreshing.catch(() => null);
+    }
+    return TR;
+  }
+
+  // ---------------------------------------------------------------- random order that stays the same all day
+  // dayRank("FAV-012") gives a number 0..1, different every day, the same all day (so plans don't jump on reload).
+  function dayRank(key, day) {
+    const str = (day || new Date().toLocaleDateString("en-CA")) + "|" + key;
+    let h = 2166136261;
+    for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+    h ^= h >>> 13; h = Math.imul(h, 0x5bd1e995); h ^= h >>> 15;
+    return (h >>> 0) / 4294967296;
+  }
+  // Sort for the daily plans: anything not posted in the last `fresh` days comes first in a random
+  // order (new every day); recently posted things wait at the back, oldest first.
+  function dailyOrder(items, keyOf, lastOf, fresh) {
+    const cut = new Date(Date.now() - (fresh || 7) * 864e5).toLocaleDateString("en-CA");
+    const bucket = it => { const l = String(lastOf(it) || "").slice(0, 10); return !l || l < cut ? "" : l; };
+    return items.slice().sort((a, b) => bucket(a).localeCompare(bucket(b)) || dayRank(keyOf(a)) - dayRank(keyOf(b)));
   }
 
   // ---------------------------------------------------------------- one product
@@ -114,19 +190,27 @@
       const ROOM = 200;   // leave room for the "where are you seeing this from" ask (withAsk)
       if (t.length > ROOM) t = [hook, `${name}: ${price}.`, cta(p, o), f.link].join(" ");
       if (t.length > ROOM) t = `${name}: ${price}. WhatsApp ${f.wa} to order 👉 ${f.link}`;
-      const tg = tags(p, "x");
-      if ((t + " " + tg).length <= ROOM) t += " " + tg;
-      return t;
+      return xTags(t, p);
     }
     const body = shuffle([blurb, hl.map(h => `${bullet} ${h}`).join("\n")]).filter(Boolean);
     return [hook, "", ...body.flatMap(b => [b, ""]), priceLine, extra, place, pay, "", cta(p, o), link, "", tags(p, net, o.tags)].join("\n");
+  }
+
+  // X: add as many of the hashtags (trending one first) as fit in 200 characters, leaving room for the ask.
+  function xTags(t, p) {
+    const ROOM = 200;
+    t = String(t).trim();
+    if (t.length > ROOM) t = t.slice(0, ROOM).replace(/\s+\S*$/, "");
+    const tg = tags(p, "x").split(" ").filter(Boolean);
+    for (let k = tg.length; k > 0; k--) { const add = tg.slice(0, k).join(" "); if ((t + " " + add).length <= ROOM) return t + " " + add; }
+    return t;
   }
 
   // ---------------------------------------------------------------- AI Studio and general (brand) posts
   function studio(o) {
     const net = o.net || "fb";
     const link = inBio(net) ? "link in bio" : site() + "studio/";
-    if (net === "x") return `${pick(["See your room before you buy ✨", "Design your room free 🎨"])} Try F.A Vision AI Studio, then order only what you love. ${site()}studio/ ${cta(null, o)}`.slice(0, 280);
+    if (net === "x") return xTags(`${pick(["See your room before you buy ✨", "Design your room free 🎨"])} Try F.A Vision AI Studio, then order only what you love. ${site()}studio/ ${cta(null, o)}`, null);
     return [
       pick(["See your room before you buy it ✨", "Design your dream room for FREE 🎨", "Not sure what fits your space? Try it first 👀", "Plan your room in minutes with AI ✨"]),
       "",
@@ -141,7 +225,7 @@
   function general(o) {
     const net = o.net || "fb";
     const what = o.subject ? String(o.subject).trim() : "";
-    if (net === "x") return `${what || pick(["Quality furniture for every home 🛋️", "New pieces in the showroom ✨"])} ${cta(null, o)} ${site()}`.slice(0, 280);
+    if (net === "x") return xTags(`${what || pick(["Quality furniture for every home 🛋️", "New pieces in the showroom ✨"])} ${cta(null, o)} ${site()}`, null);
     return [
       what || pick(["Quality furniture for every home and office 🛋️", "Comfort, style and durability, at prices that make sense ✨", "Turning houses into homes across Accra 🏠", "Sofas, beds, dining sets, wardrobes and more 🔥"]),
       "",
@@ -210,5 +294,5 @@
     const name = short(p), price = money(p.price_ghs);
     return pick([`${name} – ${price} in Ghana`, `${name} for ${price} 🔥`, `Look at this ${name.toLowerCase()} 😍`, `${name} | Furniture in Accra`, `${name}: worth ${price}?`, `${name} at F.A Vision, Odorkor`]).slice(0, 100 - sh.length) + sh;
   }
-  window.FAV_CAPTIONS = { write, title, cta, tags, comment };
+  window.FAV_CAPTIONS = { write, title, cta, tags, comment, loadTrends, trends: () => TR, trending, audienceTags, AUDIENCE, dayRank, dailyOrder };
 })();
