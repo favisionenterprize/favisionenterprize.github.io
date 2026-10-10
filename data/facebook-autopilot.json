@@ -6755,6 +6755,30 @@
    "ok": false,
    "now": true,
    "why": "We limit how often"
+  },
+  {
+   "d": "2026-10-10",
+   "t": "2026-10-10T08:20:05.805Z",
+   "p": "FAV-006",
+   "g": "1145676989186606",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-10",
+   "t": "2026-10-10T08:20:47.428Z",
+   "p": "FAV-006",
+   "g": "1367025170347293",
+   "ok": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-10",
+   "t": "2026-10-10T08:24:22.385Z",
+   "p": "FAV-006",
+   "g": "1412859638977189",
+   "ok": true,
+   "why": "Waiting for admin approval"
   }
  ],
  "resets": {},
@@ -7018,6 +7042,14 @@
    "kind": "grow",
    "joined": 18,
    "requested": 2
+  },
+  {
+   "d": "2026-10-10",
+   "t": "2026-10-10T08:25:44.981Z",
+   "kind": "post",
+   "tried": 3,
+   "ok": 2,
+   "stopped": "Facebook showed \"You Can't Use This Feature\". Nothing more was posted."
   }
  ],
  "removed": [
