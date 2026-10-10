@@ -7813,6 +7813,14 @@
    "tried": 3,
    "ok": 2,
    "stopped": "Facebook showed \"You Can't Use This Feature\". Nothing more was posted."
+  },
+  {
+   "d": "2026-10-10",
+   "t": "2026-10-10T09:24:44.156Z",
+   "kind": "renew",
+   "tried": 0,
+   "ok": 0,
+   "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile in Facebook, then tap Renew again."
   }
  ],
  "removed": [
