@@ -9126,6 +9126,14 @@
    "kind": "renew",
    "tried": 45,
    "ok": 0
+  },
+  {
+   "d": "2026-10-10",
+   "t": "2026-10-10T11:09:49.201Z",
+   "kind": "post",
+   "tried": 0,
+   "ok": 0,
+   "stopped": "Stopped by you."
   }
  ],
  "removed": [
