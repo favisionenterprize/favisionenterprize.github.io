@@ -29,7 +29,13 @@
   "max_invites": 500,
   "likers_text": "{names} thank you for liking our ad 🙏 Follow F.A Vision Enterprise and like the page for more deals!",
   "likers_per_comment": 4,
-  "max_likers": 200
+  "max_likers": 200,
+  "thank_nets": {
+   "fb": true,
+   "ig": true,
+   "x": true,
+   "tiktok": true
+  }
  },
  "followers": [
   {
