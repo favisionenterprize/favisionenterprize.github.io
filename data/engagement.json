@@ -67,6 +67,11 @@
    "d": "2026-10-08",
    "net": "ig",
    "n": 890
+  },
+  {
+   "d": "2026-10-11",
+   "net": "ig",
+   "n": 890
   }
  ],
  "posts": {
@@ -157,7 +162,7 @@
     }
    ],
    "title": "Instagram",
-   "checked": "2026-10-08"
+   "checked": "2026-10-11"
   },
   "https://www.instagram.com/reel/DYk7xGboiMo/": {
    "net": "ig",
@@ -165,7 +170,7 @@
    "first": "2026-10-07",
    "commented": [],
    "title": "Instagram",
-   "checked": "2026-10-08"
+   "checked": "2026-10-11"
   },
   "https://www.instagram.com/reel/C1Tge8mgCKR/": {
    "net": "ig",
@@ -173,7 +178,7 @@
    "first": "2026-10-07",
    "commented": [],
    "title": "Instagram",
-   "checked": "2026-10-08"
+   "checked": "2026-10-11"
   },
   "https://www.instagram.com/p/DeM-zwRCBti/": {
    "net": "ig",
@@ -579,6 +584,78 @@
    "commented": [],
    "title": "(5)Still juggling multiple suppliers for your bedroom and beauty furnitur...",
    "checked": "2026-10-08"
+  },
+  "https://www.instagram.com/p/DeT574biDMr/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/DeT574biDMr/",
+   "first": "2026-10-11",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-10-11"
+  },
+  "https://www.instagram.com/p/DeT52hUCFR4/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/DeT52hUCFR4/",
+   "first": "2026-10-11",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-10-11"
+  },
+  "https://www.instagram.com/p/DeT5wRqCOtD/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/DeT5wRqCOtD/",
+   "first": "2026-10-11",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-10-11"
+  },
+  "https://www.instagram.com/p/DeT5p8rCHbm/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/DeT5p8rCHbm/",
+   "first": "2026-10-11",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-10-11"
+  },
+  "https://www.instagram.com/p/DeT5jaTiE4E/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/DeT5jaTiE4E/",
+   "first": "2026-10-11",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-10-11"
+  },
+  "https://www.instagram.com/p/DeT5d87CEYI/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/DeT5d87CEYI/",
+   "first": "2026-10-11",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-10-11"
+  },
+  "https://www.instagram.com/p/DeT5YX8CHw7/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/DeT5YX8CHw7/",
+   "first": "2026-10-11",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-10-11"
+  },
+  "https://www.instagram.com/p/DeT5MsFiI5-/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/DeT5MsFiI5-/",
+   "first": "2026-10-11",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-10-11"
+  },
+  "https://www.instagram.com/p/DeT5GfVCOHC/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/DeT5GfVCOHC/",
+   "first": "2026-10-11",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-10-11"
   }
  },
  "runs": [
@@ -900,6 +977,21 @@
    "thanked": 0,
    "followers": null,
    "stopped": "TikTok has no invite-friends feature.",
+   "commenting": false
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:39:53.252Z",
+   "net": "ig",
+   "mode": "reply",
+   "posts": 12,
+   "checked": 12,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 890,
+   "stopped": null,
    "commenting": false
   }
  ],
