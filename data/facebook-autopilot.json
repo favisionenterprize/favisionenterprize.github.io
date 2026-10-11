@@ -8457,6 +8457,166 @@
    "ok": false,
    "now": true,
    "why": "We limit how often"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:34:18.878Z",
+   "p": "FAV-031",
+   "g": "392605194108401",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:34:45.743Z",
+   "p": "FAV-031",
+   "g": "diaboloways",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:35:13.707Z",
+   "p": "FAV-031",
+   "g": "109466021249490",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:35:41.957Z",
+   "p": "FAV-031",
+   "g": "225063174497183",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:36:09.671Z",
+   "p": "FAV-031",
+   "g": "391477037975889",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:36:41.090Z",
+   "p": "FAV-031",
+   "g": "1920187655278551",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:37:17.551Z",
+   "p": "FAV-031",
+   "g": "organicshoppingcentrergh",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:37:49.710Z",
+   "p": "FAV-031",
+   "g": "726805024646976",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:38:19.740Z",
+   "p": "FAV-031",
+   "g": "838250582621741",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:38:50.698Z",
+   "p": "FAV-031",
+   "g": "2651053661601174",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:48:21.501Z",
+   "p": "FAV-031",
+   "g": "264912567379254",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:48:50.338Z",
+   "p": "FAV-031",
+   "g": "548561573854951",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:49:17.711Z",
+   "p": "FAV-031",
+   "g": "667719126905919",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:49:47.313Z",
+   "p": "FAV-031",
+   "g": "1526935564182914",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:50:36.316Z",
+   "p": "FAV-031",
+   "g": "149869398975301",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:51:02.875Z",
+   "p": "FAV-031",
+   "g": "201128397214211",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:51:30.797Z",
+   "p": "FAV-031",
+   "g": "1043708372763307",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:51:58.994Z",
+   "p": "FAV-031",
+   "g": "1268682153222170",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:52:25.785Z",
+   "p": "FAV-031",
+   "g": "1723555304651988",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:52:53.284Z",
+   "p": "FAV-031",
+   "g": "917243369247662",
+   "ok": false,
+   "why": "Not a member of this group"
   }
  ],
  "resets": {},
@@ -9134,6 +9294,13 @@
    "tried": 0,
    "ok": 0,
    "stopped": "Stopped by you."
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:53:04.561Z",
+   "kind": "post",
+   "tried": 20,
+   "ok": 0
   }
  ],
  "removed": [
