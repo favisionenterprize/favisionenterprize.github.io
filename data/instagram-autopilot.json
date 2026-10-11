@@ -483,6 +483,86 @@
    "k": "card:FAV-030",
    "p": "FAV-030",
    "ok": true
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:35:06.895Z",
+   "k": "presence:fav-001",
+   "p": "FAV-001",
+   "ok": false,
+   "why": "Instagram didn't take the photo"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:35:46.767Z",
+   "k": "presence:fav-011",
+   "p": "FAV-011",
+   "ok": false,
+   "why": "Instagram didn't take the photo"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:36:27.748Z",
+   "k": "tile:fav-008",
+   "p": "FAV-008",
+   "ok": false,
+   "why": "Instagram didn't take the photo"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:37:18.136Z",
+   "k": "presence:fav-010",
+   "p": "FAV-010",
+   "ok": false,
+   "why": "Instagram didn't take the photo"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:38:06.310Z",
+   "k": "presence:fav-014",
+   "p": "FAV-014",
+   "ok": false,
+   "why": "Instagram didn't take the photo"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:38:51.408Z",
+   "k": "tile:fav-024",
+   "p": "FAV-024",
+   "ok": false,
+   "why": "Instagram didn't take the photo"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:48:09.604Z",
+   "k": "card:FAV-029",
+   "p": "FAV-029",
+   "ok": false,
+   "why": "Instagram didn't take the photo"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:48:50.344Z",
+   "k": "card:FAV-026",
+   "p": "FAV-026",
+   "ok": false,
+   "why": "Instagram didn't take the photo"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:49:31.963Z",
+   "k": "card:FAV-021",
+   "p": "FAV-021",
+   "ok": false,
+   "why": "Instagram didn't take the photo"
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:50:35.108Z",
+   "k": "season:customer-service-week-2026",
+   "p": null,
+   "ok": false,
+   "why": "Instagram didn't take the photo"
   }
  ],
  "profile": [
@@ -521,6 +601,12 @@
    "followers": 890,
    "following": 2007,
    "posts": 189
+  },
+  {
+   "d": "2026-10-11",
+   "followers": 890,
+   "following": 2010,
+   "posts": 198
   }
  ],
  "runs": [
@@ -616,6 +702,13 @@
    "kind": "ig",
    "tried": 10,
    "ok": 9
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:51:02.058Z",
+   "kind": "ig",
+   "tried": 10,
+   "ok": 0
   }
  ]
 }
