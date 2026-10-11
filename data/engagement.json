@@ -1038,6 +1038,21 @@
    "followers": 890,
    "stopped": null,
    "commenting": false
+  },
+  {
+   "d": "2026-10-11",
+   "t": "2026-10-11T16:42:18.423Z",
+   "net": "x",
+   "mode": "invite",
+   "posts": 0,
+   "checked": 0,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": null,
+   "stopped": "X has no invite-friends feature.",
+   "commenting": false
   }
  ],
  "liked": {}
