@@ -216,8 +216,9 @@
    "id": "bssinaccra",
    "name": "Buy & Sell New or used in ACCRA (Ghana)",
    "url": "https://www.facebook.com/groups/bssinaccra/",
-   "active": true,
-   "added": "2026-10-13"
+   "active": false,
+   "added": "2026-10-13",
+   "off_why": "Not a member of this group"
   },
   {
    "id": "533510970636131",
@@ -1197,6 +1198,33 @@
    "ok": false,
    "now": true,
    "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:29:32.839Z",
+   "p": "FAV-014",
+   "g": "169856196719821",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:29:59.830Z",
+   "p": "FAV-014",
+   "g": "bssinaccra",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:30:28.185Z",
+   "p": "FAV-014",
+   "g": "533510970636131",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
   }
  ],
  "resets": {},
@@ -1247,6 +1275,13 @@
    "kind": "post",
    "tried": 14,
    "ok": 5
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:30:42.110Z",
+   "kind": "post",
+   "tried": 3,
+   "ok": 1
   }
  ]
 }
