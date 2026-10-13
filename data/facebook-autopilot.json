@@ -1415,6 +1415,303 @@
    "ok": false,
    "now": true,
    "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T20:48:51.216Z",
+   "p": "FAV-025",
+   "g": "688229241385954",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T20:49:47.000Z",
+   "p": "FAV-025",
+   "g": "3295010260530139",
+   "ok": false,
+   "now": true,
+   "why": "Post box didn't open"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T20:50:20.516Z",
+   "p": "FAV-025",
+   "g": "433382596714655",
+   "ok": false,
+   "now": true,
+   "why": "Post box didn't open"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T20:50:49.905Z",
+   "p": "FAV-025",
+   "g": "455961835149809",
+   "ok": false,
+   "now": true,
+   "why": "Post box didn't open"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T20:51:43.382Z",
+   "p": "FAV-025",
+   "g": "tltshopgroup",
+   "ok": false,
+   "now": true,
+   "why": "Post box didn't open"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T20:54:20.647Z",
+   "p": "FAV-025",
+   "g": "555856695137297",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T20:55:58.534Z",
+   "p": "FAV-025",
+   "g": "202260457082921",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T20:56:57.471Z",
+   "p": "FAV-025",
+   "g": "1328490837168650",
+   "ok": false,
+   "now": true,
+   "why": "Post box didn't open"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T20:58:27.130Z",
+   "p": "FAV-025",
+   "g": "907088049979819",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T20:59:40.572Z",
+   "p": "FAV-025",
+   "g": "2260951624062487",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:00:38.660Z",
+   "p": "FAV-025",
+   "g": "1913588495528647",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:02:17.960Z",
+   "p": "FAV-025",
+   "g": "461960315943081",
+   "ok": false,
+   "now": true,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:28:09.082Z",
+   "p": "FAV-025",
+   "g": "400333275396635",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:28:53.518Z",
+   "p": "FAV-025",
+   "g": "1434712039912937",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:29:14.019Z",
+   "p": "FAV-025",
+   "g": "994523464506238",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:30:01.753Z",
+   "p": "FAV-025",
+   "g": "671759327593437",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:30:58.663Z",
+   "p": "FAV-025",
+   "g": "1550934621851396",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:31:29.015Z",
+   "p": "FAV-025",
+   "g": "228215741084312",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:32:23.482Z",
+   "p": "FAV-025",
+   "g": "7314540974",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:33:10.088Z",
+   "p": "FAV-025",
+   "g": "cometoaccra",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:33:57.227Z",
+   "p": "FAV-025",
+   "g": "650579767131006",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:34:47.335Z",
+   "p": "FAV-025",
+   "g": "1710392929742308",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:35:07.587Z",
+   "p": "FAV-025",
+   "g": "293517128059625",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:35:30.562Z",
+   "p": "FAV-025",
+   "g": "1598448630416654",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:35:59.768Z",
+   "p": "FAV-025",
+   "g": "382522171847495",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:36:42.931Z",
+   "p": "FAV-025",
+   "g": "139560271489581",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:37:24.862Z",
+   "p": "FAV-025",
+   "g": "180212603087458",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:37:44.785Z",
+   "p": "FAV-025",
+   "g": "195199285857356",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:38:08.111Z",
+   "p": "FAV-025",
+   "g": "324168798801822",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:38:53.302Z",
+   "p": "FAV-025",
+   "g": "kofitv",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:39:36.096Z",
+   "p": "FAV-025",
+   "g": "397641595383636",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:40:05.056Z",
+   "p": "FAV-025",
+   "g": "495508180829744",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:41:25.174Z",
+   "p": "FAV-025",
+   "g": "497509459086362",
+   "ok": false,
+   "now": true,
+   "why": "We limit how often"
   }
  ],
  "resets": {},
@@ -1486,6 +1783,14 @@
    "kind": "post",
    "tried": 20,
    "ok": 18
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:41:32.569Z",
+   "kind": "post",
+   "tried": 33,
+   "ok": 20,
+   "stopped": "Facebook showed \"We limit how often\". Nothing more was posted."
   }
  ]
 }
