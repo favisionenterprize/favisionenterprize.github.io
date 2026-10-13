@@ -37,8 +37,51 @@
    "tiktok": true
   }
  },
- "followers": [],
- "posts": {},
+ "followers": [
+  {
+   "d": "2026-10-13",
+   "net": "fb",
+   "n": 551
+  }
+ ],
+ "posts": {
+  "https://www.facebook.com/FaVisionEnterprise/posts/pfbid02xXNCWkm5n6uqyVD2QsJxVoJGcxXMkpQ5wAgddJkMZHvihuyDFxWQk2Ae3BssQ6Pvl": {
+   "net": "fb",
+   "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid02xXNCWkm5n6uqyVD2QsJxVoJGcxXMkpQ5wAgddJkMZHvihuyDFxWQk2Ae3BssQ6Pvl",
+   "first": "2026-10-13",
+   "commented": [
+    {
+     "d": "before",
+     "text": ""
+    }
+   ],
+   "title": "(20+) Fresh stock, just arrived! 🎒📚 Our new... - F.A Vision Enterprise",
+   "checked": "2026-10-13",
+   "likes": 4100
+  },
+  "https://www.facebook.com/FaVisionEnterprise/posts/pfbid02bKzEr651HS6dtioGcFFbf1i4NjvLR8tLC4AyKyFEuekXAzffzdDiPs3uZrVJ9JHTl": {
+   "net": "fb",
+   "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid02bKzEr651HS6dtioGcFFbf1i4NjvLR8tLC4AyKyFEuekXAzffzdDiPs3uZrVJ9JHTl",
+   "first": "2026-10-13",
+   "commented": [
+    {
+     "d": "before",
+     "text": ""
+    }
+   ],
+   "title": "(20+) Fresh stock, just arrived! 🎒📚 Our new... - F.A Vision Enterprise",
+   "checked": "2026-10-13",
+   "likes": 4100
+  },
+  "https://www.facebook.com/FaVisionEnterprise/videos/442786224559428/": {
+   "net": "fb",
+   "url": "https://www.facebook.com/FaVisionEnterprise/videos/442786224559428/",
+   "first": "2026-10-13",
+   "commented": [],
+   "title": "Video",
+   "checked": "2026-10-13"
+  }
+ },
  "runs": [
   {
    "d": "2026-10-13",
@@ -84,6 +127,21 @@
    "followers": null,
    "stopped": "No posts found on your Facebook profile.",
    "commenting": false
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:01:12.370Z",
+   "net": "fb",
+   "mode": "comment",
+   "posts": 3,
+   "checked": 3,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 551,
+   "stopped": null,
+   "commenting": true
   }
  ],
  "liked": {}
