@@ -5240,9 +5240,7 @@
    "added": "2026-10-10",
    "members": 182000,
    "source": "autopilot",
-   "active": false,
-   "pending": true,
-   "off_why": "Waiting for the group's admin to accept us"
+   "active": true
   },
   {
    "id": "246365003047126",
@@ -5278,9 +5276,7 @@
    "added": "2026-10-10",
    "members": 123000,
    "source": "autopilot",
-   "active": false,
-   "pending": true,
-   "off_why": "Join request needs answers: open the group on Facebook and answer its questions"
+   "active": true
   },
   {
    "id": "264043484022478",
@@ -5312,7 +5308,7 @@
   },
   {
    "id": "963693663767065",
-   "name": "NAKURU  furniture limited",
+   "name": "NAKURU furniture limited",
    "url": "https://www.facebook.com/groups/963693663767065/",
    "active": true,
    "added": "2026-10-10"
@@ -6044,6 +6040,1343 @@
    "url": "https://www.facebook.com/groups/659946600378292/",
    "active": true,
    "added": "2026-10-10"
+  },
+  {
+   "id": "claudecommunity",
+   "name": "Claude Community",
+   "url": "https://www.facebook.com/groups/claudecommunity/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "claudeaicommunity",
+   "name": "Claude Ai Community",
+   "url": "https://www.facebook.com/groups/claudeaicommunity/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1348711550214520",
+   "name": "Artificial Intelligence News • AI Tools • ChatGPT Prompts",
+   "url": "https://www.facebook.com/groups/1348711550214520/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "vibecodinglife",
+   "name": "Vibe Coding is Life",
+   "url": "https://www.facebook.com/groups/vibecodinglife/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "secondhandfurnitureportugal",
+   "name": "Second Hand Furniture Portugal",
+   "url": "https://www.facebook.com/groups/secondhandfurnitureportugal/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "345937738453048",
+   "name": "CHEAP LONDON SECOND HAND FURNITURE",
+   "url": "https://www.facebook.com/groups/345937738453048/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1116874682560106",
+   "name": "Furniture Repair & Restoration",
+   "url": "https://www.facebook.com/groups/1116874682560106/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1533724513558622",
+   "name": "Furniture Market in Australia",
+   "url": "https://www.facebook.com/groups/1533724513558622/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1741642912744052",
+   "name": "GTA ANTIQUE /VINTAGE FURNITURE BUY N SELL",
+   "url": "https://www.facebook.com/groups/1741642912744052/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "964037770331292",
+   "name": "Furniture sale and parchace",
+   "url": "https://www.facebook.com/groups/964037770331292/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1082991006724632",
+   "name": "Juhi Furniture",
+   "url": "https://www.facebook.com/groups/1082991006724632/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "707775259414844",
+   "name": "JYOTIRMOY GARMENTS & FURNITURES",
+   "url": "https://www.facebook.com/groups/707775259414844/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1135642811136193",
+   "name": "FREE AND BUY FURNITURE.",
+   "url": "https://www.facebook.com/groups/1135642811136193/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "163793881741634",
+   "name": "Nairobi ALL Used household items(electrical appliances, furniture)",
+   "url": "https://www.facebook.com/groups/163793881741634/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "909360278192005",
+   "name": "Uk second hand &New furniture Market �",
+   "url": "https://www.facebook.com/groups/909360278192005/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "447135391588874",
+   "name": "NEW AND FAILY USED FURNITURE ABUJA",
+   "url": "https://www.facebook.com/groups/447135391588874/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "2894560353956422",
+   "name": "AUTO FURNITURE WHOLESALERS AND MANUFACTURERS",
+   "url": "https://www.facebook.com/groups/2894560353956422/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "3948861122106468",
+   "name": "Furniture Flipping Tips - before & after",
+   "url": "https://www.facebook.com/groups/3948861122106468/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "718943768494941",
+   "name": "FURNITURE SOURCE BUY AND SELL",
+   "url": "https://www.facebook.com/groups/718943768494941/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "624650029368746",
+   "name": "Kimberley Furniture Buy and Sell",
+   "url": "https://www.facebook.com/groups/624650029368746/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "466334783868699",
+   "name": "NDOLA SECOND HAND FURNITURES AND HOME APPLIANCES FOR SALE",
+   "url": "https://www.facebook.com/groups/466334783868699/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "500753507817267",
+   "name": "ABUJA NEW AND USED FURNITURE",
+   "url": "https://www.facebook.com/groups/500753507817267/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1326062365906787",
+   "name": "𝖮𝖪 𝖿𝗎𝗋𝗇𝗂𝗍𝗎𝗋𝖾 𝖿𝖺𝗇𝗌",
+   "url": "https://www.facebook.com/groups/1326062365906787/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1378928569473110",
+   "name": "BULLION FURNITURE NG",
+   "url": "https://www.facebook.com/groups/1378928569473110/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "517712681054664",
+   "name": "Zokambilana furniture (0881015006)",
+   "url": "https://www.facebook.com/groups/517712681054664/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "343763939354865",
+   "name": "Secondhand furniture Pretoria",
+   "url": "https://www.facebook.com/groups/343763939354865/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "furniturerepublic",
+   "name": "Furniture Nigeria",
+   "url": "https://www.facebook.com/groups/furniturerepublic/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "282275224626513",
+   "name": "NAIJA FURNITURE MARKET",
+   "url": "https://www.facebook.com/groups/282275224626513/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "521905256164495",
+   "name": "নতুন পুরাতন ফার্নিচার ক্রয় বিক্রয় Buy and Sell New or Old Furniture",
+   "url": "https://www.facebook.com/groups/521905256164495/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "322940890011079",
+   "name": "Furniture Reviews in Egypt",
+   "url": "https://www.facebook.com/groups/322940890011079/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1213791442303110",
+   "name": "indian furniture design nd",
+   "url": "https://www.facebook.com/groups/1213791442303110/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "329443866631729",
+   "name": "Murang bilihan ng mga furniture 😊❤😊💓",
+   "url": "https://www.facebook.com/groups/329443866631729/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1513282760046576",
+   "name": "Furniture Reviews in Damietta",
+   "url": "https://www.facebook.com/groups/1513282760046576/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "651059692348620",
+   "name": "ABBA OZIL FURNITURE GLOBAL LINK AND GENERAL MERCHANT",
+   "url": "https://www.facebook.com/groups/651059692348620/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "4232497506868793",
+   "name": "My furniture",
+   "url": "https://www.facebook.com/groups/4232497506868793/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "914947162844106",
+   "name": "BENTAHAN NG MURANG FURNITURE (SALA SET / DINING / BEDFRAMES / PLATERA )",
+   "url": "https://www.facebook.com/groups/914947162844106/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "758085211455482",
+   "name": "Buy & sell used furniture in UAE",
+   "url": "https://www.facebook.com/groups/758085211455482/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "589379282622353",
+   "name": "Pune Furniture Sell & buy",
+   "url": "https://www.facebook.com/groups/589379282622353/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "360461425837432",
+   "name": "All free furniture/ free stuff nothing for sale",
+   "url": "https://www.facebook.com/groups/360461425837432/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "876916523040071",
+   "name": "Old Furniture Isb & Rwp",
+   "url": "https://www.facebook.com/groups/876916523040071/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "362314267547479",
+   "name": "RIYADH BUY & SELL ( house hold items, furniture etc)",
+   "url": "https://www.facebook.com/groups/362314267547479/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1685047752303231",
+   "name": "Canada Ontario \" Furniture \" Sell and Buy",
+   "url": "https://www.facebook.com/groups/1685047752303231/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "wayneosreclaimtimberfurniturefreak",
+   "name": "Wooden Furniture Design",
+   "url": "https://www.facebook.com/groups/wayneosreclaimtimberfurniturefreak/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "687182923407548",
+   "name": "DIRECT PAGAWAAN PHILIPPINES MURANG FURNITURE",
+   "url": "https://www.facebook.com/groups/687182923407548/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "872672258024330",
+   "name": "FK Furniture",
+   "url": "https://www.facebook.com/groups/872672258024330/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "2216207181996459",
+   "name": "Furniture and Home Decor Buy and Sell",
+   "url": "https://www.facebook.com/groups/2216207181996459/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1513369195649746",
+   "name": "Furniture For Sale Only",
+   "url": "https://www.facebook.com/groups/1513369195649746/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "987152452677837",
+   "name": "KARAN FURNITURE DESIGN",
+   "url": "https://www.facebook.com/groups/987152452677837/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1025652208510078",
+   "name": "Furniture work 1",
+   "url": "https://www.facebook.com/groups/1025652208510078/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1527761071913052",
+   "name": "CHAIRS FRAME Work And FURNITURE Workers",
+   "url": "https://www.facebook.com/groups/1527761071913052/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1111362383723014",
+   "name": "Furniture ideas",
+   "url": "https://www.facebook.com/groups/1111362383723014/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "990575425291194",
+   "name": "Philippines Furniture",
+   "url": "https://www.facebook.com/groups/990575425291194/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1544779479730752",
+   "name": "cp furniture",
+   "url": "https://www.facebook.com/groups/1544779479730752/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "935337094421911",
+   "name": "Furniture group",
+   "url": "https://www.facebook.com/groups/935337094421911/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "3400206070240349",
+   "name": "Smart furniture mat",
+   "url": "https://www.facebook.com/groups/3400206070240349/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1177150933952921",
+   "name": "Krishna carpenter furniture wood",
+   "url": "https://www.facebook.com/groups/1177150933952921/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1753729201743686",
+   "name": "Mr wooden furniture table and chairs",
+   "url": "https://www.facebook.com/groups/1753729201743686/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "953902948316292",
+   "name": "Made In Nigeria Furniture",
+   "url": "https://www.facebook.com/groups/953902948316292/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1545532683027199",
+   "name": "ELDORET FURNITURE 0768307562.",
+   "url": "https://www.facebook.com/groups/1545532683027199/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "766589794403121",
+   "name": "nigerian furniture",
+   "url": "https://www.facebook.com/groups/766589794403121/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "820982346197285",
+   "name": "ALL ABUJA FURNITURES MARKET",
+   "url": "https://www.facebook.com/groups/820982346197285/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "2600372936761228",
+   "name": "saani furniture works",
+   "url": "https://www.facebook.com/groups/2600372936761228/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "810271179969514",
+   "name": "Furniture",
+   "url": "https://www.facebook.com/groups/810271179969514/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1581875612326482",
+   "name": "Furniture designer",
+   "url": "https://www.facebook.com/groups/1581875612326482/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "6013475958780011",
+   "name": "Furniture works",
+   "url": "https://www.facebook.com/groups/6013475958780011/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1434687514013946",
+   "name": "Furniture morderne Tv stand",
+   "url": "https://www.facebook.com/groups/1434687514013946/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1970375350184180",
+   "name": "Furniture design",
+   "url": "https://www.facebook.com/groups/1970375350184180/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1733426363624316",
+   "name": "See You In Ghana!",
+   "url": "https://www.facebook.com/groups/1733426363624316/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1000443098735205",
+   "name": "furniture Group",
+   "url": "https://www.facebook.com/groups/1000443098735205/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "3304993546450481",
+   "name": "High dee furniture 🥇🔨🔨 make your chair and bed dining tables wardrobes",
+   "url": "https://www.facebook.com/groups/3304993546450481/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "316219450487776",
+   "name": "Furniture Hub Naija",
+   "url": "https://www.facebook.com/groups/316219450487776/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "650944189882777",
+   "name": "HIGH QUALITY STANDARD FURNITURE MAKING ABUJA",
+   "url": "https://www.facebook.com/groups/650944189882777/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "936759847712124",
+   "name": "NOAH CLASSIC FURNITURE INTERIOR,08080545841",
+   "url": "https://www.facebook.com/groups/936759847712124/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "203478074113075",
+   "name": "ROYAL FURNITURE AND INTERIOR DECORATION/ELECTRICALS DISPLAY GROUP",
+   "url": "https://www.facebook.com/groups/203478074113075/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "10014299425255504",
+   "name": "Furniture work group",
+   "url": "https://www.facebook.com/groups/10014299425255504/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "902588068756442",
+   "name": "oga foreign furniture",
+   "url": "https://www.facebook.com/groups/902588068756442/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "852686693387991",
+   "name": "S R furniture design",
+   "url": "https://www.facebook.com/groups/852686693387991/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "4518026374894411",
+   "name": "Furniture market",
+   "url": "https://www.facebook.com/groups/4518026374894411/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "338656108275589",
+   "name": "kennan furniture",
+   "url": "https://www.facebook.com/groups/338656108275589/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "484909397566930",
+   "name": "Home furniture group",
+   "url": "https://www.facebook.com/groups/484909397566930/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "510312310365390",
+   "name": "sofa set and furniture",
+   "url": "https://www.facebook.com/groups/510312310365390/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1093888814859434",
+   "name": "Furniture design",
+   "url": "https://www.facebook.com/groups/1093888814859434/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "728140486331394",
+   "name": "Furniture Designers",
+   "url": "https://www.facebook.com/groups/728140486331394/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "827259908263328",
+   "name": "Furniture group",
+   "url": "https://www.facebook.com/groups/827259908263328/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1623518648336319",
+   "name": "Furniture group",
+   "url": "https://www.facebook.com/groups/1623518648336319/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "159378603916994",
+   "name": "Abuja furniture producers",
+   "url": "https://www.facebook.com/groups/159378603916994/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "574413890571353",
+   "name": "Furniture group",
+   "url": "https://www.facebook.com/groups/574413890571353/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1517116778559975",
+   "name": "Furnitures discussion",
+   "url": "https://www.facebook.com/groups/1517116778559975/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "738374556008198",
+   "name": "furniture group",
+   "url": "https://www.facebook.com/groups/738374556008198/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "324514989124170",
+   "name": "Nigerian furniture group",
+   "url": "https://www.facebook.com/groups/324514989124170/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "freeeestufff",
+   "name": "All free stuff / free furniture/ groceries (Nothing for Sale )",
+   "url": "https://www.facebook.com/groups/freeeestufff/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "482367426282568",
+   "name": "Used Furniture Buy & Sell In Dubai",
+   "url": "https://www.facebook.com/groups/482367426282568/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "855161833500333",
+   "name": "Used Furniture Karachi",
+   "url": "https://www.facebook.com/groups/855161833500333/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1673829269478493",
+   "name": "Second hand furniture (Mumbai & Pune)",
+   "url": "https://www.facebook.com/groups/1673829269478493/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "3601612466798714",
+   "name": "Old and New sofa furniture Sell & Buy point Karachi",
+   "url": "https://www.facebook.com/groups/3601612466798714/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "911556667428924",
+   "name": "All free furniture/ free stuff nothing for sale",
+   "url": "https://www.facebook.com/groups/911556667428924/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "959023124822779",
+   "name": "OLD furniture rwp isb",
+   "url": "https://www.facebook.com/groups/959023124822779/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "592127270965534",
+   "name": "Second hand furniture (Delhi NCR)",
+   "url": "https://www.facebook.com/groups/592127270965534/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "483249323266922",
+   "name": "CAVITE FURNITURE SHOP",
+   "url": "https://www.facebook.com/groups/483249323266922/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1282674869244530",
+   "name": "Mumbai Second Hand Furniture (Buy & Sell)",
+   "url": "https://www.facebook.com/groups/1282674869244530/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "907922267422530",
+   "name": "USED FURNITURE FOR SALE IN LAHORE",
+   "url": "https://www.facebook.com/groups/907922267422530/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "502638160792071",
+   "name": "Second hand furniture (Bangalore)",
+   "url": "https://www.facebook.com/groups/502638160792071/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1109248184398213",
+   "name": "NYC FURNITURE - FREE/ SALE/ BUY",
+   "url": "https://www.facebook.com/groups/1109248184398213/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "578190242202420",
+   "name": "Used Furniture Perth",
+   "url": "https://www.facebook.com/groups/578190242202420/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "3654304208231716",
+   "name": "Old furniture for sale in Rawalpindi Islamabad",
+   "url": "https://www.facebook.com/groups/3654304208231716/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "3363980003928731",
+   "name": "furniture",
+   "url": "https://www.facebook.com/groups/3363980003928731/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "592942511740233",
+   "name": "How to make money in Ghana",
+   "url": "https://www.facebook.com/groups/592942511740233/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "606869777359184",
+   "name": "HOOKUP Online Ghana",
+   "url": "https://www.facebook.com/groups/606869777359184/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "309621673969961",
+   "name": "WORLD-REMIT GHANA🇬🇭",
+   "url": "https://www.facebook.com/groups/309621673969961/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "385117446342496",
+   "name": "GHANA ONLINE MARKET (SHOPPING ONLINE ON BUDGET)",
+   "url": "https://www.facebook.com/groups/385117446342496/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "750963185508937",
+   "name": "iPhones Swap Yard - Ghana (Online)",
+   "url": "https://www.facebook.com/groups/750963185508937/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "120240101951683",
+   "name": "Ghana & Overseas Markt",
+   "url": "https://www.facebook.com/groups/120240101951683/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1174841056798143",
+   "name": "Pure Ogbomoso Cashews Buyer and Supply product's in world online marketing",
+   "url": "https://www.facebook.com/groups/1174841056798143/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1137747866626608",
+   "name": "Cars For SALE in GHANA",
+   "url": "https://www.facebook.com/groups/1137747866626608/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1685870021878686",
+   "name": "Buying and selling animals and Ghana",
+   "url": "https://www.facebook.com/groups/1685870021878686/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "319172014314089",
+   "name": "Online Investment Ghana",
+   "url": "https://www.facebook.com/groups/319172014314089/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1204891443331548",
+   "name": "GHANA ONLINE MARKET",
+   "url": "https://www.facebook.com/groups/1204891443331548/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1967163227413954",
+   "name": "Nigeria,niger,ghana,cameroon market",
+   "url": "https://www.facebook.com/groups/1967163227413954/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "309158032116731",
+   "name": "Ghana sell and buy",
+   "url": "https://www.facebook.com/groups/309158032116731/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "291898279374851",
+   "name": "Ghana/China wholesale market",
+   "url": "https://www.facebook.com/groups/291898279374851/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "kr2ghcars",
+   "name": "Global Cars Ghana 🇬🇭 – Buy, Sell & Import Cars | smartlinkautogh.com",
+   "url": "https://www.facebook.com/groups/kr2ghcars/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "344604844618184",
+   "name": "Farmers in Ghana",
+   "url": "https://www.facebook.com/groups/344604844618184/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "568099054201904",
+   "name": "Friends from Ghana",
+   "url": "https://www.facebook.com/groups/568099054201904/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "2061907777882790",
+   "name": "farmers marketplace Ghana",
+   "url": "https://www.facebook.com/groups/2061907777882790/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "830284957650820",
+   "name": "Ghana Import & Export",
+   "url": "https://www.facebook.com/groups/830284957650820/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "559625738082657",
+   "name": "Buy, Sell and Rent a Car (Ghana).",
+   "url": "https://www.facebook.com/groups/559625738082657/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1185032147147935",
+   "name": "JIJI SALES AGENCY (Ghana �) SELL YOUR GOODS WITH US,",
+   "url": "https://www.facebook.com/groups/1185032147147935/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "133199290550099",
+   "name": "Buy and Sell in Tamale",
+   "url": "https://www.facebook.com/groups/133199290550099/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "741238753733698",
+   "name": "Legit buy and sell ghana",
+   "url": "https://www.facebook.com/groups/741238753733698/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1800763390150879",
+   "name": "Global Market Place. Buying And Selling!",
+   "url": "https://www.facebook.com/groups/1800763390150879/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "858591091189669",
+   "name": "Ghana Made Market",
+   "url": "https://www.facebook.com/groups/858591091189669/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1322448426766756",
+   "name": "Accra Online Marketplace",
+   "url": "https://www.facebook.com/groups/1322448426766756/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1003695134829479",
+   "name": "Hook up Ghana",
+   "url": "https://www.facebook.com/groups/1003695134829479/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "623576514425829",
+   "name": "Ghana business club",
+   "url": "https://www.facebook.com/groups/623576514425829/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "305103884358687",
+   "name": "BEREKUM MARKET SQUARE 💯💯💯",
+   "url": "https://www.facebook.com/groups/305103884358687/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "286441505892158",
+   "name": "IPhone shop Ghana",
+   "url": "https://www.facebook.com/groups/286441505892158/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "2257683591383963",
+   "name": "Francophone d'Accra in Ghana",
+   "url": "https://www.facebook.com/groups/2257683591383963/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1767829174359415",
+   "name": "Ghana Business Promotion Hub",
+   "url": "https://www.facebook.com/groups/1767829174359415/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "420421849068622",
+   "name": "Ghana girls dating",
+   "url": "https://www.facebook.com/groups/420421849068622/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "785608924460112",
+   "name": "Ghana Online Market – Real People. No Scams. Safe.",
+   "url": "https://www.facebook.com/groups/785608924460112/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1030285904612019",
+   "name": "Ghana market place for cars dealer in gh",
+   "url": "https://www.facebook.com/groups/1030285904612019/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1023862433142740",
+   "name": "Buy and sale in Ghana",
+   "url": "https://www.facebook.com/groups/1023862433142740/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "282275088771789",
+   "name": "DIASPORA GABONAISE AU GHANA",
+   "url": "https://www.facebook.com/groups/282275088771789/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "109796135759301",
+   "name": "MYF GHANA FORUM",
+   "url": "https://www.facebook.com/groups/109796135759301/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "2593215140871131",
+   "name": "Kasoa New Market - buy and sell",
+   "url": "https://www.facebook.com/groups/2593215140871131/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "714757602067998",
+   "name": "SERIOUS BUYERS AND SELLERS IN GHANA",
+   "url": "https://www.facebook.com/groups/714757602067998/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "741131152697248",
+   "name": "BUSINESS AND JOBS IN GHANA",
+   "url": "https://www.facebook.com/groups/741131152697248/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "892820751512665",
+   "name": "DBA 133 Business in Ghana",
+   "url": "https://www.facebook.com/groups/892820751512665/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1816155311970731",
+   "name": "Online Market",
+   "url": "https://www.facebook.com/groups/1816155311970731/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1002333013138116",
+   "name": "Accra Business Connect",
+   "url": "https://www.facebook.com/groups/1002333013138116/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "745709418963696",
+   "name": "GHANA BUSINESS NETWORK (ADVERTISE YOUR PRODUCTS HERE)",
+   "url": "https://www.facebook.com/groups/745709418963696/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "216600112006827",
+   "name": "BUY and SELL IN GHANA",
+   "url": "https://www.facebook.com/groups/216600112006827/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "301948990473293",
+   "name": "Osofo Apple Ventures",
+   "url": "https://www.facebook.com/groups/301948990473293/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "229517241719147",
+   "name": "America to Ghana Trading Group",
+   "url": "https://www.facebook.com/groups/229517241719147/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "184594258417846",
+   "name": "MARKET CYCLE",
+   "url": "https://www.facebook.com/groups/184594258417846/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "322015483060130",
+   "name": "GHANAIANS HOME & ABROAD",
+   "url": "https://www.facebook.com/groups/322015483060130/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "6159275160787580",
+   "name": "BUY AND SELL IN GHANA",
+   "url": "https://www.facebook.com/groups/6159275160787580/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "378690683261495",
+   "name": "Online Market Place",
+   "url": "https://www.facebook.com/groups/378690683261495/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "724543962046908",
+   "name": "Ghana Farmers Hub",
+   "url": "https://www.facebook.com/groups/724543962046908/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "3581684458766677",
+   "name": "GHANA business",
+   "url": "https://www.facebook.com/groups/3581684458766677/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1055482215016077",
+   "name": "GHANA BUSINESS GROUP",
+   "url": "https://www.facebook.com/groups/1055482215016077/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1487554847950243",
+   "name": "Ghana Customers MarketPlace",
+   "url": "https://www.facebook.com/groups/1487554847950243/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1376619412481357",
+   "name": "Connect & Grow Ghana 💯🦾",
+   "url": "https://www.facebook.com/groups/1376619412481357/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1657303014494099",
+   "name": "GHANAIAN IN EUROPA",
+   "url": "https://www.facebook.com/groups/1657303014494099/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "468130588374807",
+   "name": "Buy and Sell car in Ghana.",
+   "url": "https://www.facebook.com/groups/468130588374807/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1034444205244123",
+   "name": "Kumasi market",
+   "url": "https://www.facebook.com/groups/1034444205244123/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1182886548841874",
+   "name": "Ghanaians in UK",
+   "url": "https://www.facebook.com/groups/1182886548841874/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "ghanaiansyouthinohio",
+   "name": "GHANAIAN YOUTH IN OHIO, USA",
+   "url": "https://www.facebook.com/groups/ghanaiansyouthinohio/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "784416915516167",
+   "name": "Farmers in Ghana",
+   "url": "https://www.facebook.com/groups/784416915516167/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "228065555617232",
+   "name": "Nigerians In Ghana",
+   "url": "https://www.facebook.com/groups/228065555617232/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "732138961273814",
+   "name": "Ghana Catfish Farmers Market",
+   "url": "https://www.facebook.com/groups/732138961273814/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1110851067906424",
+   "name": "GHANA VEGETABLE NETWORK",
+   "url": "https://www.facebook.com/groups/1110851067906424/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1252924888564434",
+   "name": "Ghana Online Drivers Forum",
+   "url": "https://www.facebook.com/groups/1252924888564434/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "703266418500291",
+   "name": "GHANZI MARKETPLACE",
+   "url": "https://www.facebook.com/groups/703266418500291/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "ghanabusinessnetworking",
+   "name": "Ghana Business Networking",
+   "url": "https://www.facebook.com/groups/ghanabusinessnetworking/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1189680332463710",
+   "name": "Buying and selling all types of goods in Ghana",
+   "url": "https://www.facebook.com/groups/1189680332463710/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1189650374403505",
+   "name": "GHANA, NIGERIA & AFRICA MARKETS",
+   "url": "https://www.facebook.com/groups/1189650374403505/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "511435443376618",
+   "name": "Ghana Market Online",
+   "url": "https://www.facebook.com/groups/511435443376618/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "kumasibusinessplace",
+   "name": "KUMASI BUSINESS PLACE",
+   "url": "https://www.facebook.com/groups/kumasibusinessplace/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "144558175934584",
+   "name": "Business like Unlimited Gh",
+   "url": "https://www.facebook.com/groups/144558175934584/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "141689615431232",
+   "name": "Ghana market for selling",
+   "url": "https://www.facebook.com/groups/141689615431232/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "701569542195585",
+   "name": "Ghana buy and sell 1",
+   "url": "https://www.facebook.com/groups/701569542195585/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "693396866573535",
+   "name": "BUY AND SELL IN GHANA",
+   "url": "https://www.facebook.com/groups/693396866573535/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1519341328583563",
+   "name": "Accra Art and Craft Market Community",
+   "url": "https://www.facebook.com/groups/1519341328583563/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "244748102367495",
+   "name": "MLM Ghana",
+   "url": "https://www.facebook.com/groups/244748102367495/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1140470769685362",
+   "name": "Ghana business promotions �",
+   "url": "https://www.facebook.com/groups/1140470769685362/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "836655978144784",
+   "name": "Deals and finds, Ghana.",
+   "url": "https://www.facebook.com/groups/836655978144784/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "555334653550951",
+   "name": "GREATER ACCRA ONLINE BUSINESS GROUP",
+   "url": "https://www.facebook.com/groups/555334653550951/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "555287496335552",
+   "name": "Ghana Online Marketers",
+   "url": "https://www.facebook.com/groups/555287496335552/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "233633241983449",
+   "name": "Instant Jobs Ghana",
+   "url": "https://www.facebook.com/groups/233633241983449/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "1451351388625589",
+   "name": "Current Jobs In Ghana (Apply Now)",
+   "url": "https://www.facebook.com/groups/1451351388625589/",
+   "active": true,
+   "added": "2026-10-13"
   }
  ],
  "posts": [
@@ -9937,7 +11270,7 @@
  "checks": {
   "declines": "2026-10-13",
   "grow": "2026-10-10",
-  "sync": "2026-10-10"
+  "sync": "2026-10-13"
  },
  "rounds": {
   "FAV-014": "2026-10-08T16:48:38.667Z",
