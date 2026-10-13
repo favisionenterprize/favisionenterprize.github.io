@@ -142,6 +142,21 @@
    "followers": 551,
    "stopped": null,
    "commenting": true
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:01:36.033Z",
+   "net": "ig",
+   "mode": "invite",
+   "posts": 0,
+   "checked": 0,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": null,
+   "stopped": "Instagram has no invite-friends feature.",
+   "commenting": false
   }
  ],
  "liked": {}
