@@ -7503,6 +7503,123 @@
    "url": "https://www.facebook.com/groups/312229470570562/",
    "active": true,
    "added": "2026-10-13"
+  },
+  {
+   "id": "354104205310549",
+   "name": "Home Decor Pakistan",
+   "url": "https://www.facebook.com/groups/354104205310549/",
+   "added": "2026-10-13",
+   "members": 149000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "745957940207685",
+   "name": "buy and sales old furniture",
+   "url": "https://www.facebook.com/groups/745957940207685/",
+   "added": "2026-10-13",
+   "members": 303000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "935104666932027",
+   "name": "Furniture's",
+   "url": "https://www.facebook.com/groups/935104666932027/",
+   "added": "2026-10-13",
+   "members": 111000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "homedecorinteriordesign",
+   "name": "Home Decor and Interior Design Ideas",
+   "url": "https://www.facebook.com/groups/homedecorinteriordesign/",
+   "added": "2026-10-13",
+   "members": 929000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "1018040865982096",
+   "name": "Home Decor ideas",
+   "url": "https://www.facebook.com/groups/1018040865982096/",
+   "added": "2026-10-13",
+   "members": 369000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "980371453358304",
+   "name": "Home Decorations ��",
+   "url": "https://www.facebook.com/groups/980371453358304/",
+   "added": "2026-10-13",
+   "members": 287000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "547931246263247",
+   "name": "Home Decor Ideas",
+   "url": "https://www.facebook.com/groups/547931246263247/",
+   "added": "2026-10-13",
+   "members": 231000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "homedecorali",
+   "name": "Home Decor",
+   "url": "https://www.facebook.com/groups/homedecorali/",
+   "added": "2026-10-13",
+   "members": 179000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "2350652831731838",
+   "name": "I LOVE GHANA 🇬🇭 ❤",
+   "url": "https://www.facebook.com/groups/2350652831731838/",
+   "added": "2026-10-13",
+   "members": 27000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "293807220407837",
+   "name": "_#iheartGhana 🇬🇭_",
+   "url": "https://www.facebook.com/groups/293807220407837/",
+   "added": "2026-10-13",
+   "members": 20000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "256224274785625",
+   "name": "Jobs In Ghana Today",
+   "url": "https://www.facebook.com/groups/256224274785625/",
+   "added": "2026-10-13",
+   "members": 20000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "3056151644617043",
+   "name": "Single Ghanaians ABROAD",
+   "url": "https://www.facebook.com/groups/3056151644617043/",
+   "added": "2026-10-13",
+   "members": 64000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "365324614282366",
+   "name": "JUMIA GHANA SHOP",
+   "url": "https://www.facebook.com/groups/365324614282366/",
+   "added": "2026-10-13",
+   "members": 42000,
+   "source": "autopilot",
+   "active": true
   }
  ],
  "posts": [
@@ -10760,6 +10877,13 @@
    "kind": "declines",
    "found": 1,
    "left": 1
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T20:08:44.830Z",
+   "kind": "grow",
+   "joined": 15,
+   "requested": 1
   }
  ],
  "removed": [
@@ -11391,11 +11515,155 @@
    "members": 123000,
    "status": "questions",
    "url": "https://www.facebook.com/groups/2764329860556531/"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T19:44:09.826Z",
+   "g": "3032787496848082",
+   "name": "ديكور شقتك home decor",
+   "members": 1400000,
+   "status": "pending",
+   "url": "https://www.facebook.com/groups/3032787496848082/"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T19:45:08.461Z",
+   "g": "354104205310549",
+   "name": "Home Decor Pakistan",
+   "members": 149000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/354104205310549/"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T19:46:53.448Z",
+   "g": "639828170589638",
+   "name": "Modric furniture",
+   "members": 124000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/639828170589638/"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T19:47:58.137Z",
+   "g": "755614535841357",
+   "name": "🏡✨ Dream Home Interiors Hub ✨🏡",
+   "members": 117000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/755614535841357/"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T19:50:25.031Z",
+   "g": "745957940207685",
+   "name": "buy and sales old furniture",
+   "members": 303000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/745957940207685/"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T19:51:18.691Z",
+   "g": "935104666932027",
+   "name": "Furniture's",
+   "members": 111000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/935104666932027/"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T19:52:59.402Z",
+   "g": "homedecorinteriordesign",
+   "name": "Home Decor and Interior Design Ideas",
+   "members": 929000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/homedecorinteriordesign/"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T19:54:22.430Z",
+   "g": "1018040865982096",
+   "name": "Home Decor ideas",
+   "members": 369000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/1018040865982096/"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T19:55:25.477Z",
+   "g": "980371453358304",
+   "name": "Home Decorations ��",
+   "members": 287000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/980371453358304/"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T19:56:37.592Z",
+   "g": "547931246263247",
+   "name": "Home Decor Ideas",
+   "members": 231000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/547931246263247/"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T19:57:49.170Z",
+   "g": "homedecorali",
+   "name": "Home Decor",
+   "members": 179000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/homedecorali/"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T19:59:48.777Z",
+   "g": "2350652831731838",
+   "name": "I LOVE GHANA 🇬🇭 ❤",
+   "members": 27000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/2350652831731838/"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T20:01:12.097Z",
+   "g": "293807220407837",
+   "name": "_#iheartGhana 🇬🇭_",
+   "members": 20000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/293807220407837/"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T20:02:47.097Z",
+   "g": "256224274785625",
+   "name": "Jobs In Ghana Today",
+   "members": 20000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/256224274785625/"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T20:06:16.662Z",
+   "g": "3056151644617043",
+   "name": "Single Ghanaians ABROAD",
+   "members": 64000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/3056151644617043/"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T20:07:43.637Z",
+   "g": "365324614282366",
+   "name": "JUMIA GHANA SHOP",
+   "members": 42000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/365324614282366/"
   }
  ],
  "checks": {
   "declines": "2026-10-13",
-  "grow": "2026-10-10",
+  "grow": "2026-10-13",
   "sync": "2026-10-13"
  },
  "rounds": {
