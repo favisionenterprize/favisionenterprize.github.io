@@ -634,6 +634,92 @@
    "p": "FAV-026",
    "ok": false,
    "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T19:56:56.258Z",
+   "net": "x",
+   "k": "ad:fav-014-arrived",
+   "p": "FAV-014",
+   "ok": true
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T20:00:35.966Z",
+   "net": "x",
+   "k": "tile:fav-005",
+   "p": "FAV-005",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T20:12:42.795Z",
+   "net": "x",
+   "k": "card:FAV-025",
+   "p": "FAV-025",
+   "ok": true
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T20:20:45.106Z",
+   "net": "x",
+   "k": "tile:fav-008",
+   "p": "FAV-008",
+   "ok": true
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T20:23:49.183Z",
+   "net": "x",
+   "k": "presence:fav-002",
+   "p": "FAV-002",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T20:25:33.282Z",
+   "net": "x",
+   "k": "card:FAV-006",
+   "p": "FAV-006",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T20:37:55.588Z",
+   "net": "x",
+   "k": "card:FAV-034",
+   "p": "FAV-034",
+   "ok": true
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T20:40:57.015Z",
+   "net": "x",
+   "k": "card:FAV-017",
+   "p": "FAV-017",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T20:53:38.913Z",
+   "net": "x",
+   "k": "tile:fav-024",
+   "p": "FAV-024",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T20:54:49.597Z",
+   "net": "x",
+   "k": "card:FAV-001",
+   "p": "FAV-001",
+   "ok": false,
+   "why": "X didn't confirm the post"
   }
  ],
  "runs": [
@@ -721,6 +807,13 @@
    "kind": "x",
    "tried": 5,
    "ok": 3
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T20:59:47.994Z",
+   "kind": "x",
+   "tried": 10,
+   "ok": 4
   }
  ]
 }
