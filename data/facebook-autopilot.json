@@ -3044,6 +3044,96 @@
    "ok": false,
    "now": true,
    "why": "We limit how often"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:29:34.963Z",
+   "p": "FAV-001",
+   "g": "Junkatowngh",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:30:02.575Z",
+   "p": "FAV-002",
+   "g": "footballtalk24x7",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:30:31.976Z",
+   "p": "FAV-003",
+   "g": "149869398975301",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:31:29.663Z",
+   "p": "FAV-004",
+   "g": "980376278667360",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:31:56.989Z",
+   "p": "FAV-005",
+   "g": "1260426287321668",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:32:45.218Z",
+   "p": "FAV-006",
+   "g": "weddingandgoodlife",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:35:19.344Z",
+   "p": "FAV-007",
+   "g": "139560271489581",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:37:41.588Z",
+   "p": "FAV-008",
+   "g": "169856196719821",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:40:17.236Z",
+   "p": "FAV-009",
+   "g": "180212603087458",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:43:34.100Z",
+   "p": "FAV-010",
+   "g": "195199285857356",
+   "ok": false,
+   "now": true,
+   "why": "We limit how often"
   }
  ],
  "resets": {},
@@ -3130,6 +3220,14 @@
    "kind": "post",
    "tried": 148,
    "ok": 79,
+   "stopped": "Facebook showed \"We limit how often\". Nothing more was posted."
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T22:43:41.325Z",
+   "kind": "post",
+   "tried": 10,
+   "ok": 4,
    "stopped": "Facebook showed \"We limit how often\". Nothing more was posted."
   }
  ]
