@@ -214,8 +214,15 @@
   },
   {
    "id": "bssinaccra",
-   "name": "Buy  & Sell New or used in ACCRA (Ghana)",
+   "name": "Buy & Sell New or used in ACCRA (Ghana)",
    "url": "https://www.facebook.com/groups/bssinaccra/",
+   "active": true,
+   "added": "2026-10-13"
+  },
+  {
+   "id": "533510970636131",
+   "name": "African Seasoned Speakers Network (Afsesnet_Group)",
+   "url": "https://www.facebook.com/groups/533510970636131/",
    "active": true,
    "added": "2026-10-13"
   }
