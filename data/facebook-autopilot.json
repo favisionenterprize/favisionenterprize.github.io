@@ -1134,13 +1134,6 @@
    "added": "2026-10-08"
   },
   {
-   "id": "264912567379254",
-   "name": "Tamale hub, buy and sell",
-   "url": "https://www.facebook.com/groups/264912567379254/",
-   "active": true,
-   "added": "2026-10-08"
-  },
-  {
    "id": "548561573854951",
    "name": "THE GREAT BESEC [ CKATKYIE MMA]����",
    "url": "https://www.facebook.com/groups/548561573854951/",
@@ -9301,6 +9294,13 @@
    "kind": "post",
    "tried": 20,
    "ok": 0
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T19:42:02.379Z",
+   "kind": "declines",
+   "found": 1,
+   "left": 1
   }
  ],
  "removed": [
@@ -9361,7 +9361,7 @@
    "why": "Declined 4 of our posts · leave not confirmed",
    "d": "2026-10-09",
    "left": false,
-   "tries": 2
+   "tries": 3
   },
   {
    "id": "230569805011332",
@@ -9369,8 +9369,9 @@
    "url": "https://www.facebook.com/groups/230569805011332/",
    "why": "Declined our post (notification) · leave not confirmed",
    "d": "2026-10-10",
-   "left": false,
-   "tries": 1
+   "left": true,
+   "tries": 2,
+   "left_d": "2026-10-13"
   },
   {
    "id": "966583207420627",
@@ -9378,6 +9379,15 @@
    "url": "https://www.facebook.com/groups/966583207420627/",
    "why": "Declined our post (notification) · leave not confirmed",
    "d": "2026-10-10",
+   "left": false,
+   "tries": 2
+  },
+  {
+   "id": "264912567379254",
+   "name": "Tamale hub, buy and sell",
+   "url": "https://www.facebook.com/groups/264912567379254/",
+   "why": "Declined 2 of our posts · leave not confirmed",
+   "d": "2026-10-13",
    "left": false,
    "tries": 1
   }
@@ -9925,7 +9935,7 @@
   }
  ],
  "checks": {
-  "declines": "2026-10-10",
+  "declines": "2026-10-13",
   "grow": "2026-10-10",
   "sync": "2026-10-10"
  },
