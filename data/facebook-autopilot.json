@@ -598,6 +598,240 @@
    "ok": false,
    "now": true,
    "why": "Post box didn't open"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:33:43.060Z",
+   "p": "FAV-014",
+   "g": "Junkatowngh",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:34:16.040Z",
+   "p": "FAV-014",
+   "g": "footballtalk24x7",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:35:01.404Z",
+   "p": "FAV-014",
+   "g": "149869398975301",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:35:38.205Z",
+   "p": "FAV-014",
+   "g": "980376278667360",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:36:06.552Z",
+   "p": "FAV-014",
+   "g": "1260426287321668",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:36:50.696Z",
+   "p": "FAV-014",
+   "g": "weddingandgoodlife",
+   "ok": false,
+   "now": true,
+   "why": "Post box didn't open"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:37:20.911Z",
+   "p": "FAV-014",
+   "g": "139560271489581",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:37:51.550Z",
+   "p": "FAV-014",
+   "g": "169856196719821",
+   "ok": false,
+   "now": true,
+   "why": "Post box didn't open"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:38:18.239Z",
+   "p": "FAV-014",
+   "g": "180212603087458",
+   "ok": false,
+   "now": true,
+   "why": "Post box didn't open"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:38:45.866Z",
+   "p": "FAV-014",
+   "g": "195199285857356",
+   "ok": false,
+   "now": true,
+   "why": "Post box didn't open"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:40:16.719Z",
+   "p": "FAV-014",
+   "g": "264043484022478",
+   "ok": false,
+   "now": true,
+   "why": "Post button stayed off"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:41:55.261Z",
+   "p": "FAV-014",
+   "g": "324168798801822",
+   "ok": false,
+   "now": true,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:43:38.379Z",
+   "p": "FAV-014",
+   "g": "kofitv",
+   "ok": false,
+   "now": true,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:45:20.280Z",
+   "p": "FAV-014",
+   "g": "377992663533329",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:46:05.609Z",
+   "p": "FAV-014",
+   "g": "397641595383636",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:47:05.477Z",
+   "p": "FAV-014",
+   "g": "495508180829744",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:48:44.679Z",
+   "p": "FAV-014",
+   "g": "497509459086362",
+   "ok": false,
+   "now": true,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:49:39.751Z",
+   "p": "FAV-014",
+   "g": "527646587321586",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:50:45.176Z",
+   "p": "FAV-014",
+   "g": "535325930759843",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:51:20.943Z",
+   "p": "FAV-014",
+   "g": "540169077702036",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:51:52.527Z",
+   "p": "FAV-014",
+   "g": "582376070602961",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:52:23.643Z",
+   "p": "FAV-014",
+   "g": "661332781128349",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:52:47.329Z",
+   "p": "FAV-014",
+   "g": "694644710640007",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:53:15.483Z",
+   "p": "FAV-014",
+   "g": "732658637184181",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:54:07.595Z",
+   "p": "FAV-014",
+   "g": "748111992059254",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:54:40.249Z",
+   "p": "FAV-014",
+   "g": "bssinaccra",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
   }
  ],
  "resets": {},
@@ -626,6 +860,13 @@
    "kind": "post",
    "tried": 25,
    "ok": 6
+  },
+  {
+   "d": "2026-10-13",
+   "t": "2026-10-13T21:55:27.291Z",
+   "kind": "post",
+   "tried": 26,
+   "ok": 10
   }
  ]
 }
