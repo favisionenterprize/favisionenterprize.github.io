@@ -4307,6 +4307,33 @@
    "ok": false,
    "now": true,
    "why": "We limit how often"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:25:04.489Z",
+   "p": "FAV-033",
+   "g": "weddingandgoodlife",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:26:04.422Z",
+   "p": "FAV-033",
+   "g": "139560271489581",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:27:25.738Z",
+   "p": "FAV-033",
+   "g": "169856196719821",
+   "ok": false,
+   "now": true,
+   "why": "We limit how often"
   }
  ],
  "resets": {},
@@ -4477,6 +4504,14 @@
    "kind": "post",
    "tried": 14,
    "ok": 10,
+   "stopped": "Facebook showed \"We limit how often\". Nothing more was posted."
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:28:29.022Z",
+   "kind": "post",
+   "tried": 3,
+   "ok": 2,
    "stopped": "Facebook showed \"We limit how often\". Nothing more was posted."
   }
  ],
