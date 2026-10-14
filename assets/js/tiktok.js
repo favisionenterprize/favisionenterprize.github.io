@@ -1,5 +1,5 @@
 // TikTok shop page (/tiktok/). TikTok Shop isn't open to Ghana sellers, so this page is the
-// TikTok bio link instead: the products picked in admin → Commerce hub → "TikTok shop" tab
+// TikTok bio link instead: the products picked in admin → Social autopilot → X & TikTok → "TikTok shop page"
 // (a "tiktok": <position> number on each product in data/products.json; no number = hidden),
 // with one-tap WhatsApp ordering and the site's own checkout for deposits.
 // Everything that leaves this page is tagged so TikTok orders can be told apart:
