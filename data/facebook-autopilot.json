@@ -3559,10 +3559,22 @@
  "resets": {},
  "today": null,
  "renewals": {},
- "removed": [],
+ "removed": [
+  {
+   "id": "1906581739638634",
+   "name": "Unread",
+   "url": "https://www.facebook.com/groups/1906581739638634/",
+   "why": "Declined our post (notification) · already left",
+   "d": "2026-10-14",
+   "left": true,
+   "tries": 1,
+   "left_d": "2026-10-14"
+  }
+ ],
  "joins": [],
  "checks": {
-  "sync": "2026-10-14"
+  "sync": "2026-10-14",
+  "declines": "2026-10-14"
  },
  "rounds": {
   "FAV-014": "2026-10-13T21:28:03.690Z",
@@ -3657,6 +3669,13 @@
    "tried": 0,
    "ok": 0,
    "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile in Facebook, then tap Renew again."
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:14:28.741Z",
+   "kind": "declines",
+   "found": 1,
+   "left": 1
   }
  ],
  "renewLog": []
