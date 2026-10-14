@@ -4493,6 +4493,14 @@
    "g": "963693663767065",
    "ok": false,
    "why": "We limit how often"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:41:13.370Z",
+   "p": "FAV-033",
+   "g": "3108712636082022",
+   "ok": false,
+   "why": "We limit how often"
   }
  ],
  "resets": {},
@@ -4842,6 +4850,14 @@
    "kind": "grow",
    "joined": 17,
    "requested": 0
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:41:19.370Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 0,
+   "stopped": "Facebook showed \"We limit how often\". Nothing more was posted."
   }
  ],
  "renewLog": []
