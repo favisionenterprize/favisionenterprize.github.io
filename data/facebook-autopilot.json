@@ -4181,6 +4181,132 @@
    "ok": false,
    "now": true,
    "why": "We limit how often"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:18:13.152Z",
+   "p": "FAV-031",
+   "g": "weddingandgoodlife",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:19:13.100Z",
+   "p": "FAV-031",
+   "g": "139560271489581",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:19:35.243Z",
+   "p": "FAV-031",
+   "g": "169856196719821",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:19:57.735Z",
+   "p": "FAV-031",
+   "g": "195199285857356",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:20:27.056Z",
+   "p": "FAV-031",
+   "g": "264043484022478",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:20:50.747Z",
+   "p": "FAV-031",
+   "g": "324168798801822",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:21:36.784Z",
+   "p": "FAV-031",
+   "g": "kofitv",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:22:22.597Z",
+   "p": "FAV-031",
+   "g": "377992663533329",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:23:12.513Z",
+   "p": "FAV-031",
+   "g": "397641595383636",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:23:44.566Z",
+   "p": "FAV-031",
+   "g": "495508180829744",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:24:30.713Z",
+   "p": "FAV-031",
+   "g": "497509459086362",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:24:58.884Z",
+   "p": "FAV-031",
+   "g": "527646587321586",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:26:00.906Z",
+   "p": "FAV-031",
+   "g": "535325930759843",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:27:23.229Z",
+   "p": "FAV-031",
+   "g": "540169077702036",
+   "ok": false,
+   "now": true,
+   "why": "We limit how often"
   }
  ],
  "resets": {},
@@ -4343,6 +4469,14 @@
    "kind": "post",
    "tried": 20,
    "ok": 17,
+   "stopped": "Facebook showed \"We limit how often\". Nothing more was posted."
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:28:19.844Z",
+   "kind": "post",
+   "tried": 14,
+   "ok": 10,
    "stopped": "Facebook showed \"We limit how often\". Nothing more was posted."
   }
  ],
