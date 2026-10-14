@@ -4334,6 +4334,30 @@
    "ok": false,
    "now": true,
    "why": "We limit how often"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:24:29.118Z",
+   "p": "FAV-033",
+   "g": "928755090542065",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:30:59.296Z",
+   "p": "FAV-033",
+   "g": "claudecommunity",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:32:21.410Z",
+   "p": "FAV-033",
+   "g": "963693663767065",
+   "ok": false,
+   "why": "We limit how often"
   }
  ],
  "resets": {},
@@ -4512,6 +4536,14 @@
    "kind": "post",
    "tried": 3,
    "ok": 2,
+   "stopped": "Facebook showed \"We limit how often\". Nothing more was posted."
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:32:51.888Z",
+   "kind": "post",
+   "tried": 3,
+   "ok": 1,
    "stopped": "Facebook showed \"We limit how often\". Nothing more was posted."
   }
  ],
