@@ -1496,6 +1496,87 @@
    "k": "tile:fav-024",
    "p": "FAV-024",
    "ok": true
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T01:41:23.721Z",
+   "net": "x",
+   "k": "presence:fav-026",
+   "p": "FAV-026",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T01:42:27.047Z",
+   "net": "x",
+   "k": "card:FAV-005",
+   "p": "FAV-005",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T01:43:30.778Z",
+   "net": "x",
+   "k": "card:FAV-002",
+   "p": "FAV-002",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T01:44:33.202Z",
+   "net": "x",
+   "k": "ad:fav-011",
+   "p": "FAV-011",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T01:45:35.267Z",
+   "net": "x",
+   "k": "presence:fav-001",
+   "p": "FAV-001",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T01:46:37.566Z",
+   "net": "x",
+   "k": "ad:fav-024",
+   "p": "FAV-024",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T01:47:39.516Z",
+   "net": "x",
+   "k": "card:FAV-004",
+   "p": "FAV-004",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T01:48:42.349Z",
+   "net": "x",
+   "k": "card:FAV-032",
+   "p": "FAV-032",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T01:49:44.664Z",
+   "net": "x",
+   "k": "tile:fav-006",
+   "p": "FAV-006",
+   "ok": false,
+   "why": "X didn't confirm the post"
   }
  ],
  "runs": [
@@ -1772,6 +1853,13 @@
    "kind": "tiktok",
    "tried": 10,
    "ok": 10
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T01:49:52.681Z",
+   "kind": "x",
+   "tried": 9,
+   "ok": 0
   }
  ]
 }
