@@ -4001,6 +4001,186 @@
    "ok": false,
    "now": true,
    "why": "We limit how often"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:15:13.429Z",
+   "p": "FAV-011",
+   "g": "928755090542065",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:15:42.409Z",
+   "p": "FAV-011",
+   "g": "claudecommunity",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:16:26.550Z",
+   "p": "FAV-011",
+   "g": "963693663767065",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:17:15.444Z",
+   "p": "FAV-011",
+   "g": "977797772413869",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:17:40.499Z",
+   "p": "FAV-011",
+   "g": "1024060211323777",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:18:29.059Z",
+   "p": "FAV-011",
+   "g": "1054552872583267",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:19:13.101Z",
+   "p": "FAV-011",
+   "g": "1145676989186606",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:19:41.079Z",
+   "p": "FAV-011",
+   "g": "claudeaicommunity",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:20:10.383Z",
+   "p": "FAV-011",
+   "g": "1348711550214520",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:21:03.515Z",
+   "p": "FAV-011",
+   "g": "1367025170347293",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:21:49.934Z",
+   "p": "FAV-011",
+   "g": "LakelandUsedFurnitureForSale",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:22:16.866Z",
+   "p": "FAV-011",
+   "g": "1412859638977189",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:22:46.631Z",
+   "p": "FAV-011",
+   "g": "1493651767884438",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:23:14.020Z",
+   "p": "FAV-011",
+   "g": "1512374675928402",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:23:36.869Z",
+   "p": "FAV-011",
+   "g": "1534229616988507",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:23:55.533Z",
+   "p": "FAV-011",
+   "g": "1603659139995662",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:24:42.311Z",
+   "p": "FAV-011",
+   "g": "1709817569323257",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:25:02.547Z",
+   "p": "FAV-011",
+   "g": "1754360848215346",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:25:58.238Z",
+   "p": "FAV-011",
+   "g": "1780893349074019",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:27:21.909Z",
+   "p": "FAV-011",
+   "g": "1789062137848723",
+   "ok": false,
+   "now": true,
+   "why": "We limit how often"
   }
  ],
  "resets": {},
@@ -4155,6 +4335,14 @@
    "kind": "post",
    "tried": 17,
    "ok": 15,
+   "stopped": "Facebook showed \"We limit how often\". Nothing more was posted."
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:27:36.661Z",
+   "kind": "post",
+   "tried": 20,
+   "ok": 17,
    "stopped": "Facebook showed \"We limit how often\". Nothing more was posted."
   }
  ],
