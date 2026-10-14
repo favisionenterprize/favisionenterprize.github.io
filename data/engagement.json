@@ -253,7 +253,7 @@
    ],
    "checked": "2026-10-14",
    "views": 1,
-   "title": "FA Vision Enterprise on X: \"Student Mattress: GH₵ 1,200 (negotiable). WhatsApp 057 264 617"
+   "title": "X"
   },
   "https://x.com/FaVisionEnt/status/2110115034714264022": {
    "net": "x",
@@ -265,16 +265,19 @@
      "text": ""
     }
    ],
-   "checked": "2026-10-13",
-   "views": 5
+   "checked": "2026-10-14",
+   "views": 5,
+   "title": "X"
   },
   "https://x.com/FaVisionEnt/status/2110109322315169989": {
    "net": "x",
    "url": "https://x.com/FaVisionEnt/status/2110109322315169989",
    "first": "2026-10-13",
    "commented": [],
-   "checked": "2026-10-13",
-   "views": 2
+   "checked": "2026-10-14",
+   "views": 3,
+   "title": "FA Vision Enterprise on X: \"Student desk 650 cedis. Call 0207473267 for your bulk orders f",
+   "comments": 1
   },
   "https://www.instagram.com/p/DedGxwPCIYE/": {
    "net": "ig",
@@ -362,9 +365,18 @@
    "url": "https://x.com/FaVisionEnt/status/2110167714757226759",
    "first": "2026-10-14",
    "commented": [],
-   "title": "FA Vision Enterprise on X: \"10 Seater Foldable Round Table with Chairs: GH₵ 9,650 (negotia",
+   "title": "X",
    "checked": "2026-10-14",
    "views": 3
+  },
+  "https://x.com/FaVisionEnt/status/2110138048776225272": {
+   "net": "x",
+   "url": "https://x.com/FaVisionEnt/status/2110138048776225272",
+   "first": "2026-10-14",
+   "commented": [],
+   "title": "FA Vision Enterprise on X: \"📍 Where are you seeing this from? Tell us in the comments 👇 ",
+   "checked": "2026-10-14",
+   "views": 1
   }
  },
  "runs": [
@@ -645,6 +657,21 @@
    "mode": "reply",
    "posts": 5,
    "checked": 5,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 298,
+   "stopped": null,
+   "commenting": false
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T01:07:32.809Z",
+   "net": "x",
+   "mode": "reply",
+   "posts": 8,
+   "checked": 8,
    "commented": 0,
    "replied": 0,
    "invited": 0,
