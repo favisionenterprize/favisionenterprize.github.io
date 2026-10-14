@@ -72,7 +72,7 @@
    ],
    "title": "(20+) Fresh stock, just arrived! 🎒📚 Our new... - F.A Vision Enterprise",
    "checked": "2026-10-14",
-   "likes": 4100
+   "likes": 238
   },
   "https://www.facebook.com/FaVisionEnterprise/posts/pfbid02bKzEr651HS6dtioGcFFbf1i4NjvLR8tLC4AyKyFEuekXAzffzdDiPs3uZrVJ9JHTl": {
    "net": "fb",
@@ -86,7 +86,7 @@
    ],
    "title": "(20+) Tertiary Student Desk is available. Hurry... - F.A Vision Enterprise",
    "checked": "2026-10-14",
-   "likes": 238
+   "likes": 49
   },
   "https://www.facebook.com/FaVisionEnterprise/videos/442786224559428/": {
    "net": "fb",
@@ -489,6 +489,21 @@
    "followers": 552,
    "stopped": null,
    "commenting": true
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T01:03:07.833Z",
+   "net": "fb",
+   "mode": "reply",
+   "posts": 3,
+   "checked": 3,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 552,
+   "stopped": null,
+   "commenting": false
   }
  ],
  "liked": {}
