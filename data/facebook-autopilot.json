@@ -3571,7 +3571,10 @@
   }
  ],
  "resets": {},
- "today": null,
+ "today": {
+  "d": "2026-10-14",
+  "p": "FAV-033"
+ },
  "renewals": {},
  "removed": [
   {
