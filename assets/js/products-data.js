@@ -827,7 +827,8 @@ window.FAV_DATA = {
           "checked": "2026-09-29",
           "synced": "2026-09-29"
         }
-      ]
+      ],
+      "tiktok": 8
     },
     {
       "id": "FAV-002",
@@ -867,7 +868,8 @@ window.FAV_DATA = {
           "checked": "2026-09-29",
           "synced": "2026-09-29"
         }
-      ]
+      ],
+      "tiktok": 9
     },
     {
       "id": "FAV-003",
@@ -919,7 +921,8 @@ window.FAV_DATA = {
           "checked": "2026-09-29",
           "synced": "2026-09-29"
         }
-      ]
+      ],
+      "tiktok": 10
     },
     {
       "id": "FAV-004",
@@ -959,7 +962,8 @@ window.FAV_DATA = {
           "checked": "2026-09-29",
           "synced": "2026-09-29"
         }
-      ]
+      ],
+      "tiktok": 11
     },
     {
       "id": "FAV-005",
@@ -1011,7 +1015,8 @@ window.FAV_DATA = {
           "checked": "2026-09-29",
           "synced": "2026-09-29"
         }
-      ]
+      ],
+      "tiktok": 12
     },
     {
       "id": "FAV-006",
@@ -1060,7 +1065,8 @@ window.FAV_DATA = {
           "checked": "2026-09-29",
           "synced": "2026-09-29"
         }
-      ]
+      ],
+      "tiktok": 5
     },
     {
       "id": "FAV-007",
@@ -1115,7 +1121,8 @@ window.FAV_DATA = {
           "checked": "2026-09-29",
           "synced": "2026-09-29"
         }
-      ]
+      ],
+      "tiktok": 6
     },
     {
       "id": "FAV-008",
@@ -1153,7 +1160,8 @@ window.FAV_DATA = {
           "checked": "2026-09-29",
           "synced": "2026-09-29"
         }
-      ]
+      ],
+      "tiktok": 13
     },
     {
       "id": "FAV-009",
@@ -1215,7 +1223,8 @@ window.FAV_DATA = {
           "checked": "2026-09-29",
           "synced": "2026-09-29"
         }
-      ]
+      ],
+      "tiktok": 14
     },
     {
       "id": "FAV-010",
@@ -1258,7 +1267,8 @@ window.FAV_DATA = {
           "checked": "2026-09-29",
           "synced": "2026-09-29"
         }
-      ]
+      ],
+      "tiktok": 15
     },
     {
       "id": "FAV-011",
@@ -1298,7 +1308,8 @@ window.FAV_DATA = {
           "checked": "2026-09-29",
           "synced": "2026-09-29"
         }
-      ]
+      ],
+      "tiktok": 16
     },
     {
       "id": "FAV-014",
@@ -1349,7 +1360,8 @@ window.FAV_DATA = {
           "checked": "2026-09-29",
           "synced": "2026-09-29"
         }
-      ]
+      ],
+      "tiktok": 1
     },
     {
       "id": "FAV-015",
@@ -1385,7 +1397,8 @@ window.FAV_DATA = {
           "checked": "2026-10-01",
           "synced": "2026-10-01"
         }
-      ]
+      ],
+      "tiktok": 17
     },
     {
       "id": "FAV-016",
@@ -1419,7 +1432,8 @@ window.FAV_DATA = {
           "synced": "2026-10-01"
         }
       ],
-      "material": "Leather"
+      "material": "Leather",
+      "tiktok": 18
     },
     {
       "id": "FAV-017",
@@ -1458,7 +1472,8 @@ window.FAV_DATA = {
         "Grey",
         "Blue",
         "Green"
-      ]
+      ],
+      "tiktok": 4
     },
     {
       "id": "FAV-018",
@@ -1490,7 +1505,8 @@ window.FAV_DATA = {
           "checked": "2026-10-01",
           "synced": "2026-10-01"
         }
-      ]
+      ],
+      "tiktok": 19
     },
     {
       "id": "FAV-019",
@@ -1524,7 +1540,8 @@ window.FAV_DATA = {
           "checked": "2026-10-01",
           "synced": "2026-10-01"
         }
-      ]
+      ],
+      "tiktok": 3
     },
     {
       "id": "FAV-020",
@@ -1557,7 +1574,8 @@ window.FAV_DATA = {
           "checked": "2026-10-01",
           "synced": "2026-10-01"
         }
-      ]
+      ],
+      "tiktok": 20
     },
     {
       "id": "FAV-021",
@@ -1602,7 +1620,8 @@ window.FAV_DATA = {
           "checked": "2026-10-01",
           "synced": "2026-10-01"
         }
-      ]
+      ],
+      "tiktok": 21
     },
     {
       "id": "FAV-022",
@@ -1638,7 +1657,8 @@ window.FAV_DATA = {
           "checked": "2026-10-01",
           "synced": "2026-10-01"
         }
-      ]
+      ],
+      "tiktok": 22
     },
     {
       "id": "FAV-023",
@@ -1672,7 +1692,8 @@ window.FAV_DATA = {
           "checked": "2026-10-01",
           "synced": "2026-10-01"
         }
-      ]
+      ],
+      "tiktok": 23
     },
     {
       "id": "FAV-024",
@@ -1720,7 +1741,8 @@ window.FAV_DATA = {
         "whatsapp": "+233277477752",
         "address": "Kantamanto, near Grandview Hotel, UTC, close to Barclays Bank, Mamleshie Rd, Accra",
         "note": "Sold and delivered by AGOODMANN VENTURES (a partner business). Contact them directly to order."
-      }
+      },
+      "tiktok": 30
     },
     {
       "id": "FAV-025",
@@ -1768,7 +1790,8 @@ window.FAV_DATA = {
         "whatsapp": "+233277477752",
         "address": "Kantamanto, near Grandview Hotel, UTC, close to Barclays Bank, Mamleshie Rd, Accra",
         "note": "Sold and delivered by AGOODMANN VENTURES (a partner business). Contact them directly to order."
-      }
+      },
+      "tiktok": 31
     },
     {
       "id": "FAV-026",
@@ -1817,7 +1840,8 @@ window.FAV_DATA = {
       },
       "was_price_ghs": 650,
       "sale_until": "2026-12-31",
-      "sale_from": "2026-10-08"
+      "sale_from": "2026-10-08",
+      "tiktok": 32
     },
     {
       "id": "FAV-027",
@@ -1853,7 +1877,8 @@ window.FAV_DATA = {
         "Red brick"
       ],
       "roll_m2": 5.3,
-      "placeholder": false
+      "placeholder": false,
+      "tiktok": 24
     },
     {
       "id": "FAV-028",
@@ -1879,7 +1904,8 @@ window.FAV_DATA = {
       "marketplace_category": "Home & Garden > Furniture > Chairs",
       "images": [
         "assets/images/products/fav-028-mv00kf41-1.jpg"
-      ]
+      ],
+      "tiktok": 2
     },
     {
       "id": "FAV-029",
@@ -1908,7 +1934,8 @@ window.FAV_DATA = {
       "marketplace_category": "Home & Garden > Furniture > Other Furniture",
       "images": [
         "assets/images/products/fav-029-mv00kf41-1.jpg"
-      ]
+      ],
+      "tiktok": 7
     },
     {
       "id": "FAV-030",
@@ -1934,7 +1961,8 @@ window.FAV_DATA = {
       "marketplace_category": "Home & Garden > Furniture > Other Furniture",
       "images": [
         "assets/images/products/fav-030-mv00kf41-1.jpg"
-      ]
+      ],
+      "tiktok": 25
     },
     {
       "id": "FAV-031",
@@ -1960,7 +1988,8 @@ window.FAV_DATA = {
       "marketplace_category": "Home & Garden > Furniture > Tables",
       "images": [
         "assets/images/products/fav-031-mv00kf41-1.jpg"
-      ]
+      ],
+      "tiktok": 26
     },
     {
       "id": "FAV-032",
@@ -1986,7 +2015,8 @@ window.FAV_DATA = {
       "marketplace_category": "Home & Garden > Furniture > TV Stands",
       "images": [
         "assets/images/products/fav-032-mv00kf41-1.jpg"
-      ]
+      ],
+      "tiktok": 27
     },
     {
       "id": "FAV-033",
@@ -2012,7 +2042,8 @@ window.FAV_DATA = {
       "marketplace_category": "Home & Garden > Furniture > TV Stands",
       "images": [
         "assets/images/products/fav-033-mv00kf41-1.jpg"
-      ]
+      ],
+      "tiktok": 28
     },
     {
       "id": "FAV-034",
@@ -2038,7 +2069,8 @@ window.FAV_DATA = {
       "marketplace_category": "Home & Garden > Furniture > Mattresses",
       "images": [
         "assets/images/products/fav-034-mv00kf41-1.jpg"
-      ]
+      ],
+      "tiktok": 29
     },
     {
       "id": "FAV-035",
@@ -2072,7 +2104,8 @@ window.FAV_DATA = {
         "whatsapp": "+233535700722",
         "address": "Kasoa, near Amanfrom Taxi Rank",
         "note": "Sold and delivered by MANYE OYE REHOBOTH (a partner business). Contact them directly to order."
-      }
+      },
+      "tiktok": 33
     }
   ]
 };

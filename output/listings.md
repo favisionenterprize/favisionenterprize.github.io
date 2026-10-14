@@ -1,6 +1,6 @@
 # F.A Vision Enterprise: ready-to-paste listings
 
-Generated 2026-10-09. Regenerate after editing `data/products.json`.
+Generated 2026-10-14. Regenerate after editing `data/products.json`.
 
 ## FAV-001 · Rainbow Glass-Top Dining Set — 6 Chairs
 

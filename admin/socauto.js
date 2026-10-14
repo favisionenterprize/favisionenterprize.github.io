@@ -183,6 +183,7 @@
       </section>`;
     };
     return `${mode !== "live" ? `<p class="fa-ext bad">✗ X and TikTok need the add-on's automatic updates switched on (Today tab, top). Without them it can't download its X/TikTok part.</p>` : ""}
+      ${window.FAV_TTSHOP ? window.FAV_TTSHOP.renderCard() : ""}
       ${trendsCard()}
       ${card("x")}${card("tiktok")}
       <section class="fa-card">

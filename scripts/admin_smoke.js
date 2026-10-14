@@ -17,7 +17,7 @@ try { ({ chromium } = require("playwright")); } catch (e) {
   }
 }
 const ROOT = path.resolve(__dirname, "..") + "/";
-const SCRIPTS = ["admin/captions.js", "admin/igauto.js", "admin/socauto.js", "admin/vidauto.js", "admin/engage.js", "admin/fbauto.js"];
+const SCRIPTS = ["admin/captions.js", "admin/igauto.js", "admin/ttshop.js", "admin/socauto.js", "admin/vidauto.js", "admin/engage.js", "admin/fbauto.js"];
 const MIN_TEXT = 150; // a tab with less text than this counts as blank
 
 const files = {};
@@ -114,6 +114,8 @@ async function catalog(browser) {
   await page.addScriptTag({ content: fs.readFileSync(ROOT + "admin/catalog.js", "utf8") });
   await page.evaluate(() => document.querySelector("[data-catalog]").click());
   await page.waitForTimeout(300);
+  await page.evaluate(() => { const t = document.querySelector('#screen-catalog [data-tab="products"]'); if (t) t.click(); }); // the hub opens on Overview
+  await page.waitForTimeout(200);
   const rows = await page.evaluate(() => document.querySelectorAll(".cat-row").length);
   const want = files["data/products.json"].filter(p => !p.placeholder).length;
   if (rows !== want) problems.push(`catalog shows ${rows} products, expected ${want}`);
@@ -122,6 +124,46 @@ async function catalog(browser) {
   if (!commits.length || !/price GH₵999/.test(commits[0])) problems.push("changing a price didn't save: " + JSON.stringify(commits));
   await page.close();
   return { rows, problems };
+}
+
+// TikTok shop card (admin/ttshop.js, top of the X & TikTok tab): draws the picked products in
+// order, and moving / hiding / adding one and pressing Save commits the new "tiktok" positions.
+async function ttshop(browser) {
+  const page = await browser.newPage({ viewport: { width: 390, height: 900 } });
+  const problems = [];
+  page.on("pageerror", e => problems.push("page error: " + e.message));
+  await page.route("http://smoke.test/**", r => r.fulfill({ status: 200, contentType: "text/html", body: `<div id="fa-body"></div>` }));
+  await page.goto("http://smoke.test/admin/");
+  await page.evaluate(({ files, ESC }) => {
+    window.__commits = []; window.__toasts = [];
+    let list = JSON.parse(JSON.stringify(files["data/products.json"]));
+    window.__list = () => list;
+    window.FAV_CONFIG = { escapeHtml: (0, eval)(ESC), formatPrice: n => "GH₵" + n };
+    window.FAV_ADMIN = { products: () => list, business: () => files["data/business.json"], toast: (m, bad) => window.__toasts.push((bad ? "✗ " : "") + m), busy: () => {}, friendly: String, refreshDash: () => {},
+      commit: async o => { list = o.mutate(list); window.__commits.push(o.message); return list; } };
+  }, { files, ESC });
+  await page.addScriptTag({ content: fs.readFileSync(ROOT + "admin/ttshop.js", "utf8") });
+  await page.evaluate(() => { document.querySelector("#fa-body").innerHTML = window.FAV_TTSHOP.renderCard(); });
+  const want = files["data/products.json"].filter(p => p.tiktok > 0).sort((a, b) => a.tiktok - b.tiktok).map(p => p.id);
+  const ids = () => page.evaluate(() => [...document.querySelectorAll("#tts-card .tts-row")].map(r => r.dataset.id));
+  const before = await ids();
+  if (!before.length) problems.push("the TikTok shop card lists no products");
+  if (want.length && before.join() !== want.join()) problems.push("card order doesn't match data/products.json tiktok positions");
+  await page.click(`#tts-card .tts-row:nth-child(2) [data-tts=up]`);
+  await page.click(`#tts-card .tts-row:nth-child(3) [data-tts=remove]`);
+  const extra = await page.evaluate(() => { const o = document.querySelector("#tts-add option[value^='FAV']"); return o ? o.value : ""; });
+  if (extra) await page.selectOption("#tts-add", extra);
+  const expect = await ids();
+  await page.click("#tts-card [data-tts=save]");
+  await page.waitForTimeout(200);
+  const res = await page.evaluate(() => ({ commits: window.__commits, toasts: window.__toasts,
+    saved: window.__list().filter(p => p.tiktok > 0).sort((a, b) => a.tiktok - b.tiktok).map(p => p.id), btn: document.querySelector("#tts-card [data-tts=save]").textContent }));
+  if (res.commits.length !== 1) problems.push("Save didn't commit once: " + JSON.stringify(res.commits));
+  if (res.saved.join() !== expect.join()) problems.push(`saved order ${res.saved.join()} != shown ${expect.join()}`);
+  if (expect[0] !== before[1] || expect.slice(0, extra ? -1 : undefined).includes(before[2]) || (extra && expect[expect.length - 1] !== extra)) problems.push("move up / hide / add didn't change the list as expected: " + before.slice(0, 4).join() + " -> " + expect.join() + " +" + extra);
+  res.toasts.filter(t => t.startsWith("✗")).forEach(t => problems.push("error toast: " + t));
+  await page.close();
+  return { n: res.saved.length, problems };
 }
 
 (async () => {
@@ -139,6 +181,9 @@ async function catalog(browser) {
   const c = await catalog(browser);
   if (c.problems.length) { failed++; console.log("✗ Facebook catalog"); c.problems.forEach(p => console.log("    " + p)); }
   else console.log(`✓ Facebook catalog: ${c.rows} products, price edit saves`);
+  const t = await ttshop(browser);
+  if (t.problems.length) { failed++; console.log("✗ TikTok shop card"); t.problems.forEach(p => console.log("    " + p)); }
+  else console.log(`✓ TikTok shop card: reorder, hide, add and save work (${t.n} products saved)`);
   await browser.close();
   console.log(failed ? `\n${failed} check(s) FAILED` : "\nAll admin checks passed.");
   process.exit(failed ? 1 : 0);
