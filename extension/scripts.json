@@ -1,0 +1,150 @@
+{
+  "version": "2026-10-10.1",
+  "note": "Script library for the FA Vision add-on's side panel (extension/sidepanel.js). The panel downloads this file from the live site, so adding or editing a script here updates every add-on. lang: page (runs on the open tab from the panel), python, python-selenium, python-playwright, node-puppeteer.",
+  "scripts": [
+    {
+      "id": "setup-edge-debug",
+      "title": "Start here: let your own scripts control Edge",
+      "lang": "python-selenium",
+      "tags": ["setup", "edge", "selenium", "remote debugging", "attach", "logged in"],
+      "about": "Starts a separate Edge window that Python, Playwright and Puppeteer scripts can control, then lists its open tabs. Log in to Facebook, Instagram, TikTok and X once in that window; it remembers you.",
+      "how": "1. In Command Prompt run:\n   \"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\" --remote-debugging-port=9222 --user-data-dir=C:\\FAVisionRobot\n2. Log in to your sites in that new window (first time only).\n3. pip install selenium\n4. python start_here.py",
+      "file": "start_here.py",
+      "code": "# Lists the tabs open in the Edge window started with --remote-debugging-port=9222\n# pip install selenium\nfrom selenium import webdriver\nfrom selenium.webdriver.edge.options import Options\n\nopts = Options()\nopts.add_experimental_option(\"debuggerAddress\", \"127.0.0.1:9222\")\ndriver = webdriver.Edge(options=opts)\n\nfor handle in driver.window_handles:\n    driver.switch_to.window(handle)\n    print(driver.title, \"-\", driver.current_url)\n\nprint(\"Connected. Your scripts can now drive this window.\")\n"
+    },
+    {
+      "id": "playwright-attach",
+      "title": "Playwright: open a page in your Edge and take a screenshot",
+      "lang": "python-playwright",
+      "tags": ["playwright", "screenshot", "attach", "cdp", "edge"],
+      "about": "Connects Playwright to the Edge window from \"Start here\" and saves a full-page screenshot of your website.",
+      "how": "pip install playwright\npython playwright_shot.py",
+      "file": "playwright_shot.py",
+      "code": "# pip install playwright\nfrom playwright.sync_api import sync_playwright\n\nURL = \"https://favisionenterprize.github.io/\"\n\nwith sync_playwright() as p:\n    browser = p.chromium.connect_over_cdp(\"http://127.0.0.1:9222\")\n    context = browser.contexts[0]\n    page = context.new_page()\n    page.goto(URL, wait_until=\"networkidle\")\n    page.screenshot(path=\"favision_home.png\", full_page=True)\n    print(\"Saved favision_home.png\")\n    page.close()\n"
+    },
+    {
+      "id": "puppeteer-pdf",
+      "title": "Puppeteer: save any page as a PDF",
+      "lang": "node-puppeteer",
+      "tags": ["puppeteer", "pdf", "node", "attach", "save page"],
+      "about": "Connects Puppeteer to the Edge window from \"Start here\" and saves a page as an A4 PDF.",
+      "how": "npm install puppeteer-core\nnode save_pdf.js https://favisionenterprize.github.io/",
+      "file": "save_pdf.js",
+      "code": "// npm install puppeteer-core\nconst puppeteer = require(\"puppeteer-core\");\n\n(async () => {\n  const url = process.argv[2] || \"https://favisionenterprize.github.io/\";\n  const browser = await puppeteer.connect({ browserURL: \"http://127.0.0.1:9222\", defaultViewport: null });\n  const page = await browser.newPage();\n  await page.goto(url, { waitUntil: \"networkidle2\" });\n  await page.pdf({ path: \"page.pdf\", format: \"A4\", printBackground: true });\n  console.log(\"Saved page.pdf\");\n  await page.close();\n  browser.disconnect();\n})();\n"
+    },
+    {
+      "id": "page-links-csv",
+      "title": "Download every link on this page (CSV)",
+      "lang": "page",
+      "tags": ["links", "csv", "export", "urls", "scrape"],
+      "about": "Collects every link's text and address on the open page and downloads them as links.csv.",
+      "code": "const rows = [...document.querySelectorAll(\"a[href]\")]\n  .map(a => [(a.innerText || a.title || \"\").trim().replace(/\\s+/g, \" \"), a.href])\n  .filter((r, i, all) => all.findIndex(x => x[1] === r[1]) === i);\nconst csv = [[\"text\", \"url\"], ...rows].map(r => r.map(v => '\"' + String(v).replace(/\"/g, '\"\"') + '\"').join(\",\")).join(\"\\n\");\nconst a = document.createElement(\"a\");\na.href = URL.createObjectURL(new Blob([csv], { type: \"text/csv\" }));\na.download = \"links.csv\";\na.click();\n`${rows.length} links saved to links.csv`;\n"
+    },
+    {
+      "id": "page-table-csv",
+      "title": "Download the tables on this page (CSV)",
+      "lang": "page",
+      "tags": ["table", "csv", "excel", "export"],
+      "about": "Turns every HTML table on the page into a CSV file you can open in Excel.",
+      "code": "const tables = [...document.querySelectorAll(\"table\")];\ntables.forEach((t, n) => {\n  const csv = [...t.rows].map(r => [...r.cells].map(c => '\"' + c.innerText.trim().replace(/\"/g, '\"\"') + '\"').join(\",\")).join(\"\\n\");\n  const a = document.createElement(\"a\");\n  a.href = URL.createObjectURL(new Blob([csv], { type: \"text/csv\" }));\n  a.download = `table-${n + 1}.csv`;\n  a.click();\n});\ntables.length ? `${tables.length} table(s) downloaded` : \"No tables on this page.\";\n"
+    },
+    {
+      "id": "page-autoscroll",
+      "title": "Scroll to the very end (load the whole feed)",
+      "lang": "page",
+      "tags": ["scroll", "infinite", "feed", "load more", "facebook", "groups"],
+      "about": "Keeps scrolling until nothing new loads (or 3 minutes), so feeds, group lists and Marketplace pages show everything before you export or read them.",
+      "code": "(async () => {\n  const end = Date.now() + 180000;\n  let last = 0, same = 0;\n  while (Date.now() < end && same < 4) {\n    window.scrollTo(0, document.body.scrollHeight);\n    await new Promise(r => setTimeout(r, 1800));\n    const h = document.body.scrollHeight;\n    same = h === last ? same + 1 : 0;\n    last = h;\n  }\n  console.log(\"FA Vision: reached the end of the page\");\n})();\n\"Scrolling… it stops by itself when nothing new loads.\";\n"
+    },
+    {
+      "id": "page-see-more",
+      "title": "Open every \"See more\" on this page",
+      "lang": "page",
+      "tags": ["see more", "expand", "read more", "comments", "facebook"],
+      "about": "Clicks every See more / Read more / View more comments button that's visible, so the full text shows.",
+      "code": "const re = /^(see more|read more|show more|view more comments|view more replies)$/i;\nlet n = 0;\ndocument.querySelectorAll(\"[role=button], button, span, a\").forEach(el => {\n  if (el.getClientRects().length && re.test((el.innerText || \"\").trim())) { el.click(); n++; }\n});\n`Opened ${n} \"see more\" button(s)`;\n"
+    },
+    {
+      "id": "page-marketplace-csv",
+      "title": "Facebook Marketplace: my listings to CSV",
+      "lang": "page",
+      "tags": ["facebook", "marketplace", "listings", "prices", "csv", "selling"],
+      "about": "On facebook.com/marketplace/you/selling, reads each listing's title and price (best effort) and downloads marketplace.csv. Scroll to the end first with the scroll script.",
+      "code": "const rows = [];\ndocument.querySelectorAll(\"[role=main] *\").forEach(el => {\n  if (el.children.length) return;\n  const t = (el.innerText || \"\").trim();\n  if (!/^(GH₵|GHS|₵)\\s?[\\d,]+/.test(t)) return;\n  let box = el;\n  for (let i = 0; i < 6 && box.parentElement; i++) box = box.parentElement;\n  const lines = (box.innerText || \"\").split(\"\\n\").map(s => s.trim()).filter(Boolean);\n  const title = lines.find(s => s !== t && !/^(GH₵|GHS|₵)/.test(s) && s.length > 3) || \"\";\n  rows.push([title, t]);\n});\nconst uniq = rows.filter((r, i) => rows.findIndex(x => x[0] === r[0] && x[1] === r[1]) === i);\nconst csv = [[\"title\", \"price\"], ...uniq].map(r => r.map(v => '\"' + v.replace(/\"/g, '\"\"') + '\"').join(\",\")).join(\"\\n\");\nconst a = document.createElement(\"a\");\na.href = URL.createObjectURL(new Blob([csv], { type: \"text/csv\" }));\na.download = \"marketplace.csv\";\na.click();\n`${uniq.length} listings saved to marketplace.csv`;\n"
+    },
+    {
+      "id": "page-find-highlight",
+      "title": "Highlight a word everywhere on this page",
+      "lang": "page",
+      "tags": ["find", "highlight", "search", "count", "word"],
+      "about": "Change WORD in the code, run it, and every match is highlighted in yellow and counted.",
+      "code": "const WORD = \"sofa\";   // change this\nconst re = new RegExp(WORD.replace(/[.*+?^${}()|[\\]\\\\]/g, \"\\\\$&\"), \"gi\");\nlet n = 0;\nconst walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);\nconst hits = [];\nwhile (walk.nextNode()) { const node = walk.currentNode; if (node.parentElement && !/SCRIPT|STYLE/.test(node.parentElement.tagName) && re.test(node.nodeValue)) hits.push(node); re.lastIndex = 0; }\nhits.forEach(node => {\n  const span = document.createElement(\"span\");\n  span.innerHTML = node.nodeValue.replace(/[&<>]/g, c => ({ \"&\": \"&amp;\", \"<\": \"&lt;\", \">\": \"&gt;\" }[c])).replace(re, m => { n++; return `<mark style=\"background:#ffe066\">${m}</mark>`; });\n  node.replaceWith(span);\n});\n`\"${WORD}\" found ${n} time(s)`;\n"
+    },
+    {
+      "id": "page-images-list",
+      "title": "List every image on this page (download list)",
+      "lang": "page",
+      "tags": ["images", "photos", "urls", "download", "pictures"],
+      "about": "Saves the addresses of all images on the page (largest first) to images.txt, ready for the bulk-download Python script.",
+      "code": "const imgs = [...document.images]\n  .filter(i => i.naturalWidth >= 200)\n  .sort((a, b) => b.naturalWidth * b.naturalHeight - a.naturalWidth * a.naturalHeight)\n  .map(i => i.currentSrc || i.src)\n  .filter((u, i, all) => u && all.indexOf(u) === i);\nconst a = document.createElement(\"a\");\na.href = URL.createObjectURL(new Blob([imgs.join(\"\\n\")], { type: \"text/plain\" }));\na.download = \"images.txt\";\na.click();\n`${imgs.length} image addresses saved to images.txt`;\n"
+    },
+    {
+      "id": "page-clean-overlays",
+      "title": "Remove pop-ups and let the page scroll again",
+      "lang": "page",
+      "tags": ["popup", "overlay", "modal", "cookie", "scroll", "clean"],
+      "about": "Hides full-screen overlays and sticky banners that block reading, and turns scrolling back on. Reload the page to undo.",
+      "code": "let n = 0;\ndocument.querySelectorAll(\"body *\").forEach(el => {\n  const s = getComputedStyle(el);\n  if ((s.position === \"fixed\" || s.position === \"sticky\") && el.offsetWidth * el.offsetHeight > innerWidth * innerHeight * 0.3) { el.style.display = \"none\"; n++; }\n});\n[document.documentElement, document.body].forEach(e => { e.style.overflow = \"auto\"; });\n`Removed ${n} overlay(s)`;\n"
+    },
+    {
+      "id": "py-site-check",
+      "title": "Check every FA Vision product page is online",
+      "lang": "python",
+      "tags": ["website", "check", "products", "broken links", "uptime"],
+      "about": "Reads your live products list, opens every product page and its first photos, then prints anything broken.",
+      "how": "pip install requests\npython check_site.py",
+      "file": "check_site.py",
+      "code": "# pip install requests\nimport requests\n\nSITE = \"https://favisionenterprize.github.io/\"\ndata = requests.get(SITE + \"data/products.json\", timeout=30).json()\nproducts = data.get(\"products\", data) if isinstance(data, dict) else data\n\nbad = []\nfor p in products:\n    if p.get(\"placeholder\"):\n        continue\n    urls = [SITE + \"p/\" + p[\"id\"] + \".html\"] + [SITE + i.lstrip(\"/\") for i in p.get(\"images\", [])[:3]]\n    for u in urls:\n        r = requests.head(u, timeout=20, allow_redirects=True)\n        if r.status_code >= 400:\n            bad.append((p[\"id\"], u, r.status_code))\n\nprint(f\"Checked {len(products)} products.\")\nfor row in bad:\n    print(\"BROKEN:\", *row)\nif not bad:\n    print(\"Everything is online.\")\n"
+    },
+    {
+      "id": "py-bulk-download",
+      "title": "Bulk-download images from images.txt",
+      "lang": "python",
+      "tags": ["download", "images", "bulk", "photos"],
+      "about": "Downloads every address in images.txt (from the image-list page script) into a photos folder.",
+      "how": "pip install requests\npython bulk_download.py",
+      "file": "bulk_download.py",
+      "code": "# pip install requests\nimport os, requests\n\nos.makedirs(\"photos\", exist_ok=True)\nurls = [u.strip() for u in open(\"images.txt\", encoding=\"utf-8\") if u.strip()]\nfor n, u in enumerate(urls, 1):\n    try:\n        r = requests.get(u, timeout=60)\n        r.raise_for_status()\n        ext = \".png\" if \"png\" in r.headers.get(\"content-type\", \"\") else \".jpg\"\n        with open(os.path.join(\"photos\", f\"photo_{n:03d}{ext}\"), \"wb\") as f:\n            f.write(r.content)\n    except Exception as e:\n        print(\"Skipped\", u, e)\nprint(f\"Done: {len(urls)} addresses processed into ./photos\")\n"
+    },
+    {
+      "id": "py-screenshot-list",
+      "title": "Screenshot a list of web pages",
+      "lang": "python-playwright",
+      "tags": ["screenshot", "many pages", "list", "playwright", "proof"],
+      "about": "Opens each address in urls.txt in your Edge (from \"Start here\") and saves a screenshot of each, e.g. as proof that ads or listings are live.",
+      "how": "pip install playwright\nPut one address per line in urls.txt\npython screenshot_list.py",
+      "file": "screenshot_list.py",
+      "code": "# pip install playwright\nimport re\nfrom playwright.sync_api import sync_playwright\n\nurls = [u.strip() for u in open(\"urls.txt\", encoding=\"utf-8\") if u.strip()]\nwith sync_playwright() as p:\n    browser = p.chromium.connect_over_cdp(\"http://127.0.0.1:9222\")\n    page = browser.contexts[0].new_page()\n    for n, u in enumerate(urls, 1):\n        page.goto(u, wait_until=\"domcontentloaded\")\n        page.wait_for_timeout(3000)\n        name = f\"{n:02d}_\" + re.sub(r\"[^\\w]+\", \"_\", u)[:60] + \".png\"\n        page.screenshot(path=name)\n        print(\"Saved\", name)\n    page.close()\n"
+    },
+    {
+      "id": "node-price-watch",
+      "title": "Watch a page and alert me when it changes",
+      "lang": "node-puppeteer",
+      "tags": ["watch", "price", "monitor", "alert", "change", "supplier"],
+      "about": "Every 10 minutes reads one part of a page (CSS selector) and beeps and prints when it changes, e.g. a supplier's price.",
+      "how": "npm install puppeteer-core\nnode watch.js \"https://example.com/item\" \".price\"",
+      "file": "watch.js",
+      "code": "// npm install puppeteer-core\nconst puppeteer = require(\"puppeteer-core\");\n\nconst [url, selector = \"body\"] = process.argv.slice(2);\nif (!url) { console.log(\"Usage: node watch.js URL [CSS selector]\"); process.exit(1); }\n\n(async () => {\n  const browser = await puppeteer.connect({ browserURL: \"http://127.0.0.1:9222\", defaultViewport: null });\n  const page = await browser.newPage();\n  let last = null;\n  for (;;) {\n    await page.goto(url, { waitUntil: \"networkidle2\" });\n    const now = await page.$eval(selector, el => el.innerText.trim()).catch(() => \"(not found)\");\n    if (last !== null && now !== last) {\n      process.stdout.write(\"\\x07\");\n      console.log(new Date().toLocaleString(), \"CHANGED:\", last, \"->\", now);\n    } else console.log(new Date().toLocaleTimeString(), now.slice(0, 80));\n    last = now;\n    await new Promise(r => setTimeout(r, 10 * 60 * 1000));\n  }\n})();\n"
+    },
+    {
+      "id": "py-form-from-csv",
+      "title": "Fill a web form once per row of a CSV",
+      "lang": "python-selenium",
+      "tags": ["form", "fill", "csv", "data entry", "selenium", "bulk"],
+      "about": "For your own systems: opens a form page and fills it once for each row of data.csv, asking you before each submit. Edit FIELDS to match the form.",
+      "how": "pip install selenium\nMake data.csv with headers matching FIELDS\npython fill_form.py",
+      "file": "fill_form.py",
+      "code": "# pip install selenium\nimport csv, time\nfrom selenium import webdriver\nfrom selenium.webdriver.common.by import By\nfrom selenium.webdriver.edge.options import Options\n\nFORM_URL = \"https://example.com/form\"     # change this\nFIELDS = {                                 # CSV column -> CSS selector of the input\n    \"name\": \"input[name=name]\",\n    \"phone\": \"input[name=phone]\",\n    \"message\": \"textarea[name=message]\",\n}\nSUBMIT = \"button[type=submit]\"\n\nopts = Options()\nopts.add_experimental_option(\"debuggerAddress\", \"127.0.0.1:9222\")\ndriver = webdriver.Edge(options=opts)\n\nfor row in csv.DictReader(open(\"data.csv\", encoding=\"utf-8\")):\n    driver.get(FORM_URL)\n    time.sleep(2)\n    for col, sel in FIELDS.items():\n        box = driver.find_element(By.CSS_SELECTOR, sel)\n        box.clear()\n        box.send_keys(row.get(col, \"\"))\n    if input(f\"Submit row for {row.get('name', '')}? [y/N] \").lower() == \"y\":\n        driver.find_element(By.CSS_SELECTOR, SUBMIT).click()\n        time.sleep(2)\nprint(\"Done.\")\n"
+    }
+  ]
+}

@@ -20,6 +20,9 @@ function setup() {
   check();
 }
 chrome.alarms.onAlarm.addListener(a => { if (a.name === "check") { install(false); check(); awake(); } });
+// 5.3+: the icon opens the side panel (FA Vision Agent + script library; extension/sidepanel.html),
+// which has an "Autopilot ↗" button. Older browsers without side panels still open the autopilot.
+if (chrome.sidePanel && chrome.sidePanel.setPanelBehavior) chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true }).catch(() => null);
 chrome.action.onClicked.addListener(() => chrome.tabs.create({ url: ADMIN + "#fbauto" }));
 chrome.notifications.onClicked.addListener(id => { chrome.notifications.clear(id); chrome.tabs.create({ url: ADMIN + "#fbauto" }); });
 

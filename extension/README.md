@@ -30,6 +30,16 @@ Only changes to `background.js`, `admin.js` or `manifest.json` (the add-on's fra
 
 Updating from 5.1: replace the folder with the new `extension` folder and click **↻ Reload** in `edge://extensions` once (5.2 adds the "keep awake" permission).
 
+## FA Vision Agent and scripts (version 5.3+)
+
+Click the add-on's icon: a side panel opens and stays open while you browse.
+
+- **🤖 Agent.** Type a task ("open my Marketplace selling page and list my sofa prices", "find furniture groups in Accra with 50K+ members", "summarise the comments on this post"). It reads the open tab, decides one step, does it (search the web, open a page, click, type, choose, scroll, go back) and repeats until done, showing its thinking. It uses the same AI as Muse through your backend, so open the admin and sign in once. It asks you before anything that posts, sends, pays, submits or deletes, never types passwords or card numbers, and stops after 30 steps or when you press Stop. The first time, press **Allow on all sites** so it can work on any website.
+- **📚 Scripts.** Search a library of ready scripts (`scripts.json`, downloaded from the website so new ones appear by themselves): page scripts you run on the open tab with **▶ Run on this page**, and Python, Selenium, Playwright and Puppeteer scripts to download and run on your PC. **✨ Write a new script** has the AI write one for you; **Save to my scripts** keeps it in the search.
+- The old "click the icon to open the autopilot" is now the **Autopilot ↗** button at the top of the panel.
+
+Updating from 5.2: replace the folder with the new `extension` folder and click **↻ Reload** in `edge://extensions` once (5.3 adds the side panel).
+
 ## What it does
 
 - **Badge and reminder.** Once an hour it reads your live site's `data/facebook-autopilot.json` and `data/products.json`. The red number on its icon shows Marketplace listings due for renewal, plus 1 if today's group posts haven't run. It sends one reminder a day. Click the icon to open the autopilot screen.

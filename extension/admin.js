@@ -31,3 +31,14 @@ window.addEventListener("message", e => {
     if (!r || !r.ok) window.postMessage({ type: "favauto-start-failed" }, location.origin);
   });
 });
+
+// 5.3+: give the side panel (FA Vision Agent) your admin sign-in, so it can use your AI through the backend.
+// Only the session token from your own email sign-in is copied, and only into this add-on's storage.
+function shareSession() {
+  let s = "";
+  try { s = localStorage.getItem("fav_admin_session") || sessionStorage.getItem("fav_admin_session") || ""; } catch (e) { /* storage blocked */ }
+  try { chrome.storage.local.get("adminSession", o => { if ((o.adminSession || "") !== s) chrome.storage.local.set({ adminSession: s }); }); } catch (e) { /* add-on reloaded */ }
+}
+shareSession();
+setInterval(shareSession, 30000);
+window.addEventListener("storage", shareSession);

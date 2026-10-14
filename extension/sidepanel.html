@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FA Vision</title>
+  <style>
+    :root { --ink: #1c1a1f; --muted: #6b6470; --line: #e6e1e8; --bg: #faf8f5; --card: #fff; --accent: #e0245e; --gold: #c8932e; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 14px/1.45 system-ui, "Segoe UI", sans-serif; color: var(--ink); background: var(--bg); }
+    header { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-bottom: 1px solid var(--line); background: var(--card); position: sticky; top: 0; z-index: 2; }
+    header b { font-size: 15px; flex: 1; }
+    header b span { color: var(--accent); }
+    .tabs { display: flex; gap: 4px; padding: 8px 12px 0; }
+    .tabs button { flex: 1; border: 1px solid var(--line); border-bottom: 0; background: #f1edf2; border-radius: 10px 10px 0 0; padding: 8px; font: 600 13px system-ui; cursor: pointer; color: var(--muted); }
+    .tabs button[aria-selected=true] { background: var(--card); color: var(--ink); }
+    main { background: var(--card); border-top: 1px solid var(--line); padding: 12px; min-height: calc(100vh - 92px); }
+    [hidden] { display: none !important; }
+    textarea, input, select { width: 100%; border: 1px solid var(--line); border-radius: 10px; padding: 9px 10px; font: inherit; background: #fff; }
+    textarea { resize: vertical; }
+    .row { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; align-items: center; }
+    .btn { border: 0; border-radius: 10px; padding: 9px 12px; font: 600 13px system-ui; cursor: pointer; background: #ece7ee; color: var(--ink); }
+    .btn.main { background: var(--accent); color: #fff; }
+    .btn.gold { background: var(--gold); color: #fff; }
+    .btn.small { padding: 6px 10px; font-size: 12px; }
+    .btn:disabled { opacity: .45; cursor: default; }
+    .muted { color: var(--muted); font-size: 12.5px; }
+    .note { background: #fff7e6; border: 1px solid #f3dfb5; border-radius: 10px; padding: 8px 10px; font-size: 12.5px; margin: 0 0 8px; }
+    .note.bad { background: #fdecea; border-color: #f5c2bd; }
+    #log { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+    .step { border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; font-size: 13px; white-space: pre-wrap; word-break: break-word; }
+    .step .t { color: var(--muted); }
+    .step.done { border-color: #b7dfc3; background: #f0faf3; }
+    .step.err { border-color: #f5c2bd; background: #fdf3f2; }
+    .step.ask { border-color: #f3dfb5; background: #fffaf0; }
+    .code { white-space: pre-wrap; word-break: break-word; background: #1f1d23; color: #f3efe8; border-radius: 8px; padding: 10px; font: 12px/1.45 ui-monospace, Consolas, monospace; max-height: 340px; overflow: auto; margin: 6px 0 0; }
+    .list { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+    .list li { border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; cursor: pointer; }
+    .list li:hover { border-color: var(--gold); }
+    .badge { display: inline-block; font: 600 11px system-ui; padding: 1px 7px; border-radius: 999px; background: #efe9f2; color: #5b4a66; margin-right: 6px; }
+    .badge.page { background: #e6f4ea; color: #1e6b34; }
+    .badge.mine { background: #fde7ee; color: #a3123f; }
+    h3 { margin: 4px 0 6px; font-size: 15px; }
+    pre.how { white-space: pre-wrap; background: #f6f3f7; border-radius: 8px; padding: 8px; font: 12px/1.45 ui-monospace, Consolas, monospace; margin: 6px 0; }
+    details { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 10px; }
+    summary { cursor: pointer; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="icon128.png" width="22" height="22" alt="">
+    <b>FA Vision <span>Agent</span></b>
+    <button class="btn small" id="open-auto" title="Open the Social autopilot">Autopilot ↗</button>
+  </header>
+  <nav class="tabs" role="tablist">
+    <button role="tab" data-tab="agent" aria-selected="true">🤖 Agent</button>
+    <button role="tab" data-tab="scripts" aria-selected="false">📚 Scripts</button>
+  </nav>
+  <main>
+    <section id="tab-agent">
+      <div id="agent-notes"></div>
+      <textarea id="task" rows="4" placeholder="Tell me what to do in this browser, e.g.&#10;• Go to my Marketplace selling page and list my sofa prices&#10;• Find furniture groups in Accra with over 50K members&#10;• Read this page and summarise the comments"></textarea>
+      <div class="row">
+        <button class="btn main" id="go">▶ Start</button>
+        <button class="btn" id="stop" disabled>■ Stop</button>
+      </div>
+      <p class="muted">It works on the tab you're looking at, one step at a time, and shows its thinking. It asks you first before anything that posts, sends, pays, submits or deletes, and never types passwords or card numbers.</p>
+      <div id="log"></div>
+    </section>
+
+    <section id="tab-scripts" hidden>
+      <input id="q" type="search" placeholder="Search scripts: csv, facebook, screenshot, selenium…" autocomplete="off">
+      <div id="lib-note" class="muted" style="margin-top:6px"></div>
+      <ul class="list" id="results"></ul>
+      <div id="detail" hidden></div>
+      <details id="writer">
+        <summary>✨ Write a new script</summary>
+        <textarea id="ask" rows="3" placeholder="Describe the script, e.g. download all comments under this Facebook post to a CSV" style="margin-top:8px"></textarea>
+        <div class="row">
+          <select id="lang" style="flex:1">
+            <option value="page">Runs on this page (JavaScript)</option>
+            <option value="python-selenium">Python + Selenium</option>
+            <option value="python-playwright">Python + Playwright</option>
+            <option value="node-puppeteer">Node + Puppeteer</option>
+            <option value="python">Plain Python</option>
+          </select>
+          <button class="btn gold" id="write">Write it</button>
+        </div>
+        <div id="written"></div>
+      </details>
+    </section>
+  </main>
+  <script src="sidepanel.js"></script>
+</body>
+</html>

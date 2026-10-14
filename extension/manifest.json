@@ -1,14 +1,14 @@
 {
   "manifest_version": 3,
   "name": "FA Vision Autopilot",
-  "version": "5.2.0",
-  "description": "Works with your FA Vision admin: renews Facebook Marketplace listings, posts into Facebook groups on Instagram, X, TikTok and YouTube, and syncs prices. Updates itself from your website. Keeps running when the browser is minimised or the screen is locked.",
+  "version": "5.3.0",
+  "description": "Works with your FA Vision admin: renews Facebook Marketplace listings, posts into Facebook groups on Instagram, X, TikTok and YouTube, and syncs prices. Updates itself from your website. Keeps running when the browser is minimised or the screen is locked. Click the icon for the FA Vision Agent (does tasks in your browser, searches the web) and a searchable automation-script library.",
   "icons": {
     "128": "icon128.png"
   },
   "action": {
     "default_icon": "icon128.png",
-    "default_title": "FA Vision autopilot"
+    "default_title": "FA Vision Agent and scripts"
   },
   "background": {
     "service_worker": "background.js"
@@ -19,7 +19,9 @@
     "storage",
     "scripting",
     "userScripts",
-    "power"
+    "power",
+    "sidePanel",
+    "activeTab"
   ],
   "host_permissions": [
     "https://favisionenterprize.github.io/*",
@@ -28,7 +30,9 @@
     "https://www.tiktok.com/*",
     "https://x.com/*",
     "https://www.youtube.com/*",
-    "https://studio.youtube.com/*"
+    "https://studio.youtube.com/*",
+    "https://script.google.com/*",
+    "https://script.googleusercontent.com/*"
   ],
   "content_scripts": [
     {
@@ -40,5 +44,11 @@
       ],
       "run_at": "document_start"
     }
+  ],
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "optional_host_permissions": [
+    "<all_urls>"
   ]
 }
