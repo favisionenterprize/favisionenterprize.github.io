@@ -4629,6 +4629,102 @@
    "g": "149247685657323",
    "ok": false,
    "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T01:21:20.226Z",
+   "p": "FAV-033",
+   "g": "4343810679056037",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T01:21:49.389Z",
+   "p": "FAV-033",
+   "g": "945564802120994",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T01:22:16.667Z",
+   "p": "FAV-033",
+   "g": "617295088616357",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T01:22:45.874Z",
+   "p": "FAV-033",
+   "g": "367918950553182",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T01:24:14.067Z",
+   "p": "FAV-033",
+   "g": "745092999534132",
+   "ok": false,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T01:40:54.641Z",
+   "p": "FAV-033",
+   "g": "1793027177596201",
+   "ok": false,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T01:42:18.017Z",
+   "p": "FAV-033",
+   "g": "2786549388234689",
+   "ok": false,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T01:42:49.873Z",
+   "p": "FAV-033",
+   "g": "374100935963119",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T01:44:09.952Z",
+   "p": "FAV-033",
+   "g": "310489786992809",
+   "ok": false,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T01:45:37.351Z",
+   "p": "FAV-033",
+   "g": "588401269940013",
+   "ok": false,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T01:47:01.670Z",
+   "p": "FAV-033",
+   "g": "560467425090394",
+   "ok": false,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T01:51:12.882Z",
+   "p": "FAV-033",
+   "g": "firstghananews",
+   "ok": false,
+   "why": "We limit how often"
   }
  ],
  "resets": {},
@@ -5016,6 +5112,14 @@
    "kind": "post",
    "tried": 16,
    "ok": 0
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T01:51:33.373Z",
+   "kind": "post",
+   "tried": 12,
+   "ok": 0,
+   "stopped": "Facebook showed \"We limit how often\". Nothing more was posted."
   }
  ],
  "renewLog": [
