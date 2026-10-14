@@ -3848,6 +3848,159 @@
    "ok": false,
    "now": true,
    "why": "We limit how often"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:16:36.111Z",
+   "p": "FAV-021",
+   "g": "weddingandgoodlife",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:17:21.438Z",
+   "p": "FAV-021",
+   "g": "139560271489581",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:18:07.218Z",
+   "p": "FAV-021",
+   "g": "169856196719821",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:18:30.637Z",
+   "p": "FAV-021",
+   "g": "195199285857356",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:19:01.387Z",
+   "p": "FAV-021",
+   "g": "264043484022478",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:19:31.291Z",
+   "p": "FAV-021",
+   "g": "324168798801822",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:20:21.396Z",
+   "p": "FAV-021",
+   "g": "kofitv",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:21:08.734Z",
+   "p": "FAV-021",
+   "g": "377992663533329",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:21:53.356Z",
+   "p": "FAV-021",
+   "g": "397641595383636",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:22:22.603Z",
+   "p": "FAV-021",
+   "g": "495508180829744",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:23:11.207Z",
+   "p": "FAV-021",
+   "g": "497509459086362",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:23:30.578Z",
+   "p": "FAV-021",
+   "g": "527646587321586",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:24:12.630Z",
+   "p": "FAV-021",
+   "g": "535325930759843",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:24:37.392Z",
+   "p": "FAV-021",
+   "g": "540169077702036",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:25:09.089Z",
+   "p": "FAV-021",
+   "g": "661332781128349",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:25:38.199Z",
+   "p": "FAV-021",
+   "g": "694644710640007",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:27:04.554Z",
+   "p": "FAV-021",
+   "g": "732658637184181",
+   "ok": false,
+   "now": true,
+   "why": "We limit how often"
   }
  ],
  "resets": {},
@@ -3991,6 +4144,14 @@
   {
    "d": "2026-10-14",
    "t": "2026-10-14T00:27:15.226Z",
+   "kind": "post",
+   "tried": 17,
+   "ok": 15,
+   "stopped": "Facebook showed \"We limit how often\". Nothing more was posted."
+  },
+  {
+   "d": "2026-10-14",
+   "t": "2026-10-14T00:27:23.960Z",
    "kind": "post",
    "tried": 17,
    "ok": 15,
