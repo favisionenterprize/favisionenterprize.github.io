@@ -1,0 +1,23 @@
+{
+ "settings": {
+  "auto_sound": true,
+  "rotate_days": 3,
+  "best_time": false,
+  "stories": true,
+  "first_hour": true,
+  "reels": true,
+  "hooks": true
+ },
+ "pinned": [],
+ "stories": [
+  {
+   "d": "2026-10-15",
+   "net": "fb",
+   "p": "FAV-021",
+   "ok": false,
+   "why": "Facebook didn't show “Create a photo story” (switch Facebook to your Page, then try again)."
+  }
+ ],
+ "reels": [],
+ "runs": []
+}
