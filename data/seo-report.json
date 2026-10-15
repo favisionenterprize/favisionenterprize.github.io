@@ -1,38 +1,22 @@
 {
- "generated": "2026-10-15T16:58:04Z",
- "mode": "full",
- "score": 63,
+ "generated": "2026-10-15T16:59:54Z",
+ "mode": "local",
+ "score": 75,
  "prev_score": 63,
  "counts": {
-  "high": 1,
-  "medium": 8,
+  "high": 0,
+  "medium": 7,
   "low": 4
  },
  "site": {
   "robots": true,
   "robots_sitemap": true,
-  "sitemap_urls": 5,
+  "sitemap_urls": 38,
   "llms": false,
   "product_pages": 33,
-  "product_pages_indexable": 0
+  "product_pages_indexable": 33
  },
  "issues": [
-  {
-   "id": "product-pages:p/",
-   "sev": "high",
-   "page": "p/",
-   "check": "product-pages",
-   "msg": "33 product pages (p/FAV-xxx.html) redirect straight to the home page, so Google and AI engines can't index a single product page. Competitors like Kpogas have their own indexable product and category pages.",
-   "count": 33,
-   "fix": {
-    "kind": "product_landing",
-    "page": "p/",
-    "label": "Make real product pages",
-    "value": "Each p/FAV-xxx.html becomes a real page: name, price, photos, highlights, Order on WhatsApp, See it in our shop, Product + Breadcrumb schema, self canonical, added to sitemap.xml. Share links keep the same preview card.",
-    "id": "product_landing:p/",
-    "applied": false
-   }
-  },
   {
    "id": "title:index.html",
    "sev": "medium",
@@ -364,14 +348,6 @@
    }
   },
   {
-   "id": "sitemap:sitemap.xml",
-   "sev": "medium",
-   "page": "sitemap.xml",
-   "check": "sitemap",
-   "msg": "sitemap.xml lists only 5 URLs; none of your 33 products has its own URL in it.",
-   "count": 1
-  },
-  {
    "id": "description:tiktok/index.html",
    "sev": "low",
    "page": "tiktok/index.html",
@@ -544,599 +520,731 @@
    "page": "p/FAV-001.html",
    "label": "/p/FAV-001.html",
    "url": "https://favisionenterprize.github.io/p/FAV-001.html",
-   "title": "Rainbow Glass-Top Dining Set · GH₵12,600 | F.A Vision Enterprise",
-   "title_len": 64,
-   "description": "Tempered-glass top, easy to wipe clean · 6 padded, fully upholstered chairs",
-   "h1": [],
+   "title": "Rainbow Glass-Top Dining Set · GH₵12,600 in Accra | F.A Vision Enterprise",
+   "title_len": 73,
+   "description": "Bring colour to every meal. A tempered-glass table with a playful printed top, paired with six fully upholstered chairs in bold rainbow fabric. Easy to wipe c",
+   "h1": [
+    "Rainbow Glass-Top Dining Set"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 237847,
-   "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "bytes": 598144,
+   "requests": 5,
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-002.html",
    "label": "/p/FAV-002.html",
    "url": "https://favisionenterprize.github.io/p/FAV-002.html",
-   "title": "Black Glass Dining Set · GH₵4,900 | F.A Vision Enterprise",
-   "title_len": 57,
-   "description": "Black tempered-glass top · 6 padded high-back chairs",
-   "h1": [],
+   "title": "Black Glass Dining Set · GH₵4,900 in Accra | F.A Vision Enterprise",
+   "title_len": 66,
+   "description": "Sleek, modern and made for entertaining. A black tempered-glass table on a chrome base with six tall, padded high-back chairs in black leatherette. It looks p",
+   "h1": [
+    "Black Glass Dining Set"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 172678,
-   "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "bytes": 262617,
+   "requests": 4,
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-003.html",
    "label": "/p/FAV-003.html",
    "url": "https://favisionenterprize.github.io/p/FAV-003.html",
-   "title": "Dining Set Collection · GH₵12,600 | F.A Vision Enterprise",
-   "title_len": 57,
-   "description": "5 designs in the showroom · Seat 4 to 6",
-   "h1": [],
+   "title": "Dining Set Collection · GH₵12,600 in Accra | F.A Vision Enterprise",
+   "title_len": 66,
+   "description": "Five showroom designs to choose from, seating four to six: black marble-effect with chrome chairs, black glass with quilted high-back chairs, frosted white-to",
+   "h1": [
+    "Dining Set Collection"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 259312,
-   "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "bytes": 841769,
+   "requests": 5,
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-004.html",
    "label": "/p/FAV-004.html",
    "url": "https://favisionenterprize.github.io/p/FAV-004.html",
-   "title": "Red Glass Dining Set · GH₵12,600 | F.A Vision Enterprise",
-   "title_len": 56,
-   "description": "Glossy red-brown glass top · 6 curved high-back chairs",
-   "h1": [],
+   "title": "Red Glass Dining Set · GH₵12,600 in Accra | F.A Vision Enterprise",
+   "title_len": 65,
+   "description": "Warm and elegant: a glossy red-brown glass table with six curved high-back chairs finished in brown and black. A bold centrepiece for family dinners and speci",
+   "h1": [
+    "Red Glass Dining Set"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 228635,
+   "bytes": 154233,
    "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-005.html",
    "label": "/p/FAV-005.html",
    "url": "https://favisionenterprize.github.io/p/FAV-005.html",
-   "title": "Foldable Wood-Grain Dining Set · GH₵11,900 | F.A Vision Enterprise",
-   "title_len": 66,
-   "description": "Folds away to save space · 6 cushioned chairs included",
-   "h1": [],
+   "title": "Foldable Wood-Grain Dining Set · GH₵11,900 in Accra | F.A Vision Enterprise",
+   "title_len": 75,
+   "description": "Space-saving and strong. A wood-grain dining table that folds away when you need the room, with six matching cushioned chairs. Ideal for apartments, compact d",
+   "h1": [
+    "Foldable Wood-Grain Dining Set"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 276145,
+   "bytes": 209334,
    "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-006.html",
    "label": "/p/FAV-006.html",
    "url": "https://favisionenterprize.github.io/p/FAV-006.html",
-   "title": "Executive Director Chair · GH₵9,500 | F.A Vision Enterprise",
-   "title_len": 59,
-   "description": "High back with thick padding · Gas-lift height adjustment, tilt and 360° swivel",
-   "h1": [],
+   "title": "Executive Director Chair · GH₵9,500 in Accra | F.A Vision Enterprise",
+   "title_len": 68,
+   "description": "Look the part and sit comfortably all day. A high-back executive chair in black leatherette with thick padding, padded armrests, smooth gas-lift height adjust",
+   "h1": [
+    "Executive Director Chair"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 159092,
-   "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "bytes": 295932,
+   "requests": 5,
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-007.html",
    "label": "/p/FAV-007.html",
    "url": "https://favisionenterprize.github.io/p/FAV-007.html",
-   "title": "Mesh Secretary Chair · GH₵9,500 | F.A Vision Enterprise",
-   "title_len": 55,
-   "description": "Breathable mesh back with lumbar support · Height adjustable, 360° swivel",
-   "h1": [],
+   "title": "Mesh Secretary Chair · GH₵9,500 in Accra | F.A Vision Enterprise",
+   "title_len": 64,
+   "description": "Your team spends long hours in these seats, so make them good ones. A breathable mesh back with lumbar support, a soft padded seat, fixed armrests, height adj",
+   "h1": [
+    "Mesh Secretary Chair"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 167816,
-   "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "bytes": 109000,
+   "requests": 3,
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-008.html",
    "label": "/p/FAV-008.html",
    "url": "https://favisionenterprize.github.io/p/FAV-008.html",
-   "title": "1.2 m Office Desk with Drawer Unit · GH₵4,500 | F.A Vision Enterprise",
-   "title_len": 69,
-   "description": "1.2 m work surface · Detachable 3-drawer unit",
-   "h1": [],
+   "title": "1.2 m Office Desk with Drawer Unit · GH₵4,500 in Accra | F.A Vision Enterprise",
+   "title_len": 78,
+   "description": "A practical 1.2 m office desk in a warm wood finish with a detachable three-drawer unit and keyboard/cable space. Supplied flat-packed so it's easy to move in",
+   "h1": [
+    "1.2 m Office Desk with Drawer Unit"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 154678,
+   "bytes": 39310,
    "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-009.html",
    "label": "/p/FAV-009.html",
    "url": "https://favisionenterprize.github.io/p/FAV-009.html",
-   "title": "White Dressing Table with Mirror & Stool · GH₵7,450 | F.A Vision Enterprise",
-   "title_len": 75,
-   "description": "Arched mirror with side shelves · Drawers plus storage cabinet",
-   "h1": [],
+   "title": "White Dressing Table with Mirror & Stool · GH₵7,450 in Accra | F.A Vision Enterprise",
+   "title_len": 84,
+   "description": "Get ready in style. A white dressing table with an arched mirror, side display shelves, drawers, a storage cabinet and a matching padded stool. Stay fabulous,",
+   "h1": [
+    "White Dressing Table with Mirror & Stool"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 226423,
-   "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "bytes": 485315,
+   "requests": 5,
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-010.html",
    "label": "/p/FAV-010.html",
    "url": "https://favisionenterprize.github.io/p/FAV-010.html",
-   "title": "Wardrobe · GH₵9,800 | F.A Vision Enterprise",
-   "title_len": 43,
-   "description": "4 doors plus top cabinets · Hanging space and shelves",
-   "h1": [],
+   "title": "Wardrobe · GH₵9,800 in Accra | F.A Vision Enterprise",
+   "title_len": 52,
+   "description": "Spacious, stylish and strong. A tall four-door wardrobe with quilted-pattern doors, top storage cabinets, hanging space and shelves: room for two. Several col",
+   "h1": [
+    "Wardrobe"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 227148,
-   "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "bytes": 580890,
+   "requests": 5,
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-011.html",
    "label": "/p/FAV-011.html",
    "url": "https://favisionenterprize.github.io/p/FAV-011.html",
-   "title": "L-Shaped Sectional Sofa · GH₵15,500 | F.A Vision Enterprise",
-   "title_len": 59,
-   "description": "Seats 5–6 comfortably · Deep, high-density foam cushions",
-   "h1": [],
+   "title": "L-Shaped Sectional Sofa · GH₵15,500 in Accra | F.A Vision Enterprise",
+   "title_len": 68,
+   "description": "Room for the whole family. A large L-shaped sectional in soft grey fabric with deep cushions, a chaise end and matching scatter pillows. Wholesale and bulk pr",
+   "h1": [
+    "L-Shaped Sectional Sofa"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 301856,
-   "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "bytes": 575835,
+   "requests": 4,
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-014.html",
    "label": "/p/FAV-014.html",
    "url": "https://favisionenterprize.github.io/p/FAV-014.html",
-   "title": "Student Desk Chair Set · GH₵650 | F.A Vision Enterprise",
-   "title_len": 55,
-   "description": "Height-adjustable desk (73–88 cm) and chair (46–52 cm) · Powder-coated carbon steel frame with MDF/melamine top",
-   "h1": [],
+   "title": "Student Desk Chair Set · GH₵650 in Accra | F.A Vision Enterprise",
+   "title_len": 64,
+   "description": "Height-adjustable desk and chair sets, perfect for classrooms from SHS through university. Anti-slip floor caps on the legs prevent sliding and cut down on di",
+   "h1": [
+    "Student Desk Chair Set"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 216200,
-   "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "bytes": 346341,
+   "requests": 5,
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-015.html",
    "label": "/p/FAV-015.html",
    "url": "https://favisionenterprize.github.io/p/FAV-015.html",
-   "title": "L-Shaped Sofa Set · GH₵5,500 | F.A Vision Enterprise",
-   "title_len": 52,
-   "description": "Modern L-shaped design · Fabric & leather finish",
-   "h1": [],
+   "title": "L-Shaped Sofa Set · GH₵5,500 in Accra | F.A Vision Enterprise",
+   "title_len": 61,
+   "description": "Modern L-shaped sofa set in fabric and leather, roomy enough for the whole family. Ready stock at our Odorkor showroom, with delivery across Accra.",
+   "h1": [
+    "L-Shaped Sofa Set"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 202292,
-   "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "bytes": 153048,
+   "requests": 5,
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-016.html",
    "label": "/p/FAV-016.html",
    "url": "https://favisionenterprize.github.io/p/FAV-016.html",
-   "title": "Luxury Leather Sofa Set · GH₵8,500 | F.A Vision Enterprise",
-   "title_len": 58,
-   "description": "Premium leather · Modern design that elevates your home",
-   "h1": [],
+   "title": "Luxury Leather Sofa Set · GH₵8,500 in Accra | F.A Vision Enterprise",
+   "title_len": 67,
+   "description": "Premium leather living-room sofa set, designed for elegance and built for comfort. Perfect for homes, offices, lounges and Airbnb setups. Ready stock: order t",
+   "h1": [
+    "Luxury Leather Sofa Set"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 255439,
+   "bytes": 74090,
    "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-017.html",
    "label": "/p/FAV-017.html",
    "url": "https://favisionenterprize.github.io/p/FAV-017.html",
-   "title": "Mesh Secretary Chair · GH₵4,500 | F.A Vision Enterprise",
-   "title_len": 55,
-   "description": "Breathable mesh back · 360° swivel with castor wheels",
-   "h1": [],
+   "title": "Mesh Secretary Chair · GH₵4,500 in Accra | F.A Vision Enterprise",
+   "title_len": 64,
+   "description": "Breathable mesh-back secretary swivel chair with arm rests and padded seat, for the long hours at the desk. Available in grey/blue and green.",
+   "h1": [
+    "Mesh Secretary Chair"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 191247,
-   "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "bytes": 43790,
+   "requests": 3,
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-018.html",
    "label": "/p/FAV-018.html",
    "url": "https://favisionenterprize.github.io/p/FAV-018.html",
-   "title": "Strong Glass Centre Table · GH₵800 | F.A Vision Enterprise",
-   "title_len": 58,
-   "description": "Tempered glass top · Strong, durable base",
-   "h1": [],
+   "title": "Strong Glass Centre Table · GH₵800 in Accra | F.A Vision Enterprise",
+   "title_len": 67,
+   "description": "Very strong and durable oval glass-top centre table with a sculpted black base.",
+   "h1": [
+    "Strong Glass Centre Table"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 271562,
+   "bytes": 126858,
    "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-019.html",
    "label": "/p/FAV-019.html",
    "url": "https://favisionenterprize.github.io/p/FAV-019.html",
-   "title": "Auditorium / Conference Chair · GH₵405 | F.A Vision Enterprise",
-   "title_len": 62,
-   "description": "Stackable steel frame · Padded seat and back",
-   "h1": [],
+   "title": "Auditorium / Conference Chair · GH₵405 in Accra | F.A Vision Enterprise",
+   "title_len": 71,
+   "description": "Stackable auditorium and conference chair with a gold steel frame and padded blue seat and back. For churches, schools, halls, events and conference rooms. Bu",
+   "h1": [
+    "Auditorium / Conference Chair"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 176299,
-   "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "bytes": 50403,
+   "requests": 3,
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-020.html",
    "label": "/p/FAV-020.html",
    "url": "https://favisionenterprize.github.io/p/FAV-020.html",
-   "title": "Business Cards · GH₵100 | F.A Vision Enterprise",
-   "title_len": 47,
-   "description": "100 pieces: GH₵50 · 200 pieces: GH₵100",
-   "h1": [],
+   "title": "Business Cards · GH₵100 in Accra | F.A Vision Enterprise",
+   "title_len": 56,
+   "description": "Professionally designed and printed business cards from our printing press at Omanjor. 100 pieces GH₵50 · 200 pieces GH₵100. Price with or without delivery.",
+   "h1": [
+    "Business Cards"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 198048,
+   "bytes": 15208,
    "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-021.html",
    "label": "/p/FAV-021.html",
    "url": "https://favisionenterprize.github.io/p/FAV-021.html",
-   "title": "A4 & A3 Copy Paper · GH₵450 | F.A Vision Enterprise",
-   "title_len": 51,
-   "description": "A4 & A3 sizes · 70 / 75 / 80gsm",
-   "h1": [],
+   "title": "A4 & A3 Copy Paper · GH₵450 in Accra | F.A Vision Enterprise",
+   "title_len": 60,
+   "description": "Quality A4 and A3 copy paper, wholesale and retail. Rotatrim 70, 75 and 80gsm, PaperOne 80gsm, Double A and Chamex multipurpose. For offices, schools, printin",
+   "h1": [
+    "A4 & A3 Copy Paper"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 214868,
-   "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "bytes": 177743,
+   "requests": 5,
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-022.html",
    "label": "/p/FAV-022.html",
    "url": "https://favisionenterprize.github.io/p/FAV-022.html",
-   "title": "TCL 43\" Smart Android TV · GH₵6,500 | F.A Vision Enterprise",
-   "title_len": 59,
-   "description": "43\" Full HD LED · Android TV + Google Play",
-   "h1": [],
+   "title": "TCL 43\" Smart Android TV · GH₵6,500 in Accra | F.A Vision Enterprise",
+   "title_len": 68,
+   "description": "TCL S5400A 43-inch Full HD LED Smart TV with Android TV, Google Assistant voice remote and built-in Wi-Fi for Netflix, YouTube and Google Play. Sleek metallic",
+   "h1": [
+    "TCL 43\" Smart Android TV"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 215830,
-   "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "bytes": 160385,
+   "requests": 5,
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-023.html",
    "label": "/p/FAV-023.html",
    "url": "https://favisionenterprize.github.io/p/FAV-023.html",
-   "title": "Sigma 1.5HP Split Air Conditioner (BREEZE-HY12SB) · GH₵6,500 | F.A Vision Enterprise",
-   "title_len": 84,
-   "description": "1.5HP split unit · R410A refrigerant",
-   "h1": [],
+   "title": "Sigma 1.5HP Split Air Conditioner (BREEZE-HY12SB) · GH₵6,500 in Accra | F.A Vision Enterprise",
+   "title_len": 93,
+   "description": "Sigma 1.5HP split air conditioner, R410A refrigerant, model BREEZE-HY12SB. Energy-efficient, powerful cooling at an affordable price, available for delivery.",
+   "h1": [
+    "Sigma 1.5HP Split Air Conditioner (BREEZE-HY12SB)"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 185962,
-   "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "bytes": 117628,
+   "requests": 3,
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-024.html",
    "label": "/p/FAV-024.html",
    "url": "https://favisionenterprize.github.io/p/FAV-024.html",
-   "title": "TWYFORD Water Closet · GH₵750 | F.A Vision Enterprise",
-   "title_len": 53,
-   "description": "High-quality ceramic · Powerful straight-inlet flush",
-   "h1": [],
+   "title": "TWYFORD Water Closet · GH₵750 in Accra | AGOODMANN VENTURES",
+   "title_len": 59,
+   "description": "Brand-new two-piece TWYFORD water closet: high-quality ceramic, sleek modern design, easy to clean, powerful straight-inlet flush. For homes, offices and larg",
+   "h1": [
+    "TWYFORD Water Closet"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Organization",
     "Product"
    ],
-   "bytes": 174409,
-   "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "bytes": 285312,
+   "requests": 5,
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-025.html",
    "label": "/p/FAV-025.html",
    "url": "https://favisionenterprize.github.io/p/FAV-025.html",
-   "title": "Tiles & Finishes · GH₵1,000 | F.A Vision Enterprise",
-   "title_len": 51,
-   "description": "Floor tiles (anti-skid) · Wall tiles: glossy or matte",
-   "h1": [],
+   "title": "Tiles & Finishes · GH₵1,000 in Accra | AGOODMANN VENTURES",
+   "title_len": 57,
+   "description": "Anti-skid floor tiles, glossy and matte wall tiles, tile grout and adhesive, plus toilet sets, plumbing materials and stylish mirrors. Wholesale and retail. S",
+   "h1": [
+    "Tiles & Finishes"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Organization",
     "Product"
    ],
-   "bytes": 238789,
-   "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "bytes": 540140,
+   "requests": 5,
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-026.html",
    "label": "/p/FAV-026.html",
    "url": "https://favisionenterprize.github.io/p/FAV-026.html",
-   "title": "Kavukçu Wheat Flour · GH₵640 | F.A Vision Enterprise",
-   "title_len": 52,
-   "description": "50kg professional pack · Strong dough, reliable yield",
-   "h1": [],
+   "title": "Kavukçu Wheat Flour · GH₵640 in Accra | ANAC Essentials",
+   "title_len": 55,
+   "description": "Kavukçu wheat flour, the professional baker's choice: strong dough, reliable yield, consistent quality batch after batch. Made in Turkey, est. 1920. 50kg prof",
+   "h1": [
+    "Kavukçu Wheat Flour"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Organization",
     "Product"
    ],
-   "bytes": 214406,
-   "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "bytes": 383147,
+   "requests": 5,
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-027.html",
    "label": "/p/FAV-027.html",
    "url": "https://favisionenterprize.github.io/p/FAV-027.html",
-   "title": "3D Wallpaper · GH₵650 | F.A Vision Enterprise",
-   "title_len": 45,
-   "description": "GH₵650 per roll · Brick, stone & pattern designs",
-   "h1": [],
+   "title": "3D Wallpaper · GH₵650 in Accra | F.A Vision Enterprise",
+   "title_len": 54,
+   "description": "3D wallpaper that gives any wall a fresh look in a day: brick, stone and modern square patterns for living rooms, bedrooms, offices, shops and salons. GH₵650 ",
+   "h1": [
+    "3D Wallpaper"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 283441,
-   "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "bytes": 351763,
+   "requests": 5,
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-028.html",
    "label": "/p/FAV-028.html",
    "url": "https://favisionenterprize.github.io/p/FAV-028.html",
-   "title": "Kids Plastic Chair · GH₵550 | F.A Vision Enterprise",
-   "title_len": 51,
-   "description": "Stackable, saves space · Bright assorted colours",
-   "h1": [],
+   "title": "Kids Plastic Chair · GH₵550 in Accra | F.A Vision Enterprise",
+   "title_len": 60,
+   "description": "Strong, lightweight stackable plastic chairs for kids — ideal for nurseries, schools, churches and homes. Available in assorted bright colours. Bulk and whole",
+   "h1": [
+    "Kids Plastic Chair"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 212703,
+   "bytes": 168114,
    "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-029.html",
    "label": "/p/FAV-029.html",
    "url": "https://favisionenterprize.github.io/p/FAV-029.html",
-   "title": "Salon Chair · GH₵12,500 | F.A Vision Enterprise",
-   "title_len": 47,
-   "description": "Hydraulic height adjustment · Swivel base with chrome footrest",
-   "h1": [],
+   "title": "Salon Chair · GH₵12,500 in Accra | F.A Vision Enterprise",
+   "title_len": 56,
+   "description": "Professional hydraulic salon / barber chair with padded leather seat, chrome footrest and swivel base. Available in red and black.",
+   "h1": [
+    "Salon Chair"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 254292,
+   "bytes": 263383,
    "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-030.html",
    "label": "/p/FAV-030.html",
    "url": "https://favisionenterprize.github.io/p/FAV-030.html",
-   "title": "Hair Dressers Washing Bowl with Bar Chair · GH₵9,300 | F.A Vision Enterprise",
-   "title_len": 76,
-   "description": "Washing bowl with attached chair · From GH₵9,300 to GH₵10,950",
-   "h1": [],
+   "title": "Hair Dressers Washing Bowl with Bar Chair · GH₵9,300 in Accra | F.A Vision Enterprise",
+   "title_len": 85,
+   "description": "Salon backwash unit: hair washing bowl with attached padded chair, for hairdressers and barbering shops. Priced from GH₵9,300 to GH₵10,950 depending on model ",
+   "h1": [
+    "Hair Dressers Washing Bowl with Bar Chair"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 212417,
+   "bytes": 149057,
    "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-031.html",
    "label": "/p/FAV-031.html",
    "url": "https://favisionenterprize.github.io/p/FAV-031.html",
-   "title": "10 Seater Foldable Round Table with Chairs · GH₵9,650 | F.A Vision Enterprise",
-   "title_len": 77,
-   "description": "Seats 10 people · Folds flat for storage",
-   "h1": [],
+   "title": "10 Seater Foldable Round Table with Chairs · GH₵9,650 in Accra | F.A Vision Enterprise",
+   "title_len": 86,
+   "description": "Large round foldable table that seats 10, with matching white folding chairs. Ideal for events, churches, restaurants and family gatherings — folds flat for e",
+   "h1": [
+    "10 Seater Foldable Round Table with Chairs"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 188211,
+   "bytes": 121377,
    "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-032.html",
    "label": "/p/FAV-032.html",
    "url": "https://favisionenterprize.github.io/p/FAV-032.html",
-   "title": "TV Stand · GH₵6,950 | F.A Vision Enterprise",
-   "title_len": 43,
-   "description": "Marble-effect top · Pull-out storage drawer",
-   "h1": [],
+   "title": "TV Stand · GH₵6,950 in Accra | F.A Vision Enterprise",
+   "title_len": 52,
+   "description": "Modern black TV stand with a marble-effect glass top, gold trim, side cabinet and a large pull-out drawer.",
+   "h1": [
+    "TV Stand"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 181131,
+   "bytes": 111236,
    "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-033.html",
    "label": "/p/FAV-033.html",
    "url": "https://favisionenterprize.github.io/p/FAV-033.html",
-   "title": "TV Stand + Centre Table Set · GH₵16,800 | F.A Vision Enterprise",
-   "title_len": 63,
-   "description": "TV stand and centre table set · Marble-effect tops",
-   "h1": [],
+   "title": "TV Stand + Centre Table Set · GH₵16,800 in Accra | F.A Vision Enterprise",
+   "title_len": 72,
+   "description": "Matching TV stand and centre table set with a marble-effect top and white drawers. Sold as a set.",
+   "h1": [
+    "TV Stand + Centre Table Set"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 249836,
+   "bytes": 247447,
    "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-034.html",
    "label": "/p/FAV-034.html",
    "url": "https://favisionenterprize.github.io/p/FAV-034.html",
-   "title": "Student Mattress · GH₵1,200 | F.A Vision Enterprise",
-   "title_len": 51,
-   "description": "GH₵1,200 – GH₵1,300 by size · Ideal for boarding schools & hostels",
-   "h1": [],
+   "title": "Student Mattress · GH₵1,200 in Accra | F.A Vision Enterprise",
+   "title_len": 60,
+   "description": "Brand new student mattress (27 by 75 inches and a larger size) for boarding schools, hostels and homes. GH₵1,200 to GH₵1,300 depending on size. Bulk orders fo",
+   "h1": [
+    "Student Mattress"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Product"
    ],
-   "bytes": 216053,
+   "bytes": 177477,
    "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "redirect": false,
+   "in_sitemap": true
   },
   {
    "page": "p/FAV-035.html",
    "label": "/p/FAV-035.html",
    "url": "https://favisionenterprize.github.io/p/FAV-035.html",
-   "title": "Jasmine Rice · GH₵400 | F.A Vision Enterprise",
-   "title_len": 45,
-   "description": "Fragrant long-grain Thai Hom Mali rice · 25 lb bags",
-   "h1": [],
+   "title": "Jasmine Rice · GH₵400 in Accra | MANYE OYE REHOBOTH",
+   "title_len": 51,
+   "description": "Natural, fragrant long-grain jasmine rice (Thai Hom Mali) with a sweet aroma. 25 lb bags. Wholesale and retail. Sold by MANYE OYE REHOBOTH store, Kasoa, near ",
+   "h1": [
+    "Jasmine Rice"
+   ],
    "schema": [
     "Brand",
+    "BreadcrumbList",
+    "ListItem",
     "Offer",
     "Organization",
     "Product"
    ],
-   "bytes": 303958,
-   "requests": 2,
-   "redirect": true,
-   "in_sitemap": false
+   "bytes": 511516,
+   "requests": 3,
+   "redirect": false,
+   "in_sitemap": true
   }
  ],
  "keywords": [
@@ -1192,29 +1300,22 @@
   },
   {
    "keyword": "dining set Accra price",
-   "score": 1,
-   "covered": false,
-   "best_page": "tiktok/index.html",
+   "score": 4,
+   "covered": true,
+   "best_page": "p/FAV-001.html",
    "where": [
-    "description"
+    "title",
+    "text"
    ],
-   "suggest": "products/index.html",
-   "fix": {
-    "kind": "intro",
-    "page": "products/index.html",
-    "label": "Add keyword intro line",
-    "value": "Looking for dining set Accra price? F.A Vision Enterprise sells furniture such as Rainbow Glass-Top Dining Set GH₵12,600, Black Glass Dining Set GH₵4,900 from our showroom at Tarazzo Road, Odorkor, with delivery across Accra, Tema & Kasoa. WhatsApp 057 264 6176.",
-    "keyword": "dining set Accra price",
-    "id": "intro:dining-set-accra-price",
-    "applied": false
-   }
+   "suggest": "products/index.html"
   },
   {
    "keyword": "sofa Odorkor",
-   "score": 1,
+   "score": 2,
    "covered": false,
-   "best_page": "index.html",
+   "best_page": "p/FAV-015.html",
    "where": [
+    "description",
     "text"
    ],
    "suggest": "index.html",
@@ -1584,13 +1685,6 @@
       "Furniture City Ghana"
      ],
      "fix": "Our shop filters live behind #hash links. Product pages + the Products page ItemList are the first step."
-    },
-    {
-     "what": "Breadcrumb schema",
-     "who": [
-      "Jamila Home"
-     ],
-     "fix": "Comes with real product pages."
     }
    ],
    "we_beat": [
@@ -1651,7 +1745,7 @@
  "history": [
   {
    "d": "2026-10-15",
-   "score": 63,
+   "score": 75,
    "ai": null
   }
  ]
