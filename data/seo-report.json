@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-15T17:06:42Z",
+ "generated": "2026-10-15T17:07:09Z",
  "mode": "local",
  "score": 92,
  "prev_score": 92,
@@ -115,7 +115,7 @@
     "Service",
     "WebSite"
    ],
-   "bytes": 444615,
+   "bytes": 444979,
    "requests": 14,
    "redirect": false,
    "in_sitemap": true
@@ -1042,7 +1042,7 @@
     "value": "Looking for wholesale furniture Accra? F.A Vision Enterprise sells home, office and school furniture from our showroom at Tarazzo Road, Odorkor, with delivery across Accra, Tema & Kasoa. WhatsApp 057 264 6176.",
     "keyword": "wholesale furniture Accra",
     "id": "intro:wholesale-furniture-accra",
-    "applied": false
+    "applied": true
    }
   },
   {
