@@ -1,4 +1,4 @@
-// TikTok captions (Social autopilot → X & TikTok tab, card "TikTok captions").
+// TikTok captions (Social autopilot → its own tab "TikTok captions", key "ttcap").
 //   Find posts without a description – the add-on (extension/ttcaptions.js, job "ttscan") reads every
 //     post in TikTok Studio → Posts. Posts whose description has under 15 characters of real text (or
 //     only hashtags) are listed here.
@@ -121,8 +121,9 @@
     return `<section class="fa-card" id="ttc-card">
       <header><h2>TikTok captions</h2><span class="fa-big ${list.length ? "hot" : ""}">${sc ? list.length : "?"}</span></header>
       <p class="muted">Finds your TikTok posts with no description (or only hashtags) and gives each a short, classy caption that makes people stop and comment to buy: a hook, real details, the price, delivery, a “Comment ‘MINE’” ask and your /tiktok/ page. Edit it, then fix one or all. Posts are never deleted or re-posted.</p>
-      ${sc ? `<p class="muted fa-small">Last read ${esc(sc.d)}: ${plural(sc.n, "post")}, ${plural(list.length, "without a description")}.</p>` : ""}
-      <div class="fa-actions"><button class="btn btn-primary" data-ttc="scan">🔎 Find posts without a description</button>${list.length > 1 ? `<button class="btn btn-sell" data-ttc="all">Fix all ${list.length}</button>` : ""}</div>
+      ${sc ? `<p class="muted fa-small">Last read ${esc(sc.d)}: ${plural(sc.n, "post")}, ${list.length} without a description.</p>` : ""}
+      <div class="fa-actions"><button class="btn btn-primary" data-ttc="scan">🔎 Find posts without a description</button><button class="btn btn-sell" data-ttc="all" ${list.length ? "" : "disabled"}>✨ Fix all${list.length ? " " + list.length : ""}</button></div>
+      ${list.length ? "" : `<p class="muted fa-small" id="ttc-hint">Press Find first: it lists your TikTok posts with no description, then Fix all adds captions to every one.</p>`}
       ${list.map(post => { const p = productOf(post), f = S.fixed[post.id]; return `<div class="ttc-post">
         <div class="ttc-head">${okImg(post.thumb) ? `<img src="${esc(okImg(post.thumb))}" alt="" width="54" height="72" loading="lazy" referrerpolicy="no-referrer">` : ""}
           <div><b>${okUrl(post.url) ? `<a href="${esc(okUrl(post.url))}" target="_blank" rel="noopener">Post ${esc(post.id)}</a>` : "Post " + esc(post.id)}</b>
@@ -142,7 +143,7 @@
     if (!b || !b.closest("#ttc-card")) return;
     e.preventDefault();
     if (b.dataset.ttc === "scan") return startScan();
-    if (b.dataset.ttc === "all") return startFix(waiting().map(p => p.id));
+    if (b.dataset.ttc === "all") return b.disabled ? null : startFix(waiting().map(p => p.id));
     if (b.dataset.ttcFix) return startFix([b.dataset.ttcFix]);
     if (b.dataset.ttcNew) {
       const post = waiting().find(x => x.id === b.dataset.ttcNew), p = post && productOf(post);

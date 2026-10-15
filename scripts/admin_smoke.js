@@ -249,8 +249,26 @@ async function marketplace(browser) {
     window.__jobs = [];
     document.querySelector("#prof-form [data-prof=check]").click(); await wait(300);
     out.profJob = window.__jobs[0] && window.__jobs[0].job;
-    // TikTok captions card (X & TikTok tab)
+    // TikTok captions: its own tab (key "ttcap"), not on X & TikTok
     window.FAV_FBAUTO._test.setTab("social"); await wait(200);
+    out.ttcOnSocial = !!document.querySelector("#ttc-card");
+    const TC = window.FAV_TTCAPS, ttcSaved = JSON.parse(JSON.stringify(TC.state()));
+    const fixAll = () => { const b = document.querySelector("#ttc-card [data-ttc='all']"), f = document.querySelector("#ttc-card [data-ttc='scan']"); return { scan: !!f, all: !!b, disabled: b ? b.disabled : null, label: b ? b.textContent.trim() : "", hint: !!document.querySelector("#ttc-hint") }; };
+    TC._test.set({ scan: null, fixed: {}, runs: [] });
+    window.FAV_FBAUTO._test.setTab("ttcap"); await wait(200);
+    out.ttcNoScan = fixAll();
+    TC._test.set({ scan: { d: "2026-10-15", n: 1, posts: [ttcSaved.scan.posts[1]] }, fixed: {}, runs: [] });
+    window.FAV_FBAUTO._test.setTab("ttcap"); await wait(200);
+    out.ttcOne = fixAll();
+    window.__jobs = [];
+    document.querySelector("#ttc-card [data-ttc='all']").click(); await wait(200);
+    out.ttcOneJob = window.__jobs[0] && window.__jobs[0].job;
+    TC._test.set(ttcSaved);
+    window.FAV_FBAUTO._test.setTab("ttcap"); await wait(200);
+    out.ttcTabs = [...document.querySelectorAll("[data-fa-tab]")].map(b => b.dataset.faTab);
+    out.ttcMock = fixAll();
+    out.ttcLast = ((document.querySelector("#ttc-card") || {}).innerText || "").match(/Last read[^\n]*/) ;
+    out.ttcLast = out.ttcLast ? out.ttcLast[0] : "";
     const tc = document.querySelector("#ttc-card");
     out.ttc = tc ? { posts: tc.querySelectorAll(".ttc-post").length, imgs: [...tc.querySelectorAll("img")].map(i => i.getAttribute("src")), links: [...tc.querySelectorAll(".ttc-post a")].map(a => a.getAttribute("href")),
       pick: (tc.querySelector("[data-ttc-pick='7400000000000000002']") || {}).value, text: (tc.querySelector("[data-ttc-text='7400000000000000002']") || {}).value || "" } : null;
@@ -306,6 +324,13 @@ async function marketplace(browser) {
   want(it && !/where are you (seeing|watching)/i.test(it.text), "Marketplace description still has the comment ask");
   want(r.jobs.some(j => j.kind === "mkscan" && /marketplace\/you\/selling/.test(j.url)) && r.jobs.some(j => j.kind === "mkinbox"), "scan / inbox jobs not launched: " + JSON.stringify(r.jobs.map(j => j.kind)));
   want(r.profCard && r.profJob && r.profJob.kind === "profile" && r.profJob.net === "fb" && r.profJob.mode === "check" && /favisionenterprize/.test(r.profJob.link) && /Fresh stock/.test(r.profJob.pin), "profile check job wrong: " + JSON.stringify(r.profJob));
+  want(!r.ttcOnSocial, "TikTok captions card should no longer be on the X & TikTok tab");
+  want((r.ttcTabs || []).join() .includes("social,ttcap,"), "TikTok captions tab should come right after X & TikTok: " + (r.ttcTabs || []).join());
+  want(r.ttcNoScan && r.ttcNoScan.scan && r.ttcNoScan.all && r.ttcNoScan.disabled === true && r.ttcNoScan.hint, "before a scan both buttons show, Fix all disabled with the hint: " + JSON.stringify(r.ttcNoScan));
+  want(r.ttcOne && r.ttcOne.all && r.ttcOne.disabled === false && r.ttcOne.label === "✨ Fix all 1" && !r.ttcOne.hint, "with 1 post Fix all shows, enabled: " + JSON.stringify(r.ttcOne));
+  want(r.ttcOneJob && r.ttcOneJob.kind === "ttfix" && r.ttcOneJob.q.length === 1, "Fix all works for a single post: " + JSON.stringify(r.ttcOneJob).slice(0, 200));
+  want(r.ttcMock && r.ttcMock.scan && r.ttcMock.disabled === false && r.ttcMock.label === "✨ Fix all 2" && !r.ttcMock.hint, "with the mock scan Fix all is enabled: " + JSON.stringify(r.ttcMock));
+  want(/, 2 without a description\.$/.test(r.ttcLast || ""), "Last read line wording: " + r.ttcLast);
   const tt = r.ttc || {};
   want(tt.posts === 2, "TikTok captions card should list the 2 posts without a real description, got " + tt.posts);
   want(tt.pick === "FAV-014" && /Comment/i.test(tt.text) && /favisionenterprize\.github\.io\/tiktok\//.test(tt.text) && /GH₵650/.test(tt.text) && !/where are you seeing/i.test(tt.text), "classy caption for the student desk post: " + tt.text);

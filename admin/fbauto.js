@@ -837,7 +837,7 @@
     }
   }
 
-  const TABS = [["today", "Today"], ["now", "Post now"], ["facebook", "Facebook"], ["market", "Marketplace"], ["boost", "Boost"], ["instagram", "Instagram"], ["social", "X & TikTok"], ["videos", "Videos & YouTube"], ["engage", "Engagement"]];
+  const TABS = [["today", "Today"], ["now", "Post now"], ["facebook", "Facebook"], ["market", "Marketplace"], ["boost", "Boost"], ["instagram", "Instagram"], ["social", "X & TikTok"], ["ttcap", "TikTok captions"], ["videos", "Videos & YouTube"], ["engage", "Engagement"]];
   function step(state, title, detail) {
     const icon = { done: "✓", wait: "•", off: "–", warn: "!" }[state];
     return `<li class="run-step ${state}"><span class="run-icon" aria-hidden="true">${icon}</span><div><b>${title}</b><small>${detail}</small></div></li>`;
@@ -935,7 +935,7 @@
 
   function render() {
     if (!S) return;
-    const body = tab === "facebook" ? renderFacebook() : tab === "instagram" ? (IG() ? IG().renderTab() : "") : tab === "now" ? renderNow() : tab === "social" ? (SOC() ? SOC().renderTab() : "") : tab === "videos" ? (VID() ? VID().renderTab() : "") : tab === "engage" ? (PRO() ? PRO().renderCard() : "") + (ENG() ? ENG().renderTab() : "") : tab === "market" ? (MK() ? MK().renderTab() : "") : tab === "boost" ? (BST() ? BST().renderTab() : "") : renderToday();
+    const body = tab === "facebook" ? renderFacebook() : tab === "instagram" ? (IG() ? IG().renderTab() : "") : tab === "now" ? renderNow() : tab === "social" ? (SOC() ? SOC().renderTab() : "") : tab === "ttcap" ? (TTC() ? TTC().renderCard() : "") : tab === "videos" ? (VID() ? VID().renderTab() : "") : tab === "engage" ? (PRO() ? PRO().renderCard() : "") + (ENG() ? ENG().renderTab() : "") : tab === "market" ? (MK() ? MK().renderTab() : "") : tab === "boost" ? (BST() ? BST().renderTab() : "") : renderToday();
     $("#fa-body").innerHTML = `<nav class="fa-tabs" role="tablist">${TABS.map(([k, t]) => `<button type="button" role="tab" aria-selected="${tab === k}" data-fa-tab="${k}">${t}</button>`).join("")}</nav>` + body;
   }
 
@@ -1102,5 +1102,5 @@
     }
     if (e.source === window && e.data && e.data.type === "favauto-start-failed") A.toast("The add-on couldn't start the run. Reload the add-on in edge://extensions and try again.", true);
   });
-  window.FAV_FBAUTO = { open, launch, needExt, liveAddon, runStep, render: () => { if (!screen.hidden || tab === "videos" || tab === "engage" || tab === "market" || tab === "boost" || tab === "social") render(); }, _test: { set: s => { S = normalise(s); }, dueList, plan, caption, receive, state: () => S, stepsToday, runStep, setTab: t => { tab = t; render(); } } };
+  window.FAV_FBAUTO = { open, launch, needExt, liveAddon, runStep, render: () => { if (!screen.hidden || tab === "videos" || tab === "engage" || tab === "market" || tab === "boost" || tab === "social" || tab === "ttcap") render(); }, _test: { set: s => { S = normalise(s); }, dueList, plan, caption, receive, state: () => S, stepsToday, runStep, setTab: t => { tab = t; render(); } } };
 })();

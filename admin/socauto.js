@@ -191,7 +191,6 @@
       ${window.FAV_TTSHOP ? window.FAV_TTSHOP.renderCard() : ""}
       ${trendsCard()}
       ${card("x")}${card("tiktok")}
-      ${window.FAV_TTCAPS ? window.FAV_TTCAPS.renderCard() : ""}
       <section class="fa-card">
         <header><h2>Settings</h2></header>
         <form class="fa-settings" id="soc-settings">
