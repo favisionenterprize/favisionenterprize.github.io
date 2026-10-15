@@ -41,7 +41,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "Apply approved SEO fixes"
           for i in 1 2 3; do
-            git pull --rebase --quiet origin main && git push --quiet origin HEAD:main && break
+            git pull --rebase -X theirs --quiet origin main && git push --quiet origin HEAD:main && break
             sleep 5
           done
           echo "changed=true" >> "$GITHUB_OUTPUT"
