@@ -629,7 +629,7 @@ def ask_ai(q):
               "and say briefly why. Keep it under 200 words.")
     gk, ak = os.environ.get("GEMINI_API_KEY"), os.environ.get("ANTHROPIC_API_KEY")
     if gk:
-        model = os.environ.get("GEMINI_MODEL") or "gemini-flash-latest"
+        model = os.environ.get("GEMINI_MODEL") or "gemini-flash-lite-latest"
         body = {"contents": [{"parts": [{"text": prompt}]}], "tools": [{"google_search": {}}]}
         req = urllib.request.Request(f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={gk}",
                                      data=json.dumps(body).encode(), headers={"Content-Type": "application/json"})
@@ -668,8 +668,14 @@ def ai_visibility(cfg):
                             "competitors": [n for n, rx in names if rx.search(text)],
                             "answer": text[:600], "sources": srcs[:6]})
         except Exception as e:  # noqa: BLE001
-            results.append({"q": q, "error": str(e)[:160]})
-        time.sleep(2)
+            msg = str(e)
+            if hasattr(e, "read"):  # keep Google's explanation (quota name, retry hint)
+                try:
+                    msg += " | " + e.read().decode("utf-8", "replace")
+                except Exception:  # noqa: BLE001
+                    pass
+            results.append({"q": q, "error": msg[:800]})
+        time.sleep(13)  # free tier allows 5 requests a minute
     ok = [r for r in results if "error" not in r]
     return {"status": "ok" if ok else "error", "provider": provider, "results": results,
             "share": round(100 * sum(r["us"] for r in ok) / len(ok)) if ok else 0}
