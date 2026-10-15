@@ -324,6 +324,27 @@
    "page": "index.html",
    "value": "Looking for furniture Kasoa? F.A Vision Enterprise sells home, office and school furniture from our showroom at Tarazzo Road, Odorkor, with delivery across Accra, Tema & Kasoa. WhatsApp 057 264 6176.",
    "applied_at": "2026-10-15"
+  },
+  {
+   "id": "jsonld:index.html",
+   "kind": "jsonld",
+   "page": "index.html",
+   "value": {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://favisionenterprize.github.io/#org",
+    "sameAs": [
+     "https://www.facebook.com/FaVisionEnterprise",
+     "https://www.facebook.com/FaVisionEnt/",
+     "https://www.instagram.com/favisionent/",
+     "https://x.com/FaVisionEnt",
+     "https://www.tiktok.com/@favisionenterprise",
+     "https://maps.app.goo.gl/Ct4oYoMkmTPGPX3P6",
+     "https://maps.app.goo.gl/2czi91wUwRAwXcgd7",
+     "https://maps.app.goo.gl/zrELKCZL1NWdqKiE9"
+    ]
+   },
+   "applied_at": "2026-10-15"
   }
  ]
 }
