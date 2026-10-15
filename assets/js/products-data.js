@@ -1568,9 +1568,9 @@ window.FAV_DATA = {
         {
           "id": "2017230745600774",
           "title": "Complementary Cards",
-          "price": 100,
-          "checked": "2026-10-01",
-          "synced": "2026-10-01"
+          "price": 450,
+          "checked": "2026-10-15",
+          "synced": "2026-10-15"
         }
       ],
       "tiktok": 20,
