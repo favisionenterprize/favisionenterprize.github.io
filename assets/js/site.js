@@ -40,11 +40,15 @@
     return `Hello F.A Vision, I'm interested in the ${p.name} (${p.id}).${p.price_ghs ? ` Listed at ${C.formatPrice(p.price_ghs)}.` : ""} Is it available?\n${productUrl(p)}`;
   }
 
-  // Products with photos first, then in-stock, then the rest, keeping data order.
+  // Pinned products first ("featured": 1, 2… in data/products.json; FAV-014 if none is set),
+  // then products with photos, then in-stock, then the rest, keeping data order.
+  const anyPinned = products.some(p => Number(p.featured) > 0);
+  const pinOf = p => Number(p.featured) > 0 ? Number(p.featured) : (!anyPinned && p.id === "FAV-014" ? 1 : Infinity);
   const featured = products
     .map((p, i) => ({ p, i }))
-    .sort((a, b) => (!!(b.p.images || []).length - !!(a.p.images || []).length) || (b.p.in_stock - a.p.in_stock) || a.i - b.i)
+    .sort((a, b) => (pinOf(a.p) - pinOf(b.p) || 0) || (!!(b.p.images || []).length - !!(a.p.images || []).length) || (b.p.in_stock - a.p.in_stock) || a.i - b.i)
     .map(x => x.p);
+  const topId = (featured[0] && pinOf(featured[0]) !== Infinity) ? featured[0].id : "";
 
   // ---------- WhatsApp tap alerts ----------
   // Every tap on a WhatsApp link is logged in the backend Sheet, which texts the owner (SMS alerts,
@@ -371,7 +375,9 @@
     const list = visible();
     $("#empty").hidden = list.length > 0;
     $("#grid").innerHTML = list.map((p, i) => {
+      const top = p.id === topId;
       const badges = [
+        top ? `<span class="badge top">★ Top pick</span>` : "",
         !p.in_stock ? `<span class="badge sold">Sold out</span>` : "",
         p.custom_order ? `<span class="badge">Made to order</span>` : "",
         p.negotiable && p.price_ghs ? `<span class="badge gold">Negotiable</span>` : "",
@@ -379,8 +385,8 @@
       ].join("");
       const n = (p.images || []).length;
       return `
-      <article class="card" data-id="${esc(p.id)}" style="animation-delay:${Math.min(i, 8) * 40}ms" tabindex="0" aria-label="${esc(p.name)}">
-        <div class="media">${media(p)}<div class="badges">${badges}</div>${n > 1 ? `<span class="photo-count">${n} photos</span>` : ""}</div>
+      <article class="card${top ? " is-top" : ""}" data-id="${esc(p.id)}" style="animation-delay:${Math.min(i, 8) * 40}ms" tabindex="0" aria-label="${esc(p.name)}">
+        <div class="media">${i < 2 ? media(p).replace('loading="lazy"', 'loading="eager" fetchpriority="high"') : media(p)}<div class="badges">${badges}</div>${n > 1 ? `<span class="photo-count">${n} photos</span>` : ""}</div>
         <div class="card-body">
           <span class="card-type">${esc(p.type || p.category)}</span>
           <h3>${esc(p.name)}</h3>

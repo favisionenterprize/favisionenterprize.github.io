@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/site.css?v=20261015n">
+  <link rel="stylesheet" href="../assets/css/site.css?v=20261015p">
   <link rel="stylesheet" href="../assets/css/studio.css?v=20260930b">
 </head>
 <body class="studio-page">
@@ -33,11 +33,20 @@
         <span class="logo-text"><span><b>F.A</b> Vision</span><small>Enterprise</small></span>
       </a>
       <nav class="nav-links" id="nav-links" aria-label="Main">
+        <div class="nav-group nav-mega" data-group="products">
+          <button type="button" class="nav-cat" id="nav-cat-products" aria-expanded="false" aria-haspopup="true" aria-controls="nav-menu-products">Products<span class="nav-caret" aria-hidden="true">▾</span></button>
+          <div class="nav-menu" id="nav-menu-products" aria-labelledby="nav-cat-products" data-root="../">
+            <div class="pm-search"><input type="search" id="pm-q" placeholder="Search products…" aria-label="Search products" autocomplete="off"></div>
+            <div class="pm-scroll"><div class="pm-body" id="pm-body"></div><p class="pm-empty" id="pm-empty" hidden>No products match your search.</p></div>
+            <a class="pm-all" href="../products/">View all products <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
         <div class="nav-group" data-group="shop">
           <button type="button" class="nav-cat" id="nav-cat-shop" aria-expanded="false" aria-haspopup="true" aria-controls="nav-menu-shop">Shop<span class="nav-caret" aria-hidden="true">▾</span></button>
           <div class="nav-menu" id="nav-menu-shop" aria-labelledby="nav-cat-shop">
             <a href="../#deals"><span class="nav-item-t">Deals</span><small>Today’s offers and promos</small></a>
             <a href="../#shop"><span class="nav-item-t">Shop all</span><small>Browse every piece we sell</small></a>
+            <a href="../products/"><span class="nav-item-t">All products</span><small>Every product in one list</small></a>
             <a href="../#custom"><span class="nav-item-t">Custom orders</span><small>Describe it, get a quote</small></a>
           </div>
         </div>
@@ -161,6 +170,6 @@
   <script src="../assets/js/checkout.js?v=20260930d"></script>
   <script src="../assets/js/room-designer.js?v=20260930b"></script>
   <script src="../assets/js/studio.js?v=20260930b"></script>
-  <script src="../assets/js/nav.js?v=20261015n"></script>
+  <script src="../assets/js/nav.js?v=20261015p"></script>
 </body>
 </html>

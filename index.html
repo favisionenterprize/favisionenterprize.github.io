@@ -367,7 +367,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/site.css?v=20261015n">
+  <link rel="stylesheet" href="assets/css/site.css?v=20261015q">
   <link rel="stylesheet" href="assets/css/live-strip.css?v=20261002f">
 </head>
 <body>
@@ -383,11 +383,20 @@
         <span class="logo-text"><span><b>F.A</b> Vision</span><small>Enterprise</small></span>
       </a>
       <nav class="nav-links" id="nav-links" aria-label="Main">
+        <div class="nav-group nav-mega" data-group="products">
+          <button type="button" class="nav-cat" id="nav-cat-products" aria-expanded="false" aria-haspopup="true" aria-controls="nav-menu-products">Products<span class="nav-caret" aria-hidden="true">▾</span></button>
+          <div class="nav-menu" id="nav-menu-products" aria-labelledby="nav-cat-products" data-root="">
+            <div class="pm-search"><input type="search" id="pm-q" placeholder="Search products…" aria-label="Search products" autocomplete="off"></div>
+            <div class="pm-scroll"><div class="pm-body" id="pm-body"></div><p class="pm-empty" id="pm-empty" hidden>No products match your search.</p></div>
+            <a class="pm-all" href="products/">View all products <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
         <div class="nav-group" data-group="shop">
           <button type="button" class="nav-cat" id="nav-cat-shop" aria-expanded="false" aria-haspopup="true" aria-controls="nav-menu-shop">Shop<span class="nav-caret" aria-hidden="true">▾</span></button>
           <div class="nav-menu" id="nav-menu-shop" aria-labelledby="nav-cat-shop">
             <a href="#deals"><span class="nav-item-t">Deals</span><small>Today’s offers and promos</small></a>
             <a href="#shop"><span class="nav-item-t">Shop all</span><small>Browse every piece we sell</small></a>
+            <a href="products/"><span class="nav-item-t">All products</span><small>Every product in one list</small></a>
             <a href="#custom"><span class="nav-item-t">Custom orders</span><small>Describe it, get a quote</small></a>
           </div>
         </div>
@@ -412,9 +421,34 @@
       <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
     </div>
   </header>
-  <div class="fav-live" id="fav-live" aria-label="Live deals"></div>
-
   <main>
+    <section class="shop shop-first" id="shop" aria-labelledby="shop-title">
+      <div class="wrap">
+        <div class="shop-top">
+          <h2 class="shop-title" id="shop-title">Shop quality furniture in Accra</h2>
+          <p class="shop-sub">Prices in GH₵ · bulk prices for schools, offices &amp; churches</p>
+        </div>
+        <div class="toolbar" id="toolbar">
+          <label class="search">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="search" type="search" placeholder="Search sofas, beds, desks…" aria-label="Search products">
+          </label>
+          <select id="sort" aria-label="Sort products">
+            <option value="featured">Featured</option>
+            <option value="price-asc">Price: low to high</option>
+            <option value="price-desc">Price: high to low</option>
+            <option value="newest">Newest</option>
+          </select>
+        </div>
+        <div class="chips" id="chips" role="tablist" aria-label="Filter by category"></div>
+
+        <div class="grid" id="grid"></div>
+        <p class="empty" id="empty" hidden>No products match your search. <a class="js-wa" data-msg="Hello F.A Vision, I'm looking for a piece that isn't on your site.">Ask us on WhatsApp</a>, since we can make it.</p>
+      </div>
+    </section>
+
+    <div class="fav-live" id="fav-live" aria-label="Live deals"></div>
+
     <section class="hero">
       <div class="wrap hero-inner">
         <div class="hero-copy">
@@ -493,32 +527,6 @@
       </div>
     </section>
 
-    <section class="shop" id="shop">
-      <div class="wrap">
-        <div class="section-head">
-          <p class="kicker">The collection</p>
-          <h2>Pieces built to last</h2>
-          <p class="section-sub">Prices in Ghana Cedis. Bulk and wholesale prices for schools, offices, churches and hotels. Ask about other sizes, colours and finishes.</p>
-        </div>
-
-        <div class="toolbar" id="toolbar">
-          <label class="search">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-            <input id="search" type="search" placeholder="Search sofas, beds, desks…" aria-label="Search products">
-          </label>
-          <select id="sort" aria-label="Sort products">
-            <option value="featured">Featured</option>
-            <option value="price-asc">Price: low to high</option>
-            <option value="price-desc">Price: high to low</option>
-            <option value="newest">Newest</option>
-          </select>
-        </div>
-        <div class="chips" id="chips" role="tablist" aria-label="Filter by category"></div>
-
-        <div class="grid" id="grid"></div>
-        <p class="empty" id="empty" hidden>No products match your search. <a class="js-wa" data-msg="Hello F.A Vision, I'm looking for a piece that isn't on your site.">Ask us on WhatsApp</a>, since we can make it.</p>
-      </div>
-    </section>
 
     <section class="services" id="services">
       <div class="wrap">
@@ -774,12 +782,12 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="assets/js/catalog-config.js?v=20260930b"></script>
-  <script src="assets/js/products-data.js?v=20260930e"></script>
+  <script src="assets/js/products-data.js?v=20261015q"></script>
   <script src="assets/js/auto-carousel.js?v=20261002a"></script>
   <script src="assets/js/live-strip.js?v=20261002d"></script>
   <script src="assets/js/checkout.js?v=20260930d"></script>
-  <script src="assets/js/site.js?v=20261007a"></script>
+  <script src="assets/js/site.js?v=20261015q"></script>
   <script src="assets/js/meta-pixel.js?v=20261008a"></script>
-  <script src="assets/js/nav.js?v=20261015n"></script>
+  <script src="assets/js/nav.js?v=20261015p"></script>
 </body>
 </html>

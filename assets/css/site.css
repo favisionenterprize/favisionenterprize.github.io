@@ -553,3 +553,65 @@ section { padding: 96px 0; }
   .nav-links .nav-menu a { padding: 10px 12px; border-bottom: 0; font-size: 16px; }
   .nav-menu .nav-item-t { font-size: 16px; }
 }
+
+/* Products ▾ mega-menu (built by assets/js/nav.js from products-data.js) */
+.nav-inner { position: relative; }
+.nav-group.nav-mega { position: static; }
+.nav-mega > .nav-menu { left: auto; right: 20px; top: 100%; width: min(940px, calc(100% - 40px)); max-height: min(76vh, 680px); display: flex; flex-direction: column; padding: 12px; transform: translateY(-6px); }
+.nav-group.nav-mega.open > .nav-menu { transform: translateY(0); }
+.nav-mega > .nav-menu::before { top: -20px; height: 20px; }
+.pm-search input { width: 100%; padding: 10px 14px 10px 38px; border: 1.5px solid var(--line); border-radius: 10px; font: 400 15px var(--sans); color: var(--ink); background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='none' stroke='%235f6368' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='8' cy='8' r='6'/%3E%3Cpath d='m16 16-3.5-3.5'/%3E%3C/svg%3E") no-repeat 12px center; }
+.pm-search input:focus { outline: none; border-color: var(--brand-blue); box-shadow: 0 0 0 3px rgba(13, 85, 175, .15); }
+.pm-scroll { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; margin: 10px -6px 0; padding: 0 6px; }
+.pm-body { columns: 3 240px; column-gap: 18px; }
+.pm-cat { break-inside: avoid; margin: 0 0 12px; }
+.nav-mega .pm-cat { padding: 0; } /* .pm-cat is a <section>: drop the global section padding */
+.pm-cat[hidden], .nav-links .nav-menu a.pm-item[hidden] { display: none !important; }
+.pm-cat-h { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 6px 8px; border: 0; background: none; color: var(--brand-red); font: 700 11.5px/1.3 var(--sans); letter-spacing: .1em; text-transform: uppercase; text-align: left; cursor: default; }
+.pm-cat-h .nav-caret { display: none; }
+.pm-n { margin-left: 4px; color: var(--muted-light); font-weight: 600; }
+.nav-links .nav-menu a.pm-item { display: flex; align-items: center; gap: 10px; padding: 6px 8px; border-left: 0; }
+.pm-thumb { flex: none; display: grid; place-items: center; width: 44px; height: 44px; overflow: hidden; border-radius: 8px; background: var(--cream); }
+.pm-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.pm-ph { font-size: 20px; }
+.pm-txt { display: flex; flex-direction: column; min-width: 0; }
+.pm-name { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; color: var(--ink); font: 500 14px/1.3 var(--sans); }
+.pm-price { margin-top: 2px; color: var(--brand-blue); font: 600 13px/1.2 var(--sans); }
+.nav-links .nav-menu a.pm-item:hover .pm-name { color: var(--brand-blue); }
+.nav-links .nav-menu a.pm-all { margin-top: 8px; padding: 12px 8px 4px; border-left: 0; border-top: 1px solid var(--line); border-radius: 0; color: var(--brand-blue); font: 600 15px var(--sans); text-align: center; }
+.nav-links .nav-menu a.pm-all:hover, .nav-links .nav-menu a.pm-all[aria-current="page"] { background: none; text-decoration: underline; }
+.pm-empty { padding: 16px 8px; color: var(--muted); font-size: 14px; }
+@media (max-width: 760px) {
+  .nav-mega > .nav-menu { display: none; width: auto; max-height: none; padding: 0 0 10px; }
+  .nav-group.nav-mega.open > .nav-menu { display: block; }
+  .pm-search { margin: 0 0 6px; }
+  .pm-scroll { margin: 0; padding: 0; overflow: visible; }
+  .pm-body { columns: auto; }
+  .pm-cat { margin: 0; border-top: 1px solid #eef0f3; }
+  .pm-cat-h { padding: 12px 8px; color: var(--ink); font: 600 15px var(--sans); letter-spacing: 0; text-transform: none; cursor: pointer; }
+  .pm-cat-h .nav-caret { display: inline-block; }
+  .pm-cat.open > .pm-cat-h .nav-caret { transform: rotate(180deg); }
+  .pm-list { display: none; padding-bottom: 6px; }
+  .pm-cat.open > .pm-list, .pm-body.searching .pm-list { display: block; }
+  .nav-links .nav-menu a.pm-all { text-align: left; }
+}
+
+/* Home: shop (search + chips + grid) is the first thing under the header */
+section.shop-first { padding: 18px 0 64px; }
+.shop-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; margin-bottom: 12px; }
+.shop-title { margin: 0; font-size: clamp(20px, 2.4vw, 26px); font-weight: 700; line-height: 1.2; }
+.shop-sub { margin: 0; color: var(--muted); font-size: 14px; }
+.shop-first .chips { margin-bottom: 18px; }
+.badge.top { background: #ffc83d; color: #1a1a1a; }
+.card.is-top { box-shadow: 0 0 0 2px rgba(255, 200, 61, .9); }
+@media (max-width: 760px) {
+  section.shop-first { padding: 12px 0 48px; }
+  .shop-top { margin-bottom: 10px; }
+  .shop-title { font-size: 19px; }
+  .shop-sub { font-size: 12.5px; }
+  .shop-first .toolbar { flex-direction: row; gap: 8px; margin-bottom: 10px; }
+  .shop-first .search { flex: 1 1 auto; min-width: 0; padding: 0 14px; }
+  .shop-first .search input { padding: 11px 0; }
+  .shop-first .toolbar select { flex: 0 0 104px; width: 104px; min-width: 0; padding: 0 10px; }
+  .shop-first .chips { margin-bottom: 14px; }
+}

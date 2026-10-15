@@ -1313,6 +1313,7 @@ window.FAV_DATA = {
     },
     {
       "id": "FAV-014",
+      "featured": 1,
       "name": "Student Desk Chair Set — Senior High to Tertiary Level",
       "category": "School",
       "type": "Classroom Desk",
