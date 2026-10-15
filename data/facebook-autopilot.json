@@ -5120,6 +5120,14 @@
    "tried": 12,
    "ok": 0,
    "stopped": "Facebook showed \"We limit how often\". Nothing more was posted."
+  },
+  {
+   "d": "2026-10-15",
+   "t": "2026-10-15T02:03:42.030Z",
+   "kind": "renew",
+   "tried": 0,
+   "ok": 0,
+   "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile in Facebook, then tap Renew again."
   }
  ],
  "renewLog": [
