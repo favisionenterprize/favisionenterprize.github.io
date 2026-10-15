@@ -1880,11 +1880,10 @@ Order: https://wa.me/233555434994?text=Hello%20ANAC%20Essentials%20%28formerly%2
 ```
 3D Wallpaper — Brick, Stone & Pattern (per roll) by F.A Vision Enterprise.
 
-3D wallpaper that gives any wall a fresh look in a day: brick, stone and modern square patterns for living rooms, bedrooms, offices, shops and salons. GH₵650 per roll. Not sure how many rolls you need? Try your room free in our AI Studio and it works it out for you, or WhatsApp us your wall size.
+3D wallpaper that gives any wall a fresh look in a day: brick, stone and modern square patterns for living rooms, bedrooms, offices, shops and salons. Not sure how many rolls you need? Try your room free in our AI Studio and it works it out for you, or WhatsApp us your wall size.
 
 👉 See all photos, price and order online: https://favisionenterprize.github.io/#product/FAV-027
 
-✔ GH₵650 per roll
 ✔ Brick, stone & pattern designs
 ✔ Living rooms, offices, shops
 ✔ Rolls worked out free in AI Studio
@@ -1906,7 +1905,6 @@ Ref: FAV-027
 
 ```
 🧱 3D Wallpaper — Brick, Stone & Pattern (per roll) available now!
-• GH₵650 per roll
 • Brick, stone & pattern designs
 • Living rooms, offices, shops
 • Rolls worked out free in AI Studio
@@ -1919,7 +1917,7 @@ Ref: FAV-027
 **Variant 2**
 
 ```
-Looking for a quality 3d wallpaper — brick, stone & pattern (per roll)? GH₵650 per roll.
+Looking for a quality 3d wallpaper — brick, stone & pattern (per roll)? Brick, stone & pattern designs.
 Available at Odorkor, Accra. GH₵ 650.
 Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
