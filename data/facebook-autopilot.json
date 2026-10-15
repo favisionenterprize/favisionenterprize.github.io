@@ -10220,58 +10220,16 @@
    "kind": "renew",
    "tried": 157,
    "ok": 0
+  },
+  {
+   "d": "2026-10-15",
+   "t": "2026-10-15T19:27:25.659Z",
+   "kind": "renew",
+   "tried": 45,
+   "ok": 0
   }
  ],
  "renewLog": [
-  {
-   "d": "2026-10-14",
-   "t": "Dinning Set with Chairs",
-   "listed": "2026-10-13",
-   "ok": false,
-   "why": "Next renewal in 7 days"
-  },
-  {
-   "d": "2026-10-14",
-   "t": "Dinning Set with Chairs",
-   "listed": "2026-10-07",
-   "ok": false,
-   "why": "Next renewal in 1 days"
-  },
-  {
-   "d": "2026-10-14",
-   "t": "Dinning Set with Chairs",
-   "listed": "2026-10-02",
-   "ok": false,
-   "why": "Next renewal in 3 days"
-  },
-  {
-   "d": "2026-10-14",
-   "t": "Student Desk Chair Set — Senior High to Tertiary Level",
-   "listed": "2026-09-23",
-   "ok": false,
-   "why": "Next renewal in 2 days"
-  },
-  {
-   "d": "2026-10-14",
-   "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
-   "listed": "2026-09-22",
-   "ok": false,
-   "why": "Next renewal in 1 days"
-  },
-  {
-   "d": "2026-10-15",
-   "t": "3D Wallpaper — Brick, Stone & Pattern (per roll)",
-   "listed": "2026-10-15",
-   "ok": false,
-   "why": "Next renewal in 7 days"
-  },
-  {
-   "d": "2026-10-15",
-   "t": "Student Mattress — 2 Sizes",
-   "listed": "2026-10-15",
-   "ok": false,
-   "why": "Next renewal in 7 days"
-  },
   {
    "d": "2026-10-15",
    "t": "TV Stand + Centre Table Set — Marble Top",
@@ -11356,6 +11314,321 @@
    "listed": null,
    "ok": false,
    "why": "No Renew option"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "3D Wallpaper — Brick, Stone & Pattern (per roll)",
+   "listed": "2026-10-15",
+   "ok": false,
+   "why": "No Renew option"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Student Mattress — 2 Sizes",
+   "listed": "2026-10-15",
+   "ok": false,
+   "why": "No Renew option"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "TV Stand + Centre Table Set — Marble Top",
+   "listed": "2026-10-15",
+   "ok": false,
+   "why": "No Renew option"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Hair Dressers Washing Bowl with Bar Chair",
+   "listed": "2026-10-15",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Salon Chair — Hydraulic, Red or Black",
+   "listed": "2026-10-15",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Kids Plastic Chair — Stackable, Assorted Colours",
+   "listed": "2026-10-15",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "10 Seater Foldable Round Table with Chairs",
+   "listed": "2026-10-14",
+   "ok": false,
+   "why": "Next renewal in 6 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "TV Stand — Black Marble Top with Drawer",
+   "listed": "2026-10-14",
+   "ok": false,
+   "why": "Next renewal in 6 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Dinning Set with Chairs",
+   "listed": "2026-10-13",
+   "ok": false,
+   "why": "Next renewal in 6 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Dinning Set with Chairs",
+   "listed": "2026-10-07",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Dinning Set with Chairs",
+   "listed": "2026-10-02",
+   "ok": false,
+   "why": "Next renewal in 1 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Student Desk Chair Set — Senior High to Tertiary Level",
+   "listed": "2026-09-23",
+   "ok": false,
+   "why": "Next renewal in 1 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
+   "listed": "2026-09-22",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
+   "listed": "2026-09-07",
+   "ok": false,
+   "why": "Next renewal in 1 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Executive Director Chair — Leather, High Back",
+   "listed": "2026-08-03",
+   "ok": false,
+   "why": "Next renewal in 1 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
+   "listed": "2026-08-03",
+   "ok": false,
+   "why": "Next renewal in 1 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Dining Set Collection — 5 Designs, 6 Chairs",
+   "listed": "2026-08-03",
+   "ok": false,
+   "why": "Next renewal in 1 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Red Glass Dining Set — 6 Chairs",
+   "listed": "2026-08-03",
+   "ok": false,
+   "why": "Next renewal in 1 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Mesh Secretary Chair — Ergonomic Swivel",
+   "listed": "2026-08-03",
+   "ok": false,
+   "why": "Next renewal in 1 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Black Glass Dining Set — 6 High-Back Chairs",
+   "listed": "2026-08-03",
+   "ok": false,
+   "why": "Next renewal in 1 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Executive Director Chair — Leather, High Back",
+   "listed": "2026-08-03",
+   "ok": false,
+   "why": "Next renewal in 1 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
+   "listed": "2026-08-03",
+   "ok": false,
+   "why": "Next renewal in 1 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
+   "listed": "2026-08-01",
+   "ok": false,
+   "why": "Next renewal in 1 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
+   "listed": "2026-07-26",
+   "ok": false,
+   "why": "Next renewal in 1 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Mesh Secretary Chair — Ergonomic Swivel",
+   "listed": "2026-07-26",
+   "ok": false,
+   "why": "Next renewal in 1 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
+   "listed": "2026-07-26",
+   "ok": false,
+   "why": "Next renewal in 1 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
+   "listed": "2026-07-26",
+   "ok": false,
+   "why": "Next renewal in 1 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Complementary Cards",
+   "listed": "2026-07-26",
+   "ok": false,
+   "why": "Next renewal in 1 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
+   "listed": "2026-07-26",
+   "ok": false,
+   "why": "Next renewal in 1 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "🌾 Kavukçu Wheat Flour — Baking Flour",
+   "listed": "2026-07-20",
+   "ok": false,
+   "why": "Next renewal in 1 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "L-Shaped Sectional Sofa — Grey Fabric",
+   "listed": "2026-08-03",
+   "ok": false,
+   "why": "Next renewal in 1 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "White Dressing Table with Mirror & Stool",
+   "listed": "2026-07-26",
+   "ok": false,
+   "why": "Next renewal in 1 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Dinning Set with Chairs",
+   "listed": "2026-05-18",
+   "ok": false,
+   "why": "No Renew option"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Foldable Dinning set",
+   "listed": "2026-05-18",
+   "ok": false,
+   "why": "No Renew option"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "White Dressing Table with Mirror & Stool",
+   "listed": "2026-08-03",
+   "ok": false,
+   "why": "Next renewal in 1 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Mesh Secretary Chair — Ergonomic Swivel",
+   "listed": "2026-08-03",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
+   "listed": "2026-08-03",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
+   "listed": "2026-08-03",
+   "ok": false,
+   "why": "No Renew option"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "1.2 m Office Desk with Drawer Unit",
+   "listed": "2026-08-03",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "White Dressing Table with Mirror & Stool",
+   "listed": "2026-08-03",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Student Desk Chair Set — Senior High to Tertiary Level",
+   "listed": "2026-08-03",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Wardrobe — 4-Door with Top Cabinets",
+   "listed": "2026-08-03",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Dining Set Collection — 5 Designs, 6 Chairs",
+   "listed": "2026-08-03",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Dinning Set with Chairs",
+   "listed": "2026-08-03",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "Dinning Set with Chairs",
+   "listed": "2026-08-03",
+   "ok": false,
+   "why": "Next renewal in 7 days"
   }
  ],
  "selling": {
@@ -11365,19 +11638,19 @@
     "t": "3D Wallpaper — Brick, Stone & Pattern (per roll)",
     "listed": "2026-10-15",
     "status": "Active",
-    "next": "2026-10-22"
+    "none": "2026-10-15"
    },
    {
     "t": "Student Mattress — 2 Sizes",
     "listed": "2026-10-15",
     "status": "Active",
-    "next": "2026-10-22"
+    "none": "2026-10-15"
    },
    {
     "t": "TV Stand + Centre Table Set — Marble Top",
     "listed": "2026-10-15",
     "status": "Active",
-    "next": "2026-10-22"
+    "none": "2026-10-15"
    },
    {
     "t": "Hair Dressers Washing Bowl with Bar Chair",
@@ -11401,13 +11674,13 @@
     "t": "10 Seater Foldable Round Table with Chairs",
     "listed": "2026-10-14",
     "status": "Active",
-    "next": "2026-10-22"
+    "next": "2026-10-21"
    },
    {
     "t": "TV Stand — Black Marble Top with Drawer",
     "listed": "2026-10-14",
     "status": "Active",
-    "next": "2026-10-22"
+    "next": "2026-10-21"
    },
    {
     "t": "Dinning Set with Chairs",
@@ -11450,59 +11723,6 @@
     "listed": "2026-08-03",
     "status": "In stock",
     "next": "2026-10-16"
-   },
-   {
-    "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
-    "listed": "2026-08-03",
-    "status": "Active",
-    "next": "2026-10-16"
-   },
-   {
-    "t": "Dining Set Collection — 5 Designs, 6 Chairs",
-    "listed": "2026-08-03",
-    "status": "In stock",
-    "next": "2026-10-16"
-   },
-   {
-    "t": "Red Glass Dining Set — 6 Chairs",
-    "listed": "2026-08-03",
-    "status": "In stock",
-    "none": "2026-10-15"
-   },
-   {
-    "t": "Mesh Secretary Chair — Ergonomic Swivel",
-    "listed": "2026-08-03",
-    "status": "In stock"
-   },
-   {
-    "t": "Black Glass Dining Set — 6 High-Back Chairs",
-    "listed": "2026-08-03",
-    "status": "In stock"
-   },
-   {
-    "t": "Executive Director Chair — Leather, High Back",
-    "listed": "2026-08-03",
-    "status": "In stock"
-   },
-   {
-    "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
-    "listed": "2026-08-03",
-    "status": "In stock"
-   },
-   {
-    "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
-    "listed": "2026-08-01",
-    "status": "Active"
-   },
-   {
-    "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
-    "listed": "2026-07-26",
-    "status": "In stock"
-   },
-   {
-    "t": "Mesh Secretary Chair — Ergonomic Swivel",
-    "listed": "2026-07-26",
-    "status": "In stock"
    }
   ]
  }
