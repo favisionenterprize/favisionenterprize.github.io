@@ -15,7 +15,7 @@
 //            posts so the log is committed, and the admin starts the next batch. Never deletes or re-posts.
 // Results (with VERSION) go back to the admin (admin/ttcaptions.js).
 (async () => {
-  const VERSION = "2026-10-15.3";     // reported back to the admin with every result
+  const VERSION = "2026-10-15.4";     // reported back to the admin with every result
   let bgSleepOk = true;
   const sleep = ms => new Promise(done => {
     const end = Date.now() + ms;
@@ -189,7 +189,7 @@
     if (stopAsked) return;
   }
   const n = `Fixing ${job.i + 1} of ${job.q.length}`;
-  const record = (ok, why, skip) => { job.res.push({ id: it.id, ok, why: why || "", ...(skip ? { skip: true } : {}), t: new Date().toISOString() }); job.i++; job.stage = "open"; job.alt = 0; };
+  const record = (ok, why, skip) => { job.res.push({ id: it.id, ok, why: why || "", ...(skip ? { skip: true } : {}), ...(it.mode ? { mode: it.mode } : {}), t: new Date().toISOString() }); job.i++; job.stage = "open"; job.alt = 0; };
   const batch = job.batch || 5;
   const next = async ok => {
     await save();
@@ -217,7 +217,8 @@
     return go(editUrl(cur, job.alt === 1));
   }
   const flat = t => String(t || "").replace(/\s+/g, " ").trim();
-  const probe = flat(it.text.split("\n").find(l => l.trim()) || "").slice(0, 25);
+  const probe = it.mode === "tags" ? (String(it.tags || it.text).match(/#[\p{L}\p{N}_]+/u) || [""])[0] : flat(it.text.split("\n").find(l => l.trim()) || "").slice(0, 25);
+  const tagged = t => /(^|\s)#[\p{L}\p{N}_]{2,}/u.test(String(t || ""));
   const hasText = () => { const ed = editor(); return !!ed && !!probe && flat(ed.innerText).includes(probe); };
   function paste(ed, text) {
     ed.focus();
@@ -284,6 +285,18 @@
   const lockMsg = [...document.querySelectorAll("[role=alert],[role=dialog],[class*=toast],[class*=Toast],[class*=tip],[class*=Tip],[class*=notice],[class*=Notice]")].map(x => x.innerText || "").join("\n");
   if (LOCKED.test(lockMsg)) { record(false, "TikTok won't allow an edit now (once a day, within 7 days of posting)"); return next(false); }
   const now = editor().innerText || "";
+  if (it.mode === "tags") {
+    // Quality gate, Fix all: the post keeps its own description; only the hashtag mix goes on the end.
+    if (meaningful(now).length < 15) { record(false, "no description on TikTok now (Fix all writes one next time)"); return next(false); }
+    if (tagged(now)) { record(false, "already has hashtags, left as it is", true); return next(false); }
+    const ed2 = editor(); ed2.focus();
+    const rg = document.createRange(); rg.selectNodeContents(ed2); rg.collapse(false);
+    const sel = getSelection(); sel.removeAllRanges(); sel.addRange(rg);
+    const dt = new DataTransfer(); dt.setData("text/plain", "\n\n" + String(it.tags || it.text).trim());
+    ed2.dispatchEvent(new ClipboardEvent("paste", { clipboardData: dt, bubbles: true, cancelable: true }));
+    await sleep(1200);
+    if (!hasText() || meaningful(editor().innerText).length < 15) { record(false, "couldn't add the hashtags (nothing saved)"); return next(false); }
+  } else {
   if (meaningful(now).length >= 15 && !job.overwrite) { record(false, "already has a description now, left as it is", true); return next(false); }
   paste(editor(), it.text);
   await sleep(1200);
@@ -294,10 +307,11 @@
     await sleep(1200);
   }
   if (!hasText()) { record(false, "couldn't put the description in (nothing saved)"); return next(false); }
+  }
   const btn = await waitFor(() => { const b = findBtn(/^(save|save changes|update)$/i); return b && b.getAttribute("aria-disabled") !== "true" && !b.disabled ? b : null; }, 10000);
   if (!btn) { record(false, "no Save button (nothing was changed)"); return next(false); }
   await sleep(rand(800, 1500));
-  if (!hasText()) { record(false, "the description vanished before Save (nothing saved)"); return next(false); }
+  if (!hasText() || meaningful(editor() ? editor().innerText : "").length < 15) { record(false, "blank description — not saved (it vanished before Save)"); return next(false); }
   job.stage = "after";            // saved before the click, in case Save reloads the page
   await save();
   btn.click();

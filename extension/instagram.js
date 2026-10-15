@@ -69,6 +69,11 @@
     const hit = t.match(WARN);
     return hit ? hit[0] : null;
   }
+  // Quality gate (same rule as admin/captions.js ensure): never post a blank description. Real text =
+  // what's left without hashtags, @mentions and links; 15+ characters needed.
+  const realLen = t => { const m = String(t || "").replace(/https?:\/\/\S+/g, "").replace(/[#@][\p{L}\p{N}_.]+/gu, "").replace(/\s+/g, " ").trim(); return /^(no description|add (a )?description)\.?$/i.test(m) ? 0 : m.length; };
+  const tagged = t => /(^|\s)#[\p{L}\p{N}_]{2,}/u.test(String(t || ""));
+  const BLANK = "blank description — not posted";
   const visible = el => !!el && el.getClientRects().length > 0;
   function findBtn(re, root) {
     return [...(root || document).querySelectorAll('[role=button],button,a[role=link],a')]
@@ -136,6 +141,7 @@
     if (!(await arrive("https://www.instagram.com/", "post" + job.i))) return;
     const record = (ok, why) => { job.res.push({ k: it.k, p: it.p || null, ok, why: [why, it.soundNote].filter(Boolean).join(" · "), sound: it.soundUsed || null, ...(it.soundFav ? { fav: it.soundFav, fav_found: !!it.soundFavFound, fav_tried: !!it.soundFavTried } : {}), t: new Date().toISOString() }); job.i++; return save(); };
     const fail = async why => { await record(false, why); box(`${n}: ${why}. Moving on…`, true); await sleep(4000); };
+    if (realLen(it.text) < 15) { await fail(BLANK); continue; }
 
     box(`${n}: opening Create…`);
     await sleep(rand(2500, 4000));
@@ -239,6 +245,7 @@
     await sleep(800);
     if (!editor.innerText.trim()) { document.execCommand("insertText", false, it.text); await sleep(600); }
     if (!editor.innerText.trim()) { await fail("Couldn't type the caption"); continue; }
+    if (it.video && !it.soundUsed && !it.soundNote) it.soundNote = "no sound picked (the Reel keeps its own sound)";
 
     // "Share to Facebook" must stay off (it would post to the personal Facebook profile)
     const dialog = editor.closest("[role=dialog]") || document;
@@ -260,6 +267,15 @@
       break;
     }
     await sleep(rand(900, 1800));
+    // Right before Share: the caption must still be there, with its hashtags; else paste again, else don't post.
+    if (realLen(editor.innerText) < 15 || (tagged(it.text) && !tagged(editor.innerText))) {
+      editor.focus(); document.execCommand("selectAll", false, null); document.execCommand("delete", false, null);
+      const dt2 = new DataTransfer(); dt2.setData("text/plain", it.text);
+      editor.dispatchEvent(new ClipboardEvent("paste", { clipboardData: dt2, bubbles: true, cancelable: true }));
+      await sleep(800);
+      if (realLen(editor.innerText) < 15) { document.execCommand("insertText", false, it.text); await sleep(600); }
+    }
+    if (realLen(editor.innerText) < 15) { await fail(BLANK); continue; }
     share.click();
     box(`${n}: sharing…`);
     const done = await waitFor(() => /your (post|reel) has been shared|(post|reel) shared/i.test((document.querySelector("[role=dialog]") || {}).innerText || "") || warning(), it.video ? 240000 : 90000);

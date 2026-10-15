@@ -57,6 +57,11 @@
     await bg({ type: "clearJob" });
     location.href = job.back + "#favauto-done=" + encodeURIComponent(JSON.stringify(out));
   }
+  // Quality gate (same rule as admin/captions.js ensure): never post a blank description. Real text =
+  // what's left without hashtags, @mentions and links; 15+ characters needed.
+  const realLen = t => { const m = String(t || "").replace(/https?:\/\/\S+/g, "").replace(/[#@][\p{L}\p{N}_.]+/gu, "").replace(/\s+/g, " ").trim(); return /^(no description|add (a )?description)\.?$/i.test(m) ? 0 : m.length; };
+  const tagged = t => /(^|\s)#[\p{L}\p{N}_]{2,}/u.test(String(t || ""));
+  const BLANK = "blank description — not posted";
   const visible = el => !!el && el.getClientRects().length > 0;
   const WARN = /daily upload limit|upload limit reached|too many uploads|verify (it('|’)s you|your account)|account (is|has been) (suspended|terminated)|community guidelines strike/i;
   function warning() {
@@ -100,6 +105,7 @@
   const record = (ok, why, url) => { job.res.push({ k: it.k, ok, why: why || "", url: url || "", t: new Date().toISOString() }); job.i++; return save(); };
   const next = async () => { if (job.i >= job.q.length) { box("All done. Going back to your admin…"); await sleep(1500); return finish(); } await sleep(4000); location.href = "https://www.youtube.com/upload"; };
 
+  if (!job.dry && realLen(it.description) < 15) { await record(false, BLANK); return next(); }
   box(`Video ${job.i + 1} of ${job.q.length}: opening the upload window…`);
   if (await waitFor(() => /create (a )?channel/i.test((document.querySelector("[role=dialog],tp-yt-paper-dialog") || {}).innerText || ""), 3000)) return finish("This Google account has no YouTube channel yet. Create the F.A Vision Enterprise channel, then try again.");
   const input = await waitFor(() => document.querySelector("ytcp-uploads-file-picker input[type=file], input[type=file][name=Filedata], input[type=file]"), 40000);
@@ -126,6 +132,10 @@
   await sleep(600);
   const desc = [...document.querySelectorAll("#description-textarea #textbox, ytcp-social-suggestions-textbox#description-textarea [contenteditable=true]")].find(visible);
   if (desc) { typeInto(desc, (it.description || "").slice(0, 4900)); await sleep(600); }
+  // Description check (quality gate): type it again once if it's empty or lost its hashtags; still empty → not published.
+  const descNow = () => { const d = [...document.querySelectorAll("#description-textarea #textbox, ytcp-social-suggestions-textbox#description-textarea [contenteditable=true]")].find(visible); return d ? d.innerText || "" : ""; };
+  if (desc && (realLen(descNow()) < 15 || (tagged(it.description) && !tagged(descNow())))) { typeInto(desc, (it.description || "").slice(0, 4900)); await sleep(800); }
+  if (realLen(descNow()) < 15) { await record(false, BLANK + " (left as a draft in YouTube Studio)"); return next(); }
   const notKids = await waitFor(() => document.querySelector('tp-yt-paper-radio-button[name="VIDEO_MADE_FOR_KIDS_NOT_MFK"]'), 10000);
   if (notKids) { notKids.scrollIntoView({ block: "center" }); notKids.click(); await sleep(800); }
   for (let step = 0; step < 3 && !stopAsked; step++) {

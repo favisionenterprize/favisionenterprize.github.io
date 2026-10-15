@@ -1,0 +1,8 @@
+{
+  "settings": { "min": 20, "max": 40, "scan_max": 100, "mk_min": 60, "web_min": 80 },
+  "fb": { "scan": null, "fixed": {} },
+  "ig": { "scan": null, "fixed": {} },
+  "x": { "scan": null, "replied": {} },
+  "mk": { "fixed": {} },
+  "runs": []
+}

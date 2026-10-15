@@ -17,7 +17,7 @@ try { ({ chromium } = require("playwright")); } catch (e) {
   }
 }
 const ROOT = path.resolve(__dirname, "..") + "/";
-const SCRIPTS = ["admin/captions.js", "admin/igauto.js", "admin/ttshop.js", "admin/socauto.js", "admin/vidauto.js", "admin/engage.js", "admin/mkauto.js", "admin/profiles.js", "admin/ttcaptions.js", "admin/boost.js", "admin/fbauto.js"];
+const SCRIPTS = ["admin/captions.js", "admin/igauto.js", "admin/ttshop.js", "admin/socauto.js", "admin/vidauto.js", "admin/engage.js", "admin/mkauto.js", "admin/profiles.js", "admin/ttcaptions.js", "admin/boost.js", "admin/fixall.js", "admin/fbauto.js"];
 const MIN_TEXT = 150; // a tab with less text than this counts as blank
 
 const files = {};
@@ -319,8 +319,10 @@ async function marketplace(browser) {
     const now = BigInt(Math.floor(Date.now() / 1000));
     const pid = (agoH, k) => String(((now - BigInt(agoH * 3600)) << 32n) + BigInt(k));
     const P = { a: pid(100, 11), b: pid(50, 12), c: pid(10, 13), old: pid(24 * 8, 14), app: pid(20, 15), done: pid(30, 16) };
-    TC._test.set({ settings: { min: 20, max: 40, min_chars: 15, edit_days: 7 }, scan: null, fixed: { [P.done]: { d: "2026-10-14", ok: true } }, runs: [], app_only: [P.app],
-      prepared: Object.fromEntries(Object.values(P).map((id, i) => [id, { p: "FAV-014", text: "Prepared caption number " + i + " for this post.\nComment 'MINE' 👇" }])) });
+    const prepState = { settings: { min: 20, max: 40, min_chars: 15, edit_days: 7 }, scan: null, fixed: { [P.done]: { d: "2026-10-14", ok: true } }, runs: [], app_only: [P.app],
+      prepared: Object.fromEntries(Object.values(P).map((id, i) => [id, { p: "FAV-014", text: "Prepared caption number " + i + " for this post.\nComment 'MINE' 👇" }])) };
+    window.__files["data/tiktok-captions.json"] = JSON.parse(JSON.stringify(prepState));
+    TC._test.set(prepState);
     TC._test.setRun({ stage: "scan", tried: [], done: 0 });
     out.ttcEmptyScan = await TC.receive({ kind: "ttscan", v: "x", res: [], noid: 7, helper: "", stopped: "No posts found in TikTok Studio → Posts." });
     out.ttcEmptyAlert = TC._test.alert();
@@ -337,6 +339,69 @@ async function marketplace(browser) {
     TC._test.setRun(null);
     window.__toasts = (window.__toasts || []).filter(t => !/add-on|live\.json|read of your posts|ttids|old copy/i.test(t));   // the red messages above were on purpose
     TC._test.set(ttcSaved);
+    window.__files["data/tiktok-captions.json"] = JSON.parse(JSON.stringify(ttcSaved));
+    // ---------------- Quality gate (admin/captions.js ensure + fbauto launch) and the Fix all tab (admin/fixall.js)
+    const CAP = window.FAV_CAPTIONS, FBA = window.FAV_FBAUTO._test;
+    const d14 = window.__list().find(p => p.id === "FAV-014");
+    out.gate = {
+      blank: CAP.ensure("", d14, { net: "fb" }), tagsOnly: CAP.ensure("#fyp #accra", d14, { net: "tiktok" }),
+      noTags: CAP.ensure("Luxury leather sofa set now in stock at our Odorkor showroom", d14, { net: "ig" }),
+      xLong: CAP.ensure("A very long caption about our student desks ".repeat(10), d14, { net: "x" }),
+      mk: CAP.ensure("Student desk and chair set, sturdy steel frame.\n\nOrder or see more: https://favisionenterprize.github.io/p/FAV-014.html", d14, { net: "mk" }),
+      keep: CAP.ensure("Student desk and chair set in stock now. WhatsApp 0572646176 to order. #AccraFurniture", d14, { net: "fb" }),
+      writes: Array.from({ length: 30 }, (_, i) => ["fb", "ig", "x", "tiktok", "youtube", "share"][i % 6]).map(net => ({ net, c: CAP.check(CAP.write(d14, { net }), { net }) })),
+      jobs: [FBA.gateJob({ kind: "post", q: [{ g: "page", p: null, text: "" }, { g: "1", p: "FAV-014", text: "Desk set in stock now at Odorkor" }] }),
+        FBA.gateJob({ kind: "x", q: [{ p: "FAV-014", text: "" }] }), FBA.gateJob({ kind: "youtube", q: [{ k: "v", description: "" }] }),
+        FBA.gateJob({ kind: "mklist", q: [{ p: "FAV-014", text: "Short." }] }), FBA.gateJob({ kind: "story", p: "FAV-014", text: "Student Desk · GH₵650\nfavisionenterprize.github.io/p/FAV-014.html" })]
+    };
+    const FX = window.FAV_FIXALL;
+    const fbPost = (id, text, kind) => ({ id, url: "https://www.facebook.com/FaVisionEnterprise/posts/" + id, text, kind: kind || "post" });
+    const fxState = { settings: { min: 20, max: 40, scan_max: 100, mk_min: 60, web_min: 80 },
+      fb: { scan: { d: "2026-10-15", n: 4, posts: [fbPost("111", ""), fbPost("112", "Luxury leather sofa set now in stock at our Odorkor showroom"), fbPost("113", "Great sofa deals this week at Odorkor #AccraFurniture"), fbPost("114", "", "shared"), fbPost("115", "<img src=x onerror=window.__xss=9>new")] }, fixed: {} },
+      ig: { scan: { d: "2026-10-15", n: 2, posts: [{ id: "Cabc1", url: "https://www.instagram.com/p/Cabc1/", text: "#fyp", kind: "post" }, { id: "Cabc2", url: "https://www.instagram.com/p/Cabc2/", text: "Red glass dining set, six chairs, in stock now", kind: "post" }] }, fixed: {} },
+      x: { scan: { d: "2026-10-15", n: 1, posts: [{ id: "1800000000000000001", url: "https://x.com/FaVisionEnt/status/1800000000000000001", text: "New sofas!", kind: "post" }] }, replied: {} }, mk: { fixed: {} }, runs: [] };
+    window.__files["data/fix-all.json"] = JSON.parse(JSON.stringify(fxState));
+    FX._test.set(JSON.parse(JSON.stringify(fxState)));
+    window.FAV_FBAUTO._test.setTab("ttcap"); await wait(200);
+    const fxc = document.querySelector("#fx-card");
+    out.fx = { card: !!fxc, go: ((fxc && fxc.querySelector("[data-fx=all]")) || {}).textContent || "", ttInside: !!document.querySelector("#fa-body #ttc-card"),
+      label: ((document.querySelector("[data-fa-tab=ttcap]") || {}).textContent || "").trim(), counts: FX.counts(), rows: fxc ? fxc.querySelectorAll(".fx-table tbody tr").length : 0,
+      hot: document.querySelectorAll("#fx-fb .fx-pill.hot").length, xCant: /can't edit on X/.test((document.querySelector("#fx-x") || {}).innerText || ""), seek: document.querySelectorAll("#fx-web [data-fx-seek]").length,
+      web: FX._test.webNeed().length, xss: window.__xss || 0, text: document.querySelector("#fa-body").innerText.length };
+    const fq2 = FX._test.fixQueue("fb");
+    out.fxQueue = fq2.map(x => ({ id: x.id, mode: x.mode, ok: CAP.check(x.text, { net: "fb" }).ok, tags: /#/.test(x.tags) }));
+    out.mkQ = FX._test.mkQueue({ tried: [] }).map(x => ({ id: x.id, url: x.url, end: /Order or see more: https:\/\/favisionenterprize\.github\.io\/p\/FAV-\d+\.html$/.test(x.text), ask: /where are you (seeing|watching)/i.test(x.text) }));
+    // One network: Fix Facebook Page → check add-on → scan job → (scan returns) → fix job in batches of 5
+    window.__jobs = [];
+    document.querySelector("#fx-fb [data-fx='net:fb']").click(); await wait(1200);
+    out.fxScanJob = window.__jobs[0] && window.__jobs[0].job;
+    out.fxScanRes = await FX.receive({ kind: "fxscan", net: "fb", v: "x", res: fxState.fb.scan.posts.concat([fbPost("116", ""), fbPost("117", ""), fbPost("118", ""), fbPost("119", ""), { id: "bad id!", url: "javascript:x", text: "" }]) });
+    window.__jobs = [];
+    FX.step("fx:fix:fb", ["report"]); await wait(200);
+    out.fxFixJob = window.__jobs[0] && window.__jobs[0].job;
+    out.fxBatch = await FX.receive({ kind: "fxfix", net: "fb", v: "x", n: 7, more: 2, res: [{ id: "111", ok: true, mode: "set" }, { id: "112", ok: true, mode: "tags" }, { id: "115", ok: false, skip: true, why: "already has a description and hashtags, left as it is" }, { id: "116", ok: true }, { id: "117", ok: false, why: "no “Edit post” in the post's menu" }] });
+    window.__jobs = [];
+    FX.step("fx:fix:fb", ["report"]); await wait(200);
+    out.fxNextJob = window.__jobs[0] && window.__jobs[0].job;
+    FX._test.setRun(null);
+    // X: report only; reply needs a confirm
+    window.FAV_FBAUTO._test.setTab("ttcap"); await wait(200);
+    const xp = document.querySelector("[data-fx-xpick]"); if (xp) xp.checked = true;
+    window.__jobs = [];
+    document.querySelector("#fx-x [data-fx=xreply]").click(); await wait(200);
+    out.fxReply = window.__jobs[0] && window.__jobs[0].job;
+    FX._test.setRun(null);
+    // The big button: add-on check, then the Facebook Page scan first
+    window.__jobs = [];
+    document.querySelector("#fx-card [data-fx=all]").click(); await wait(1200);
+    out.fxAll = window.__jobs[0] && window.__jobs[0].job;
+    FX._test.setRun(null);
+    const keepAddon = window.__addon;
+    window.__addon = null; window.__jobs = [];
+    document.querySelector("#fx-card [data-fx=all]").click(); await wait(1200);
+    out.fxSilent = { jobs: window.__jobs.length, alert: (document.querySelector("#fx-alert") || {}).hidden === false ? document.querySelector("#fx-alert").textContent : "" };
+    window.__addon = keepAddon;
+    window.__toasts = (window.__toasts || []).filter(t => !/add-on|Fix all|Facebook Page:/i.test(t));
     const soc = window.FAV_SOCAUTO.job("tiktok", { products: ["FAV-014"], limit: 1 });
     out.socText = soc && soc.job.q[0] && soc.job.q[0].text;
     window.FAV_FBAUTO._test.setTab("market"); await wait(100);
@@ -406,16 +471,16 @@ async function marketplace(browser) {
   want(r.ttcNoScan && r.ttcNoScan.go && r.ttcNoScan.buttons.length === 1 && r.ttcNoScan.label === "✨ Fix all TikTok descriptions" && r.ttcNoScan.disabled === false, "before any scan there is ONE enabled button, Fix all TikTok descriptions: " + JSON.stringify(r.ttcNoScan));
   want(r.ttcScanJob && r.ttcScanJob.kind === "ttscan" && r.ttcScanJob.max === 500 && (r.ttcScanJob.then || [])[0] === "ttcaps:fixall", "the button reads all posts (max 500) then chains Fix all: " + JSON.stringify(r.ttcScanJob));
   want(r.ttcMock && r.ttcMock.buttons.length === 1 && r.ttcMock.go && r.ttcMock.review && !r.ttcMock.reviewOpen, "with a scan: still one button, Review captions collapsed: " + JSON.stringify(r.ttcMock));
-  want(/^Last read 2026-10-15: 6 posts, 5 without a description\.$/.test(r.ttcLast || ""), "Last read line wording: " + r.ttcLast);
-  want(/3 fixed by the button now/.test(r.ttcMock.split) && /1 post over 7 days old/.test(r.ttcMock.split) && /App only/.test(r.ttcMock.split) && r.ttcMock.split.includes(T.app), "split: 3 now, 1 too old, 1 app-only: " + r.ttcMock.split);
+  want(/^Last read 2026-10-15: 6 posts, 5 without a description, 1 without hashtags\.$/.test(r.ttcLast || ""), "Last read line wording: " + r.ttcLast);
+  want(/4 fixed by the button now/.test(r.ttcMock.split) && /1 post over 7 days old/.test(r.ttcMock.split) && /App only/.test(r.ttcMock.split) && r.ttcMock.split.includes(T.app), "split: 3 now, 1 too old, 1 app-only: " + r.ttcMock.split);
   const tt = r.ttc || {};
-  want(tt.posts === 3, "Review captions lists the 3 posts the button will fix, got " + tt.posts);
+  want(tt.posts === 4, "Review captions lists the 4 posts the button will fix (3 captions + 1 hashtags only), got " + tt.posts);
   want(tt.pick === "FAV-014" && /Comment/i.test(tt.text) && /favisionenterprize\.github\.io\/tiktok\//.test(tt.text) && /GH₵650/.test(tt.text) && !/where are you seeing/i.test(tt.text), "classy caption for the student desk post: " + tt.text);
   want(/favisionenterprize\.github\.io\/tiktok\//.test(tt.general) && /statement/.test(tt.general) && !/GH₵|GHS|₵/.test(tt.general), "no confident product → general caption, no price: " + tt.general);
   want(/^Bold colour, warm welcomes\./.test(tt.prep), "a prepared caption (from the post's photos) is used as is: " + tt.prep);
   want(!r.xss2 && (tt.imgs || []).every(u => /^https:/.test(u)) && (tt.links || []).every(h => /^https:\/\//.test(h)), "TikTok card escapes text and only shows https thumbnails/links: " + JSON.stringify([tt.imgs, tt.links]));
   const fq = (r.ttcFixJob && r.ttcFixJob.q) || [];
-  want(r.ttcFixJob && r.ttcFixJob.kind === "ttfix" && fq.map(x => x.id).join() === [T.prep, T.desk, T.tags].join() && /^Bold colour/.test(fq[0].text) && fq.every(x => x.text.length > 20), "Fix all queues every editable post, oldest first, prepared caption first, none too old / app-only: " + JSON.stringify(fq.map(x => [x.id, x.text.slice(0, 30)])));
+  want(r.ttcFixJob && r.ttcFixJob.kind === "ttfix" && fq.map(x => x.id).join() === [T.prep, T.desk, T.has, T.tags].join() && /^Bold colour/.test(fq[0].text) && fq.filter(x => x.mode !== "tags").every(x => x.text.length > 20 && /#\w/.test(x.text)) && fq[2].mode === "tags" && /^#/.test(fq[2].tags), "Fix all queues every editable post, oldest first, prepared caption first, none too old / app-only: " + JSON.stringify(fq.map(x => [x.id, x.text.slice(0, 30)])));
   want(r.ttJob && r.ttJob.kind === "ttfix" && r.ttJob.q.length === 1 && r.ttJob.q[0].id === T.desk && /\nEdited\.$/.test(r.ttJob.q[0].text), "Fix just this one sends the edited caption: " + String(JSON.stringify(r.ttJob)).slice(0, 300));
   want(/Last fix .*: 2 of 3 descriptions added, 1 failed/.test(r.ttcAfter && r.ttcAfter.summary), "final summary on the card: " + JSON.stringify(r.ttcAfter));
   want(r.ttcNoAddon && !r.ttcNoAddon.jobs && /didn't answer/.test(r.ttcNoAddon.alert) && /edge:\/\/extensions/.test(r.ttcNoAddon.alert), "add-on silent → red message, no job: " + JSON.stringify(r.ttcNoAddon));
@@ -428,6 +493,36 @@ async function marketplace(browser) {
   want(r.ttcFixedAfterBatch && r.ttcFixedAfterBatch[0] && r.ttcFixedAfterBatch[0].ok && r.ttcFixedAfterBatch[1] && r.ttcFixedAfterBatch[1].skip, "each batch is saved to the log (ok / skipped): " + JSON.stringify(r.ttcFixedAfterBatch));
   want(r.ttcRunAfterBatch && r.ttcRunAfterBatch.done === 2 && NQ.length === 1 && !NQ.includes(PQ[0]) && !NQ.includes(PQ[1]) && r.ttcNextJob.wait_first, "next batch continues with the rest, waiting 20–40 s first: " + JSON.stringify([NQ, r.ttcRunAfterBatch]));
   want(/favisionenterprize\.github\.io\/tiktok\//.test(r.socText || "") && /Comment|Tell us below/i.test(r.socText || ""), "new TikTok autopilot posts use the classy caption by default: " + r.socText);
+  const g = r.gate || {}, CK = t => ({ desc: t.replace(/https?:\/\/\S+/g, "").replace(/[#@][\p{L}\p{N}_.]+/gu, "").trim().length >= 15, tags: /#[\p{L}\p{N}_]{2,}/u.test(t) });
+  want(CK(g.blank).desc && CK(g.blank).tags && /FAV-014|Student|desk/i.test(g.blank), "gate: a blank caption becomes a full one for the product: " + g.blank);
+  want(CK(g.tagsOnly).desc && CK(g.tagsOnly).tags && /tiktok\//.test(g.tagsOnly), "gate: hashtags-only TikTok text becomes a classy caption: " + g.tagsOnly);
+  want(/^Luxury leather sofa set/.test(g.noTags) && CK(g.noTags).tags, "gate: text without hashtags keeps its words and gets the hashtag mix: " + g.noTags);
+  want(g.xLong.length <= 280 && CK(g.xLong).tags, "gate: X stays within 280 with hashtags: " + g.xLong.length);
+  want(!/#\w/.test(g.mk) && /Order or see more/.test(g.mk), "gate: Marketplace needs no hashtags: " + g.mk);
+  want(g.keep === "Student desk and chair set in stock now. WhatsApp 0572646176 to order. #AccraFurniture", "gate: a complete caption is left exactly as it is: " + g.keep);
+  want((g.writes || []).every(w => w.c.ok), "gate: every written caption has a description, hashtags and a call to action: " + JSON.stringify((g.writes || []).filter(w => !w.c.ok)));
+  const [gj1, gj2, gj3, gj4, gj5] = g.jobs || [];
+  want(gj1 && gj1.q.every(x => CK(x.text).desc && CK(x.text).tags) && /^Desk set in stock now at Odorkor/.test(gj1.q[1].text), "gate in launch: Facebook Page / group posts always leave with a description and hashtags: " + JSON.stringify(gj1 && gj1.q.map(x => x.text.slice(0, 60))));
+  want(gj2 && gj2.q[0].text.length <= 280 && CK(gj2.q[0].text).desc && CK(gj2.q[0].text).tags, "gate in launch: X: " + (gj2 && gj2.q[0].text));
+  want(gj3 && CK(gj3.q[0].description).desc && /#Shorts|#\w/.test(gj3.q[0].description), "gate in launch: YouTube description: " + (gj3 && gj3.q[0].description.slice(0, 80)));
+  want(gj4 && CK(gj4.q[0].text).desc, "gate in launch: Marketplace listing text: " + (gj4 && gj4.q[0].text.slice(0, 80)));
+  want(gj5 && /FAV-014\.html/.test(gj5.text) && /WhatsApp|order/i.test(gj5.text) && /#\w/.test(gj5.text), "gate in launch: story text has the link, a call to action and a hashtag: " + (gj5 && gj5.text));
+  const fx = r.fx || {}, fc = fx.counts || {};
+  want(fx.card && fx.label === "Fix all" && /Fix all everywhere/.test(fx.go) && fx.ttInside && fx.rows === 8 && fx.text > 1500, "Fix all tab: one big button, the table of 8 rows and the TikTok card inside: " + JSON.stringify(fx).slice(0, 300));
+  want(fc.fb && fc.fb.desc === 1 && fc.fb.tags === 2 && fc.ig.desc === 1 && fc.ig.tags === 1 && fc.x.desc === 1 && fc.tt.desc === 5 && fc.tt.tags === 1 && fx.hot >= 1 && fx.xCant, "Fix all counts per network (shared posts left out), highlighted: " + JSON.stringify(fc));
+  want(!fx.xss, "Fix all escapes post text");
+  want(fx.seek === Math.min(40, fx.web) && fx.web > 0, "Website / shop lists products needing text, each with a Seek button: " + JSON.stringify([fx.seek, fx.web]));
+  want((r.fxQueue || []).length === 3 && r.fxQueue.every(x => x.ok && x.tags) && r.fxQueue.find(x => x.id === "112").mode === "tags" && r.fxQueue.find(x => x.id === "111").mode === "set", "Facebook fix queue: fresh gated captions, hashtags-only for the post with text: " + JSON.stringify(r.fxQueue));
+  want((r.mkQ || []).length > 0 && r.mkQ.every(x => x.end && !x.ask && /^https:\/\/www\.facebook\.com\/marketplace\/edit\/\?listing_id=/.test(x.url)), "Marketplace fix queue: linked listings, edit URL, description ending with the product link: " + JSON.stringify(r.mkQ));
+  const sj = r.fxScanJob || {}, fj = r.fxFixJob || {}, nj = r.fxNextJob || {};
+  want(sj.kind === "fxscan" && sj.net === "fb" && sj.max === 100 && (sj.then || [])[0] === "fx:fix:fb", "Fix Facebook Page: add-on check, then the scan, chained to the fix: " + JSON.stringify(sj).slice(0, 200));
+  want(r.fxScanRes && /without a description/.test(r.fxScanRes.text), "scan result saved and summed up: " + JSON.stringify(r.fxScanRes));
+  want(fj.kind === "fxfix" && fj.net === "fb" && fj.q.length === 7 && fj.batch === 5 && (fj.cont || [])[0] === "fx:fix:fb" && (fj.then || []).join() === "report" && fj.q.every(x => /^https:\/\/www\.facebook\.com\//.test(x.url)) && !fj.q.some(x => x.id === "113" || x.id === "114"), "fix job: the 7 posts that need it (not the fine one, not the shared one), batches of 5: " + JSON.stringify(fj.q && fj.q.map(x => [x.id, x.mode])));
+  want(nj.kind === "fxfix" && nj.wait_first && nj.q.map(x => x.id).join() === "118,119", "next batch: only the posts not tried yet, waiting 20–40 s first: " + JSON.stringify(nj.q && nj.q.map(x => x.id)));
+  const rp = r.fxReply || {};
+  want(rp.kind === "fxreply" && rp.q.length === 1 && rp.q[0].text.length <= 280 && /#\w/.test(rp.q[0].text) && /\/status\/1800000000000000001$/.test(rp.q[0].url), "X: reply with a description (after confirm), ≤ 280 with hashtags: " + JSON.stringify(rp).slice(0, 300));
+  want(r.fxAll && r.fxAll.kind === "fxscan" && r.fxAll.net === "fb" && (r.fxAll.then || []).join().startsWith("fx:fix:fb,fx:scan:ig,fx:fix:ig,fx:scan:x,mkscan,fx:fix:mk,ttcaps:all,fx:done"), "Fix all everywhere: Facebook Page → Instagram → X → Marketplace → TikTok: " + JSON.stringify(r.fxAll && r.fxAll.then));
+  want(r.fxSilent && !r.fxSilent.jobs && /didn't answer/.test(r.fxSilent.alert), "Fix all: add-on silent → red message, no job: " + JSON.stringify(r.fxSilent));
   const b = r.boost || {};
   want(b.text > 500 && !b.xss && !b.imgs, "Boost tab draws and escapes sound names: " + JSON.stringify(b));
   want(r.sound1 && r.sound1.name === "Highlife Groove" && r.sound2 && r.sound2.name !== "Highlife Groove" && r.sound2.name !== "Afro Vibes Commercial", "sound rotation skips sounds used in the last 3 days: " + JSON.stringify([r.sound1, r.sound2]));
@@ -526,7 +621,7 @@ async function seo(browser, shot) {
   else console.log(`✓ TikTok shop card: reorder, hide, add and save work (${t.n} products saved)`);
   const m = await marketplace(browser);
   if (m.problems.length) { failed++; console.log("✗ Marketplace tab / profile card"); m.problems.forEach(p => console.log("    " + p)); }
-  else console.log(`✓ Marketplace tab: matching, duplicates, escaping, price commit and add-on jobs work (${m.n} products not listed in the mock scan); profile card launches its check; TikTok captions card lists empty posts, writes classy captions and launches the fix; Boost: sounds rotate, best-time queue, refresh pinned, first-hour timers, What's working`);
+  else console.log(`✓ Marketplace tab: matching, duplicates, escaping, price commit and add-on jobs work (${m.n} products not listed in the mock scan); profile card launches its check; Fix all tab: counts per network, gated captions, scan → fix in batches, X reply, Marketplace queue, red alert; quality gate on every posting job; TikTok captions card lists empty posts, writes classy captions and launches the fix; Boost: sounds rotate, best-time queue, refresh pinned, first-hour timers, What's working`);
   const so = await seo(browser, process.env.SEO_SHOT || "");
   if (so.problems.length) { failed++; console.log("✗ SEO & AI screen"); so.problems.forEach(p => console.log("    " + p)); }
   else console.log(`✓ SEO & AI screen: score ${so.score}, ${so.issues} issues drawn, Apply fix (${so.applied}) saves after preview + confirm, Run check now dispatches seo-watch.yml, quick check fallback works`);

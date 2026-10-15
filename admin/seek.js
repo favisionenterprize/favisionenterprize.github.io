@@ -202,7 +202,8 @@
     body.innerHTML = out;
   }
 
-  async function open() {
+  async function open(id) {
+    if (id && typeof id === "string") { pid = id; query = ""; res = null; pick.drop.clear(); }   // Fix all → Website / shop → 🔎 Seek
     A.show("seek");
     if (location.hash !== "#seek") history.replaceState(null, "", "#seek");
     $("#seek-body").innerHTML = `<p class="muted">Loading…</p>`;

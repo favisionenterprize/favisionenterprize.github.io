@@ -163,6 +163,11 @@
     input.dispatchEvent(new Event("change", { bubbles: true }));
   }
 
+  // Quality gate (same rule as admin/captions.js ensure): never post a blank description. Real text =
+  // what's left without hashtags, @mentions and links; 15+ characters needed.
+  const realLen = t => { const m = String(t || "").replace(/https?:\/\/\S+/g, "").replace(/[#@][\p{L}\p{N}_.]+/gu, "").replace(/\s+/g, " ").trim(); return /^(no description|add (a )?description)\.?$/i.test(m) ? 0 : m.length; };
+  const tagged = t => /(^|\s)#[\p{L}\p{N}_]{2,}/u.test(String(t || ""));
+  const BLANK = "blank description — not posted";
   const composeUrl = () => job.kind === "x" ? "https://x.com/compose/post" : "https://www.tiktok.com/tiktokstudio/upload?from=webapp&tab=photo";
   const record = (it, ok, why) => { job.res.push({ k: it.k, p: it.p || null, ok, why: [why, it.soundNote].filter(Boolean).join(" · "), sound: it.soundUsed || null, ...(it.soundFav ? { fav: it.soundFav, fav_found: !!it.soundFavFound, fav_tried: !!it.soundFavTried } : {}), t: new Date().toISOString() }); job.i++; return save(); };
   // Boost: sounds only from TikTok's own picker (business accounts only see the Commercial Music Library
@@ -207,7 +212,7 @@
   }
   async function addSound(it) {
     const s = it.sound;
-    if (!s || (!s.name && !s.fav)) return;
+    if (!s || (!s.name && !s.fav)) { if (job.kind === "tiktok" && !job.dry) it.soundNote = "no sound (no trending sound picked for this post)"; return; }
     const notes = [];
     try {
       box(`opening TikTok's sound picker…`);
@@ -265,6 +270,7 @@
     await record(it, true, "posted (TikTok opened Posts)");
     return next(true);
   }
+  if (realLen(it.text) < 15) { await record(it, false, BLANK); return next(false); }
   if (!(await arrive(composeUrl()))) return;
   const n = `Post ${job.i + 1} of ${job.q.length}`;
   box(`${n}: opening…`);
@@ -300,6 +306,13 @@
     const post = await waitFor(() => { const b = dialog.querySelector("[data-testid=tweetButton]") || document.querySelector("[data-testid=tweetButton],[data-testid=tweetButtonInline]"); return b && b.getAttribute("aria-disabled") !== "true" && !b.disabled ? b : null; }, 30000);
     if (!post) { await record(it, false, "Post button stayed off"); return next(false); }
     await sleep(rand(800, 1600));
+    // Right before Post: the caption must still be there, with its hashtags; else type it again, else don't post.
+    if (realLen(ed.innerText) < 15 || (tagged(it.text) && !tagged(ed.innerText))) {
+      box(`${n}: the caption went missing, putting it back…`);
+      typeInto(ed, it.text); await sleep(800);
+      if (realLen(ed.innerText) < 15) { const dt = new DataTransfer(); dt.setData("text/plain", it.text); ed.dispatchEvent(new ClipboardEvent("paste", { clipboardData: dt, bubbles: true, cancelable: true })); await sleep(800); }
+    }
+    if (realLen(ed.innerText) < 15) { await record(it, false, BLANK); return next(false); }
     if (job.dry) {
       box(`${n}: test passed ✓ (caption typed${photoNote ? ", photo NOT attached" : ", photo attached"}). Not posting.`);
       await sleep(2500);
@@ -337,14 +350,16 @@
   const title = [...document.querySelectorAll("input")].find(i => visible(i) && /catchy title/i.test(i.placeholder || ""));
   if (title && it.title) setInput(title, it.title.slice(0, 90));
   await sleep(600);
-  if (!(await setDescription(it.text))) { await record(it, false, "The description stayed empty, so nothing was posted"); return finish("TikTok's description box stayed empty. Stopped rather than post without a description."); }
+  if (!(await setDescription(it.text))) { await record(it, false, BLANK + " (the description box stayed empty)"); return finish("TikTok's description box stayed empty: " + BLANK + ". Stopped rather than post without a description."); }
   await addSound(it);
   w = warning(); if (w) return finish(`TikTok showed "${w}". Nothing more was posted.`);
   const post = await waitFor(() => { const b = [...document.querySelectorAll("button")].find(x => visible(x) && (x.innerText || "").trim() === "Post"); return b && !b.disabled && b.getAttribute("aria-disabled") !== "true" ? b : null; }, 30000);
   if (!post) { await record(it, false, "Post button stayed off"); return next(false); }
   await sleep(rand(1000, 2000));
   // Last check right before Post (the sound picker or the title can re-render the editor).
-  if (!hasText(it.text) && !(await setDescription(it.text))) { await record(it, false, "The description was empty right before Post, so nothing was posted"); return finish("TikTok's description box was empty right before Post. Stopped rather than post without a description."); }
+  const edNow = () => (ttEditor() || {}).innerText || "";
+  if ((!hasText(it.text) || (tagged(it.text) && !tagged(edNow()))) && !(await setDescription(it.text))) { await record(it, false, BLANK + " (the description was empty right before Post)"); return finish("TikTok's description box was empty right before Post: " + BLANK + ". Stopped rather than post without a description."); }
+  if (realLen(edNow()) < 15) { await record(it, false, BLANK); return finish("TikTok's description box was empty right before Post: " + BLANK + "."); }
   if (job.dry) {
     box(`${n}: test passed ✓ (photo uploaded, description typed, Post ready). Not posting.`);
     await sleep(2500);

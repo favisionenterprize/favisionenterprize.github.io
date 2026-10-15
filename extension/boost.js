@@ -58,6 +58,11 @@
   }
   const WARN = /temporarily blocked|temporarily restricted|you('|’)re restricted|we limit how often|try again later|suspicious activity|confirm (your identity|it('|’)s you)|action blocked/i;
   const warning = () => { const t = [...document.querySelectorAll("[role=dialog],[role=alert]")].map(d => d.innerText || "").join("\n"); const m = t.match(WARN); return m ? m[0] : null; };
+  // Quality gate (same rule as admin/captions.js ensure): never post a blank description. Real text =
+  // what's left without hashtags, @mentions and links; 15+ characters needed.
+  const realLen = t => { const m = String(t || "").replace(/https?:\/\/\S+/g, "").replace(/[#@][\p{L}\p{N}_.]+/gu, "").replace(/\s+/g, " ").trim(); return /^(no description|add (a )?description)\.?$/i.test(m) ? 0 : m.length; };
+  const tagged = t => /(^|\s)#[\p{L}\p{N}_]{2,}/u.test(String(t || ""));
+  const BLANK = "blank description — not posted";
   const visible = el => !!el && el.getClientRects().length > 0;
   const findBtn = (re, root) => [...(root || document).querySelectorAll("[role=button],button,[role=tab],[role=checkbox],[role=switch],label,[role=menuitem]")].find(b => visible(b) && (re.test((b.getAttribute("aria-label") || "").trim()) || re.test((b.innerText || "").trim())));
   async function waitFor(fn, ms) { for (let t = 0; t < ms; t += 300) { if (stopAsked) return null; const v = fn(); if (v) return v; await sleep(300); } return null; }
@@ -156,13 +161,18 @@
     } catch (e) { return finish("Couldn't load the photo."); }
     const share = await waitFor(() => findBtn(/^share to story$/i), 20000);
     if (!share) return finish("The story editor didn't open (photo not taken).");
+    // Quality gate: a story always carries its text (product, price, WhatsApp, link); without it, nothing is shared.
+    if (realLen(job.text) < 15) { job.res.push({ net: "fb", ok: false, why: BLANK }); return finish(BLANK + ": the story had no text."); }
     const addText = findBtn(/^add text$/i);
-    if (addText && job.text) {
+    let storyEd = null;
+    if (addText) {
       addText.click(); await sleep(1200);
-      const ed = [...document.querySelectorAll("textarea,[contenteditable=true]")].find(visible);
-      if (ed) { ed.focus(); document.execCommand("insertText", false, job.text); await sleep(800); }
-      else job.notes.push("couldn't add the text");
+      storyEd = [...document.querySelectorAll("textarea,[contenteditable=true]")].find(visible);
+      if (storyEd) { storyEd.focus(); document.execCommand("insertText", false, job.text); await sleep(800); }
     }
+    const storyText = () => storyEd ? (storyEd.value != null && storyEd.tagName === "TEXTAREA" ? storyEd.value : storyEd.innerText) || "" : "";
+    if (storyEd && realLen(storyText()) < 15) { storyEd.focus(); document.execCommand("insertText", false, job.text); await sleep(800); }
+    if (realLen(storyText()) < 15) { job.res.push({ net: "fb", ok: false, why: BLANK + " (couldn't add the story text)" }); return finish(BLANK + ": couldn't add the story text."); }
     w = warning(); if (w) return finish(`Facebook showed "${w}". Stopped.`);
     if (job.dry) { job.res.push({ net: "fb", ok: true, why: "Test only, not shared" }); return finish(); }
     job.stage = "shared";   // saved before the click, so a reload can't share it twice

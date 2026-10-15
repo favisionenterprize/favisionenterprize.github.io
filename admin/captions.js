@@ -5,6 +5,8 @@
 // window.FAV_CAPTIONS.write(p, { net, ad, studio, full, tags, subject, style })  → text  (style "classy": upscale TikTok caption)
 // window.FAV_CAPTIONS.title(p, { net })                                   → short title (YouTube / TikTok)
 // window.FAV_CAPTIONS.cta(p, { net })                                     → one call to action
+// window.FAV_CAPTIONS.ensure(text, p, { net, tags })                      → the quality gate every posting path uses
+//   (real description, hashtags, call to action, X ≤ 280); check(text, { net }) → { desc, tags, cta, ok }
 // net: "fb" | "ig" | "x" | "tiktok" | "youtube" | "share"; p can be null (brand / AI Studio / general video).
 (function () {
   const C = window.FAV_CONFIG || {};
@@ -85,11 +87,12 @@
     for (const k of order) { if (out.length >= n) break; const t = shuffle(audience(k)).find(x => !out.includes(x)); if (t) out.push(t); }
     return out;
   }
-  function tags(p, net, extra) {
+  function tags(p, net, extra, force) {
     const s = p && p.seller;
     const tr = shuffle(trending(net));
+    if (net === "story") return pick(TAGS.brand);
     if (net === "fb" || net === "share") {
-      if (Math.random() < 0.3) return "";
+      if (Math.random() < 0.3 && !force) return "";
       return [...new Set(tr.slice(0, 1).concat(audienceTags(1), shuffle(s ? TAGS.partner : TAGS.home).slice(0, 1)))].join(" ");
     }
     if (net === "x") {   // trending first so it survives the 280-character trim
@@ -343,10 +346,66 @@
     for (let i = 0; i < 6; i++) {
       // classy: its own comment-to-buy ask replaces the "where are you seeing this from" line
       t = o.style === "classy" && p && !o.studio ? tidy(classy(p, o), o.net || "tiktok") : tidy(withAsk(o.studio ? studio(o) : p ? product(p, o) : general(o), o.net), o.net);
+      if (!o._raw) t = ensure(t, p, { net: o.net, subject: o.subject, studio: o.studio, tags: o.gateTags });   // quality gate (below)
       if (!recent.includes(t)) break;
     }
     recent.push(t); if (recent.length > 300) recent.shift();
     return t;
+  }
+
+  // ---------------------------------------------------------------- quality gate: every post, listing, story, reel and video
+  // ensure(text, p, { net, tags }) makes sure a caption has
+  //   1. a real description: 15+ characters that aren't hashtags, @mentions or links (TikTok's grey
+  //      "No description" counts as empty); otherwise a fresh caption is written for the product (classy on
+  //      TikTok) or a general F.A Vision one;
+  //   2. hashtags: if none, the tags() mix for that network is added (net "mk" = Marketplace, or tags:false:
+  //      optional, nothing added);
+  //   3. a call to action (one is added before the hashtags if none is there);
+  //   4. X: 280 characters at most.
+  // check(text, { net }) → { desc, tags, cta, ok } for the Fix all tab; meaningful(text) → the real text.
+  const MIN_DESC = 15;
+  const meaningful = t => { const m = String(t || "").replace(/https?:\/\/\S+/g, "").replace(/[#@][\p{L}\p{N}_.]+/gu, "").replace(/\s+/g, " ").trim(); return /^(no description|add (a )?description)\.?$/i.test(m) ? "" : m; };
+  const hasTags = t => /(^|\s)#[\p{L}\p{N}_]{2,}/u.test(String(t || ""));
+  const CTA_RE = /whatsapp|comment|\bdm\b|order|call|tap|link in (our )?bio|message|reserve|visit|shop|book|send|follow|tag the|tell us/i;
+  const tagsWanted = (net, o) => !(o && o.tags === false) && net !== "mk";
+  function check(text, o) {
+    const net = (o && o.net) || "fb", t = String(text || "");
+    const r = { desc: meaningful(t).length >= MIN_DESC, tags: !tagsWanted(net, o) || hasTags(t), cta: CTA_RE.test(t) };
+    r.ok = r.desc && r.tags && r.cta && (net !== "x" || t.length <= 280);
+    return r;
+  }
+  // X: keep the hashtags (2 at most) and a short call to action, trim the words before them.
+  function fitX(t, p) {
+    t = String(t).trim();
+    if (t.length <= 280) return t;
+    const tg = (t.match(/#[\p{L}\p{N}_]+/gu) || []).slice(0, 2).join(" ");
+    const f = facts(p);
+    let body = t.replace(/#[\p{L}\p{N}_]+/gu, "").replace(/\s+/g, " ").trim();
+    const end = (CTA_RE.test(body.slice(-90)) ? "" : ` WhatsApp ${f.wa}.`) + (tg ? " " + tg : "");
+    const room = 280 - end.length;
+    if (body.length > room) body = body.slice(0, room - 1).replace(/\s+\S*$/, "") + "…";
+    return (body + end).trim().slice(0, 280);
+  }
+  function ensure(text, p, o) {
+    o = o || {};
+    const net = o.net || "fb";
+    let t = String(text == null ? "" : text).replace(/\r/g, "").trim();
+    if (meaningful(t).length < MIN_DESC) {
+      t = write(p || null, { net: net === "mk" || net === "story" ? "share" : net, subject: o.subject, studio: o.studio, _raw: true, ...(net === "tiktok" && p && !o.studio ? { style: "classy" } : {}) });
+      if (net === "mk") t = t.split("\n").filter(l => !/where are you (seeing|watching)|which town are you|comment where you|tell us where you/i.test(l)).join("\n");
+    }
+    if (!CTA_RE.test(t)) {
+      const c = cta(p || null, { net: net === "mk" || net === "story" ? "share" : net });
+      const lines = t.split("\n");
+      const last = (lines[lines.length - 1] || "").trim();
+      if (/^#/.test(last) && lines.length > 1) { lines.splice(lines.length - 1, 0, c, ""); t = lines.join("\n"); } else t = t + (net === "x" ? " " : net === "story" ? "\n" : "\n\n") + c;
+    }
+    if (tagsWanted(net, o) && !hasTags(t)) {
+      const tg = tags(p || null, net === "mk" ? "share" : net, null, true) || pick(TAGS.brand);
+      t = t + (net === "x" ? " " : net === "story" ? "\n" : "\n\n") + tg;
+    }
+    if (net === "x") t = fitX(t, p);
+    return t.replace(/\n{3,}/g, "\n\n").trim();
   }
   function title(p, o) {
     o = o || {};
@@ -356,5 +415,5 @@
     const name = short(p), price = money(p.price_ghs);
     return pick([`${name} – ${price} in Ghana`, `${name} for ${price} 🔥`, `Look at this ${name.toLowerCase()} 😍`, `${name} | Furniture in Accra`, `${name}: worth ${price}?`, `${name} at F.A Vision, Odorkor`]).slice(0, 100 - sh.length) + sh;
   }
-  window.FAV_CAPTIONS = { write, title, cta, tags, comment, loadTrends, trends: () => TR, trending, audienceTags, AUDIENCE, dayRank, dailyOrder };
+  window.FAV_CAPTIONS = { write, ensure, check, meaningful, hasTags, title, cta, tags, comment, loadTrends, trends: () => TR, trending, audienceTags, AUDIENCE, dayRank, dailyOrder };
 })();

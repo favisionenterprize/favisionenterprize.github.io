@@ -45,6 +45,13 @@
   // What's left without hashtags, mentions and spaces; TikTok's grey "No description" placeholder is empty.
   const meaningful = t => { const m = String(t || "").replace(/[#@][\p{L}\p{N}_.]+/gu, "").replace(/\s+/g, " ").trim(); return /^no description\.?$/i.test(m) ? "" : m; };
   const isDone = id => { const f = S.fixed[id]; return !!f && (f.ok || f.skip); };
+  // Quality gate (Fix all): a post WITH a description but no hashtags gets the hashtag mix added at the end
+  // (TikTok's own limits apply: within 7 days of posting, one edit a day). fixed[id].tags marks those done.
+  const tagged = t => /(^|\s)#[\p{L}\p{N}_]{2,}/u.test(String(t || ""));
+  function tagsWaiting() {
+    if (!S || !S.scan) return [];
+    return S.scan.posts.filter(p => p.id && meaningful(p.desc).length >= S.settings.min_chars && !tagged(p.desc) && !(S.fixed[p.id] && (S.fixed[p.id].tags_ok || S.fixed[p.id].skip_tags)) && !(S.fixed[p.id] && S.fixed[p.id].ok));
+  }
   // Every post that needs a description: each prepared id + every empty post the scan found.
   function candidates() {
     if (!S) return [];
@@ -68,7 +75,7 @@
   const triedThisRun = post => { const r = getRun(); return !!r && Array.isArray(r.tried) && r.tried.includes(post.id); };
   const byAge = (a, b) => { try { const x = BigInt(a.id), y = BigInt(b.id); return x < y ? -1 : x > y ? 1 : 0; } catch (e) { return 0; } };
   // What one press fixes now: oldest first, so posts about to pass 7 days are done first.
-  function fixable() { return waiting().filter(p => !appOnly(p) && !tooOld(p) && !triedToday(p) && !triedThisRun(p)).sort(byAge); }
+  function fixable() { return waiting().concat(tagsWaiting().map(p => ({ ...p, need: "tags" }))).filter(p => !appOnly(p) && !tooOld(p) && !triedToday(p) && !triedThisRun(p)).sort(byAge); }
 
   // Product for a post: the one picked in "Review captions", else the best word match on its old text /
   // thumbnail alt text. Only a CONFIDENT match counts (one product clearly ahead); otherwise the post gets
@@ -110,8 +117,8 @@
   function draft(post) {
     if (drafts[post.id] == null) {
       const prep = S.prepared[post.id], picked = picks()[post.id];
-      if (prep && prep.text && !picked) drafts[post.id] = prep.text;    // written from the post's own images (browser run 15 Oct)
-      else { const p = productOf(post); drafts[post.id] = p ? captionFor(p) : genericCaption(); }
+      if (prep && prep.text && !picked) drafts[post.id] = gated(post, prep.text);    // written from the post's own images (browser run 15 Oct)
+      else { const p = productOf(post); drafts[post.id] = gated(post, p ? captionFor(p) : genericCaption()); }
     }
     return drafts[post.id];
   }
@@ -125,7 +132,8 @@
   let scanProblem = null;
   // Red message on the card (what went wrong and what to press).
   let alertMsg = null;
-  function alarm(msg) {
+  const alarm = m => alarmTT(m);
+  function alarmTT(msg) {
     alertMsg = msg;
     A.toast(msg, true);
     const el = document.getElementById("ttc-alert");
@@ -144,17 +152,21 @@
       window.postMessage({ type: "favauto-recheck" }, location.origin);
     });
   }
-  async function siteVersion() {
-    try { const r = await fetch("/extension/live.json?t=" + Date.now(), { cache: "no-store" }); const j = await r.json(); return { version: String(j.version || ""), ok: (j.scripts || []).some(x => x.file === "ttcaptions.js" && (x.matches || []).some(m => /tiktok\.com/.test(m))) && (j.scripts || []).some(x => x.file === "ttids.js") }; } catch (e) { return null; }
+  async function siteVersion(need) {
+    try { const r = await fetch("/extension/live.json?t=" + Date.now(), { cache: "no-store" }); const j = await r.json(); return { version: String(j.version || ""), ok: need ? need.every(n => (j.scripts || []).some(x => x.file === n)) : (j.scripts || []).some(x => x.file === "ttcaptions.js" && (x.matches || []).some(m => /tiktok\.com/.test(m))) && (j.scripts || []).some(x => x.file === "ttids.js") }; } catch (e) { return null; }
   }
-  async function preflight() {
+  // Also used by the other networks on the Fix all tab (admin/fixall.js): opts.alarm shows the red message
+  // there, opts.need lists the live scripts that must be in extension/live.json.
+  async function preflight(opts) {
+    opts = opts || {};
+    const alarm = opts.alarm || alarmTT;
     const f = F();
     if (!f || f.needExt()) { alarm("The FA Vision add-on isn't installed in this browser: install it (steps at the bottom of the Today tab), then press the button again."); return false; }
     const st = await addonStatus(STATUS_MS);
     if (!st) { alarm("The FA Vision add-on didn't answer. Open edge://extensions, make sure FA Vision Autopilot is switched on and press ↻ Reload, then press Ctrl+F5 on this page and try again."); return false; }
-    if (st.mode !== "live" || !st.userScripts) { alarm("The add-on isn't in automatic-update (live) mode, so it can't run TikTok captions. Open edge://extensions → FA Vision Autopilot → Details, switch on \"Allow user scripts\", press ↻ Reload, then Ctrl+F5 here."); return false; }
-    const site = await siteVersion();
-    if (site && !site.ok) { alarm("extension/live.json on the website doesn't list the TikTok captions scripts. Tell Claude: the add-on can't run them."); return false; }
+    if (st.mode !== "live" || !st.userScripts) { alarm(`The add-on isn't in automatic-update (live) mode, so it can't run ${opts.what || "TikTok captions"}. Open edge://extensions → FA Vision Autopilot → Details, switch on "Allow user scripts", press ↻ Reload, then Ctrl+F5 here.`); return false; }
+    const site = await siteVersion(opts.need);
+    if (site && !site.ok) { alarm(`extension/live.json on the website doesn't list the ${opts.what || "TikTok captions"} scripts. Tell Claude: the add-on can't run them.`); return false; }
     if (site && site.version && st.version !== site.version) {
       const st2 = await addonStatus(STATUS_MS);          // the website may have just updated: one more try
       if (!st2 || st2.version !== site.version) { alarm(`The add-on still has old scripts (${(st2 || st).version || "unknown"}; the website has ${site.version}). ${(st2 || st).error ? "Its last update failed: " + (st2 || st).error + ". " : ""}Open edge://extensions and press ↻ Reload on FA Vision Autopilot, then Ctrl+F5 here and try again.`); return false; }
@@ -188,8 +200,22 @@
     if (!ready(then)) return;
     launchJob("https://www.tiktok.com/tiktokstudio/content", { kind: "ttscan", max: 500, then: then && then.length ? then : null });
   }
+  // Each caption goes through the quality gate (admin/captions.js ensure: description, hashtags, call to action).
+  // need "tags": the post keeps its own text; the add-on only adds `tags` at the end.
+  function gated(post, text) {
+    const W = window.FAV_CAPTIONS;
+    return W && W.ensure ? W.ensure(text, productOf(post), { net: "tiktok" }) : text;
+  }
+  function tagLine(post) {
+    const W = window.FAV_CAPTIONS;
+    let t = "";
+    try { t = W ? W.tags(productOf(post), "tiktok") : ""; } catch (e) { t = ""; }
+    return t || "#furniture #accra #ghana #homedecor #FAVisionEnterprise";
+  }
   function queueFor(posts) {
-    return posts.map(p => ({ id: p.id, url: p.url || "", kind: p.kind || "", text: String(drafts[p.id] != null && drafts[p.id].trim() ? drafts[p.id] : draft(p)).trim().slice(0, 2200) })).filter(x => x.text);
+    return posts.map(p => p.need === "tags"
+      ? { id: p.id, url: p.url || "", kind: p.kind || "", mode: "tags", tags: tagLine(p), text: tagLine(p) }
+      : { id: p.id, url: p.url || "", kind: p.kind || "", text: gated(p, String(drafts[p.id] != null && drafts[p.id].trim() ? drafts[p.id] : draft(p)).trim()).slice(0, 2200) }).filter(x => x.text);
   }
   const BATCH = 5;
   function launchFix(q, then, run) {
@@ -201,7 +227,7 @@
     return true;
   }
   function startFix(ids) {
-    const posts = waiting().filter(p => ids.includes(p.id));
+    const posts = waiting().concat(tagsWaiting().map(p => ({ ...p, need: "tags" }))).filter(p => ids.includes(p.id));
     const blocked = posts.find(p => appOnly(p) || tooOld(p));
     if (blocked && posts.length === 1) return A.toast(appOnly(blocked) ? "TikTok only lets you edit this post in the app (commercial content)." : `TikTok only allows caption edits within ${S.settings.edit_days} days of posting.`, true);
     const q = queueFor(posts.filter(p => !appOnly(p) && !tooOld(p)).sort(byAge));
@@ -248,7 +274,9 @@
     if (out.kind === "ttfix") {
       const ok = res.filter(r => r.ok), had = res.filter(r => !r.ok && (r.skip || /already has/.test(r.why || "")));
       await save(s => {
-        for (const r of res) s.fixed[r.id] = { d, ok: !!r.ok, ...(r.why ? { why: r.why } : {}), ...(!r.ok && (r.skip || /already has/.test(r.why || "")) ? { skip: true } : {}) };
+        for (const r of res) s.fixed[r.id] = r.mode === "tags"
+          ? { ...(s.fixed[r.id] || {}), d, ...(r.why ? { why: r.why } : {}), ...(r.ok ? { tags_ok: true } : {}), ...(!r.ok && r.skip ? { skip_tags: true } : {}) }
+          : { d, ok: !!r.ok, ...(r.why ? { why: r.why } : {}), ...(!r.ok && (r.skip || /already has/.test(r.why || "")) ? { skip: true } : {}) };
         s.runs = s.runs.concat([{ d, kind: "fix", queued: Number(out.n) || res.length, tried: res.length, ok: ok.length, had: had.length, v: String(out.v || ""), ...(out.more ? { more: out.more } : {}), ...(out.stopped ? { stopped: out.stopped } : {}) }]).slice(-100);
         return s;
       }, `TikTok captions: added ${ok.length} of ${res.length}`);
@@ -273,7 +301,7 @@
   }
   function renderCard() {
     if (!S) return "";
-    const list = waiting(), prods = A.products().filter(p => !p.placeholder), sc = S.scan, run = getRun(), lf = lastFix();
+    const list = waiting(), noTags = tagsWaiting(), prods = A.products().filter(p => !p.placeholder), sc = S.scan, run = getRun(), lf = lastFix();
     const fx = fixable(), old = list.filter(p => !appOnly(p) && tooOld(p)), app = list.filter(appOnly), today_ = list.filter(p => !appOnly(p) && !tooOld(p) && triedToday(p));
     const general = fx.filter(p => !(S.prepared[p.id] && S.prepared[p.id].text) && !productOf(p)).length;
     return `<section class="fa-card" id="ttc-card">
@@ -282,12 +310,14 @@
       <p class="fa-small down ttc-alert" id="ttc-alert" role="alert" style="color:var(--err);font-weight:600" ${alertMsg ? "" : "hidden"}>${esc(alertMsg || "")}</p>
       <div class="fa-actions ttc-go"><button class="btn btn-sell btn-lg" data-ttc="go" id="ttc-go">✨ Fix all TikTok descriptions</button></div>
       <p class="muted fa-small" id="ttc-status">${run ? (run.stage === "fix" ? `<b>Fixing ${plural(run.n || 0, "post")}…</b> The TikTok tab shows “Fixing 1 of ${run.n || "N"}…” as it goes; the summary appears here when it's done.` : "<b>Step 1 of 2: reading all your posts in TikTok Studio…</b> then it fixes each one.")
-        : sc ? `Last read ${esc(sc.d)}: ${plural(sc.n, "post")}, ${list.length} without a description.${sc.stopped ? " (Stopped early: " + esc(sc.stopped) + ")" : ""}` : `${plural(list.length, "post")} waiting for a description (captions already written). Press the button.`}</p>
+        : sc ? `Last read ${esc(sc.d)}: ${plural(sc.n, "post")}, ${list.length} without a description${noTags.length ? `, ${noTags.length} without hashtags` : ""}.${sc.stopped ? " (Stopped early: " + esc(sc.stopped) + ")" : ""}` : `${plural(list.length, "post")} waiting for a description (captions already written). Press the button.`}</p>
       ${list.length ? `<ul class="fa-small ttc-split" id="ttc-split"><li><b>${fx.length}</b> fixed by the button now (oldest first: TikTok allows caption edits only within ${S.settings.edit_days} days of posting, once a day)</li>${old.length ? `<li class="muted">${plural(old.length, "post")} over ${S.settings.edit_days} days old: too old to edit</li>` : ""}${today_.length ? `<li class="muted">${today_.length} already edited today: tomorrow</li>` : ""}${app.length ? `<li class="muted">App only (commercial content, edit in the TikTok app): ${app.map(p => okUrl(p.url) ? `<a href="${esc(okUrl(p.url))}" target="_blank" rel="noopener">${esc(p.id)}</a>` : esc(p.id)).join(", ")}</li>` : ""}</ul>` : ""}
       ${lf && !run ? `<p class="fa-small ${lf.ok + (lf.had || 0) === lf.tried && !lf.stopped ? "up" : "down"}" id="ttc-summary">Last fix ${esc(lf.d)}: ${lf.ok} of ${lf.queued || lf.tried} descriptions added${lf.had ? `, ${lf.had} already had one` : ""}${lf.tried - lf.ok - (lf.had || 0) > 0 ? `, ${lf.tried - lf.ok - (lf.had || 0)} failed` : ""}${lf.stopped ? ". Stopped: " + esc(lf.stopped) : ""}.</p>` : ""}
       ${fx.length ? `<details class="ttc-review"><summary>Review captions (${fx.length}${general ? `, ${general} general` : ""}): optional</summary>
       <p class="muted fa-small">Nothing here is needed: the button uses these captions as they are. Change the product or the text first if you want.</p>
-      ${fx.map(post => { const p = productOf(post), f = S.fixed[post.id], pk = picks()[post.id]; return `<div class="ttc-post">
+      ${fx.map(post => { const p = productOf(post), f = S.fixed[post.id], pk = picks()[post.id];
+        if (post.need === "tags") return `<div class="ttc-post ttc-tags"><b>${okUrl(post.url) ? `<a href="${esc(okUrl(post.url))}" target="_blank" rel="noopener">Post ${esc(post.id)}</a>` : "Post " + esc(post.id)}</b> <small class="muted">has a description, no hashtags: the button adds today's hashtag mix at the end (its text stays).</small> <small>${esc(String(post.desc || "").slice(0, 90))}</small></div>`;
+        return `<div class="ttc-post">
         <div class="ttc-head">${okImg(post.thumb) ? `<img src="${esc(okImg(post.thumb))}" alt="" width="54" height="72" loading="lazy" referrerpolicy="no-referrer">` : ""}
           <div><b>${okUrl(post.url) ? `<a href="${esc(okUrl(post.url))}" target="_blank" rel="noopener">Post ${esc(post.id)}</a>` : "Post " + esc(post.id)}</b>
           <small class="muted">${post.desc ? "Now: " + esc(post.desc) : "No description"}${post.alt ? " · shows: " + esc(post.alt) : ""}</small>
@@ -323,5 +353,5 @@
     rerender();
   });
 
-  window.FAV_TTCAPS = { load, state: () => S, renderCard, receive, startAll, startScan, startFix, fixAll, waiting, _test: { guess, meaningful, genericCaption, queueFor, setRun, getRun, fixable, candidates, postedAt, preflight, alert: () => alertMsg, statusMs: ms => { STATUS_MS = ms; }, set: s => { S = normalise(s); } } };
+  window.FAV_TTCAPS = { load, state: () => S, renderCard, receive, startAll, startScan, startFix, fixAll, waiting, tagsWaiting, fixable: () => (S ? fixable() : []), preflight, meaningful, _test: { guess, meaningful, genericCaption, queueFor, setRun, getRun, fixable, candidates, postedAt, preflight, alert: () => alertMsg, statusMs: ms => { STATUS_MS = ms; }, set: s => { S = normalise(s); } } };
 })();

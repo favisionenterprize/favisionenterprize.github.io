@@ -112,10 +112,12 @@
   }
   function description(p) {
     const W = window.FAV_CAPTIONS;
-    let t = W ? W.write(p, { net: "share" }) : (A.marketplaceText ? A.marketplaceText(p) : p.description);
+    let t = W ? W.write(p, { net: "share", gateTags: false }) : (A.marketplaceText ? A.marketplaceText(p) : p.description);
     t = String(t).split("\n").filter(l => !/where are you (seeing|watching)|which town are you|comment where you|tell us where you('|’)re/i.test(l)).join("\n");
+    if (W && W.ensure) t = W.ensure(t, p, { net: "mk" });   // quality gate (hashtags optional on Marketplace)
     return t.replace(/\n{3,}/g, "\n\n").trim() + `\n\nOrder or see more: ${SITE}p/${p.id}.html`;
   }
+  // Marketplace "Fix all" (admin/fixall.js) rewrites short descriptions with the same text.
   function listItem(p) {
     return {
       p: p.id, title: String(p.name).slice(0, 99), price: Number(p.price_ghs), cats: categoriesFor(p), cond: "New",
@@ -406,5 +408,5 @@
     finally { A.busy(null); }
   });
 
-  window.FAV_MKAUTO = { load, state: () => S, renderTab, receive, startScan, startList, startInbox, scanWaiting, listWaiting, analyse, _test: { productFor, sim, templateDraft, listItem, description, categoriesFor, set: s => { S = normalise(s); }, setInbox: writeInbox } };
+  window.FAV_MKAUTO = { load, state: () => S, renderTab, receive, startScan, startList, startInbox, scanWaiting, listWaiting, analyse, description, _test: { productFor, sim, templateDraft, listItem, description, categoriesFor, set: s => { S = normalise(s); }, setInbox: writeInbox } };
 })();

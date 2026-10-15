@@ -9,7 +9,7 @@
 // post, else video), data-fav-time (Unix seconds), data-fav-edit (1/0 = TikTok's can_edit).
 // It never clicks or changes anything.
 (() => {
-  const VERSION = "2026-10-15.3";
+  const VERSION = "2026-10-15.4";
   if (!/^\/tiktokstudio\//.test(location.pathname) || window.__favTtids) return;
   window.__favTtids = true;
   const ROW = "[data-tt=components_PostTable_Absolute]";

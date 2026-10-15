@@ -734,3 +734,19 @@ input.now-num { width: 4.5em !important; display: inline-block; padding: 2px 6px
 #ttc-card .up { color: var(--ok); font-weight: 600; } #ttc-card .down { color: var(--err); font-weight: 600; }
 .ttc-review { margin-top: 10px; border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; }
 .ttc-review > summary { cursor: pointer; font-weight: 600; padding: 4px 0; }
+/* Fix all tab (admin/fixall.js) */
+#fx-card, .fx-net, .fx-tt { margin-bottom: 14px; }
+.fx-pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; font-weight: 600; background: #eef0f3; color: var(--muted); white-space: nowrap; margin: 1px 0; }
+.fx-pill.hot { background: #fde7e7; color: var(--err); }
+.fx-pill.warn { background: #fff4e0; color: #9a5b00; }
+.fx-pill.ok { background: #e7f6ec; color: var(--ok); }
+.fx-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 10px 0; }
+.fx-table th, .fx-table td { text-align: left; padding: 6px 6px; border-top: 1px solid var(--line); vertical-align: top; }
+.fx-table thead th { border-top: 0; color: var(--muted); font-weight: 600; }
+.fx-list summary { cursor: pointer; font-size: 13px; font-weight: 600; }
+.fx-list ul, .fx-web { list-style: none; padding: 0; margin: 6px 0; font-size: 13px; }
+.fx-list li, .fx-web li { padding: 5px 0; border-top: 1px solid var(--line); overflow-wrap: anywhere; }
+.fx-list li.hot b { color: var(--err); } .fx-list li.warn b { color: #9a5b00; }
+.fx-web .btn { margin-left: 6px; }
+#fx-card .up, .fx-net .up { color: var(--ok); font-weight: 600; }
+@media (max-width: 520px) { .fx-table th, .fx-table td { padding: 5px 3px; } }

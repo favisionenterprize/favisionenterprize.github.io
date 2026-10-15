@@ -52,6 +52,7 @@
     const d = draft(v);
     if (!d.edited) return describe(v, net);
     const t = d.text.trim();
+    if (CAP() && CAP().ensure) return CAP().ensure(t, product(v), { net });   // quality gate: description, hashtags, call to action
     return /whatsapp|call|\b0\d{2}\s?\d{3}\s?\d{4}\b|order|dm us/i.test(t) || !CAP() ? t : t + "\n\n" + CAP().cta(product(v), { net });
   }
   function titleFor(v, net) {

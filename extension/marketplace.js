@@ -72,6 +72,11 @@
     const hit = t.match(WARN);
     return hit ? hit[0] : null;
   }
+  // Quality gate (same rule as admin/captions.js ensure): never post a blank description. Real text =
+  // what's left without hashtags, @mentions and links; 15+ characters needed.
+  const realLen = t => { const m = String(t || "").replace(/https?:\/\/\S+/g, "").replace(/[#@][\p{L}\p{N}_.]+/gu, "").replace(/\s+/g, " ").trim(); return /^(no description|add (a )?description)\.?$/i.test(m) ? 0 : m.length; };
+  const tagged = t => /(^|\s)#[\p{L}\p{N}_]{2,}/u.test(String(t || ""));
+  const BLANK = "blank description — not posted";
   const visible = el => !!el && el.getClientRects().length > 0;
   const textOf = el => ((el && (el.innerText || el.getAttribute("aria-label"))) || "").trim();
   function findBtn(re, root) {
@@ -329,9 +334,12 @@
     if (!cat) return skip("couldn't pick the category");
     const cond = await choose(/^condition$/i, [it.cond || "New"]);
     if (!cond) return skip("couldn't pick the condition");
+    if (realLen(it.text) < 15) return skip(BLANK);
     const desc = field(/^description$/i);
     if (desc) { typeIn(desc, it.text); await sleep(rand(500, 900)); }
-    if (!desc || !(desc.value || desc.innerText || "").includes("favisionenterprize.github.io/p/")) return skip("couldn't type the description");
+    if (desc && realLen(desc.value || desc.innerText) < 15) { typeIn(desc, it.text); await sleep(rand(500, 900)); }
+    if (!desc || realLen(desc.value || desc.innerText) < 15) return skip(BLANK);
+    if (!(desc.value || desc.innerText || "").includes("favisionenterprize.github.io/p/")) return skip("couldn't type the description");
     const loc = field(/^location$/i);
     if (loc && !/odorkor|accra/i.test(loc.value || "")) {
       typeIn(loc, it.loc || "Odorkor");
@@ -360,6 +368,8 @@
       return job.i >= job.q.length ? done() : go(CREATE);
     }
     await sleep(rand(800, 1600));
+    const d2 = field(/^description$/i);      // still on screen after Next? then it must still hold the text
+    if (d2 && realLen(d2.value || d2.innerText) < 15) return skip(BLANK);
     // Saved BEFORE the click: if Publish reloads the page, the next page carries on with the check
     // instead of filling the form again (which would list the product twice).
     job.stage = "verify";

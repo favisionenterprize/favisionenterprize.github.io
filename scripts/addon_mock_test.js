@@ -9,6 +9,7 @@
 // stop on warnings, PIN-locked chats skipped, results returned to the admin).
 //
 // Run:  node scripts/addon_mock_test.js        (needs Playwright, like admin_smoke.js)
+//       FX_ONLY=1 node scripts/addon_mock_test.js   only the Fix all + quality gate checks (fast)
 const fs = require("fs");
 const path = require("path");
 let chromium;
@@ -188,7 +189,7 @@ const TT_EDIT = id => page(`<main><p class="tip-note">Captions can only be edite
   const D = JSON.parse(localStorage.getItem("tt-desc") || "{}");
   const ed = document.querySelector("[contenteditable]");
   let model = D[${JSON.stringify(id)}] || ""; ed.innerText = model;
-  ed.addEventListener("paste", e => { e.preventDefault(); model = e.clipboardData.getData("text/plain"); ed.innerText = model; });
+  ed.addEventListener("paste", e => { e.preventDefault(); const t = e.clipboardData.getData("text/plain"); model = ed.innerText.trim() ? model + t : t; ed.innerText = model; });
   ed.addEventListener("input", () => setTimeout(() => { ed.innerText = model; }, 50));
   document.querySelector("#save").onclick = () => { D[${JSON.stringify(id)}] = model; localStorage.setItem("tt-desc", JSON.stringify(D)); if (document.querySelector("input").value) localStorage.setItem("tt-violation", "title changed"); location.href = "/tiktokstudio/content"; };
   document.querySelectorAll("[role=button]")[1].onclick = () => localStorage.setItem("tt-violation", "repost");`);
@@ -235,11 +236,94 @@ const TT_UPLOAD = page(`<main><div role="tab" aria-selected="true">Photos</div><
     if (all.length === 2) { location.href = "/tiktokstudio/content"; return; }
     history.pushState(null, "", "/tiktokstudio/content"); document.body.insertAdjacentHTML("beforeend", "<p>Manage your posts</p>"); };`);
 
+
+// ------------------------------------------------------------------ Fix all mocks (extension/fixall.js) + quality gate
+// Facebook Page feed (?fxmock): top-level posts [role=article] with the caption in [data-ad-preview=message] (none =
+// empty caption), a link to the post, a "shared a post" one, and a comment article nested inside a post.
+const FB_FEED = page(`<div role="main"><h1>F.A Vision Enterprise</h1><div role="feed" id="feed"></div></div>`, `
+  const P = JSON.parse(localStorage.getItem("fb-posts") || "null") || { "111": "", "112": "Luxury leather sofa set now in stock at our Odorkor showroom", "113": "Great sofa deals this week at Odorkor #AccraFurniture", "114": null };
+  localStorage.setItem("fb-posts", JSON.stringify(P));
+  for (const id of Object.keys(P)) {
+    const a = document.createElement("div"); a.setAttribute("role", "article");
+    a.innerHTML = (P[id] === null ? '<div>F.A Vision Enterprise shared a post</div>' : '<div>F.A Vision Enterprise</div>') + '<a href="/FaVisionEnterprise/posts/' + id + '?__cft__=x">Oct 1</a>' + (P[id] ? '<div data-ad-preview="message"></div>' : '') + '<div role="button" aria-label="Actions for this post">⋯</div>';
+    if (P[id]) a.querySelector("[data-ad-preview]").textContent = P[id];
+    if (id === "113") a.insertAdjacentHTML("beforeend", '<div role="article"><a href="/FaVisionEnterprise/posts/999">comment</a>Nice!</div>');
+    document.getElementById("feed").appendChild(a);
+  }`);
+// One Page post (permalink): "Actions for this post" → menu (Save post / Edit post / Move to trash) → Edit post dialog
+// (Draft-like: only a paste event changes the text; a paste at the end appends) → Save. "fb-blank": pastes are ignored.
+const FB_POST = id => page(`<div role="main"><div role="article"><div>F.A Vision Enterprise</div><a href="/FaVisionEnterprise/posts/${id}">Oct 1</a><div data-ad-preview="message" id="msg"></div><div role="button" aria-label="Actions for this post" id="act">⋯</div></div></div>`, `
+  const P = JSON.parse(localStorage.getItem("fb-posts") || "{}"), id = ${JSON.stringify(id)};
+  document.getElementById("msg").textContent = P[id] || "";
+  document.getElementById("act").onclick = () => {
+    const m = document.createElement("div"); m.setAttribute("role", "menu");
+    m.innerHTML = '<div role="menuitem">Save post</div><div role="menuitem">Edit post</div><div role="menuitem">Move to trash</div>';
+    m.children[0].onclick = () => localStorage.setItem("fx-violation", "save post");
+    m.children[2].onclick = () => localStorage.setItem("fx-violation", "trash");
+    m.children[1].onclick = () => { m.remove();
+      const d = document.createElement("div"); d.setAttribute("role", "dialog");
+      d.innerHTML = '<h2>Edit post</h2><div contenteditable="true" role="textbox" id="ed"></div><div role="button" aria-label="Close">×</div><div role="button" id="save">Save</div>';
+      document.body.appendChild(d);
+      const ed = d.querySelector("#ed"); let model = P[id] || ""; ed.innerText = model;
+      ed.addEventListener("paste", e => { e.preventDefault(); if (localStorage.getItem("fb-blank")) return; const t = e.clipboardData.getData("text/plain"); model = ed.innerText.trim() ? model + t : t; ed.innerText = model; });
+      ed.addEventListener("input", () => setTimeout(() => { ed.innerText = model; }, 50));
+      d.querySelector("[aria-label=Close]").onclick = () => d.remove();
+      d.querySelector("#save").onclick = () => { P[id] = model; localStorage.setItem("fb-posts", JSON.stringify(P)); d.remove(); };
+    };
+    document.body.appendChild(m);
+  };`);
+// Instagram profile grid and post pages: caption in h1 (none = empty), "More options" → Delete / Edit / Cancel,
+// Edit → caption box (contenteditable) + Done.
+const IG_GRID = page(`<main><h2>favisionent</h2><div id="grid"><a href="/p/Cabc1/"><img alt="Photo by F.A Vision"></a><a href="/p/Cabc2/"><img alt=""></a><a href="/reel/Cabc3/"><img alt=""></a></div></main>`);
+const IG_POST = code => page(`<main><article><h1 id="cap"></h1><div role="button"><svg aria-label="More options"></svg>…</div></article></main>`, `
+  const P = JSON.parse(localStorage.getItem("ig-posts") || "null") || { Cabc1: "#fyp", Cabc2: "Red glass dining set, six chairs, in stock now", Cabc3: "" };
+  localStorage.setItem("ig-posts", JSON.stringify(P));
+  const code = ${JSON.stringify(code)};
+  if (P[code]) document.getElementById("cap").textContent = P[code]; else document.getElementById("cap").remove();
+  document.querySelector("[role=button]").onclick = () => {
+    const m = document.createElement("div"); m.setAttribute("role", "dialog");
+    m.innerHTML = '<button>Delete</button><button>Edit</button><button>Cancel</button>';
+    m.children[0].onclick = () => localStorage.setItem("fx-violation", "delete");
+    m.children[2].onclick = () => m.remove();
+    m.children[1].onclick = () => { m.remove();
+      const d = document.createElement("div"); d.setAttribute("role", "dialog");
+      d.innerHTML = '<div role="button">Cancel</div><div contenteditable="true" aria-label="Write a caption..." id="ed"></div><div role="button" id="done">Done</div>';
+      document.body.appendChild(d);
+      const ed = d.querySelector("#ed"); let model = P[code] || ""; ed.innerText = model;
+      ed.addEventListener("paste", e => { e.preventDefault(); const t = e.clipboardData.getData("text/plain"); model = ed.innerText.trim() ? model + t : t; ed.innerText = model; });
+      ed.addEventListener("input", () => setTimeout(() => { ed.innerText = model; }, 50));
+      d.children[0].onclick = () => d.remove();
+      d.querySelector("#done").onclick = () => { P[code] = model; localStorage.setItem("ig-posts", JSON.stringify(P)); d.remove(); };
+    };
+    document.body.appendChild(m);
+  };`);
+// Marketplace "Edit listing" form: Title, Price, Description, Update, Delete listing.
+const MK_EDIT = id => page(`<div role="main"><h1>Edit listing</h1><label><span>Title</span><input id="t" value="Listing ${id}"></label><label><span>Price</span><input id="pr" value="GH₵650"></label>
+  <label><span>Description</span><textarea id="desc"></textarea></label><div role="button" id="del">Delete listing</div><div role="button" id="up">Update</div></div>`, `
+  const D = JSON.parse(localStorage.getItem("mk-desc") || "null") || { "1001": "Desk", "1002": "Student desk and chair set with a steel frame, laminated top and delivery in Accra. Order or see more: https://favisionenterprize.github.io/p/FAV-014.html" };
+  localStorage.setItem("mk-desc", JSON.stringify(D));
+  const id = ${JSON.stringify(id)};
+  document.getElementById("desc").value = D[id] || "";
+  document.getElementById("del").onclick = () => localStorage.setItem("fx-violation", "delete listing");
+  document.getElementById("up").onclick = () => { D[id] = document.getElementById("desc").value; localStorage.setItem("mk-desc", JSON.stringify(D)); localStorage.setItem("mk-title-" + id, document.getElementById("t").value); location.href = "/marketplace/you/selling/"; };`);
+// A Facebook group (autopilot.js "post"): Draft-like post box; with "fb-wipe" the photo paste wipes the caption
+// (the gate must put it back before Post).
+const FB_GROUP = page(`<div role="main"><h1>Accra Buy and Sell</h1><div role="button" id="open">Write something...</div></div>`, `
+  document.getElementById("open").onclick = () => {
+    const d = document.createElement("div"); d.setAttribute("role", "dialog");
+    d.innerHTML = '<div contenteditable="true" role="textbox" id="ed"></div><div id="att"></div><div role="button" id="post">Post</div>';
+    document.body.appendChild(d);
+    const ed = d.querySelector("#ed"); let model = "";
+    ed.addEventListener("paste", e => { e.preventDefault(); const f = e.clipboardData.files; if (f && f.length) { if (localStorage.getItem("fb-wipe")) { model = ""; ed.innerText = ""; } return; } model = e.clipboardData.getData("text/plain"); ed.innerText = model; });
+    ed.addEventListener("input", () => setTimeout(() => { ed.innerText = model; }, 50));
+    d.querySelector("#post").onclick = () => { const all = JSON.parse(localStorage.getItem("group-posts") || "[]"); all.push(model); localStorage.setItem("group-posts", JSON.stringify(all)); d.remove(); };
+  };`);
+
 function serve(url) {
   const u = new URL(url);
   if (u.hostname === "favisionenterprize.github.io") return page("<p>admin</p>");
   if (u.hostname === "ads.tiktok.com") return CC;
-  if (u.hostname === "www.instagram.com") return IG_REELS;
+  if (u.hostname === "www.instagram.com") { const m = u.pathname.match(/^\/(?:p|reel)\/([\w-]+)/); return m ? IG_POST(m[1]) : /^\/favisionent\/?$/.test(u.pathname) ? IG_GRID : IG_REELS; }
   if (u.hostname === "www.tiktok.com" && u.pathname.startsWith("/tiktokstudio/upload/post/")) {
     const id = u.searchParams.get("item_id") || "", k = Object.keys(TT_SEED).indexOf(id), kind = k % 3 ? "photo" : "video";
     return k >= 0 && !id.endsWith("14") && u.pathname.endsWith("/" + kind) ? TT_EDIT(id) : TT_NOEDIT;
@@ -252,7 +336,11 @@ function serve(url) {
   if (p.startsWith("/marketplace/create/item")) return CREATE;
   if (p.startsWith("/marketplace/inbox")) return INBOX;
   const t = p.match(/^\/messages\/t\/(\d+)/); if (t) return THREAD(t[1]);
+  const fp = p.match(/^\/FaVisionEnterprise\/posts\/(\w+)/); if (fp) return FB_POST(fp[1]);
+  if (p.startsWith("/FaVisionEnterprise") && u.searchParams.has("fxmock")) return FB_FEED;
   if (p.startsWith("/FaVisionEnterprise")) return FB_PAGE;
+  const me = p.startsWith("/marketplace/edit") && u.searchParams.get("listing_id"); if (me) return MK_EDIT(me);
+  if (p.startsWith("/groups/")) return FB_GROUP;
   if (p.startsWith("/stories/create")) return FB_STORY;
   return page("<div role=main>facebook home</div>");
 }
@@ -271,7 +359,7 @@ async function run(browser, job, startUrl, setup, skip) {
     return {};
   });
   await ctx.route(/^https:\/\/(www\.facebook\.com|x\.com|www\.tiktok\.com|ads\.tiktok\.com|www\.instagram\.com|favisionenterprize\.github\.io)\//, r => r.fulfill({ status: 200, contentType: "text/html; charset=utf-8", body: serve(r.request().url()) }));
-  const scripts = { fb: ["autopilot.js", "engage.js", "marketplace.js", "profile.js", "boost.js"], cc: ["boost.js"], ig: ["instagram.js", "engage.js", "profile.js", "boost.js"], x: ["engage.js", "profile.js", "social.js"], tt: ["engage.js", "profile.js", "social.js", "ttcaptions.js", "ttids.js"].filter(f => !(skip || []).includes(f)) };
+  const scripts = { fb: ["autopilot.js", "engage.js", "marketplace.js", "profile.js", "boost.js", "fixall.js"], cc: ["boost.js"], ig: ["instagram.js", "engage.js", "profile.js", "boost.js", "fixall.js"], x: ["engage.js", "profile.js", "social.js", "fixall.js"], tt: ["engage.js", "profile.js", "social.js", "ttcaptions.js", "ttids.js"].filter(f => !(skip || []).includes(f)) };
   const wrap = (host, files) => `if (location.hostname === ${JSON.stringify(host)} && !/^\\/(setup|state)$/.test(location.pathname)) {
     window.chrome = window.chrome || {}; chrome.runtime = { lastError: null, sendMessage: (m, cb) => { window.__bg(m).then(r => cb && cb(r)); } };
     document.addEventListener("DOMContentLoaded", () => setTimeout(() => { ${files.map(f => `try { ${code(f)} } catch (e) { console.error(e); }`).join("\n")} }, 0));
@@ -308,9 +396,75 @@ async function run(browser, job, startUrl, setup, skip) {
   const item = (p, title, price, imgs) => ({ p, title, price, cats: ["Furniture", "Household"], cond: "New", loc: "Odorkor",
     text: `${title} in stock. WhatsApp 0572646176\n\nOrder or see more: https://favisionenterprize.github.io/p/${p}.html`, imgs });
   const S = "https://favisionenterprize.github.io/assets/images/";
+  let r;
+
+  // ================================================================ Fix all + quality gate (extension/fixall.js, autopilot.js, boost.js)
+  console.log("fxscan (Facebook Page: posts, empty captions, shared post, comments ignored)");
+  r = await run(browser, { kind: "fxscan", net: "fb", max: 100, page: "https://www.facebook.com/FaVisionEnterprise?fxmock=1" }, "https://www.facebook.com/FaVisionEnterprise?fxmock=1");
+  const fbs = r.out.res || [];
+  want(fbs.length === 4 && fbs.map(x => x.id).join() === "111,112,113,114" && !fbs.some(x => x.id === "999"), "reads the 4 posts, not the comment inside one: " + JSON.stringify(fbs.map(x => x.id)));
+  want(fbs[0].text === "" && /Luxury/.test(fbs[1].text) && /#AccraFurniture/.test(fbs[2].text) && fbs[3].kind === "shared" && /\/FaVisionEnterprise\/posts\/111$/.test(fbs[0].url) && r.out.v, "empty caption read as empty, shared post marked, clean post links, script version: " + JSON.stringify(fbs).slice(0, 400));
+  want(!r.errors.length, "no page errors: " + r.errors.join("; "));
+
+  console.log("fxfix (Facebook Page: Edit post only; caption into an empty post, hashtags onto one with text, fine one left; batches)");
+  const fbCap = "Quiet luxury for your living room.\nGH₵8,500 · WhatsApp 0572646176 to order.\n\n#AccraFurniture #FurnitureGhana";
+  const fbQ = [{ id: "111", url: "https://www.facebook.com/FaVisionEnterprise/posts/111", text: fbCap, tags: "#AccraFurniture #FAVision", mode: "set" },
+    { id: "112", url: "https://www.facebook.com/FaVisionEnterprise/posts/112", text: fbCap, tags: "#AccraFurniture #FAVision", mode: "tags" },
+    { id: "113", url: "https://www.facebook.com/FaVisionEnterprise/posts/113", text: fbCap, tags: "#AccraFurniture", mode: "tags" }];
+  const seedFb = () => localStorage.setItem("fb-posts", JSON.stringify({ "111": "", "112": "Luxury leather sofa set now in stock at our Odorkor showroom", "113": "Great sofa deals this week at Odorkor #AccraFurniture" }));
+  r = await run(browser, { kind: "fxfix", net: "fb", min: 1, max: 2, q: fbQ, batch: 5, cont: ["fx:fix:fb"], then: ["report"] }, fbQ[0].url, seedFb);
+  const FP = JSON.parse(r.state["fb-posts"] || "{}"), fr2 = r.out.res || [];
+  want(fr2.length === 3 && fr2[0].ok && fr2[1].ok && !fr2[2].ok && fr2[2].skip && !r.out.more && (r.out.then || []).join() === "report", "2 fixed, the complete one skipped, then the rest of the run: " + JSON.stringify(fr2));
+  want(FP["111"] === fbCap && FP["112"] === "Luxury leather sofa set now in stock at our Odorkor showroom\n\n#AccraFurniture #FAVision" && FP["113"] === "Great sofa deals this week at Odorkor #AccraFurniture", "Facebook saved the caption, the hashtags at the end (text kept), the fine one untouched: " + JSON.stringify(FP));
+  want(!r.state["fx-violation"], "only “Edit post” is ever clicked (never Save post / Move to trash): " + r.state["fx-violation"]);
+  want(!r.errors.length, "no page errors: " + r.errors.join("; "));
+  r = await run(browser, { kind: "fxfix", net: "fb", min: 1, max: 2, q: fbQ, batch: 2, cont: ["fx:fix:fb"], then: ["report"] }, fbQ[0].url, seedFb);
+  want((r.out.res || []).length === 2 && r.out.more === 1 && (r.out.then || []).join() === "fx:fix:fb,report", "hands back after the batch so the admin saves the log: " + JSON.stringify([r.out.res && r.out.res.length, r.out.more, r.out.then]));
+  r = await run(browser, { kind: "fxfix", net: "fb", min: 1, max: 2, q: fbQ.slice(0, 1) }, fbQ[0].url, () => { localStorage.setItem("fb-posts", JSON.stringify({ "111": "", "112": "Luxury leather sofa set now in stock at our Odorkor showroom" })); localStorage.setItem("fb-blank", "1"); });
+  want(!r.out.res[0].ok && /nothing saved|blank/.test(r.out.res[0].why) && JSON.parse(r.state["fb-posts"] || "{}")["111"] === "", "never saves a blank caption: " + JSON.stringify(r.out.res));
+
+  console.log("fxscan + fxfix (Instagram: captions from each post, Edit only)");
+  r = await run(browser, { kind: "fxscan", net: "ig", account: "favisionent", max: 100 }, "https://www.instagram.com/favisionent/");
+  const igs = r.out.res || [];
+  want(igs.length === 3 && igs.find(x => x.id === "Cabc1").text === "#fyp" && /Red glass/.test(igs.find(x => x.id === "Cabc2").text) && igs.find(x => x.id === "Cabc3").text === "" && igs.find(x => x.id === "Cabc3").kind === "video", "reads every post's caption (none = empty, reels marked): " + JSON.stringify(igs));
+  want(!r.errors.length, "no page errors: " + r.errors.join("; "));
+  const igQ = [{ id: "Cabc1", url: "https://www.instagram.com/p/Cabc1/", text: "Bold colour, warm welcomes. Red Glass Dining Set GH₵12,600.\nLink in bio 🔗\n\n#AccraHomes #FAVision", tags: "#AccraHomes", mode: "set" },
+    { id: "Cabc2", url: "https://www.instagram.com/p/Cabc2/", text: "x", tags: "#DiningGhana #FAVision", mode: "tags" }];
+  r = await run(browser, { kind: "fxfix", net: "ig", min: 1, max: 2, q: igQ }, igQ[0].url);
+  const IP = JSON.parse(r.state["ig-posts"] || "{}");
+  want(r.out.res.every(x => x.ok) && IP.Cabc1 === igQ[0].text && IP.Cabc2 === "Red glass dining set, six chairs, in stock now\n\n#DiningGhana #FAVision" && !r.state["fx-violation"], "Instagram: caption set / hashtags added via Edit → Done, never Delete: " + JSON.stringify([r.out.res, IP, r.state["fx-violation"]]));
+
+  console.log("mkedit (Marketplace: rewrite a short description, leave a full one, never delete)");
+  const mkText = "Student desk and chair set, steel frame, laminated top.\nWhatsApp 0572646176 to order.\n\nOrder or see more: https://favisionenterprize.github.io/p/FAV-014.html";
+  const mkQ = [{ id: "1001", p: "FAV-014", url: "https://www.facebook.com/marketplace/edit/?listing_id=1001", text: mkText }, { id: "1002", p: "FAV-014", url: "https://www.facebook.com/marketplace/edit/?listing_id=1002", text: mkText }];
+  r = await run(browser, { kind: "mkedit", min: 1, max: 2, q: mkQ, min_len: 60 }, mkQ[0].url);
+  const MD = JSON.parse(r.state["mk-desc"] || "{}");
+  want(r.out.res.length === 2 && r.out.res[0].ok && r.out.res[1].skip && MD["1001"] === mkText && /steel frame, laminated top and delivery/.test(MD["1002"]) && r.state["mk-title-1001"] === "Listing 1001" && !r.state["fx-violation"], "short one rewritten (title untouched), full one left, never Delete listing: " + JSON.stringify([r.out.res, MD, r.state["fx-violation"]]));
+  want(!r.errors.length, "no page errors: " + r.errors.join("; "));
+
+  console.log("quality gate in a group post (autopilot.js): blank never posted; caption wiped by the photo is put back with its hashtags");
+  const gq = [{ g: "1", name: "Accra Buy and Sell", url: "https://www.facebook.com/groups/1/", p: "FAV-014", text: "   #fyp  ", img: S + "a.jpg" },
+    { g: "2", name: "Ghana Market", url: "https://www.facebook.com/groups/2/", p: "FAV-014", text: "Student desk and chair set GH₵650. WhatsApp 0572646176 to order.\n\n#AccraFurniture #FurnitureGhana", img: S + "a.jpg" }];
+  r = await run(browser, { kind: "post", mode: "now", q: gq, min: 1, max: 2 }, gq[0].url, () => localStorage.setItem("fb-wipe", "1"));
+  const GP = JSON.parse(r.state["group-posts"] || "[]");
+  want(r.out.res.length === 2 && !r.out.res[0].ok && /blank description — not posted/.test(r.out.res[0].why) && r.out.res[1].ok, "blank caption skipped with the reason, the other posted: " + JSON.stringify(r.out.res));
+  want(GP.length === 1 && GP[0] === gq[1].text, "what Facebook got is the full caption WITH its hashtags (re-pasted before Post): " + JSON.stringify(GP));
+  want(!r.errors.length, "no page errors: " + r.errors.join("; "));
+
+  console.log("quality gate in a story (boost.js): no text → nothing shared");
+  r = await run(browser, { kind: "story", img: S + "a.jpg", text: "  " }, "https://www.facebook.com/stories/create");
+  want(r.out.res[0] && !r.out.res[0].ok && /blank description — not posted/.test(r.out.res[0].why) && !("story" in r.state), "a story without text is never shared: " + JSON.stringify(r.out));
+
+  console.log("ttfix hashtags mode (TikTok: hashtags added at the end of a post that has text)");
+  r = await run(browser, { kind: "ttfix", min: 1, max: 2, q: [{ id: "7400000000000000001", url: "https://www.tiktok.com/@favision/video/7400000000000000001", kind: "video", mode: "tags", tags: "#AccraFurniture #fyp", text: "#AccraFurniture #fyp" }, { id: "7400000000000000003", url: "", kind: "photo", mode: "tags", tags: "#AccraFurniture", text: "#AccraFurniture" }] }, "https://www.tiktok.com/tiktokstudio/content");
+  const TD = JSON.parse(r.state["tt-desc"] || "{}");
+  want(r.out.res[0].ok && r.out.res[0].mode === "tags" && TD["7400000000000000001"] === "Luxury leather sofa set now in stock at Odorkor\n\n#AccraFurniture #fyp", "hashtags appended, the text kept: " + JSON.stringify([r.out.res[0], TD["7400000000000000001"]]));
+  want(!r.out.res[1].ok && /no description/.test(r.out.res[1].why) && TD["7400000000000000003"] === "#fyp #accra", "a post with only hashtags isn't touched in hashtags mode: " + JSON.stringify(r.out.res[1]));
+  want(!r.state["tt-violation"], "never ••• / Post: " + r.state["tt-violation"]);
+  if (process.env.FX_ONLY) { await browser.close(); console.log(problems.length ? `\n${problems.length} problem(s):\n  ✗ ` + problems.join("\n  ✗ ") : "\nAll Fix all mock checks passed."); process.exit(problems.length ? 1 : 0); }
 
   console.log("mkscan (Your listings, renew menus)");
-  let r = await run(browser, { kind: "mkscan", menus: true }, "https://www.facebook.com/marketplace/you/selling");
+  r = await run(browser, { kind: "mkscan", menus: true }, "https://www.facebook.com/marketplace/you/selling");
   want(r.out.kind === "mkscan" && r.out.res.length === 3, "reads all 3 listings: " + JSON.stringify(r.out).slice(0, 300));
   want(r.out.res[0].id === "1001" && r.out.res[0].price === 650 && r.out.res[0].renew === "ready" && r.out.res[0].listed, "listing 1: id, price, listed date, renew ready: " + JSON.stringify(r.out.res[0]));
   want(r.out.res[1].renew === "wait" && r.out.res[1].next && r.out.res[1].price === 12000, "listing 2: renew in 3 days: " + JSON.stringify(r.out.res[1]));

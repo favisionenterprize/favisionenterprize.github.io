@@ -82,6 +82,11 @@
     return hit ? hit[0] : null;
   }
 
+  // Quality gate (same rule as admin/captions.js ensure): never post a blank description. Real text =
+  // what's left without hashtags, @mentions and links; 15+ characters needed.
+  const realLen = t => { const m = String(t || "").replace(/https?:\/\/\S+/g, "").replace(/[#@][\p{L}\p{N}_.]+/gu, "").replace(/\s+/g, " ").trim(); return /^(no description|add (a )?description)\.?$/i.test(m) ? 0 : m.length; };
+  const tagged = t => /(^|\s)#[\p{L}\p{N}_]{2,}/u.test(String(t || ""));
+  const BLANK = "blank description — not posted";
   const visible = el => !!el && el.getClientRects().length > 0;
   const matches = (el, re) => re.test((el.getAttribute("aria-label") || "").trim()) || re.test((el.innerText || "").trim());
   function findBtn(re, root) {
@@ -158,6 +163,7 @@
       await arrive(job.q[job.i].url);
     };
     const n = `Group ${job.i + 1} of ${job.q.length}`;
+    if (realLen(it.text) < 15) { record(false, BLANK); box(`${n}: ${BLANK}. Skipping…`, true); return next(false); }
     box(`${n}: opening ${it.name}…`);
     await sleep(rand(2500, 4500));
     let w = warning(); if (w) return finish(`Facebook showed "${w}". Nothing more was posted.`);
@@ -211,6 +217,17 @@
     const post = await waitFor(() => { const b = findBtn(/^post$/i, dialog); return b && b.getAttribute("aria-disabled") !== "true" ? b : null; }, 30000);
     if (!post) { record(false, "Post button stayed off"); box(`${n}: Post button stayed off. Skipping…`, true); return next(false); }
     await sleep(rand(800, 1600));
+    // Right before Post: read the box again. Empty or without its hashtags (the photo paste can wipe it) → paste again.
+    if (realLen(editor.innerText) < 15 || (tagged(it.text) && !tagged(editor.innerText))) {
+      box(`${n}: the caption went missing, putting it back…`);
+      editor.focus(); document.execCommand("selectAll", false, null); document.execCommand("delete", false, null);
+      const dt2 = new DataTransfer(); dt2.setData("text/plain", it.text);
+      editor.dispatchEvent(new ClipboardEvent("paste", { clipboardData: dt2, bubbles: true, cancelable: true }));
+      await sleep(900);
+      if (realLen(editor.innerText) < 15) { document.execCommand("insertText", false, it.text); await sleep(600); }
+    }
+    if (realLen(editor.innerText) < 15) { record(false, BLANK); box(`${n}: ${BLANK}. Skipping…`, true); return next(false); }
+    if (/\.mp4(\?|$)/i.test(it.img || "")) photoNote = [photoNote, "no sound: Facebook's web composer has no music picker (the video keeps its own beat)"].filter(Boolean).join(" · ");
     if (job.dry) {
       // Test mode: everything worked up to the Post button. Close without posting.
       box(`${n}: test passed ✓ (caption typed${photoNote ? ", photo NOT attached" : ", photo attached"}, Post button ready). Not posting.`);
