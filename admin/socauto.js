@@ -106,7 +106,9 @@
     const used = new Set(okToday.map(x => x.p).filter(Boolean));
     const queue = [];
     // random order each day among photos not posted on this network in the last week
-    for (const it of ORDER(pool(), i => net + ":" + i.k, i => last[i.k])) {
+    let ordered = ORDER(pool(), i => net + ":" + i.k, i => last[i.k]);
+    if (window.FAV_BOOST) ordered = window.FAV_BOOST.prefer(ordered, i => i.p && i.p.id, i => last[i.k]);   // Boost: products of the top posts first
+    for (const it of ordered) {
       if (queue.length >= room) break;
       if (it.p && used.has(it.p.id)) continue;   // one photo per product a day
       queue.push(it);
@@ -133,11 +135,13 @@
     if (opts.dry) q = (q.length ? q : pool()).slice(0, 1);
     if (!q.length) return null;
     const site = location.origin + "/", start = S.posts.filter(x => x.net === net).length;
+    const taken = [];   // Boost auto-sound: a different trending sound for each TikTok post
+    const soundOf = () => { const s = net === "tiktok" && window.FAV_BOOST ? window.FAV_BOOST.soundFor("tiktok", taken) : null; if (s) taken.push(s.name); return s; };
     return {
       url: net === "x" ? "https://x.com/compose/post" : "https://www.tiktok.com/tiktokstudio/upload?from=webapp&tab=photo",
       job: {
         kind: net, dry: !!opts.dry, mode: opts.products || opts.keys ? "now" : null, account: S.settings.x.account,
-        q: q.map((it, i) => ({ k: it.k, p: it.p ? it.p.id : null, img: site + it.img, text: caption(net, it, start + i, !!opts.full), title: titleOf(it) })),
+        q: q.map((it, i) => ({ k: it.k, p: it.p ? it.p.id : null, img: site + it.img, text: caption(net, it, start + i, !!opts.full), title: titleOf(it), ...(net === "tiktok" && !opts.dry ? { sound: soundOf() } : {}) })),
         min: S.settings.pause_min_s, max: S.settings.pause_max_s
       }
     };

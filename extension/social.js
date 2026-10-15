@@ -89,7 +89,8 @@
   }
   async function fileFor(url) {
     const blob = await fetch(await getImage(url)).then(r => r.blob());
-    return new File([blob], "fa-vision.jpg", { type: blob.type || "image/jpeg" });
+    const type = blob.type || "image/jpeg";
+    return new File([blob], "fa-vision." + (/video/.test(type) ? "mp4" : /png/.test(type) ? "png" : "jpg"), { type });
   }
   async function arrive(url) {
     if (job.navFor === job.i) return true;
@@ -130,7 +131,33 @@
   }
 
   const composeUrl = () => job.kind === "x" ? "https://x.com/compose/post" : "https://www.tiktok.com/tiktokstudio/upload?from=webapp&tab=photo";
-  const record = (it, ok, why) => { job.res.push({ k: it.k, p: it.p || null, ok, why: why || "", t: new Date().toISOString() }); job.i++; return save(); };
+  const record = (it, ok, why) => { job.res.push({ k: it.k, p: it.p || null, ok, why: [why, it.soundNote].filter(Boolean).join(" · "), sound: it.soundUsed || null, t: new Date().toISOString() }); job.i++; return save(); };
+  // Boost (5.4 admin): pick it.sound in TikTok's own sound picker (business accounts only see the
+  // Commercial Music Library there). Search its name, take the first result. Never fails the post:
+  // without a match it posts with no sound and notes why. Selectors NOT checked live.
+  async function addSound(it) {
+    if (!it.sound || !it.sound.name) return;
+    try {
+      box(`adding the sound “${it.sound.name}”…`);
+      const open = findBtn(/^(add sound|sounds?|music|add music)$/i) || document.querySelector("[data-e2e*=sound] [role=button],[data-e2e*=music] button,[class*=sound-entry],[class*=SoundEntry]");
+      if (!open) { it.soundNote = "no sound: TikTok showed no sound button"; return; }
+      open.click(); await sleep(1500);
+      const panel = () => [...document.querySelectorAll("[role=dialog],[class*=sound-panel],[class*=SoundPanel],[class*=music-panel]")].find(visible) || document;
+      const search = await waitFor(() => [...panel().querySelectorAll("input")].find(i => visible(i) && /search/i.test(i.placeholder || i.getAttribute("aria-label") || "")), 8000);
+      if (!search) { it.soundNote = "no sound: no search box in the sound picker"; document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true })); return; }
+      search.focus(); setInput(search, it.sound.name);
+      search.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", code: "Enter", keyCode: 13, bubbles: true }));
+      await sleep(2500);
+      const probe = it.sound.name.toLowerCase().slice(0, 18);
+      const row = await waitFor(() => [...panel().querySelectorAll("[class*=item],[class*=Item],li,[role=listitem],[role=option]")].find(r => visible(r) && (r.innerText || "").toLowerCase().includes(probe)), 10000);
+      if (!row) { it.soundNote = `no sound: “${it.sound.name}” not found in TikTok's library`; const c = findBtn(/^(close|cancel|back)$/i, panel()); if (c) c.click(); else document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true })); return; }
+      row.scrollIntoView({ block: "center" }); row.dispatchEvent(new MouseEvent("mouseover", { bubbles: true })); await sleep(600);
+      const use = findBtn(/^(use|add|use sound|use this sound|\+)$/i, row) || row.querySelector("button");
+      (use || row).click(); await sleep(2000);
+      const c = findBtn(/^(close|done|save|confirm)$/i, panel()); if (c && panel() !== document) { c.click(); await sleep(1000); }
+      it.soundUsed = it.sound.name;
+    } catch (e) { it.soundNote = "no sound: " + String(e.message || e).slice(0, 60); }
+  }
   async function next(ok) {
     if (job.i >= job.q.length) { box("All done. Going back to your admin…"); await sleep(1500); return finish(); }
     if (ok) await countdown(rand(job.min || 90, job.max || 240), `Posted ✓ (${job.res.filter(r => r.ok).length} so far). Next in`);
@@ -218,6 +245,7 @@
   ed.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));   // close the #hashtag suggestions
   await fixFirstLine(ed, it.text);
   if (!ed.innerText.trim()) { await record(it, false, "Couldn't type the description"); return next(false); }
+  await addSound(it);
   w = warning(); if (w) return finish(`TikTok showed "${w}". Nothing more was posted.`);
   const post = await waitFor(() => { const b = [...document.querySelectorAll("button")].find(x => visible(x) && (x.innerText || "").trim() === "Post"); return b && !b.disabled && b.getAttribute("aria-disabled") !== "true" ? b : null; }, 30000);
   if (!post) { await record(it, false, "Post button stayed off"); return next(false); }

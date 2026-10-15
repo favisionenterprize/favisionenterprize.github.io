@@ -39,13 +39,15 @@
   async function save(mutate, message) { S = normalise(await A.saveJson(FILE, s => mutate(normalise(s)), message, EMPTY)); }
   const handles = () => { const e = window.FAV_ENGAGE && window.FAV_ENGAGE.state && window.FAV_ENGAGE.state(); return (e && e.settings && e.settings.handles) || {}; };
 
-  function start(net, mode, then) {
+  // opts (Boost refresh pinned): { pin, unpin } for mode "pinswap"
+  function start(net, mode, then, opts) {
+    opts = opts || {};
     const f = F();
     if (!f || f.needExt()) return;
     if (!f.liveAddon()) { A.toast("Profile check needs the add-on's automatic updates switched on (Today tab, top).", true); if (then && then.length) setTimeout(() => f.runStep(then, true), 1500); return; }
     const st = S.settings;
     f.launch({ fb: "https://www.facebook.com/", ig: "https://www.instagram.com/", x: "https://x.com/", tiktok: "https://www.tiktok.com/" }[net], {
-      kind: "profile", net, mode: mode === "fix" ? "fix" : "check", handle: handles()[net] || "", link: st.links[net] || "", pin: st.pin.text || "",
+      kind: "profile", net, mode: /^(fix|pinswap)$/.test(mode) ? mode : "check", handle: handles()[net] || "", link: st.links[net] || "", pin: opts.pin || st.pin.text || "", unpin: opts.unpin || "",
       then: then && then.length ? then : null
     });
   }
@@ -59,6 +61,7 @@
     const d = today(), net = out.net;
     await save(s => {
       s.status[net] = { d, link: r.link || null, pinned: r.pinned || null, linkOk: !!r.linkOk, pinOk: !!r.pinOk, why: [r.why, out.stopped].filter(Boolean).join(" · ") || "", mode: out.mode };
+      if (out.mode === "pinswap" && r.pinOk && out.pin) s.settings.pin.text = String(out.pin).slice(0, 120);   // the refreshed post is the pinned one now
       s.runs = s.runs.concat([{ d, net, mode: out.mode, linkOk: !!r.linkOk, pinOk: !!r.pinOk, ...(out.stopped ? { stopped: out.stopped } : {}) }]).slice(-100);
       return s;
     }, `Profile check: ${NETS[net]} (${out.mode})`);

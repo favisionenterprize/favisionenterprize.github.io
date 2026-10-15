@@ -114,9 +114,10 @@ const X_PROFILE = page(`<div role="main"><div data-testid="UserUrl"></div><div i
     a.innerHTML = (p.k === pinned ? '<div data-testid="socialContext">Pinned</div>' : "") + '<div data-testid="tweetText"></div><div role="button" data-testid="caret">⋯</div>';
     a.querySelector("[data-testid=tweetText]").textContent = p.t;
     a.querySelector("[data-testid=caret]").onclick = () => {
-      const m = document.createElement("div"); m.setAttribute("role", "menu"); m.innerHTML = '<div role="menuitem">Pin to your profile</div>';
+      const pinned = localStorage.getItem("x-pinned") || "old";
+      const m = document.createElement("div"); m.setAttribute("role", "menu"); m.innerHTML = '<div role="menuitem">' + (p.k === pinned ? "Unpin from profile" : "Pin to your profile") + '</div>';
       m.firstChild.onclick = () => { m.remove(); const d = document.createElement("div"); d.setAttribute("role", "dialog"); d.innerHTML = '<div role="button" data-testid="confirmationSheetConfirm">Pin</div>';
-        d.firstChild.onclick = () => { localStorage.setItem("x-pinned", p.k); d.remove(); }; document.body.appendChild(d); };
+        d.firstChild.onclick = () => { localStorage.setItem("x-pinned", p.k === pinned ? "none" : p.k); d.remove(); }; document.body.appendChild(d); };
       document.body.appendChild(m);
     };
     document.getElementById("tl").appendChild(a);
@@ -146,9 +147,35 @@ const TT_EDIT = id => page(`<main><div class="public-DraftEditor-content" conten
   document.querySelector("#save").onclick = () => { D[${JSON.stringify(id)}] = document.querySelector("[contenteditable]").innerText; localStorage.setItem("tt-desc", JSON.stringify(D)); location.href = "/tiktokstudio/content"; };
   document.querySelectorAll("[role=button]")[1].onclick = () => localStorage.setItem("tt-violation", "repost");`);
 
+const CC = page(`<main><div class="region">Ghana</div><div role="checkbox" aria-checked="false" id="biz">Approved for business use</div><div id="list"></div></main>`, `
+  const render = biz => { document.getElementById("list").innerHTML = (biz ? [["Afro Vibes Commercial", "CML Artist"], ["Highlife Groove", "CML Band"]] : [["Hit Song (not licensed)", "Star"]])
+    .map((x, i) => '<div class="ItemCard_container"><div>' + (i + 1) + '</div><div>' + x[0] + '</div><div>' + x[1] + '</div><div>Details</div></div>').join(""); };
+  render(false);
+  document.getElementById("biz").onclick = e => { e.currentTarget.setAttribute("aria-checked", "true"); render(true); };`);
+const IG_REELS = page(`<main>
+  <a href="/reels/audio/1/">Original audio</a><a href="/reels/audio/2/"><span>Meta Artist · Reel Tune</span><svg aria-label="Trending"></svg></a>
+  <a href="/reels/audio/3/">Other Artist · Second Tune</a><a href="/reels/audio/2/">Meta Artist · Reel Tune</a></main>`);
+const FB_STORY = page(`<div role="main"><div role="button" id="ph">Create a photo story</div><input type="file" accept="image/*" style="display:none"><div id="ed" hidden><div role="button" id="addt">Add text</div><div role="button" id="share">Share to story</div></div></div>`, `
+  document.querySelector("input[type=file]").addEventListener("change", () => { document.getElementById("ed").hidden = false; });
+  document.getElementById("addt").onclick = () => { const t = document.createElement("textarea"); t.id = "txt"; document.getElementById("ed").appendChild(t); };
+  document.getElementById("share").onclick = () => { localStorage.setItem("story", (document.getElementById("txt") || {}).value || ""); location.href = "/"; };`);
+const TT_UPLOAD = page(`<main><div role="tab" aria-selected="true">Photos</div><input type="file" accept="image/jpeg,image/png,image/webp" style="display:none"><div id="form" hidden>
+  <input placeholder="Add a catchy title"><div data-e2e="caption_container"><div class="public-DraftEditor-content" contenteditable="true"></div></div>
+  <button id="snd">Sounds</button><span id="chip"></span><button id="post">Post</button></div></main>`, `
+  document.querySelector("input[type=file]").addEventListener("change", () => { document.getElementById("form").hidden = false; });
+  document.getElementById("snd").onclick = () => { const d = document.createElement("div"); d.setAttribute("role", "dialog");
+    d.innerHTML = '<input placeholder="Search sounds"><div id="res"></div><button>Close</button>';
+    d.querySelector("input").addEventListener("input", e => { d.querySelector("#res").innerHTML = /groove/i.test(e.target.value) ? '<div class="music-item">Highlife Groove · CML Band <button>Use</button></div>' : ""; 
+      const u = d.querySelector(".music-item button"); if (u) u.onclick = () => { document.getElementById("chip").textContent = "Highlife Groove"; d.remove(); }; });
+    d.lastChild.onclick = () => d.remove(); document.body.appendChild(d); };
+  document.getElementById("post").onclick = () => { localStorage.setItem("tt-post", JSON.stringify({ sound: document.getElementById("chip").textContent, text: document.querySelector("[contenteditable]").innerText })); history.pushState(null, "", "/tiktokstudio/content"); document.body.insertAdjacentHTML("beforeend", "<p>Manage your posts</p>"); };`);
+
 function serve(url) {
   const u = new URL(url);
   if (u.hostname === "favisionenterprize.github.io") return page("<p>admin</p>");
+  if (u.hostname === "ads.tiktok.com") return CC;
+  if (u.hostname === "www.instagram.com") return IG_REELS;
+  if (u.hostname === "www.tiktok.com" && u.pathname.startsWith("/tiktokstudio/upload")) return TT_UPLOAD;
   if (u.hostname === "www.tiktok.com") { const e = u.pathname.match(/\/tiktokstudio\/content\/(\d+)\/edit/); return e ? TT_EDIT(e[1]) : TT_CONTENT; }
   if (u.hostname === "x.com") return u.pathname.startsWith("/settings/profile") ? X_EDIT : X_PROFILE;
   const p = u.pathname;
@@ -157,6 +184,7 @@ function serve(url) {
   if (p.startsWith("/marketplace/inbox")) return INBOX;
   const t = p.match(/^\/messages\/t\/(\d+)/); if (t) return THREAD(t[1]);
   if (p.startsWith("/FaVisionEnterprise")) return FB_PAGE;
+  if (p.startsWith("/stories/create")) return FB_STORY;
   return page("<div role=main>facebook home</div>");
 }
 
@@ -173,8 +201,8 @@ async function run(browser, job, startUrl, setup) {
     if (msg.type === "image") { images.push(msg.url); return /missing/.test(msg.url) ? { error: "HTTP 404" } : { dataUrl: JPG }; }
     return {};
   });
-  await ctx.route(/^https:\/\/(www\.facebook\.com|x\.com|www\.tiktok\.com|favisionenterprize\.github\.io)\//, r => r.fulfill({ status: 200, contentType: "text/html; charset=utf-8", body: serve(r.request().url()) }));
-  const scripts = { fb: ["autopilot.js", "engage.js", "marketplace.js", "profile.js"], x: ["engage.js", "profile.js", "social.js"], tt: ["engage.js", "profile.js", "social.js", "ttcaptions.js"] };
+  await ctx.route(/^https:\/\/(www\.facebook\.com|x\.com|www\.tiktok\.com|ads\.tiktok\.com|www\.instagram\.com|favisionenterprize\.github\.io)\//, r => r.fulfill({ status: 200, contentType: "text/html; charset=utf-8", body: serve(r.request().url()) }));
+  const scripts = { fb: ["autopilot.js", "engage.js", "marketplace.js", "profile.js", "boost.js"], cc: ["boost.js"], ig: ["instagram.js", "engage.js", "profile.js", "boost.js"], x: ["engage.js", "profile.js", "social.js"], tt: ["engage.js", "profile.js", "social.js", "ttcaptions.js"] };
   const wrap = (host, files) => `if (location.hostname === ${JSON.stringify(host)} && !/^\\/(setup|state)$/.test(location.pathname)) {
     window.chrome = window.chrome || {}; chrome.runtime = { lastError: null, sendMessage: (m, cb) => { window.__bg(m).then(r => cb && cb(r)); } };
     document.addEventListener("DOMContentLoaded", () => setTimeout(() => { ${files.map(f => `try { ${code(f)} } catch (e) { console.error(e); }`).join("\n")} }, 0));
@@ -182,6 +210,8 @@ async function run(browser, job, startUrl, setup) {
   await ctx.addInitScript(wrap("www.facebook.com", scripts.fb));
   await ctx.addInitScript(wrap("x.com", scripts.x));
   await ctx.addInitScript(wrap("www.tiktok.com", scripts.tt));
+  await ctx.addInitScript(wrap("ads.tiktok.com", scripts.cc));
+  await ctx.addInitScript(wrap("www.instagram.com", scripts.ig));
   const pg = await ctx.newPage();
   const errors = [];
   pg.on("pageerror", e => errors.push(e.message));
@@ -273,6 +303,26 @@ async function run(browser, job, startUrl, setup) {
   want(/homework fights/.test(D["7400000000000000002"]) && /Luxury/.test(D["7400000000000000001"]), "TikTok mock shows the new caption saved, the old one untouched");
   want(!r.state["tt-violation"], "never clicks Delete or Post: " + r.state["tt-violation"]);
   want(!r.errors.length, "no page errors: " + r.errors.join("; "));
+
+  console.log("sounds (Creative Center business songs + Instagram Reels audio)");
+  r = await run(browser, { kind: "sounds", stage: "cc", cc: true }, "https://ads.tiktok.com/business/creativecenter/inspiration/popular/music/pc/en?countryCode=GH&period=7");
+  const tt = r.out.res.filter(x => x.platform === "tiktok"), ig = r.out.res.filter(x => x.platform === "ig");
+  want(tt.length === 2 && tt[0].name === "Afro Vibes Commercial" && tt[0].artist === "CML Artist" && tt.every(x => x.commercial) && !r.out.res.some(x => /not licensed/.test(x.name)), "TikTok: switches on 'Approved for business use' and reads the list: " + JSON.stringify(tt));
+  want(ig.length === 2 && ig[0].name === "Reel Tune" && ig[0].trending && !ig.some(x => /original audio/i.test(x.name)), "Instagram: trending audio first, no 'Original audio': " + JSON.stringify(ig));
+  want(!r.errors.length, "no page errors: " + r.errors.join("; "));
+
+  console.log("story (Facebook photo story with the product link)");
+  r = await run(browser, { kind: "story", img: S + "a.jpg", text: "Student Desk · GH₵650\nfavisionenterprize.github.io/p/FAV-014.html" }, "https://www.facebook.com/stories/create");
+  want(r.out.res[0] && r.out.res[0].ok && /FAV-014\.html/.test(r.state.story || ""), "shares the story with the link text: " + JSON.stringify(r.out));
+
+  console.log("tiktok post with a trending sound (social.js)");
+  r = await run(browser, { kind: "tiktok", q: [{ k: "card:FAV-014", p: "FAV-014", img: S + "a.jpg", text: "The desk that ends homework fights.\nGH₵650", title: "Student desk", sound: { name: "Highlife Groove", artist: "CML Band" } }, { k: "card:FAV-016", p: "FAV-016", img: S + "b.jpg", text: "Quiet luxury.\nGH₵8,500", title: "Sofa", sound: { name: "Unknown Tune" } }], min: 1, max: 2 }, "https://www.tiktok.com/tiktokstudio/upload?from=webapp&tab=photo");
+  want(r.out.res.length === 2 && r.out.res[0].ok && r.out.res[0].sound === "Highlife Groove" && r.out.res[1].ok && !r.out.res[1].sound && /no sound/.test(r.out.res[1].why), "picks the sound in TikTok's picker; posts without one when it isn't found: " + JSON.stringify(r.out.res));
+  want(!r.errors.length, "no page errors: " + r.errors.join("; "));
+
+  console.log("pinswap (X: pin the new post, unpin the old one)");
+  r = await run(browser, { kind: "profile", net: "x", mode: "pinswap", handle: "FaVisionEnt", pin: "Fresh stock, just arrived! Student desk chair sets", unpin: "Old promo from last year" }, "https://x.com/");
+  want(r.out.res[0].pinOk && r.state["x-pinned"] === "desk", "new post pinned (old one not deleted): " + JSON.stringify(r.out.res[0]) + " " + r.state["x-pinned"]);
 
   await browser.close();
   console.log(problems.length ? `\n${problems.length} problem(s):\n  ✗ ` + problems.join("\n  ✗ ") : "\nAll add-on mock checks passed.");

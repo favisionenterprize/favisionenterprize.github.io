@@ -134,7 +134,7 @@
     const it = job.q[job.i];
     const n = `Post ${job.i + 1} of ${job.q.length}`;
     if (!(await arrive("https://www.instagram.com/", "post" + job.i))) return;
-    const record = (ok, why) => { job.res.push({ k: it.k, p: it.p || null, ok, why: why || "", t: new Date().toISOString() }); job.i++; return save(); };
+    const record = (ok, why) => { job.res.push({ k: it.k, p: it.p || null, ok, why: [why, it.soundNote].filter(Boolean).join(" · "), sound: it.soundUsed || null, t: new Date().toISOString() }); job.i++; return save(); };
     const fail = async why => { await record(false, why); box(`${n}: ${why}. Moving on…`, true); await sleep(4000); };
 
     box(`${n}: opening Create…`);
@@ -160,12 +160,15 @@
     try {
       const blob = await fetch(await getImage(it.img)).then(r => r.blob());
       const ft = new DataTransfer();
-      ft.items.add(new File([blob], "fa-vision.jpg", { type: blob.type || "image/jpeg" }));
+      const type = blob.type || "image/jpeg";
+      ft.items.add(new File([blob], "fa-vision." + (/video/.test(type) ? "mp4" : "jpg"), { type }));
       input.files = ft.files;
       input.dispatchEvent(new Event("change", { bubbles: true }));
     } catch (e) { await fail("Couldn't load the photo"); continue; }
     const next1 = await waitFor(() => { const d = document.querySelector("[role=dialog]"); return d && findBtn(/^next$/i, d); }, 20000);
     if (!next1) { await fail("Instagram didn't take the photo"); continue; }
+    // Videos: "Video posts are now shared as reels" notice
+    const okReel = findBtn(/^ok$/i, document.querySelector("[role=dialog]") || undefined); if (it.video && okReel) { okReel.click(); await sleep(800); }
 
     // Crop: keep the full 4:5 photo (Instagram crops to a square by default)
     const crop = findIcon(/select crop/i);
@@ -180,6 +183,25 @@
     const next2 = await waitFor(() => { const d = document.querySelector("[role=dialog]"); return d && findBtn(/^next$/i, d); }, 10000);   // filters step
     if (next2) { next2.click(); await sleep(1500); }
 
+    // Boost: trending audio from Instagram's own (licensed) library, when the web editor offers it.
+    // Best effort, NOT checked live: Instagram's web editor often has no audio picker; then the Reel keeps
+    // its own sound (our Afrobeats beat) and the note says so.
+    if (it.sound && it.sound.name) {
+      try {
+        const d0 = document.querySelector("[role=dialog]") || document;
+        const audio = findBtn(/^(add audio|audio|music|add music)$/i, d0) || findIcon(/audio|music/i, d0);
+        if (!audio) it.soundNote = "no sound: Instagram's web editor has no audio picker (kept the video's own sound)";
+        else {
+          audio.click(); await sleep(1500);
+          const q = await waitFor(() => [...document.querySelectorAll("[role=dialog] input")].find(i => visible(i) && /search/i.test(i.placeholder || i.getAttribute("aria-label") || "")), 6000);
+          if (q) { q.focus(); document.execCommand("insertText", false, it.sound.name); await sleep(2500); }
+          const probe = it.sound.name.toLowerCase().slice(0, 18);
+          const row = q && await waitFor(() => [...document.querySelectorAll("[role=dialog] [role=button],[role=dialog] [role=listitem],[role=dialog] li")].find(r => visible(r) && (r.innerText || "").toLowerCase().includes(probe)), 8000);
+          if (row) { row.click(); await sleep(1500); const dn = findBtn(/^(done|add|use)$/i); if (dn) { dn.click(); await sleep(1000); } it.soundUsed = it.sound.name; }
+          else { it.soundNote = `no sound: “${it.sound.name}” not found`; const back = findIcon(/^back$/i) || findBtn(/^cancel$/i); if (back) { back.click(); await sleep(800); } }
+        }
+      } catch (e) { it.soundNote = "no sound"; }
+    }
     // Caption
     box(`${n}: typing the caption…`);
     const editor = await waitFor(() => [...document.querySelectorAll('[role=dialog] [contenteditable=true]')].find(visible), 12000);
@@ -213,7 +235,7 @@
     await sleep(rand(900, 1800));
     share.click();
     box(`${n}: sharing…`);
-    const done = await waitFor(() => /your (post|reel) has been shared|post shared/i.test((document.querySelector("[role=dialog]") || {}).innerText || "") || warning(), 90000);
+    const done = await waitFor(() => /your (post|reel) has been shared|(post|reel) shared/i.test((document.querySelector("[role=dialog]") || {}).innerText || "") || warning(), it.video ? 240000 : 90000);
     w = warning(); if (w) { await record(false, w); return finish(`Instagram showed "${w}". Nothing more was posted.`); }
     if (!done) { await fail("Instagram didn't confirm the post"); continue; }
     await record(true, "");

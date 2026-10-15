@@ -727,3 +727,6 @@ input.now-num { width: 4.5em !important; display: inline-block; padding: 2px 6px
 .ttc-head select { max-width: 100%; font-size: 13px; padding: 4px 6px; }
 .ttc-head .down { color: var(--err); }
 .ttc-post textarea { display: block; width: 100%; box-sizing: border-box; margin-top: 8px; font: 14px/1.4 inherit; padding: 8px; border: 1px solid var(--line); border-radius: 8px; }
+/* Boost tab (admin/boost.js) */
+.boost-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 8px; }
+#boost-manual textarea { width: 100%; box-sizing: border-box; font: 13px/1.4 ui-monospace, monospace; padding: 8px; border: 1px solid var(--line); border-radius: 8px; }

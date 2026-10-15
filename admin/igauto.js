@@ -107,7 +107,8 @@
     for (const x of S.posts) if (x.ok && (!last[x.k] || x.t > last[x.k])) last[x.k] = x.t;
     const usedProducts = new Set(okToday.map(x => x.p).filter(Boolean));
     // random order each day among photos not posted in the last week; recent ones wait at the back
-    const sorted = ORDER(items, i => i.k, i => last[i.k]);
+    let sorted = ORDER(items, i => i.k, i => last[i.k]);
+    if (window.FAV_BOOST) sorted = window.FAV_BOOST.prefer(sorted, i => i.p && i.p.id, i => last[i.k]);   // Boost: products of the top posts first
     const queue = [];
     // Weekly spotlight: the headline promo goes first on the spotlight day
     const isSpot = new Date().getDay() === Number(S.settings.spotlight_day);
@@ -135,7 +136,8 @@
   // ------------------------------------------------------------------ captions (3 variants, rotated)
   function caption(it, v) {
     const B = A.business();
-    if (window.FAV_CAPTIONS) return window.FAV_CAPTIONS.write(it.studio ? null : it.p, { net: "ig", ad: it.ad, studio: !!it.studio, subject: it.subject, tags: it.studio ? S.settings.audiences.home : S.settings.audiences[audienceOf(it.p)] });
+    const classy = window.FAV_BOOST && window.FAV_BOOST.hooks() && it.p && !it.studio && !it.seasonal;   // Boost: comment-inviting classy captions
+    if (window.FAV_CAPTIONS) return window.FAV_CAPTIONS.write(it.studio ? null : it.p, { net: "ig", ad: it.ad, studio: !!it.studio, subject: it.subject, ...(classy ? { style: "classy" } : {}), tags: it.studio ? S.settings.audiences.home : S.settings.audiences[audienceOf(it.p)] });
     const brand = "#FAVisionEnterprise #AccraFurniture #FurnitureGhana";
     if (it.studio) {
       return `See your room before you buy it ✨\n\nDesign your room free with F.A Vision AI Studio: pick sofas, dining sets, wardrobes and wallpaper, and see them in your space. You only pay for the pieces you order.\n\n🔗 favisionenterprize.github.io/studio (link in bio)\n📲 WhatsApp ${C.localPhone(B.whatsapp)}\n📍 Odorkor, Accra\n\n${S.settings.audiences.home} ${brand}`;

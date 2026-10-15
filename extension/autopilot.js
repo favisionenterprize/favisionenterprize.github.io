@@ -41,7 +41,7 @@
     else job = stored;
   } catch (e) { job = null; }
   if (!job || !job.kind) return;                       // not an autopilot tab: do nothing
-  if (job.kind === "engage" || job.kind === "ig" || job.kind === "x" || job.kind === "tiktok" || job.kind === "youtube" || job.kind === "profile" || /^mk/.test(job.kind)) return;   // handled by engage.js, marketplace.js, profile.js / other scripts
+  if (!/^(post|renew|import|declines|grow)$/.test(job.kind)) return;   // other jobs belong to engage.js, marketplace.js, profile.js, boost.js and the other scripts
   if (m) history.replaceState(history.state, "", location.pathname + location.search);
   job.i = job.i || 0;
   job.res = job.res || [];
@@ -189,8 +189,9 @@
     try {
       box(`${n}: adding the photo…`);
       const blob = await fetch(await getImage(it.img)).then(r => r.blob());
-      const file = new File([blob], "fa-vision.jpg", { type: blob.type || "image/jpeg" });
-      const hasPhoto = () => [...dialog.querySelectorAll("img")].some(i => /^blob:|scontent|fbcdn/.test(i.src) && i.naturalWidth > 60);
+      const type = blob.type || "image/jpeg";
+      const file = new File([blob], "fa-vision." + (/video/.test(type) ? "mp4" : "jpg"), { type });   // Boost: Page Reels/videos too
+      const hasPhoto = () => [...dialog.querySelectorAll("img")].some(i => /^blob:|scontent|fbcdn/.test(i.src) && i.naturalWidth > 60) || [...dialog.querySelectorAll("video")].some(v => /^blob:/.test(v.src || "") || v.querySelector("source"));
       const ft = new DataTransfer(); ft.items.add(file);
       editor.dispatchEvent(new ClipboardEvent("paste", { clipboardData: ft, bubbles: true, cancelable: true }));
       if (!(await waitFor(hasPhoto, 6000))) {

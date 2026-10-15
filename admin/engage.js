@@ -66,7 +66,9 @@
 
   // ------------------------------------------------------------------ run (one network after the other)
   const RUN_KEY = "fa-engage-run";
-  function start(net, then) {
+  // opts (Boost first-hour replies): { mode: "reply", limit: 3 } = reply mode on the newest posts only
+  function start(net, then, opts) {
+    opts = opts || {};
     const fb = F();
     if (!fb || fb.needExt()) return;
     if (!fb.liveAddon()) return A.toast("Engagement needs the add-on's automatic updates switched on (Today tab, top).", true);
@@ -74,9 +76,9 @@
     try { run = JSON.parse(localStorage.getItem(RUN_KEY) || "{}"); } catch (e) { run = {}; }
     const st = S.settings;
     fb.launch({ fb: "https://www.facebook.com/", ig: "https://www.instagram.com/", x: "https://x.com/", tiktok: "https://www.tiktok.com/" }[net], {
-      kind: "engage", net, mode: run.mode || (run.statsOnly ? "stats" : "comment"), handle: st.handles[net] || "",
+      kind: "engage", net, mode: opts.mode || run.mode || (run.statsOnly ? "stats" : "comment"), handle: st.handles[net] || "",
       text: run.statsOnly ? "" : (run.text || commentText()), statsOnly: !!run.statsOnly, reply_text: run.reply_text || replyTemplate(),
-      limit: st.limit, max_comments: st.max_comments, min: st.min, max: st.max, max_replies: st.max_replies, max_invites: st.max_invites,
+      limit: opts.limit || st.limit, max_comments: st.max_comments, min: st.min, max: st.max, max_replies: st.max_replies, max_invites: st.max_invites,
       likers_text: likersTemplate(st), likers_per_comment: st.likers_per_comment, max_likers: st.max_likers,
       kw_on: !!st.kw_on, kw_words: String(st.kw_words || "").split(",").map(w => w.trim()).filter(Boolean).slice(0, 30), kw_text: st.kw_text,
       skip: Object.keys(S.liked || {}).filter(k => k.startsWith(net + ":")).map(k => k.slice(net.length + 1)),

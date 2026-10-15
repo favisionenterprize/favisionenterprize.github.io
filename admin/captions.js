@@ -248,7 +248,9 @@
     if (p.id === "FAV-014") price += pick([" a set (GH₵640 each from 50)", " per set"]);
     const where = s ? `Sold by ${s.name}. Delivery available.` : "Delivered across Accra, Tema & Kasoa.";
     const ctaLine = cols.length > 1 ? pick(CLASSY_CTA) : pick(CLASSY_CTA.filter(c => !/colour/.test(c)));
-    const linkLine = pick(["🔗 favisionenterprize.github.io/tiktok/", "Shop: favisionenterprize.github.io/tiktok/", "More at favisionenterprize.github.io/tiktok/"]);
+    const linkLine = net === "ig" ? pick(["🔗 Link in bio", "Tap the link in our bio 🔗", "Shop via the link in our bio"])
+      : net === "tiktok" ? pick(["🔗 favisionenterprize.github.io/tiktok/", "Shop: favisionenterprize.github.io/tiktok/", "More at favisionenterprize.github.io/tiktok/"])
+      : `👉 ${site()}p/${p.id}.html`;
     const pricePart = pick([`${price}. ${where}`, `${price} · ${where}`]);
     let main = [hook, detail, pricePart, ctaLine, linkLine].filter(Boolean).join("\n");
     if (main.length > 300 && detail) main = [hook, pricePart, ctaLine, linkLine].join("\n");

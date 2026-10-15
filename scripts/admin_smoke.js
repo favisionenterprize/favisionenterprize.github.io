@@ -17,7 +17,7 @@ try { ({ chromium } = require("playwright")); } catch (e) {
   }
 }
 const ROOT = path.resolve(__dirname, "..") + "/";
-const SCRIPTS = ["admin/captions.js", "admin/igauto.js", "admin/ttshop.js", "admin/socauto.js", "admin/vidauto.js", "admin/engage.js", "admin/mkauto.js", "admin/profiles.js", "admin/ttcaptions.js", "admin/fbauto.js"];
+const SCRIPTS = ["admin/captions.js", "admin/igauto.js", "admin/ttshop.js", "admin/socauto.js", "admin/vidauto.js", "admin/engage.js", "admin/mkauto.js", "admin/profiles.js", "admin/ttcaptions.js", "admin/boost.js", "admin/fbauto.js"];
 const MIN_TEXT = 150; // a tab with less text than this counts as blank
 
 const files = {};
@@ -189,6 +189,13 @@ async function marketplace(browser) {
   await page.evaluate(({ files, ESC, scan }) => {
     window.__files = files; window.__toasts = []; window.__commits = []; window.__jobs = [];
     window.__files["data/marketplace-scan.json"] = { settings: {}, scan, listed: [], runs: [], skip: [] };
+    const d0 = new Date().toLocaleDateString("en-CA");
+    window.__files["data/sounds.json"] = { d: "2026-01-01", sounds: [
+      { name: "Afro Vibes Commercial", artist: "CML", platform: "tiktok", rank: 1 }, { name: "Highlife Groove", artist: "CML", platform: "tiktok", rank: 2 },
+      { name: "<img src=x onerror=window.__xss=4>Evil", artist: "x", platform: "tiktok", rank: 3 }, { name: "Reel Tune", artist: "Meta", platform: "ig", rank: 1 } ],
+      manual: [], used: [{ name: "Afro Vibes Commercial", platform: "tiktok", d: d0 }], notes: [] };
+    window.__files["data/boost.json"] = { settings: { best_time: false }, pinned: [], stories: [], reels: [], runs: [] };
+    window.__files["data/engagement.json"] = Object.assign({}, files["data/engagement.json"], { posts: { "https://www.tiktok.com/@fav/video/1": { net: "tiktok", url: "https://www.tiktok.com/@fav/video/1", title: "Luxury Leather Sofa Set in Accra", likes: 900, comments: 80, shares: 40, views: 30000 } } });
     window.__files["data/tiktok-captions.json"] = { scan: { d: "2026-10-15", n: 3, posts: [
       { id: "7400000000000000001", url: "https://www.tiktok.com/@favision/video/7400000000000000001", desc: "Luxury leather sofa set now in stock at our Odorkor showroom", thumb: "", alt: "" },
       { id: "7400000000000000002", url: "https://www.tiktok.com/@favision/photo/7400000000000000002", desc: "", thumb: "https://p16.tiktokcdn.com/x.jpg", alt: "<img src=x onerror=window.__xss=3>student desk chair in a classroom" },
@@ -254,6 +261,29 @@ async function marketplace(browser) {
     const soc = window.FAV_SOCAUTO.job("tiktok", { products: ["FAV-014"], limit: 1 });
     out.socText = soc && soc.job.q[0] && soc.job.q[0].text;
     window.FAV_FBAUTO._test.setTab("market"); await wait(100);
+    // Boost tab
+    const BS = window.FAV_BOOST;
+    window.FAV_FBAUTO._test.setTab("boost"); await wait(200);
+    out.boost = { text: document.querySelector("#fa-body").innerText.length, xss: window.__xss || 0, imgs: document.querySelectorAll("#fa-body .fa-card img").length };
+    out.sound1 = BS.soundFor("tiktok"); out.sound2 = BS.soundFor("tiktok", [out.sound1 && out.sound1.name]);
+    const tj = window.FAV_SOCAUTO.job("tiktok", { products: ["FAV-014", "FAV-016"], limit: 2 });
+    out.ttSounds = tj ? tj.job.q.map(x => x.sound && x.sound.name) : [];
+    out.favour = BS.favour();
+    out.inSlot = BS.inSlot();
+    BS.state().settings.best_time = true;
+    out.defer = BS.deferSteps(["renew", "post", "ig", "tiktok", "mkscan"]);
+    out.queue = JSON.parse(localStorage.getItem("fa-boost-queue") || "null");
+    BS.state().settings.best_time = false; localStorage.removeItem("fa-boost-queue");
+    window.__jobs = [];
+    document.querySelector("[data-boost-refresh=tiktok]").click(); await wait(200);
+    out.refreshTT = window.__jobs[0] && window.__jobs[0].job;
+    window.__jobs = [];
+    document.querySelector("[data-boost-refresh=ig]").click(); await wait(200);
+    out.refreshIG = window.__jobs[0] && window.__jobs[0].job;
+    out.pinStore = JSON.parse(localStorage.getItem("fa-boost-pin") || "null");
+    await BS.afterRun({ kind: "tiktok", id: "zz", res: [{ ok: true, sound: "Highlife Groove", k: "x" }] });
+    out.timers = (JSON.parse(localStorage.getItem("fa-boost-timers") || "[]")).length;
+    out.used = window.__files["data/sounds.json"].used.map(u => u.name);
     // Today tab shows the Marketplace step and the run plan includes the scan only (listing defaults off)
     out.steps = window.FAV_FBAUTO._test.stepsToday();
     out.toasts = window.__toasts;
@@ -282,6 +312,16 @@ async function marketplace(browser) {
   want(!r.xss2 && (tt.imgs || []).every(u => /^https:/.test(u)) && (tt.links || []).every(h => /^https:\/\/www\.tiktok\.com\//.test(h)), "TikTok card escapes text and only shows https thumbnails/links: " + JSON.stringify([tt.imgs, tt.links]));
   want(r.ttJob && r.ttJob.kind === "ttfix" && r.ttJob.q.length === 1 && r.ttJob.q[0].id === "7400000000000000002" && r.ttJob.q[0].text === tt.text, "Fix this one sends the edited caption: " + JSON.stringify(r.ttJob).slice(0, 300));
   want(/favisionenterprize\.github\.io\/tiktok\//.test(r.socText || "") && /Comment/i.test(r.socText || ""), "new TikTok autopilot posts use the classy caption by default: " + r.socText);
+  const b = r.boost || {};
+  want(b.text > 500 && !b.xss && !b.imgs, "Boost tab draws and escapes sound names: " + JSON.stringify(b));
+  want(r.sound1 && r.sound1.name === "Highlife Groove" && r.sound2 && r.sound2.name !== "Highlife Groove" && r.sound2.name !== "Afro Vibes Commercial", "sound rotation skips sounds used in the last 3 days: " + JSON.stringify([r.sound1, r.sound2]));
+  want(r.ttSounds.length === 2 && r.ttSounds[0] && r.ttSounds[0] !== r.ttSounds[1], "each TikTok post gets a different trending sound: " + JSON.stringify(r.ttSounds));
+  want(r.favour.includes("FAV-016"), "What's working picks the top post's product (FAV-016): " + JSON.stringify(r.favour));
+  want(r.inSlot ? r.defer.length === 5 : (r.defer.join() === "renew,mkscan" && r.queue && r.queue.steps.join() === "post,ig,tiktok"), "best-time posting holds the posting steps until the next slot: " + JSON.stringify([r.inSlot, r.defer, r.queue]));
+  want(r.refreshTT && r.refreshTT.kind === "tiktok" && r.refreshTT.q.length === 1 && r.refreshTT.q[0].p === "FAV-014" && r.refreshTT.q[0].sound && (r.refreshTT.then || [])[0] === "pinswap:tiktok", "Refresh pinned on TikTok posts FAV-014 with a sound, then pins: " + JSON.stringify(r.refreshTT).slice(0, 300));
+  want(r.refreshIG && r.refreshIG.q[0].video && /\.mp4$/.test(r.refreshIG.q[0].img) && (r.refreshIG.then || [])[0] === "pinswap:ig", "Refresh pinned on Instagram posts our Short as a Reel: " + JSON.stringify(r.refreshIG && r.refreshIG.q[0]).slice(0, 300));
+  want(r.pinStore && r.pinStore.tiktok && r.pinStore.tiktok.pin && /Fresh stock/.test(r.pinStore.tiktok.unpin), "new post to pin and old one to unpin are remembered: " + JSON.stringify(r.pinStore));
+  want(r.timers === 3 && r.used.includes("Highlife Groove"), "after a TikTok post: 3 first-hour reply checks and the sound noted: " + JSON.stringify([r.timers, r.used]));
   want(!r.steps.includes("mklist"), "listing must be off in the daily run by default: " + r.steps.join());
   (r.toasts || []).filter(t => t.startsWith("✗")).forEach(t => problems.push("error toast: " + t));
   await page.close();
@@ -308,7 +348,7 @@ async function marketplace(browser) {
   else console.log(`✓ TikTok shop card: reorder, hide, add and save work (${t.n} products saved)`);
   const m = await marketplace(browser);
   if (m.problems.length) { failed++; console.log("✗ Marketplace tab / profile card"); m.problems.forEach(p => console.log("    " + p)); }
-  else console.log(`✓ Marketplace tab: matching, duplicates, escaping, price commit and add-on jobs work (${m.n} products not listed in the mock scan); profile card launches its check; TikTok captions card lists empty posts, writes classy captions and launches the fix`);
+  else console.log(`✓ Marketplace tab: matching, duplicates, escaping, price commit and add-on jobs work (${m.n} products not listed in the mock scan); profile card launches its check; TikTok captions card lists empty posts, writes classy captions and launches the fix; Boost: sounds rotate, best-time queue, refresh pinned, first-hour timers, What's working`);
   await browser.close();
   console.log(failed ? `\n${failed} check(s) FAILED` : "\nAll admin checks passed.");
   process.exit(failed ? 1 : 0);

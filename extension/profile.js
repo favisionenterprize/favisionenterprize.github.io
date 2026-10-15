@@ -2,6 +2,8 @@
 // x.com and tiktok.com, but only in a tab the FA Vision admin opened with a "profile" job (kept per
 // tab by background.js). One network per job:
 //   mode "check" – open the profile, read the website/link shown and which post is pinned;
+//   mode "pinswap" – pin the post containing job.pin, then unpin the one containing job.unpin (Boost →
+//                  "Refresh pinned"); nothing is ever deleted;
 //   mode "fix"   – set ONLY the link field to job.link (the bio text is kept) and pin the post whose
 //                  text contains job.pin (found by its first line), then read the profile again.
 // Returns { net, link, pinned, linkOk, pinOk, why } to the admin (admin/profiles.js).
@@ -33,6 +35,7 @@
   job.notes = job.notes || [];
   job.hops = job.hops || 0;
   const save = () => bg({ type: "saveJob", job });
+  const norm = t => String(t || "").replace(/\s+/g, " ").trim().toLowerCase();
 
   let stopAsked = false;
   function box(msg, bad) {
@@ -56,10 +59,10 @@
     const r = job.read || {};
     const want = String(job.link || "").replace(/^https?:\/\//, "").replace(/\/$/, "").toLowerCase();
     const has = String(r.link || "").replace(/^https?:\/\//, "").replace(/\/$/, "").toLowerCase();
-    const pinProbe = String(job.pin || "").toLowerCase().slice(0, 30);
+    const pinProbe = norm(job.pin).slice(0, 30);
     const out = {
-      kind: "profile", net: NET, mode: job.mode, id: job.id, then: job.then || null, stopped: stopped || null,
-      res: [{ link: r.link || null, pinned: r.pinned || null, linkOk: !!want && has === want, pinOk: !!pinProbe && String(r.pinned || "").toLowerCase().includes(pinProbe), why: job.notes.join(" · ") }]
+      kind: "profile", net: NET, mode: job.mode, id: job.id, pin: job.pin || null, then: job.then || null, stopped: stopped || null,
+      res: [{ link: r.link || null, pinned: r.pinned || null, linkOk: !!want && has === want, pinOk: !!pinProbe && norm(r.pinned).includes(pinProbe), why: job.notes.join(" · ") }]
     };
     await bg({ type: "clearJob" });
     location.href = job.back + "#favauto-done=" + encodeURIComponent(JSON.stringify(out));
@@ -85,8 +88,7 @@
       if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") { Object.getOwnPropertyDescriptor(proto, "value").set.call(el, value); el.dispatchEvent(new Event("input", { bubbles: true })); el.dispatchEvent(new Event("change", { bubbles: true })); }
     }
   }
-  const pinProbe = String(job.pin || "").split("\n")[0].trim().slice(0, 30).toLowerCase();
-  const hasPin = el => !!pinProbe && (el.innerText || "").toLowerCase().includes(pinProbe);
+  const pinProbe = norm(job.pin).slice(0, 30);
   const looksLikeLink = s => /^(https?:\/\/)?[\w-]+(\.[\w-]+)+(\/\S*)?$/i.test(String(s || "").trim());
 
   const handle = String(job.handle || "").replace(/^@/, "");
@@ -100,7 +102,7 @@
   // ------------------------------------------------------------- reading the profile
   function readProfile() {
     const r = { link: null, pinned: null };
-    const first = el => (el && (el.innerText || "").split("\n").map(x => x.trim()).filter(x => x && !/^pinned( post| tweet)?$/i.test(x)).find(x => x.length > 6) || "").slice(0, 120) || null;
+    const first = el => (el && (el.innerText || "").split("\n").map(x => x.trim()).filter(x => x && !/^(pinned( post| tweet)?|featured)$/i.test(x)).join(" ").replace(/\s+/g, " ").slice(0, 200)) || null;
     if (NET === "fb") {
       const intro = [...document.querySelectorAll("a[href]")].filter(a => visible(a) && looksLikeLink(a.innerText) && !/facebook\.com|fb\.me|instagram\.com\/?$/i.test(a.innerText));
       r.link = intro.length ? intro[0].innerText.trim() : null;
@@ -177,42 +179,61 @@
     return "not supported";
   }
 
-  // ------------------------------------------------------------- pinning the chosen post
-  async function pinPost() {
-    if (!pinProbe) return "no post text to look for";
-    // scroll the profile until a post with the text shows
-    let post = null;
-    const posts = () => NET === "x" ? [...document.querySelectorAll("article[data-testid=tweet]")] : [...document.querySelectorAll("[role=article]")].filter(a => !a.closest("[role=article] [role=article]"));
-    for (let i = 0; i < 25 && !post && !stopAsked; i++) {
-      post = posts().find(a => visible(a) && hasPin(a));
-      if (!post) { window.scrollBy(0, Math.round(innerHeight * 1.5)); await sleep(1800); }
-    }
-    if (!post) return `couldn't find a post with “${job.pin}” on the profile`;
-    post.scrollIntoView({ block: "center" }); await sleep(900);
-    if (NET === "x") {
-      const caret = post.querySelector("[data-testid=caret]");
-      if (!caret) return "no ••• menu on the post";
-      caret.click(); await sleep(1000);
-      const item = await waitFor(() => [...document.querySelectorAll("[role=menuitem]")].find(m => visible(m) && /pin to your profile/i.test(m.innerText || "")), 5000);
-      if (!item) { document.body.click(); return /unpin/i.test(document.body.innerText) ? "" : "no “Pin to your profile” in the menu"; }
-      item.click(); await sleep(1000);
-      const ok = await waitFor(() => document.querySelector("[data-testid=confirmationSheetConfirm]"), 5000);
+  // ------------------------------------------------------------- pinning / unpinning a post found by its text
+  // act: "pin" or "unpin". Opens the post's own ••• menu and picks Pin / Unpin. Never deletes anything.
+  async function menuOn(text, act) {
+    const probe = norm(text).slice(0, 60);
+    if (!probe) return "no post text to look for";
+    const has = el => norm(el.innerText).includes(probe);
+    const PIN = act === "pin" ? /^(pin post|pin to top of page|feature|pin to your profile|pin to profile|pin)$/i : /^(unpin post|unpin from top of page|unfeature|remove from featured|unpin from profile|unpin)$/i;
+    const pick = async () => {
+      const item = await waitFor(() => [...document.querySelectorAll("[role=menuitem],[role=dialog] button,[role=dialog] [role=button],[role=menu] li,[role=menu] [role=button]")].find(m => visible(m) && PIN.test((m.innerText || "").trim().split("\n")[0])), 5000);
+      if (!item) { document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true })); return `no “${act === "pin" ? "Pin" : "Unpin"}” in the post's menu`; }
+      item.click(); await sleep(1500);
+      const ok = document.querySelector("[data-testid=confirmationSheetConfirm]") || findBtn(/^(pin|unpin|save|confirm|feature)$/i, [...document.querySelectorAll("[role=dialog]")].filter(visible).pop());
       if (ok) { ok.click(); await sleep(1500); }
       return "";
-    }
-    if (NET === "fb") {
-      const menu = [...post.querySelectorAll("[role=button][aria-label]")].find(b => /^actions for this post$/i.test(b.getAttribute("aria-label")));
+    };
+    if (NET === "fb" || NET === "x") {
+      const posts = () => NET === "x" ? [...document.querySelectorAll("article[data-testid=tweet]")] : [...document.querySelectorAll("[role=article]")].filter(a => !a.closest("[role=article] [role=article]"));
+      let post = null;
+      for (let i = 0; i < 25 && !post && !stopAsked; i++) {
+        post = posts().find(a => visible(a) && has(a));
+        if (!post) { window.scrollBy(0, Math.round(innerHeight * 1.5)); await sleep(1800); }
+      }
+      window.scrollTo(0, 0);
+      if (!post) return `couldn't find a post with “${text.split("\n")[0].slice(0, 40)}” on the profile`;
+      post.scrollIntoView({ block: "center" }); await sleep(900);
+      const menu = NET === "x" ? post.querySelector("[data-testid=caret]") : [...post.querySelectorAll("[role=button][aria-label]")].find(b => /^actions for this post$/i.test(b.getAttribute("aria-label")));
       if (!menu) return "no ••• menu on the post";
       menu.click(); await sleep(1200);
-      const item = await waitFor(() => [...document.querySelectorAll("[role=menuitem]")].find(m => visible(m) && /^(pin post|pin to top of page|feature)$/i.test((m.innerText || "").trim().split("\n")[0])), 5000);
-      if (!item) { document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true })); return "no “Pin post” in the post's menu (it may already be pinned)"; }
-      item.click(); await sleep(2500);
-      const ok = findBtn(/^(pin|save|feature)$/i, [...document.querySelectorAll("[role=dialog]")].filter(visible).pop());
-      if (ok) { ok.click(); await sleep(1500); }
-      return "";
+      return pick();
     }
-    return `pinning on ${NAME} has to be done in its app (open the post → ••• → Pin)`;
+    // Instagram / TikTok: open the newest posts one by one (they open over the profile) and check the text.
+    const tiles = () => NET === "ig" ? [...document.querySelectorAll("main a[href*='/p/'],main a[href*='/reel/']")] : [...document.querySelectorAll("[data-e2e=user-post-item] a")];
+    await waitFor(() => tiles().length, 10000);
+    for (const a of tiles().slice(0, 12)) {
+      if (stopAsked) return "stopped";
+      a.click(); await sleep(2500);
+      const view = [...document.querySelectorAll("[role=dialog]")].filter(visible).pop() || document.querySelector("[data-e2e=browse-video-desc]") && document.body;
+      const descEl = NET === "ig" ? view : document.querySelector("[data-e2e=browse-video-desc],[data-e2e=video-desc]");
+      if (view && descEl && has(descEl)) {
+        const more = NET === "ig" ? findIcon(/^more options$/i, view) : (document.querySelector("[data-e2e=video-setting],[data-e2e=browse-more],[aria-label='More options']"));
+        if (!more) return `no ••• menu on the post (${NAME} may only allow this in its app)`;
+        more.click(); await sleep(1200);
+        return pick();
+      }
+      const close = NET === "ig" ? findIcon(/^close$/i) : document.querySelector("[data-e2e=browse-close]");
+      if (close) close.click(); else history.back();
+      await sleep(1500);
+    }
+    return `couldn't find the post on ${NAME} (pin it in the app: open the post → ••• → ${act === "pin" ? "Pin" : "Unpin"})`;
   }
+  function findIcon(re, root) {
+    const svg = [...(root || document).querySelectorAll("svg[aria-label]")].find(x => re.test(x.getAttribute("aria-label")) && visible(x));
+    return svg ? (svg.closest("[role=button],button,a") || svg.parentElement) : null;
+  }
+  const pinPost = () => menuOn(job.pin, "pin");
 
   // ------------------------------------------------------------- steps
   await sleep(3000);
@@ -233,11 +254,19 @@
     await sleep(2500);
     job.read = readProfile();
     await save();
+    if (job.mode === "pinswap") {
+      box("pinning the new post…");
+      const e1 = await menuOn(job.pin, "pin"); if (e1) job.notes.push("pin: " + e1);
+      w = warning(); if (w) return finish(`${NAME} showed "${w}". Stopped.`);
+      if (!e1 && job.unpin && job.unpin !== job.pin) { if (NET !== "fb" && NET !== "x") await go(PROFILE, "unpin"); else { const e2 = await menuOn(job.unpin, "unpin"); if (e2) job.notes.push("unpin: " + e2); } }
+      if (job.step !== "unpin") return go(PROFILE, "reread");
+      return;
+    }
     if (job.mode !== "fix") { box("Done. Going back to your admin…"); await sleep(1000); return finish(); }
     const want = String(job.link || "").replace(/^https?:\/\//, "").replace(/\/$/, "").toLowerCase();
     const linkOk = String(job.read.link || "").replace(/^https?:\/\//, "").replace(/\/$/, "").toLowerCase() === want;
     job.needLink = !!want && !linkOk;
-    job.needPin = !!pinProbe && !String(job.read.pinned || "").toLowerCase().includes(pinProbe);
+    job.needPin = !!pinProbe && !norm(job.read.pinned).includes(pinProbe);
     if (job.needPin) {
       box("pinning the chosen post…");
       const err = await pinPost();
@@ -250,6 +279,11 @@
       if (editUrl) return go(editUrl, "link");
       job.step = "link";
     } else return go(PROFILE, "reread");
+  }
+  if (job.step === "unpin") {
+    box("unpinning the old post (it stays on your profile)…");
+    const e2 = await menuOn(job.unpin, "unpin"); if (e2) job.notes.push("unpin: " + e2);
+    return go(PROFILE, "reread");
   }
   if (job.step === "link") {
     box("setting the link (the bio text stays as it is)…");
