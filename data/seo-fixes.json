@@ -259,6 +259,15 @@
    "page": "tiktok/index.html",
    "value": "We sell sofas, beds, dining sets, office chairs and student desks from GH₵650 in Odorkor, Accra. Delivery to Accra, Tema & Kasoa. WhatsApp 057 264 6176.",
    "applied_at": "2026-10-15"
+  },
+  {
+   "id": "alt:tiktok/index.html",
+   "kind": "alt",
+   "page": "tiktok/index.html",
+   "value": {
+    "../assets/images/logo.png": "Logo, F.A Vision Enterprise furniture, Odorkor Accra"
+   },
+   "applied_at": "2026-10-15"
   }
  ]
 }
