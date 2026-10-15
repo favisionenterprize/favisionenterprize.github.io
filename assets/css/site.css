@@ -513,3 +513,43 @@ section { padding: 96px 0; }
 .pd-seller { margin: 0 0 16px; padding: 12px 14px; border-radius: 12px; background: #eaf6ee; color: #14442a; font-size: .95rem; line-height: 1.5; }
 .pd-seller a { color: inherit; font-weight: 600; }
 .pd-credit { font-size: 12px; color: var(--muted, #6b7280); margin: 0; }
+
+/* Top nav categories: Shop ▾ / Services ▾ / About ▾ (assets/js/nav.js) */
+.nav-links { align-items: center; gap: 4px; }
+.nav-group { position: relative; }
+.nav-cat { display: inline-flex; align-items: center; gap: 6px; padding: 9px 12px; border: 0; border-radius: 10px; background: none; color: var(--muted); font: 500 15px var(--sans); cursor: pointer; transition: color .15s, background .15s; }
+.nav-cat:hover, .nav-group.open > .nav-cat { color: var(--brand-blue); background: #eef3fc; }
+.nav-cat:focus-visible { outline: 2px solid var(--brand-blue-2); outline-offset: 2px; }
+.nav-group.is-current > .nav-cat { color: var(--brand-blue); font-weight: 600; }
+.nav-group.is-current > .nav-cat::after { content: ""; position: absolute; left: 50%; bottom: -2px; width: 18px; height: 3px; margin-left: -9px; border-radius: 3px; background: var(--brand-blue); }
+.nav-caret { display: inline-block; font-size: 11px; line-height: 1; transition: transform .2s ease; }
+.nav-group.open > .nav-cat .nav-caret { transform: rotate(180deg); }
+.nav-menu { position: absolute; top: calc(100% + 10px); left: 50%; z-index: 60; min-width: 272px; padding: 8px; background: #fff; border: 1px solid #e3e7ee; border-radius: 14px; box-shadow: 0 14px 36px rgba(13, 42, 90, .14), 0 2px 6px rgba(60, 64, 67, .08); opacity: 0; visibility: hidden; transform: translate(-50%, -6px); transition: opacity .16s ease, transform .16s ease, visibility 0s linear .16s; }
+.nav-menu::before { content: ""; position: absolute; left: 0; right: 0; top: -12px; height: 12px; }
+.nav-group.open > .nav-menu { opacity: 1; visibility: visible; transform: translate(-50%, 0); transition: opacity .16s ease, transform .16s ease, visibility 0s; }
+.nav-links .nav-menu a { display: block; padding: 10px 12px; border-radius: 10px; color: var(--ink); text-decoration: none; border-left: 3px solid transparent; }
+.nav-menu .nav-item-t { display: flex; align-items: center; gap: 8px; font: 600 15px/1.3 var(--sans); color: var(--ink); }
+.nav-menu small { display: block; margin-top: 2px; font-size: 13px; line-height: 1.35; color: var(--muted); font-weight: 400; }
+.nav-links .nav-menu a:hover, .nav-links .nav-menu a:focus-visible { background: var(--cream); outline: none; }
+.nav-links .nav-menu a:focus-visible { box-shadow: inset 0 0 0 2px var(--brand-blue-2); }
+.nav-links .nav-menu a:hover .nav-item-t { color: var(--brand-blue); }
+.nav-links .nav-menu a[aria-current="page"], .nav-links .nav-menu a.is-current { background: #eef3fc; border-left-color: var(--brand-blue); }
+.nav-menu a[aria-current="page"] .nav-item-t, .nav-menu a.is-current .nav-item-t { color: var(--brand-blue); }
+.nav-links .nav-menu a.nav-new .nav-item-t { color: var(--brand-purple); }
+.nav-links .nav-menu a.nav-new[aria-current="page"] { background: #f7e9f5; border-left-color: var(--brand-purple); }
+.nav-badge { padding: 3px 7px; border-radius: 999px; background: var(--brand-purple); color: #fff; font: 700 10px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; }
+.nav-sep { margin: 6px 4px 0; padding: 10px 8px 4px; border-top: 1px solid var(--line); color: var(--muted-light); font: 600 11px var(--sans); letter-spacing: .12em; text-transform: uppercase; }
+@media (prefers-reduced-motion: reduce) { .nav-menu, .nav-caret { transition: none !important; } }
+@media (max-width: 760px) {
+  .nav-links { align-items: stretch; max-height: calc(100vh - 68px); overflow-y: auto; padding: 4px 16px 16px; }
+  .nav-group { border-bottom: 1px solid var(--line); }
+  .nav-cat { width: 100%; justify-content: space-between; padding: 16px 4px; border-radius: 0; color: var(--ink); font-size: 17px; }
+  .nav-cat:hover, .nav-group.open > .nav-cat { background: none; }
+  .nav-group.is-current > .nav-cat::after { display: none; }
+  .nav-caret { font-size: 13px; }
+  .nav-menu { position: static; display: none; min-width: 0; padding: 0 0 10px; border: 0; border-radius: 0; box-shadow: none; opacity: 1; visibility: inherit; transform: none; transition: none; }
+  .nav-menu::before { display: none; }
+  .nav-group.open > .nav-menu { display: block; visibility: inherit; transform: none; }
+  .nav-links .nav-menu a { padding: 10px 12px; border-bottom: 0; font-size: 16px; }
+  .nav-menu .nav-item-t { font-size: 16px; }
+}

@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/site.css?v=20260930a">
+  <link rel="stylesheet" href="../assets/css/site.css?v=20261015n">
   <link rel="stylesheet" href="../assets/css/studio.css?v=20260930b">
 </head>
 <body class="studio-page">
@@ -32,12 +32,35 @@
         <img src="../assets/images/logo.png" alt="F.A Vision Enterprise logo" width="46" height="46">
         <span class="logo-text"><span><b>F.A</b> Vision</span><small>Enterprise</small></span>
       </a>
-      <nav class="nav-links" id="nav-links">
-        <a href="../#shop">Shop</a>
-        <a href="#designer">Room designer</a>
-        <a href="#studio-services">AI services</a>
-        <a href="#how">How it works</a>
-        <a href="../#visit">Locations</a>
+      <nav class="nav-links" id="nav-links" aria-label="Main">
+        <div class="nav-group" data-group="shop">
+          <button type="button" class="nav-cat" id="nav-cat-shop" aria-expanded="false" aria-haspopup="true" aria-controls="nav-menu-shop">Shop<span class="nav-caret" aria-hidden="true">▾</span></button>
+          <div class="nav-menu" id="nav-menu-shop" aria-labelledby="nav-cat-shop">
+            <a href="../#deals"><span class="nav-item-t">Deals</span><small>Today’s offers and promos</small></a>
+            <a href="../#shop"><span class="nav-item-t">Shop all</span><small>Browse every piece we sell</small></a>
+            <a href="../#custom"><span class="nav-item-t">Custom orders</span><small>Describe it, get a quote</small></a>
+          </div>
+        </div>
+        <div class="nav-group" data-group="services" data-current="true">
+          <button type="button" class="nav-cat" id="nav-cat-services" aria-expanded="false" aria-haspopup="true" aria-controls="nav-menu-services">Services<span class="nav-caret" aria-hidden="true">▾</span></button>
+          <div class="nav-menu" id="nav-menu-services" aria-labelledby="nav-cat-services">
+            <a href="./" class="nav-new" aria-current="page"><span class="nav-item-t">AI Studio <span class="nav-badge">Free</span></span><small>Room designer, programmes, letters</small></a>
+            <a href="../#services"><span class="nav-item-t">Services</span><small>Upholstery, bulk orders, printing</small></a>
+            <a href="../#invoice"><span class="nav-item-t">Invoice</span><small>Get an invoice for your order</small></a>
+            <div class="nav-sep" role="presentation">On this page</div>
+            <a href="#designer"><span class="nav-item-t">Room designer</span><small>Plan your room free</small></a>
+            <a href="#studio-services"><span class="nav-item-t">AI services</span><small>Done for you</small></a>
+            <a href="#how"><span class="nav-item-t">How it works</span><small>Four steps on your phone</small></a>
+          </div>
+        </div>
+        <div class="nav-group" data-group="about">
+          <button type="button" class="nav-cat" id="nav-cat-about" aria-expanded="false" aria-haspopup="true" aria-controls="nav-menu-about">About<span class="nav-caret" aria-hidden="true">▾</span></button>
+          <div class="nav-menu" id="nav-menu-about" aria-labelledby="nav-cat-about">
+            <a href="../#why"><span class="nav-item-t">Why us</span><small>Materials, prices, delivery</small></a>
+            <a href="../videos/"><span class="nav-item-t">Videos</span><small>See our furniture in action</small></a>
+            <a href="../#visit"><span class="nav-item-t">Locations</span><small>Odorkor · Omanjor · Kasoa</small></a>
+          </div>
+        </div>
       </nav>
       <a class="btn btn-gold btn-sm nav-cta js-wa" data-msg="Hello F.A Vision, I have a question about your AI Studio services.">WhatsApp us</a>
       <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
@@ -138,5 +161,6 @@
   <script src="../assets/js/checkout.js?v=20260930d"></script>
   <script src="../assets/js/room-designer.js?v=20260930b"></script>
   <script src="../assets/js/studio.js?v=20260930b"></script>
+  <script src="../assets/js/nav.js?v=20261015n"></script>
 </body>
 </html>
