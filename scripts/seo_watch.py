@@ -629,7 +629,7 @@ def ask_ai(q):
               "and say briefly why. Keep it under 200 words.")
     gk, ak = os.environ.get("GEMINI_API_KEY"), os.environ.get("ANTHROPIC_API_KEY")
     if gk:
-        model = os.environ.get("GEMINI_MODEL") or "gemini-2.5-flash"
+        model = os.environ.get("GEMINI_MODEL") or "gemini-flash-latest"
         body = {"contents": [{"parts": [{"text": prompt}]}], "tools": [{"google_search": {}}]}
         req = urllib.request.Request(f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={gk}",
                                      data=json.dumps(body).encode(), headers={"Content-Type": "application/json"})
