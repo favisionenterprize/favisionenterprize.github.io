@@ -1,11 +1,11 @@
 {
- "generated": "2026-10-15T17:02:31Z",
+ "generated": "2026-10-15T17:02:59Z",
  "mode": "local",
- "score": 86,
- "prev_score": 82,
+ "score": 87,
+ "prev_score": 86,
  "counts": {
   "high": 0,
-  "medium": 2,
+  "medium": 1,
   "low": 6
  },
  "site": {
@@ -44,22 +44,6 @@
      ]
     },
     "id": "jsonld:index.html",
-    "applied": false
-   }
-  },
-  {
-   "id": "description:studio/index.html",
-   "sev": "medium",
-   "page": "studio/index.html",
-   "check": "description",
-   "msg": "/studio/ meta description is 217 characters (aim for 70–160).",
-   "count": 1,
-   "fix": {
-    "kind": "description",
-    "page": "studio/index.html",
-    "label": "Rewrite meta description",
-    "value": "We sell sofas, beds, dining sets, office chairs and student desks from GH₵650 in Odorkor, Accra. Delivery to Accra, Tema & Kasoa. WhatsApp 057 264 6176.",
-    "id": "description:studio/index.html",
     "applied": false
    }
   },
@@ -211,12 +195,12 @@
    "url": "https://favisionenterprize.github.io/studio/",
    "title": "Photo Studio & Ads · F.A Vision Enterprise, Accra",
    "title_len": 49,
-   "description": "F.A Vision AI Studio in Odorkor: free room designer with furniture and wallpaper, bulk school & church layouts, funeral brochures and programmes, small business starter kits, letters and typing. Pay with MoMo or card.",
+   "description": "We sell sofas, beds, dining sets, office chairs and student desks from GH₵650 in Odorkor, Accra. Delivery to Accra, Tema & Kasoa. WhatsApp 057 264 6176.",
    "h1": [
     "Smart help for your home, school and business"
    ],
    "schema": [],
-   "bytes": 296903,
+   "bytes": 296840,
    "requests": 10,
    "redirect": false,
    "in_sitemap": true
@@ -1495,7 +1479,7 @@
  "history": [
   {
    "d": "2026-10-15",
-   "score": 86,
+   "score": 87,
    "ai": null
   }
  ]
