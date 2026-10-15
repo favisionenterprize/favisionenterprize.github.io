@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-15T17:05:24Z",
+ "generated": "2026-10-15T17:05:41Z",
  "mode": "local",
  "score": 92,
  "prev_score": 92,
@@ -115,7 +115,7 @@
     "Service",
     "WebSite"
    ],
-   "bytes": 444240,
+   "bytes": 444615,
    "requests": 14,
    "redirect": false,
    "in_sitemap": true
@@ -1004,7 +1004,7 @@
     "value": "Looking for sofa Odorkor? F.A Vision Enterprise sells furniture such as L-Shaped Sectional Sofa GH₵15,500, L-Shaped Sofa Set GH₵5,500 from our showroom at Tarazzo Road, Odorkor, with delivery across Accra, Tema & Kasoa. WhatsApp 057 264 6176.",
     "keyword": "sofa Odorkor",
     "id": "intro:sofa-odorkor",
-    "applied": false
+    "applied": true
    }
   },
   {
