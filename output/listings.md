@@ -1,6 +1,6 @@
 # F.A Vision Enterprise: ready-to-paste listings
 
-Generated 2026-10-14. Regenerate after editing `data/products.json`.
+Generated 2026-10-15. Regenerate after editing `data/products.json`.
 
 ## FAV-001 · Rainbow Glass-Top Dining Set — 6 Chairs
 
@@ -898,7 +898,6 @@ Height-adjustable desk and chair sets, perfect for classrooms from SHS through u
 ✔ Powder-coated carbon steel frame with MDF/melamine top
 ✔ Anti-slip floor caps — no sliding, less noise
 ✔ Suitable for SHS through university
-✔ Bulk discount: GH₵ 640/set from 50 pieces
 
 Material: MDF with melamine cover, ABS, powder-coated carbon steel frame
 Size: Desk 70 × 50 × 73–88 cm; Chair 48 × 46 × 46–52 cm (height adjustable)
@@ -923,7 +922,6 @@ Ref: FAV-014
 • Powder-coated carbon steel frame with MDF/melamine top
 • Anti-slip floor caps — no sliding, less noise
 • Suitable for SHS through university
-• Bulk discount: GH₵ 640/set from 50 pieces
 💰 GH₵ 650
 📍 Odorkor, Accra, delivery available
 📞 WhatsApp 057 264 6176
