@@ -1,0 +1,44 @@
+# Nightly SEO & AI-visibility watch (scripts/seo_watch.py): audits our own pages, checks the
+# keyword targets, reads competitors' public pages (robots.txt respected, slow and polite) and,
+# if a GEMINI_API_KEY or ANTHROPIC_API_KEY secret exists, asks AI search who it recommends.
+# Writes data/seo-report.json for the admin's "SEO & AI" screen. "Run check now" in the admin
+# starts it through workflow_dispatch.
+name: SEO watch
+
+on:
+  schedule:
+    - cron: "7 2 * * *"   # ~02:00 GMT (Accra) every night
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: seo-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run the SEO watch
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python3 scripts/seo_watch.py
+      - name: Commit the report
+        run: |
+          git add data/seo-report.json
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "SEO watch: nightly report"
+          for i in 1 2 3; do
+            git pull --rebase --quiet origin main && git push --quiet origin HEAD:main && break
+            sleep 5
+          done

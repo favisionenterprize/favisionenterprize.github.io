@@ -448,6 +448,64 @@ async function marketplace(browser) {
   return { problems, n: r.missing.length };
 }
 
+// SEO & AI screen (admin/seo.js): draws the real data/seo-report.json, "Apply fix" previews and
+// saves into data/seo-fixes.json only after a confirm, "Run check now" starts the workflow, and
+// when GitHub refuses it runs the quick in-browser check against the site's own files.
+async function seo(browser, shot) {
+  const page = await browser.newPage({ viewport: { width: shot ? 1280 : 390, height: 900 } });
+  const problems = [];
+  page.on("pageerror", e => problems.push("page error: " + e.message));
+  const html = fs.readFileSync(ROOT + "admin/index.html", "utf8").replace(/<script[\s\S]*?<\/script>/g, "");
+  await page.route("http://smoke.test/**", r => {
+    const u = new URL(r.request().url());
+    if (u.pathname === "/admin/") return r.fulfill({ status: 200, contentType: "text/html", body: html });
+    let f = decodeURIComponent(u.pathname).replace(/^\//, ""); if (!f || f.endsWith("/")) f += "index.html";
+    if (!fs.existsSync(ROOT + f)) return r.fulfill({ status: 404, body: "" });
+    return r.fulfill({ status: 200, body: fs.readFileSync(ROOT + f), contentType: f.endsWith(".html") ? "text/html" : f.endsWith(".json") ? "application/json" : "text/plain" });
+  });
+  await page.goto("http://smoke.test/admin/");
+  await page.addStyleTag({ content: fs.readFileSync(ROOT + "admin/admin.css", "utf8") });
+  await page.evaluate(({ files }) => {
+    window.__saves = []; window.__gh = []; window.__ghFail = false; window.confirm = () => true;
+    let fx = files["data/seo-fixes.json"] || { applied: [] };
+    window.FAV_ADMIN = { signedIn: () => true, toast: () => {}, busy: () => {}, friendly: e => e.message,
+      readJsonFile: async (p, fb) => p === "data/seo-fixes.json" ? fx : (files[p] || fb),
+      saveJson: async (p, m, msg, fb) => { fx = m(JSON.parse(JSON.stringify(fx || fb))); window.__saves.push({ p, msg, fx }); return fx; },
+      gh: async (path, o) => { window.__gh.push([path, o && o.method]); if (window.__ghFail) throw Object.assign(new Error("Resource not accessible"), { status: 403 }); return null; } };
+  }, { files });
+  await page.addScriptTag({ content: fs.readFileSync(ROOT + "admin/seo.js", "utf8") });
+  await page.evaluate(() => document.querySelector("[data-seo]").click());
+  await page.waitForTimeout(400);
+  const r = files["data/seo-report.json"];
+  const st = await page.evaluate(() => ({ text: (document.querySelector("#seo-body") || {}).innerText || "", issues: document.querySelectorAll("#seo-body .seo-issue").length,
+    fixBtns: document.querySelectorAll("[data-seo-fix]").length, kw: document.querySelectorAll(".seo-table tr").length }));
+  if (st.text.length < MIN_TEXT) problems.push("SEO screen is blank");
+  if (!st.text.includes(String(r.score))) problems.push("score " + r.score + " not shown");
+  if (st.issues < Math.min(3, r.issues.length)) problems.push(`only ${st.issues} issues drawn of ${r.issues.length}`);
+  if (shot) { await page.screenshot({ path: shot, fullPage: true }); }
+  let applied = null;
+  if (st.fixBtns) {
+    await page.click("[data-seo-fix]"); await page.waitForTimeout(100);
+    const pv = await page.evaluate(() => (document.querySelector(".seo-prev") || {}).innerText || "");
+    if (!/Confirm/.test(pv)) problems.push("Apply fix shows no preview");
+    if ((await page.evaluate(() => window.__saves.length))) problems.push("a fix was saved before Confirm");
+    await page.click("[data-seo-apply]"); await page.waitForTimeout(200);
+    applied = await page.evaluate(() => window.__saves[0]);
+    if (!applied || applied.p !== "data/seo-fixes.json" || !applied.fx.applied.length) problems.push("Confirm & apply didn't save data/seo-fixes.json: " + JSON.stringify(applied));
+    if (!(await page.evaluate(() => /Applied ✓/.test(document.querySelector("#seo-body").innerText)))) problems.push("applied fix not marked Applied");
+  } else problems.push("no Apply fix buttons");
+  await page.click("#seo-run"); await page.waitForTimeout(200);
+  const run = await page.evaluate(() => ({ gh: window.__gh, status: (document.querySelector("#seo-status") || {}).innerText || "" }));
+  if (!run.gh.length || !/actions\/workflows\/seo-watch\.yml\/dispatches/.test(run.gh[0][0]) || run.gh[0][1] !== "POST") problems.push("Run check now didn't dispatch the workflow: " + JSON.stringify(run.gh));
+  if (!/Running/.test(run.status)) problems.push("no Running… status: " + run.status);
+  await page.evaluate(() => { window.__ghFail = true; localStorage.removeItem("fa-seo-run"); });
+  await page.click("#seo-run"); await page.waitForTimeout(2500);
+  const q = await page.evaluate(() => ({ status: (document.querySelector("#seo-status") || {}).innerText || "", issues: document.querySelectorAll("#seo-body .seo-issue").length }));
+  if (!/Quick check/.test(q.status) || !q.issues) problems.push("refused dispatch didn't fall back to the quick check: " + q.status.slice(0, 200));
+  await page.close();
+  return { problems, score: r.score, issues: st.issues, applied: applied && applied.fx.applied[0].kind };
+}
+
 (async () => {
   const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
   let failed = 0;
@@ -469,6 +527,9 @@ async function marketplace(browser) {
   const m = await marketplace(browser);
   if (m.problems.length) { failed++; console.log("✗ Marketplace tab / profile card"); m.problems.forEach(p => console.log("    " + p)); }
   else console.log(`✓ Marketplace tab: matching, duplicates, escaping, price commit and add-on jobs work (${m.n} products not listed in the mock scan); profile card launches its check; TikTok captions card lists empty posts, writes classy captions and launches the fix; Boost: sounds rotate, best-time queue, refresh pinned, first-hour timers, What's working`);
+  const so = await seo(browser, process.env.SEO_SHOT || "");
+  if (so.problems.length) { failed++; console.log("✗ SEO & AI screen"); so.problems.forEach(p => console.log("    " + p)); }
+  else console.log(`✓ SEO & AI screen: score ${so.score}, ${so.issues} issues drawn, Apply fix (${so.applied}) saves after preview + confirm, Run check now dispatches seo-watch.yml, quick check fallback works`);
   await browser.close();
   console.log(failed ? `\n${failed} check(s) FAILED` : "\nAll admin checks passed.");
   process.exit(failed ? 1 : 0);

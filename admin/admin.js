@@ -1092,6 +1092,7 @@
   window.FAV_ADMIN = {
     commit: opts => commit(opts),
     readJsonFile, saveJson, commitFiles, productUrl, friendly,
+    gh: (path, opts) => gh(path, opts),   // GitHub API for this repo (admin/seo.js starts the SEO watch workflow)
     // backend call with this browser's sign-in (email sign-in only; GitHub-token sign-in has none)
     backendSigned: payload => session ? backend({ ...payload, session }) : Promise.resolve({ ok: false, error: "no_session" }),
     products: () => products,

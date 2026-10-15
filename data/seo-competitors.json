@@ -1,0 +1,33 @@
+{
+ "note": "Used by scripts/seo_watch.py (nightly SEO watch). Only public pages are read, robots.txt is respected, nothing is copied into our site.",
+ "user_agent": "FAVisionSEOWatch/1.0 (+https://favisionenterprize.github.io/; nanaotengdonkor1 at gmail)",
+ "delay_seconds": 3,
+ "pages_per_competitor": 3,
+ "competitors": [
+  {"name": "Kpogas Furniture", "url": "https://kpogasfurniture.com/"},
+  {"name": "Orca Deco", "url": "https://orcadeco.com.gh/"},
+  {"name": "Phenicia", "url": "https://phenicia.com.gh/", "note": "address not confirmed: fix it here if this isn't their site"},
+  {"name": "Furniture Leaders", "url": "https://furnitureleaders.com.gh/", "note": "address not confirmed: fix it here if this isn't their site"},
+  {"name": "Furniture City Ghana", "url": "https://furniturecityghana.com/"},
+  {"name": "Jamila Home", "url": "https://jamilahome.com/"},
+  {"name": "Casa Trasacco", "url": "https://www.casatrasacco.com/"},
+  {"name": "Furnart", "url": "https://www.furnart-gh.com/"}
+ ],
+ "keywords": [
+  "furniture shop Accra",
+  "student desk Ghana",
+  "office chairs Accra",
+  "dining set Accra price",
+  "sofa Odorkor",
+  "school furniture Ghana",
+  "wholesale furniture Accra",
+  "furniture Kasoa"
+ ],
+ "questions": [
+  "What is the best furniture shop in Accra, Ghana?",
+  "Where can I buy student desks in bulk in Ghana?",
+  "Where can I buy affordable sofas in Accra?",
+  "Which furniture shops are in Odorkor or Kasoa?",
+  "Where can I buy office chairs in Accra and how much do they cost?"
+ ]
+}

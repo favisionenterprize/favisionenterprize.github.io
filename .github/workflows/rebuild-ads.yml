@@ -14,6 +14,7 @@ on:
       - "scripts/make_ads.py"
       - "scripts/make_ad_models.py"
       - "scripts/make_share_cards.py"
+      - "scripts/seo_build.py"
       - "scripts/generate_listings.py"
   workflow_dispatch:
 
@@ -45,12 +46,13 @@ jobs:
           python3 scripts/make_ads.py
           python3 scripts/make_ad_models.py
           python3 scripts/make_share_cards.py
+          python3 scripts/seo_build.py   # Product schema + approved SEO fixes back into p/*.html
           python3 scripts/generate_listings.py
 
       - name: Commit if anything changed
         id: commit
         run: |
-          git add -A assets/images/ads assets/images/share p output assets/js/products-data.js
+          git add -A assets/images/ads assets/images/share p sitemap.xml output assets/js/products-data.js
           if git diff --cached --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0

@@ -1,0 +1,1658 @@
+{
+ "generated": "2026-10-15T16:38:02Z",
+ "mode": "local",
+ "score": 63,
+ "prev_score": 63,
+ "counts": {
+  "high": 1,
+  "medium": 8,
+  "low": 4
+ },
+ "site": {
+  "robots": true,
+  "robots_sitemap": true,
+  "sitemap_urls": 5,
+  "llms": false,
+  "product_pages": 33,
+  "product_pages_indexable": 0
+ },
+ "issues": [
+  {
+   "id": "product-pages:p/",
+   "sev": "high",
+   "page": "p/",
+   "check": "product-pages",
+   "msg": "33 product pages (p/FAV-xxx.html) redirect straight to the home page, so Google and AI engines can't index a single product page. Competitors like Kpogas have their own indexable product and category pages.",
+   "count": 33,
+   "fix": {
+    "kind": "product_landing",
+    "page": "p/",
+    "label": "Make real product pages",
+    "value": "Each p/FAV-xxx.html becomes a real page: name, price, photos, highlights, Order on WhatsApp, See it in our shop, Product + Breadcrumb schema, self canonical, added to sitemap.xml. Share links keep the same preview card.",
+    "id": "product_landing:p/",
+    "applied": false
+   }
+  },
+  {
+   "id": "title:index.html",
+   "sev": "medium",
+   "page": "index.html",
+   "check": "title",
+   "msg": "Home page title is 109 characters (aim for 30–65 so Google shows it in full).",
+   "count": 1,
+   "fix": {
+    "kind": "title",
+    "page": "index.html",
+    "label": "Rewrite title",
+    "value": "Furniture Shop in Accra · Sofas, Desks & Office Chairs | F.A Vision",
+    "id": "title:index.html",
+    "applied": false
+   }
+  },
+  {
+   "id": "description:index.html",
+   "sev": "medium",
+   "page": "index.html",
+   "check": "description",
+   "msg": "Home page meta description is 225 characters (aim for 70–160).",
+   "count": 1,
+   "fix": {
+    "kind": "description",
+    "page": "index.html",
+    "label": "Rewrite meta description",
+    "value": "We sell sofas, beds, dining sets, office chairs and student desks from GH₵650 in Odorkor, Accra. Delivery to Accra, Tema & Kasoa. WhatsApp 057 264 6176.",
+    "id": "description:index.html",
+    "applied": false
+   }
+  },
+  {
+   "id": "sameas:index.html",
+   "sev": "medium",
+   "page": "index.html",
+   "check": "sameas",
+   "msg": "Organization schema doesn't link 6 of your profiles (Instagram, TikTok, X, Google Maps). AI engines use these links to recognise the business.",
+   "count": 1,
+   "fix": {
+    "kind": "jsonld",
+    "page": "index.html",
+    "label": "Link all profiles",
+    "value": {
+     "@context": "https://schema.org",
+     "@type": "Organization",
+     "@id": "https://favisionenterprize.github.io/#org",
+     "sameAs": [
+      "https://www.facebook.com/FaVisionEnterprise",
+      "https://www.facebook.com/FaVisionEnt/",
+      "https://www.instagram.com/favisionent/",
+      "https://x.com/FaVisionEnt",
+      "https://www.tiktok.com/@favisionenterprise",
+      "https://maps.app.goo.gl/Ct4oYoMkmTPGPX3P6",
+      "https://maps.app.goo.gl/2czi91wUwRAwXcgd7",
+      "https://maps.app.goo.gl/zrELKCZL1NWdqKiE9"
+     ]
+    },
+    "id": "jsonld:index.html",
+    "applied": false
+   }
+  },
+  {
+   "id": "description:products/index.html",
+   "sev": "medium",
+   "page": "products/index.html",
+   "check": "description",
+   "msg": "/products/ meta description is 203 characters (aim for 70–160).",
+   "count": 1,
+   "fix": {
+    "kind": "description",
+    "page": "products/index.html",
+    "label": "Rewrite meta description",
+    "value": "We sell sofas, beds, dining sets, office chairs and student desks from GH₵650 in Odorkor, Accra. Delivery to Accra, Tema & Kasoa. WhatsApp 057 264 6176.",
+    "id": "description:products/index.html",
+    "applied": false
+   }
+  },
+  {
+   "id": "jsonld-itemlist:products/index.html",
+   "sev": "medium",
+   "page": "products/index.html",
+   "check": "jsonld-itemlist",
+   "msg": "Products page has no ItemList schema listing the products.",
+   "count": 1,
+   "fix": {
+    "kind": "jsonld",
+    "page": "products/index.html",
+    "label": "Add product list schema",
+    "value": {
+     "@context": "https://schema.org",
+     "@type": "ItemList",
+     "name": "F.A Vision Enterprise furniture",
+     "itemListElement": [
+      {
+       "@type": "ListItem",
+       "position": 1,
+       "url": "https://favisionenterprize.github.io/p/FAV-001.html",
+       "name": "Rainbow Glass-Top Dining Set"
+      },
+      {
+       "@type": "ListItem",
+       "position": 2,
+       "url": "https://favisionenterprize.github.io/p/FAV-002.html",
+       "name": "Black Glass Dining Set"
+      },
+      {
+       "@type": "ListItem",
+       "position": 3,
+       "url": "https://favisionenterprize.github.io/p/FAV-003.html",
+       "name": "Dining Set Collection"
+      },
+      {
+       "@type": "ListItem",
+       "position": 4,
+       "url": "https://favisionenterprize.github.io/p/FAV-004.html",
+       "name": "Red Glass Dining Set"
+      },
+      {
+       "@type": "ListItem",
+       "position": 5,
+       "url": "https://favisionenterprize.github.io/p/FAV-005.html",
+       "name": "Foldable Wood-Grain Dining Set"
+      },
+      {
+       "@type": "ListItem",
+       "position": 6,
+       "url": "https://favisionenterprize.github.io/p/FAV-006.html",
+       "name": "Executive Director Chair"
+      },
+      {
+       "@type": "ListItem",
+       "position": 7,
+       "url": "https://favisionenterprize.github.io/p/FAV-007.html",
+       "name": "Mesh Secretary Chair"
+      },
+      {
+       "@type": "ListItem",
+       "position": 8,
+       "url": "https://favisionenterprize.github.io/p/FAV-008.html",
+       "name": "1.2 m Office Desk with Drawer Unit"
+      },
+      {
+       "@type": "ListItem",
+       "position": 9,
+       "url": "https://favisionenterprize.github.io/p/FAV-009.html",
+       "name": "White Dressing Table with Mirror & Stool"
+      },
+      {
+       "@type": "ListItem",
+       "position": 10,
+       "url": "https://favisionenterprize.github.io/p/FAV-010.html",
+       "name": "Wardrobe"
+      },
+      {
+       "@type": "ListItem",
+       "position": 11,
+       "url": "https://favisionenterprize.github.io/p/FAV-011.html",
+       "name": "L-Shaped Sectional Sofa"
+      },
+      {
+       "@type": "ListItem",
+       "position": 12,
+       "url": "https://favisionenterprize.github.io/p/FAV-014.html",
+       "name": "Student Desk Chair Set"
+      },
+      {
+       "@type": "ListItem",
+       "position": 13,
+       "url": "https://favisionenterprize.github.io/p/FAV-015.html",
+       "name": "L-Shaped Sofa Set"
+      },
+      {
+       "@type": "ListItem",
+       "position": 14,
+       "url": "https://favisionenterprize.github.io/p/FAV-016.html",
+       "name": "Luxury Leather Sofa Set"
+      },
+      {
+       "@type": "ListItem",
+       "position": 15,
+       "url": "https://favisionenterprize.github.io/p/FAV-017.html",
+       "name": "Mesh Secretary Chair"
+      },
+      {
+       "@type": "ListItem",
+       "position": 16,
+       "url": "https://favisionenterprize.github.io/p/FAV-018.html",
+       "name": "Strong Glass Centre Table"
+      },
+      {
+       "@type": "ListItem",
+       "position": 17,
+       "url": "https://favisionenterprize.github.io/p/FAV-019.html",
+       "name": "Auditorium / Conference Chair"
+      },
+      {
+       "@type": "ListItem",
+       "position": 18,
+       "url": "https://favisionenterprize.github.io/p/FAV-020.html",
+       "name": "Business Cards"
+      },
+      {
+       "@type": "ListItem",
+       "position": 19,
+       "url": "https://favisionenterprize.github.io/p/FAV-021.html",
+       "name": "A4 & A3 Copy Paper"
+      },
+      {
+       "@type": "ListItem",
+       "position": 20,
+       "url": "https://favisionenterprize.github.io/p/FAV-022.html",
+       "name": "TCL 43\" Smart Android TV"
+      },
+      {
+       "@type": "ListItem",
+       "position": 21,
+       "url": "https://favisionenterprize.github.io/p/FAV-023.html",
+       "name": "Sigma 1.5HP Split Air Conditioner (BREEZE-HY12SB)"
+      },
+      {
+       "@type": "ListItem",
+       "position": 22,
+       "url": "https://favisionenterprize.github.io/p/FAV-024.html",
+       "name": "TWYFORD Water Closet"
+      },
+      {
+       "@type": "ListItem",
+       "position": 23,
+       "url": "https://favisionenterprize.github.io/p/FAV-025.html",
+       "name": "Tiles & Finishes"
+      },
+      {
+       "@type": "ListItem",
+       "position": 24,
+       "url": "https://favisionenterprize.github.io/p/FAV-026.html",
+       "name": "Kavukçu Wheat Flour"
+      },
+      {
+       "@type": "ListItem",
+       "position": 25,
+       "url": "https://favisionenterprize.github.io/p/FAV-027.html",
+       "name": "3D Wallpaper"
+      },
+      {
+       "@type": "ListItem",
+       "position": 26,
+       "url": "https://favisionenterprize.github.io/p/FAV-028.html",
+       "name": "Kids Plastic Chair"
+      },
+      {
+       "@type": "ListItem",
+       "position": 27,
+       "url": "https://favisionenterprize.github.io/p/FAV-029.html",
+       "name": "Salon Chair"
+      },
+      {
+       "@type": "ListItem",
+       "position": 28,
+       "url": "https://favisionenterprize.github.io/p/FAV-030.html",
+       "name": "Hair Dressers Washing Bowl with Bar Chair"
+      },
+      {
+       "@type": "ListItem",
+       "position": 29,
+       "url": "https://favisionenterprize.github.io/p/FAV-031.html",
+       "name": "10 Seater Foldable Round Table with Chairs"
+      },
+      {
+       "@type": "ListItem",
+       "position": 30,
+       "url": "https://favisionenterprize.github.io/p/FAV-032.html",
+       "name": "TV Stand"
+      },
+      {
+       "@type": "ListItem",
+       "position": 31,
+       "url": "https://favisionenterprize.github.io/p/FAV-033.html",
+       "name": "TV Stand + Centre Table Set"
+      },
+      {
+       "@type": "ListItem",
+       "position": 32,
+       "url": "https://favisionenterprize.github.io/p/FAV-034.html",
+       "name": "Student Mattress"
+      },
+      {
+       "@type": "ListItem",
+       "position": 33,
+       "url": "https://favisionenterprize.github.io/p/FAV-035.html",
+       "name": "Jasmine Rice"
+      }
+     ]
+    },
+    "id": "jsonld:products/index.html",
+    "applied": false
+   }
+  },
+  {
+   "id": "title:studio/index.html",
+   "sev": "medium",
+   "page": "studio/index.html",
+   "check": "title",
+   "msg": "/studio/ title is 83 characters (aim for 30–65 so Google shows it in full).",
+   "count": 1,
+   "fix": {
+    "kind": "title",
+    "page": "studio/index.html",
+    "label": "Rewrite title",
+    "value": "Photo Studio & Ads · F.A Vision Enterprise, Accra",
+    "id": "title:studio/index.html",
+    "applied": false
+   }
+  },
+  {
+   "id": "description:studio/index.html",
+   "sev": "medium",
+   "page": "studio/index.html",
+   "check": "description",
+   "msg": "/studio/ meta description is 217 characters (aim for 70–160).",
+   "count": 1,
+   "fix": {
+    "kind": "description",
+    "page": "studio/index.html",
+    "label": "Rewrite meta description",
+    "value": "We sell sofas, beds, dining sets, office chairs and student desks from GH₵650 in Odorkor, Accra. Delivery to Accra, Tema & Kasoa. WhatsApp 057 264 6176.",
+    "id": "description:studio/index.html",
+    "applied": false
+   }
+  },
+  {
+   "id": "sitemap:sitemap.xml",
+   "sev": "medium",
+   "page": "sitemap.xml",
+   "check": "sitemap",
+   "msg": "sitemap.xml lists only 5 URLs; none of your 33 products has its own URL in it.",
+   "count": 1
+  },
+  {
+   "id": "description:tiktok/index.html",
+   "sev": "low",
+   "page": "tiktok/index.html",
+   "check": "description",
+   "msg": "/tiktok/ meta description is 179 characters (aim for 70–160).",
+   "count": 1,
+   "fix": {
+    "kind": "description",
+    "page": "tiktok/index.html",
+    "label": "Rewrite meta description",
+    "value": "We sell sofas, beds, dining sets, office chairs and student desks from GH₵650 in Odorkor, Accra. Delivery to Accra, Tema & Kasoa. WhatsApp 057 264 6176.",
+    "id": "description:tiktok/index.html",
+    "applied": false
+   }
+  },
+  {
+   "id": "alt:tiktok/index.html",
+   "sev": "low",
+   "page": "tiktok/index.html",
+   "check": "alt",
+   "msg": "/tiktok/: 1 image(s) without alt text.",
+   "count": 1,
+   "fix": {
+    "kind": "alt",
+    "page": "tiktok/index.html",
+    "label": "Add alt text",
+    "value": {
+     "../assets/images/logo.png": "Logo, F.A Vision Enterprise furniture, Odorkor Accra"
+    },
+    "id": "alt:tiktok/index.html",
+    "applied": false
+   }
+  },
+  {
+   "id": "og:videos/index.html",
+   "sev": "low",
+   "page": "videos/index.html",
+   "check": "og",
+   "msg": "/videos/ is missing og:image (link previews on WhatsApp/Facebook).",
+   "count": 1
+  },
+  {
+   "id": "llms:llms.txt",
+   "sev": "low",
+   "page": "llms.txt",
+   "check": "llms",
+   "msg": "No /llms.txt: a short plain-text fact sheet (address, phones, products, prices) that AI search tools can read.",
+   "count": 1,
+   "fix": {
+    "kind": "llms",
+    "page": "llms.txt",
+    "label": "Create llms.txt",
+    "value": "Business facts, 3 branches with map links, every product with price and link.",
+    "id": "llms:llms.txt",
+    "applied": false
+   }
+  }
+ ],
+ "pages": [
+  {
+   "page": "index.html",
+   "label": "Home page",
+   "url": "https://favisionenterprize.github.io/",
+   "title": "F.A Vision Enterprise | Wholesale Furniture, Upholstery, Bookstore & Printing Press · Odorkor, Omanjor, Kasoa",
+   "title_len": 109,
+   "description": "F.A Vision Enterprise: bulk & wholesale furniture, upholstery, bookstore and printing press in Odorkor, Omanjor and Kasoa, Accra. School, office & home furniture made to order. Call 020 747 3267, 057 264 6176 or 054 614 8923.",
+   "h1": [
+    "Furniture that feels like home."
+   ],
+   "schema": [
+    "Answer",
+    "ContactPoint",
+    "FAQPage",
+    "FurnitureStore",
+    "GeoCoordinates",
+    "Offer",
+    "OfferCatalog",
+    "OpeningHoursSpecification",
+    "Organization",
+    "Person",
+    "PostalAddress",
+    "Question",
+    "Service",
+    "WebSite"
+   ],
+   "bytes": 444357,
+   "requests": 14,
+   "redirect": false,
+   "in_sitemap": true
+  },
+  {
+   "page": "products/index.html",
+   "label": "/products/",
+   "url": "https://favisionenterprize.github.io/products/",
+   "title": "All products · F.A Vision Enterprise · Furniture in Accra",
+   "title_len": 57,
+   "description": "Every product F.A Vision Enterprise sells: school, office, dining, living room and bedroom furniture, wallpaper, electronics, printing and partner products. Prices in GH₵. Order on WhatsApp 057 264 6176.",
+   "h1": [
+    "Everything we sell, in one place"
+   ],
+   "schema": [],
+   "bytes": 194702,
+   "requests": 8,
+   "redirect": false,
+   "in_sitemap": true
+  },
+  {
+   "page": "studio/index.html",
+   "label": "/studio/",
+   "url": "https://favisionenterprize.github.io/studio/",
+   "title": "AI Studio · Room Makeovers, Flyers, Business Kits & Letters · F.A Vision Enterprise",
+   "title_len": 83,
+   "description": "F.A Vision AI Studio in Odorkor: free room designer with furniture and wallpaper, bulk school & church layouts, funeral brochures and programmes, small business starter kits, letters and typing. Pay with MoMo or card.",
+   "h1": [
+    "Smart help for your home, school and business"
+   ],
+   "schema": [],
+   "bytes": 296938,
+   "requests": 10,
+   "redirect": false,
+   "in_sitemap": true
+  },
+  {
+   "page": "tiktok/index.html",
+   "label": "/tiktok/",
+   "url": "https://favisionenterprize.github.io/tiktok/",
+   "title": "TikTok Shop · F.A Vision Enterprise · Order on WhatsApp",
+   "title_len": 55,
+   "description": "Saw it on our TikTok? Shop F.A Vision furniture here: student desks, chairs, sofas, dining sets and more. Order on WhatsApp, pay with MoMo or a 50% deposit. Delivery across Accra.",
+   "h1": [
+    "Shop our TikTok furniture"
+   ],
+   "schema": [],
+   "bytes": 228442,
+   "requests": 9,
+   "redirect": false,
+   "in_sitemap": true
+  },
+  {
+   "page": "videos/index.html",
+   "label": "/videos/",
+   "url": "https://favisionenterprize.github.io/videos/",
+   "title": "Videos · F.A Vision Enterprise · Furniture in Accra",
+   "title_len": 51,
+   "description": "Watch F.A Vision Enterprise furniture videos: sofas, beds, dining sets, wardrobes and more from our Odorkor showroom in Accra. WhatsApp 057 264 6176 to order.",
+   "h1": [
+    "See it in action"
+   ],
+   "schema": [],
+   "bytes": 184322,
+   "requests": 5,
+   "redirect": false,
+   "in_sitemap": true
+  },
+  {
+   "page": "desks/index.html",
+   "label": "/desks/",
+   "url": "https://favisionenterprize.github.io/desks/",
+   "title": "Student Desk & Chair Sets from GH₵650 · F.A Vision Enterprise",
+   "title_len": 61,
+   "description": "Height-adjustable steel student desk & chair sets for SHS to University. GH₵650 per set, GH₵640 each from 50 sets. Delivery & school set-up available. Odorkor, Omanjor, Kasoa.",
+   "h1": [],
+   "schema": [],
+   "bytes": 2498,
+   "requests": 1,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-001.html",
+   "label": "/p/FAV-001.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-001.html",
+   "title": "Rainbow Glass-Top Dining Set · GH₵12,600 | F.A Vision Enterprise",
+   "title_len": 64,
+   "description": "Tempered-glass top, easy to wipe clean · 6 padded, fully upholstered chairs",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 237847,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-002.html",
+   "label": "/p/FAV-002.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-002.html",
+   "title": "Black Glass Dining Set · GH₵4,900 | F.A Vision Enterprise",
+   "title_len": 57,
+   "description": "Black tempered-glass top · 6 padded high-back chairs",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 172678,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-003.html",
+   "label": "/p/FAV-003.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-003.html",
+   "title": "Dining Set Collection · GH₵12,600 | F.A Vision Enterprise",
+   "title_len": 57,
+   "description": "5 designs in the showroom · Seat 4 to 6",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 259312,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-004.html",
+   "label": "/p/FAV-004.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-004.html",
+   "title": "Red Glass Dining Set · GH₵12,600 | F.A Vision Enterprise",
+   "title_len": 56,
+   "description": "Glossy red-brown glass top · 6 curved high-back chairs",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 228635,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-005.html",
+   "label": "/p/FAV-005.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-005.html",
+   "title": "Foldable Wood-Grain Dining Set · GH₵11,900 | F.A Vision Enterprise",
+   "title_len": 66,
+   "description": "Folds away to save space · 6 cushioned chairs included",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 276145,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-006.html",
+   "label": "/p/FAV-006.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-006.html",
+   "title": "Executive Director Chair · GH₵9,500 | F.A Vision Enterprise",
+   "title_len": 59,
+   "description": "High back with thick padding · Gas-lift height adjustment, tilt and 360° swivel",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 159092,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-007.html",
+   "label": "/p/FAV-007.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-007.html",
+   "title": "Mesh Secretary Chair · GH₵9,500 | F.A Vision Enterprise",
+   "title_len": 55,
+   "description": "Breathable mesh back with lumbar support · Height adjustable, 360° swivel",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 167816,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-008.html",
+   "label": "/p/FAV-008.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-008.html",
+   "title": "1.2 m Office Desk with Drawer Unit · GH₵4,500 | F.A Vision Enterprise",
+   "title_len": 69,
+   "description": "1.2 m work surface · Detachable 3-drawer unit",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 154678,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-009.html",
+   "label": "/p/FAV-009.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-009.html",
+   "title": "White Dressing Table with Mirror & Stool · GH₵7,450 | F.A Vision Enterprise",
+   "title_len": 75,
+   "description": "Arched mirror with side shelves · Drawers plus storage cabinet",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 226423,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-010.html",
+   "label": "/p/FAV-010.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-010.html",
+   "title": "Wardrobe · GH₵9,800 | F.A Vision Enterprise",
+   "title_len": 43,
+   "description": "4 doors plus top cabinets · Hanging space and shelves",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 227148,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-011.html",
+   "label": "/p/FAV-011.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-011.html",
+   "title": "L-Shaped Sectional Sofa · GH₵15,500 | F.A Vision Enterprise",
+   "title_len": 59,
+   "description": "Seats 5–6 comfortably · Deep, high-density foam cushions",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 301856,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-014.html",
+   "label": "/p/FAV-014.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-014.html",
+   "title": "Student Desk Chair Set · GH₵650 | F.A Vision Enterprise",
+   "title_len": 55,
+   "description": "Height-adjustable desk (73–88 cm) and chair (46–52 cm) · Powder-coated carbon steel frame with MDF/melamine top",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 216200,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-015.html",
+   "label": "/p/FAV-015.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-015.html",
+   "title": "L-Shaped Sofa Set · GH₵5,500 | F.A Vision Enterprise",
+   "title_len": 52,
+   "description": "Modern L-shaped design · Fabric & leather finish",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 202292,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-016.html",
+   "label": "/p/FAV-016.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-016.html",
+   "title": "Luxury Leather Sofa Set · GH₵8,500 | F.A Vision Enterprise",
+   "title_len": 58,
+   "description": "Premium leather · Modern design that elevates your home",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 255439,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-017.html",
+   "label": "/p/FAV-017.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-017.html",
+   "title": "Mesh Secretary Chair · GH₵4,500 | F.A Vision Enterprise",
+   "title_len": 55,
+   "description": "Breathable mesh back · 360° swivel with castor wheels",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 191247,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-018.html",
+   "label": "/p/FAV-018.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-018.html",
+   "title": "Strong Glass Centre Table · GH₵800 | F.A Vision Enterprise",
+   "title_len": 58,
+   "description": "Tempered glass top · Strong, durable base",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 271562,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-019.html",
+   "label": "/p/FAV-019.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-019.html",
+   "title": "Auditorium / Conference Chair · GH₵405 | F.A Vision Enterprise",
+   "title_len": 62,
+   "description": "Stackable steel frame · Padded seat and back",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 176299,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-020.html",
+   "label": "/p/FAV-020.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-020.html",
+   "title": "Business Cards · GH₵100 | F.A Vision Enterprise",
+   "title_len": 47,
+   "description": "100 pieces: GH₵50 · 200 pieces: GH₵100",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 198048,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-021.html",
+   "label": "/p/FAV-021.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-021.html",
+   "title": "A4 & A3 Copy Paper · GH₵450 | F.A Vision Enterprise",
+   "title_len": 51,
+   "description": "A4 & A3 sizes · 70 / 75 / 80gsm",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 214868,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-022.html",
+   "label": "/p/FAV-022.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-022.html",
+   "title": "TCL 43\" Smart Android TV · GH₵6,500 | F.A Vision Enterprise",
+   "title_len": 59,
+   "description": "43\" Full HD LED · Android TV + Google Play",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 215830,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-023.html",
+   "label": "/p/FAV-023.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-023.html",
+   "title": "Sigma 1.5HP Split Air Conditioner (BREEZE-HY12SB) · GH₵6,500 | F.A Vision Enterprise",
+   "title_len": 84,
+   "description": "1.5HP split unit · R410A refrigerant",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 185962,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-024.html",
+   "label": "/p/FAV-024.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-024.html",
+   "title": "TWYFORD Water Closet · GH₵750 | F.A Vision Enterprise",
+   "title_len": 53,
+   "description": "High-quality ceramic · Powerful straight-inlet flush",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Organization",
+    "Product"
+   ],
+   "bytes": 174409,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-025.html",
+   "label": "/p/FAV-025.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-025.html",
+   "title": "Tiles & Finishes · GH₵1,000 | F.A Vision Enterprise",
+   "title_len": 51,
+   "description": "Floor tiles (anti-skid) · Wall tiles: glossy or matte",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Organization",
+    "Product"
+   ],
+   "bytes": 238789,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-026.html",
+   "label": "/p/FAV-026.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-026.html",
+   "title": "Kavukçu Wheat Flour · GH₵640 | F.A Vision Enterprise",
+   "title_len": 52,
+   "description": "50kg professional pack · Strong dough, reliable yield",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Organization",
+    "Product"
+   ],
+   "bytes": 214406,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-027.html",
+   "label": "/p/FAV-027.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-027.html",
+   "title": "3D Wallpaper · GH₵650 | F.A Vision Enterprise",
+   "title_len": 45,
+   "description": "GH₵650 per roll · Brick, stone & pattern designs",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 283441,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-028.html",
+   "label": "/p/FAV-028.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-028.html",
+   "title": "Kids Plastic Chair · GH₵550 | F.A Vision Enterprise",
+   "title_len": 51,
+   "description": "Stackable, saves space · Bright assorted colours",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 212703,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-029.html",
+   "label": "/p/FAV-029.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-029.html",
+   "title": "Salon Chair · GH₵12,500 | F.A Vision Enterprise",
+   "title_len": 47,
+   "description": "Hydraulic height adjustment · Swivel base with chrome footrest",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 254292,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-030.html",
+   "label": "/p/FAV-030.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-030.html",
+   "title": "Hair Dressers Washing Bowl with Bar Chair · GH₵9,300 | F.A Vision Enterprise",
+   "title_len": 76,
+   "description": "Washing bowl with attached chair · From GH₵9,300 to GH₵10,950",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 212417,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-031.html",
+   "label": "/p/FAV-031.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-031.html",
+   "title": "10 Seater Foldable Round Table with Chairs · GH₵9,650 | F.A Vision Enterprise",
+   "title_len": 77,
+   "description": "Seats 10 people · Folds flat for storage",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 188211,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-032.html",
+   "label": "/p/FAV-032.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-032.html",
+   "title": "TV Stand · GH₵6,950 | F.A Vision Enterprise",
+   "title_len": 43,
+   "description": "Marble-effect top · Pull-out storage drawer",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 181131,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-033.html",
+   "label": "/p/FAV-033.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-033.html",
+   "title": "TV Stand + Centre Table Set · GH₵16,800 | F.A Vision Enterprise",
+   "title_len": 63,
+   "description": "TV stand and centre table set · Marble-effect tops",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 249836,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-034.html",
+   "label": "/p/FAV-034.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-034.html",
+   "title": "Student Mattress · GH₵1,200 | F.A Vision Enterprise",
+   "title_len": 51,
+   "description": "GH₵1,200 – GH₵1,300 by size · Ideal for boarding schools & hostels",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Product"
+   ],
+   "bytes": 216053,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-035.html",
+   "label": "/p/FAV-035.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-035.html",
+   "title": "Jasmine Rice · GH₵400 | F.A Vision Enterprise",
+   "title_len": 45,
+   "description": "Fragrant long-grain Thai Hom Mali rice · 25 lb bags",
+   "h1": [],
+   "schema": [
+    "Brand",
+    "Offer",
+    "Organization",
+    "Product"
+   ],
+   "bytes": 303958,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  }
+ ],
+ "keywords": [
+  {
+   "keyword": "furniture shop Accra",
+   "score": 5,
+   "covered": true,
+   "best_page": "videos/index.html",
+   "where": [
+    "title",
+    "description",
+    "text"
+   ],
+   "suggest": "index.html"
+  },
+  {
+   "keyword": "student desk Ghana",
+   "score": 1,
+   "covered": false,
+   "best_page": "index.html",
+   "where": [
+    "text"
+   ],
+   "suggest": "products/index.html",
+   "fix": {
+    "kind": "intro",
+    "page": "products/index.html",
+    "label": "Add keyword intro line",
+    "value": "Looking for student desk Ghana? F.A Vision Enterprise sells furniture such as 1.2 m Office Desk with Drawer Unit GH₵4,500, Student Desk Chair Set GH₵650 from our showroom at Tarazzo Road, Odorkor, with delivery across Accra, Tema & Kasoa. WhatsApp 057 264 6176.",
+    "keyword": "student desk Ghana",
+    "id": "intro:student-desk-ghana",
+    "applied": false
+   }
+  },
+  {
+   "keyword": "office chairs Accra",
+   "score": 1,
+   "covered": false,
+   "best_page": "index.html",
+   "where": [
+    "text"
+   ],
+   "suggest": "products/index.html",
+   "fix": {
+    "kind": "intro",
+    "page": "products/index.html",
+    "label": "Add keyword intro line",
+    "value": "Looking for office chairs Accra? F.A Vision Enterprise sells furniture such as Executive Director Chair GH₵9,500, Mesh Secretary Chair GH₵9,500 from our showroom at Tarazzo Road, Odorkor, with delivery across Accra, Tema & Kasoa. WhatsApp 057 264 6176.",
+    "keyword": "office chairs Accra",
+    "id": "intro:office-chairs-accra",
+    "applied": false
+   }
+  },
+  {
+   "keyword": "dining set Accra price",
+   "score": 1,
+   "covered": false,
+   "best_page": "tiktok/index.html",
+   "where": [
+    "description"
+   ],
+   "suggest": "products/index.html",
+   "fix": {
+    "kind": "intro",
+    "page": "products/index.html",
+    "label": "Add keyword intro line",
+    "value": "Looking for dining set Accra price? F.A Vision Enterprise sells furniture such as Rainbow Glass-Top Dining Set GH₵12,600, Black Glass Dining Set GH₵4,900 from our showroom at Tarazzo Road, Odorkor, with delivery across Accra, Tema & Kasoa. WhatsApp 057 264 6176.",
+    "keyword": "dining set Accra price",
+    "id": "intro:dining-set-accra-price",
+    "applied": false
+   }
+  },
+  {
+   "keyword": "sofa Odorkor",
+   "score": 1,
+   "covered": false,
+   "best_page": "index.html",
+   "where": [
+    "text"
+   ],
+   "suggest": "index.html",
+   "fix": {
+    "kind": "intro",
+    "page": "index.html",
+    "label": "Add keyword intro line",
+    "value": "Looking for sofa Odorkor? F.A Vision Enterprise sells furniture such as L-Shaped Sectional Sofa GH₵15,500, L-Shaped Sofa Set GH₵5,500 from our showroom at Tarazzo Road, Odorkor, with delivery across Accra, Tema & Kasoa. WhatsApp 057 264 6176.",
+    "keyword": "sofa Odorkor",
+    "id": "intro:sofa-odorkor",
+    "applied": false
+   }
+  },
+  {
+   "keyword": "school furniture Ghana",
+   "score": 1,
+   "covered": false,
+   "best_page": "index.html",
+   "where": [
+    "text"
+   ],
+   "suggest": "products/index.html",
+   "fix": {
+    "kind": "intro",
+    "page": "products/index.html",
+    "label": "Add keyword intro line",
+    "value": "Looking for school furniture Ghana? F.A Vision Enterprise sells furniture such as Student Desk Chair Set GH₵650, Kids Plastic Chair GH₵550 from our showroom at Tarazzo Road, Odorkor, with delivery across Accra, Tema & Kasoa. WhatsApp 057 264 6176.",
+    "keyword": "school furniture Ghana",
+    "id": "intro:school-furniture-ghana",
+    "applied": false
+   }
+  },
+  {
+   "keyword": "wholesale furniture Accra",
+   "score": 2,
+   "covered": false,
+   "best_page": "index.html",
+   "where": [
+    "description",
+    "text"
+   ],
+   "suggest": "index.html",
+   "fix": {
+    "kind": "intro",
+    "page": "index.html",
+    "label": "Add keyword intro line",
+    "value": "Looking for wholesale furniture Accra? F.A Vision Enterprise sells home, office and school furniture from our showroom at Tarazzo Road, Odorkor, with delivery across Accra, Tema & Kasoa. WhatsApp 057 264 6176.",
+    "keyword": "wholesale furniture Accra",
+    "id": "intro:wholesale-furniture-accra",
+    "applied": false
+   }
+  },
+  {
+   "keyword": "furniture Kasoa",
+   "score": 5,
+   "covered": true,
+   "best_page": "index.html",
+   "where": [
+    "title",
+    "description",
+    "text"
+   ],
+   "suggest": "index.html"
+  }
+ ],
+ "competitors": {
+  "status": "ok",
+  "list": [
+   {
+    "name": "Kpogas Furniture",
+    "url": "https://kpogasfurniture.com/",
+    "status": "ok",
+    "pages": [
+     {
+      "url": "https://kpogasfurniture.com/",
+      "title": true,
+      "title_len": 67,
+      "description": true,
+      "h1": 1,
+      "og": true,
+      "canonical": true,
+      "viewport": true,
+      "schema": [],
+      "phone": true,
+      "accra": false,
+      "whatsapp": true,
+      "blog": false,
+      "faq": false,
+      "kb": 302,
+      "requests": 48,
+      "img_no_alt": 0,
+      "secs": 0.5,
+      "keywords": []
+     },
+     {
+      "url": "https://kpogasfurniture.com/furniture",
+      "title": true,
+      "title_len": 67,
+      "description": true,
+      "h1": 0,
+      "og": true,
+      "canonical": true,
+      "viewport": true,
+      "schema": [],
+      "phone": true,
+      "accra": false,
+      "whatsapp": true,
+      "blog": false,
+      "faq": false,
+      "kb": 282,
+      "requests": 48,
+      "img_no_alt": 0,
+      "secs": 0.4,
+      "keywords": []
+     },
+     {
+      "url": "https://kpogasfurniture.com/furniture/a001",
+      "title": true,
+      "title_len": 67,
+      "description": true,
+      "h1": 0,
+      "og": true,
+      "canonical": true,
+      "viewport": true,
+      "schema": [],
+      "phone": true,
+      "accra": false,
+      "whatsapp": true,
+      "blog": false,
+      "faq": false,
+      "kb": 191,
+      "requests": 5,
+      "img_no_alt": 2,
+      "secs": 0.4,
+      "keywords": []
+     },
+     {
+      "url": "https://kpogasfurniture.com/furniture/a002",
+      "title": true,
+      "title_len": 67,
+      "description": true,
+      "h1": 0,
+      "og": true,
+      "canonical": true,
+      "viewport": true,
+      "schema": [],
+      "phone": true,
+      "accra": false,
+      "whatsapp": true,
+      "blog": false,
+      "faq": false,
+      "kb": 193,
+      "requests": 6,
+      "img_no_alt": 3,
+      "secs": 0.4,
+      "keywords": []
+     }
+    ],
+    "sitemap": true,
+    "https": true
+   },
+   {
+    "name": "Orca Deco",
+    "url": "https://orcadeco.com.gh/",
+    "status": "ok",
+    "pages": [
+     {
+      "url": "https://orcadeco.com.gh/",
+      "title": true,
+      "title_len": 70,
+      "description": true,
+      "h1": 0,
+      "og": true,
+      "canonical": true,
+      "viewport": true,
+      "schema": [
+       "FurnitureStore",
+       "OpeningHoursSpecification",
+       "PostalAddress"
+      ],
+      "phone": false,
+      "accra": true,
+      "whatsapp": false,
+      "blog": false,
+      "faq": false,
+      "kb": 4,
+      "requests": 4,
+      "img_no_alt": 0,
+      "secs": 1.0,
+      "keywords": [
+       "furniture shop Accra"
+      ]
+     }
+    ],
+    "sitemap": null,
+    "https": true
+   },
+   {
+    "name": "Phenicia",
+    "url": "https://phenicia.com.gh/",
+    "status": "unreachable: Tunnel connection failed: 502 Bad Gateway",
+    "pages": [],
+    "sitemap": null
+   },
+   {
+    "name": "Furniture Leaders",
+    "url": "https://furnitureleaders.com.gh/",
+    "status": "unreachable: Tunnel connection failed: 502 Bad Gateway",
+    "pages": [],
+    "sitemap": null
+   },
+   {
+    "name": "Furniture City Ghana",
+    "url": "https://furniturecityghana.com/",
+    "status": "ok",
+    "pages": [
+     {
+      "url": "https://furniturecityghana.com/",
+      "title": true,
+      "title_len": 52,
+      "description": false,
+      "h1": 0,
+      "og": false,
+      "canonical": true,
+      "viewport": true,
+      "schema": [],
+      "phone": false,
+      "accra": false,
+      "whatsapp": true,
+      "blog": false,
+      "faq": false,
+      "kb": 135,
+      "requests": 122,
+      "img_no_alt": 1,
+      "secs": 1.0,
+      "keywords": []
+     },
+     {
+      "url": "https://furniturecityghana.com/shop/",
+      "title": true,
+      "title_len": 27,
+      "description": false,
+      "h1": 1,
+      "og": false,
+      "canonical": false,
+      "viewport": true,
+      "schema": [],
+      "phone": false,
+      "accra": false,
+      "whatsapp": true,
+      "blog": false,
+      "faq": false,
+      "kb": 163,
+      "requests": 128,
+      "img_no_alt": 1,
+      "secs": 0.7,
+      "keywords": []
+     },
+     {
+      "url": "https://furniturecityghana.com/contact-us/",
+      "title": true,
+      "title_len": 33,
+      "description": false,
+      "h1": 0,
+      "og": false,
+      "canonical": true,
+      "viewport": true,
+      "schema": [],
+      "phone": false,
+      "accra": false,
+      "whatsapp": true,
+      "blog": false,
+      "faq": false,
+      "kb": 94,
+      "requests": 102,
+      "img_no_alt": 0,
+      "secs": 1.0,
+      "keywords": []
+     },
+     {
+      "url": "https://furniturecityghana.com/product/cs-06g/",
+      "title": true,
+      "title_len": 29,
+      "description": false,
+      "h1": 1,
+      "og": false,
+      "canonical": true,
+      "viewport": true,
+      "schema": [],
+      "phone": false,
+      "accra": false,
+      "whatsapp": true,
+      "blog": false,
+      "faq": false,
+      "kb": 114,
+      "requests": 114,
+      "img_no_alt": 2,
+      "secs": 0.7,
+      "keywords": []
+     }
+    ],
+    "sitemap": true,
+    "https": true
+   },
+   {
+    "name": "Jamila Home",
+    "url": "https://jamilahome.com/",
+    "status": "ok",
+    "pages": [
+     {
+      "url": "https://jamilahome.com/",
+      "title": true,
+      "title_len": 18,
+      "description": false,
+      "h1": 2,
+      "og": true,
+      "canonical": true,
+      "viewport": true,
+      "schema": [
+       "BreadcrumbList",
+       "EntryPoint",
+       "ImageObject",
+       "ListItem",
+       "Organization",
+       "PropertyValueSpecification",
+       "ReadAction",
+       "SearchAction",
+       "WebPage",
+       "WebSite"
+      ],
+      "phone": false,
+      "accra": true,
+      "whatsapp": true,
+      "blog": false,
+      "faq": true,
+      "kb": 365,
+      "requests": 129,
+      "img_no_alt": 26,
+      "secs": 0.4,
+      "keywords": []
+     }
+    ],
+    "sitemap": true,
+    "https": true
+   },
+   {
+    "name": "Casa Trasacco",
+    "url": "https://www.casatrasacco.com/",
+    "status": "HTTP 500",
+    "pages": [],
+    "sitemap": true
+   },
+   {
+    "name": "Furnart",
+    "url": "https://www.furnart-gh.com/",
+    "status": "unreachable: Tunnel connection failed: 502 Bad Gateway",
+    "pages": [],
+    "sitemap": null
+   }
+  ],
+  "gaps": {
+   "they_do": [
+    {
+     "what": "Separate category pages (sofas, beds, office…) that Google can rank one by one",
+     "who": [
+      "Kpogas Furniture",
+      "Furniture City Ghana"
+     ],
+     "fix": "Our shop filters live behind #hash links. Product pages + the Products page ItemList are the first step."
+    },
+    {
+     "what": "Breadcrumb schema",
+     "who": [
+      "Jamila Home"
+     ],
+     "fix": "Comes with real product pages."
+    }
+   ],
+   "we_beat": [
+    {
+     "who": "Kpogas Furniture",
+     "weak": [
+      "no LocalBusiness schema (address/phone for Google Maps & AI)",
+      "no FAQ",
+      "heavy home page (302 KB HTML, 48 files)",
+      "targets none of our keywords in title/H1"
+     ]
+    },
+    {
+     "who": "Orca Deco",
+     "weak": [
+      "no FAQ",
+      "no H1",
+      "no phone number on the home page"
+     ]
+    },
+    {
+     "who": "Furniture City Ghana",
+     "weak": [
+      "no meta description",
+      "no LocalBusiness schema (address/phone for Google Maps & AI)",
+      "no FAQ",
+      "no H1",
+      "no link-preview tags",
+      "heavy home page (135 KB HTML, 122 files)",
+      "no phone number on the home page",
+      "targets none of our keywords in title/H1"
+     ]
+    },
+    {
+     "who": "Jamila Home",
+     "weak": [
+      "no meta description",
+      "no LocalBusiness schema (address/phone for Google Maps & AI)",
+      "heavy home page (365 KB HTML, 129 files)",
+      "26 images without alt text",
+      "no phone number on the home page",
+      "targets none of our keywords in title/H1"
+     ]
+    },
+    {
+     "who": "Nobody",
+     "weak": [
+      "No competitor targets: student desk Ghana, office chairs Accra, dining set Accra price, sofa Odorkor, school furniture Ghana, wholesale furniture Accra, furniture Kasoa. Own these first."
+     ]
+    }
+   ]
+  }
+ },
+ "ai": {
+  "status": "no_key",
+  "help": "Add GEMINI_API_KEY (free at aistudio.google.com) or ANTHROPIC_API_KEY in GitHub → repo Settings → Secrets and variables → Actions → New repository secret."
+ },
+ "history": [
+  {
+   "d": "2026-10-15",
+   "score": 63,
+   "ai": null
+  }
+ ]
+}
