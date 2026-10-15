@@ -1,11 +1,11 @@
 {
- "generated": "2026-10-15T17:00:23Z",
+ "generated": "2026-10-15T17:00:47Z",
  "mode": "local",
  "score": 78,
- "prev_score": 75,
+ "prev_score": 78,
  "counts": {
   "high": 0,
-  "medium": 6,
+  "medium": 5,
   "low": 5
  },
  "site": {
@@ -17,22 +17,6 @@
   "product_pages_indexable": 33
  },
  "issues": [
-  {
-   "id": "description:index.html",
-   "sev": "medium",
-   "page": "index.html",
-   "check": "description",
-   "msg": "Home page meta description is 225 characters (aim for 70–160).",
-   "count": 1,
-   "fix": {
-    "kind": "description",
-    "page": "index.html",
-    "label": "Rewrite meta description",
-    "value": "We sell sofas, beds, dining sets, office chairs and student desks from GH₵650 in Odorkor, Accra. Delivery to Accra, Tema & Kasoa. WhatsApp 057 264 6176.",
-    "id": "description:index.html",
-    "applied": false
-   }
-  },
   {
    "id": "sameas:index.html",
    "sev": "medium",
@@ -413,7 +397,7 @@
    "url": "https://favisionenterprize.github.io/",
    "title": "Furniture Shop in Accra · Sofas, Desks & Office Chairs | F.A Vision",
    "title_len": 67,
-   "description": "F.A Vision Enterprise: bulk & wholesale furniture, upholstery, bookstore and printing press in Odorkor, Omanjor and Kasoa, Accra. School, office & home furniture made to order. Call 020 747 3267, 057 264 6176 or 054 614 8923.",
+   "description": "We sell sofas, beds, dining sets, office chairs and student desks from GH₵650 in Odorkor, Accra. Delivery to Accra, Tema & Kasoa. WhatsApp 057 264 6176.",
    "h1": [
     "Furniture that feels like home."
    ],
@@ -433,7 +417,7 @@
     "Service",
     "WebSite"
    ],
-   "bytes": 444315,
+   "bytes": 444240,
    "requests": 14,
    "redirect": false,
    "in_sitemap": true
@@ -1252,7 +1236,7 @@
    "keyword": "furniture shop Accra",
    "score": 5,
    "covered": true,
-   "best_page": "index.html",
+   "best_page": "videos/index.html",
    "where": [
     "title",
     "description",
@@ -1281,11 +1265,12 @@
   },
   {
    "keyword": "office chairs Accra",
-   "score": 4,
+   "score": 5,
    "covered": true,
    "best_page": "index.html",
    "where": [
     "title",
+    "description",
     "text"
    ],
    "suggest": "products/index.html"
@@ -1305,7 +1290,7 @@
    "keyword": "sofa Odorkor",
    "score": 2,
    "covered": false,
-   "best_page": "p/FAV-015.html",
+   "best_page": "index.html",
    "where": [
     "description",
     "text"
@@ -1342,11 +1327,10 @@
   },
   {
    "keyword": "wholesale furniture Accra",
-   "score": 2,
+   "score": 1,
    "covered": false,
    "best_page": "index.html",
    "where": [
-    "description",
     "text"
    ],
    "suggest": "index.html",
@@ -1362,11 +1346,10 @@
   },
   {
    "keyword": "furniture Kasoa",
-   "score": 2,
+   "score": 1,
    "covered": false,
    "best_page": "index.html",
    "where": [
-    "description",
     "text"
    ],
    "suggest": "index.html",
