@@ -1,12 +1,12 @@
 {
- "generated": "2026-10-15T16:59:54Z",
+ "generated": "2026-10-15T17:00:23Z",
  "mode": "local",
- "score": 75,
- "prev_score": 63,
+ "score": 78,
+ "prev_score": 75,
  "counts": {
   "high": 0,
-  "medium": 7,
-  "low": 4
+  "medium": 6,
+  "low": 5
  },
  "site": {
   "robots": true,
@@ -17,22 +17,6 @@
   "product_pages_indexable": 33
  },
  "issues": [
-  {
-   "id": "title:index.html",
-   "sev": "medium",
-   "page": "index.html",
-   "check": "title",
-   "msg": "Home page title is 109 characters (aim for 30–65 so Google shows it in full).",
-   "count": 1,
-   "fix": {
-    "kind": "title",
-    "page": "index.html",
-    "label": "Rewrite title",
-    "value": "Furniture Shop in Accra · Sofas, Desks & Office Chairs | F.A Vision",
-    "id": "title:index.html",
-    "applied": false
-   }
-  },
   {
    "id": "description:index.html",
    "sev": "medium",
@@ -348,6 +332,22 @@
    }
   },
   {
+   "id": "title:index.html",
+   "sev": "low",
+   "page": "index.html",
+   "check": "title",
+   "msg": "Home page title is 67 characters (aim for 30–65 so Google shows it in full).",
+   "count": 1,
+   "fix": {
+    "kind": "title",
+    "page": "index.html",
+    "label": "Rewrite title",
+    "value": "Furniture Shop in Accra · Sofas, Desks & Office Chairs | F.A Vision",
+    "id": "title:index.html",
+    "applied": true
+   }
+  },
+  {
    "id": "description:tiktok/index.html",
    "sev": "low",
    "page": "tiktok/index.html",
@@ -411,8 +411,8 @@
    "page": "index.html",
    "label": "Home page",
    "url": "https://favisionenterprize.github.io/",
-   "title": "F.A Vision Enterprise | Wholesale Furniture, Upholstery, Bookstore & Printing Press · Odorkor, Omanjor, Kasoa",
-   "title_len": 109,
+   "title": "Furniture Shop in Accra · Sofas, Desks & Office Chairs | F.A Vision",
+   "title_len": 67,
    "description": "F.A Vision Enterprise: bulk & wholesale furniture, upholstery, bookstore and printing press in Odorkor, Omanjor and Kasoa, Accra. School, office & home furniture made to order. Call 020 747 3267, 057 264 6176 or 054 614 8923.",
    "h1": [
     "Furniture that feels like home."
@@ -433,7 +433,7 @@
     "Service",
     "WebSite"
    ],
-   "bytes": 444357,
+   "bytes": 444315,
    "requests": 14,
    "redirect": false,
    "in_sitemap": true
@@ -1252,7 +1252,7 @@
    "keyword": "furniture shop Accra",
    "score": 5,
    "covered": true,
-   "best_page": "videos/index.html",
+   "best_page": "index.html",
    "where": [
     "title",
     "description",
@@ -1281,22 +1281,14 @@
   },
   {
    "keyword": "office chairs Accra",
-   "score": 1,
-   "covered": false,
+   "score": 4,
+   "covered": true,
    "best_page": "index.html",
    "where": [
+    "title",
     "text"
    ],
-   "suggest": "products/index.html",
-   "fix": {
-    "kind": "intro",
-    "page": "products/index.html",
-    "label": "Add keyword intro line",
-    "value": "Looking for office chairs Accra? F.A Vision Enterprise sells furniture such as Executive Director Chair GH₵9,500, Mesh Secretary Chair GH₵9,500 from our showroom at Tarazzo Road, Odorkor, with delivery across Accra, Tema & Kasoa. WhatsApp 057 264 6176.",
-    "keyword": "office chairs Accra",
-    "id": "intro:office-chairs-accra",
-    "applied": false
-   }
+   "suggest": "products/index.html"
   },
   {
    "keyword": "dining set Accra price",
@@ -1370,15 +1362,23 @@
   },
   {
    "keyword": "furniture Kasoa",
-   "score": 5,
-   "covered": true,
+   "score": 2,
+   "covered": false,
    "best_page": "index.html",
    "where": [
-    "title",
     "description",
     "text"
    ],
-   "suggest": "index.html"
+   "suggest": "index.html",
+   "fix": {
+    "kind": "intro",
+    "page": "index.html",
+    "label": "Add keyword intro line",
+    "value": "Looking for furniture Kasoa? F.A Vision Enterprise sells home, office and school furniture from our showroom at Tarazzo Road, Odorkor, with delivery across Accra, Tema & Kasoa. WhatsApp 057 264 6176.",
+    "keyword": "furniture Kasoa",
+    "id": "intro:furniture-kasoa",
+    "applied": false
+   }
   }
  ],
  "competitors": {
@@ -1745,7 +1745,7 @@
  "history": [
   {
    "d": "2026-10-15",
-   "score": 75,
+   "score": 78,
    "ai": null
   }
  ]
