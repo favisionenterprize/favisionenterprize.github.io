@@ -1549,10 +1549,10 @@ window.FAV_DATA = {
       "category": "Printing & Stationery",
       "type": "Business Cards",
       "marketplace_category": "Office Supplies",
-      "price_ghs": 100,
-      "negotiable": false,
+      "price_ghs": 450,
+      "negotiable": true,
       "icon": "🪪",
-      "description": "Professionally designed and printed business cards from our printing press at Omanjor. 100 pieces GH₵50 · 200 pieces GH₵100. Price with or without delivery.",
+      "description": "Professionally designed and printed business cards from our printing press at Omanjor.",
       "condition": "Brand New",
       "custom_order": false,
       "in_stock": true,
@@ -1560,8 +1560,6 @@ window.FAV_DATA = {
         "assets/images/products/fav-020-mp-1.jpg"
       ],
       "highlights": [
-        "100 pieces: GH₵50",
-        "200 pieces: GH₵100",
         "Design included",
         "Printed at Omanjor"
       ],
@@ -1575,7 +1573,10 @@ window.FAV_DATA = {
           "synced": "2026-10-01"
         }
       ],
-      "tiktok": 20
+      "tiktok": 20,
+      "material": "",
+      "dimensions": "",
+      "colors": []
     },
     {
       "id": "FAV-021",
