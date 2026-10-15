@@ -1,6 +1,6 @@
 {
- "generated": "2026-10-15T17:07:09Z",
- "mode": "local",
+ "generated": "2026-10-15T17:28:13Z",
+ "mode": "full",
  "score": 92,
  "prev_score": 92,
  "counts": {
@@ -1091,7 +1091,7 @@
       "kb": 302,
       "requests": 48,
       "img_no_alt": 0,
-      "secs": 0.5,
+      "secs": 0.4,
       "keywords": []
      },
      {
@@ -1133,7 +1133,7 @@
       "kb": 191,
       "requests": 5,
       "img_no_alt": 2,
-      "secs": 0.5,
+      "secs": 0.3,
       "keywords": []
      },
      {
@@ -1154,7 +1154,7 @@
       "kb": 193,
       "requests": 6,
       "img_no_alt": 3,
-      "secs": 0.8,
+      "secs": 0.3,
       "keywords": []
      }
     ],
@@ -1231,10 +1231,10 @@
       "whatsapp": true,
       "blog": false,
       "faq": false,
-      "kb": 135,
-      "requests": 123,
+      "kb": 134,
+      "requests": 120,
       "img_no_alt": 1,
-      "secs": 0.7,
+      "secs": 0.8,
       "keywords": []
      },
      {
@@ -1255,7 +1255,7 @@
       "kb": 163,
       "requests": 128,
       "img_no_alt": 1,
-      "secs": 0.7,
+      "secs": 0.8,
       "keywords": []
      },
      {
@@ -1276,13 +1276,13 @@
       "kb": 94,
       "requests": 102,
       "img_no_alt": 0,
-      "secs": 0.7,
+      "secs": 0.5,
       "keywords": []
      },
      {
-      "url": "https://furniturecityghana.com/product/w-122b/",
+      "url": "https://furniturecityghana.com/product/lotus-2/",
       "title": true,
-      "title_len": 29,
+      "title_len": 28,
       "description": false,
       "h1": 1,
       "og": false,
@@ -1294,8 +1294,8 @@
       "whatsapp": true,
       "blog": false,
       "faq": false,
-      "kb": 114,
-      "requests": 114,
+      "kb": 107,
+      "requests": 111,
       "img_no_alt": 2,
       "secs": 0.6,
       "keywords": []
@@ -1338,7 +1338,7 @@
       "kb": 365,
       "requests": 129,
       "img_no_alt": 26,
-      "secs": 0.3,
+      "secs": 0.4,
       "keywords": []
      }
     ],
@@ -1397,7 +1397,7 @@
       "no FAQ",
       "no H1",
       "no link-preview tags",
-      "heavy home page (135 KB HTML, 123 files)",
+      "heavy home page (134 KB HTML, 120 files)",
       "no phone number on the home page",
       "targets none of our keywords in title/H1"
      ]
@@ -1423,14 +1423,37 @@
   }
  },
  "ai": {
-  "status": "no_key",
-  "help": "Add GEMINI_API_KEY (free at aistudio.google.com) or ANTHROPIC_API_KEY in GitHub → repo Settings → Secrets and variables → Actions → New repository secret."
+  "status": "error",
+  "provider": null,
+  "results": [
+   {
+    "q": "What is the best furniture shop in Accra, Ghana?",
+    "error": "HTTP Error 404: Not Found"
+   },
+   {
+    "q": "Where can I buy student desks in bulk in Ghana?",
+    "error": "HTTP Error 404: Not Found"
+   },
+   {
+    "q": "Where can I buy affordable sofas in Accra?",
+    "error": "HTTP Error 404: Not Found"
+   },
+   {
+    "q": "Which furniture shops are in Odorkor or Kasoa?",
+    "error": "HTTP Error 404: Not Found"
+   },
+   {
+    "q": "Where can I buy office chairs in Accra and how much do they cost?",
+    "error": "HTTP Error 404: Not Found"
+   }
+  ],
+  "share": 0
  },
  "history": [
   {
    "d": "2026-10-15",
    "score": 92,
-   "ai": null
+   "ai": 0
   }
  ]
 }
