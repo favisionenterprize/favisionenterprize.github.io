@@ -1852,7 +1852,7 @@ window.FAV_DATA = {
       "price_ghs": 650,
       "negotiable": true,
       "icon": "🧱",
-      "description": "3D wallpaper that gives any wall a fresh look in a day: brick, stone and modern square patterns for living rooms, bedrooms, offices, shops and salons. GH₵650 per roll. Not sure how many rolls you need? Try your room free in our AI Studio and it works it out for you, or WhatsApp us your wall size.",
+      "description": "3D wallpaper that gives any wall a fresh look in a day: brick, stone and modern square patterns for living rooms, bedrooms, offices, shops and salons. Not sure how many rolls you need? Try your room free in our AI Studio and it works it out for you, or WhatsApp us your wall size.",
       "condition": "Brand New",
       "custom_order": false,
       "in_stock": true,
@@ -1864,7 +1864,6 @@ window.FAV_DATA = {
         "assets/images/products/fav-027-5.jpg"
       ],
       "highlights": [
-        "GH₵650 per roll",
         "Brick, stone & pattern designs",
         "Living rooms, offices, shops",
         "Rolls worked out free in AI Studio"
@@ -1878,7 +1877,9 @@ window.FAV_DATA = {
       ],
       "roll_m2": 5.3,
       "placeholder": false,
-      "tiktok": 24
+      "tiktok": 24,
+      "material": "",
+      "dimensions": ""
     },
     {
       "id": "FAV-028",
