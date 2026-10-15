@@ -228,6 +228,13 @@
   const OWN = new RegExp(`F\\.A Vision|FaVision|^@?${(handle || "favisionent").replace(/[.]/g, "\\.")}$`, "i");
   const firstName = nm => String(nm || "").replace(/^@/, "").trim().split(/\s+/)[0] || "there";
   const replyText = nm => String(job.reply_text || "Thank you {name}! 🙏").replace(/\{name\}/g, firstName(nm));
+  // Buy-intent comments ("MINE", "price", "how much"…) get the WhatsApp / TikTok-page reply instead (job.kw_*).
+  const kwRe = job.kw_on && (job.kw_words || []).length ? new RegExp(`(^|[^\\p{L}])(${job.kw_words.map(w => String(w).replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})(?=$|[^\\p{L}])`, "iu") : null;
+  const replyFor = cm => {
+    const said = String((cm.el && cm.el.innerText) || "").replace(cm.name || "", " ");
+    if (kwRe && job.kw_text && kwRe.test(said)) { const t = String(job.kw_text).replace(/\{name\}/g, firstName(cm.name)); return NET === "tiktok" ? Array.from(t).slice(0, 150).join("") : t; }
+    return replyText(cm.name);
+  };
   async function expandComments() {
     for (let i = 0; i < 6; i++) {
       const more = [...document.querySelectorAll("[role=button],button")].find(b => visible(b) && /^(View (more|all|previous|\d+ more) (comments?|replies)|View \d+ repl(y|ies)|See more comments|Load more comments|View more replies)/i.test((b.innerText || "").trim()));
@@ -482,7 +489,7 @@
       if (stopAsked) return;
       if ((job.rdone || 0) >= (job.max_replies || 60)) { why = "reply limit for this run reached"; break; }
       box(`${n}: replying to ${cm.name} (${replied + 1} of ${list.length})…`);
-      const err = await replyTo(cm, replyText(cm.name));
+      const err = await replyTo(cm, replyFor(cm));
       if (err.startsWith("warning:")) { job.res.push({ url, title, ...s, commented, replied, why: err }); job.i++; await save(); return finish(`${NAME} showed "${err.slice(9)}". Stopped so the account stays safe.`); }
       if (!err) { replied++; job.rdone = (job.rdone || 0) + 1; await save(); await countdown(rand(job.rmin || 12, job.rmax || 25), `${n}: replied to ${cm.name} ✓. Next reply in`); }
       else why = err;

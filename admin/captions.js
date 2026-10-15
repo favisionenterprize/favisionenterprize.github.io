@@ -2,7 +2,7 @@
 // X, TikTok, YouTube, videos, share buttons). Each call builds a fresh text from random
 // parts (hook, body, price, place, payment, call to action, hashtags), so posts never carry
 // the same description twice, and every text ends with a call to action.
-// window.FAV_CAPTIONS.write(p, { net, ad, studio, full, tags, subject })  → text
+// window.FAV_CAPTIONS.write(p, { net, ad, studio, full, tags, subject, style })  → text  (style "classy": upscale TikTok caption)
 // window.FAV_CAPTIONS.title(p, { net })                                   → short title (YouTube / TikTok)
 // window.FAV_CAPTIONS.cta(p, { net })                                     → one call to action
 // net: "fb" | "ig" | "x" | "tiktok" | "youtube" | "share"; p can be null (brand / AI Studio / general video).
@@ -196,6 +196,65 @@
     return [hook, "", ...body.flatMap(b => [b, ""]), priceLine, extra, place, pay, "", cta(p, o), link, "", tags(p, net, o.tags)].join("\n");
   }
 
+  // ---------------------------------------------------------------- "classy" TikTok captions (style: "classy")
+  // Upscale, calm and short: a scroll-stopping hook, 1–2 lines of real detail from the product's own facts
+  // (material, size, finish, colours, highlights: nothing invented), the price and delivery, a comment-to-buy
+  // ask, the /tiktok/ page written as text (TikTok captions can't link), then the hashtag mix.
+  // Aims for under ~300 characters before the hashtags; never longer than TikTok's 2,200.
+  const HOOKS = {
+    living: ["Quiet luxury for your living room.", "The sofa your guests will ask about.", "Sink in. Stay a while.", "Living rooms, elevated.", "Soft lines. Serious comfort.", "Your evenings deserve this.", "Comfort that looks expensive."],
+    dining: ["Dinner, but make it beautiful.", "Where Sunday lunches become memories.", "Set the table for the whole family.", "The table everyone gathers around.", "Every meal, a little more special."],
+    bedroom: ["Mornings start better here.", "Your bedroom, quietly upgraded.", "Calm, clean, and beautifully made.", "Rest like you mean it."],
+    office: ["Work like the boss you are.", "Posture, sorted. Style, included.", "The chair that means business.", "Your desk setup, upgraded."],
+    school: ["The desk that ends homework fights.", "Built for bright futures.", "Classrooms that inspire focus.", "Study time, sorted."],
+    decor: ["Walls that start conversations.", "One roll. A whole new room.", "Texture you can almost feel.", "Turn a plain wall into a feature."],
+    pantry: ["Kitchen staples, sorted.", "Good food starts here.", "Stock up, the smart way.", "Your kitchen will thank you."],
+    tech: ["Upgrade the way you relax.", "Cool rooms. Clear pictures.", "Home comfort, switched on."],
+    other: ["Small detail. Big difference.", "Made to be noticed.", "Elegance, delivered.", "Simply better at home.", "Quality you can feel."]
+  };
+  function kindOf(p) {
+    const c = (p.category || "") + " " + (p.marketplace_category || "") + " " + p.name;
+    if (/groceries|flour|rice|oil/i.test(c)) return "pantry";
+    if (/electronics|appliance|tv\b|air condition/i.test(c)) return "tech";
+    if (/desk|school|student|classroom/i.test(c)) return "school";
+    if (/office|executive|secretary|conference|auditorium/i.test(c)) return "office";
+    if (/dining/i.test(c)) return "dining";
+    if (/bed|wardrobe|dressing|mattress/i.test(c)) return "bedroom";
+    if (/sofa|living|centre table|tv stand/i.test(c)) return "living";
+    if (/wallpaper|decor|tile/i.test(c)) return "decor";
+    return "other";
+  }
+  const CLASSY_CTA = [
+    "Comment 'MINE' and we'll send you the details 👇",
+    "Comment your area for the delivery price 📍",
+    "Which colour would you pick? Tell us below 👇",
+    "Comment 'PRICE' and we'll reply with everything you need ✨",
+    "Want it in your space? Comment 'YES' 👇",
+    "Tag the person who needs this, then comment 'MINE' 👇",
+    "Comment 'DETAILS' and we'll message you 💬"
+  ];
+  function classy(p, o) {
+    const s = p.seller, name = short(p), net = o.net || "tiktok";
+    const hook = pick(HOOKS[kindOf(p)].concat([`${name}. Nothing more to say.`, `Meet the ${name.toLowerCase()}.`]));
+    const cols = [].concat(p.colors || []);
+    const facts = [
+      p.material && `${String(p.material).replace(/\.$/, "")}.`,
+      p.dimensions && `${String(p.dimensions).replace(/\.$/, "")}.`,
+      cols.length > 1 && `In ${cols.slice(0, 3).join(", ").replace(/, ([^,]*)$/, " or $1")}.`,
+      ...(p.highlights || []).map(h => String(h).replace(/\.$/, "") + ".")
+    ].filter(Boolean).filter(x => x.length <= 90);
+    const detail = shuffle(facts).slice(0, 1 + Math.floor(Math.random() * 2)).join(" ");
+    let price = money(p.price_ghs);
+    if (p.id === "FAV-014") price += pick([" a set (GH₵640 each from 50)", " per set"]);
+    const where = s ? `Sold by ${s.name}. Delivery available.` : "Delivered across Accra, Tema & Kasoa.";
+    const ctaLine = cols.length > 1 ? pick(CLASSY_CTA) : pick(CLASSY_CTA.filter(c => !/colour/.test(c)));
+    const linkLine = pick(["🔗 favisionenterprize.github.io/tiktok/", "Shop: favisionenterprize.github.io/tiktok/", "More at favisionenterprize.github.io/tiktok/"]);
+    const pricePart = pick([`${price}. ${where}`, `${price} · ${where}`]);
+    let main = [hook, detail, pricePart, ctaLine, linkLine].filter(Boolean).join("\n");
+    if (main.length > 300 && detail) main = [hook, pricePart, ctaLine, linkLine].join("\n");
+    return (main + "\n\n" + tags(p, net, o.tags)).slice(0, 2200).trim();
+  }
+
   // X: add as many of the hashtags (trending one first) as fit in 200 characters, leaving room for the ask.
   function xTags(t, p) {
     const ROOM = 200;
@@ -280,7 +339,8 @@
     o = o || {};
     let t = "";
     for (let i = 0; i < 6; i++) {
-      t = tidy(withAsk(o.studio ? studio(o) : p ? product(p, o) : general(o), o.net), o.net);
+      // classy: its own comment-to-buy ask replaces the "where are you seeing this from" line
+      t = o.style === "classy" && p && !o.studio ? tidy(classy(p, o), o.net || "tiktok") : tidy(withAsk(o.studio ? studio(o) : p ? product(p, o) : general(o), o.net), o.net);
       if (!recent.includes(t)) break;
     }
     recent.push(t); if (recent.length > 300) recent.shift();

@@ -699,3 +699,31 @@ input.now-num { width: 4.5em !important; display: inline-block; padding: 2px 6px
 .tts-add label { display: grid; gap: 4px; font-size: 14px; font-weight: 600; }
 .tts-add select { width: 100%; max-width: 100%; padding: 8px; border: 1px solid var(--line); border-radius: 8px; font: inherit; }
 @media (max-width: 420px) { .fa-list li.tts-row { grid-template-columns: 40px minmax(0, 1fr); } .fa-list li .tts-btns { grid-column: 2; } }
+
+/* Marketplace sync (admin/mkauto.js) and profile check (admin/profiles.js) */
+.mk-list li { flex-wrap: wrap; align-items: center; }
+.mk-list li > span:first-child { display: flex; align-items: center; gap: 8px; flex: 1 1 200px; }
+.mk-list img { border-radius: 4px; object-fit: cover; flex: 0 0 auto; }
+.mk-list .now-right { flex-wrap: wrap; white-space: normal; }
+.mk-list select { max-width: 220px; font-size: 13px; padding: 4px 6px; }
+@media (max-width: 640px) { .mk-list .now-right { width: 100%; justify-content: flex-start; } }
+.mk-thread { border-top: 1px solid var(--line); padding: 12px 0 4px; }
+.mk-thread.unread .mk-thread-head b::before { content: "● "; color: var(--sell); }
+.mk-msgs { list-style: none; margin: 6px 0; padding: 0; font-size: 14px; }
+.mk-msgs li { padding: 4px 8px; margin: 3px 0; border-radius: 8px; background: #f3f5f9; overflow-wrap: anywhere; }
+.mk-msgs li.me { background: #e8f1ff; margin-left: 24px; }
+.mk-msgs small { color: var(--muted); font-weight: 600; margin-right: 4px; }
+.mk-draft { display: block; font-size: 13px; color: var(--muted); }
+.mk-draft textarea { display: block; width: 100%; box-sizing: border-box; margin-top: 4px; font: 14px/1.4 inherit; padding: 8px; border: 1px solid var(--line); border-radius: 8px; }
+#prof-card .eng-table td { white-space: normal; vertical-align: top; }
+#prof-card input[type=url] { width: 100%; min-width: 180px; box-sizing: border-box; }
+#prof-card .up { color: var(--ok); } #prof-card .down { color: var(--err); }
+/* TikTok captions card (admin/ttcaptions.js) */
+.ttc-post { border-top: 1px solid var(--line); padding: 12px 0 2px; }
+.ttc-head { display: flex; gap: 12px; align-items: flex-start; }
+.ttc-head img { border-radius: 6px; object-fit: cover; flex: 0 0 auto; background: #eee; }
+.ttc-head > div { display: flex; flex-direction: column; gap: 3px; min-width: 0; font-size: 14px; }
+.ttc-head small { overflow-wrap: anywhere; }
+.ttc-head select { max-width: 100%; font-size: 13px; padding: 4px 6px; }
+.ttc-head .down { color: var(--err); }
+.ttc-post textarea { display: block; width: 100%; box-sizing: border-box; margin-top: 8px; font: 14px/1.4 inherit; padding: 8px; border: 1px solid var(--line); border-radius: 8px; }

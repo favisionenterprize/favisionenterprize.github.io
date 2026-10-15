@@ -24,7 +24,10 @@
       reply_text: "Thank you {name}! 🙏 Please like, share and follow F.A Vision Enterprise for more deals.",
       reply_nets: { fb: true, ig: true, x: true, tiktok: true }, max_replies: 60, max_invites: 100,
       likers_text: "{names} thank you for viewing, liking and sharing 🙏 Follow F.A Vision Enterprise and like the page for more deals!",
-      likers_per_comment: 4, max_likers: 60, thank_nets: { fb: true, ig: true, x: true, tiktok: true }
+      likers_per_comment: 4, max_likers: 60, thank_nets: { fb: true, ig: true, x: true, tiktok: true },
+      // Buy-intent comments ("MINE", "price"…, the ask in the classy TikTok captions) get this reply instead.
+      kw_on: true, kw_words: "mine, price, how much, interested, i want, want it, details, available, yes, dm, inbox",
+      kw_text: "Hi {name}! 🙌 WhatsApp 057 264 6176 for the details and delivery price, or shop at favisionenterprize.github.io/tiktok/"
     },
     followers: [], posts: {}, runs: [], liked: {}
   };
@@ -75,6 +78,7 @@
       text: run.statsOnly ? "" : (run.text || commentText()), statsOnly: !!run.statsOnly, reply_text: run.reply_text || replyTemplate(),
       limit: st.limit, max_comments: st.max_comments, min: st.min, max: st.max, max_replies: st.max_replies, max_invites: st.max_invites,
       likers_text: likersTemplate(st), likers_per_comment: st.likers_per_comment, max_likers: st.max_likers,
+      kw_on: !!st.kw_on, kw_words: String(st.kw_words || "").split(",").map(w => w.trim()).filter(Boolean).slice(0, 30), kw_text: st.kw_text,
       skip: Object.keys(S.liked || {}).filter(k => k.startsWith(net + ":")).map(k => k.slice(net.length + 1)),
       then: then && then.length ? then : null
     });
@@ -220,6 +224,10 @@
             <textarea name="reply_text" rows="3" maxlength="600">${esc(st.reply_text)}</textarea></label>
           <div class="eng-nets">${Object.entries(NETS).map(([k, t]) => `<label class="fa-check"><input type="checkbox" name="rnet_${k}" ${st.reply_nets[k] ? "checked" : ""}> ${t}</label>`).join("")}</div>
           <label>Most replies per network per run <input name="max_replies" type="number" min="1" max="300" value="${st.max_replies}"></label>
+          <label class="fa-check"><input type="checkbox" name="kw_on" ${st.kw_on ? "checked" : ""}> Buy-intent comments get the WhatsApp reply below instead</label>
+          <label>Words that mean “I want to buy” (comma separated) <input name="kw_words" type="text" maxlength="400" value="${esc(st.kw_words)}"></label>
+          <label>Reply to them ({name} = first name; keep under 150 characters for TikTok)
+            <textarea name="kw_text" rows="2" maxlength="280">${esc(st.kw_text)}</textarea></label>
           <p class="muted fa-small">Example: <span class="eng-rpreview">${esc(replyTemplate().replace(/\{name\}/g, "Ama"))}</span></p>
           <div class="fa-actions"><button class="btn btn-sell" type="submit">↩️ Reply to all commenters</button></div>
           <p class="muted fa-small">Goes through every post and replies under each comment from other people (also people you replied to before), 12–25 s apart. Facebook likers and sharers can't be messaged: Facebook no longer shows Pages who they are.</p>
@@ -284,7 +292,8 @@
     e.preventDefault();
     const el = f.elements, st = S.settings;
     const next = f.id === "eng-reply"
-      ? { ...st, reply_text: el.reply_text.value.trim(), reply_nets: Object.fromEntries(Object.keys(NETS).map(k => [k, el["rnet_" + k].checked])), max_replies: Math.min(300, Math.max(1, parseInt(el.max_replies.value, 10) || 60)) }
+      ? { ...st, reply_text: el.reply_text.value.trim(), reply_nets: Object.fromEntries(Object.keys(NETS).map(k => [k, el["rnet_" + k].checked])), max_replies: Math.min(300, Math.max(1, parseInt(el.max_replies.value, 10) || 60)),
+          kw_on: el.kw_on.checked, kw_words: el.kw_words.value.trim() || EMPTY.settings.kw_words, kw_text: el.kw_text.value.trim() || EMPTY.settings.kw_text }
       : f.id === "eng-likers"
         ? { ...st, likers_text: el.likers_text.value.trim() || EMPTY.settings.likers_text, likers_per_comment: Math.min(10, Math.max(1, parseInt(el.likers_per_comment.value, 10) || 4)), thank_nets: Object.fromEntries(Object.keys(NETS).map(k => [k, el["tnet_" + k].checked])), max_likers: Math.min(200, Math.max(1, parseInt(el.max_likers.value, 10) || 60)) }
         : { ...st, max_invites: Math.min(500, Math.max(1, parseInt(el.max_invites.value, 10) || 100)) };

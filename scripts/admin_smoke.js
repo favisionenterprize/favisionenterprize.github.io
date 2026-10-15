@@ -17,7 +17,7 @@ try { ({ chromium } = require("playwright")); } catch (e) {
   }
 }
 const ROOT = path.resolve(__dirname, "..") + "/";
-const SCRIPTS = ["admin/captions.js", "admin/igauto.js", "admin/ttshop.js", "admin/socauto.js", "admin/vidauto.js", "admin/engage.js", "admin/fbauto.js"];
+const SCRIPTS = ["admin/captions.js", "admin/igauto.js", "admin/ttshop.js", "admin/socauto.js", "admin/vidauto.js", "admin/engage.js", "admin/mkauto.js", "admin/profiles.js", "admin/ttcaptions.js", "admin/fbauto.js"];
 const MIN_TEXT = 150; // a tab with less text than this counts as blank
 
 const files = {};
@@ -166,6 +166,128 @@ async function ttshop(browser) {
   return { n: res.saved.length, problems };
 }
 
+// Marketplace tab (admin/mkauto.js) + profile card (admin/profiles.js): with a mock scan and mock buyer
+// threads, checks the matching (missing / price differences / duplicates / not linked), that buyer text
+// is escaped, that "Use … on the site" commits the price, and that the add-on jobs carry the right data.
+async function marketplace(browser) {
+  const page = await browser.newPage({ viewport: { width: 390, height: 900 } });
+  const problems = [];
+  page.on("pageerror", e => problems.push("page error: " + e.message));
+  await page.route("http://smoke.test/**", r => r.fulfill({ status: 200, contentType: "text/html",
+    body: `<div id="top-actions"></div><span id="fa-badge"></span><div id="fa-alert"></div><section class="screen" id="screen-fbauto"><div id="fa-body"></div></section>` }));
+  await page.goto("http://smoke.test/admin/");
+  const prods = files["data/products.json"];
+  const f1 = prods.find(p => p.id === "FAV-001").facebook_listings;
+  const scan = { d: today, t: today + "T08:00:00Z", n: 5, listings: [
+    { t: f1[0].title, price: 12000, status: "Active", listed: "2026-09-01", id: f1[0].id, renew: "ready" },
+    { t: "Dinning Set with Chairs", price: 12600, status: "Active", listed: "2026-09-02", id: f1[1].id, renew: "wait", next: "2026-10-20" },
+    { t: "Dinning Set with Chairs", price: 12600, status: "Active", listed: "2026-09-03", id: f1[2].id, renew: "ready" },
+    { t: "Student Desk and Chair Set", price: 650, status: "Active", listed: "2026-10-01" },
+    { t: "Kitchen blender", price: 300, status: "Active", listed: "2026-10-01", id: "999000111" },
+    { t: "Old sofa", price: 100, status: "Sold", listed: "2026-01-01", id: "999000112" }
+  ] };
+  await page.evaluate(({ files, ESC, scan }) => {
+    window.__files = files; window.__toasts = []; window.__commits = []; window.__jobs = [];
+    window.__files["data/marketplace-scan.json"] = { settings: {}, scan, listed: [], runs: [], skip: [] };
+    window.__files["data/tiktok-captions.json"] = { scan: { d: "2026-10-15", n: 3, posts: [
+      { id: "7400000000000000001", url: "https://www.tiktok.com/@favision/video/7400000000000000001", desc: "Luxury leather sofa set now in stock at our Odorkor showroom", thumb: "", alt: "" },
+      { id: "7400000000000000002", url: "https://www.tiktok.com/@favision/photo/7400000000000000002", desc: "", thumb: "https://p16.tiktokcdn.com/x.jpg", alt: "<img src=x onerror=window.__xss=3>student desk chair in a classroom" },
+      { id: "7400000000000000003", url: "javascript:alert(1)", desc: "#fyp #accra", thumb: "javascript:x", alt: "" } ] }, fixed: {}, runs: [] };
+    let list = JSON.parse(JSON.stringify(files["data/products.json"]));
+    window.__list = () => list;
+    document.documentElement.dataset.favautoExt = "5"; document.documentElement.dataset.favautoMode = "live";
+    window.addEventListener("message", e => { if (e.data && e.data.type === "favauto-start") window.__jobs.push(e.data); });
+    window.confirm = () => true;
+    window.FAV_CONFIG = { escapeHtml: (0, eval)(ESC), localPhone: x => String(x).replace(/^\+233/, "0"), formatPrice: n => "GH₵" + Number(n).toLocaleString() };
+    window.FAV_ADMIN = {
+      readJsonFile: async (f, e) => JSON.parse(JSON.stringify(window.__files[f] || e)),
+      saveJson: async (f, m, msg, e) => { window.__files[f] = m(JSON.parse(JSON.stringify(window.__files[f] || e))); return window.__files[f]; },
+      commit: async o => { list = o.mutate(list); window.__commits.push(o.message); return list; },
+      commitFiles: async o => o, backendSigned: async () => ({ ok: true, text: "AI draft text" }),
+      products: () => list, business: () => files["data/business.json"], productUrl: p => "https://favisionenterprize.github.io/p/" + p.id + ".html",
+      signedIn: () => true, toast: (m, bad) => window.__toasts.push((bad ? "✗ " : "") + m), busy: () => {}, friendly: e => String(e && e.message || e), show: () => {}, refreshDash: () => {}
+    };
+    window.open = () => null;
+  }, { files, ESC, scan });
+  for (const f of SCRIPTS) await page.addScriptTag({ content: fs.readFileSync(ROOT + f, "utf8") });
+  const r = await page.evaluate(async () => {
+    const wait = ms => new Promise(r => setTimeout(r, ms));
+    const out = {};
+    await window.FAV_FBAUTO.open(); await wait(200);
+    window.FAV_MKAUTO._test.setInbox({ t: new Date().toISOString(), locked: 1, threads: [
+      { url: "https://www.facebook.com/messages/t/1/", name: "<img src=x onerror=\"window.__xss=1\">Ama", listing: "Student Desk and Chair Set", snippet: "Is it available?", msgs: [{ me: false, text: "<script>window.__xss=2</script>Is this still available? Do you deliver to Kasoa?" }] },
+      { url: "javascript:alert(1)", name: "Kojo", listing: "Dinning Set with Chairs", snippet: "How much", msgs: [] }
+    ] });
+    window.FAV_FBAUTO._test.setTab("market"); await wait(200);
+    const an = window.FAV_MKAUTO.analyse();
+    out.missing = an.missing.map(p => p.id); out.mismatch = an.mismatch.map(r => r.t); out.dups = an.dups.map(g => g.length);
+    out.unmatched = an.unmatched.map(r => r.t); out.ready = an.ready.length; out.deskMatch = (an.rows[3].m || {}).p && an.rows[3].m.p.id;
+    out.text = document.querySelector("#fa-body").innerText.length;
+    out.imgs = document.querySelectorAll("#mk-inbox .mk-thread-head img, #mk-inbox .mk-msgs script").length;
+    out.xss = window.__xss || 0;
+    out.links = [...document.querySelectorAll("#mk-inbox a")].map(a => a.getAttribute("href"));
+    out.draft = (document.querySelector("[data-mk-draft='0']") || {}).value || "";
+    out.lockedNote = /PIN/.test(document.querySelector("#mk-inbox").innerText);
+    // Use the Marketplace price on the site
+    document.querySelector("[data-mk-price]").click(); await wait(200);
+    out.price = window.__list().find(p => p.id === "FAV-001").price_ghs;
+    // List one missing product → job payload
+    const btn = document.querySelector("[data-mk-list]"); out.listPid = btn && btn.dataset.mkList; if (btn) btn.click(); await wait(200);
+    document.querySelector("[data-mk=scan]").click(); await wait(100);
+    document.querySelector("[data-mk=inbox]").click(); await wait(100);
+    out.jobs = window.__jobs.map(j => ({ url: j.url, kind: j.job.kind, q: j.job.q }));
+    // Profile card on the Engagement tab, Check button → first job
+    window.FAV_FBAUTO._test.setTab("engage"); await wait(200);
+    out.profCard = !!document.querySelector("#prof-card");
+    window.__jobs = [];
+    document.querySelector("#prof-form [data-prof=check]").click(); await wait(300);
+    out.profJob = window.__jobs[0] && window.__jobs[0].job;
+    // TikTok captions card (X & TikTok tab)
+    window.FAV_FBAUTO._test.setTab("social"); await wait(200);
+    const tc = document.querySelector("#ttc-card");
+    out.ttc = tc ? { posts: tc.querySelectorAll(".ttc-post").length, imgs: [...tc.querySelectorAll("img")].map(i => i.getAttribute("src")), links: [...tc.querySelectorAll(".ttc-post a")].map(a => a.getAttribute("href")),
+      pick: (tc.querySelector("[data-ttc-pick='7400000000000000002']") || {}).value, text: (tc.querySelector("[data-ttc-text='7400000000000000002']") || {}).value || "" } : null;
+    out.xss2 = window.__xss || 0;
+    window.__jobs = [];
+    const fx = document.querySelector("[data-ttc-fix='7400000000000000002']"); if (fx) fx.click(); await wait(200);
+    out.ttJob = window.__jobs[0] && window.__jobs[0].job;
+    const soc = window.FAV_SOCAUTO.job("tiktok", { products: ["FAV-014"], limit: 1 });
+    out.socText = soc && soc.job.q[0] && soc.job.q[0].text;
+    window.FAV_FBAUTO._test.setTab("market"); await wait(100);
+    // Today tab shows the Marketplace step and the run plan includes the scan only (listing defaults off)
+    out.steps = window.FAV_FBAUTO._test.stepsToday();
+    out.toasts = window.__toasts;
+    return out;
+  });
+  const want = (c, msg) => { if (!c) problems.push(msg); };
+  want(r.mismatch.length === 1 && r.mismatch[0] === f1[0].title, "price differences should be just the FAV-001 listing at 12000: " + JSON.stringify(r.mismatch));
+  want(r.dups.length === 1 && r.dups[0] === 3, "expected one duplicate group of 3 (\"Dinning Sets with Chairs\" = \"Dinning Set with Chairs\"): " + JSON.stringify(r.dups));
+  want(r.unmatched.length === 1 && r.unmatched[0] === "Kitchen blender", "expected only the blender unlinked: " + JSON.stringify(r.unmatched));
+  want(r.deskMatch === "FAV-014", "the student desk listing should match FAV-014 by title, got " + r.deskMatch);
+  want(!r.missing.includes("FAV-001") && !r.missing.includes("FAV-014") && r.missing.includes("FAV-002"), "missing list wrong: " + r.missing.join());
+  want(r.ready === 2, "expected 2 listings ready to renew, got " + r.ready);
+  want(r.imgs === 0 && !r.xss, "buyer text was not escaped (" + r.imgs + " elements, xss " + r.xss + ")");
+  want(r.links.every(h => /^https:\/\/www\.facebook\.com\//.test(h)), "a thread link isn't a facebook.com link: " + r.links.join());
+  want(/FAV-014\.html/.test(r.draft) && /available/i.test(r.draft) && /Odorkor/.test(r.draft) && /Kasoa|deliver/i.test(r.draft), "template draft missing facts: " + r.draft);
+  want(r.lockedNote, "PIN-locked chats aren't mentioned");
+  want(r.price === 12000, "Use price on site didn't commit 12000 (got " + r.price + ")");
+  const lj = r.jobs.find(j => j.kind === "mklist"), it = lj && lj.q && lj.q[0];
+  want(it && it.p === r.listPid && it.text.trim().endsWith(`Order or see more: https://favisionenterprize.github.io/p/${it.p}.html`) && it.imgs.length && it.imgs.every(u => u.startsWith("https://favisionenterprize.github.io/assets/")) && it.cond === "New" && it.cats.length, "mklist job is wrong: " + JSON.stringify(it).slice(0, 400));
+  want(it && !/where are you (seeing|watching)/i.test(it.text), "Marketplace description still has the comment ask");
+  want(r.jobs.some(j => j.kind === "mkscan" && /marketplace\/you\/selling/.test(j.url)) && r.jobs.some(j => j.kind === "mkinbox"), "scan / inbox jobs not launched: " + JSON.stringify(r.jobs.map(j => j.kind)));
+  want(r.profCard && r.profJob && r.profJob.kind === "profile" && r.profJob.net === "fb" && r.profJob.mode === "check" && /favisionenterprize/.test(r.profJob.link) && /Fresh stock/.test(r.profJob.pin), "profile check job wrong: " + JSON.stringify(r.profJob));
+  const tt = r.ttc || {};
+  want(tt.posts === 2, "TikTok captions card should list the 2 posts without a real description, got " + tt.posts);
+  want(tt.pick === "FAV-014" && /Comment/i.test(tt.text) && /favisionenterprize\.github\.io\/tiktok\//.test(tt.text) && /GH₵650/.test(tt.text) && !/where are you seeing/i.test(tt.text), "classy caption for the student desk post: " + tt.text);
+  want(!r.xss2 && (tt.imgs || []).every(u => /^https:/.test(u)) && (tt.links || []).every(h => /^https:\/\/www\.tiktok\.com\//.test(h)), "TikTok card escapes text and only shows https thumbnails/links: " + JSON.stringify([tt.imgs, tt.links]));
+  want(r.ttJob && r.ttJob.kind === "ttfix" && r.ttJob.q.length === 1 && r.ttJob.q[0].id === "7400000000000000002" && r.ttJob.q[0].text === tt.text, "Fix this one sends the edited caption: " + JSON.stringify(r.ttJob).slice(0, 300));
+  want(/favisionenterprize\.github\.io\/tiktok\//.test(r.socText || "") && /Comment/i.test(r.socText || ""), "new TikTok autopilot posts use the classy caption by default: " + r.socText);
+  want(!r.steps.includes("mklist"), "listing must be off in the daily run by default: " + r.steps.join());
+  (r.toasts || []).filter(t => t.startsWith("✗")).forEach(t => problems.push("error toast: " + t));
+  await page.close();
+  return { problems, n: r.missing.length };
+}
+
 (async () => {
   const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
   let failed = 0;
@@ -184,6 +306,9 @@ async function ttshop(browser) {
   const t = await ttshop(browser);
   if (t.problems.length) { failed++; console.log("✗ TikTok shop card"); t.problems.forEach(p => console.log("    " + p)); }
   else console.log(`✓ TikTok shop card: reorder, hide, add and save work (${t.n} products saved)`);
+  const m = await marketplace(browser);
+  if (m.problems.length) { failed++; console.log("✗ Marketplace tab / profile card"); m.problems.forEach(p => console.log("    " + p)); }
+  else console.log(`✓ Marketplace tab: matching, duplicates, escaping, price commit and add-on jobs work (${m.n} products not listed in the mock scan); profile card launches its check; TikTok captions card lists empty posts, writes classy captions and launches the fix`);
   await browser.close();
   console.log(failed ? `\n${failed} check(s) FAILED` : "\nAll admin checks passed.");
   process.exit(failed ? 1 : 0);

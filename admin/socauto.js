@@ -16,7 +16,7 @@
   const EMPTY = {
     settings: {
       x: { on: true, daily_posts: 2, account: "FaVisionEnt" },
-      tiktok: { on: true, daily_posts: 2 },
+      tiktok: { on: true, daily_posts: 2, classy: true },   // classy: upscale comment-to-buy captions (captions.js style "classy")
       pause_min_s: 90, pause_max_s: 240
     },
     posts: [], runs: []
@@ -42,7 +42,8 @@
   const shortName = p => String(p.name).split(" — ")[0];
 
   function caption(net, it, v, full) {
-    if (window.FAV_CAPTIONS) return window.FAV_CAPTIONS.write(it.studio ? null : it.p, { net, ad: it.ad, studio: !!it.studio, full: !!full, subject: it.subject });
+    const classy = net === "tiktok" && S && S.settings.tiktok.classy && it.p && !it.studio && !full;
+    if (window.FAV_CAPTIONS) return window.FAV_CAPTIONS.write(it.studio ? null : it.p, { net, ad: it.ad, studio: !!it.studio, full: !!full, subject: it.subject, ...(classy ? { style: "classy" } : {}) });
     const B = A.business();
     const site = location.origin + "/";
     if (it.studio) {
@@ -186,6 +187,7 @@
       ${window.FAV_TTSHOP ? window.FAV_TTSHOP.renderCard() : ""}
       ${trendsCard()}
       ${card("x")}${card("tiktok")}
+      ${window.FAV_TTCAPS ? window.FAV_TTCAPS.renderCard() : ""}
       <section class="fa-card">
         <header><h2>Settings</h2></header>
         <form class="fa-settings" id="soc-settings">
@@ -194,6 +196,7 @@
           <label>X account (without @) <input name="x_account" type="text" value="${esc(S.settings.x.account)}"></label>
           <label class="fa-check"><input name="tt_on" type="checkbox" ${S.settings.tiktok.on ? "checked" : ""}> Post on TikTok in the daily run</label>
           <label>TikTok posts a day <input name="tt_daily" type="number" min="1" max="10" value="${S.settings.tiktok.daily_posts}"></label>
+          <label class="fa-check"><input name="tt_classy" type="checkbox" ${S.settings.tiktok.classy ? "checked" : ""}> Classy TikTok captions (short upscale hook, price, “Comment ‘MINE’” ask)</label>
           <button class="btn btn-ghost btn-sm" type="submit">Save settings</button>
         </form>
       </section>
@@ -228,7 +231,7 @@
     const f = form.elements, clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, parseInt(v, 10) || lo));
     await save(s => {
       s.settings.x = { ...s.settings.x, on: f.x_on.checked, daily_posts: clamp(f.x_daily.value, 1, 10), account: f.x_account.value.replace(/^@/, "").trim() || "FaVisionEnt" };
-      s.settings.tiktok = { ...s.settings.tiktok, on: f.tt_on.checked, daily_posts: clamp(f.tt_daily.value, 1, 10) };
+      s.settings.tiktok = { ...s.settings.tiktok, on: f.tt_on.checked, daily_posts: clamp(f.tt_daily.value, 1, 10), classy: !!(f.tt_classy && f.tt_classy.checked) };
       return s;
     }, "X/TikTok autopilot: settings");
   }
