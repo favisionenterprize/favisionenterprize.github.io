@@ -328,6 +328,21 @@ async function marketplace(browser) {
     await BS.afterRun({ kind: "tiktok", id: "zz", res: [{ ok: true, sound: "Highlife Groove", k: "x" }] });
     out.timers = (JSON.parse(localStorage.getItem("fa-boost-timers") || "[]")).length;
     out.used = window.__files["data/sounds.json"].used.map(u => u.name);
+    // Favourite artists: default list, round-robin per post, found / not available counted and shown, add / remove
+    out.artistsDefault = BS.sounds().settings.artists.slice();
+    const tj2 = window.FAV_SOCAUTO.job("tiktok", { products: ["FAV-014", "FAV-016"], limit: 2 });
+    out.favs = tj2 ? tj2.job.q.map(x => x.sound && x.sound.fav) : [];
+    await BS.afterRun({ kind: "tiktok", id: "zz2", res: [{ ok: true, sound: "Fall", fav: "Davido", fav_found: true, k: "a" }, { ok: true, sound: "Highlife Groove", fav: "Kojo Blak", fav_tried: true, why: "artist not available in picker: Kojo Blak", k: "b" }] });
+    out.favNext = BS.soundFor("tiktok");
+    out.stats = BS.artistStats();
+    window.FAV_FBAUTO._test.setTab("boost"); await wait(200);
+    const ac = document.querySelector("#boost-artists-card");
+    out.artistCard = ac ? ac.innerText : "";
+    const fm = document.querySelector("#boost-artists");
+    fm.elements.add.value = "Sarkodie"; fm.requestSubmit(); await wait(300);
+    out.afterAdd = window.__files["data/sounds.json"].settings.artists.slice();
+    document.querySelector("[data-boost-artist-del='1']").click(); await wait(300);
+    out.afterDel = window.__files["data/sounds.json"].settings.artists.slice();
     // Today tab shows the Marketplace step and the run plan includes the scan only (listing defaults off)
     out.steps = window.FAV_FBAUTO._test.stepsToday();
     out.toasts = window.__toasts;
@@ -368,7 +383,7 @@ async function marketplace(browser) {
   want(r.ttcFixJob && r.ttcFixJob.kind === "ttfix" && fq.map(x => x.id).join() === [T.prep, T.desk, T.tags].join() && /^Bold colour/.test(fq[0].text) && fq.every(x => x.text.length > 20), "Fix all queues every editable post, oldest first, prepared caption first, none too old / app-only: " + JSON.stringify(fq.map(x => [x.id, x.text.slice(0, 30)])));
   want(r.ttJob && r.ttJob.kind === "ttfix" && r.ttJob.q.length === 1 && r.ttJob.q[0].id === T.desk && /\nEdited\.$/.test(r.ttJob.q[0].text), "Fix just this one sends the edited caption: " + String(JSON.stringify(r.ttJob)).slice(0, 300));
   want(/Last fix .*: 2 of 3 descriptions added, 1 failed/.test(r.ttcAfter && r.ttcAfter.summary), "final summary on the card: " + JSON.stringify(r.ttcAfter));
-  want(/favisionenterprize\.github\.io\/tiktok\//.test(r.socText || "") && /Comment/i.test(r.socText || ""), "new TikTok autopilot posts use the classy caption by default: " + r.socText);
+  want(/favisionenterprize\.github\.io\/tiktok\//.test(r.socText || "") && /Comment|Tell us below/i.test(r.socText || ""), "new TikTok autopilot posts use the classy caption by default: " + r.socText);
   const b = r.boost || {};
   want(b.text > 500 && !b.xss && !b.imgs, "Boost tab draws and escapes sound names: " + JSON.stringify(b));
   want(r.sound1 && r.sound1.name === "Highlife Groove" && r.sound2 && r.sound2.name !== "Highlife Groove" && r.sound2.name !== "Afro Vibes Commercial", "sound rotation skips sounds used in the last 3 days: " + JSON.stringify([r.sound1, r.sound2]));
@@ -378,6 +393,10 @@ async function marketplace(browser) {
   want(r.refreshTT && r.refreshTT.kind === "tiktok" && r.refreshTT.q.length === 1 && r.refreshTT.q[0].p === "FAV-014" && r.refreshTT.q[0].sound && (r.refreshTT.then || [])[0] === "pinswap:tiktok", "Refresh pinned on TikTok posts FAV-014 with a sound, then pins: " + JSON.stringify(r.refreshTT).slice(0, 300));
   want(r.refreshIG && r.refreshIG.q[0].video && /\.mp4$/.test(r.refreshIG.q[0].img) && (r.refreshIG.then || [])[0] === "pinswap:ig", "Refresh pinned on Instagram posts our Short as a Reel: " + JSON.stringify(r.refreshIG && r.refreshIG.q[0]).slice(0, 300));
   want(r.pinStore && r.pinStore.tiktok && r.pinStore.tiktok.pin && /Fresh stock/.test(r.pinStore.tiktok.unpin), "new post to pin and old one to unpin are remembered: " + JSON.stringify(r.pinStore));
+  want(r.artistsDefault.join() === "Davido,Kojo Blak,Hillsong Worship" && r.favs.length === 2 && r.favs[0] && r.favs[0] !== r.favs[1], "favourite artists: default list, a different artist each post: " + JSON.stringify([r.artistsDefault, r.favs]));
+  want(r.favNext && r.favNext.fav === "Hillsong Worship" && r.favNext.avoid.includes("Fall") && r.favNext.name, "next post tries the artist tried longest ago, avoids the track used lately, keeps a trending fallback: " + JSON.stringify(r.favNext));
+  want(r.stats.find(x => x.a === "Davido").found === 1 && r.stats.find(x => x.a === "Kojo Blak").missing === 1 && /found 1/.test(r.artistCard) && /not available 1/.test(r.artistCard), "Boost tab shows found / not available per artist: " + JSON.stringify(r.stats) + " " + r.artistCard.slice(0, 200));
+  want(r.afterAdd.join() === "Davido,Kojo Blak,Hillsong Worship,Sarkodie" && r.afterDel.join() === "Davido,Hillsong Worship,Sarkodie", "artists can be added and removed (data/sounds.json settings.artists): " + JSON.stringify([r.afterAdd, r.afterDel]));
   want(r.timers === 3 && r.used.includes("Highlife Groove"), "after a TikTok post: 3 first-hour reply checks and the sound noted: " + JSON.stringify([r.timers, r.used]));
   want(!r.steps.includes("mklist"), "listing must be off in the daily run by default: " + r.steps.join());
   (r.toasts || []).filter(t => t.startsWith("✗")).forEach(t => problems.push("error toast: " + t));

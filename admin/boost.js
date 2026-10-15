@@ -6,6 +6,11 @@
 //                      downloaded or put in our own videos (they keep our own Afrobeats beats).
 //   Auto-sound       – TikTok posts (socauto) and Instagram Reels pick a sound from that list inside the
 //                      platform's own picker; the same sound isn't reused within `rotate_days`.
+//   Favourite artists – with "Try favourite artists first" on, each TikTok post / Reel searches the picker for
+//                      the next artist in turn (Davido, Kojo Blak, Hillsong Worship by default) before the
+//                      trending list. Only what the platform's own picker offers this account is used (a
+//                      business account sees the Commercial Music Library only, so the artist may be missing:
+//                      then the trending sound, or none). Found / not available is counted per artist.
 //   Refresh pinned   – a sound can't be added to a published post, so this re-posts the pinned product as a
 //                      new post (TikTok photo post with a sound, Instagram Reel, Facebook Page video from our
 //                      Short with our beat), pins the new one and unpins the old one. Never deletes.
@@ -21,7 +26,8 @@
   const esc = C.escapeHtml;
   const SFILE = "data/sounds.json", BFILE = "data/boost.json";
   const SITE = "https://favisionenterprize.github.io/";
-  const EMPTY_S = { d: null, t: null, sounds: [], manual: [], used: [], notes: [] };
+  const DEF_ARTISTS = ["Davido", "Kojo Blak", "Hillsong Worship"];
+  const EMPTY_S = { d: null, t: null, settings: { artists: DEF_ARTISTS, artists_first: true }, sounds: [], manual: [], used: [], notes: [] };
   const EMPTY_B = {
     settings: { auto_sound: true, rotate_days: 3, best_time: false, stories: true, first_hour: true, reels: true, hooks: true },
     pinned: [], stories: [], reels: [], runs: []
@@ -36,7 +42,13 @@
   const shellAtLeast = (a, b) => { const v = String(document.documentElement.dataset.favautoShell || "0").split(".").map(Number); return v[0] > a || (v[0] === a && (v[1] || 0) >= b); };
   let SS = null, B = null;
 
-  function normS(s) { s = { ...EMPTY_S, ...(s || {}) }; ["sounds", "manual", "used", "notes"].forEach(k => { s[k] = Array.isArray(s[k]) ? s[k] : []; }); return s; }
+  function normS(s) {
+    s = { ...EMPTY_S, ...(s || {}) };
+    ["sounds", "manual", "used", "notes"].forEach(k => { s[k] = Array.isArray(s[k]) ? s[k] : []; });
+    s.settings = { artists_first: true, ...(s.settings || {}) };
+    s.settings.artists = Array.isArray(s.settings.artists) ? s.settings.artists.map(a => String(a).trim()).filter(Boolean) : DEF_ARTISTS.slice();
+    return s;
+  }
   function normB(s) { s = s || JSON.parse(JSON.stringify(EMPTY_B)); s.settings = { ...EMPTY_B.settings, ...(s.settings || {}) }; ["pinned", "stories", "reels", "runs"].forEach(k => { s[k] = s[k] || []; }); return s; }
   async function load(force) {
     if (!SS || !B || force) { const [a, b] = await Promise.all([A.readJsonFile(SFILE, EMPTY_S), A.readJsonFile(BFILE, EMPTY_B)]); SS = normS(a); B = normB(b); }
@@ -54,15 +66,41 @@
   function soundFor(platform, taken) {
     if (!SS || !B || !B.settings.auto_sound) return null;
     const cut = daysAgo(B.settings.rotate_days);
-    const recent = new Set(SS.used.filter(u => u.platform === platform && u.d >= cut).map(u => u.name.toLowerCase()).concat((taken || []).map(x => String(x).toLowerCase())));
+    const recent = new Set(SS.used.filter(u => u.platform === platform && u.d >= cut && u.name).map(u => u.name.toLowerCase()).concat((taken || []).map(x => String(x).toLowerCase())));
     const s = soundList(platform).find(x => !recent.has(String(x.name).toLowerCase()));
-    return s ? { name: s.name, artist: s.artist || "" } : null;
+    const fa = favArtist(platform, taken);
+    if (!s && !fa) return null;
+    return { name: s ? s.name : "", artist: s ? s.artist || "" : "", ...(fa || {}) };
+  }
+  // Favourite artists, round-robin: the artist tried longest ago on that network goes next; within one run
+  // each post takes the next one (an "artist:<name>" marker in `taken`). `avoid` = their tracks used lately.
+  function favArtist(platform, taken) {
+    const st = SS.settings, list = st.artists;
+    if (!st.artists_first || !list.length) return null;
+    const lastTry = a => SS.used.filter(u => u.fav && u.platform === platform && u.fav.toLowerCase() === a.toLowerCase()).map(u => u.t || u.d || "").sort().pop() || "";
+    const order = list.map((a, i) => ({ a, i, l: lastTry(a) })).sort((x, y) => x.l.localeCompare(y.l) || x.i - y.i).map(x => x.a);
+    const n = (taken || []).filter(x => /^artist:/.test(x)).length;
+    const fav = order[n % order.length];
+    if (taken) taken.push("artist:" + fav);
+    const cut = daysAgo(B.settings.rotate_days);
+    const avoid = [...new Set(SS.used.filter(u => u.fav && u.found && u.name && u.d >= cut).map(u => u.name))].slice(-40);
+    return { fav, avoid };
+  }
+  function artistStats() {
+    return SS.settings.artists.map(a => {
+      const tries = SS.used.filter(u => u.fav && u.fav.toLowerCase() === a.toLowerCase());
+      const f = tries.filter(u => u.found);
+      return { a, found: f.length, missing: tries.length - f.length, last: (f.slice(-1)[0] || {}).name || "" };
+    });
   }
   async function noteSounds(res, platform) {
-    const used = (res || []).filter(r => r.ok && r.sound).map(r => ({ name: String(r.sound).slice(0, 80), platform, d: today() }));
+    const t = new Date().toISOString();
+    const used = (res || []).filter(r => r.sound && (r.ok || r.fav_found)).map(r => ({ name: String(r.sound).slice(0, 80), platform, d: today(), t, ...(r.fav && r.fav_found ? { fav: String(r.fav).slice(0, 60), found: true } : {}) }));
+    // the picker was searched for the artist and offered nothing usable to this account
+    const na = (res || []).filter(r => r.fav && !r.fav_found && r.fav_tried).map(r => ({ fav: String(r.fav).slice(0, 60), found: false, platform, d: today(), t }));
     const missed = (res || []).filter(r => /no sound/.test(r.why || "")).length;
-    if (!used.length && !missed) return;
-    await saveS(s => { s.used = s.used.concat(used).slice(-400); if (missed) s.notes = s.notes.concat([{ d: today(), platform, text: `${missed} post${missed === 1 ? "" : "s"} went out without a sound` }]).slice(-50); return s; }, `Boost: sounds used on ${NETS[platform]}`);
+    if (!used.length && !na.length && !missed) return;
+    await saveS(s => { s.used = s.used.concat(used, na).slice(-400); if (missed) s.notes = s.notes.concat([{ d: today(), platform, text: `${missed} post${missed === 1 ? "" : "s"} went out without a sound` }]).slice(-50); return s; }, `Boost: sounds used on ${NETS[platform]}`);
   }
   const soundsWaiting = () => !!SS && B && B.settings.auto_sound && SS.d !== today();
 
@@ -320,7 +358,7 @@
     const st = B.settings, p = product(pinnedPid());
     const q = ls("fa-boost-queue"), timers = (ls("fa-boost-timers") || []).filter(x => Date.parse(x.at) > Date.now());
     const tp = top();
-    const row = s => `<li><span>${s.rank ? `#${s.rank} ` : ""}${esc(s.name)}${s.artist ? ` <small class="muted">· ${esc(s.artist)}</small>` : ""}${s.manual ? ` <small class="muted">(your list)</small>` : ""}</span><small>${SS.used.some(u => u.name.toLowerCase() === String(s.name).toLowerCase() && u.d >= daysAgo(st.rotate_days)) ? "used lately" : ""}</small></li>`;
+    const row = s => `<li><span>${s.rank ? `#${s.rank} ` : ""}${esc(s.name)}${s.artist ? ` <small class="muted">· ${esc(s.artist)}</small>` : ""}${s.manual ? ` <small class="muted">(your list)</small>` : ""}</span><small>${SS.used.some(u => u.name && u.name.toLowerCase() === String(s.name).toLowerCase() && u.d >= daysAgo(st.rotate_days)) ? "used lately" : ""}</small></li>`;
     const lastOf = (arr, net) => arr.filter(x => x.net === net).slice(-1)[0];
     return `<section class="fa-card">
         <header><h2>Trending sounds</h2><span class="muted fa-small">${SS.d ? (SS.d === today() ? "checked today" : "last checked " + esc(SS.d)) : "not checked yet"}</span></header>
@@ -334,6 +372,18 @@
             <textarea name="manual" rows="5" maxlength="4000">${esc(SS.manual.map(m => `${m.platform || "any"} | ${m.name} | ${m.artist || ""}`).join("\n"))}</textarea></label>
             <button class="btn btn-ghost btn-sm" type="submit">Save my list</button></form></details>
         ${SS.notes.length ? `<p class="muted fa-small">${esc(SS.notes.slice(-2).map(n => n.text).join(" · "))}</p>` : ""}
+      </section>
+
+      <section class="fa-card" id="boost-artists-card">
+        <header><h2>Favourite artists</h2><span class="muted fa-small">${SS.settings.artists_first ? "tried first" : "off"}</span></header>
+        <p class="muted">Each TikTok post and Instagram Reel searches the platform's own sound picker for the next artist in turn (a different one each post, not the same track within ${plural(st.rotate_days, "day")}). Only songs the picker offers this account are used: the platform has licensed those. A business account only sees the Commercial Music Library, so an artist may not be there: then a trending sound is used, or none. No song is ever downloaded.</p>
+        <form class="fa-settings" id="boost-artists">
+          <label class="fa-check"><input type="checkbox" name="artists_first" ${SS.settings.artists_first ? "checked" : ""}> Try favourite artists first</label>
+          <ul class="fa-list">${artistStats().map((x, i) => `<li><span>${esc(x.a)}${x.last ? ` <small class="muted">· last: ${esc(x.last)}</small>` : ""}</span><small>found ${x.found} · not available ${x.missing} <button type="button" class="btn btn-ghost btn-sm" data-boost-artist-del="${i}" aria-label="Remove ${esc(x.a)}">✕</button></small></li>`).join("") || `<li><span class="muted">no artists: trending sounds only</span></li>`}</ul>
+          <label>Add an artist <input name="add" maxlength="60" placeholder="e.g. Sarkodie"></label>
+          <button class="btn btn-ghost btn-sm" type="submit">Save</button>
+        </form>
+        ${artistStats().some(x => x.missing && !x.found) ? `<p class="muted fa-small">“Not available” every time usually means the account is a business account (Commercial Music Library only).</p>` : ""}
       </section>
 
       <section class="fa-card" id="boost-pinned">
@@ -379,9 +429,18 @@
   const rerender = () => { if (F()) F().render(); };
   document.addEventListener("click", async e => {
     if (!B || !e.target.closest) return;
-    const b = e.target.closest("[data-boost],[data-boost-refresh],[data-boost-reel],[data-boost-copy]");
+    const b = e.target.closest("[data-boost],[data-boost-refresh],[data-boost-reel],[data-boost-copy],[data-boost-artist-del]");
     if (!b) return;
     e.preventDefault();
+    if (b.dataset.boostArtistDel != null) {
+      const i = Number(b.dataset.boostArtistDel), name = SS.settings.artists[i];
+      if (name == null) return;
+      A.busy("Saving…");
+      try { await saveS(s => { s.settings.artists = s.settings.artists.filter(a => a.toLowerCase() !== name.toLowerCase()); return s; }, `Boost: removed ${name} from favourite artists`); A.toast("Removed ✓"); rerender(); }
+      catch (err) { A.toast(A.friendly(err), true); }
+      finally { A.busy(null); }
+      return;
+    }
     if (b.dataset.boost === "sounds") return startSounds();
     if (b.dataset.boost === "story") return startStory();
     if (b.dataset.boostReel) return startReel(b.dataset.boostReel);
@@ -394,11 +453,14 @@
   });
   document.addEventListener("submit", async e => {
     const f = e.target;
-    if (!f || !B || (f.id !== "boost-settings" && f.id !== "boost-manual")) return;
+    if (!f || !B || (f.id !== "boost-settings" && f.id !== "boost-manual" && f.id !== "boost-artists")) return;
     e.preventDefault();
     A.busy("Saving…");
     try {
-      if (f.id === "boost-manual") {
+      if (f.id === "boost-artists") {
+        const on = f.elements.artists_first.checked, add = f.elements.add.value.replace(/\s+/g, " ").trim().slice(0, 60);
+        await saveS(s => { s.settings.artists_first = on; if (add && !s.settings.artists.some(a => a.toLowerCase() === add.toLowerCase())) s.settings.artists = s.settings.artists.concat([add]).slice(0, 20); return s; }, "Boost: favourite artists");
+      } else if (f.id === "boost-manual") {
         const manual = f.elements.manual.value.split("\n").map(l => l.split("|").map(x => x.trim())).filter(a => a.length >= 2 && a[1])
           .map(([pl, name, artist]) => ({ platform: /^(tiktok|ig|any)$/i.test(pl) ? pl.toLowerCase() : "any", name: name.slice(0, 80), artist: (artist || "").slice(0, 60) })).slice(0, 40);
         await saveS(s => { s.manual = manual; return s; }, "Boost: my sounds list");
@@ -413,6 +475,6 @@
     finally { A.busy(null); }
   });
 
-  window.FAV_BOOST = { load, state: () => B, sounds: () => SS, renderTab, receive, afterRun, steps, deferSteps, startSounds, startStory, startReel, refresh, pinswap, soundFor, prefer, favour, hooks, nextSlot, inSlot, tick,
+  window.FAV_BOOST = { load, state: () => B, sounds: () => SS, renderTab, receive, afterRun, steps, deferSteps, startSounds, startStory, startReel, refresh, pinswap, soundFor, artistStats, prefer, favour, hooks, nextSlot, inSlot, tick,
     _test: { set: (b, s) => { B = normB(b); SS = normS(s); }, top, productInText, afterPost } };
 })();

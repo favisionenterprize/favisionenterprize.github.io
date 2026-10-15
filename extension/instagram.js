@@ -134,7 +134,7 @@
     const it = job.q[job.i];
     const n = `Post ${job.i + 1} of ${job.q.length}`;
     if (!(await arrive("https://www.instagram.com/", "post" + job.i))) return;
-    const record = (ok, why) => { job.res.push({ k: it.k, p: it.p || null, ok, why: [why, it.soundNote].filter(Boolean).join(" · "), sound: it.soundUsed || null, t: new Date().toISOString() }); job.i++; return save(); };
+    const record = (ok, why) => { job.res.push({ k: it.k, p: it.p || null, ok, why: [why, it.soundNote].filter(Boolean).join(" · "), sound: it.soundUsed || null, ...(it.soundFav ? { fav: it.soundFav, fav_found: !!it.soundFavFound, fav_tried: !!it.soundFavTried } : {}), t: new Date().toISOString() }); job.i++; return save(); };
     const fail = async why => { await record(false, why); box(`${n}: ${why}. Moving on…`, true); await sleep(4000); };
 
     box(`${n}: opening Create…`);
@@ -183,24 +183,51 @@
     const next2 = await waitFor(() => { const d = document.querySelector("[role=dialog]"); return d && findBtn(/^next$/i, d); }, 10000);   // filters step
     if (next2) { next2.click(); await sleep(1500); }
 
-    // Boost: trending audio from Instagram's own (licensed) library, when the web editor offers it.
-    // Best effort, NOT checked live: Instagram's web editor often has no audio picker; then the Reel keeps
-    // its own sound (our Afrobeats beat) and the note says so.
-    if (it.sound && it.sound.name) {
+    // Boost: audio only from Instagram's own (licensed) picker, when the web editor offers one. Favourite
+    // artist first (it.sound.fav, skipping it.sound.avoid), then the trending name. Everything after opening
+    // happens inside the audio picker (the dialog with a search box); no picker → no sound, nothing clicked.
+    // Best effort, NOT checked live: the web editor often has no audio picker; then the Reel keeps its own
+    // sound (our Afrobeats beat) and the note says so.
+    if (it.sound && (it.sound.name || it.sound.fav)) {
+      const s = it.sound, notes = [];
+      const qOf = d => [...d.querySelectorAll("input")].find(i => visible(i) && /search/i.test(i.placeholder || i.getAttribute("aria-label") || ""));
+      const picker = () => [...document.querySelectorAll("[role=dialog]")].filter(visible).reverse().find(d => qOf(d) && /audio|music|sound|song/i.test((d.innerText || "") + (d.getAttribute("aria-label") || "") + (qOf(d).placeholder || ""))) || null;
+      const rows = d => { const all = [...d.querySelectorAll("[role=button],[role=listitem],li")].filter(r => visible(r) && !r.querySelector("input")); return all.filter(r => !all.some(o => o !== r && r.contains(o))); };
+      const okRow = r => r.getAttribute("aria-disabled") !== "true" && !/\bunavailable\b|not available/i.test(r.innerText || "");
+      const trackOf = (r, artist) => { const l = String(r.innerText || "").split(/\n|·|•/).map(x => x.trim()).filter(Boolean); return (l.find(x => x.toLowerCase() !== String(artist || "").toLowerCase()) || l[0] || "").slice(0, 80); };
+      const search = async q => { const d = picker(), i = d && qOf(d); if (!i) return false; i.focus(); i.select && i.select(); document.execCommand("insertText", false, q); await sleep(2500); return true; };
+      const take = async row => { const d = picker(); if (!d || !d.contains(row)) return false; row.click(); await sleep(1500); const d2 = picker(); const dn = d2 && findBtn(/^(done|add|use)$/i, d2); if (dn) { dn.click(); await sleep(1000); } return true; };
+      const leave = async () => { const d = picker(); if (!d) return; const back = findIcon(/^back$/i, d) || findBtn(/^(cancel|back|close)$/i, d); if (back) { back.click(); await sleep(800); } else document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true })); };
       try {
         const d0 = document.querySelector("[role=dialog]") || document;
         const audio = findBtn(/^(add audio|audio|music|add music)$/i, d0) || findIcon(/audio|music/i, d0);
         if (!audio) it.soundNote = "no sound: Instagram's web editor has no audio picker (kept the video's own sound)";
         else {
-          audio.click(); await sleep(1500);
-          const q = await waitFor(() => [...document.querySelectorAll("[role=dialog] input")].find(i => visible(i) && /search/i.test(i.placeholder || i.getAttribute("aria-label") || "")), 6000);
-          if (q) { q.focus(); document.execCommand("insertText", false, it.sound.name); await sleep(2500); }
-          const probe = it.sound.name.toLowerCase().slice(0, 18);
-          const row = q && await waitFor(() => [...document.querySelectorAll("[role=dialog] [role=button],[role=dialog] [role=listitem],[role=dialog] li")].find(r => visible(r) && (r.innerText || "").toLowerCase().includes(probe)), 8000);
-          if (row) { row.click(); await sleep(1500); const dn = findBtn(/^(done|add|use)$/i); if (dn) { dn.click(); await sleep(1000); } it.soundUsed = it.sound.name; }
-          else { it.soundNote = `no sound: “${it.sound.name}” not found`; const back = findIcon(/^back$/i) || findBtn(/^cancel$/i); if (back) { back.click(); await sleep(800); } }
+          audio.click();
+          if (!(await waitFor(picker, 6000))) it.soundNote = "no sound: no audio picker dialog (kept the video's own sound)";
+          else {
+            let done = false;
+            if (s.fav) {
+              it.soundFav = s.fav;
+              const avoid = new Set((s.avoid || []).map(x => String(x).toLowerCase())), probe = s.fav.toLowerCase().slice(0, 18);
+              if (await search(s.fav)) {
+                const hit = await waitFor(() => { const d = picker(); if (!d) return null; const rs = rows(d).filter(r => (r.innerText || "").toLowerCase().includes(probe) && okRow(r)); const row = rs.find(r => !avoid.has(trackOf(r, s.fav).toLowerCase())); return row ? { row } : rs.length ? { all: true } : null; }, 6000);
+                if (hit && hit.row) { const track = trackOf(hit.row, s.fav); if (await take(hit.row)) { it.soundUsed = track; it.soundFavFound = true; done = true; } }
+                else if (hit && hit.all) notes.push(`${s.fav}: only tracks used lately`);
+                else { it.soundFavTried = true; notes.push(`artist not available in picker: ${s.fav}`); }
+              }
+            }
+            if (!done && s.name && picker() && await search(s.name)) {
+              const probe = s.name.toLowerCase().slice(0, 18);
+              const row = await waitFor(() => { const d = picker(); return d && rows(d).find(r => (r.innerText || "").toLowerCase().includes(probe) && okRow(r)); }, 8000);
+              if (row && await take(row)) { it.soundUsed = s.name; done = true; if (notes.length) notes.push(`trending sound instead: ${s.name}`); }
+              else notes.push(`no sound: “${s.name}” not found`);
+            } else if (!done) notes.push("no sound");
+            if (!done) await leave();
+            if (notes.length) it.soundNote = notes.join(" · ");
+          }
         }
-      } catch (e) { it.soundNote = "no sound"; }
+      } catch (e) { it.soundNote = notes.concat("no sound").join(" · "); }
     }
     // Caption
     box(`${n}: typing the caption…`);

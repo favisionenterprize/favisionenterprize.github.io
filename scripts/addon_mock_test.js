@@ -195,10 +195,17 @@ const TT_UPLOAD = page(`<main><div role="tab" aria-selected="true">Photos</div><
   ed.addEventListener("paste", e => { e.preventDefault(); if (localStorage.getItem("tt-blank")) return; model = e.clipboardData.getData("text/plain"); ed.innerText = model; });
   ed.addEventListener("input", () => setTimeout(() => { ed.innerText = model; }, 50));   // re-render from state
   document.querySelector("input[type=file]").addEventListener("change", () => { document.getElementById("form").hidden = false; });
-  document.getElementById("snd").onclick = () => { const d = document.createElement("div"); d.setAttribute("role", "dialog");
+  // Sound picker: "groove" → the trending sound; "Davido" → two songs; "Hillsong Worship" → none.
+  // With localStorage "tt-nodialog" the Sounds button opens nothing, and every later click is logged.
+  let afterSnd = false;
+  document.addEventListener("click", e => { if (afterSnd && localStorage.getItem("tt-nodialog") && e.target.id !== "post") localStorage.setItem("tt-outside", (localStorage.getItem("tt-outside") || "") + (e.target.id || e.target.tagName) + ";"); }, true);
+  document.getElementById("snd").onclick = () => { if (localStorage.getItem("tt-nodialog")) { setTimeout(() => { afterSnd = true; }, 0); return; }
+    const d = document.createElement("div"); d.setAttribute("role", "dialog");
     d.innerHTML = '<input placeholder="Search sounds"><div id="res"></div><button>Close</button>';
-    d.querySelector("input").addEventListener("input", e => { d.querySelector("#res").innerHTML = /groove/i.test(e.target.value) ? '<div class="music-item">Highlife Groove · CML Band <button>Use</button></div>' : ""; 
-      const u = d.querySelector(".music-item button"); if (u) u.onclick = () => { document.getElementById("chip").textContent = "Highlife Groove"; d.remove(); }; });
+    const row = (t, a) => '<div class="music-item"><div>' + t + '</div><div>' + a + '</div><button data-t="' + t + '">Use</button></div>';
+    d.querySelector("input").addEventListener("input", e => { const v = e.target.value;
+      d.querySelector("#res").innerHTML = /groove/i.test(v) ? row("Highlife Groove", "CML Band") : /davido/i.test(v) ? row("Fall", "Davido") + row("Feel", "Davido") : "";
+      d.querySelectorAll(".music-item button").forEach(u => { u.onclick = () => { document.getElementById("chip").textContent = u.dataset.t; d.remove(); }; }); });
     d.lastChild.onclick = () => d.remove(); document.body.appendChild(d); };
   document.getElementById("post").onclick = () => { const all = JSON.parse(localStorage.getItem("tt-posts") || "[]"); const p = { sound: document.getElementById("chip").textContent, title: document.querySelector("input[placeholder]").value, text: model };
     all.push(p); localStorage.setItem("tt-posts", JSON.stringify(all)); localStorage.setItem("tt-post", JSON.stringify(p));
@@ -371,6 +378,18 @@ async function run(browser, job, startUrl, setup) {
   const posted = JSON.parse(r.state["tt-posts"] || "[]");
   want(posted.length === 2 && posted[0].text === "The desk that ends homework fights.\nGH₵650" && posted[1].text === "Quiet luxury.\nGH₵8,500", "the DESCRIPTION is posted (Draft.js state, line breaks kept), not just the title: " + JSON.stringify(posted));
   want(r.out.res[1].ok && /posted/.test(r.out.res[1].why), "a Post that reloads the tab into Posts counts as posted: " + JSON.stringify(r.out.res[1]));
+
+  console.log("tiktok favourite artists (social.js): Davido found (skips a track used lately), Hillsong Worship not → trending; no dialog → no sound");
+  r = await run(browser, { kind: "tiktok", q: [{ k: "card:FAV-014", p: "FAV-014", img: S + "a.jpg", text: "The desk that ends homework fights.\nGH₵650", title: "Student desk", sound: { name: "Highlife Groove", artist: "CML Band", fav: "Davido", avoid: ["Fall"] } }, { k: "card:FAV-016", p: "FAV-016", img: S + "b.jpg", text: "Quiet luxury.\nGH₵8,500", title: "Sofa", sound: { name: "Highlife Groove", fav: "Hillsong Worship" } }], min: 1, max: 2 }, "https://www.tiktok.com/tiktokstudio/upload?from=webapp&tab=photo");
+  const fr = r.out.res;
+  want(fr.length === 2 && fr[0].ok && fr[0].sound === "Feel" && fr[0].fav === "Davido" && fr[0].fav_found, "Davido found in the picker, a track not used lately: " + JSON.stringify(fr[0]));
+  want(fr[1] && fr[1].ok && fr[1].sound === "Highlife Groove" && fr[1].fav === "Hillsong Worship" && !fr[1].fav_found && fr[1].fav_tried && /artist not available in picker: Hillsong Worship/.test(fr[1].why), "Hillsong Worship not in the picker → trending sound, logged: " + JSON.stringify(fr[1]));
+  want(JSON.parse(r.state["tt-posts"] || "[]").map(p => p.sound).join() === "Feel,Highlife Groove", "TikTok got the picked sounds: " + r.state["tt-posts"]);
+  want(!r.errors.length, "no page errors: " + r.errors.join("; "));
+  r = await run(browser, { kind: "tiktok", q: [{ k: "card:FAV-014", p: "FAV-014", img: S + "a.jpg", text: "The desk that ends homework fights.\nGH₵650", title: "Student desk", sound: { name: "Highlife Groove", fav: "Davido" } }], min: 1, max: 2 }, "https://www.tiktok.com/tiktokstudio/upload?from=webapp&tab=photo", () => localStorage.setItem("tt-nodialog", "1"));
+  const nd = r.out.res[0] || {};
+  want(nd.ok && !nd.sound && !nd.fav_tried && /no sound picker dialog/.test(nd.why) && JSON.parse(r.state["tt-posts"] || "[]")[0].sound === "", "no picker dialog → posts with no sound: " + JSON.stringify(nd));
+  want(!r.state["tt-outside"], "nothing outside the picker clicked: " + r.state["tt-outside"]);
 
   console.log("tiktok post when the description box stays empty (social.js)");
   r = await run(browser, { kind: "tiktok", q: [{ k: "card:FAV-014", p: "FAV-014", img: S + "a.jpg", text: "The desk that ends homework fights.\nGH₵650", title: "Student desk" }, { k: "card:FAV-016", p: "FAV-016", img: S + "b.jpg", text: "Quiet luxury.", title: "Sofa" }], min: 1, max: 2 }, "https://www.tiktok.com/tiktokstudio/upload?from=webapp&tab=photo", () => localStorage.setItem("tt-blank", "1"));

@@ -164,32 +164,90 @@
   }
 
   const composeUrl = () => job.kind === "x" ? "https://x.com/compose/post" : "https://www.tiktok.com/tiktokstudio/upload?from=webapp&tab=photo";
-  const record = (it, ok, why) => { job.res.push({ k: it.k, p: it.p || null, ok, why: [why, it.soundNote].filter(Boolean).join(" · "), sound: it.soundUsed || null, t: new Date().toISOString() }); job.i++; return save(); };
-  // Boost (5.4 admin): pick it.sound in TikTok's own sound picker (business accounts only see the
-  // Commercial Music Library there). Search its name, take the first result. Never fails the post:
-  // without a match it posts with no sound and notes why. Selectors NOT checked live.
+  const record = (it, ok, why) => { job.res.push({ k: it.k, p: it.p || null, ok, why: [why, it.soundNote].filter(Boolean).join(" · "), sound: it.soundUsed || null, ...(it.soundFav ? { fav: it.soundFav, fav_found: !!it.soundFavFound, fav_tried: !!it.soundFavTried } : {}), t: new Date().toISOString() }); job.i++; return save(); };
+  // Boost: sounds only from TikTok's own picker (business accounts only see the Commercial Music Library
+  // there). it.sound = { name: trending sound, fav: favourite artist to try first, avoid: tracks used lately }.
+  // Picker safety: everything after opening it happens inside the picker dialog; no dialog → no sound.
+  // Never fails the post. Selectors NOT checked live.
+  const NOT_FOR_BUSINESS = /not available for (business|commercial)|unavailable for business|isn('|’)t available for business|only available for personal|not available in your (region|country)/i;
+  const escKey = () => document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+  const pickerSearch = d => [...d.querySelectorAll("input")].find(i => visible(i) && /search/i.test(i.placeholder || i.getAttribute("aria-label") || ""));
+  const soundDialog = () => [...document.querySelectorAll("[role=dialog],[class*=sound-panel],[class*=SoundPanel],[class*=music-panel]")].filter(visible).reverse().find(pickerSearch) || null;
+  function pickerRows(d) {
+    const all = [...d.querySelectorAll("[class*=item],[class*=Item],li,[role=listitem],[role=option]")].filter(visible);
+    return all.filter(r => !all.some(o => o !== r && r.contains(o)));   // innermost rows
+  }
+  const rowOk = r => r.getAttribute("aria-disabled") !== "true" && !/\bunavailable\b|not available/i.test(r.innerText || "");
+  function trackOf(r, artist) {
+    const lines = String(r.innerText || "").split(/\n|·|•| - /).map(x => x.trim()).filter(x => x && !/^(use|add|\+|use sound|\d+:\d+)$/i.test(x));
+    return (lines.find(x => x.toLowerCase() !== String(artist || "").toLowerCase()) || lines[0] || "").slice(0, 80);
+  }
+  async function pickerQuery(q) {
+    const d = soundDialog(), s = d && pickerSearch(d);
+    if (!s) return false;
+    s.focus(); setInput(s, q);
+    s.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", code: "Enter", keyCode: 13, bubbles: true }));
+    await sleep(2500);
+    return true;
+  }
+  async function useRow(row) {
+    const d = soundDialog();
+    if (!d || !d.contains(row)) return false;
+    row.scrollIntoView({ block: "center" }); row.dispatchEvent(new MouseEvent("mouseover", { bubbles: true })); await sleep(600);
+    const use = findBtn(/^(use|add|use sound|use this sound|\+)$/i, row) || row.querySelector("button");
+    (use || row).click(); await sleep(2000);
+    const d2 = soundDialog(); const c = d2 && findBtn(/^(close|done|save|confirm)$/i, d2); if (c) { c.click(); await sleep(1000); }
+    return true;
+  }
+  async function closePicker() {
+    const d = soundDialog(); if (!d) return;
+    const c = findBtn(/^(close|cancel|back)$/i, d);
+    if (c) c.click(); else escKey();
+    await sleep(800);
+  }
   async function addSound(it) {
-    if (!it.sound || !it.sound.name) return;
+    const s = it.sound;
+    if (!s || (!s.name && !s.fav)) return;
+    const notes = [];
     try {
-      box(`adding the sound “${it.sound.name}”…`);
-      const open = findBtn(/^(add sound|sounds?|music|add music)$/i) || document.querySelector("[data-e2e*=sound] [role=button],[data-e2e*=music] button,[class*=sound-entry],[class*=SoundEntry]");
-      if (!open) { it.soundNote = "no sound: TikTok showed no sound button"; return; }
-      open.click(); await sleep(1500);
-      const panel = () => [...document.querySelectorAll("[role=dialog],[class*=sound-panel],[class*=SoundPanel],[class*=music-panel]")].find(visible) || document;
-      const search = await waitFor(() => [...panel().querySelectorAll("input")].find(i => visible(i) && /search/i.test(i.placeholder || i.getAttribute("aria-label") || "")), 8000);
-      if (!search) { it.soundNote = "no sound: no search box in the sound picker"; document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true })); return; }
-      search.focus(); setInput(search, it.sound.name);
-      search.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", code: "Enter", keyCode: 13, bubbles: true }));
-      await sleep(2500);
-      const probe = it.sound.name.toLowerCase().slice(0, 18);
-      const row = await waitFor(() => [...panel().querySelectorAll("[class*=item],[class*=Item],li,[role=listitem],[role=option]")].find(r => visible(r) && (r.innerText || "").toLowerCase().includes(probe)), 10000);
-      if (!row) { it.soundNote = `no sound: “${it.sound.name}” not found in TikTok's library`; const c = findBtn(/^(close|cancel|back)$/i, panel()); if (c) c.click(); else document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true })); return; }
-      row.scrollIntoView({ block: "center" }); row.dispatchEvent(new MouseEvent("mouseover", { bubbles: true })); await sleep(600);
-      const use = findBtn(/^(use|add|use sound|use this sound|\+)$/i, row) || row.querySelector("button");
-      (use || row).click(); await sleep(2000);
-      const c = findBtn(/^(close|done|save|confirm)$/i, panel()); if (c && panel() !== document) { c.click(); await sleep(1000); }
-      it.soundUsed = it.sound.name;
-    } catch (e) { it.soundNote = "no sound: " + String(e.message || e).slice(0, 60); }
+      box(`opening TikTok's sound picker…`);
+      let d = soundDialog();
+      if (!d) {
+        const open = findBtn(/^(add sound|sounds?|music|add music)$/i) || document.querySelector("[data-e2e*=sound] [role=button],[data-e2e*=music] button,[class*=sound-entry],[class*=SoundEntry]");
+        if (!open) { it.soundNote = "no sound: TikTok showed no sound button"; return; }
+        open.click();
+        d = await waitFor(soundDialog, 8000);
+      }
+      if (!d) { escKey(); it.soundNote = "no sound: no sound picker dialog (nothing else clicked)"; return; }
+      if (s.fav) {
+        it.soundFav = s.fav;
+        box(`looking for a ${s.fav} song in TikTok's picker…`);
+        if (await pickerQuery(s.fav)) {
+          const avoid = new Set((s.avoid || []).map(x => String(x).toLowerCase()));
+          const probe = s.fav.toLowerCase().slice(0, 18);
+          const hit = await waitFor(() => {
+            const dd = soundDialog(); if (!dd) return null;
+            if (NOT_FOR_BUSINESS.test(dd.innerText || "")) return { na: true };
+            const rows = pickerRows(dd).filter(r => (r.innerText || "").toLowerCase().includes(probe) && rowOk(r));
+            const row = rows.find(r => !avoid.has(trackOf(r, s.fav).toLowerCase()));
+            return row ? { row } : rows.length ? { all: true } : null;
+          }, 6000);
+          if (hit && hit.row) {
+            const track = trackOf(hit.row, s.fav);
+            if (await useRow(hit.row)) { it.soundUsed = track; it.soundFavFound = true; return; }
+            notes.push(`${s.fav}: the picker closed before the song was added`);
+          } else if (hit && hit.all) notes.push(`${s.fav}: only tracks used lately`);
+          else { it.soundFavTried = true; notes.push(`artist not available in picker: ${s.fav}`); }
+        }
+      }
+      if (!s.name) { await closePicker(); it.soundNote = notes.concat("no sound").join(" · "); return; }
+      if (!soundDialog() || !(await pickerQuery(s.name))) { it.soundNote = notes.concat("no sound: no search box in the sound picker").join(" · "); escKey(); return; }
+      const probe = s.name.toLowerCase().slice(0, 18);
+      const row = await waitFor(() => { const dd = soundDialog(); return dd && pickerRows(dd).find(r => (r.innerText || "").toLowerCase().includes(probe) && rowOk(r)); }, 10000);
+      if (!row || !(await useRow(row))) { await closePicker(); it.soundNote = notes.concat(`no sound: “${s.name}” not found in TikTok's library`).join(" · "); return; }
+      it.soundUsed = s.name;
+      if (notes.length) it.soundNote = notes.concat(`trending sound instead: ${s.name}`).join(" · ");
+    } catch (e) { it.soundNote = notes.concat("no sound: " + String(e.message || e).slice(0, 60)).join(" · "); }
   }
   async function next(ok) {
     if (job.i >= job.q.length) { box("All done. Going back to your admin…"); await sleep(1500); return finish(); }
