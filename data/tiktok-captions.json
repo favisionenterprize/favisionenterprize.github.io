@@ -469,7 +469,7 @@
  ],
  "scan": {
   "d": "2026-10-15",
-  "t": "2026-10-15T07:31:29.343Z",
+  "t": "2026-10-15T07:49:40.152Z",
   "n": 4,
   "posts": [
    {
@@ -497,7 +497,7 @@
     "id": "7696775746609614100",
     "url": "https://www.tiktok.com/@favisionenterprise/video/7696775746609614100",
     "desc": "Bold colour, warm welcomes. Glossy red-brown glass top with six curved high-back chairs. Sturdy steel frame, finished in brown and black. Red Glass Dining Set (6 chairs): GH₵12,600. Delivered across Accra, Tema & Kasoa. Comment 'MINE' and we'll send you the details 👇 Shop: favisionenterprize.github",
-    "thumb": "https://p16-common-sign.tiktokcdn.com/tos-alisg-i-photomode-sg/5ba2fde2b11648348aa352ca4fe4a0dd~tplv-photomode-image-v1:q70.webp?dr=14555&from=photomode.PUBLISH&ftpl=1&idc=my2&ps=13740610&refresh_token=39653e15&s=PUBLISH&shcp=34ff8df6&shp=d05b14bd&t=4d5b0474&x-expires=1793343600&x-signature=7TRp4uhv0pAMA0vw%2B6ODzX6aTu4%3D",
+    "thumb": "https://p19-common-sign.tiktokcdn.com/tos-alisg-i-photomode-sg/5ba2fde2b11648348aa352ca4fe4a0dd~tplv-photomode-image-v1:q70.webp?dr=14555&from=photomode.PUBLISH&ftpl=1&idc=my2&ps=13740610&refresh_token=22f8d630&s=PUBLISH&shcp=34ff8df6&shp=d05b14bd&t=4d5b0474&x-expires=1793343600&x-signature=ESUgUHDjB0W9%2FIfq51t4fDstHIY%3D",
     "alt": ""
    }
   ]
@@ -523,6 +523,11 @@
    "d": "2026-10-15",
    "kind": "scan",
    "n": 3
+  },
+  {
+   "d": "2026-10-15",
+   "kind": "scan",
+   "n": 4
   },
   {
    "d": "2026-10-15",
