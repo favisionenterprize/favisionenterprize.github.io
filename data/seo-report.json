@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-15T17:05:08Z",
+ "generated": "2026-10-15T17:05:24Z",
  "mode": "local",
  "score": 92,
  "prev_score": 92,
@@ -134,7 +134,7 @@
     "ItemList",
     "ListItem"
    ],
-   "bytes": 200190,
+   "bytes": 200605,
    "requests": 8,
    "redirect": false,
    "in_sitemap": true
