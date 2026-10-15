@@ -1,11 +1,11 @@
 {
- "generated": "2026-10-15T19:16:16Z",
+ "generated": "2026-10-15T19:20:44Z",
  "mode": "local",
- "score": 92,
+ "score": 96,
  "prev_score": 92,
  "counts": {
   "high": 0,
-  "medium": 1,
+  "medium": 0,
   "low": 3
  },
  "site": {
@@ -17,36 +17,6 @@
   "product_pages_indexable": 33
  },
  "issues": [
-  {
-   "id": "sameas:index.html",
-   "sev": "medium",
-   "page": "index.html",
-   "check": "sameas",
-   "msg": "Organization schema doesn't link 6 of your profiles (Instagram, TikTok, X, Google Maps). AI engines use these links to recognise the business.",
-   "count": 1,
-   "fix": {
-    "kind": "jsonld",
-    "page": "index.html",
-    "label": "Link all profiles",
-    "value": {
-     "@context": "https://schema.org",
-     "@type": "Organization",
-     "@id": "https://favisionenterprize.github.io/#org",
-     "sameAs": [
-      "https://www.facebook.com/FaVisionEnterprise",
-      "https://www.facebook.com/FaVisionEnt/",
-      "https://www.instagram.com/favisionent/",
-      "https://x.com/FaVisionEnt",
-      "https://www.tiktok.com/@favisionenterprise",
-      "https://maps.app.goo.gl/Ct4oYoMkmTPGPX3P6",
-      "https://maps.app.goo.gl/2czi91wUwRAwXcgd7",
-      "https://maps.app.goo.gl/zrELKCZL1NWdqKiE9"
-     ]
-    },
-    "id": "jsonld:index.html",
-    "applied": false
-   }
-  },
   {
    "id": "title:index.html",
    "sev": "low",
@@ -115,7 +85,7 @@
     "Service",
     "WebSite"
    ],
-   "bytes": 445313,
+   "bytes": 445878,
    "requests": 14,
    "redirect": false,
    "in_sitemap": true
@@ -1452,7 +1422,7 @@
  "history": [
   {
    "d": "2026-10-15",
-   "score": 92,
+   "score": 96,
    "ai": 0
   }
  ]
