@@ -1,13 +1,18 @@
 // TikTok captions (Social autopilot → its own tab "TikTok captions", key "ttcap").
-//   ONE button, "✨ Fix all TikTok descriptions": job "ttscan" (extension/ttcaptions.js) reads EVERY post in
-//     TikTok Studio → Posts (scrolls the list's inner scroller / Load more, up to 500) → back here, runStep
-//     "ttcaps:fixall" takes every post with under 15 characters of real text (or only hashtags), picks the
-//     product it shows (confident word match on its old text / thumbnail alt text; otherwise a general
-//     F.A Vision caption with no product and no price) and writes a classy caption (captions.js "classy")
-//     → job "ttfix": opens each post's Edit, types the caption and presses Save only, one post at a time,
-//     20–40 s apart; stops on any warning; never deletes or re-posts; skips a post that has a description by then.
+//   ONE button, "✨ Fix all TikTok descriptions":
+//     1. checks the add-on (forces it to download the latest live scripts, live mode, same version as
+//        extension/live.json); any problem shows a red message saying what to do;
+//     2. job "ttscan" (extension/ttcaptions.js + page-world helper ttids.js) reads TikTok Studio → Posts;
+//     3. runStep "ttcaps:fixall" fixes the UNION of every `prepared` post id (captions written 15 Oct from
+//        each post's photos) and any other empty post the scan found (under 15 chars of non-hashtag text,
+//        "No description" counts as empty), minus done ones (fixed[id].ok / .skip), app-only ones and ones
+//        over 7 days old (id >> 32 = Unix seconds), oldest first. It runs even if the scan fails or finds
+//        nothing. Job "ttfix" opens each post's edit URL, skips it if it has a description by then, pastes the
+//        caption, presses Save only, 20–40 s apart, stops on any warning, and hands back every 5 posts so
+//        the log is committed (then "ttcaps:fixall" starts the next batch).
 //   "Review captions" (collapsed, optional): change a post's product / text, or fix just one.
-// Log: data/tiktok-captions.json { settings, scan: { d, n, posts: [{ id, url, desc, thumb, alt }] }, fixed: { id: {...} }, runs }.
+// Log: data/tiktok-captions.json { settings, prepared, app_only, scan: { d, n, posts: [{ id, url, desc, thumb, alt, kind }] },
+//   fixed: { id: { d, ok, why?, skip? } }, runs }.
 // Per browser (localStorage): product picks "fa-ttcaps-picks", the run in progress "fa-ttcaps-run".
 (function () {
   const C = window.FAV_CONFIG;
@@ -37,9 +42,22 @@
 
   const okUrl = u => /^https:\/\/www\.tiktok\.com\//.test(String(u || "")) ? String(u) : "";
   const okImg = u => /^https:\/\/[\w.-]+\/\S*$/.test(String(u || "")) ? String(u) : "";
-  const meaningful = t => String(t || "").replace(/[#@][\p{L}\p{N}_.]+/gu, "").replace(/\s+/g, " ").trim();
-  const needsCaption = post => meaningful(post.desc).length < S.settings.min_chars && !(S.fixed[post.id] && S.fixed[post.id].ok);
-  function waiting() { return S && S.scan ? S.scan.posts.filter(needsCaption) : []; }
+  // What's left without hashtags, mentions and spaces; TikTok's grey "No description" placeholder is empty.
+  const meaningful = t => { const m = String(t || "").replace(/[#@][\p{L}\p{N}_.]+/gu, "").replace(/\s+/g, " ").trim(); return /^no description\.?$/i.test(m) ? "" : m; };
+  const isDone = id => { const f = S.fixed[id]; return !!f && (f.ok || f.skip); };
+  // Every post that needs a description: each prepared id + every empty post the scan found.
+  function candidates() {
+    if (!S) return [];
+    const out = new Map();
+    for (const p of (S.scan && S.scan.posts) || []) if (p.id && meaningful(p.desc).length < S.settings.min_chars) out.set(p.id, p);
+    for (const id of Object.keys(S.prepared)) {
+      const seen = S.scan && S.scan.posts.find(p => p.id === id);
+      if (seen && meaningful(seen.desc).length >= S.settings.min_chars) continue;      // the scan saw it has one now
+      if (!out.has(id)) out.set(id, { id, url: "", desc: "", thumb: "", alt: "", kind: "" });
+    }
+    return [...out.values()];
+  }
+  function waiting() { return candidates().filter(p => !isDone(p.id)); }
   // TikTok limits (seen live 15 Oct 2026): a caption can be edited once a day per post, and only within
   // 7 days of posting; "commercial content" posts can only be edited in the app. A TikTok post id starts
   // with its posting time (id >> 32 = Unix seconds).
@@ -47,9 +65,10 @@
   const tooOld = post => { const t = postedAt(post.id); return t != null && Date.now() - t > S.settings.edit_days * 864e5; };
   const appOnly = post => S.app_only.includes(post.id);
   const triedToday = post => { const f = S.fixed[post.id]; return !!f && f.d === today() && /won't allow|edited today/i.test(f.why || ""); };
+  const triedThisRun = post => { const r = getRun(); return !!r && Array.isArray(r.tried) && r.tried.includes(post.id); };
   const byAge = (a, b) => { try { const x = BigInt(a.id), y = BigInt(b.id); return x < y ? -1 : x > y ? 1 : 0; } catch (e) { return 0; } };
   // What one press fixes now: oldest first, so posts about to pass 7 days are done first.
-  function fixable() { return waiting().filter(p => !appOnly(p) && !tooOld(p) && !triedToday(p)).sort(byAge); }
+  function fixable() { return waiting().filter(p => !appOnly(p) && !tooOld(p) && !triedToday(p) && !triedThisRun(p)).sort(byAge); }
 
   // Product for a post: the one picked in "Review captions", else the best word match on its old text /
   // thumbnail alt text. Only a CONFIDENT match counts (one product clearly ahead); otherwise the post gets
@@ -98,35 +117,87 @@
   }
 
   // ------------------------------------------------------------------ jobs
-  // One button: scan every post (job "ttscan") → back in the admin, runStep "ttcaps:fixall" builds a
-  // caption for every post that needs one → job "ttfix" fixes them one by one.
-  const RUN = "fa-ttcaps-run";       // { stage: "scan" | "fix", t, n } while a run is going (this browser only)
-  const getRun = () => { try { const r = JSON.parse(localStorage.getItem(RUN) || "null"); return r && Date.now() - r.t < 2 * 3600e3 ? r : null; } catch (e) { return null; } };
+  // One button: check the add-on → scan every post (job "ttscan") → back in the admin, runStep
+  // "ttcaps:fixall" queues every post that needs a description → job "ttfix" in batches of 5.
+  const RUN = "fa-ttcaps-run";       // { stage: "scan" | "fix", t, n, tried: [ids], done } while a run is going (this browser only)
+  function getRun() { try { const r = JSON.parse(localStorage.getItem(RUN) || "null"); return r && Date.now() - r.t < 3 * 3600e3 ? r : null; } catch (e) { return null; } }
   const setRun = r => { try { if (r) localStorage.setItem(RUN, JSON.stringify({ ...r, t: Date.now() })); else localStorage.removeItem(RUN); } catch (e) { /* storage blocked */ } };
-  let scanStopped = null;
+  let scanProblem = null;
+  // Red message on the card (what went wrong and what to press).
+  let alertMsg = null;
+  function alarm(msg) {
+    alertMsg = msg;
+    A.toast(msg, true);
+    const el = document.getElementById("ttc-alert");
+    if (el) { el.textContent = msg; el.hidden = false; } else rerender();
+    const b = document.getElementById("ttc-go");
+    if (b) { b.disabled = false; b.textContent = "✨ Fix all TikTok descriptions"; }
+  }
+  // The add-on: make it download the latest live scripts now (admin.js "favauto-recheck" → install(force)),
+  // then check it's in live mode with the same live.json version as the website.
+  let STATUS_MS = 10000;
+  function addonStatus(ms) {
+    return new Promise(resolve => {
+      const on = e => { if (e.source === window && e.data && e.data.type === "favauto-status") { window.removeEventListener("message", on); clearTimeout(tm); resolve(e.data.status || null); } };
+      const tm = setTimeout(() => { window.removeEventListener("message", on); resolve(null); }, ms);
+      window.addEventListener("message", on);
+      window.postMessage({ type: "favauto-recheck" }, location.origin);
+    });
+  }
+  async function siteVersion() {
+    try { const r = await fetch("/extension/live.json?t=" + Date.now(), { cache: "no-store" }); const j = await r.json(); return { version: String(j.version || ""), ok: (j.scripts || []).some(x => x.file === "ttcaptions.js" && (x.matches || []).some(m => /tiktok\.com/.test(m))) && (j.scripts || []).some(x => x.file === "ttids.js") }; } catch (e) { return null; }
+  }
+  async function preflight() {
+    const f = F();
+    if (!f || f.needExt()) { alarm("The FA Vision add-on isn't installed in this browser: install it (steps at the bottom of the Today tab), then press the button again."); return false; }
+    const st = await addonStatus(STATUS_MS);
+    if (!st) { alarm("The FA Vision add-on didn't answer. Open edge://extensions, make sure FA Vision Autopilot is switched on and press ↻ Reload, then press Ctrl+F5 on this page and try again."); return false; }
+    if (st.mode !== "live" || !st.userScripts) { alarm("The add-on isn't in automatic-update (live) mode, so it can't run TikTok captions. Open edge://extensions → FA Vision Autopilot → Details, switch on \"Allow user scripts\", press ↻ Reload, then Ctrl+F5 here."); return false; }
+    const site = await siteVersion();
+    if (site && !site.ok) { alarm("extension/live.json on the website doesn't list the TikTok captions scripts. Tell Claude: the add-on can't run them."); return false; }
+    if (site && site.version && st.version !== site.version) {
+      const st2 = await addonStatus(STATUS_MS);          // the website may have just updated: one more try
+      if (!st2 || st2.version !== site.version) { alarm(`The add-on still has old scripts (${(st2 || st).version || "unknown"}; the website has ${site.version}). ${(st2 || st).error ? "Its last update failed: " + (st2 || st).error + ". " : ""}Open edge://extensions and press ↻ Reload on FA Vision Autopilot, then Ctrl+F5 here and try again.`); return false; }
+    }
+    return true;
+  }
+  // The add-on swaps this tab to TikTok. If it hasn't within 60 s, the job never started.
+  let watchdog = null;
+  function launchJob(url, job) {
+    clearTimeout(watchdog);
+    F().launch(url, job);
+    watchdog = setTimeout(() => { setRun(null); alarm("The add-on didn't open TikTok within 60 seconds, so nothing ran. Open edge://extensions, press ↻ Reload on FA Vision Autopilot, press Ctrl+F5 here, then press the button again."); }, 60000);
+  }
+  window.addEventListener("message", e => {
+    if (e.source === window && e.data && e.data.type === "favauto-start-failed" && getRun()) { clearTimeout(watchdog); setRun(null); alarm("The add-on refused to start the TikTok job. Open edge://extensions, press ↻ Reload on FA Vision Autopilot, press Ctrl+F5 here, then try again."); }
+  });
   function ready(then) {
     const f = F();
     if (!f || f.needExt()) return false;
-    if (!f.liveAddon()) { A.toast("TikTok captions need the add-on's automatic updates switched on (Today tab, top).", true); if (then && then.length) setTimeout(() => f.runStep(then, true), 1500); return false; }
+    if (!f.liveAddon()) { alarm("TikTok captions need the add-on's automatic updates switched on (Today tab, top)."); if (then && then.length) setTimeout(() => f.runStep(then, true), 1500); return false; }
     return true;
   }
   // The big button. `then`: steps to carry on with afterwards (from a one-button run).
-  function startAll(then) {
-    if (!ready(then)) return;
-    setRun({ stage: "scan" });
-    F().launch("https://www.tiktok.com/tiktokstudio/content", { kind: "ttscan", max: 500, then: ["ttcaps:fixall"].concat(then || []) });
+  async function startAll(then) {
+    alertMsg = null;
+    if (!(await preflight())) { if (then && then.length) setTimeout(() => F().runStep(then, true), 1500); return; }
+    setRun({ stage: "scan", tried: [], done: 0 });
+    launchJob("https://www.tiktok.com/tiktokstudio/content", { kind: "ttscan", max: 500, then: ["ttcaps:fixall"].concat(then || []) });
   }
   function startScan(then) {
     if (!ready(then)) return;
-    F().launch("https://www.tiktok.com/tiktokstudio/content", { kind: "ttscan", max: 500, then: then && then.length ? then : null });
+    launchJob("https://www.tiktok.com/tiktokstudio/content", { kind: "ttscan", max: 500, then: then && then.length ? then : null });
   }
   function queueFor(posts) {
-    return posts.map(p => ({ id: p.id, url: p.url, text: String(drafts[p.id] != null && drafts[p.id].trim() ? drafts[p.id] : draft(p)).trim().slice(0, 2200) })).filter(x => x.text);
+    return posts.map(p => ({ id: p.id, url: p.url || "", kind: p.kind || "", text: String(drafts[p.id] != null && drafts[p.id].trim() ? drafts[p.id] : draft(p)).trim().slice(0, 2200) })).filter(x => x.text);
   }
-  function launchFix(q, then) {
+  const BATCH = 5;
+  function launchFix(q, then, run) {
     if (!ready(then)) return false;
-    setRun({ stage: "fix", n: q.length });
-    F().launch("https://www.tiktok.com/tiktokstudio/content", { kind: "ttfix", q, min: S.settings.min, max: S.settings.max, maxHops: 10 + q.length * 5, then: then && then.length ? then : null });
+    const r = run || { tried: [], done: 0 };
+    setRun({ ...r, stage: "fix", n: q.length });
+    launchJob("https://www.tiktok.com/tiktokstudio/content", { kind: "ttfix", q, min: S.settings.min, max: S.settings.max, maxHops: 10 + q.length * 5,
+      ...(run ? { batch: BATCH, cont: ["ttcaps:fixall"], wait_first: r.done > 0 } : {}), then: then && then.length ? then : null });
     return true;
   }
   function startFix(ids) {
@@ -137,71 +208,82 @@
     if (!q.length) return A.toast("Nothing to fix.", true);
     launchFix(q);
   }
-  // Chained after the scan: fix every post that needs a description, no review needed.
+  // Chained after the scan (and after each batch of 5): fix every post that needs a description.
+  // Runs even when the scan failed or found nothing: the prepared ids are enough.
   async function fixAll(then) {
     await load();
-    if (scanStopped) {
-      const why = scanStopped; scanStopped = null; setRun(null);
-      A.toast(`TikTok captions: the read stopped (${why}), so nothing was changed.`, true);
-      if (then && then.length) setTimeout(() => F().runStep(then, true), 1500);
-      return;
-    }
+    if (scanProblem) { A.toast(`TikTok captions: the read of your posts didn't work (${scanProblem}). Fixing the ${plural(fixable().length, "prepared post")} anyway.`, true); scanProblem = null; }
+    const run = getRun() || { tried: [], done: 0 };
     const posts = fixable();
     if (!posts.length) {
       setRun(null);
       const w = waiting().length;
-      A.toast(w ? `Nothing TikTok lets us edit right now: ${w} without a description are app-only, over ${S.settings.edit_days} days old or already edited today.` : `All ${plural(S.scan ? S.scan.n : 0, "TikTok post")} already have a description ✓`, !!w);
+      A.toast(run.done ? `TikTok captions: finished ✓ (${plural(run.done, "post")} handled this run).` : w ? `Nothing TikTok lets us edit right now: ${w} without a description are app-only, over ${S.settings.edit_days} days old or already tried today.` : "All your TikTok posts already have a description ✓", !run.done && !!w);
       if (F()) F().render();
       if (then && then.length) setTimeout(() => F().runStep(then, true), 1500);
       return;
     }
-    if (!launchFix(queueFor(posts), then)) setRun(null);
+    if (!launchFix(queueFor(posts), then, run)) setRun(null);
   }
 
   async function receive(out) {
+    clearTimeout(watchdog);
     const d = today(), res = out.res || [];
+    const old = !out.v ? " The add-on ran an OLD copy of the TikTok script (no version): open edge://extensions, press ↻ Reload on FA Vision Autopilot, Ctrl+F5 here and press the button again." : "";
+    if (old) alertMsg = old.trim();
     if (out.kind === "ttscan") {
-      scanStopped = out.stopped && out.stopped !== "Stopped by you." ? out.stopped : null;
-      if (!res.length) { setRun(null); scanStopped = out.stopped || "no posts read"; return { text: "TikTok captions: " + (out.stopped || "no posts read."), bad: true }; }
-      const posts = res.slice(0, 1000).map(r => ({ id: String(r.id), url: /^https:\/\/www\.tiktok\.com\//.test(r.url) ? r.url : "", desc: String(r.desc || "").slice(0, 300), thumb: /^https:\/\//.test(r.thumb || "") ? String(r.thumb).slice(0, 600) : "", alt: String(r.alt || "").slice(0, 200) }));
-      await save(s => {
-        s.scan = { d, t: new Date().toISOString(), n: posts.length, posts, ...(out.stopped ? { stopped: out.stopped } : {}) };
-        s.runs = s.runs.concat([{ d, kind: "scan", n: posts.length, ...(out.stopped ? { stopped: out.stopped } : {}) }]).slice(-100);
-        return s;
-      }, `TikTok captions: read ${posts.length} posts`);
+      scanProblem = out.stopped && out.stopped !== "Stopped by you." ? out.stopped : !res.length ? "no posts read" : null;
+      if (out.noid && !out.helper) alertMsg = "The add-on's TikTok id helper (ttids.js) didn't run, so posts showing \"No description\" couldn't be read. Open edge://extensions, press ↻ Reload on FA Vision Autopilot, then Ctrl+F5 here. (Fix all still fixes the prepared posts.)";
+      const posts = res.slice(0, 1000).filter(r => /^\d{6,}$/.test(String(r.id))).map(r => ({ id: String(r.id), url: /^https:\/\/www\.tiktok\.com\//.test(r.url) ? r.url : "", desc: String(r.desc || "").slice(0, 300), thumb: /^https:\/\//.test(r.thumb || "") ? String(r.thumb).slice(0, 600) : "", alt: String(r.alt || "").slice(0, 200), kind: r.kind === "video" || r.kind === "photo" ? r.kind : "" }));
+      if (posts.length) {
+        await save(s => {
+          s.scan = { d, t: new Date().toISOString(), n: posts.length, posts, v: String(out.v || ""), ...(out.stopped ? { stopped: out.stopped } : {}) };
+          s.runs = s.runs.concat([{ d, kind: "scan", n: posts.length, v: String(out.v || ""), ...(out.noid ? { noid: out.noid } : {}), ...(out.stopped ? { stopped: out.stopped } : {}) }]).slice(-100);
+          return s;
+        }, `TikTok captions: read ${posts.length} posts`);
+      }
       const need = fixable().length;
-      if (getRun() && !scanStopped && need) setRun({ stage: "fix", n: need });
-      return { text: `Read ${plural(posts.length, "TikTok post")}: ${plural(waiting().length, "post")} without a description, ${need} TikTok lets us edit now.${need && getRun() && !scanStopped ? " Fixing them now…" : ""}${out.stopped ? " Stopped: " + out.stopped : ""}`, bad: !!out.stopped };
+      return { text: `${posts.length ? `Read ${plural(posts.length, "TikTok post")}` : "Couldn't read your TikTok posts" + (out.stopped ? ` (${out.stopped})` : "")}: ${need} to fix now${getRun() ? ", fixing them now…" : "."}${old}`, bad: !posts.length || !!old };
     }
     if (out.kind === "ttfix") {
-      setRun(null);
-      const ok = res.filter(r => r.ok), had = res.filter(r => !r.ok && /already has/.test(r.why || ""));
+      const ok = res.filter(r => r.ok), had = res.filter(r => !r.ok && (r.skip || /already has/.test(r.why || "")));
       await save(s => {
-        for (const r of res) s.fixed[r.id] = { d, ok: !!r.ok, ...(r.why ? { why: r.why } : {}) };
-        s.runs = s.runs.concat([{ d, kind: "fix", queued: Number(out.n) || res.length, tried: res.length, ok: ok.length, had: had.length, ...(out.stopped ? { stopped: out.stopped } : {}) }]).slice(-100);
+        for (const r of res) s.fixed[r.id] = { d, ok: !!r.ok, ...(r.why ? { why: r.why } : {}), ...(!r.ok && (r.skip || /already has/.test(r.why || "")) ? { skip: true } : {}) };
+        s.runs = s.runs.concat([{ d, kind: "fix", queued: Number(out.n) || res.length, tried: res.length, ok: ok.length, had: had.length, v: String(out.v || ""), ...(out.more ? { more: out.more } : {}), ...(out.stopped ? { stopped: out.stopped } : {}) }]).slice(-100);
         return s;
       }, `TikTok captions: added ${ok.length} of ${res.length}`);
       ok.forEach(r => { delete drafts[r.id]; setPick(r.id, null); });
-      const bad = res.filter(r => !r.ok && !/already has/.test(r.why || ""));
-      return { text: `TikTok: ${plural(ok.length, "description")} added${had.length ? `, ${had.length} already had one` : ""}${bad.length ? `, ${bad.length} not (${bad.map(r => r.why).filter(Boolean).slice(0, 2).join("; ")})` : " ✓"}.${out.stopped ? " Stopped: " + out.stopped : ""}`, bad: !!out.stopped || !!bad.length };
+      const run = getRun();
+      if (run && out.more && !out.stopped) setRun({ ...run, tried: (run.tried || []).concat(res.map(r => r.id)), done: (run.done || 0) + res.length });
+      else setRun(null);
+      const bad = res.filter(r => !r.ok && !(r.skip || /already has/.test(r.why || "")));
+      return { text: `TikTok: ${plural(ok.length, "description")} added${had.length ? `, ${had.length} already had one` : ""}${bad.length ? `, ${bad.length} not (${bad.map(r => r.why).filter(Boolean).slice(0, 2).join("; ")})` : " ✓"}.${out.more && !out.stopped ? ` Saved; ${out.more} more to go…` : ""}${out.stopped ? " Stopped: " + out.stopped : ""}${old}`, bad: !!out.stopped || !!bad.length || !!old };
     }
     return { text: "", bad: false };
   }
 
   // ------------------------------------------------------------------ card
-  function lastFix() { return S.runs.slice().reverse().find(r => r.kind === "fix"); }
+  // The last day's fix runs added up (a run is saved in batches of 5).
+  function lastFix() {
+    const last = S.runs.slice().reverse().find(r => r.kind === "fix");
+    if (!last) return null;
+    const day = S.runs.filter(r => r.kind === "fix" && r.d === last.d);
+    const sum = k => day.reduce((n, r) => n + (Number(r[k]) || 0), 0);
+    return { d: last.d, ok: sum("ok"), had: sum("had"), tried: sum("tried"), queued: sum("tried"), stopped: last.stopped };
+  }
   function renderCard() {
     if (!S) return "";
     const list = waiting(), prods = A.products().filter(p => !p.placeholder), sc = S.scan, run = getRun(), lf = lastFix();
     const fx = fixable(), old = list.filter(p => !appOnly(p) && tooOld(p)), app = list.filter(appOnly), today_ = list.filter(p => !appOnly(p) && !tooOld(p) && triedToday(p));
     const general = fx.filter(p => !(S.prepared[p.id] && S.prepared[p.id].text) && !productOf(p)).length;
     return `<section class="fa-card" id="ttc-card">
-      <header><h2>TikTok captions</h2><span class="fa-big ${list.length ? "hot" : ""}">${sc ? list.length : "?"}</span></header>
+      <header><h2>TikTok captions</h2><span class="fa-big ${list.length ? "hot" : ""}">${list.length}</span></header>
       <p class="muted">One press reads <b>every</b> post in TikTok Studio, finds the ones with no description (or only hashtags), writes each a short, classy caption (the matching product's real details and price, or a general F.A Vision caption with no price when the product isn't clear) and saves it on TikTok, one post at a time. Posts are never deleted or re-posted.</p>
+      <p class="fa-small down ttc-alert" id="ttc-alert" role="alert" style="color:var(--err);font-weight:600" ${alertMsg ? "" : "hidden"}>${esc(alertMsg || "")}</p>
       <div class="fa-actions ttc-go"><button class="btn btn-sell btn-lg" data-ttc="go" id="ttc-go">✨ Fix all TikTok descriptions</button></div>
       <p class="muted fa-small" id="ttc-status">${run ? (run.stage === "fix" ? `<b>Fixing ${plural(run.n || 0, "post")}…</b> The TikTok tab shows “Fixing 1 of ${run.n || "N"}…” as it goes; the summary appears here when it's done.` : "<b>Step 1 of 2: reading all your posts in TikTok Studio…</b> then it fixes each one.")
-        : sc ? `Last read ${esc(sc.d)}: ${plural(sc.n, "post")}, ${list.length} without a description.${sc.stopped ? " (Stopped early: " + esc(sc.stopped) + ")" : ""}` : "Not read yet: press the button."}</p>
-      ${sc && list.length ? `<ul class="fa-small ttc-split" id="ttc-split"><li><b>${fx.length}</b> fixed by the button now (oldest first: TikTok allows caption edits only within ${S.settings.edit_days} days of posting, once a day)</li>${old.length ? `<li class="muted">${plural(old.length, "post")} over ${S.settings.edit_days} days old: too old to edit</li>` : ""}${today_.length ? `<li class="muted">${today_.length} already edited today: tomorrow</li>` : ""}${app.length ? `<li class="muted">App only (commercial content, edit in the TikTok app): ${app.map(p => okUrl(p.url) ? `<a href="${esc(okUrl(p.url))}" target="_blank" rel="noopener">${esc(p.id)}</a>` : esc(p.id)).join(", ")}</li>` : ""}</ul>` : ""}
+        : sc ? `Last read ${esc(sc.d)}: ${plural(sc.n, "post")}, ${list.length} without a description.${sc.stopped ? " (Stopped early: " + esc(sc.stopped) + ")" : ""}` : `${plural(list.length, "post")} waiting for a description (captions already written). Press the button.`}</p>
+      ${list.length ? `<ul class="fa-small ttc-split" id="ttc-split"><li><b>${fx.length}</b> fixed by the button now (oldest first: TikTok allows caption edits only within ${S.settings.edit_days} days of posting, once a day)</li>${old.length ? `<li class="muted">${plural(old.length, "post")} over ${S.settings.edit_days} days old: too old to edit</li>` : ""}${today_.length ? `<li class="muted">${today_.length} already edited today: tomorrow</li>` : ""}${app.length ? `<li class="muted">App only (commercial content, edit in the TikTok app): ${app.map(p => okUrl(p.url) ? `<a href="${esc(okUrl(p.url))}" target="_blank" rel="noopener">${esc(p.id)}</a>` : esc(p.id)).join(", ")}</li>` : ""}</ul>` : ""}
       ${lf && !run ? `<p class="fa-small ${lf.ok + (lf.had || 0) === lf.tried && !lf.stopped ? "up" : "down"}" id="ttc-summary">Last fix ${esc(lf.d)}: ${lf.ok} of ${lf.queued || lf.tried} descriptions added${lf.had ? `, ${lf.had} already had one` : ""}${lf.tried - lf.ok - (lf.had || 0) > 0 ? `, ${lf.tried - lf.ok - (lf.had || 0)} failed` : ""}${lf.stopped ? ". Stopped: " + esc(lf.stopped) : ""}.</p>` : ""}
       ${fx.length ? `<details class="ttc-review"><summary>Review captions (${fx.length}${general ? `, ${general} general` : ""}): optional</summary>
       <p class="muted fa-small">Nothing here is needed: the button uses these captions as they are. Change the product or the text first if you want.</p>
@@ -241,5 +323,5 @@
     rerender();
   });
 
-  window.FAV_TTCAPS = { load, state: () => S, renderCard, receive, startAll, startScan, startFix, fixAll, waiting, _test: { guess, meaningful, genericCaption, queueFor, setRun, fixable, postedAt, set: s => { S = normalise(s); } } };
+  window.FAV_TTCAPS = { load, state: () => S, renderCard, receive, startAll, startScan, startFix, fixAll, waiting, _test: { guess, meaningful, genericCaption, queueFor, setRun, getRun, fixable, candidates, postedAt, preflight, alert: () => alertMsg, statusMs: ms => { STATUS_MS = ms; }, set: s => { S = normalise(s); } } };
 })();

@@ -1,19 +1,21 @@
 // FA Vision Autopilot: TikTok captions. Runs on tiktok.com, but only in a tab the FA Vision admin opened
 // with one of these jobs (kept per tab by background.js):
-//   ttscan – TikTok Studio → Posts (tiktokstudio/content): read EVERY post (up to job.max, 500): scrolls the
-//            list's inner scroller (and the window), brings the last row into view, clicks "Load more" /
-//            pagination Next, until no new post appears 3 rounds running. One entry per post id (links to
-//            /video/<id> or /photo/<id>): description (a truncated one still counts), thumbnail + alt text.
-//            The admin flags the ones with no real description (under 15 characters, or hashtags only).
+//   ttscan – TikTok Studio → Posts (tiktokstudio/content): read EVERY post (up to job.max, 500) from the
+//            virtual table (rows [data-tt=components_PostTable_Absolute], scroller
+//            [data-tt=components_PostTable_Container], checked live 15 Oct 2026). Ids come from the row's
+//            link or, for "No description" rows (no link), from data-fav-id set by the page-world helper
+//            ttids.js. The grey "No description" placeholder counts as EMPTY. The admin flags posts with
+//            under 15 characters of non-hashtag text.
 //   ttfix  – for each queued post (oldest first): open its edit page by URL
 //            (/tiktokstudio/upload/post/photo|video?item_id=<id>&from=creator_center, verified live 15 Oct
-//            2026; fallback: the list's pencil, never the ••• menu, which holds Delete), check it still has
-//            no real description, paste the caption into the Draft.js description (title box left alone),
-//            check it's there, press Save. One post at a time, 20–40 s apart; stops at once on any warning.
-//            Never deletes or re-posts anything.
-// Results go back to the admin (admin/ttcaptions.js). The edit URL + paste + Save flow was checked live
-// (15 Oct 2026); the Posts list selectors (rows, scrolling) are a defensive best guess.
+//            2026; fallback: the list's pencil [data-icon=Pen], never the ••• menu, which holds Delete), check
+//            it still has no real description (else skip, res.skip), paste the caption into the Draft.js
+//            description (title box left alone), check it's there, press Save. One post at a time, 20–40 s
+//            apart; stops at once on any warning. With job.cont it hands back to the admin every job.batch (5)
+//            posts so the log is committed, and the admin starts the next batch. Never deletes or re-posts.
+// Results (with VERSION) go back to the admin (admin/ttcaptions.js).
 (async () => {
+  const VERSION = "2026-10-15.3";     // reported back to the admin with every result
   let bgSleepOk = true;
   const sleep = ms => new Promise(done => {
     const end = Date.now() + ms;
@@ -60,7 +62,12 @@
     document.getElementById("favautomsg").textContent = `FA Vision · TikTok captions · ${msg}`;
   }
   async function finish(stopped) {
-    const out = { kind: job.kind, id: job.id, res: job.res, n: job.q ? job.q.length : job.res.length, stopped: stopped || null, then: job.then || null };
+    // A batch of the fix run ends early (job.more = posts still queued) so the admin saves the log
+    // every few posts; it then starts the next batch (job.cont, e.g. "ttcaps:fixall") before job.then.
+    const more = job.kind === "ttfix" && !stopped && job.q ? job.q.length - job.i : 0;
+    const out = { kind: job.kind, id: job.id, v: VERSION, res: job.res, n: job.q ? job.q.length : job.res.length, stopped: stopped || null,
+      then: more > 0 && Array.isArray(job.cont) ? job.cont.concat(job.then || []) : job.then || null,
+      ...(more > 0 ? { more } : {}), ...(job.kind === "ttscan" ? { helper: job.helper || document.documentElement.dataset.favTtids || "", noid: job.noid || 0 } : {}) };
     await bg({ type: "clearJob" });
     location.href = job.back + "#favauto-done=" + encodeURIComponent(JSON.stringify(out));
   }
@@ -79,79 +86,45 @@
   const CONTENT = "https://www.tiktok.com/tiktokstudio/content";
   const onContent = () => /\/tiktokstudio\/content\/?$/.test(location.pathname);
   // Meaningful text: what's left without hashtags, mentions and spaces.
-  const meaningful = t => String(t || "").replace(/[#@][\p{L}\p{N}_.]+/gu, "").replace(/\s+/g, " ").trim();
+  const meaningful = t => { const m = String(t || "").replace(/[#@][\p{L}\p{N}_.]+/gu, "").replace(/\s+/g, " ").trim(); return /^no description\.?$/i.test(m) ? "" : m; };
   const clip = (s, n) => String(s || "").replace(/\s+/g, " ").trim().slice(0, n);
 
-  // Rows of the Posts list, written defensively (the live structure isn't verified): every link to one
-  // post (/video/<id> or /photo/<id>, or a Studio /content/<id> link), and the row around it: a known row
-  // element (data-tt PostTable…, role=row, tr, …) that holds no other post, else the biggest ancestor that
-  // still holds only this post. One entry per post id.
-  const POST_LINK = 'a[href*="/video/"],a[href*="/photo/"],a[href*="/tiktokstudio/content/"]';
-  const idOf = a => { const h = a.getAttribute("href") || ""; const m = h.match(/\/(?:video|photo)\/(\d{6,})/) || h.match(/\/tiktokstudio\/content\/(\d{6,})/); return m ? m[1] : null; };
-  const idsIn = el => new Set([...el.querySelectorAll(POST_LINK)].map(idOf).filter(Boolean));
-  const ROW_SEL = '[data-tt*="PostTable"][data-tt*="Row"],[data-tt*="PostTable"][data-tt*="Item"],[data-tt*="post_table"],[data-tt*="PostItem"],[data-e2e*="post-item"],[data-e2e*="content-item"],[role=row],tr,[class*="PostItem"],[class*="post-item"],[class*="TableRow"],[class*="table-row"],[class*="content-item"]';
-  const DESC_SEL = '[data-tt*="Desc"],[data-tt*="desc"],[data-tt*="Caption"],[data-tt*="caption"],[data-tt*="Title"],[data-e2e*="desc"],[data-e2e*="caption"],[class*="desc"],[class*="Desc"],[class*="caption"],[class*="Caption"],[class*="title"],[class*="Title"]';
-  const NOISE = /^(\d[\d.,]*\s*[KkMm]?|public|everyone|friends|only me|private|followers|edit|delete|more|more options|\.\.\.|…|pinned|views?|likes?|comments?|shares?|open|video|photo|posts?|\d{1,2}[:/]\d{1,2}.*|[A-Z][a-z]{2,8} \d{1,2}(, \d{4})?.*|\d{4}-\d{2}-\d{2}.*)$/i;
-  function rowOf(a, id) {
-    for (let el = a.parentElement, k = 0; el && k < 12; el = el.parentElement, k++) {
-      if (el.matches && el.matches(ROW_SEL)) { const ids = idsIn(el); if (ids.size === 1 && ids.has(id)) return el; break; }
-    }
-    let row = a;
-    for (let k = 0; k < 10 && row.parentElement; k++) {
-      const up = row.parentElement;
-      const ids = idsIn(up);
-      if (ids.size > 1 || up === document.body) break;
-      row = up;
-    }
-    return row;
+  // TikTok Studio → Posts, checked live 15 Oct 2026 (read only): a virtual table. Each row is
+  // [data-tt=components_PostTable_Absolute] (100 px, only ~8 rendered at a time, reused as it scrolls)
+  // inside the scroller [data-tt=components_PostTable_Container] (overflow-y: scroll; 10 more rows load
+  // when it nears the bottom; 151 of 152 posts read in ~70 steps of 500 px). The description cell is
+  // [data-tt=components_PostInfoCell_Container]: an <a href="/@user/video/<id>"> when there IS a
+  // description, a plain div with the grey placeholder "No description" when there isn't (no link, no id
+  // in the DOM). The id is only in React's props, which the page-world helper ttids.js copies onto the row
+  // (data-fav-id / -desc / -type / -time). Pencil = [data-icon=Pen] in [data-tt=components_ActionCell_Container].
+  const ROW = "[data-tt=components_PostTable_Absolute]";
+  const SCROLLER = "[data-tt=components_PostTable_Container]";
+  const POST_LINK = 'a[href*="/video/"],a[href*="/photo/"]';
+  const idOf = a => { const m = String((a && a.getAttribute("href")) || "").match(/\/(?:video|photo)\/(\d{6,})/); return m ? m[1] : null; };
+  const PLACEHOLDER = /^(no description|add (a )?description)\.?$/i;
+  const DATE = /^([A-Z][a-z]{2} \d{1,2}(, \d{4})?, \d{1,2}:\d{2} ?[AP]M)$/;
+  function rowInfo(row) {
+    const d = row.dataset;
+    const a = row.querySelector(POST_LINK);
+    const id = d.favId || idOf(a) || "";
+    const cell = row.querySelector("[data-tt=components_PostInfoCell_Container]");
+    let desc = d.favId ? d.favDesc || "" : clip(cell ? cell.innerText : a ? a.innerText : "", 300);
+    if (PLACEHOLDER.test(clip(desc, 40))) desc = "";
+    const im = row.querySelector("img");
+    const when = (row.innerText || "").split("\n").map(x => x.trim()).find(x => DATE.test(x)) || "";
+    const kind = d.favType ? (d.favType === "2" ? "photo" : "video") : a && /\/photo\//.test(a.getAttribute("href")) ? "photo" : "";
+    return { id, url: a ? a.href.split("?")[0] : "", desc, thumb: im && /^https:/.test(im.currentSrc || im.src) ? (im.currentSrc || im.src).slice(0, 600) : "", alt: clip(im && im.alt, 200), kind, when, time: Number(d.favTime) || 0, row };
   }
-  function descOf(row, a) {
-    const cands = [...row.querySelectorAll(DESC_SEL)].filter(el => el !== row && !el.querySelector(DESC_SEL));
-    for (const el of cands) {
-      const t = clip(el.getAttribute("title") && el.getAttribute("title").length > (el.innerText || "").length ? el.getAttribute("title") : el.innerText || el.textContent, 300);
-      if (t && !NOISE.test(t)) return t;
-    }
-    const at = clip(a.getAttribute("title") || a.getAttribute("aria-label") || a.innerText, 300);
-    if (at && at.length > 3 && !NOISE.test(at)) return at;
-    const lines = (row.innerText || "").split("\n").map(x => x.trim()).filter(x => x && !NOISE.test(x) && /[\p{L}\p{N}]/u.test(x));   // icons like ✎ / ⋯ aren't text
-    return clip(lines[0] || "", 300);    // a truncated caption ("Student desk…") still counts as a description
-  }
-  function rows() {
-    const out = [], seen = new Set();
-    for (const a of document.querySelectorAll(POST_LINK)) {
-      const id = idOf(a);
-      if (!id || seen.has(id)) continue;
-      seen.add(id);
-      const row = rowOf(a, id);
-      const im = row.querySelector("img");
-      const href = a.href.split("?")[0];
-      out.push({ id, url: /\/(video|photo)\//.test(href) ? href : "", desc: descOf(row, a), thumb: im && /^https:/.test(im.src) ? im.src.slice(0, 600) : "", alt: clip(im && im.alt, 200), row });
-    }
-    return out;
-  }
-  // Load the next part of the list: scroll every scroller holding posts (TikTok Studio scrolls an inner
-  // box, not the window), bring the last row into view (for "load when visible" lists), click
-  // "Load more" if there is one, or the pagination's Next.
-  function scrollers() {
-    return [...document.querySelectorAll("div,main,section,ul,ol,tbody,table,[role=grid],[role=table],[role=rowgroup]")]
-      .filter(el => el.scrollHeight > el.clientHeight + 40 && /auto|scroll|overlay/.test(getComputedStyle(el).overflowY));
-  }
+  const rows = () => [...document.querySelectorAll(ROW)].map(rowInfo);
+  const scroller = () => [...document.querySelectorAll(SCROLLER)].find(el => /auto|scroll/.test(getComputedStyle(el).overflowY) && el.scrollHeight > el.clientHeight) ||
+    [...document.querySelectorAll(SCROLLER)].find(el => /auto|scroll/.test(getComputedStyle(el).overflowY)) || null;
+  // Next part of the list: scroll the table's own scroller 500 px (the window doesn't scroll).
   async function loadMore() {
-    const links = document.querySelectorAll(POST_LINK);
-    if (links.length) links[links.length - 1].scrollIntoView({ block: "end" });   // first, so the scrolls below end at the very bottom
-    const se = document.scrollingElement || document.documentElement;
-    window.scrollTo(0, se.scrollHeight);
-    const withPosts = scrollers().filter(el => el.querySelector(POST_LINK));
-    for (const el of (withPosts.length ? withPosts : scrollers())) {
-      el.scrollTop = el.scrollHeight;
-      try { el.dispatchEvent(new WheelEvent("wheel", { deltaY: 1200, bubbles: true })); } catch (e) { /* old browser */ }
-    }
-    await sleep(400);
-    const more = findBtn(/^(load more|view more|show more posts|load more posts|more posts|view more posts)$/i);
-    if (more && more.getAttribute("aria-disabled") !== "true" && !more.disabled) { more.click(); return "more"; }
-    const next = [...document.querySelectorAll('[class*="agination"] [aria-label],[role=navigation] [aria-label]')].find(b => visible(b) && /^next( page)?$/i.test(b.getAttribute("aria-label").trim()) && b.getAttribute("aria-disabled") !== "true" && !b.disabled && !/disabled/i.test(b.className || ""));
-    if (next) { next.click(); return "next"; }
-    return "scroll";
+    const sc = scroller();
+    if (sc) { sc.scrollTop = Math.min(sc.scrollTop + 500, sc.scrollHeight); sc.dispatchEvent(new Event("scroll", { bubbles: true })); }
+    else window.scrollBy(0, 500);
+    await sleep(700);
+    return sc ? sc.scrollTop + sc.clientHeight >= sc.scrollHeight - 5 : true;     // at the bottom?
   }
 
   await sleep(3000);
@@ -163,33 +136,41 @@
     if (!onContent()) return go(CONTENT);
     const cap = job.max || 500;
     box("reading your posts…");
-    await waitFor(() => rows().length, 20000);
+    await waitFor(() => document.querySelector(ROW), 20000);
+    await waitFor(() => document.documentElement.dataset.favTtids, 4000);     // the id helper (ttids.js)
+    const helper = document.documentElement.dataset.favTtids || "";
+    const sc = scroller();
+    if (sc) { sc.scrollTop = 0; await sleep(800); }
     const all = new Map();
+    let noid = 0;
     const collect = () => {
       for (const r of rows()) {
-        const had = all.get(r.id);
-        if (had) { if (!had.desc && r.desc) had.desc = r.desc; if (!had.thumb && r.thumb) { had.thumb = r.thumb; had.alt = r.alt; } continue; }
-        if (all.size < cap) all.set(r.id, { id: r.id, url: r.url, desc: r.desc, thumb: r.thumb, alt: r.alt });
+        if (!r.id) { noid++; continue; }
+        if (all.has(r.id) || all.size >= cap) continue;
+        delete r.row;
+        all.set(r.id, r);
       }
     };
     collect();
     let idle = 0;
-    for (let t = 0; t < 600 && idle < 3 && all.size < cap && !stopAsked; t++) {
+    for (let t = 0; t < 1500 && idle < 8 && all.size < cap && !stopAsked; t++) {
       const before = all.size;
-      box(`reading your posts… ${all.size} found`);
-      await loadMore();
-      await waitFor(() => { collect(); return all.size > before; }, rand(5000, 7000));   // give the next page time to load
+      if (t % 5 === 0) box(`reading your posts… ${all.size} found`);
+      const bottom = await loadMore();
       collect();
-      idle = all.size > before ? 0 : idle + 1;
+      idle = all.size > before ? 0 : bottom ? idle + 1 : 0;
+      if (bottom && idle) await sleep(1200);                 // the next 10 are loading
       w = warning(); if (w) { job.res = [...all.values()]; return finish(`TikTok showed "${w}". Stopped.`); }
-      if (t % 10 === 9) { job.res = [...all.values()]; await save(); }
+      if (t % 20 === 19) { job.res = [...all.values()]; await save(); }
     }
     if (stopAsked) return;
     job.res = [...all.values()];
+    job.helper = helper;
+    job.noid = noid;
     await save();
     box(`Read ${job.res.length} posts${all.size >= cap ? ` (the first ${cap})` : ""}. Going back to your admin…`);
     await sleep(1000);
-    return finish(job.res.length ? null : "No posts found in TikTok Studio → Posts.");
+    return finish(job.res.length ? null : noid ? "Posts were on screen but their ids couldn't be read (the add-on's TikTok helper ttids.js isn't running)." : "No posts found in TikTok Studio → Posts.");
   }
 
   // ============================================================= fix: one post at a time
@@ -202,11 +183,18 @@
   const done = async why => { const ok = job.res.filter(r => r.ok).length, had = job.res.filter(r => !r.ok && /already has/.test(r.why)).length; box(`Done: ${ok} of ${job.q.length} descriptions added${had ? `, ${had} already had one` : ""}${job.res.length - ok - had ? `, ${job.res.length - ok - had} not` : ""}. Going back…`); await sleep(1500); return finish(why); };
   if (job.i >= job.q.length) return done();
   const it = job.q[job.i];
+  if (job.wait_first && !job.waited) {          // a later batch: keep the 20–40 s gap between posts
+    job.waited = true; await save();
+    await countdown(rand(job.min || 20, job.max || 40), "Next post in");
+    if (stopAsked) return;
+  }
   const n = `Fixing ${job.i + 1} of ${job.q.length}`;
-  const record = (ok, why) => { job.res.push({ id: it.id, ok, why: why || "", t: new Date().toISOString() }); job.i++; job.stage = "open"; job.alt = 0; };
+  const record = (ok, why, skip) => { job.res.push({ id: it.id, ok, why: why || "", ...(skip ? { skip: true } : {}), t: new Date().toISOString() }); job.i++; job.stage = "open"; job.alt = 0; };
+  const batch = job.batch || 5;
   const next = async ok => {
     await save();
     if (job.i >= job.q.length) return done();
+    if (job.res.length >= batch && Array.isArray(job.cont)) { box(`${job.res.length} done: saving the log in your admin, then the next ${batch}…`); await sleep(1000); return finish(null); }
     if (ok) await countdown(rand(job.min || 20, job.max || 40), `${n.replace("Fixing", "Fixed")}. Next post in`);
     else await sleep(rand(3000, 5000));
     if (stopAsked) return;
@@ -219,7 +207,7 @@
   // A refusal, not the page's standing note ("captions can only be edited once a day, within 7 days").
   const LOCKED = /can(no|'|’)t (be )?edit|no longer (be )?edit|editing (is )?(not available|unavailable)|already (been )?edited (it )?today|reached the edit limit|edit limit reached/i;
   const editUrl = (cur, alt) => {
-    const kind = /\/video\//.test(cur.url || "") ? "video" : "photo";
+    const kind = cur.kind === "video" || cur.kind === "photo" ? cur.kind : /\/video\//.test(cur.url || "") ? "video" : "photo";
     const k = alt ? (kind === "photo" ? "video" : "photo") : kind;
     return `https://www.tiktok.com/tiktokstudio/upload/post/${k}?item_id=${encodeURIComponent(cur.id)}&from=creator_center`;
   };
@@ -249,25 +237,29 @@
   if (job.stage === "list") {    // fallback: the pencil (Edit) on the post's row in the Posts list
     if (!onContent()) return go(CONTENT);
     box(`${n}: finding the post in the list…`);
-    await waitFor(() => rows().length, 20000);
-    // Load the list until this post shows (it may be far down), stopping when nothing new loads 3 times.
+    await waitFor(() => document.querySelector(ROW), 20000);
+    await waitFor(() => document.documentElement.dataset.favTtids, 4000);
+    const sc = scroller(); if (sc) { sc.scrollTop = 0; await sleep(800); }
+    // Scroll the table until this post's row shows (it may be far down), stopping at the bottom.
     const seen = new Set();
-    const look = () => { const all = rows(); all.forEach(x => seen.add(x.id)); return all.find(x => x.id === it.id) || null; };
+    const look = () => { const all = rows(); all.forEach(x => x.id && seen.add(x.id)); return all.find(x => x.id === it.id) || null; };
     let r = look();
-    for (let t = 0, idle = 0; t < 300 && !r && idle < 3 && !stopAsked; t++) {
+    for (let t = 0, idle = 0; t < 600 && !r && idle < 6 && !stopAsked; t++) {
       const before = seen.size;
-      await loadMore();
-      await waitFor(() => look() || seen.size > before, 6000);
+      const bottom = await loadMore();
       r = look();
-      idle = seen.size > before ? 0 : idle + 1;
-      box(`${n}: finding the post… (${seen.size} read)`);
+      idle = seen.size > before ? 0 : bottom ? idle + 1 : 0;
+      if (bottom && idle) await sleep(1200);
+      if (t % 5 === 0) box(`${n}: finding the post… (${seen.size} read)`);
     }
     if (!r) { record(false, "post not found in TikTok Studio → Posts"); return next(false); }
     r.row.scrollIntoView({ block: "center" });
     await sleep(800);
-    // Pencil only: a button/link labelled Edit, or an icon button whose label/tooltip/test id says edit.
-    const edit = findBtn(/^edit$|^edit (post|details|description|caption)$/i, r.row) ||
-      [...r.row.querySelectorAll('[aria-label*="edit" i],[data-tt*="Edit"],[data-e2e*="edit"],[title*="edit" i]')].find(b => visible(b) && !/delete|more/i.test((b.getAttribute("aria-label") || "") + (b.getAttribute("title") || "")));
+    if (look() && look().row !== r.row) r = look();
+    // Pencil only (data-icon "Pen"), never the ••• menu, which holds Delete.
+    const pen = r.row.querySelector('[data-icon=Pen],[data-testid=Pen]');
+    const edit = (pen && (pen.closest("[data-tt=components_ActionCell_Container]") || pen.closest("[role=button],button") || pen)) ||
+      findBtn(/^edit$|^edit (post|details|description|caption)$/i, r.row);
     if (!edit) { record(false, "couldn't find the Edit pencil for this post"); return next(false); }
     job.stage = "edit2";
     await save();
@@ -292,7 +284,7 @@
   const lockMsg = [...document.querySelectorAll("[role=alert],[role=dialog],[class*=toast],[class*=Toast],[class*=tip],[class*=Tip],[class*=notice],[class*=Notice]")].map(x => x.innerText || "").join("\n");
   if (LOCKED.test(lockMsg)) { record(false, "TikTok won't allow an edit now (once a day, within 7 days of posting)"); return next(false); }
   const now = editor().innerText || "";
-  if (meaningful(now).length >= 15 && !job.overwrite) { record(false, "already has a description now, left as it is"); return next(false); }
+  if (meaningful(now).length >= 15 && !job.overwrite) { record(false, "already has a description now, left as it is", true); return next(false); }
   paste(editor(), it.text);
   await sleep(1200);
   if (!hasText()) {             // fallback: type it

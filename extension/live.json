@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-15.2",
+  "version": "2026-10-15.3",
   "note": "The FA Vision add-on (5.0+) downloads these scripts from the live site and runs them, so pushing a change here updates everyone's add-on within the hour. Changing the version is optional (it is only shown in the admin); any change to a file is picked up.",
   "scripts": [
     {
@@ -73,6 +73,14 @@
       "matches": [
         "https://www.tiktok.com/*"
       ]
+    },
+    {
+      "id": "ttids",
+      "file": "ttids.js",
+      "matches": [
+        "https://www.tiktok.com/tiktokstudio/*"
+      ],
+      "world": "MAIN"
     },
     {
       "id": "boost",

@@ -173,9 +173,11 @@ async function marketplace(browser) {
   const page = await browser.newPage({ viewport: { width: 390, height: 900 } });
   const problems = [];
   page.on("pageerror", e => problems.push("page error: " + e.message));
-  await page.route("http://smoke.test/**", r => r.fulfill({ status: 200, contentType: "text/html",
+  const LIVE = fs.readFileSync(path.join(ROOT, "extension/live.json"), "utf8");
+  await page.route("http://smoke.test/**", r => /\/extension\/live\.json/.test(r.request().url()) ? r.fulfill({ status: 200, contentType: "application/json", body: LIVE }) : r.fulfill({ status: 200, contentType: "text/html",
     body: `<div id="top-actions"></div><span id="fa-badge"></span><div id="fa-alert"></div><section class="screen" id="screen-fbauto"><div id="fa-body"></div></section>` }));
   await page.goto("http://smoke.test/admin/");
+  const liveVersion = JSON.parse(LIVE).version;
   const prods = files["data/products.json"];
   const f1 = prods.find(p => p.id === "FAV-001").facebook_listings;
   const scan = { d: today, t: today + "T08:00:00Z", n: 5, listings: [
@@ -186,7 +188,7 @@ async function marketplace(browser) {
     { t: "Kitchen blender", price: 300, status: "Active", listed: "2026-10-01", id: "999000111" },
     { t: "Old sofa", price: 100, status: "Sold", listed: "2026-01-01", id: "999000112" }
   ] };
-  await page.evaluate(({ files, ESC, scan }) => {
+  await page.evaluate(({ files, ESC, scan, liveVersion }) => {
     window.__files = files; window.__toasts = []; window.__commits = []; window.__jobs = [];
     window.__files["data/marketplace-scan.json"] = { settings: {}, scan, listed: [], runs: [], skip: [] };
     const d0 = new Date().toLocaleDateString("en-CA");
@@ -212,6 +214,9 @@ async function marketplace(browser) {
     window.__list = () => list;
     document.documentElement.dataset.favautoExt = "5"; document.documentElement.dataset.favautoMode = "live";
     window.addEventListener("message", e => { if (e.data && e.data.type === "favauto-start") window.__jobs.push(e.data); });
+    // The add-on's answer to "favauto-recheck" (extension/admin.js → background install(force) → status).
+    window.__addon = { mode: "live", userScripts: true, version: liveVersion };
+    window.addEventListener("message", e => { if (e.data && e.data.type === "favauto-recheck" && window.__addon) setTimeout(() => window.postMessage({ type: "favauto-status", status: window.__addon }, location.origin), 20); });
     window.confirm = () => true;
     window.FAV_CONFIG = { escapeHtml: (0, eval)(ESC), localPhone: x => String(x).replace(/^\+233/, "0"), formatPrice: n => "GH₵" + Number(n).toLocaleString() };
     window.FAV_ADMIN = {
@@ -223,7 +228,7 @@ async function marketplace(browser) {
       signedIn: () => true, toast: (m, bad) => window.__toasts.push((bad ? "✗ " : "") + m), busy: () => {}, friendly: e => String(e && e.message || e), show: () => {}, refreshDash: () => {}
     };
     window.open = () => null;
-  }, { files, ESC, scan });
+  }, { files, ESC, scan, liveVersion });
   for (const f of SCRIPTS) await page.addScriptTag({ content: fs.readFileSync(ROOT + f, "utf8") });
   const r = await page.evaluate(async () => {
     const wait = ms => new Promise(r => setTimeout(r, ms));
@@ -271,7 +276,7 @@ async function marketplace(browser) {
     out.ttcNoScan = card();
     // One press: scan job, chained to "ttcaps:fixall"
     window.__jobs = [];
-    document.querySelector("#ttc-card [data-ttc='go']").click(); await wait(200);
+    document.querySelector("#ttc-card [data-ttc='go']").click(); await wait(1000);
     out.ttcScanJob = window.__jobs[0] && window.__jobs[0].job;
     TC._test.setRun(null);
     TC._test.set(ttcSaved);
@@ -301,6 +306,36 @@ async function marketplace(browser) {
     await TC.receive({ kind: "ttfix", n: 3, res: [{ id: TT.prep, ok: true }, { id: TT.desk, ok: true }, { id: TT.tags, ok: false, why: "TikTok didn't confirm the save" }] });
     window.FAV_FBAUTO._test.setTab("ttcap"); await wait(200);
     out.ttcAfter = card();
+    // The add-on doesn't answer / has old scripts: a red message, no job.
+    TC._test.statusMs(300);
+    const goTry = async () => { window.__jobs = []; document.querySelector("#ttc-card [data-ttc='go']").click(); await wait(1200); TC._test.setRun(null);
+      const el = document.querySelector("#ttc-alert"); return { jobs: window.__jobs.length, alert: el && !el.hidden ? el.textContent : "", toast: (window.__toasts || []).slice(-1)[0] || "" }; };
+    const savedAddon = window.__addon;
+    window.__addon = null; out.ttcNoAddon = await goTry();
+    window.__addon = { ...savedAddon, version: "2026-01-01.1" }; out.ttcOldAddon = await goTry();
+    window.__addon = { ...savedAddon, mode: "bundled" }; out.ttcBundled = await goTry();
+    window.__addon = savedAddon; out.ttcOkAddon = await goTry();
+    // The scan finds nothing (helper missing / page changed): Fix all still fixes the prepared ids, in batches.
+    const now = BigInt(Math.floor(Date.now() / 1000));
+    const pid = (agoH, k) => String(((now - BigInt(agoH * 3600)) << 32n) + BigInt(k));
+    const P = { a: pid(100, 11), b: pid(50, 12), c: pid(10, 13), old: pid(24 * 8, 14), app: pid(20, 15), done: pid(30, 16) };
+    TC._test.set({ settings: { min: 20, max: 40, min_chars: 15, edit_days: 7 }, scan: null, fixed: { [P.done]: { d: "2026-10-14", ok: true } }, runs: [], app_only: [P.app],
+      prepared: Object.fromEntries(Object.values(P).map((id, i) => [id, { p: "FAV-014", text: "Prepared caption number " + i + " for this post.\nComment 'MINE' 👇" }])) });
+    TC._test.setRun({ stage: "scan", tried: [], done: 0 });
+    out.ttcEmptyScan = await TC.receive({ kind: "ttscan", v: "x", res: [], noid: 7, helper: "", stopped: "No posts found in TikTok Studio → Posts." });
+    out.ttcEmptyAlert = TC._test.alert();
+    window.__jobs = [];
+    await TC.fixAll([]); await wait(200);
+    out.ttcPrepJob = window.__jobs[0] && window.__jobs[0].job;
+    // First batch comes back (5 per batch; here 2 done and 1 more queued): saved, and the next fixAll skips them.
+    out.ttcBatch = await TC.receive({ kind: "ttfix", v: "x", n: 3, more: 1, res: [{ id: P.a, ok: true }, { id: P.b, ok: false, why: "already has a description now, left as it is", skip: true }] });
+    out.ttcFixedAfterBatch = [TC.state().fixed[P.a], TC.state().fixed[P.b]];
+    out.ttcRunAfterBatch = TC._test.getRun();
+    window.__jobs = [];
+    await TC.fixAll([]); await wait(200);
+    out.ttcNextJob = window.__jobs[0] && window.__jobs[0].job;
+    TC._test.setRun(null);
+    window.__toasts = (window.__toasts || []).filter(t => !/add-on|live\.json|read of your posts|ttids|old copy/i.test(t));   // the red messages above were on purpose
     TC._test.set(ttcSaved);
     const soc = window.FAV_SOCAUTO.job("tiktok", { products: ["FAV-014"], limit: 1 });
     out.socText = soc && soc.job.q[0] && soc.job.q[0].text;
@@ -383,6 +418,15 @@ async function marketplace(browser) {
   want(r.ttcFixJob && r.ttcFixJob.kind === "ttfix" && fq.map(x => x.id).join() === [T.prep, T.desk, T.tags].join() && /^Bold colour/.test(fq[0].text) && fq.every(x => x.text.length > 20), "Fix all queues every editable post, oldest first, prepared caption first, none too old / app-only: " + JSON.stringify(fq.map(x => [x.id, x.text.slice(0, 30)])));
   want(r.ttJob && r.ttJob.kind === "ttfix" && r.ttJob.q.length === 1 && r.ttJob.q[0].id === T.desk && /\nEdited\.$/.test(r.ttJob.q[0].text), "Fix just this one sends the edited caption: " + String(JSON.stringify(r.ttJob)).slice(0, 300));
   want(/Last fix .*: 2 of 3 descriptions added, 1 failed/.test(r.ttcAfter && r.ttcAfter.summary), "final summary on the card: " + JSON.stringify(r.ttcAfter));
+  want(r.ttcNoAddon && !r.ttcNoAddon.jobs && /didn't answer/.test(r.ttcNoAddon.alert) && /edge:\/\/extensions/.test(r.ttcNoAddon.alert), "add-on silent → red message, no job: " + JSON.stringify(r.ttcNoAddon));
+  want(r.ttcOldAddon && !r.ttcOldAddon.jobs && /old scripts/.test(r.ttcOldAddon.alert), "add-on with old scripts → red message, no job: " + JSON.stringify(r.ttcOldAddon));
+  want(r.ttcBundled && !r.ttcBundled.jobs && /live/.test(r.ttcBundled.alert), "add-on not in live mode → red message, no job: " + JSON.stringify(r.ttcBundled));
+  want(r.ttcOkAddon && r.ttcOkAddon.jobs === 1 && !r.ttcOkAddon.alert, "add-on up to date → the scan starts, no red message: " + JSON.stringify(r.ttcOkAddon));
+  const PJ = r.ttcPrepJob || {}, PQ = (PJ.q || []).map(x => x.id), NQ = ((r.ttcNextJob || {}).q || []).map(x => x.id);
+  want(r.ttcEmptyScan && r.ttcEmptyScan.bad && /ttids\.js/.test(r.ttcEmptyAlert || ""), "empty scan with unread rows: says the helper didn't run: " + JSON.stringify([r.ttcEmptyScan, r.ttcEmptyAlert]));
+  want(PJ.kind === "ttfix" && PQ.length === 3 && PQ.every((id, i) => !i || BigInt(PQ[i - 1]) < BigInt(id)) && PJ.batch === 5 && (PJ.cont || [])[0] === "ttcaps:fixall" && PJ.q.every(x => /^Prepared caption/.test(x.text)), "scan found nothing → Fix all still queues the prepared ids (not done, not app-only, not over 7 days), oldest first, batches of 5: " + JSON.stringify([PQ, PJ.batch, PJ.cont]));
+  want(r.ttcFixedAfterBatch && r.ttcFixedAfterBatch[0] && r.ttcFixedAfterBatch[0].ok && r.ttcFixedAfterBatch[1] && r.ttcFixedAfterBatch[1].skip, "each batch is saved to the log (ok / skipped): " + JSON.stringify(r.ttcFixedAfterBatch));
+  want(r.ttcRunAfterBatch && r.ttcRunAfterBatch.done === 2 && NQ.length === 1 && !NQ.includes(PQ[0]) && !NQ.includes(PQ[1]) && r.ttcNextJob.wait_first, "next batch continues with the rest, waiting 20–40 s first: " + JSON.stringify([NQ, r.ttcRunAfterBatch]));
   want(/favisionenterprize\.github\.io\/tiktok\//.test(r.socText || "") && /Comment|Tell us below/i.test(r.socText || ""), "new TikTok autopilot posts use the classy caption by default: " + r.socText);
   const b = r.boost || {};
   want(b.text > 500 && !b.xss && !b.imgs, "Boost tab draws and escapes sound names: " + JSON.stringify(b));
