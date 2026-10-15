@@ -730,3 +730,7 @@ input.now-num { width: 4.5em !important; display: inline-block; padding: 2px 6px
 /* Boost tab (admin/boost.js) */
 .boost-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 8px; }
 #boost-manual textarea { width: 100%; box-sizing: border-box; font: 13px/1.4 ui-monospace, monospace; padding: 8px; border: 1px solid var(--line); border-radius: 8px; }
+.ttc-go .btn { width: 100%; max-width: 420px; }
+#ttc-card .up { color: var(--ok); font-weight: 600; } #ttc-card .down { color: var(--err); font-weight: 600; }
+.ttc-review { margin-top: 10px; border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; }
+.ttc-review > summary { cursor: pointer; font-weight: 600; padding: 4px 0; }

@@ -196,10 +196,18 @@ async function marketplace(browser) {
       manual: [], used: [{ name: "Afro Vibes Commercial", platform: "tiktok", d: d0 }], notes: [] };
     window.__files["data/boost.json"] = { settings: { best_time: false }, pinned: [], stories: [], reels: [], runs: [] };
     window.__files["data/engagement.json"] = Object.assign({}, files["data/engagement.json"], { posts: { "https://www.tiktok.com/@fav/video/1": { net: "tiktok", url: "https://www.tiktok.com/@fav/video/1", title: "Luxury Leather Sofa Set in Accra", likes: 900, comments: 80, shares: 40, views: 30000 } } });
-    window.__files["data/tiktok-captions.json"] = { scan: { d: "2026-10-15", n: 3, posts: [
-      { id: "7400000000000000001", url: "https://www.tiktok.com/@favision/video/7400000000000000001", desc: "Luxury leather sofa set now in stock at our Odorkor showroom", thumb: "", alt: "" },
-      { id: "7400000000000000002", url: "https://www.tiktok.com/@favision/photo/7400000000000000002", desc: "", thumb: "https://p16.tiktokcdn.com/x.jpg", alt: "<img src=x onerror=window.__xss=3>student desk chair in a classroom" },
-      { id: "7400000000000000003", url: "javascript:alert(1)", desc: "#fyp #accra", thumb: "javascript:x", alt: "" } ] }, fixed: {}, runs: [] };
+    // TikTok post ids start with the posting time (id >> 32 = Unix seconds): make them recent / old.
+    const ttId = (agoH, k) => String((BigInt(Math.floor(Date.now() / 1000) - agoH * 3600) << 32n) + BigInt(k));
+    const TT = { has: ttId(30, 1), desk: ttId(48, 2), tags: ttId(1, 3), old: ttId(9 * 24, 4), app: ttId(24, 5), prep: ttId(5 * 24, 6) };
+    window.__files["data/tiktok-captions.json"] = { settings: { min: 20, max: 40, min_chars: 15, edit_days: 7 },
+      prepared: { [TT.prep]: { p: "FAV-004", text: "Bold colour, warm welcomes.\nRed Glass Dining Set: GH₵12,600.\nComment 'MINE' 👇" } }, app_only: [TT.app],
+      scan: { d: "2026-10-15", n: 6, posts: [
+      { id: TT.has, url: "https://www.tiktok.com/@favision/video/" + TT.has, desc: "Luxury leather sofa set now in stock at our Odorkor showroom", thumb: "", alt: "" },
+      { id: TT.desk, url: "https://www.tiktok.com/@favision/photo/" + TT.desk, desc: "", thumb: "https://p16.tiktokcdn.com/x.jpg", alt: "<img src=x onerror=window.__xss=3>student desk chair in a classroom" },
+      { id: TT.tags, url: "javascript:alert(1)", desc: "#fyp #accra", thumb: "javascript:x", alt: "" },
+      { id: TT.old, url: "https://www.tiktok.com/@favision/photo/" + TT.old, desc: "", thumb: "", alt: "dining set" },
+      { id: TT.app, url: "https://www.tiktok.com/@favision/video/" + TT.app, desc: "", thumb: "", alt: "" },
+      { id: TT.prep, url: "https://www.tiktok.com/@favision/photo/" + TT.prep, desc: "", thumb: "", alt: "" } ] }, fixed: {}, runs: [] };
     let list = JSON.parse(JSON.stringify(files["data/products.json"]));
     window.__list = () => list;
     document.documentElement.dataset.favautoExt = "5"; document.documentElement.dataset.favautoMode = "live";
@@ -253,29 +261,47 @@ async function marketplace(browser) {
     window.FAV_FBAUTO._test.setTab("social"); await wait(200);
     out.ttcOnSocial = !!document.querySelector("#ttc-card");
     const TC = window.FAV_TTCAPS, ttcSaved = JSON.parse(JSON.stringify(TC.state()));
-    const fixAll = () => { const b = document.querySelector("#ttc-card [data-ttc='all']"), f = document.querySelector("#ttc-card [data-ttc='scan']"); return { scan: !!f, all: !!b, disabled: b ? b.disabled : null, label: b ? b.textContent.trim() : "", hint: !!document.querySelector("#ttc-hint") }; };
+    const TT = (([has, desk, tags, old, app, prep]) => ({ has, desk, tags, old, app, prep }))(ttcSaved.scan.posts.map(p => p.id));
+    out.tt = TT;
+    const card = () => { const c = document.querySelector("#ttc-card"), b = c && c.querySelector("[data-ttc='go']");
+      return { buttons: c ? [...c.querySelectorAll(".fa-actions button")].filter(x => !x.closest(".ttc-review")).map(x => x.textContent.trim()) : [], go: !!b, disabled: b ? b.disabled : null, label: b ? b.textContent.trim() : "",
+        review: !!(c && c.querySelector("details.ttc-review")), reviewOpen: !!(c && c.querySelector("details.ttc-review[open]")), split: ((c && c.querySelector("#ttc-split")) || {}).innerText || "", summary: ((c && c.querySelector("#ttc-summary")) || {}).innerText || "" }; };
     TC._test.set({ scan: null, fixed: {}, runs: [] });
     window.FAV_FBAUTO._test.setTab("ttcap"); await wait(200);
-    out.ttcNoScan = fixAll();
-    TC._test.set({ scan: { d: "2026-10-15", n: 1, posts: [ttcSaved.scan.posts[1]] }, fixed: {}, runs: [] });
-    window.FAV_FBAUTO._test.setTab("ttcap"); await wait(200);
-    out.ttcOne = fixAll();
+    out.ttcNoScan = card();
+    // One press: scan job, chained to "ttcaps:fixall"
     window.__jobs = [];
-    document.querySelector("#ttc-card [data-ttc='all']").click(); await wait(200);
-    out.ttcOneJob = window.__jobs[0] && window.__jobs[0].job;
+    document.querySelector("#ttc-card [data-ttc='go']").click(); await wait(200);
+    out.ttcScanJob = window.__jobs[0] && window.__jobs[0].job;
+    TC._test.setRun(null);
     TC._test.set(ttcSaved);
     window.FAV_FBAUTO._test.setTab("ttcap"); await wait(200);
     out.ttcTabs = [...document.querySelectorAll("[data-fa-tab]")].map(b => b.dataset.faTab);
-    out.ttcMock = fixAll();
+    out.ttcMock = card();
     out.ttcLast = ((document.querySelector("#ttc-card") || {}).innerText || "").match(/Last read[^\n]*/) ;
     out.ttcLast = out.ttcLast ? out.ttcLast[0] : "";
     const tc = document.querySelector("#ttc-card");
-    out.ttc = tc ? { posts: tc.querySelectorAll(".ttc-post").length, imgs: [...tc.querySelectorAll("img")].map(i => i.getAttribute("src")), links: [...tc.querySelectorAll(".ttc-post a")].map(a => a.getAttribute("href")),
-      pick: (tc.querySelector("[data-ttc-pick='7400000000000000002']") || {}).value, text: (tc.querySelector("[data-ttc-text='7400000000000000002']") || {}).value || "" } : null;
+    out.ttc = tc ? { posts: tc.querySelectorAll(".ttc-post").length, imgs: [...tc.querySelectorAll("img")].map(i => i.getAttribute("src")), links: [...tc.querySelectorAll("a")].map(a => a.getAttribute("href")),
+      pick: (tc.querySelector(`[data-ttc-pick='${TT.desk}']`) || {}).value, text: (tc.querySelector(`[data-ttc-text='${TT.desk}']`) || {}).value || "",
+      general: (tc.querySelector(`[data-ttc-text='${TT.tags}']`) || {}).value || "", prep: (tc.querySelector(`[data-ttc-text='${TT.prep}']`) || {}).value || "" } : null;
     out.xss2 = window.__xss || 0;
+    // After the scan comes back: fix all, no review needed
     window.__jobs = [];
-    const fx = document.querySelector("[data-ttc-fix='7400000000000000002']"); if (fx) fx.click(); await wait(200);
+    await TC.fixAll([]); await wait(200);
+    out.ttcFixJob = window.__jobs[0] && window.__jobs[0].job;
+    TC._test.setRun(null);
+    // Optional review: edit one caption and fix just that one
+    const ta = document.querySelector(`[data-ttc-text='${TT.desk}']`);
+    if (ta) { ta.value = out.ttc.text + "\nEdited."; ta.dispatchEvent(new Event("input", { bubbles: true })); }
+    window.__jobs = [];
+    const fx = document.querySelector(`[data-ttc-fix='${TT.desk}']`); if (fx) fx.click(); await wait(200);
     out.ttJob = window.__jobs[0] && window.__jobs[0].job;
+    TC._test.setRun(null);
+    // Summary after a fix run
+    await TC.receive({ kind: "ttfix", n: 3, res: [{ id: TT.prep, ok: true }, { id: TT.desk, ok: true }, { id: TT.tags, ok: false, why: "TikTok didn't confirm the save" }] });
+    window.FAV_FBAUTO._test.setTab("ttcap"); await wait(200);
+    out.ttcAfter = card();
+    TC._test.set(ttcSaved);
     const soc = window.FAV_SOCAUTO.job("tiktok", { products: ["FAV-014"], limit: 1 });
     out.socText = soc && soc.job.q[0] && soc.job.q[0].text;
     window.FAV_FBAUTO._test.setTab("market"); await wait(100);
@@ -326,16 +352,22 @@ async function marketplace(browser) {
   want(r.profCard && r.profJob && r.profJob.kind === "profile" && r.profJob.net === "fb" && r.profJob.mode === "check" && /favisionenterprize/.test(r.profJob.link) && /Fresh stock/.test(r.profJob.pin), "profile check job wrong: " + JSON.stringify(r.profJob));
   want(!r.ttcOnSocial, "TikTok captions card should no longer be on the X & TikTok tab");
   want((r.ttcTabs || []).join() .includes("social,ttcap,"), "TikTok captions tab should come right after X & TikTok: " + (r.ttcTabs || []).join());
-  want(r.ttcNoScan && r.ttcNoScan.scan && r.ttcNoScan.all && r.ttcNoScan.disabled === true && r.ttcNoScan.hint, "before a scan both buttons show, Fix all disabled with the hint: " + JSON.stringify(r.ttcNoScan));
-  want(r.ttcOne && r.ttcOne.all && r.ttcOne.disabled === false && r.ttcOne.label === "✨ Fix all 1" && !r.ttcOne.hint, "with 1 post Fix all shows, enabled: " + JSON.stringify(r.ttcOne));
-  want(r.ttcOneJob && r.ttcOneJob.kind === "ttfix" && r.ttcOneJob.q.length === 1, "Fix all works for a single post: " + JSON.stringify(r.ttcOneJob).slice(0, 200));
-  want(r.ttcMock && r.ttcMock.scan && r.ttcMock.disabled === false && r.ttcMock.label === "✨ Fix all 2" && !r.ttcMock.hint, "with the mock scan Fix all is enabled: " + JSON.stringify(r.ttcMock));
-  want(/, 2 without a description\.$/.test(r.ttcLast || ""), "Last read line wording: " + r.ttcLast);
+  const T = r.tt || {};
+  want(r.ttcNoScan && r.ttcNoScan.go && r.ttcNoScan.buttons.length === 1 && r.ttcNoScan.label === "✨ Fix all TikTok descriptions" && r.ttcNoScan.disabled === false, "before any scan there is ONE enabled button, Fix all TikTok descriptions: " + JSON.stringify(r.ttcNoScan));
+  want(r.ttcScanJob && r.ttcScanJob.kind === "ttscan" && r.ttcScanJob.max === 500 && (r.ttcScanJob.then || [])[0] === "ttcaps:fixall", "the button reads all posts (max 500) then chains Fix all: " + JSON.stringify(r.ttcScanJob));
+  want(r.ttcMock && r.ttcMock.buttons.length === 1 && r.ttcMock.go && r.ttcMock.review && !r.ttcMock.reviewOpen, "with a scan: still one button, Review captions collapsed: " + JSON.stringify(r.ttcMock));
+  want(/^Last read 2026-10-15: 6 posts, 5 without a description\.$/.test(r.ttcLast || ""), "Last read line wording: " + r.ttcLast);
+  want(/3 fixed by the button now/.test(r.ttcMock.split) && /1 post over 7 days old/.test(r.ttcMock.split) && /App only/.test(r.ttcMock.split) && r.ttcMock.split.includes(T.app), "split: 3 now, 1 too old, 1 app-only: " + r.ttcMock.split);
   const tt = r.ttc || {};
-  want(tt.posts === 2, "TikTok captions card should list the 2 posts without a real description, got " + tt.posts);
+  want(tt.posts === 3, "Review captions lists the 3 posts the button will fix, got " + tt.posts);
   want(tt.pick === "FAV-014" && /Comment/i.test(tt.text) && /favisionenterprize\.github\.io\/tiktok\//.test(tt.text) && /GH₵650/.test(tt.text) && !/where are you seeing/i.test(tt.text), "classy caption for the student desk post: " + tt.text);
-  want(!r.xss2 && (tt.imgs || []).every(u => /^https:/.test(u)) && (tt.links || []).every(h => /^https:\/\/www\.tiktok\.com\//.test(h)), "TikTok card escapes text and only shows https thumbnails/links: " + JSON.stringify([tt.imgs, tt.links]));
-  want(r.ttJob && r.ttJob.kind === "ttfix" && r.ttJob.q.length === 1 && r.ttJob.q[0].id === "7400000000000000002" && r.ttJob.q[0].text === tt.text, "Fix this one sends the edited caption: " + JSON.stringify(r.ttJob).slice(0, 300));
+  want(/favisionenterprize\.github\.io\/tiktok\//.test(tt.general) && /statement/.test(tt.general) && !/GH₵|GHS|₵/.test(tt.general), "no confident product → general caption, no price: " + tt.general);
+  want(/^Bold colour, warm welcomes\./.test(tt.prep), "a prepared caption (from the post's photos) is used as is: " + tt.prep);
+  want(!r.xss2 && (tt.imgs || []).every(u => /^https:/.test(u)) && (tt.links || []).every(h => /^https:\/\//.test(h)), "TikTok card escapes text and only shows https thumbnails/links: " + JSON.stringify([tt.imgs, tt.links]));
+  const fq = (r.ttcFixJob && r.ttcFixJob.q) || [];
+  want(r.ttcFixJob && r.ttcFixJob.kind === "ttfix" && fq.map(x => x.id).join() === [T.prep, T.desk, T.tags].join() && /^Bold colour/.test(fq[0].text) && fq.every(x => x.text.length > 20), "Fix all queues every editable post, oldest first, prepared caption first, none too old / app-only: " + JSON.stringify(fq.map(x => [x.id, x.text.slice(0, 30)])));
+  want(r.ttJob && r.ttJob.kind === "ttfix" && r.ttJob.q.length === 1 && r.ttJob.q[0].id === T.desk && /\nEdited\.$/.test(r.ttJob.q[0].text), "Fix just this one sends the edited caption: " + String(JSON.stringify(r.ttJob)).slice(0, 300));
+  want(/Last fix .*: 2 of 3 descriptions added, 1 failed/.test(r.ttcAfter && r.ttcAfter.summary), "final summary on the card: " + JSON.stringify(r.ttcAfter));
   want(/favisionenterprize\.github\.io\/tiktok\//.test(r.socText || "") && /Comment/i.test(r.socText || ""), "new TikTok autopilot posts use the classy caption by default: " + r.socText);
   const b = r.boost || {};
   want(b.text > 500 && !b.xss && !b.imgs, "Boost tab draws and escapes sound names: " + JSON.stringify(b));

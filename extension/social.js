@@ -4,7 +4,13 @@
 //   tiktok – TikTok Studio photo post: photo → title + description → Post
 // Pauses between posts; stops at once on any warning; returns to the admin with the results.
 // Checked live on TikTok Studio (Oct 2026): Photos tab = ?tab=photo, image input accepts jpg/png/webp,
-// the description is a Draft.js box (execCommand insertText works, paste doesn't), button "Post".
+// the description is a Draft.js box, button "Post". Oct 15 2026: posts had been going out with an EMPTY
+// description (only the "catchy title" was filled): execCommand text showed in the box but Draft.js's own
+// state stayed blank. Now the description goes in with a synthetic paste event (ClipboardEvent + DataTransfer
+// text/plain, line breaks kept: verified live on the edit page), falls back to execCommand insertText, is
+// checked again right before Post, and the run STOPS rather than post a blank description.
+// Post sometimes reloads the tab into TikTok Studio → Posts: job.posted marks the click so that reload
+// counts as posted (it used to be logged as a failure, e.g. FAV-006 on 15 Oct).
 (async () => {
   // Sleep that keeps time when the tab is hidden, minimised or the screen is locked: the add-on's
   // background (5.2+) does the waiting in short steps, because the browser slows timers in hidden tabs
@@ -123,6 +129,33 @@
       await sleep(600);
     }
   }
+  // Paste text into a Draft.js editor the way a person would (Ctrl+V): Draft.js updates its own state.
+  function pasteInto(ed, text) {
+    ed.focus();
+    document.execCommand("selectAll", false, null);
+    document.execCommand("delete", false, null);
+    const dt = new DataTransfer();
+    dt.setData("text/plain", String(text));
+    ed.dispatchEvent(new ClipboardEvent("paste", { clipboardData: dt, bubbles: true, cancelable: true }));
+  }
+  const flat = t => String(t || "").replace(/\s+/g, " ").trim();
+  const probeOf = text => flat((String(text).split("\n").find(l => l.trim()) || "")).slice(0, 25);
+  const ttEditor = () => [...document.querySelectorAll("[data-e2e=caption_container] [contenteditable=true],.public-DraftEditor-content[contenteditable=true],.public-DraftEditor-content")].find(visible);
+  const hasText = (text, ed) => { ed = ed || ttEditor(); const p = probeOf(text); return !!ed && !!p && flat(ed.innerText).includes(p); };
+  // Description in: paste first, then execCommand typing. true when the text is really in the box.
+  async function setDescription(text) {
+    let ed = ttEditor(); if (!ed) return false;
+    pasteInto(ed, text);
+    await sleep(1200);
+    if (hasText(text)) return "paste";
+    ed = ttEditor(); if (!ed) return false;
+    typeInto(ed, text);
+    await sleep(1200);
+    ed.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));   // close the #hashtag suggestions
+    await fixFirstLine(ttEditor() || ed, text);
+    await sleep(600);
+    return hasText(text) ? "type" : false;
+  }
   function setInput(input, value) {
     const set = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value").set;
     set.call(input, value);
@@ -169,6 +202,11 @@
   await sleep(2500);
   if (job.i >= job.q.length) return finish();
   const it = job.q[job.i];
+  if (job.kind === "tiktok" && job.posted === job.i) {    // the tab reloaded after we pressed Post
+    job.posted = -1;
+    await record(it, true, "posted (TikTok opened Posts)");
+    return next(true);
+  }
   if (!(await arrive(composeUrl()))) return;
   const n = `Post ${job.i + 1} of ${job.q.length}`;
   box(`${n}: opening…`);
@@ -240,16 +278,15 @@
   box(`${n}: writing the title and description…`);
   const title = [...document.querySelectorAll("input")].find(i => visible(i) && /catchy title/i.test(i.placeholder || ""));
   if (title && it.title) setInput(title, it.title.slice(0, 90));
-  typeInto(ed, it.text);
-  await sleep(1200);
-  ed.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));   // close the #hashtag suggestions
-  await fixFirstLine(ed, it.text);
-  if (!ed.innerText.trim()) { await record(it, false, "Couldn't type the description"); return next(false); }
+  await sleep(600);
+  if (!(await setDescription(it.text))) { await record(it, false, "The description stayed empty, so nothing was posted"); return finish("TikTok's description box stayed empty. Stopped rather than post without a description."); }
   await addSound(it);
   w = warning(); if (w) return finish(`TikTok showed "${w}". Nothing more was posted.`);
   const post = await waitFor(() => { const b = [...document.querySelectorAll("button")].find(x => visible(x) && (x.innerText || "").trim() === "Post"); return b && !b.disabled && b.getAttribute("aria-disabled") !== "true" ? b : null; }, 30000);
   if (!post) { await record(it, false, "Post button stayed off"); return next(false); }
   await sleep(rand(1000, 2000));
+  // Last check right before Post (the sound picker or the title can re-render the editor).
+  if (!hasText(it.text) && !(await setDescription(it.text))) { await record(it, false, "The description was empty right before Post, so nothing was posted"); return finish("TikTok's description box was empty right before Post. Stopped rather than post without a description."); }
   if (job.dry) {
     box(`${n}: test passed ✓ (photo uploaded, description typed, Post ready). Not posting.`);
     await sleep(2500);
@@ -259,6 +296,8 @@
     return next(false);
   }
   post.scrollIntoView({ block: "center" });
+  job.posted = job.i;               // if Post reloads the tab, the next page load counts it as posted
+  await save();
   post.click();
   box(`${n}: posting…`);
   // Possible follow-up questions ("Continue to post?", content-check prompts): go ahead.
@@ -267,6 +306,7 @@
   const done = await waitFor(() => /\/tiktokstudio\/content/.test(location.pathname) || /(post(ed)? successfully|your (photo|post)s? (is|are|has been) (being )?(uploaded|posted|published)|manage your posts)/i.test(document.body.innerText.slice(0, 4000)), 90000);
   await sleep(1500);
   w = warning(); if (w) { await record(it, false, w); return finish(`TikTok showed "${w}". Nothing more was posted.`); }
+  job.posted = -1;
   await record(it, !!done, done ? "" : "TikTok didn't confirm the post (check TikTok Studio → Posts)");
   return next(!!done);
 })();

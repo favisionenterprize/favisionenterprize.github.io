@@ -2,8 +2,471 @@
  "settings": {
   "min": 20,
   "max": 40,
-  "min_chars": 15
+  "min_chars": 15,
+  "edit_days": 7
  },
+ "notes": {
+  "prepared": "Captions written 15 Oct 2026 in a browser run by looking at each post's images (p = product id, AI/G-* = general). Fix all uses these first.",
+  "app_only": "Commercial content: TikTok only allows editing these in the app."
+ },
+ "prepared": {
+  "7696775746609614100": {
+   "p": "FAV-004",
+   "text": "Bold colour, warm welcomes.\nGlossy red-brown glass top with six curved high-back chairs. Sturdy steel frame, finished in brown and black.\nRed Glass Dining Set (6 chairs): GH₵12,600. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#FurnitureGhana #Odorkor #HomeDecorGhana #GhanaHomes #DiningSet"
+  },
+  "7696774739380997396": {
+   "p": "FAV-009",
+   "text": "Get ready in style.\nWhite dressing table with an arched mirror, side shelves, drawers and a storage cabinet. Matching padded stool included.\nWhite Dressing Table with Mirror & Stool: GH₵7,450. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#FurnitureGhana #GhanaHomes #HomeDecorGhana #AccraFurniture #DressingTable #BedroomDecor"
+  },
+  "7696773501356707124": {
+   "p": "FAV-010",
+   "text": "Room for two.\nTall four-door wardrobe with quilted-pattern doors and top storage cabinets. Hanging space and shelves, in cream, white or dark wood.\n4-Door Wardrobe with Top Cabinets: GH₵9,800. Delivered across Accra, Tema & Kasoa.\nWhich colour would you pick? Tell us below 👇\nShop: favisionenterprize.github.io/tiktok\n#FurnitureGhana #Odorkor #AccraFurniture #HomeDecorGhana #Wardrobe"
+  },
+  "7696772726652128532": {
+   "p": "FAV-026",
+   "text": "The professional baker's choice.\nKavukçu wheat flour, 50kg professional pack, made in Turkey since 1920. For bread, rolls, burger buns, doughnuts and pizza dough.\nGH₵640 (was GH₵650). Sold by ANAC Essentials.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#FurnitureGhana #AccraFurniture #Odorkor #GhanaHomes #BakingGhana #WheatFlour"
+  },
+  "7696771759227505940": {
+   "p": "FAV-017",
+   "text": "Long hours, light on your back.\nBreathable mesh-back swivel chair with arm rests and a padded seat. Grey/blue or green.\nMesh Secretary Chair with arm rests: GH₵4,500. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#AccraFurniture #FurnitureGhana #Odorkor #GhanaHomes #OfficeChair"
+  },
+  "7696771063258107156": {
+   "p": "FAV-006",
+   "text": "Lead from a better seat.\nHigh back in black leatherette with thick padding and padded armrests. Gas-lift height adjustment, tilt, 360° swivel and a chrome five-star base.\nExecutive Director Chair: GH₵9,500. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#GhanaHomes #AccraFurniture #FurnitureGhana #Odorkor #OfficeChair #OfficeFurniture"
+  },
+  "7696737023872306452": {
+   "p": "FAV-011",
+   "text": "Room for the whole family.\nLarge L-shaped sectional in soft grey fabric, seats 5 to 6. Deep high-density foam cushions, a chaise end and matching scatter pillows.\nL-Shaped Sectional Sofa (grey): GH₵15,500. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#GhanaHomes #FurnitureGhana #HomeDecorGhana #Odorkor #SofaSet"
+  },
+  "7696735911614237972": {
+   "p": "FAV-020",
+   "text": "First impressions, printed.\nProfessionally designed and printed at our Omanjor press, design included.\nBusiness cards: 100 pieces GH₵50 · 200 pieces GH₵100. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#HomeDecorGhana #FurnitureGhana #Odorkor #GhanaHomes #BusinessCards #PrintingGhana"
+  },
+  "7696734993405545748": {
+   "p": "FAV-023",
+   "text": "Cool rooms, cool heads.\nSigma 1.5HP split air conditioner, R410A, model BREEZE-HY12SB. Energy-efficient, powerful cooling.\nSigma 1.5HP Split AC: GH₵6,500. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#GhanaHomes #Odorkor #AccraFurniture #HomeDecorGhana #AirConditioner"
+  },
+  "7696734415346699541": {
+   "p": "FAV-014",
+   "text": "Study time, sorted.\nHeight-adjustable desk (73–88 cm) and chair (46–52 cm) for SHS through university. Powder-coated carbon steel frame, MDF/melamine top and anti-slip floor caps.\nStudent Desk & Chair Set: GH₵650 a set. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#AccraFurniture #HomeDecorGhana #Odorkor #FurnitureGhana #StudentDesk #SchoolFurniture"
+  },
+  "7696329298638097670": {
+   "p": "FAV-024",
+   "text": "Upgrade your bathroom.\nBrand-new two-piece TWYFORD water closet in high-quality ceramic. Powerful straight-inlet flush, easy to clean. Bulk discounts available.\nTWYFORD Water Closet: GH₵750. Sold by AGOODMANN VENTURES, Kantamanto.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#AccraFurniture #Odorkor #HomeDecorGhana #FurnitureGhana #BathroomDesign"
+  },
+  "7696328686450052404": {
+   "p": "FAV-010",
+   "text": "Spacious, stylish and strong.\nTall four-door wardrobe with quilted-pattern doors and top storage cabinets. Hanging space and shelves, in cream, white or dark wood.\n4-Door Wardrobe with Top Cabinets: GH₵9,800. Delivered across Accra, Tema & Kasoa.\nWhich colour would you pick? Tell us below 👇\nShop: favisionenterprize.github.io/tiktok\n#HomeDecorGhana #AccraFurniture #GhanaHomes #Odorkor #FurnitureGhana #Wardrobe #BedroomDecor"
+  },
+  "7696328180365397269": {
+   "p": "AI",
+   "text": "See your room before you buy it.\nTry our free AI Studio: pick furniture, colours and 3D wallpaper and see them in your space.\nSofas, dining, office & school furniture in Accra. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#GhanaHomes #Odorkor #AccraFurniture #HomeDecorGhana #FurnitureGhana #InteriorDesignGhana"
+  },
+  "7696328146940939541": {
+   "p": "FAV-033",
+   "text": "A living room that matches.\nMatching TV stand and centre table with marble-effect tops and white drawers. Sold as a set.\nTV Stand + Centre Table Set: GH₵16,800. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#FurnitureGhana #AccraFurniture #GhanaHomes #HomeDecorGhana #TVStand #LivingRoomDecor"
+  },
+  "7696327561881718037": {
+   "p": "FAV-008",
+   "text": "Your office, sorted.\n1.2 m work surface in a warm wood finish with a detachable 3-drawer unit. Flat-packed for easy delivery, assembled on site.\n1.2 m Office Desk with Drawer Unit: GH₵4,500. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#FurnitureGhana #GhanaHomes #Odorkor #AccraFurniture #OfficeDesk"
+  },
+  "7696327196545125653": {
+   "p": "FAV-011",
+   "text": "Sink in. Stay a while.\nLarge L-shaped sectional in soft grey fabric, seats 5 to 6. Deep high-density foam cushions, a chaise end and matching scatter pillows.\nL-Shaped Sectional Sofa (grey): GH₵15,500. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#Odorkor #AccraFurniture #HomeDecorGhana #GhanaHomes #FurnitureGhana #SofaSet #LivingRoomDecor"
+  },
+  "7696326527536942357": {
+   "p": "FAV-031",
+   "text": "Seat ten. Fold it away.\nLarge round foldable table that seats 10, with matching white folding chairs. Folds flat for easy storage.\n10-Seater Foldable Round Table with Chairs: GH₵9,650. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#GhanaHomes #FurnitureGhana #HomeDecorGhana #AccraFurniture #EventFurniture"
+  },
+  "7696326100401605908": {
+   "p": "FAV-024",
+   "text": "Clean lines. Powerful flush.\nBrand-new two-piece TWYFORD water closet in high-quality ceramic. Powerful straight-inlet flush, easy to clean. Bulk discounts available.\nTWYFORD Water Closet: GH₵750. Sold by AGOODMANN VENTURES, Kantamanto.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#GhanaHomes #HomeDecorGhana #Odorkor #FurnitureGhana #AccraFurniture #BathroomDesign #TwyfordGhana"
+  },
+  "7696325911540469012": {
+   "p": "FAV-009",
+   "text": "Stay fabulous, stay organised.\nWhite dressing table with an arched mirror, side shelves, drawers and a storage cabinet. Matching padded stool included.\nWhite Dressing Table with Mirror & Stool: GH₵7,450. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#Odorkor #HomeDecorGhana #GhanaHomes #AccraFurniture #FurnitureGhana #DressingTable"
+  },
+  "7696325064274283796": {
+   "p": "FAV-007",
+   "text": "Work longer. Sit better.\nBreathable mesh back with lumbar support and a soft padded seat. Height adjustable, 360° swivel, blue or green seat.\nMesh Secretary Chair (ergonomic swivel): GH₵9,500. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#Odorkor #HomeDecorGhana #GhanaHomes #AccraFurniture #OfficeChair #ErgonomicChair"
+  },
+  "7696324927863065877": {
+   "p": "FAV-010",
+   "text": "Closet goals, delivered.\nTall four-door wardrobe with quilted-pattern doors and top storage cabinets.\n4-Door Wardrobe with Top Cabinets: GH₵9,800. Delivered across Accra, Tema & Kasoa.\nWhich colour would you pick? Tell us below 👇\nShop: favisionenterprize.github.io/tiktok\n#Odorkor #HomeDecorGhana #FurnitureGhana #GhanaHomes #Wardrobe"
+  },
+  "7696324182577007893": {
+   "p": "FAV-008",
+   "text": "More focus. More comfort.\n1.2 m work surface in a warm wood finish with a detachable 3-drawer unit. Flat-packed for easy delivery, assembled on site.\n1.2 m Office Desk with Drawer Unit: GH₵4,500. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#AccraFurniture #FurnitureGhana #Odorkor #HomeDecorGhana #GhanaHomes #OfficeDesk #HomeOffice"
+  },
+  "7696323909439720724": {
+   "p": "FAV-018",
+   "text": "The centre of attention.\nVery strong oval tempered-glass top on a sculpted black base.\nStrong Glass Centre Table: GH₵800. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#AccraFurniture #FurnitureGhana #Odorkor #HomeDecorGhana #CentreTable"
+  },
+  "7696323550965288212": {
+   "p": "FAV-009",
+   "text": "More rest. More space.\nWhite dressing table with an arched mirror, side shelves, drawers and a storage cabinet.\nWhite Dressing Table with Mirror & Stool: GH₵7,450. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#AccraFurniture #HomeDecorGhana #FurnitureGhana #GhanaHomes #DressingTable #BedroomDecor"
+  },
+  "7696323152036891925": {
+   "p": "FAV-025",
+   "text": "Floors and walls that last.\nAnti-skid floor tiles, glossy and matte wall tiles, grout and adhesive. Wholesale and retail.\nTiles from GH₵1,000. Sold by AGOODMANN VENTURES, Kantamanto.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#FurnitureGhana #HomeDecorGhana #GhanaHomes #Odorkor #TilesGhana"
+  },
+  "7696322541811469589": {
+   "p": "FAV-007",
+   "text": "More focus. More comfort.\nBreathable mesh back with lumbar support and a soft padded seat. Height adjustable, 360° swivel, blue or green seat.\nMesh Secretary Chair (ergonomic swivel): GH₵9,500. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#GhanaHomes #Odorkor #FurnitureGhana #AccraFurniture #HomeDecorGhana #OfficeChair #ErgonomicChair"
+  },
+  "7696322349716573460": {
+   "p": "FAV-002",
+   "text": "Sleek. Modern. Made for entertaining.\nBlack tempered-glass top on a chrome base. Six tall, padded high-back chairs in wipe-clean black leatherette.\nBlack Glass Dining Set (6 high-back chairs): GH₵4,900. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#Odorkor #AccraFurniture #HomeDecorGhana #FurnitureGhana #DiningSet"
+  },
+  "7696322209857473813": {
+   "p": "FAV-024",
+   "text": "Bathroom goals start here.\nBrand-new two-piece TWYFORD water closet in high-quality ceramic.\nTWYFORD Water Closet: GH₵750. Sold by AGOODMANN VENTURES, Kantamanto.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#GhanaHomes #HomeDecorGhana #Odorkor #FurnitureGhana #BathroomDesign #TwyfordGhana"
+  },
+  "7696321581827493140": {
+   "p": "FAV-018",
+   "text": "Small table, big statement.\nVery strong oval tempered-glass top on a sculpted black base.\nStrong Glass Centre Table: GH₵800. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#Odorkor #GhanaHomes #AccraFurniture #FurnitureGhana #HomeDecorGhana #CentreTable"
+  },
+  "7696321470204611841": {
+   "p": "FAV-010",
+   "text": "More rest. More space.\nTall four-door wardrobe with quilted-pattern doors and top storage cabinets. Hanging space and shelves, in cream, white or dark wood.\n4-Door Wardrobe with Top Cabinets: GH₵9,800. Delivered across Accra, Tema & Kasoa.\nWhich colour would you pick? Tell us below 👇\nShop: favisionenterprize.github.io/tiktok\n#Odorkor #HomeDecorGhana #FurnitureGhana #GhanaHomes #AccraFurniture #Wardrobe #BedroomDecor"
+  },
+  "7696320779406839041": {
+   "p": "FAV-025",
+   "text": "Every room starts from the floor up.\nAnti-skid floor tiles, glossy and matte wall tiles, grout and adhesive. Wholesale and retail.\nTiles from GH₵1,000. Sold by AGOODMANN VENTURES, Kantamanto.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#FurnitureGhana #AccraFurniture #GhanaHomes #HomeDecorGhana #Odorkor #TilesGhana"
+  },
+  "7696320350639983893": {
+   "p": "FAV-033",
+   "text": "Marble looks, everyday storage.\nMatching TV stand and centre table with marble-effect tops and white drawers. Sold as a set.\nTV Stand + Centre Table Set: GH₵16,800. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#Odorkor #HomeDecorGhana #GhanaHomes #AccraFurniture #FurnitureGhana #TVStand #LivingRoomDecor"
+  },
+  "7696319790415252756": {
+   "p": "FAV-002",
+   "text": "Dinner, but make it elegant.\nBlack tempered-glass top on a chrome base. Six tall, padded high-back chairs in wipe-clean black leatherette.\nBlack Glass Dining Set (6 high-back chairs): GH₵4,900. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#GhanaHomes #FurnitureGhana #Odorkor #HomeDecorGhana #AccraFurniture #DiningSet"
+  },
+  "7696319430019550484": {
+   "p": "FAV-008",
+   "text": "Work from home, properly.\n1.2 m work surface in a warm wood finish with a detachable 3-drawer unit.\n1.2 m Office Desk with Drawer Unit: GH₵4,500. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#FurnitureGhana #GhanaHomes #HomeDecorGhana #AccraFurniture #OfficeDesk #HomeOffice"
+  },
+  "7696318861137710356": {
+   "p": "FAV-031",
+   "text": "Ready for every celebration.\nLarge round foldable table that seats 10, with matching white folding chairs. Folds flat for easy storage.\n10-Seater Foldable Round Table with Chairs: GH₵9,650. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#AccraFurniture #HomeDecorGhana #GhanaHomes #Odorkor #FurnitureGhana #EventFurniture"
+  },
+  "7696318198446099733": {
+   "p": "FAV-009",
+   "text": "Your mornings, upgraded.\nWhite dressing table with an arched mirror, side shelves, drawers and a storage cabinet. Matching padded stool included.\nWhite Dressing Table with Mirror & Stool: GH₵7,450. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#GhanaHomes #HomeDecorGhana #FurnitureGhana #AccraFurniture #Odorkor #DressingTable #BedroomDecor"
+  },
+  "7696317540531752213": {
+   "p": "FAV-007",
+   "text": "Your back will thank you.\nBreathable mesh back with lumbar support and a soft padded seat.\nMesh Secretary Chair (ergonomic swivel): GH₵9,500. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#Odorkor #FurnitureGhana #HomeDecorGhana #GhanaHomes #OfficeChair"
+  },
+  "7696316502965898548": {
+   "p": "FAV-018",
+   "text": "Glass that holds its own.\nVery strong oval tempered-glass top on a sculpted black base.\nStrong Glass Centre Table: GH₵800. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#Odorkor #AccraFurniture #FurnitureGhana #GhanaHomes #CentreTable #LivingRoomDecor"
+  },
+  "7696315439172914452": {
+   "p": "FAV-025",
+   "text": "Finishes that make the room.\nAnti-skid floor tiles, glossy and matte wall tiles, grout and adhesive.\nTiles from GH₵1,000. Sold by AGOODMANN VENTURES, Kantamanto.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#AccraFurniture #GhanaHomes #FurnitureGhana #HomeDecorGhana #TilesGhana"
+  },
+  "7696314522851609877": {
+   "p": "FAV-002",
+   "text": "Black glass, quiet luxury.\nBlack tempered-glass top on a chrome base.\nBlack Glass Dining Set (6 high-back chairs): GH₵4,900. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#Odorkor #FurnitureGhana #GhanaHomes #AccraFurniture #DiningSet #ModernDining"
+  },
+  "7696313972005309717": {
+   "p": "FAV-033",
+   "text": "Complete the room in one go.\nMatching TV stand and centre table with marble-effect tops and white drawers.\nTV Stand + Centre Table Set: GH₵16,800. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#AccraFurniture #Odorkor #HomeDecorGhana #FurnitureGhana #TVStand"
+  },
+  "7696313956691889429": {
+   "p": "FAV-031",
+   "text": "The party table, sorted.\nLarge round foldable table that seats 10, with matching white folding chairs.\n10-Seater Foldable Round Table with Chairs: GH₵9,650. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#HomeDecorGhana #FurnitureGhana #GhanaHomes #AccraFurniture #EventFurniture #PartyRentalsGhana"
+  },
+  "7696313889142656257": {
+   "p": "FAV-025",
+   "text": "Glossy or matte? Your call.\nAnti-skid floor tiles, glossy and matte wall tiles, grout and adhesive. Wholesale and retail.\nTiles from GH₵1,000. Sold by AGOODMANN VENTURES, Kantamanto.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#GhanaHomes #FurnitureGhana #AccraFurniture #Odorkor #HomeDecorGhana #TilesGhana"
+  },
+  "7696313891244084500": {
+   "p": "FAV-011",
+   "text": "Quiet luxury for your living room.\nLarge L-shaped sectional in soft grey fabric, seats 5 to 6.\nL-Shaped Sectional Sofa (grey): GH₵15,500. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#FurnitureGhana #Odorkor #GhanaHomes #HomeDecorGhana #SofaSet #LivingRoomDecor"
+  },
+  "7696313882121407764": {
+   "p": "FAV-014",
+   "text": "Every student deserves a proper desk.\nHeight-adjustable desk (73–88 cm) and chair (46–52 cm) for SHS through university. Powder-coated carbon steel frame, MDF/melamine top and anti-slip floor caps.\nStudent Desk & Chair Set: GH₵650 a set. Delivered across Accra, Tema & Kasoa.\nWhich colour would you pick? Tell us below 👇\nShop: favisionenterprize.github.io/tiktok\n#AccraFurniture #GhanaHomes #Odorkor #HomeDecorGhana #FurnitureGhana #StudentDesk"
+  },
+  "7696313842569104660": {
+   "p": "FAV-021",
+   "text": "Keep the printer happy.\nA4 & A3 copy paper: Rotatrim 70/75/80gsm, PaperOne, Double A and Chamex. Wholesale and retail for offices, schools and print shops.\nCopy paper from GH₵450. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#GhanaHomes #HomeDecorGhana #AccraFurniture #FurnitureGhana #OfficeSupplies #CopyPaper"
+  },
+  "7696313827247394068": {
+   "p": "FAV-021",
+   "text": "Paper for every office.\nA4 & A3 copy paper: Rotatrim 70/75/80gsm, PaperOne, Double A and Chamex. Wholesale and retail for offices, schools and print shops.\nCopy paper from GH₵450. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#AccraFurniture #HomeDecorGhana #Odorkor #GhanaHomes #FurnitureGhana #OfficeSupplies"
+  },
+  "7696313763506556180": {
+   "p": "FAV-016",
+   "text": "Quiet luxury for your living room.\nPremium leather sofa set, designed for elegance and built for comfort. Perfect for homes, offices, lounges and Airbnbs.\nLuxury Leather Sofa Set: GH₵8,500. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#FurnitureGhana #HomeDecorGhana #AccraFurniture #Odorkor #LeatherSofa #LivingRoomDecor"
+  },
+  "7696313568429346068": {
+   "p": "FAV-024",
+   "text": "The throne, upgraded.\nBrand-new two-piece TWYFORD water closet in high-quality ceramic. Powerful straight-inlet flush, easy to clean. Bulk discounts available.\nTWYFORD Water Closet: GH₵750. Sold by AGOODMANN VENTURES, Kantamanto.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#AccraFurniture #GhanaHomes #HomeDecorGhana #Odorkor #FurnitureGhana #BathroomDesign"
+  },
+  "7696288936531905813": {
+   "p": "FAV-016",
+   "text": "Leather that lasts. Comfort that stays.\nPremium leather sofa set, designed for elegance and built for comfort. Perfect for homes, offices, lounges and Airbnbs.\nLuxury Leather Sofa Set: GH₵8,500. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#GhanaHomes #FurnitureGhana #Odorkor #HomeDecorGhana #AccraFurniture #LeatherSofa #LivingRoomDecor"
+  },
+  "7696288239769881876": {
+   "p": "FAV-015",
+   "text": "One sofa. The whole family.\nModern L-shaped sofa set in fabric and leather, ready stock at our Odorkor showroom.\nL-Shaped Sofa Set: GH₵5,500. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#HomeDecorGhana #GhanaHomes #Odorkor #FurnitureGhana #SofaSet"
+  },
+  "7696286448257076501": {
+   "p": "FAV-014",
+   "text": "Fresh stock, just arrived.\nHeight-adjustable desk (73–88 cm) and chair (46–52 cm) for SHS through university.\nStudent Desk & Chair Set: GH₵650 a set. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#Odorkor #FurnitureGhana #HomeDecorGhana #AccraFurniture #StudentDesk #SchoolFurniture"
+  },
+  "7696286423519055124": {
+   "p": "FAV-025",
+   "text": "Tile it right.\nAnti-skid floor tiles, glossy and matte wall tiles, grout and adhesive. Wholesale and retail.\nTiles from GH₵1,000. Sold by AGOODMANN VENTURES, Kantamanto.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#HomeDecorGhana #GhanaHomes #AccraFurniture #Odorkor #TilesGhana"
+  },
+  "7696285976456482068": {
+   "p": "FAV-011",
+   "text": "More comfort. More style.\nLarge L-shaped sectional in soft grey fabric, seats 5 to 6. Deep high-density foam cushions, a chaise end and matching scatter pillows.\nL-Shaped Sectional Sofa (grey): GH₵15,500. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#FurnitureGhana #GhanaHomes #HomeDecorGhana #AccraFurniture #Odorkor #SofaSet #LivingRoomDecor"
+  },
+  "7696283868122434837": {
+   "p": "FAV-014",
+   "text": "More learning. More comfort.\nHeight-adjustable desk (73–88 cm) and chair (46–52 cm) for SHS through university. Powder-coated carbon steel frame, MDF/melamine top and anti-slip floor caps.\nStudent Desk & Chair Set: GH₵650 a set. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#GhanaHomes #Odorkor #FurnitureGhana #HomeDecorGhana #AccraFurniture #StudentDesk"
+  },
+  "7696283605168901397": {
+   "p": "FAV-014",
+   "text": "Built for the classroom.\nHeight-adjustable desk (73–88 cm) and chair (46–52 cm) for SHS through university. Powder-coated carbon steel frame, MDF/melamine top and anti-slip floor caps.\nStudent Desk & Chair Set: GH₵650 a set. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#AccraFurniture #HomeDecorGhana #Odorkor #GhanaHomes #StudentDesk #SchoolFurniture"
+  },
+  "7696277035139829013": {
+   "p": "FAV-014",
+   "text": "Ready for the new term.\nHeight-adjustable desk (73–88 cm) and chair (46–52 cm) for SHS through university.\nStudent Desk & Chair Set: GH₵650 a set. Delivered across Accra, Tema & Kasoa.\nWhich colour would you pick? Tell us below 👇\nShop: favisionenterprize.github.io/tiktok\n#AccraFurniture #HomeDecorGhana #FurnitureGhana #GhanaHomes #Odorkor #StudentDesk"
+  },
+  "7696274930664475925": {
+   "p": "FAV-034",
+   "text": "Sleep well, study better.\nBrand-new student mattress in two sizes (27 × 75 in and a larger size). Bulk orders for boarding schools and hostels welcome.\nStudent Mattress: GH₵1,200 – GH₵1,300. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#GhanaHomes #FurnitureGhana #HomeDecorGhana #AccraFurniture #StudentMattress #BoardingSchool"
+  },
+  "7696274562396228885": {
+   "p": "FAV-014",
+   "text": "Sit up, stand out, study well.\nHeight-adjustable desk (73–88 cm) and chair (46–52 cm) for SHS through university. Powder-coated carbon steel frame, MDF/melamine top and anti-slip floor caps.\nStudent Desk & Chair Set: GH₵650 a set. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#GhanaHomes #HomeDecorGhana #Odorkor #AccraFurniture #StudentDesk"
+  },
+  "7696273523349720341": {
+   "p": "FAV-002",
+   "text": "Dark, glossy and dinner-ready.\nBlack tempered-glass top on a chrome base. Six tall, padded high-back chairs in wipe-clean black leatherette.\nBlack Glass Dining Set (6 high-back chairs): GH₵4,900. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#Odorkor #FurnitureGhana #AccraFurniture #GhanaHomes #HomeDecorGhana #DiningSet #ModernDining"
+  },
+  "7696273258198388020": {
+   "p": "FAV-014",
+   "text": "Schools, this one is for you.\nHeight-adjustable desk (73–88 cm) and chair (46–52 cm) for SHS through university. Powder-coated carbon steel frame, MDF/melamine top and anti-slip floor caps.\nStudent Desk & Chair Set: GH₵650 a set. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#Odorkor #AccraFurniture #GhanaHomes #FurnitureGhana #HomeDecorGhana #StudentDesk"
+  },
+  "7696272262814616852": {
+   "p": "FAV-024",
+   "text": "Built for homes and big projects.\nBrand-new two-piece TWYFORD water closet in high-quality ceramic. Powerful straight-inlet flush, easy to clean. Bulk discounts available.\nTWYFORD Water Closet: GH₵750. Sold by AGOODMANN VENTURES, Kantamanto.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#AccraFurniture #HomeDecorGhana #FurnitureGhana #GhanaHomes #BathroomDesign #TwyfordGhana"
+  },
+  "7696271308765580565": {
+   "p": "FAV-006",
+   "text": "Look the part. Sit comfortably all day.\nHigh back in black leatherette with thick padding and padded armrests. Gas-lift height adjustment, tilt, 360° swivel and a chrome five-star base.\nExecutive Director Chair: GH₵9,500. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#AccraFurniture #GhanaHomes #HomeDecorGhana #Odorkor #FurnitureGhana #OfficeChair"
+  },
+  "7696270622808132885": {
+   "p": "FAV-007",
+   "text": "The office upgrade your team deserves.\nBreathable mesh back with lumbar support and a soft padded seat. Height adjustable, 360° swivel, blue or green seat.\nMesh Secretary Chair (ergonomic swivel): GH₵9,500. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#GhanaHomes #FurnitureGhana #HomeDecorGhana #AccraFurniture #Odorkor #OfficeChair #ErgonomicChair"
+  },
+  "7696267685570776340": {
+   "p": "FAV-001",
+   "text": "Bring colour to every meal.\nTempered-glass top that wipes clean, six fully upholstered rainbow chairs. Chrome steel legs, stable and rust-resistant.\nRainbow Glass-Top Dining Set (6 chairs): GH₵12,600. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#GhanaHomes #FurnitureGhana #AccraFurniture #Odorkor #DiningSet"
+  },
+  "7696263488007687444": {
+   "p": "FAV-002",
+   "text": "Sleek. Modern. Made for entertaining.\nSix tall, padded high-back chairs in wipe-clean black leatherette. Black tempered-glass top on a chrome base.\nBlack Glass Dining Set (6 high-back chairs): GH₵4,900. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#HomeDecorGhana #GhanaHomes #FurnitureGhana #Odorkor #DiningSet #ModernDining"
+  },
+  "7696262593874332949": {
+   "p": "FAV-024",
+   "text": "Premium ceramic, honest price.\nBrand-new two-piece TWYFORD water closet in high-quality ceramic.\nTWYFORD Water Closet: GH₵750. Sold by AGOODMANN VENTURES, Kantamanto.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#Odorkor #FurnitureGhana #AccraFurniture #HomeDecorGhana #GhanaHomes #BathroomDesign"
+  },
+  "7696261660805401877": {
+   "p": "FAV-006",
+   "text": "The boss chair, sorted.\nHigh back in black leatherette with thick padding and padded armrests.\nExecutive Director Chair: GH₵9,500. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#HomeDecorGhana #FurnitureGhana #GhanaHomes #AccraFurniture #OfficeChair #OfficeFurniture"
+  },
+  "7696260555149069589": {
+   "p": "FAV-007",
+   "text": "Work longer. Sit better.\nHeight adjustable, 360° swivel, blue or green seat. Breathable mesh back with lumbar support and a soft padded seat.\nMesh Secretary Chair (ergonomic swivel): GH₵9,500. Delivered across Accra, Tema & Kasoa.\nWhich colour would you pick? Tell us below 👇\nShop: favisionenterprize.github.io/tiktok\n#GhanaHomes #AccraFurniture #HomeDecorGhana #Odorkor #OfficeChair"
+  },
+  "7696259944076643604": {
+   "p": "FAV-010",
+   "text": "Finally, room for everything.\nTall four-door wardrobe with quilted-pattern doors and top storage cabinets. Hanging space and shelves, in cream, white or dark wood.\n4-Door Wardrobe with Top Cabinets: GH₵9,800. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#GhanaHomes #FurnitureGhana #HomeDecorGhana #Odorkor #Wardrobe #BedroomDecor"
+  },
+  "7696259322732481812": {
+   "p": "FAV-032",
+   "text": "Your TV deserves a stage.\nBlack TV stand with a marble-effect glass top, gold trim, side cabinet and a large pull-out drawer.\nTV Stand (black marble top): GH₵6,950. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#AccraFurniture #FurnitureGhana #Odorkor #GhanaHomes #TVStand"
+  },
+  "7696258136776248597": {
+   "p": "FAV-009",
+   "text": "The vanity corner of your dreams.\nWhite dressing table with an arched mirror, side shelves, drawers and a storage cabinet. Matching padded stool included.\nWhite Dressing Table with Mirror & Stool: GH₵7,450. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#GhanaHomes #Odorkor #FurnitureGhana #HomeDecorGhana #DressingTable #BedroomDecor"
+  },
+  "7696256435822300436": {
+   "p": "FAV-011",
+   "text": "Movie nights just got better.\nLarge L-shaped sectional in soft grey fabric, seats 5 to 6. Deep high-density foam cushions, a chaise end and matching scatter pillows.\nL-Shaped Sectional Sofa (grey): GH₵15,500. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#HomeDecorGhana #GhanaHomes #AccraFurniture #Odorkor #SofaSet"
+  },
+  "7696255752318553364": {
+   "p": "FAV-026",
+   "text": "Strong dough, every batch.\nKavukçu wheat flour, 50kg professional pack, made in Turkey since 1920. For bread, rolls, burger buns, doughnuts and pizza dough.\nGH₵640 (was GH₵650). Sold by ANAC Essentials.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#HomeDecorGhana #GhanaHomes #Odorkor #FurnitureGhana #AccraFurniture #BakingGhana #WheatFlour"
+  },
+  "7696254662894243124": {
+   "p": "FAV-001",
+   "text": "Dinner, but make it a celebration.\nTempered-glass top that wipes clean, six fully upholstered rainbow chairs. Chrome steel legs, stable and rust-resistant.\nRainbow Glass-Top Dining Set (6 chairs): GH₵12,600. Delivered across Accra, Tema & Kasoa.\nWhich colour would you pick? Tell us below 👇\nShop: favisionenterprize.github.io/tiktok\n#GhanaHomes #Odorkor #AccraFurniture #HomeDecorGhana #FurnitureGhana #DiningSet"
+  },
+  "7695451480056417544": {
+   "p": "FAV-011",
+   "text": "Room for the whole family.\nDeep high-density foam cushions, a chaise end and matching scatter pillows.\nL-Shaped Sectional Sofa (grey): GH₵15,500. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#Odorkor #GhanaHomes #FurnitureGhana #AccraFurniture #HomeDecorGhana #SofaSet #LivingRoomDecor"
+  },
+  "7695450569158266120": {
+   "p": "FAV-023",
+   "text": "Cool rooms, cool heads.\nEnergy-efficient, powerful cooling. Sigma 1.5HP split air conditioner, R410A, model BREEZE-HY12SB.\nSigma 1.5HP Split AC: GH₵6,500. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#FurnitureGhana #Odorkor #GhanaHomes #HomeDecorGhana #AccraFurniture #AirConditioner"
+  },
+  "7695449704624033042": {
+   "p": "FAV-014",
+   "text": "Study time, sorted.\nPowder-coated carbon steel frame, MDF/melamine top and anti-slip floor caps.\nStudent Desk & Chair Set: GH₵650 a set. Delivered across Accra, Tema & Kasoa.\nWhich colour would you pick? Tell us below 👇\nShop: favisionenterprize.github.io/tiktok\n#Odorkor #FurnitureGhana #GhanaHomes #AccraFurniture #StudentDesk #SchoolFurniture"
+  },
+  "7694748570674679061": {
+   "p": "FAV-004",
+   "text": "Warm, glossy and made for family dinners.\nGlossy red-brown glass top with six curved high-back chairs. Sturdy steel frame, finished in brown and black.\nRed Glass Dining Set (6 chairs): GH₵12,600. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#GhanaHomes #AccraFurniture #FurnitureGhana #HomeDecorGhana #Odorkor #DiningSet"
+  },
+  "7694747417136139540": {
+   "p": "FAV-003",
+   "text": "Five designs. One perfect table.\nGlass and marble-effect tops on chrome, gold or powder-coated frames. Seats 4 to 6, with delivery and assembly in Accra.\nDining sets from GH₵12,600. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#AccraFurniture #Odorkor #HomeDecorGhana #FurnitureGhana #DiningSet #MarbleTable"
+  },
+  "7694746839265971477": {
+   "p": "FAV-014",
+   "text": "Every student deserves a proper desk.\nPowder-coated carbon steel frame, MDF/melamine top and anti-slip floor caps. Height-adjustable desk (73–88 cm) and chair (46–52 cm) for SHS through university.\nStudent Desk & Chair Set: GH₵650 a set. Delivered across Accra, Tema & Kasoa.\nWhich colour would you pick? Tell us below 👇\nShop: favisionenterprize.github.io/tiktok\n#AccraFurniture #FurnitureGhana #Odorkor #HomeDecorGhana #GhanaHomes #StudentDesk"
+  },
+  "7694746619228458261": {
+   "p": "FAV-002",
+   "text": "Dinner, but make it elegant.\nSix tall, padded high-back chairs in wipe-clean black leatherette.\nBlack Glass Dining Set (6 high-back chairs): GH₵4,900. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#GhanaHomes #HomeDecorGhana #Odorkor #AccraFurniture #FurnitureGhana #DiningSet #ModernDining"
+  },
+  "7694745826953907477": {
+   "p": "FAV-001",
+   "text": "The dining set everyone asks about.\nTempered-glass top that wipes clean, six fully upholstered rainbow chairs.\nRainbow Glass-Top Dining Set (6 chairs): GH₵12,600. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#HomeDecorGhana #AccraFurniture #Odorkor #FurnitureGhana #DiningSet"
+  },
+  "7694632212578209045": {
+   "p": "FAV-002",
+   "text": "Black glass, quiet luxury.\nSix tall, padded high-back chairs in wipe-clean black leatherette. Black tempered-glass top on a chrome base.\nBlack Glass Dining Set (6 high-back chairs): GH₵4,900. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#FurnitureGhana #GhanaHomes #HomeDecorGhana #Odorkor #DiningSet #ModernDining"
+  },
+  "7694631617092013333": {
+   "p": "FAV-001",
+   "text": "Colour that seats six.\nTempered-glass top that wipes clean, six fully upholstered rainbow chairs. Chrome steel legs, stable and rust-resistant.\nRainbow Glass-Top Dining Set (6 chairs): GH₵12,600. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#HomeDecorGhana #AccraFurniture #FurnitureGhana #GhanaHomes #Odorkor #DiningSet"
+  },
+  "7694465700265528594": {
+   "p": "FAV-028",
+   "text": "Little chairs, big smiles.\nStrong, lightweight stackable plastic chairs in bright assorted colours. For nurseries, schools, churches and homes.\nKids Plastic Chair: GH₵550. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#FurnitureGhana #GhanaHomes #HomeDecorGhana #Odorkor #KidsFurniture #SchoolFurniture"
+  },
+  "7694464515810856199": {
+   "p": "FAV-019",
+   "text": "Seat the whole congregation.\nStackable gold steel frame with a padded blue seat and back. For churches, schools, halls and conferences. Buy 100, get 2 free or free delivery (T&Cs apply).\nAuditorium / Conference Chair: GH₵405. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#FurnitureGhana #GhanaHomes #AccraFurniture #Odorkor #ChurchChairs"
+  },
+  "7694463796743802119": {
+   "p": "FAV-014",
+   "text": "Fresh stock, just arrived.\nPowder-coated carbon steel frame, MDF/melamine top and anti-slip floor caps. Height-adjustable desk (73–88 cm) and chair (46–52 cm) for SHS through university.\nStudent Desk & Chair Set: GH₵650 a set. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#HomeDecorGhana #GhanaHomes #FurnitureGhana #Odorkor #StudentDesk #SchoolFurniture"
+  },
+  "7694432600286399751": {
+   "p": "FAV-010",
+   "text": "Room for two.\nHanging space and shelves, in cream, white or dark wood.\n4-Door Wardrobe with Top Cabinets: GH₵9,800. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#GhanaHomes #Odorkor #HomeDecorGhana #AccraFurniture #FurnitureGhana #Wardrobe"
+  },
+  "7694431109374954759": {
+   "p": "FAV-009",
+   "text": "Get ready in style.\nMatching padded stool included.\nWhite Dressing Table with Mirror & Stool: GH₵7,450. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#HomeDecorGhana #Odorkor #FurnitureGhana #GhanaHomes #AccraFurniture #DressingTable #BedroomDecor"
+  },
+  "7694426159618067719": {
+   "p": "FAV-008",
+   "text": "A desk that means business.\n1.2 m work surface in a warm wood finish with a detachable 3-drawer unit. Flat-packed for easy delivery, assembled on site.\n1.2 m Office Desk with Drawer Unit: GH₵4,500. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#FurnitureGhana #AccraFurniture #GhanaHomes #Odorkor #HomeDecorGhana #OfficeDesk"
+  },
+  "7694425602169769223": {
+   "p": "FAV-014",
+   "text": "More learning. More comfort.\nPowder-coated carbon steel frame, MDF/melamine top and anti-slip floor caps.\nStudent Desk & Chair Set: GH₵650 a set. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#FurnitureGhana #AccraFurniture #GhanaHomes #HomeDecorGhana #Odorkor #StudentDesk #SchoolFurniture"
+  },
+  "7694425412956572946": {
+   "p": "FAV-007",
+   "text": "More focus. More comfort.\nHeight adjustable, 360° swivel, blue or green seat.\nMesh Secretary Chair (ergonomic swivel): GH₵9,500. Delivered across Accra, Tema & Kasoa.\nWhich colour would you pick? Tell us below 👇\nShop: favisionenterprize.github.io/tiktok\n#Odorkor #AccraFurniture #FurnitureGhana #HomeDecorGhana #GhanaHomes #OfficeChair"
+  },
+  "7694424375675620616": {
+   "p": "FAV-006",
+   "text": "Executive comfort, every working hour.\nHigh back in black leatherette with thick padding and padded armrests. Gas-lift height adjustment, tilt, 360° swivel and a chrome five-star base.\nExecutive Director Chair: GH₵9,500. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#GhanaHomes #FurnitureGhana #HomeDecorGhana #AccraFurniture #Odorkor #OfficeChair #OfficeFurniture"
+  },
+  "7694416358729157895": {
+   "p": "FAV-005",
+   "text": "Big table. Small space.\nWood-grain table that folds away when you need the room, six cushioned chairs, strong steel frame.\nFoldable Wood-Grain Dining Set (6 chairs): GH₵11,900. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#FurnitureGhana #HomeDecorGhana #Odorkor #AccraFurniture #DiningSet"
+  },
+  "7694367690688875784": {
+   "p": "FAV-004",
+   "text": "A centrepiece for special occasions.\nGlossy red-brown glass top with six curved high-back chairs.\nRed Glass Dining Set (6 chairs): GH₵12,600. Delivered across Accra, Tema & Kasoa.\nWhich colour would you pick? Tell us below 👇\nShop: favisionenterprize.github.io/tiktok\n#Odorkor #GhanaHomes #FurnitureGhana #AccraFurniture #DiningSet #DiningRoomDecor"
+  },
+  "7694345512127958280": {
+   "p": "FAV-003",
+   "text": "Choose your dining mood.\nGlass and marble-effect tops on chrome, gold or powder-coated frames. Seats 4 to 6, with delivery and assembly in Accra.\nDining sets from GH₵12,600. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#HomeDecorGhana #FurnitureGhana #AccraFurniture #GhanaHomes #Odorkor #DiningSet"
+  },
+  "7694342066242899207": {
+   "p": "FAV-002",
+   "text": "Dark, glossy and dinner-ready.\nSix tall, padded high-back chairs in wipe-clean black leatherette. Black tempered-glass top on a chrome base.\nBlack Glass Dining Set (6 high-back chairs): GH₵4,900. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#AccraFurniture #HomeDecorGhana #Odorkor #GhanaHomes #FurnitureGhana #DiningSet #ModernDining"
+  },
+  "7694340205242764552": {
+   "p": "FAV-001",
+   "text": "Bring colour to every meal.\nChrome steel legs, stable and rust-resistant. Tempered-glass top that wipes clean, six fully upholstered rainbow chairs.\nRainbow Glass-Top Dining Set (6 chairs): GH₵12,600. Delivered across Accra, Tema & Kasoa.\nWhich colour would you pick? Tell us below 👇\nShop: favisionenterprize.github.io/tiktok\n#FurnitureGhana #AccraFurniture #GhanaHomes #HomeDecorGhana #DiningSet"
+  },
+  "7694096075770105095": {
+   "p": "G-ONE",
+   "text": "One supplier. Every room.\nFurniture that makes a statement. Sofas, dining, bedroom, office & school furniture from our Odorkor showroom in Accra.\nDelivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#FurnitureGhana #AccraFurniture #GhanaHomes #HomeDecorGhana #Odorkor #InteriorDesignGhana"
+  },
+  "7694074831268023553": {
+   "p": "AI",
+   "text": "Not sure it will fit? See it first.\nTry our free AI Studio: pick furniture, colours and 3D wallpaper and see them in your space.\nSofas, dining, office & school furniture in Accra. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#HomeDecorGhana #FurnitureGhana #GhanaHomes #Odorkor #AccraFurniture #InteriorDesignGhana"
+  },
+  "7694074116755737876": {
+   "p": "FAV-006",
+   "text": "Lead from a better seat.\nGas-lift height adjustment, tilt, 360° swivel and a chrome five-star base. High back in black leatherette with thick padding and padded armrests.\nExecutive Director Chair: GH₵9,500. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#Odorkor #GhanaHomes #HomeDecorGhana #FurnitureGhana #OfficeChair #OfficeFurniture"
+  },
+  "7694005664087149845": {
+   "p": "FAV-004",
+   "text": "Bold colour, warm welcomes.\nSturdy steel frame, finished in brown and black. Glossy red-brown glass top with six curved high-back chairs.\nRed Glass Dining Set (6 chairs): GH₵12,600. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#FurnitureGhana #AccraFurniture #HomeDecorGhana #GhanaHomes #Odorkor #DiningSet"
+  },
+  "7694003272771833108": {
+   "p": "FAV-003",
+   "text": "Marble, glass or gold: which is you?\nGlass and marble-effect tops on chrome, gold or powder-coated frames.\nDining sets from GH₵12,600. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#HomeDecorGhana #GhanaHomes #FurnitureGhana #AccraFurniture #DiningSet #MarbleTable"
+  },
+  "7694002707727666452": {
+   "p": "FAV-002",
+   "text": "Sleek. Modern. Made for entertaining.\nBlack tempered-glass top on a chrome base.\nBlack Glass Dining Set (6 high-back chairs): GH₵4,900. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#AccraFurniture #HomeDecorGhana #GhanaHomes #FurnitureGhana #DiningSet"
+  },
+  "7694001548879318293": {
+   "p": "FAV-001",
+   "text": "Dinner, but make it a celebration.\nChrome steel legs, stable and rust-resistant.\nRainbow Glass-Top Dining Set (6 chairs): GH₵12,600. Delivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#GhanaHomes #FurnitureGhana #Odorkor #AccraFurniture #HomeDecorGhana #DiningSet #DiningRoomDecor"
+  },
+  "7691618697915534644": {
+   "p": "FAV-003",
+   "text": "Five designs. One perfect table.\nSeats 4 to 6, with delivery and assembly in Accra. Glass and marble-effect tops on chrome, gold or powder-coated frames.\nDining sets from GH₵12,600. Delivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#Odorkor #FurnitureGhana #AccraFurniture #HomeDecorGhana #GhanaHomes #DiningSet"
+  },
+  "7644562581960559893": {
+   "p": "G-EID",
+   "text": "Eid Mubarak from all of us at F.A Vision.\nFurniture that makes a statement. Sofas, dining, bedroom, office & school furniture from our Odorkor showroom in Accra.\nDelivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#HomeDecorGhana #FurnitureGhana #AccraFurniture #GhanaHomes #Odorkor #InteriorDesignGhana"
+  },
+  "7642334536243662101": {
+   "p": "G-DRESS",
+   "text": "Furniture that makes a statement.\nDressing tables, wardrobes, sofas, dining, office & school furniture from our Odorkor showroom in Accra.\nDelivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#FurnitureGhana #GhanaHomes #AccraFurniture #HomeDecorGhana #Odorkor #InteriorDesignGhana"
+  },
+  "7528266391514877240": {
+   "p": "G-VERSE",
+   "text": "Rest easy. Live beautifully.\nFurniture that makes a statement. Sofas, dining, bedroom, office & school furniture from our Odorkor showroom in Accra.\nDelivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#FurnitureGhana #HomeDecorGhana #Odorkor #GhanaHomes #AccraFurniture #InteriorDesignGhana"
+  },
+  "7523369106578377989": {
+   "p": "G-NEVER",
+   "text": "Never give up on the home you want.\nFurniture that makes a statement. Sofas, dining, bedroom, office & school furniture from our Odorkor showroom in Accra.\nDelivered across Accra, Tema & Kasoa.\nComment 'MINE' and we'll send you the details 👇\nShop: favisionenterprize.github.io/tiktok\n#HomeDecorGhana #GhanaHomes #FurnitureGhana #AccraFurniture #Odorkor #InteriorDesignGhana"
+  },
+  "7316473093768236294": {
+   "p": "G-XMAS",
+   "text": "Merry Christmas from F.A Vision.\nFurniture that makes a statement. Sofas, dining, bedroom, office & school furniture from our Odorkor showroom in Accra.\nDelivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#Odorkor #AccraFurniture #GhanaHomes #HomeDecorGhana #FurnitureGhana #InteriorDesignGhana"
+  },
+  "7118324913609395462": {
+   "p": "G-SCHOOL",
+   "text": "Classrooms that work as hard as your students.\nStudent desks, chairs and mattresses for schools, plus sofas, dining & office furniture in Accra.\nDelivered across Accra, Tema & Kasoa.\nComment your area for the delivery price 👇\nShop: favisionenterprize.github.io/tiktok\n#Odorkor #FurnitureGhana #AccraFurniture #GhanaHomes #HomeDecorGhana #SchoolFurniture"
+  }
+ },
+ "app_only": [
+  "7490195826141072645",
+  "7012730068443122949"
+ ],
  "scan": {
   "d": "2026-10-15",
   "t": "2026-10-15T06:28:30.004Z",

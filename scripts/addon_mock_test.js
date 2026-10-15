@@ -126,26 +126,50 @@ const X_EDIT = page(`<div role="main"><textarea name="description">Quality furni
   const u = document.querySelector("input[name=url]"); u.value = localStorage.getItem("x-url") || "example.com";
   document.querySelector("[data-testid=Profile_Save_Button]").onclick = () => { localStorage.setItem("x-url", u.value); localStorage.setItem("x-bio", document.querySelector("textarea").value); };`);
 
-const TT_SEED = { "7400000000000000001": "Luxury leather sofa set now in stock at Odorkor", "7400000000000000002": "", "7400000000000000003": "#fyp #accra" };
-const TT_CONTENT = page(`<main><h1>Posts</h1><div id="rows"></div></main>`, `
+// 60 posts. The list is an inner scroller (the window doesn't scroll): 20 rows at first, 20 more each time
+// it's scrolled to the bottom. Some have no description or only hashtags; rows alternate role=row and
+// plain divs so the row finder's fallbacks are used too.
+const TT_SEED = (() => {
+  const D = { "7400000000000000001": "Luxury leather sofa set now in stock at Odorkor", "7400000000000000002": "", "7400000000000000003": "#fyp #accra" };
+  for (let k = 4; k <= 60; k++) D["74000000000000000" + String(k).padStart(2, "0")] = k % 7 === 0 ? "" : k % 11 === 0 ? "#furniture #ghana" : k % 5 === 0 ? "Executive director chair, leather high back, now at our Odorkor showroom with delivery…" : "Dining set with 6 chairs, glass top, delivered across Accra post " + k;
+  return D;
+})();
+const TT_CONTENT = page(`<main style="height:100vh;overflow:hidden"><h1>Posts</h1><div id="rows" style="height:520px;overflow-y:auto"></div></main>`, `
   const D = JSON.parse(localStorage.getItem("tt-desc") || "null") || ${JSON.stringify(TT_SEED)};
   localStorage.setItem("tt-desc", JSON.stringify(D));
-  Object.keys(D).forEach((id, k) => {
-    const r = document.createElement("div"); r.setAttribute("role", "row");
-    r.innerHTML = '<img src="https://p16.tiktokcdn.com/' + id + '.jpg" alt="' + (k === 1 ? "student desk and chair in a classroom" : "") + '" width="40" height="60"><a href="/@favision/' + (k ? "photo" : "video") + '/' + id + '">open</a><div class="desc"></div><div>1.2K</div><div>Public</div><div role="button" aria-label="More">…</div>';
+  const ids = Object.keys(D); let shown = 0;
+  const add = id => { const k = ids.indexOf(id);
+    const r = document.createElement("div"); if (k % 2 === 0) r.setAttribute("role", "row"); else r.className = "post-card";
+    r.style.cssText = "height:90px;border-bottom:1px solid #ddd";
+    r.innerHTML = '<img src="https://p16.tiktokcdn.com/' + id + '.jpg" alt="' + (k === 1 ? "student desk and chair in a classroom" : "") + '" width="40" height="60"><a href="/@favision/' + (k % 3 ? "photo" : "video") + '/' + id + '">open</a><div class="desc"></div><div>1.2K</div><div>Public</div><div role="button" aria-label="Edit" class="pencil">✎</div><div role="button" aria-label="More">…</div>';
+    r.querySelector(".pencil").onclick = () => { location.href = "/tiktokstudio/content/" + id + "/edit"; };
     r.querySelector(".desc").textContent = D[id];
     r.querySelector("[aria-label=More]").onclick = () => { const m = document.createElement("div"); m.setAttribute("role", "menu");
       m.innerHTML = '<div role="menuitem">Edit</div><div role="menuitem">Delete</div>';
-      m.firstChild.onclick = () => { location.href = "/tiktokstudio/content/" + id + "/edit"; };
+      m.firstChild.onclick = () => localStorage.setItem("tt-violation", "opened the ••• menu");
       m.lastChild.onclick = () => localStorage.setItem("tt-violation", "delete");
       document.body.appendChild(m); };
-    document.getElementById("rows").appendChild(r);
-  });`);
-const TT_EDIT = id => page(`<main><div class="public-DraftEditor-content" contenteditable="true" role="textbox"></div><div role="button" id="save">Save</div><div role="button">Post</div></main>`, `
+    document.getElementById("rows").appendChild(r); };
+  const more = () => { ids.slice(shown, shown + 20).forEach(add); shown = Math.min(ids.length, shown + 20); };
+  more();
+  let busy = false;
+  document.getElementById("rows").addEventListener("scroll", e => { const el = e.target;
+    if (busy || shown >= ids.length || el.scrollTop + el.clientHeight < el.scrollHeight - 20) return;
+    busy = true; setTimeout(() => { more(); busy = false; window.__loads = (window.__loads || 0) + 1; }, 20); });`);
+// Edit page, opened by URL (/tiktokstudio/upload/post/photo|video?item_id=…, only the post's own kind has
+// an editor; post …14's edit URL is broken, so the list's pencil → /tiktokstudio/content/<id>/edit is
+// used) or by the pencil. Draft.js-like description: only a paste event updates its state; the title box
+// and TikTok's standing "once a day" note are there too.
+const TT_EDIT = id => page(`<main><p class="tip-note">Captions can only be edited once a day, within 7 days of posting.</p><input placeholder="Add a catchy title" value="">
+  <div data-e2e="caption_container"><div class="public-DraftEditor-content" contenteditable="true" role="textbox"></div></div><div role="button" id="save">Save</div><div role="button">Post</div></main>`, `
   const D = JSON.parse(localStorage.getItem("tt-desc") || "{}");
-  document.querySelector("[contenteditable]").textContent = D[${JSON.stringify(id)}] || "";
-  document.querySelector("#save").onclick = () => { D[${JSON.stringify(id)}] = document.querySelector("[contenteditable]").innerText; localStorage.setItem("tt-desc", JSON.stringify(D)); location.href = "/tiktokstudio/content"; };
+  const ed = document.querySelector("[contenteditable]");
+  let model = D[${JSON.stringify(id)}] || ""; ed.innerText = model;
+  ed.addEventListener("paste", e => { e.preventDefault(); model = e.clipboardData.getData("text/plain"); ed.innerText = model; });
+  ed.addEventListener("input", () => setTimeout(() => { ed.innerText = model; }, 50));
+  document.querySelector("#save").onclick = () => { D[${JSON.stringify(id)}] = model; localStorage.setItem("tt-desc", JSON.stringify(D)); if (document.querySelector("input").value) localStorage.setItem("tt-violation", "title changed"); location.href = "/tiktokstudio/content"; };
   document.querySelectorAll("[role=button]")[1].onclick = () => localStorage.setItem("tt-violation", "repost");`);
+const TT_NOEDIT = page(`<main><p>Something went wrong. This post isn't available.</p></main>`);
 
 const CC = page(`<main><div class="region">Ghana</div><div role="checkbox" aria-checked="false" id="biz">Approved for business use</div><div id="list"></div></main>`, `
   const render = biz => { document.getElementById("list").innerHTML = (biz ? [["Afro Vibes Commercial", "CML Artist"], ["Highlife Groove", "CML Band"]] : [["Hit Song (not licensed)", "Star"]])
@@ -159,22 +183,37 @@ const FB_STORY = page(`<div role="main"><div role="button" id="ph">Create a phot
   document.querySelector("input[type=file]").addEventListener("change", () => { document.getElementById("ed").hidden = false; });
   document.getElementById("addt").onclick = () => { const t = document.createElement("textarea"); t.id = "txt"; document.getElementById("ed").appendChild(t); };
   document.getElementById("share").onclick = () => { localStorage.setItem("story", (document.getElementById("txt") || {}).value || ""); location.href = "/"; };`);
+// The description box acts like live Draft.js (Oct 2026): what gets posted is the editor's own state,
+// which a paste event updates; text put in the DOM another way is wiped on the next render. With
+// localStorage "tt-blank" set, nothing gets in at all (the run must stop instead of posting blank).
+// The 2nd post's Post reloads the tab into TikTok Studio → Posts (a real navigation), like live.
 const TT_UPLOAD = page(`<main><div role="tab" aria-selected="true">Photos</div><input type="file" accept="image/jpeg,image/png,image/webp" style="display:none"><div id="form" hidden>
   <input placeholder="Add a catchy title"><div data-e2e="caption_container"><div class="public-DraftEditor-content" contenteditable="true"></div></div>
   <button id="snd">Sounds</button><span id="chip"></span><button id="post">Post</button></div></main>`, `
+  let model = "";
+  const ed = document.querySelector("[contenteditable]");
+  ed.addEventListener("paste", e => { e.preventDefault(); if (localStorage.getItem("tt-blank")) return; model = e.clipboardData.getData("text/plain"); ed.innerText = model; });
+  ed.addEventListener("input", () => setTimeout(() => { ed.innerText = model; }, 50));   // re-render from state
   document.querySelector("input[type=file]").addEventListener("change", () => { document.getElementById("form").hidden = false; });
   document.getElementById("snd").onclick = () => { const d = document.createElement("div"); d.setAttribute("role", "dialog");
     d.innerHTML = '<input placeholder="Search sounds"><div id="res"></div><button>Close</button>';
     d.querySelector("input").addEventListener("input", e => { d.querySelector("#res").innerHTML = /groove/i.test(e.target.value) ? '<div class="music-item">Highlife Groove · CML Band <button>Use</button></div>' : ""; 
       const u = d.querySelector(".music-item button"); if (u) u.onclick = () => { document.getElementById("chip").textContent = "Highlife Groove"; d.remove(); }; });
     d.lastChild.onclick = () => d.remove(); document.body.appendChild(d); };
-  document.getElementById("post").onclick = () => { localStorage.setItem("tt-post", JSON.stringify({ sound: document.getElementById("chip").textContent, text: document.querySelector("[contenteditable]").innerText })); history.pushState(null, "", "/tiktokstudio/content"); document.body.insertAdjacentHTML("beforeend", "<p>Manage your posts</p>"); };`);
+  document.getElementById("post").onclick = () => { const all = JSON.parse(localStorage.getItem("tt-posts") || "[]"); const p = { sound: document.getElementById("chip").textContent, title: document.querySelector("input[placeholder]").value, text: model };
+    all.push(p); localStorage.setItem("tt-posts", JSON.stringify(all)); localStorage.setItem("tt-post", JSON.stringify(p));
+    if (all.length === 2) { location.href = "/tiktokstudio/content"; return; }
+    history.pushState(null, "", "/tiktokstudio/content"); document.body.insertAdjacentHTML("beforeend", "<p>Manage your posts</p>"); };`);
 
 function serve(url) {
   const u = new URL(url);
   if (u.hostname === "favisionenterprize.github.io") return page("<p>admin</p>");
   if (u.hostname === "ads.tiktok.com") return CC;
   if (u.hostname === "www.instagram.com") return IG_REELS;
+  if (u.hostname === "www.tiktok.com" && u.pathname.startsWith("/tiktokstudio/upload/post/")) {
+    const id = u.searchParams.get("item_id") || "", k = Object.keys(TT_SEED).indexOf(id), kind = k % 3 ? "photo" : "video";
+    return k >= 0 && !id.endsWith("14") && u.pathname.endsWith("/" + kind) ? TT_EDIT(id) : TT_NOEDIT;
+  }
   if (u.hostname === "www.tiktok.com" && u.pathname.startsWith("/tiktokstudio/upload")) return TT_UPLOAD;
   if (u.hostname === "www.tiktok.com") { const e = u.pathname.match(/\/tiktokstudio\/content\/(\d+)\/edit/); return e ? TT_EDIT(e[1]) : TT_CONTENT; }
   if (u.hostname === "x.com") return u.pathname.startsWith("/settings/profile") ? X_EDIT : X_PROFILE;
@@ -218,7 +257,7 @@ async function run(browser, job, startUrl, setup) {
   if (setup) { await pg.goto(startUrl.replace(/(https:\/\/[^/]+).*/, "$1/setup")); await pg.evaluate(setup); }
   await pg.goto(startUrl);
   pg.on("console", m => { if (m.type() === "error") errors.push("console: " + m.text()); });
-  try { await pg.waitForURL(u => String(u).startsWith(BACK + "#favauto-done="), { timeout: 150000 }); }
+  try { await pg.waitForURL(u => String(u).startsWith(BACK + "#favauto-done="), { timeout: 300000 }); }
   catch (e) {
     const msg = await pg.evaluate(() => (document.getElementById("favautomsg") || {}).textContent || "").catch(() => "");
     throw new Error(`${job.kind} didn't return to the admin. Last status: "${msg}" at ${pg.url()} · res ${JSON.stringify(stored && {i: stored.i, stage: stored.stage, hops: stored.hops, res: stored.res})} · ${errors.join("; ")}`);
@@ -293,15 +332,25 @@ async function run(browser, job, startUrl, setup) {
   console.log("ttscan (TikTok Studio posts)");
   r = await run(browser, { kind: "ttscan" }, "https://www.tiktok.com/tiktokstudio/content");
   const posts = r.out.res || [];
-  want(posts.length === 3 && posts[1].id === "7400000000000000002" && posts[1].desc === "" && /student desk/.test(posts[1].alt) && /^https:/.test(posts[1].thumb) && /Luxury/.test(posts[0].desc), "reads all posts with id, description, thumbnail and alt: " + JSON.stringify(posts).slice(0, 400));
+  const empties = Object.values(TT_SEED).filter(t => t.replace(/#\w+/g, "").trim().length < 15).length;
+  want(posts.length === 60 && new Set(posts.map(p => p.id)).size === 60, "reads all 60 posts (20 at first, 20 more per scroll of the inner list): got " + posts.length);
+  want(posts.filter(p => p.desc.replace(/#\w+/g, "").trim().length < 15).length === empties, "finds every post without a real description (" + empties + "): " + posts.filter(p => p.desc.replace(/#\w+/g, "").trim().length < 15).map(p => p.id.slice(-2)).join());
+  want(posts.length && posts[1].id === "7400000000000000002" && posts[1].desc === "" && /student desk/.test(posts[1].alt) && /^https:/.test(posts[1].thumb) && /Luxury/.test(posts[0].desc), "reads all posts with id, description, thumbnail and alt: " + JSON.stringify(posts).slice(0, 400));
   want(!r.errors.length, "no page errors: " + r.errors.join("; "));
 
-  console.log("ttfix (2 posts: one empty, one that has a description now)");
-  r = await run(browser, { kind: "ttfix", min: 1, max: 2, q: [{ id: "7400000000000000002", text: "The desk that ends homework fights.\nGH₵650 · Delivered across Accra, Tema & Kasoa.\nComment 'MINE' 👇" }, { id: "7400000000000000001", text: "should not be used" }] }, "https://www.tiktok.com/tiktokstudio/content");
+  console.log("ttfix (5 posts: by edit URL, one that has a description now, one far down, a video, a broken edit URL → pencil)");
+  const cap = "The desk that ends homework fights.\nGH₵650 · Delivered across Accra, Tema & Kasoa.\nComment 'MINE' 👇";
+  r = await run(browser, { kind: "ttfix", min: 1, max: 2, q: [
+    { id: "7400000000000000002", url: "https://www.tiktok.com/@favision/photo/7400000000000000002", text: cap },
+    { id: "7400000000000000001", url: "https://www.tiktok.com/@favision/video/7400000000000000001", text: "should not be used" },
+    { id: "7400000000000000056", url: "https://www.tiktok.com/@favision/photo/7400000000000000056", text: "Furniture that makes a statement ✨\nShop the collection at favisionenterprize.github.io/tiktok/ · Comment 'MINE' 👇" },
+    { id: "7400000000000000007", url: "", text: "Video post caption\nsecond line" },
+    { id: "7400000000000000014", url: "https://www.tiktok.com/@favision/photo/7400000000000000014", text: "Pencil fallback caption" }] }, "https://www.tiktok.com/tiktokstudio/content");
   const D = JSON.parse(r.state["tt-desc"] || "{}");
-  want(r.out.res.length === 2 && r.out.res[0].ok && !r.out.res[1].ok && /already has/.test(r.out.res[1].why), "adds the caption to the empty post, leaves the other: " + JSON.stringify(r.out.res));
-  want(/homework fights/.test(D["7400000000000000002"]) && /Luxury/.test(D["7400000000000000001"]), "TikTok mock shows the new caption saved, the old one untouched");
-  want(!r.state["tt-violation"], "never clicks Delete or Post: " + r.state["tt-violation"]);
+  const rs = r.out.res || [];
+  want(rs.length === 5 && rs[0].ok && !rs[1].ok && /already has/.test(rs[1].why) && rs[2].ok && rs[3].ok && rs[4].ok && r.out.n === 5, "adds the caption to every empty post (edit URL, other kind, pencil fallback), leaves the one with text: " + JSON.stringify(rs));
+  want(D["7400000000000000002"] === cap && /Luxury/.test(D["7400000000000000001"]) && /makes a statement/.test(D["7400000000000000056"]) && D["7400000000000000007"] === "Video post caption\nsecond line" && D["7400000000000000014"] === "Pencil fallback caption", "TikTok mock saved the pasted captions (line breaks kept), the old one untouched: " + JSON.stringify([D["7400000000000000002"], D["7400000000000000007"], D["7400000000000000014"]]));
+  want(!r.state["tt-violation"], "never opens ••• (Delete), never Posts, leaves the title alone: " + r.state["tt-violation"]);
   want(!r.errors.length, "no page errors: " + r.errors.join("; "));
 
   console.log("sounds (Creative Center business songs + Instagram Reels audio)");
@@ -319,6 +368,13 @@ async function run(browser, job, startUrl, setup) {
   r = await run(browser, { kind: "tiktok", q: [{ k: "card:FAV-014", p: "FAV-014", img: S + "a.jpg", text: "The desk that ends homework fights.\nGH₵650", title: "Student desk", sound: { name: "Highlife Groove", artist: "CML Band" } }, { k: "card:FAV-016", p: "FAV-016", img: S + "b.jpg", text: "Quiet luxury.\nGH₵8,500", title: "Sofa", sound: { name: "Unknown Tune" } }], min: 1, max: 2 }, "https://www.tiktok.com/tiktokstudio/upload?from=webapp&tab=photo");
   want(r.out.res.length === 2 && r.out.res[0].ok && r.out.res[0].sound === "Highlife Groove" && r.out.res[1].ok && !r.out.res[1].sound && /no sound/.test(r.out.res[1].why), "picks the sound in TikTok's picker; posts without one when it isn't found: " + JSON.stringify(r.out.res));
   want(!r.errors.length, "no page errors: " + r.errors.join("; "));
+  const posted = JSON.parse(r.state["tt-posts"] || "[]");
+  want(posted.length === 2 && posted[0].text === "The desk that ends homework fights.\nGH₵650" && posted[1].text === "Quiet luxury.\nGH₵8,500", "the DESCRIPTION is posted (Draft.js state, line breaks kept), not just the title: " + JSON.stringify(posted));
+  want(r.out.res[1].ok && /posted/.test(r.out.res[1].why), "a Post that reloads the tab into Posts counts as posted: " + JSON.stringify(r.out.res[1]));
+
+  console.log("tiktok post when the description box stays empty (social.js)");
+  r = await run(browser, { kind: "tiktok", q: [{ k: "card:FAV-014", p: "FAV-014", img: S + "a.jpg", text: "The desk that ends homework fights.\nGH₵650", title: "Student desk" }, { k: "card:FAV-016", p: "FAV-016", img: S + "b.jpg", text: "Quiet luxury.", title: "Sofa" }], min: 1, max: 2 }, "https://www.tiktok.com/tiktokstudio/upload?from=webapp&tab=photo", () => localStorage.setItem("tt-blank", "1"));
+  want(!r.state["tt-posts"] && r.out.res.length === 1 && !r.out.res[0].ok && /empty/.test(r.out.stopped || ""), "never posts a blank description, stops the run: " + JSON.stringify(r.out).slice(0, 300));
 
   console.log("pinswap (X: pin the new post, unpin the old one)");
   r = await run(browser, { kind: "profile", net: "x", mode: "pinswap", handle: "FaVisionEnt", pin: "Fresh stock, just arrived! Student desk chair sets", unpin: "Old promo from last year" }, "https://x.com/");

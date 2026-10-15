@@ -338,6 +338,8 @@
       if (k === "mklist" && MK() && MK().state()) return MK().startList(null, {}, steps);
       if (k === "mkinbox" && MK() && MK().state()) return MK().startInbox(steps);
       if (k === "ttcaps:scan" && TTC() && TTC().state()) return TTC().startScan(steps);
+      if (k === "ttcaps:all" && TTC() && TTC().state()) return TTC().startAll(steps);
+      if (k === "ttcaps:fixall" && TTC()) return TTC().fixAll(steps);
       if (k === "sounds" && BST() && BST().state()) return BST().startSounds(steps);
       if (k === "story:fb" && BST() && BST().state()) return BST().startStory(steps);
       if (k.startsWith("reel:") && BST() && BST().state()) return BST().startReel(k.slice(5), steps);
@@ -552,7 +554,7 @@
       } else if ((out.kind === "ttscan" || out.kind === "ttfix") && TTC()) {
         const r = await TTC().receive(out);
         A.toast(r.text, r.bad);
-        tab = "social";
+        tab = "ttcap";
       } else if (out.kind === "profile" && PRO()) {
         const r = await PRO().receive(out);
         A.toast(r.text, r.bad);
