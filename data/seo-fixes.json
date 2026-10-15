@@ -275,6 +275,13 @@
    "page": "llms.txt",
    "value": "Business facts, 3 branches with map links, every product with price and link.",
    "applied_at": "2026-10-15"
+  },
+  {
+   "id": "intro:student-desk-ghana",
+   "kind": "intro",
+   "page": "products/index.html",
+   "value": "Looking for student desk Ghana? F.A Vision Enterprise sells furniture such as 1.2 m Office Desk with Drawer Unit GH₵4,500, Student Desk Chair Set GH₵650 from our showroom at Tarazzo Road, Odorkor, with delivery across Accra, Tema & Kasoa. WhatsApp 057 264 6176.",
+   "applied_at": "2026-10-15"
   }
  ]
 }
