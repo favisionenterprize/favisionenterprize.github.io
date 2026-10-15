@@ -1,0 +1,71 @@
+{
+ "settings": {
+  "scan_in_run": true,
+  "list_in_run": false,
+  "list_per_run": 3,
+  "gap_min_s": 30,
+  "gap_max_s": 60,
+  "menus": true,
+  "inbox_max": 20,
+  "photos": 8
+ },
+ "scan": {
+  "d": "2026-10-15",
+  "t": "2026-10-15T09:59:06.542Z",
+  "n": 5,
+  "listings": [
+   {
+    "t": "3D Wallpaper — Brick, Stone & Pattern (per roll)",
+    "price": 650,
+    "status": "Active",
+    "listed": "2026-10-15",
+    "renew": "none"
+   },
+   {
+    "t": "Student Mattress — 2 Sizes",
+    "price": 650,
+    "status": "Active",
+    "listed": "2026-10-15",
+    "id": "4500044700267467",
+    "renew": "wait",
+    "next": "2026-10-22"
+   },
+   {
+    "t": "TV Stand + Centre Table Set — Marble Top",
+    "price": 650,
+    "status": "Active",
+    "listed": "2026-10-15",
+    "id": "2694330591023020",
+    "renew": "wait",
+    "next": "2026-10-22"
+   },
+   {
+    "t": "Hair Dressers Washing Bowl with Bar Chair",
+    "price": 650,
+    "status": "Active",
+    "listed": "2026-10-15",
+    "id": "3014582455544691",
+    "renew": "wait",
+    "next": "2026-10-22"
+   },
+   {
+    "t": "Salon Chair — Hydraulic, Red or Black",
+    "price": 650,
+    "status": "Active",
+    "listed": "2026-10-15",
+    "id": "975247691651140",
+    "renew": "wait",
+    "next": "2026-10-22"
+   }
+  ]
+ },
+ "listed": [],
+ "runs": [
+  {
+   "d": "2026-10-15",
+   "kind": "scan",
+   "n": 5
+  }
+ ],
+ "skip": []
+}
