@@ -1,11 +1,11 @@
 {
- "generated": "2026-10-15T17:01:43Z",
+ "generated": "2026-10-15T17:02:10Z",
  "mode": "local",
- "score": 78,
+ "score": 82,
  "prev_score": 78,
  "counts": {
   "high": 0,
-  "medium": 4,
+  "medium": 3,
   "low": 6
  },
  "site": {
@@ -44,226 +44,6 @@
      ]
     },
     "id": "jsonld:index.html",
-    "applied": false
-   }
-  },
-  {
-   "id": "jsonld-itemlist:products/index.html",
-   "sev": "medium",
-   "page": "products/index.html",
-   "check": "jsonld-itemlist",
-   "msg": "Products page has no ItemList schema listing the products.",
-   "count": 1,
-   "fix": {
-    "kind": "jsonld",
-    "page": "products/index.html",
-    "label": "Add product list schema",
-    "value": {
-     "@context": "https://schema.org",
-     "@type": "ItemList",
-     "name": "F.A Vision Enterprise furniture",
-     "itemListElement": [
-      {
-       "@type": "ListItem",
-       "position": 1,
-       "url": "https://favisionenterprize.github.io/p/FAV-001.html",
-       "name": "Rainbow Glass-Top Dining Set"
-      },
-      {
-       "@type": "ListItem",
-       "position": 2,
-       "url": "https://favisionenterprize.github.io/p/FAV-002.html",
-       "name": "Black Glass Dining Set"
-      },
-      {
-       "@type": "ListItem",
-       "position": 3,
-       "url": "https://favisionenterprize.github.io/p/FAV-003.html",
-       "name": "Dining Set Collection"
-      },
-      {
-       "@type": "ListItem",
-       "position": 4,
-       "url": "https://favisionenterprize.github.io/p/FAV-004.html",
-       "name": "Red Glass Dining Set"
-      },
-      {
-       "@type": "ListItem",
-       "position": 5,
-       "url": "https://favisionenterprize.github.io/p/FAV-005.html",
-       "name": "Foldable Wood-Grain Dining Set"
-      },
-      {
-       "@type": "ListItem",
-       "position": 6,
-       "url": "https://favisionenterprize.github.io/p/FAV-006.html",
-       "name": "Executive Director Chair"
-      },
-      {
-       "@type": "ListItem",
-       "position": 7,
-       "url": "https://favisionenterprize.github.io/p/FAV-007.html",
-       "name": "Mesh Secretary Chair"
-      },
-      {
-       "@type": "ListItem",
-       "position": 8,
-       "url": "https://favisionenterprize.github.io/p/FAV-008.html",
-       "name": "1.2 m Office Desk with Drawer Unit"
-      },
-      {
-       "@type": "ListItem",
-       "position": 9,
-       "url": "https://favisionenterprize.github.io/p/FAV-009.html",
-       "name": "White Dressing Table with Mirror & Stool"
-      },
-      {
-       "@type": "ListItem",
-       "position": 10,
-       "url": "https://favisionenterprize.github.io/p/FAV-010.html",
-       "name": "Wardrobe"
-      },
-      {
-       "@type": "ListItem",
-       "position": 11,
-       "url": "https://favisionenterprize.github.io/p/FAV-011.html",
-       "name": "L-Shaped Sectional Sofa"
-      },
-      {
-       "@type": "ListItem",
-       "position": 12,
-       "url": "https://favisionenterprize.github.io/p/FAV-014.html",
-       "name": "Student Desk Chair Set"
-      },
-      {
-       "@type": "ListItem",
-       "position": 13,
-       "url": "https://favisionenterprize.github.io/p/FAV-015.html",
-       "name": "L-Shaped Sofa Set"
-      },
-      {
-       "@type": "ListItem",
-       "position": 14,
-       "url": "https://favisionenterprize.github.io/p/FAV-016.html",
-       "name": "Luxury Leather Sofa Set"
-      },
-      {
-       "@type": "ListItem",
-       "position": 15,
-       "url": "https://favisionenterprize.github.io/p/FAV-017.html",
-       "name": "Mesh Secretary Chair"
-      },
-      {
-       "@type": "ListItem",
-       "position": 16,
-       "url": "https://favisionenterprize.github.io/p/FAV-018.html",
-       "name": "Strong Glass Centre Table"
-      },
-      {
-       "@type": "ListItem",
-       "position": 17,
-       "url": "https://favisionenterprize.github.io/p/FAV-019.html",
-       "name": "Auditorium / Conference Chair"
-      },
-      {
-       "@type": "ListItem",
-       "position": 18,
-       "url": "https://favisionenterprize.github.io/p/FAV-020.html",
-       "name": "Business Cards"
-      },
-      {
-       "@type": "ListItem",
-       "position": 19,
-       "url": "https://favisionenterprize.github.io/p/FAV-021.html",
-       "name": "A4 & A3 Copy Paper"
-      },
-      {
-       "@type": "ListItem",
-       "position": 20,
-       "url": "https://favisionenterprize.github.io/p/FAV-022.html",
-       "name": "TCL 43\" Smart Android TV"
-      },
-      {
-       "@type": "ListItem",
-       "position": 21,
-       "url": "https://favisionenterprize.github.io/p/FAV-023.html",
-       "name": "Sigma 1.5HP Split Air Conditioner (BREEZE-HY12SB)"
-      },
-      {
-       "@type": "ListItem",
-       "position": 22,
-       "url": "https://favisionenterprize.github.io/p/FAV-024.html",
-       "name": "TWYFORD Water Closet"
-      },
-      {
-       "@type": "ListItem",
-       "position": 23,
-       "url": "https://favisionenterprize.github.io/p/FAV-025.html",
-       "name": "Tiles & Finishes"
-      },
-      {
-       "@type": "ListItem",
-       "position": 24,
-       "url": "https://favisionenterprize.github.io/p/FAV-026.html",
-       "name": "Kavukçu Wheat Flour"
-      },
-      {
-       "@type": "ListItem",
-       "position": 25,
-       "url": "https://favisionenterprize.github.io/p/FAV-027.html",
-       "name": "3D Wallpaper"
-      },
-      {
-       "@type": "ListItem",
-       "position": 26,
-       "url": "https://favisionenterprize.github.io/p/FAV-028.html",
-       "name": "Kids Plastic Chair"
-      },
-      {
-       "@type": "ListItem",
-       "position": 27,
-       "url": "https://favisionenterprize.github.io/p/FAV-029.html",
-       "name": "Salon Chair"
-      },
-      {
-       "@type": "ListItem",
-       "position": 28,
-       "url": "https://favisionenterprize.github.io/p/FAV-030.html",
-       "name": "Hair Dressers Washing Bowl with Bar Chair"
-      },
-      {
-       "@type": "ListItem",
-       "position": 29,
-       "url": "https://favisionenterprize.github.io/p/FAV-031.html",
-       "name": "10 Seater Foldable Round Table with Chairs"
-      },
-      {
-       "@type": "ListItem",
-       "position": 30,
-       "url": "https://favisionenterprize.github.io/p/FAV-032.html",
-       "name": "TV Stand"
-      },
-      {
-       "@type": "ListItem",
-       "position": 31,
-       "url": "https://favisionenterprize.github.io/p/FAV-033.html",
-       "name": "TV Stand + Centre Table Set"
-      },
-      {
-       "@type": "ListItem",
-       "position": 32,
-       "url": "https://favisionenterprize.github.io/p/FAV-034.html",
-       "name": "Student Mattress"
-      },
-      {
-       "@type": "ListItem",
-       "position": 33,
-       "url": "https://favisionenterprize.github.io/p/FAV-035.html",
-       "name": "Jasmine Rice"
-      }
-     ]
-    },
-    "id": "jsonld:products/index.html",
     "applied": false
    }
   },
@@ -432,8 +212,11 @@
    "h1": [
     "Everything we sell, in one place"
    ],
-   "schema": [],
-   "bytes": 194671,
+   "schema": [
+    "ItemList",
+    "ListItem"
+   ],
+   "bytes": 199385,
    "requests": 8,
    "redirect": false,
    "in_sitemap": true
@@ -1728,7 +1511,7 @@
  "history": [
   {
    "d": "2026-10-15",
-   "score": 78,
+   "score": 82,
    "ai": null
   }
  ]
