@@ -72,6 +72,13 @@
    "d": "2026-10-16",
    "kind": "scan",
    "n": 5
+  },
+  {
+   "d": "2026-10-16",
+   "kind": "list",
+   "tried": 0,
+   "ok": 0,
+   "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile in Facebook, then press the button again."
   }
  ],
  "skip": []
