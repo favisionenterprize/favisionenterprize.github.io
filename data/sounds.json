@@ -1,6 +1,14 @@
 {
- "d": "2026-10-15",
- "t": "2026-10-15T06:07:00.316Z",
+ "d": "2026-10-16",
+ "t": "2026-10-16T15:55:13.700Z",
+ "settings": {
+  "artists_first": true,
+  "artists": [
+   "Davido",
+   "Kojo Blak",
+   "Hillsong Worship"
+  ]
+ },
  "sounds": [],
  "manual": [],
  "used": [],
@@ -15,6 +23,10 @@
   },
   {
    "d": "2026-10-15",
+   "text": "no Instagram audio seen on Reels"
+  },
+  {
+   "d": "2026-10-16",
    "text": "no Instagram audio seen on Reels"
   }
  ]
