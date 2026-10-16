@@ -1437,9 +1437,10 @@
    "ok": true
   },
   "7696267685570776340": {
-   "d": "2026-10-15",
+   "d": "2026-10-16",
    "ok": false,
-   "why": "TikTok didn't confirm the save"
+   "why": "already has hashtags, left as it is",
+   "skip_tags": true
   },
   "7696270622808132885": {
    "d": "2026-10-15",
@@ -1454,9 +1455,10 @@
    "ok": true
   },
   "7696273258198388020": {
-   "d": "2026-10-15",
+   "d": "2026-10-16",
    "ok": false,
-   "why": "TikTok didn't confirm the save"
+   "why": "already has hashtags, left as it is",
+   "skip_tags": true
   },
   "7696273523349720341": {
    "d": "2026-10-15",
@@ -1714,6 +1716,19 @@
    "d": "2026-10-16",
    "why": "already has hashtags, left as it is",
    "skip_tags": true
+  },
+  "7696774739380997396": {
+   "d": "2026-10-16",
+   "tags_ok": true
+  },
+  "7696775746609614100": {
+   "d": "2026-10-16",
+   "why": "already has hashtags, left as it is",
+   "skip_tags": true
+  },
+  "7697352112883240212": {
+   "d": "2026-10-16",
+   "ok": true
   }
  },
  "runs": [
@@ -1974,6 +1989,16 @@
    "had": 5,
    "v": "2026-10-15.4",
    "more": 15
+  },
+  {
+   "d": "2026-10-16",
+   "kind": "fix",
+   "queued": 15,
+   "tried": 5,
+   "ok": 2,
+   "had": 3,
+   "v": "2026-10-15.4",
+   "more": 10
   }
  ]
 }
