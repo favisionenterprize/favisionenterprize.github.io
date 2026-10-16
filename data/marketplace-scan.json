@@ -61,7 +61,260 @@
    }
   ]
  },
- "listed": [],
+ "listed": [
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:22:54.570Z",
+   "p": "FAV-001",
+   "title": "Rainbow Glass-Top Dining Set — 6 Chairs",
+   "price": 12600,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:23:48.598Z",
+   "p": "FAV-002",
+   "title": "Black Glass Dining Set — 6 High-Back Chairs",
+   "price": 4900,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:24:42.732Z",
+   "p": "FAV-003",
+   "title": "Dining Set Collection — 5 Designs, 6 Chairs",
+   "price": 12600,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:25:36.021Z",
+   "p": "FAV-004",
+   "title": "Red Glass Dining Set — 6 Chairs",
+   "price": 12600,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:26:29.947Z",
+   "p": "FAV-005",
+   "title": "Foldable Wood-Grain Dining Set — 6 Chairs",
+   "price": 11900,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:27:24.339Z",
+   "p": "FAV-006",
+   "title": "Executive Director Chair — Leather, High Back",
+   "price": 9500,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:28:16.472Z",
+   "p": "FAV-007",
+   "title": "Mesh Secretary Chair — Ergonomic Swivel",
+   "price": 9500,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:29:08.551Z",
+   "p": "FAV-008",
+   "title": "1.2 m Office Desk with Drawer Unit",
+   "price": 4500,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:30:02.679Z",
+   "p": "FAV-009",
+   "title": "White Dressing Table with Mirror & Stool",
+   "price": 7450,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:30:56.621Z",
+   "p": "FAV-010",
+   "title": "Wardrobe — 4-Door with Top Cabinets",
+   "price": 9800,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:31:49.860Z",
+   "p": "FAV-011",
+   "title": "L-Shaped Sectional Sofa — Grey Fabric",
+   "price": 15500,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:32:44.044Z",
+   "p": "FAV-014",
+   "title": "Student Desk Chair Set — Senior High to Tertiary Level",
+   "price": 650,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:33:37.863Z",
+   "p": "FAV-015",
+   "title": "L-Shaped Sofa Set — Fabric & Leather",
+   "price": 5500,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:34:30.438Z",
+   "p": "FAV-016",
+   "title": "Luxury Leather Sofa Set",
+   "price": 8500,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:35:22.715Z",
+   "p": "FAV-017",
+   "title": "Mesh Secretary Chair — Swivel, Arm Rests",
+   "price": 4500,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:36:15.846Z",
+   "p": "FAV-018",
+   "title": "Strong Glass Centre Table",
+   "price": 800,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:37:08.402Z",
+   "p": "FAV-019",
+   "title": "Auditorium / Conference Chair",
+   "price": 405,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:38:06.460Z",
+   "p": "FAV-020",
+   "title": "Business Cards — 100 or 200 Pieces",
+   "price": 450,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:39:05.799Z",
+   "p": "FAV-021",
+   "title": "A4 & A3 Copy Paper — Rotatrim, PaperOne, Double A",
+   "price": 450,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:39:59.357Z",
+   "p": "FAV-022",
+   "title": "TCL 43\" Smart Android TV — Full HD (43S5400A)",
+   "price": 6500,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:40:53.537Z",
+   "p": "FAV-023",
+   "title": "Sigma 1.5HP Split Air Conditioner (BREEZE-HY12SB)",
+   "price": 6500,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:41:55.111Z",
+   "p": "FAV-024",
+   "title": "TWYFORD Water Closet — Two-Piece, Premium",
+   "price": 750,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:42:54.319Z",
+   "p": "FAV-025",
+   "title": "Tiles & Finishes — Floor & Wall",
+   "price": 1000,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:43:48.756Z",
+   "p": "FAV-026",
+   "title": "Kavukçu Wheat Flour — 50kg Baking Flour",
+   "price": 640,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:45:00.954Z",
+   "p": "FAV-028",
+   "title": "Kids Plastic Chair — Stackable, Assorted Colours",
+   "price": 550,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:46:03.685Z",
+   "p": "FAV-031",
+   "title": "10 Seater Foldable Round Table with Chairs",
+   "price": 9650,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:46:56.882Z",
+   "p": "FAV-032",
+   "title": "TV Stand — Black Marble Top with Drawer",
+   "price": 6950,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T20:48:02.236Z",
+   "p": "FAV-035",
+   "title": "Jasmine Rice — Long Grain Fragrant Rice",
+   "price": 400,
+   "ok": false,
+   "why": "the Next button stayed off (a field is missing)"
+  }
+ ],
  "runs": [
   {
    "d": "2026-10-15",
@@ -86,6 +339,12 @@
    "tried": 0,
    "ok": 0,
    "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile in Facebook, then press the button again."
+  },
+  {
+   "d": "2026-10-16",
+   "kind": "list",
+   "tried": 28,
+   "ok": 0
   }
  ],
  "skip": []
