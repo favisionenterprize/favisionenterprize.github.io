@@ -299,6 +299,15 @@
    "skip": 0,
    "v": "2026-10-15.4",
    "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile, then try again."
+  },
+  {
+   "d": "2026-10-16",
+   "kind": "fxfix",
+   "net": "ig",
+   "tried": 2,
+   "ok": 0,
+   "skip": 0,
+   "v": "2026-10-15.4"
   }
  ]
 }
