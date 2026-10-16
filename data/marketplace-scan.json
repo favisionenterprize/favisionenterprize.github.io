@@ -10,8 +10,8 @@
   "photos": 8
  },
  "scan": {
-  "d": "2026-10-15",
-  "t": "2026-10-15T09:59:06.542Z",
+  "d": "2026-10-16",
+  "t": "2026-10-16T18:16:57.300Z",
   "n": 5,
   "listings": [
    {
@@ -19,11 +19,13 @@
     "price": 650,
     "status": "Active",
     "listed": "2026-10-15",
-    "renew": "none"
+    "id": "1424483486497081",
+    "renew": "wait",
+    "next": "2026-10-22"
    },
    {
     "t": "Student Mattress — 2 Sizes",
-    "price": 650,
+    "price": 1200,
     "status": "Active",
     "listed": "2026-10-15",
     "id": "4500044700267467",
@@ -32,7 +34,7 @@
    },
    {
     "t": "TV Stand + Centre Table Set — Marble Top",
-    "price": 650,
+    "price": 16800,
     "status": "Active",
     "listed": "2026-10-15",
     "id": "2694330591023020",
@@ -41,7 +43,7 @@
    },
    {
     "t": "Hair Dressers Washing Bowl with Bar Chair",
-    "price": 650,
+    "price": 9300,
     "status": "Active",
     "listed": "2026-10-15",
     "id": "3014582455544691",
@@ -50,7 +52,7 @@
    },
    {
     "t": "Salon Chair — Hydraulic, Red or Black",
-    "price": 650,
+    "price": 12500,
     "status": "Active",
     "listed": "2026-10-15",
     "id": "975247691651140",
@@ -63,6 +65,11 @@
  "runs": [
   {
    "d": "2026-10-15",
+   "kind": "scan",
+   "n": 5
+  },
+  {
+   "d": "2026-10-16",
    "kind": "scan",
    "n": 5
   }
