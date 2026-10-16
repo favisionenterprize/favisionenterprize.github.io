@@ -1,8 +1,53 @@
 {
-  "settings": { "min": 20, "max": 40, "scan_max": 100, "mk_min": 60, "web_min": 80 },
-  "fb": { "scan": null, "fixed": {} },
-  "ig": { "scan": null, "fixed": {} },
-  "x": { "scan": null, "replied": {} },
-  "mk": { "fixed": {} },
-  "runs": []
+ "settings": {
+  "min": 20,
+  "max": 40,
+  "scan_max": 100,
+  "mk_min": 60,
+  "web_min": 80
+ },
+ "fb": {
+  "scan": null,
+  "fixed": {}
+ },
+ "ig": {
+  "scan": null,
+  "fixed": {}
+ },
+ "x": {
+  "scan": {
+   "d": "2026-10-16",
+   "t": "2026-10-16T21:43:11.902Z",
+   "n": 2,
+   "posts": [
+    {
+     "id": "1662447925388099587",
+     "url": "https://x.com/FaVisionEnt/status/1662447925388099587",
+     "text": "Pls take Note that office is open for walk in purchases and delivery as well. STUDENT DESKS ARE AVAILABLE IN LARGE QUANTITIES!!!",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2110674176415859172",
+     "url": "https://x.com/FaVisionEnt/status/2110674176415859172",
+     "text": "TWYFORD Water Closet: GH₵ 750, price negotiable. WhatsApp 027 747 7752 to order https:// favisionenterprize.github.io/p/FAV-024.html #Ghana #GhanaBusiness Tell us where you're seeing this from, then like, share & follow!",
+     "kind": "post",
+     "alt": ""
+    }
+   ]
+  },
+  "replied": {}
+ },
+ "mk": {
+  "fixed": {}
+ },
+ "runs": [
+  {
+   "d": "2026-10-16",
+   "kind": "scan",
+   "net": "x",
+   "n": 2,
+   "v": "2026-10-15.4"
+  }
+ ]
 }
