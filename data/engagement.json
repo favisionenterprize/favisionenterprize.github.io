@@ -752,6 +752,21 @@
    "followers": null,
    "stopped": "No posts found on your TikTok profile.",
    "commenting": false
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T21:38:13.754Z",
+   "net": "ig",
+   "mode": "reply",
+   "posts": 3,
+   "checked": 3,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 892,
+   "stopped": null,
+   "commenting": false
   }
  ],
  "liked": {}
