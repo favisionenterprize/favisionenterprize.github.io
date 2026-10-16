@@ -1,0 +1,40 @@
+{
+ "settings": {
+  "links": {
+   "fb": "https://favisionenterprize.github.io/",
+   "ig": "https://favisionenterprize.github.io/",
+   "x": "https://favisionenterprize.github.io/",
+   "tiktok": "https://favisionenterprize.github.io/tiktok/"
+  },
+  "pin": {
+   "p": "FAV-014",
+   "text": "Fresh stock, just arrived"
+  },
+  "nets": {
+   "fb": true,
+   "ig": true,
+   "x": true,
+   "tiktok": true
+  }
+ },
+ "status": {
+  "tiktok": {
+   "d": "2026-10-16",
+   "link": null,
+   "pinned": null,
+   "linkOk": false,
+   "pinOk": false,
+   "why": "pin: couldn't find the post on TikTok (pin it in the app: open the post → ••• → Pin)",
+   "mode": "pinswap"
+  }
+ },
+ "runs": [
+  {
+   "d": "2026-10-16",
+   "net": "tiktok",
+   "mode": "pinswap",
+   "linkOk": false,
+   "pinOk": false
+  }
+ ]
+}
