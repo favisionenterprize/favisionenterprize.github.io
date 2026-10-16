@@ -8,7 +8,14 @@
   "reels": true,
   "hooks": true
  },
- "pinned": [],
+ "pinned": [
+  {
+   "d": "2026-10-16",
+   "net": "tiktok",
+   "p": "FAV-014",
+   "ok": true
+  }
+ ],
  "stories": [
   {
    "d": "2026-10-15",
