@@ -5513,6 +5513,24 @@
    "url": "https://www.facebook.com/groups/103417196471063/",
    "active": true,
    "added": "2026-10-15"
+  },
+  {
+   "id": "433233306075040",
+   "name": "Home Interior Designs",
+   "url": "https://www.facebook.com/groups/433233306075040/",
+   "added": "2026-10-16",
+   "members": 1400000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "175162353823750",
+   "name": "Interior Design Sri Lanka",
+   "url": "https://www.facebook.com/groups/175162353823750/",
+   "added": "2026-10-16",
+   "members": 164000,
+   "source": "autopilot",
+   "active": true
   }
  ],
  "posts": [
@@ -9954,12 +9972,30 @@
    "members": 32000,
    "status": "joined",
    "url": "https://www.facebook.com/groups/GhanaintheUK/"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T18:27:22.963Z",
+   "g": "433233306075040",
+   "name": "Home Interior Designs",
+   "members": 1400000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/433233306075040/"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T18:28:57.288Z",
+   "g": "175162353823750",
+   "name": "Interior Design Sri Lanka",
+   "members": 164000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/175162353823750/"
   }
  ],
  "checks": {
   "sync": "2026-10-16",
   "declines": "2026-10-16",
-  "grow": "2026-10-15"
+  "grow": "2026-10-16"
  },
  "rounds": {
   "FAV-014": "2026-10-13T21:28:03.690Z",
@@ -10241,6 +10277,13 @@
    "kind": "declines",
    "found": 0,
    "left": 0
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T18:33:13.016Z",
+   "kind": "grow",
+   "joined": 2,
+   "requested": 0
   }
  ],
  "renewLog": [
