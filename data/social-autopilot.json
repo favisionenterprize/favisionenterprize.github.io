@@ -1758,6 +1758,96 @@
    "p": "FAV-014",
    "ok": true,
    "now": true
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:36:29.413Z",
+   "net": "x",
+   "k": "tile:fav-014-arrived",
+   "p": "FAV-014",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:37:33.227Z",
+   "net": "x",
+   "k": "tile:fav-003",
+   "p": "FAV-003",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:38:52.680Z",
+   "net": "x",
+   "k": "card:FAV-017",
+   "p": "FAV-017",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:39:59.551Z",
+   "net": "x",
+   "k": "presence:fav-001",
+   "p": "FAV-001",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:41:04.186Z",
+   "net": "x",
+   "k": "presence:fav-005",
+   "p": "FAV-005",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:42:07.640Z",
+   "net": "x",
+   "k": "tile:fav-004",
+   "p": "FAV-004",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:43:15.907Z",
+   "net": "x",
+   "k": "presence:fav-006",
+   "p": "FAV-006",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:45:04.004Z",
+   "net": "x",
+   "k": "tile:fav-026",
+   "p": "FAV-026",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:46:11.314Z",
+   "net": "x",
+   "k": "card:FAV-002",
+   "p": "FAV-002",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:47:16.199Z",
+   "net": "x",
+   "k": "card:FAV-022",
+   "p": "FAV-022",
+   "ok": false,
+   "why": "X didn't confirm the post"
   }
  ],
  "runs": [
@@ -2062,6 +2152,13 @@
    "kind": "tiktok",
    "tried": 1,
    "ok": 1
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:47:41.023Z",
+   "kind": "x",
+   "tried": 10,
+   "ok": 0
   }
  ]
 }
