@@ -163,6 +163,18 @@
     "ok": false,
     "why": "Instagram didn't confirm the save",
     "mode": "set"
+   },
+   "DekROsWCNYN": {
+    "d": "2026-10-16",
+    "ok": false,
+    "why": "Instagram didn't confirm the save",
+    "mode": "set"
+   },
+   "DekRH6tiHWK": {
+    "d": "2026-10-16",
+    "ok": false,
+    "why": "Instagram didn't confirm the save",
+    "mode": "set"
    }
   }
  },
@@ -261,6 +273,15 @@
    "skip": 0,
    "v": "2026-10-15.4",
    "more": 2
+  },
+  {
+   "d": "2026-10-16",
+   "kind": "fxfix",
+   "net": "ig",
+   "tried": 2,
+   "ok": 0,
+   "skip": 0,
+   "v": "2026-10-15.4"
   }
  ]
 }
