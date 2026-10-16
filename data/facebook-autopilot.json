@@ -240,8 +240,9 @@
    "id": "claudecommunity",
    "name": "Claude Community",
    "url": "https://www.facebook.com/groups/claudecommunity/",
-   "active": true,
-   "added": "2026-10-14"
+   "active": false,
+   "added": "2026-10-14",
+   "off_why": "Couldn't find the post box"
   },
   {
    "id": "963693663767065",
@@ -275,8 +276,9 @@
    "id": "1145676989186606",
    "name": "ST . JOHN'S �GRAMMAR� SCHOOL��",
    "url": "https://www.facebook.com/groups/1145676989186606/",
-   "active": true,
-   "added": "2026-10-14"
+   "active": false,
+   "added": "2026-10-14",
+   "off_why": "Couldn't find the post box"
   },
   {
    "id": "claudeaicommunity",
@@ -457,8 +459,9 @@
    "id": "3192043407490719",
    "name": "ACCRA TO BONGO GLASS N ALUMINIUM FABRICATED",
    "url": "https://www.facebook.com/groups/3192043407490719/",
-   "active": true,
-   "added": "2026-10-14"
+   "active": false,
+   "added": "2026-10-14",
+   "off_why": "Couldn't find the post box"
   },
   {
    "id": "745092999534132",
@@ -485,8 +488,9 @@
    "id": "2786549388234689",
    "name": "Techiman buy and sell. Information and enquiries",
    "url": "https://www.facebook.com/groups/2786549388234689/",
-   "active": true,
-   "added": "2026-10-14"
+   "active": false,
+   "added": "2026-10-14",
+   "off_why": "Couldn't find the post box"
   },
   {
    "id": "376610050033553",
@@ -10675,6 +10679,528 @@
    "g": "gh4real",
    "ok": true,
    "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:00:46.518Z",
+   "p": "FAV-014",
+   "g": "928755090542065",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:01:24.425Z",
+   "p": "FAV-014",
+   "g": "claudecommunity",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:02:12.211Z",
+   "p": "FAV-014",
+   "g": "963693663767065",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:03:01.636Z",
+   "p": "FAV-014",
+   "g": "977797772413869",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:03:53.908Z",
+   "p": "FAV-014",
+   "g": "1024060211323777",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:04:37.250Z",
+   "p": "FAV-014",
+   "g": "1054552872583267",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:05:14.068Z",
+   "p": "FAV-014",
+   "g": "1145676989186606",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:05:33.479Z",
+   "p": "FAV-014",
+   "g": "claudeaicommunity",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:05:55.426Z",
+   "p": "FAV-014",
+   "g": "1348711550214520",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:06:37.614Z",
+   "p": "FAV-014",
+   "g": "1367025170347293",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:07:22.456Z",
+   "p": "FAV-014",
+   "g": "LakelandUsedFurnitureForSale",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:07:49.806Z",
+   "p": "FAV-014",
+   "g": "1412859638977189",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:08:09.861Z",
+   "p": "FAV-014",
+   "g": "1493651767884438",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:08:40.261Z",
+   "p": "FAV-014",
+   "g": "1512374675928402",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:09:03.841Z",
+   "p": "FAV-014",
+   "g": "1534229616988507",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:09:25.159Z",
+   "p": "FAV-014",
+   "g": "1603659139995662",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:10:14.361Z",
+   "p": "FAV-014",
+   "g": "1709817569323257",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:10:35.801Z",
+   "p": "FAV-014",
+   "g": "1754360848215346",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:11:19.271Z",
+   "p": "FAV-014",
+   "g": "1780893349074019",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:12:03.637Z",
+   "p": "FAV-014",
+   "g": "1789062137848723",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:12:51.869Z",
+   "p": "FAV-014",
+   "g": "3108712636082022",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:13:42.508Z",
+   "p": "FAV-014",
+   "g": "4343810679056037",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:14:03.824Z",
+   "p": "FAV-014",
+   "g": "967984253310361",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:14:27.293Z",
+   "p": "FAV-014",
+   "g": "945564802120994",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:15:10.924Z",
+   "p": "FAV-014",
+   "g": "617295088616357",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:15:32.671Z",
+   "p": "FAV-014",
+   "g": "367918950553182",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:16:30.187Z",
+   "p": "FAV-014",
+   "g": "752474170569704",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:16:51.524Z",
+   "p": "FAV-014",
+   "g": "1021608758366751",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:18:25.103Z",
+   "p": "FAV-014",
+   "g": "PresidentVladimirPutinFanClub",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:19:14.466Z",
+   "p": "FAV-014",
+   "g": "1444450994103378",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:19:48.700Z",
+   "p": "FAV-014",
+   "g": "3192043407490719",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:20:09.705Z",
+   "p": "FAV-014",
+   "g": "745092999534132",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:20:53.119Z",
+   "p": "FAV-014",
+   "g": "1793027177596201",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:21:25.543Z",
+   "p": "FAV-014",
+   "g": "3003660699858296",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:21:57.484Z",
+   "p": "FAV-014",
+   "g": "2786549388234689",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:22:20.533Z",
+   "p": "FAV-014",
+   "g": "376610050033553",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:22:42.021Z",
+   "p": "FAV-014",
+   "g": "374100935963119",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:23:05.182Z",
+   "p": "FAV-014",
+   "g": "310489786992809",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:23:46.877Z",
+   "p": "FAV-014",
+   "g": "588401269940013",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:24:09.380Z",
+   "p": "FAV-014",
+   "g": "560467425090394",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:24:52.445Z",
+   "p": "FAV-014",
+   "g": "firstghananews",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:25:39.050Z",
+   "p": "FAV-014",
+   "g": "902907810572458",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:26:03.528Z",
+   "p": "FAV-014",
+   "g": "4151708311620111",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:26:23.534Z",
+   "p": "FAV-014",
+   "g": "140329066696827",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:26:50.438Z",
+   "p": "FAV-014",
+   "g": "149247685657323",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:28:11.551Z",
+   "p": "FAV-014",
+   "g": "382880061859512",
+   "ok": false,
+   "now": true,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:29:00.366Z",
+   "p": "FAV-014",
+   "g": "310074000604374",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:30:11.496Z",
+   "p": "FAV-014",
+   "g": "258786122624242",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:30:35.685Z",
+   "p": "FAV-014",
+   "g": "1152473946124801",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:31:20.424Z",
+   "p": "FAV-014",
+   "g": "1006016517835882",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:31:44.960Z",
+   "p": "FAV-014",
+   "g": "365324614282366",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:32:10.057Z",
+   "p": "FAV-014",
+   "g": "421927897596838",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:32:58.487Z",
+   "p": "FAV-014",
+   "g": "149810362345363",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:33:46.330Z",
+   "p": "FAV-014",
+   "g": "3056151644617043",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:34:15.282Z",
+   "p": "FAV-014",
+   "g": "456819521876158",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:34:52.493Z",
+   "p": "FAV-014",
+   "g": "164083064090060",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:35:15.819Z",
+   "p": "FAV-014",
+   "g": "220197416172147",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:36:38.880Z",
+   "p": "FAV-014",
+   "g": "1661098030735546",
+   "ok": false,
+   "now": true,
+   "why": "Try again later"
   }
  ],
  "resets": {},
@@ -11347,6 +11873,14 @@
    "kind": "post",
    "tried": 20,
    "ok": 16
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:36:49.037Z",
+   "kind": "post",
+   "tried": 58,
+   "ok": 51,
+   "stopped": "Facebook showed \"Try again later\". Nothing more was posted."
   }
  ],
  "renewLog": [
