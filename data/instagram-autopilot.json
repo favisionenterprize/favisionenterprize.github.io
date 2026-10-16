@@ -797,6 +797,84 @@
    "k": "card:FAV-021",
    "p": "FAV-021",
    "ok": true
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:17:56.695Z",
+   "k": "presence:fav-014-arrived",
+   "p": "FAV-014",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:19:11.853Z",
+   "k": "card:FAV-019",
+   "p": "FAV-019",
+   "ok": true
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:21:17.199Z",
+   "k": "tile:fav-024",
+   "p": "FAV-024",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:22:14.146Z",
+   "k": "ad:fav-009",
+   "p": "FAV-009",
+   "ok": true
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:24:14.478Z",
+   "k": "presence:fav-001",
+   "p": "FAV-001",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:26:15.946Z",
+   "k": "card:FAV-015",
+   "p": "FAV-015",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:28:17.513Z",
+   "k": "tile:fav-026",
+   "p": "FAV-026",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:30:45.944Z",
+   "k": "card:FAV-029",
+   "p": "FAV-029",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:32:52.375Z",
+   "k": "ad:ai-studio",
+   "p": null,
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:35:02.130Z",
+   "k": "card:FAV-027",
+   "p": "FAV-027",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
   }
  ],
  "profile": [
@@ -859,6 +937,12 @@
    "followers": 892,
    "following": 2011,
    "posts": 221
+  },
+  {
+   "d": "2026-10-16",
+   "followers": 892,
+   "following": 2011,
+   "posts": 231
   }
  ],
  "runs": [
@@ -989,6 +1073,13 @@
    "kind": "ig",
    "tried": 10,
    "ok": 10
+  },
+  {
+   "d": "2026-10-16",
+   "t": "2026-10-16T19:35:15.869Z",
+   "kind": "ig",
+   "tried": 10,
+   "ok": 2
   }
  ]
 }
