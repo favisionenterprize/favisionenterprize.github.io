@@ -1321,10 +1321,10 @@ window.FAV_DATA = {
       "price_ghs": 650,
       "negotiable": true,
       "icon": "🏫",
-      "description": "Height-adjustable desk and chair sets, perfect for classrooms from SHS through university. Anti-slip floor caps on the legs prevent sliding and cut down on distracting noise.\n\nSpecifications\nItem No.: SF-07F\nSize: Standard (custom sizes available on request)\n\nDesk\nMaterial: Multi-layer composite board / ABS / carbon steel frame, high-quality MDF with melamine cover — durable & strong\nColour: Grey frame with yellow (gold) top — other colours available\nDimensions: 70 × 50 × 73–88 cm (L × W × H)\n\nChair\nMaterial: Composite panel / ABS / carbon steel frame with powder-coated iron tube\nDimensions: 48 × 46 × 46–52 cm (L × W × H)\nSeat size: 48 × 46 cm\n\nPacking: Knock-down packing — wood/plastic in carton with bubble wrap; metal wrapped in nylon fabric.\n\nNeed desks for your school? Contact us today for a great bulk discount",
+      "description": "Height-adjustable desk and chair sets, perfect for classrooms from SHS through university. Anti-slip floor caps on the legs prevent sliding and cut down on distracting noise.\n\nSpecifications\nItem No.: SF-07F\nSize: Standard (custom sizes available on request)\n\nDesk\nMaterial: Multi-layer composite board / ABS / carbon steel frame, high-quality MDF with melamine cover — durable & strong\nColour: Grey frame with yellow (gold) top — other colours available\nDimensions: 60.5 × 40 × 75.5 cm (L × W × H)\n\nChair\nMaterial: Composite panel / ABS / carbon steel frame with powder-coated iron tube\nDimensions: 38.5 × 40 × 76 cm (L × W × H)\n\nPacking: Knock-down packing — wood/plastic in carton with bubble wrap; metal wrapped in nylon fabric.\n\nNeed desks for your school? Contact us today for a great bulk discount",
       "condition": "Brand New",
       "material": "MDF with melamine cover, ABS, powder-coated carbon steel frame",
-      "dimensions": "Desk 70 × 50 × 73–88 cm; Chair 48 × 46 × 46–52 cm (height adjustable)",
+      "dimensions": "Desk 60.5 × 40 × 75.5 cm; Chair 38.5 × 40 × 76 cm (L × W × H)",
       "colors": [
         "Grey",
         "Gold"
@@ -1339,7 +1339,7 @@ window.FAV_DATA = {
         "assets/images/products/fav-014-muk5690f-4.jpg"
       ],
       "highlights": [
-        "Height-adjustable desk (73–88 cm) and chair (46–52 cm)",
+        "Desk 60.5 × 40 × 75.5 cm and chair 38.5 × 40 × 76 cm (L × W × H)",
         "Powder-coated carbon steel frame with MDF/melamine top",
         "Anti-slip floor caps — no sliding, less noise",
         "Suitable for SHS through university"

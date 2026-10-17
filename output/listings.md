@@ -1,6 +1,6 @@
 # F.A Vision Enterprise: ready-to-paste listings
 
-Generated 2026-10-15. Regenerate after editing `data/products.json`.
+Generated 2026-10-17. Regenerate after editing `data/products.json`.
 
 ## FAV-001 · Rainbow Glass-Top Dining Set — 6 Chairs
 
@@ -894,13 +894,13 @@ Height-adjustable desk and chair sets, perfect for classrooms from SHS through u
 
 👉 See all photos, price and order online: https://favisionenterprize.github.io/#product/FAV-014
 
-✔ Height-adjustable desk (73–88 cm) and chair (46–52 cm)
+✔ Desk 60.5 × 40 × 75.5 cm and chair 38.5 × 40 × 76 cm (L × W × H)
 ✔ Powder-coated carbon steel frame with MDF/melamine top
 ✔ Anti-slip floor caps — no sliding, less noise
 ✔ Suitable for SHS through university
 
 Material: MDF with melamine cover, ABS, powder-coated carbon steel frame
-Size: Desk 70 × 50 × 73–88 cm; Chair 48 × 46 × 46–52 cm (height adjustable)
+Size: Desk 60.5 × 40 × 75.5 cm; Chair 38.5 × 40 × 76 cm (L × W × H)
 Colours: Grey, Gold
 
 Price negotiable for bulk orders.
@@ -918,7 +918,7 @@ Ref: FAV-014
 
 ```
 🏫 Student Desk Chair Set — Senior High to Tertiary Level available now!
-• Height-adjustable desk (73–88 cm) and chair (46–52 cm)
+• Desk 60.5 × 40 × 75.5 cm and chair 38.5 × 40 × 76 cm (L × W × H)
 • Powder-coated carbon steel frame with MDF/melamine top
 • Anti-slip floor caps — no sliding, less noise
 • Suitable for SHS through university
@@ -931,7 +931,7 @@ Ref: FAV-014
 **Variant 2**
 
 ```
-Looking for a quality student desk chair set — senior high to tertiary level? Height-adjustable desk (73–88 cm) and chair (46–52 cm).
+Looking for a quality student desk chair set — senior high to tertiary level? Desk 60.5 × 40 × 75.5 cm and chair 38.5 × 40 × 76 cm (L × W × H).
 Available at Odorkor, Accra. GH₵ 650.
 Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
@@ -1338,7 +1338,7 @@ Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interes
 ### Facebook Marketplace
 
 - **Title:** Business Cards — 100 or 200 Pieces
-- **Price:** 100
+- **Price:** 450
 - **Category:** Office Supplies
 - **Condition:** Brand New
 - **Location:** Odorkor, Accra
@@ -1349,16 +1349,15 @@ Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interes
 ```
 Business Cards — 100 or 200 Pieces by F.A Vision Enterprise.
 
-Professionally designed and printed business cards from our printing press at Omanjor. 100 pieces GH₵50 · 200 pieces GH₵100. Price with or without delivery.
+Professionally designed and printed business cards from our printing press at Omanjor.
 
 👉 See all photos, price and order online: https://favisionenterprize.github.io/#product/FAV-020
 
-✔ 100 pieces: GH₵50
-✔ 200 pieces: GH₵100
 ✔ Design included
 ✔ Printed at Omanjor
 
 
+Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
@@ -1373,11 +1372,9 @@ Ref: FAV-020
 
 ```
 🪪 Business Cards — 100 or 200 Pieces available now!
-• 100 pieces: GH₵50
-• 200 pieces: GH₵100
 • Design included
 • Printed at Omanjor
-💰 GH₵ 100
+💰 GH₵ 450
 📍 Odorkor, Accra, delivery available
 📞 WhatsApp 057 264 6176
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
@@ -1386,8 +1383,8 @@ Ref: FAV-020
 **Variant 2**
 
 ```
-Looking for a quality business cards — 100 or 200 pieces? 100 pieces: GH₵50.
-Available at Odorkor, Accra. GH₵ 100.
+Looking for a quality business cards — 100 or 200 pieces? Design included.
+Available at Odorkor, Accra. GH₵ 450.
 Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -1395,7 +1392,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 
 ```
 NEW FROM F.A VISION ✨ Business Cards — 100 or 200 Pieces
-GH₵ 100 | Ready for pickup
+GH₵ 450 | Ready for pickup
 Homes • Offices • Schools
 DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
@@ -1404,7 +1401,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 
 ```
 Business Cards — 100 or 200 Pieces 🔥
-GH₵ 100
+GH₵ 450
 Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Business%20Cards%20%E2%80%94%20100%20or%20200%20Pieces%20%28FAV-020%29.
 ```
 
@@ -2093,7 +2090,7 @@ Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interes
 ### Facebook Marketplace
 
 - **Title:** Hair Dressers Washing Bowl with Bar Chair
-- **Price:** 9300
+- **Price:** 10950
 - **Category:** Home & Garden > Furniture > Other Furniture
 - **Condition:** Brand New
 - **Location:** Odorkor, Accra
@@ -2131,7 +2128,7 @@ Ref: FAV-030
 • Washing bowl with attached chair
 • From GH₵9,300 to GH₵10,950
 • For salons and barbering shops
-💰 GH₵ 9,300
+💰 GH₵ 10,950
 📍 Odorkor, Accra, delivery available
 📞 WhatsApp 057 264 6176
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
@@ -2141,7 +2138,7 @@ Ref: FAV-030
 
 ```
 Looking for a quality hair dressers washing bowl with bar chair? Washing bowl with attached chair.
-Available at Odorkor, Accra. GH₵ 9,300.
+Available at Odorkor, Accra. GH₵ 10,950.
 Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -2149,7 +2146,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 
 ```
 NEW FROM F.A VISION ✨ Hair Dressers Washing Bowl with Bar Chair
-GH₵ 9,300 | Ready for pickup
+GH₵ 10,950 | Ready for pickup
 Homes • Offices • Schools
 DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
@@ -2158,7 +2155,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 
 ```
 Hair Dressers Washing Bowl with Bar Chair 🔥
-GH₵ 9,300
+GH₵ 10,950
 Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Hair%20Dressers%20Washing%20Bowl%20with%20Bar%20Chair%20%28FAV-030%29.
 ```
 
