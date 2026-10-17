@@ -1,6 +1,6 @@
 {
- "generated": "2026-10-17T12:44:08Z",
- "mode": "full",
+ "generated": "2026-10-17T14:30:30Z",
+ "mode": "local",
  "score": 96,
  "prev_score": 96,
  "counts": {
@@ -85,7 +85,7 @@
     "Service",
     "WebSite"
    ],
-   "bytes": 445746,
+   "bytes": 475354,
    "requests": 14,
    "redirect": false,
    "in_sitemap": true
@@ -104,7 +104,7 @@
     "ItemList",
     "ListItem"
    ],
-   "bytes": 200884,
+   "bytes": 223092,
    "requests": 8,
    "redirect": false,
    "in_sitemap": true
@@ -120,7 +120,7 @@
     "Smart help for your home, school and business"
    ],
    "schema": [],
-   "bytes": 296719,
+   "bytes": 318927,
    "requests": 10,
    "redirect": false,
    "in_sitemap": true
@@ -136,7 +136,7 @@
     "Shop our TikTok furniture"
    ],
    "schema": [],
-   "bytes": 228352,
+   "bytes": 250560,
    "requests": 9,
    "redirect": false,
    "in_sitemap": true
@@ -152,7 +152,7 @@
     "See it in action"
    ],
    "schema": [],
-   "bytes": 184201,
+   "bytes": 206893,
    "requests": 5,
    "redirect": false,
    "in_sitemap": true
@@ -188,8 +188,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 598144,
-   "requests": 5,
+   "bytes": 762387,
+   "requests": 6,
    "redirect": false,
    "in_sitemap": true
   },
@@ -210,8 +210,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 262617,
-   "requests": 4,
+   "bytes": 389664,
+   "requests": 5,
    "redirect": false,
    "in_sitemap": true
   },
@@ -232,8 +232,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 841769,
-   "requests": 5,
+   "bytes": 1028679,
+   "requests": 6,
    "redirect": false,
    "in_sitemap": true
   },
@@ -254,8 +254,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 154233,
-   "requests": 2,
+   "bytes": 319818,
+   "requests": 3,
    "redirect": false,
    "in_sitemap": true
   },
@@ -276,8 +276,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 209334,
-   "requests": 2,
+   "bytes": 400104,
+   "requests": 3,
    "redirect": false,
    "in_sitemap": true
   },
@@ -298,8 +298,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 295932,
-   "requests": 5,
+   "bytes": 393602,
+   "requests": 6,
    "redirect": false,
    "in_sitemap": true
   },
@@ -320,8 +320,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 109000,
-   "requests": 3,
+   "bytes": 214976,
+   "requests": 4,
    "redirect": false,
    "in_sitemap": true
   },
@@ -342,8 +342,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 39310,
-   "requests": 2,
+   "bytes": 157116,
+   "requests": 3,
    "redirect": false,
    "in_sitemap": true
   },
@@ -364,8 +364,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 485315,
-   "requests": 5,
+   "bytes": 646641,
+   "requests": 6,
    "redirect": false,
    "in_sitemap": true
   },
@@ -386,8 +386,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 580890,
-   "requests": 5,
+   "bytes": 716279,
+   "requests": 6,
    "redirect": false,
    "in_sitemap": true
   },
@@ -408,8 +408,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 575835,
-   "requests": 4,
+   "bytes": 798275,
+   "requests": 5,
    "redirect": false,
    "in_sitemap": true
   },
@@ -430,8 +430,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 346278,
-   "requests": 5,
+   "bytes": 487298,
+   "requests": 6,
    "redirect": false,
    "in_sitemap": true
   },
@@ -452,8 +452,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 153048,
-   "requests": 5,
+   "bytes": 331329,
+   "requests": 6,
    "redirect": false,
    "in_sitemap": true
   },
@@ -474,8 +474,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 74090,
-   "requests": 2,
+   "bytes": 250206,
+   "requests": 3,
    "redirect": false,
    "in_sitemap": true
   },
@@ -496,8 +496,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 43790,
-   "requests": 3,
+   "bytes": 145748,
+   "requests": 4,
    "redirect": false,
    "in_sitemap": true
   },
@@ -518,8 +518,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 126858,
-   "requests": 2,
+   "bytes": 324528,
+   "requests": 3,
    "redirect": false,
    "in_sitemap": true
   },
@@ -540,8 +540,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 50403,
-   "requests": 3,
+   "bytes": 146033,
+   "requests": 4,
    "redirect": false,
    "in_sitemap": true
   },
@@ -562,8 +562,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 14864,
-   "requests": 2,
+   "bytes": 142445,
+   "requests": 3,
    "redirect": false,
    "in_sitemap": true
   },
@@ -584,8 +584,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 177743,
-   "requests": 5,
+   "bytes": 335317,
+   "requests": 6,
    "redirect": false,
    "in_sitemap": true
   },
@@ -606,8 +606,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 160385,
-   "requests": 5,
+   "bytes": 304701,
+   "requests": 6,
    "redirect": false,
    "in_sitemap": true
   },
@@ -628,8 +628,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 117628,
-   "requests": 3,
+   "bytes": 248301,
+   "requests": 4,
    "redirect": false,
    "in_sitemap": true
   },
@@ -651,8 +651,8 @@
     "Organization",
     "Product"
    ],
-   "bytes": 285312,
-   "requests": 5,
+   "bytes": 402973,
+   "requests": 6,
    "redirect": false,
    "in_sitemap": true
   },
@@ -674,8 +674,8 @@
     "Organization",
     "Product"
    ],
-   "bytes": 540140,
-   "requests": 5,
+   "bytes": 729645,
+   "requests": 6,
    "redirect": false,
    "in_sitemap": true
   },
@@ -697,8 +697,8 @@
     "Organization",
     "Product"
    ],
-   "bytes": 383147,
-   "requests": 5,
+   "bytes": 563776,
+   "requests": 6,
    "redirect": false,
    "in_sitemap": true
   },
@@ -719,8 +719,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 351695,
-   "requests": 5,
+   "bytes": 590260,
+   "requests": 6,
    "redirect": false,
    "in_sitemap": true
   },
@@ -741,8 +741,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 168114,
-   "requests": 2,
+   "bytes": 320698,
+   "requests": 3,
    "redirect": false,
    "in_sitemap": true
   },
@@ -763,8 +763,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 263383,
-   "requests": 2,
+   "bytes": 452486,
+   "requests": 3,
    "redirect": false,
    "in_sitemap": true
   },
@@ -785,8 +785,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 149063,
-   "requests": 2,
+   "bytes": 301909,
+   "requests": 3,
    "redirect": false,
    "in_sitemap": true
   },
@@ -807,8 +807,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 121377,
-   "requests": 2,
+   "bytes": 251676,
+   "requests": 3,
    "redirect": false,
    "in_sitemap": true
   },
@@ -829,8 +829,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 111236,
-   "requests": 2,
+   "bytes": 220888,
+   "requests": 3,
    "redirect": false,
    "in_sitemap": true
   },
@@ -851,8 +851,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 247447,
-   "requests": 2,
+   "bytes": 420015,
+   "requests": 3,
    "redirect": false,
    "in_sitemap": true
   },
@@ -873,8 +873,8 @@
     "Offer",
     "Product"
    ],
-   "bytes": 177477,
-   "requests": 2,
+   "bytes": 353604,
+   "requests": 3,
    "redirect": false,
    "in_sitemap": true
   },
@@ -896,8 +896,8 @@
     "Organization",
     "Product"
    ],
-   "bytes": 511516,
-   "requests": 3,
+   "bytes": 759351,
+   "requests": 4,
    "redirect": false,
    "in_sitemap": true
   }
