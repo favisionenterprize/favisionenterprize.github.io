@@ -446,7 +446,7 @@
      "text": ""
     }
    ],
-   "title": "(20+) Fresh stock, just arrived! 🎒📚 Our new... - F.A Vision Enterprise",
+   "title": "Fresh stock, just arrived! 🎒📚 Our new... - F.A Vision Enterprise",
    "checked": "2026-10-17",
    "likes": 1
   },
@@ -462,7 +462,7 @@
    ],
    "title": "(20+) Tertiary Student Desk is available. Hurry... - F.A Vision Enterprise",
    "checked": "2026-10-17",
-   "likes": 9
+   "likes": 9700
   }
  },
  "runs": [
@@ -921,6 +921,21 @@
    "t": "2026-10-17T01:29:19.603Z",
    "net": "fb",
    "mode": "reply",
+   "posts": 3,
+   "checked": 3,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 556,
+   "stopped": null,
+   "commenting": false
+  },
+  {
+   "d": "2026-10-17",
+   "t": "2026-10-17T01:29:28.545Z",
+   "net": "fb",
+   "mode": "likers",
    "posts": 3,
    "checked": 3,
    "commented": 0,
