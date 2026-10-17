@@ -826,6 +826,13 @@ window.FAV_DATA = {
           "price": 12600,
           "checked": "2026-09-29",
           "synced": "2026-09-29"
+        },
+        {
+          "id": "1394887792628703",
+          "title": "Rainbow Glass-Top Dining Set — 6 Chairs",
+          "price": 12600,
+          "checked": "2026-10-17",
+          "synced": "2026-10-17"
         }
       ],
       "tiktok": 8,
@@ -892,6 +899,13 @@ window.FAV_DATA = {
           "price": 4900,
           "checked": "2026-09-29",
           "synced": "2026-09-29"
+        },
+        {
+          "id": "1486101121254456",
+          "title": "Black Glass Dining Set — 6 High-Back Chairs",
+          "price": 4900,
+          "checked": "2026-10-17",
+          "synced": "2026-10-17"
         }
       ],
       "tiktok": 9,
@@ -1035,6 +1049,13 @@ window.FAV_DATA = {
           "price": 12600,
           "checked": "2026-09-29",
           "synced": "2026-09-29"
+        },
+        {
+          "id": "1786121632606050",
+          "title": "Red Glass Dining Set — 6 Chairs",
+          "price": 12600,
+          "checked": "2026-10-17",
+          "synced": "2026-10-17"
         }
       ],
       "tiktok": 11,
@@ -1112,6 +1133,13 @@ window.FAV_DATA = {
           "price": 11900,
           "checked": "2026-09-29",
           "synced": "2026-09-29"
+        },
+        {
+          "id": "1847862492868412",
+          "title": "Foldable Wood-Grain Dining Set — 6 Chairs",
+          "price": 11900,
+          "checked": "2026-10-17",
+          "synced": "2026-10-17"
         }
       ],
       "tiktok": 12,
@@ -1175,6 +1203,13 @@ window.FAV_DATA = {
           "price": 9500,
           "checked": "2026-09-29",
           "synced": "2026-09-29"
+        },
+        {
+          "id": "3161561380714152",
+          "title": "Executive Director Chair — Leather, High Back",
+          "price": 9500,
+          "checked": "2026-10-17",
+          "synced": "2026-10-17"
         }
       ],
       "tiktok": 5,
@@ -1270,6 +1305,13 @@ window.FAV_DATA = {
           "price": 9500,
           "checked": "2026-09-29",
           "synced": "2026-09-29"
+        },
+        {
+          "id": "2632470250583339",
+          "title": "Mesh Secretary Chair — Ergonomic Swivel",
+          "price": 9500,
+          "checked": "2026-10-17",
+          "synced": "2026-10-17"
         }
       ],
       "tiktok": 6,
@@ -1354,6 +1396,13 @@ window.FAV_DATA = {
           "price": 4500,
           "checked": "2026-09-29",
           "synced": "2026-09-29"
+        },
+        {
+          "id": "1110537861350483",
+          "title": "1.2 m Office Desk with Drawer Unit",
+          "price": 4500,
+          "checked": "2026-10-17",
+          "synced": "2026-10-17"
         }
       ],
       "tiktok": 13,
@@ -1443,6 +1492,13 @@ window.FAV_DATA = {
           "price": 7450,
           "checked": "2026-09-29",
           "synced": "2026-09-29"
+        },
+        {
+          "id": "2069324037040040",
+          "title": "White Dressing Table with Mirror & Stool",
+          "price": 7450,
+          "checked": "2026-10-17",
+          "synced": "2026-10-17"
         }
       ],
       "tiktok": 14,
@@ -1511,6 +1567,13 @@ window.FAV_DATA = {
           "price": 9800,
           "checked": "2026-09-29",
           "synced": "2026-09-29"
+        },
+        {
+          "id": "1472896918048864",
+          "title": "Wardrobe — 4-Door with Top Cabinets",
+          "price": 9800,
+          "checked": "2026-10-17",
+          "synced": "2026-10-17"
         }
       ],
       "tiktok": 15,
@@ -1794,6 +1857,13 @@ window.FAV_DATA = {
           "price": 8500,
           "checked": "2026-10-01",
           "synced": "2026-10-01"
+        },
+        {
+          "id": "1738911440551218",
+          "title": "Luxury Leather Sofa Set",
+          "price": 8500,
+          "checked": "2026-10-17",
+          "synced": "2026-10-17"
         }
       ],
       "material": "Leather",
@@ -1844,6 +1914,13 @@ window.FAV_DATA = {
           "price": 4500,
           "checked": "2026-10-01",
           "synced": "2026-10-01"
+        },
+        {
+          "id": "940522158828122",
+          "title": "Mesh Secretary Chair — Swivel, Arm Rests",
+          "price": 4500,
+          "checked": "2026-10-17",
+          "synced": "2026-10-17"
         }
       ],
       "colors": [
@@ -1923,6 +2000,13 @@ window.FAV_DATA = {
           "price": 800,
           "checked": "2026-10-01",
           "synced": "2026-10-01"
+        },
+        {
+          "id": "913470438368416",
+          "title": "Strong Glass Centre Table",
+          "price": 800,
+          "checked": "2026-10-17",
+          "synced": "2026-10-17"
         }
       ],
       "tiktok": 19,
@@ -1971,6 +2055,13 @@ window.FAV_DATA = {
           "price": 405,
           "checked": "2026-10-01",
           "synced": "2026-10-01"
+        },
+        {
+          "id": "2204005653861982",
+          "title": "Auditorium / Conference Chair",
+          "price": 405,
+          "checked": "2026-10-17",
+          "synced": "2026-10-17"
         }
       ],
       "tiktok": 3,
@@ -2011,6 +2102,13 @@ window.FAV_DATA = {
           "price": 450,
           "checked": "2026-10-15",
           "synced": "2026-10-15"
+        },
+        {
+          "id": "1817098926207285",
+          "title": "Business Cards — 100 or 200 Pieces",
+          "price": 450,
+          "checked": "2026-10-17",
+          "synced": "2026-10-17"
         }
       ],
       "tiktok": 20,
@@ -2074,6 +2172,13 @@ window.FAV_DATA = {
           "price": 450,
           "checked": "2026-10-01",
           "synced": "2026-10-01"
+        },
+        {
+          "id": "1507552074510540",
+          "title": "A4 & A3 Copy Paper — Rotatrim, PaperOne, Double A",
+          "price": 450,
+          "checked": "2026-10-17",
+          "synced": "2026-10-17"
         }
       ],
       "tiktok": 21,
@@ -2121,6 +2226,13 @@ window.FAV_DATA = {
           "price": 6500,
           "checked": "2026-10-01",
           "synced": "2026-10-01"
+        },
+        {
+          "id": "1451664136898948",
+          "title": "TCL 43\" Smart Android TV — Full HD (43S5400A)",
+          "price": 6500,
+          "checked": "2026-10-17",
+          "synced": "2026-10-17"
         }
       ],
       "tiktok": 22,
@@ -2199,6 +2311,13 @@ window.FAV_DATA = {
           "price": 6500,
           "checked": "2026-10-01",
           "synced": "2026-10-01"
+        },
+        {
+          "id": "1098545739740008",
+          "title": "Sigma 1.5HP Split Air Conditioner (BREEZE-HY12SB)",
+          "price": 6500,
+          "checked": "2026-10-17",
+          "synced": "2026-10-17"
         }
       ],
       "tiktok": 23,
@@ -2269,6 +2388,13 @@ window.FAV_DATA = {
           "price": 750,
           "checked": "2026-10-01",
           "synced": "2026-10-01"
+        },
+        {
+          "id": "1790166538957973",
+          "title": "TWYFORD Water Closet — Two-Piece, Premium",
+          "price": 750,
+          "checked": "2026-10-17",
+          "synced": "2026-10-17"
         }
       ],
       "seller": {
@@ -2343,6 +2469,13 @@ window.FAV_DATA = {
           "price": 1000,
           "checked": "2026-10-01",
           "synced": "2026-10-01"
+        },
+        {
+          "id": "931168873150502",
+          "title": "Tiles & Finishes — Floor & Wall",
+          "price": 1000,
+          "checked": "2026-10-17",
+          "synced": "2026-10-17"
         }
       ],
       "seller": {
@@ -2401,6 +2534,13 @@ window.FAV_DATA = {
           "price": 640,
           "checked": "2026-10-08",
           "synced": "2026-10-08"
+        },
+        {
+          "id": "1086294804390655",
+          "title": "Kavukçu Wheat Flour — 50kg Baking Flour",
+          "price": 640,
+          "checked": "2026-10-17",
+          "synced": "2026-10-17"
         }
       ],
       "seller": {
@@ -2508,7 +2648,16 @@ window.FAV_DATA = {
           "icon": "plastic_chair"
         }
       ],
-      "in_the_box_confirmed": false
+      "in_the_box_confirmed": false,
+      "facebook_listings": [
+        {
+          "id": "1653412249725072",
+          "title": "Kids Plastic Chair — Stackable, Assorted Colours",
+          "price": 550,
+          "checked": "2026-10-17",
+          "synced": "2026-10-17"
+        }
+      ]
     },
     {
       "id": "FAV-029",
@@ -2703,7 +2852,16 @@ window.FAV_DATA = {
           "guess": true
         }
       ],
-      "in_the_box_confirmed": false
+      "in_the_box_confirmed": false,
+      "facebook_listings": [
+        {
+          "id": "1844320933688368",
+          "title": "TV Stand — Black Marble Top with Drawer",
+          "price": 6950,
+          "checked": "2026-10-17",
+          "synced": "2026-10-17"
+        }
+      ]
     },
     {
       "id": "FAV-033",
@@ -2824,100 +2982,16 @@ window.FAV_DATA = {
         }
       ],
       "box_title": "What's in the Bag?",
-      "in_the_box_confirmed": false
+      "in_the_box_confirmed": false,
+      "facebook_listings": [
+        {
+          "id": "4417065965273644",
+          "title": "Jasmine Rice — Long Grain Fragrant Rice",
+          "price": 400,
+          "checked": "2026-10-17",
+          "synced": "2026-10-17"
+        }
+      ]
     }
-  ],
-  "webp": [
-    "assets/images/products/fav-001-1.jpg",
-    "assets/images/products/fav-001-2.jpg",
-    "assets/images/products/fav-001-3.jpg",
-    "assets/images/products/fav-001-4.jpg",
-    "assets/images/products/fav-002-1.jpg",
-    "assets/images/products/fav-002-2.jpg",
-    "assets/images/products/fav-002-3.jpg",
-    "assets/images/products/fav-003-1.jpg",
-    "assets/images/products/fav-003-2.jpg",
-    "assets/images/products/fav-003-3.jpg",
-    "assets/images/products/fav-003-4.jpg",
-    "assets/images/products/fav-003-5.jpg",
-    "assets/images/products/fav-004-1.jpg",
-    "assets/images/products/fav-005-1.jpg",
-    "assets/images/products/fav-006-1.jpg",
-    "assets/images/products/fav-006-2.jpg",
-    "assets/images/products/fav-006-3.jpg",
-    "assets/images/products/fav-006-4.jpg",
-    "assets/images/products/fav-006-5.jpg",
-    "assets/images/products/fav-007-1.jpg",
-    "assets/images/products/fav-007-2.jpg",
-    "assets/images/products/fav-008-1.jpg",
-    "assets/images/products/fav-009-1.jpg",
-    "assets/images/products/fav-009-2.jpg",
-    "assets/images/products/fav-009-3.jpg",
-    "assets/images/products/fav-009-4.jpg",
-    "assets/images/products/fav-010-1.jpg",
-    "assets/images/products/fav-010-2.jpg",
-    "assets/images/products/fav-010-3.jpg",
-    "assets/images/products/fav-010-4.jpg",
-    "assets/images/products/fav-011-1.jpg",
-    "assets/images/products/fav-011-2.jpg",
-    "assets/images/products/fav-011-3.jpg",
-    "assets/images/products/fav-014-muk5690f-1.jpg",
-    "assets/images/products/fav-014-muk5690f-3.jpg",
-    "assets/images/products/fav-014-muk5690f-4.jpg",
-    "assets/images/products/fav-014-muk5690f-5.jpg",
-    "assets/images/products/fav-014-mukbwfwp-6.jpg",
-    "assets/images/products/fav-015-mp-1.jpg",
-    "assets/images/products/fav-015-mp-2.jpg",
-    "assets/images/products/fav-015-mp-3.jpg",
-    "assets/images/products/fav-015-mp-4.jpg",
-    "assets/images/products/fav-016-mp-1.jpg",
-    "assets/images/products/fav-017-mp-1.jpg",
-    "assets/images/products/fav-017-mp-2.jpg",
-    "assets/images/products/fav-018-mp-1.jpg",
-    "assets/images/products/fav-019-mp-1.jpg",
-    "assets/images/products/fav-019-mp-2.jpg",
-    "assets/images/products/fav-020-mp-1.jpg",
-    "assets/images/products/fav-021-mp-1.jpg",
-    "assets/images/products/fav-021-mp-2.jpg",
-    "assets/images/products/fav-021-mp-3.jpg",
-    "assets/images/products/fav-021-mp-4.jpg",
-    "assets/images/products/fav-021-mp-5.jpg",
-    "assets/images/products/fav-021-mp-6.jpg",
-    "assets/images/products/fav-022-mp-1.jpg",
-    "assets/images/products/fav-022-mp-2.jpg",
-    "assets/images/products/fav-022-mp-3.jpg",
-    "assets/images/products/fav-022-mp-4.jpg",
-    "assets/images/products/fav-023-mp-1.jpg",
-    "assets/images/products/fav-023-mp-2-p6500.jpg",
-    "assets/images/products/fav-024-mp-1.jpg",
-    "assets/images/products/fav-024-mp-2.jpg",
-    "assets/images/products/fav-024-mp-3.jpg",
-    "assets/images/products/fav-024-mp-4.jpg",
-    "assets/images/products/fav-024-mp-5.jpg",
-    "assets/images/products/fav-024-mp-6.jpg",
-    "assets/images/products/fav-025-mp-1.jpg",
-    "assets/images/products/fav-025-mp-2.jpg",
-    "assets/images/products/fav-025-mp-3.jpg",
-    "assets/images/products/fav-025-mp-4.jpg",
-    "assets/images/products/fav-025-mp-5.jpg",
-    "assets/images/products/fav-025-mp-6.jpg",
-    "assets/images/products/fav-026-mp-1.jpg",
-    "assets/images/products/fav-026-mp-2.jpg",
-    "assets/images/products/fav-026-mp-3.jpg",
-    "assets/images/products/fav-026-mp-4.jpg",
-    "assets/images/products/fav-027-1.jpg",
-    "assets/images/products/fav-027-2.jpg",
-    "assets/images/products/fav-027-3.jpg",
-    "assets/images/products/fav-027-4.jpg",
-    "assets/images/products/fav-027-5.jpg",
-    "assets/images/products/fav-028-mv00kf41-1.jpg",
-    "assets/images/products/fav-029-mv00kf41-1.jpg",
-    "assets/images/products/fav-030-mv00kf41-1.jpg",
-    "assets/images/products/fav-031-mv00kf41-1.jpg",
-    "assets/images/products/fav-032-mv00kf41-1.jpg",
-    "assets/images/products/fav-033-mv00kf41-1.jpg",
-    "assets/images/products/fav-034-mv00kf41-1.jpg",
-    "assets/images/products/fav-035-1.jpg",
-    "assets/images/products/fav-035-2.jpg"
   ]
 };
