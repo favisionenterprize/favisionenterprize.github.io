@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-16T07:05:16Z",
+ "generated": "2026-10-17T06:52:47Z",
  "mode": "full",
  "score": 96,
  "prev_score": 96,
@@ -1103,7 +1103,7 @@
       "kb": 191,
       "requests": 5,
       "img_no_alt": 2,
-      "secs": 0.4,
+      "secs": 0.5,
       "keywords": []
      },
      {
@@ -1124,7 +1124,7 @@
       "kb": 193,
       "requests": 6,
       "img_no_alt": 3,
-      "secs": 0.4,
+      "secs": 0.3,
       "keywords": []
      }
     ],
@@ -1184,9 +1184,95 @@
    {
     "name": "Furniture City Ghana",
     "url": "https://furniturecityghana.com/",
-    "status": "HTTP 500",
-    "pages": [],
-    "sitemap": null
+    "status": "ok",
+    "pages": [
+     {
+      "url": "https://furniturecityghana.com/",
+      "title": true,
+      "title_len": 52,
+      "description": false,
+      "h1": 0,
+      "og": false,
+      "canonical": true,
+      "viewport": true,
+      "schema": [],
+      "phone": false,
+      "accra": false,
+      "whatsapp": true,
+      "blog": false,
+      "faq": false,
+      "kb": 133,
+      "requests": 120,
+      "img_no_alt": 1,
+      "secs": 0.7,
+      "keywords": []
+     },
+     {
+      "url": "https://furniturecityghana.com/shop/",
+      "title": true,
+      "title_len": 27,
+      "description": false,
+      "h1": 1,
+      "og": false,
+      "canonical": false,
+      "viewport": true,
+      "schema": [],
+      "phone": false,
+      "accra": false,
+      "whatsapp": true,
+      "blog": false,
+      "faq": false,
+      "kb": 163,
+      "requests": 128,
+      "img_no_alt": 1,
+      "secs": 0.5,
+      "keywords": []
+     },
+     {
+      "url": "https://furniturecityghana.com/contact-us/",
+      "title": true,
+      "title_len": 33,
+      "description": false,
+      "h1": 0,
+      "og": false,
+      "canonical": true,
+      "viewport": true,
+      "schema": [],
+      "phone": false,
+      "accra": false,
+      "whatsapp": true,
+      "blog": false,
+      "faq": false,
+      "kb": 94,
+      "requests": 102,
+      "img_no_alt": 0,
+      "secs": 2.5,
+      "keywords": []
+     },
+     {
+      "url": "https://furniturecityghana.com/product/bedroom-61/",
+      "title": true,
+      "title_len": 30,
+      "description": false,
+      "h1": 1,
+      "og": false,
+      "canonical": true,
+      "viewport": true,
+      "schema": [],
+      "phone": false,
+      "accra": false,
+      "whatsapp": true,
+      "blog": false,
+      "faq": false,
+      "kb": 117,
+      "requests": 118,
+      "img_no_alt": 2,
+      "secs": 0.5,
+      "keywords": []
+     }
+    ],
+    "sitemap": true,
+    "https": true
    },
    {
     "name": "Jamila Home",
@@ -1232,9 +1318,9 @@
    {
     "name": "Casa Trasacco",
     "url": "https://www.casatrasacco.com/",
-    "status": "unreachable: timed out",
+    "status": "HTTP 500",
     "pages": [],
-    "sitemap": null
+    "sitemap": true
    },
    {
     "name": "Furnart",
@@ -1249,7 +1335,8 @@
     {
      "what": "Separate category pages (sofas, beds, office…) that Google can rank one by one",
      "who": [
-      "Kpogas Furniture"
+      "Kpogas Furniture",
+      "Furniture City Ghana"
      ],
      "fix": "Our shop filters live behind #hash links. Product pages + the Products page ItemList are the first step."
     }
@@ -1270,6 +1357,19 @@
       "no FAQ",
       "no H1",
       "no phone number on the home page"
+     ]
+    },
+    {
+     "who": "Furniture City Ghana",
+     "weak": [
+      "no meta description",
+      "no LocalBusiness schema (address/phone for Google Maps & AI)",
+      "no FAQ",
+      "no H1",
+      "no link-preview tags",
+      "heavy home page (133 KB HTML, 120 files)",
+      "no phone number on the home page",
+      "targets none of our keywords in title/H1"
      ]
     },
     {
@@ -1327,6 +1427,11 @@
   },
   {
    "d": "2026-10-16",
+   "score": 96,
+   "ai": 0
+  },
+  {
+   "d": "2026-10-17",
    "score": 96,
    "ai": 0
   }
