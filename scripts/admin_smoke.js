@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Admin smoke test: opens every Social autopilot tab and the Leads screen with the REAL data
+// Admin smoke test: opens every Social autopilot tab, the Leads screen and the What's in the Box ads screen with the REAL data
 // files from data/*.json (no network, no sign-in, nothing is posted or saved), on today's date
 // and on the first and last day of every dated (seasonal) ad, and fails on any page error,
 // failed toast or blank tab. This is the check that catches a blank autopilot screen before
@@ -601,6 +601,67 @@ async function seo(browser, shot) {
   return { problems, score: r.score, issues: st.issues, applied: applied && applied.fx.applied[0].kind };
 }
 
+// "📦 What's in the Box ads" screen (admin/boxads.js, #boxads): one card per product with a box ad image on
+// disk, captions pass the quality gate, Edit contents + ✓ Confirmed save through FAV_ADMIN.commit, and the
+// Instagram / X / TikTok pool carries a "Box ad" per product.
+async function boxads(browser, shot) {
+  const page = await browser.newPage({ viewport: shot ? { width: 1280, height: 900 } : { width: 390, height: 900 } });
+  const problems = [];
+  page.on("pageerror", e => problems.push("page error: " + e.message));
+  const html = fs.readFileSync(ROOT + "admin/index.html", "utf8").replace(/<script[\s\S]*?<\/script>/g, "");
+  await page.route("http://smoke.test/**", r => {
+    const u = new URL(r.request().url());
+    if (u.pathname === "/admin/") return r.fulfill({ status: 200, contentType: "text/html", body: html });
+    const f = decodeURIComponent(u.pathname).replace(/^\//, "");
+    if (!fs.existsSync(ROOT + f) || fs.statSync(ROOT + f).isDirectory()) return r.fulfill({ status: 404, body: "" });
+    return r.fulfill({ status: 200, body: fs.readFileSync(ROOT + f), contentType: f.endsWith(".jpg") ? "image/jpeg" : "text/plain" });
+  });
+  await page.goto("http://smoke.test/admin/");
+  await page.addStyleTag({ content: fs.readFileSync(ROOT + "admin/admin.css", "utf8") });
+  await page.evaluate(({ files, ESC }) => {
+    window.__commits = []; window.__toasts = []; window.__clip = [];
+    Object.defineProperty(navigator, "clipboard", { value: { writeText: async t => { window.__clip.push(t); } } });
+    window.open = () => null;
+    window.FAV_CONFIG = { escapeHtml: (0, eval)(ESC), localPhone: x => x, formatPrice: n => "GH₵" + Number(n).toLocaleString() };
+    let list = JSON.parse(JSON.stringify(files["data/products.json"]));
+    window.__list = () => list;
+    window.FAV_ADMIN = { products: () => list, business: () => files["data/business.json"], signedIn: () => true, show: () => {}, busy: () => {}, friendly: String, refreshDash: () => {},
+      readJsonFile: async (f, e) => JSON.parse(JSON.stringify(files[f] || e)), saveJson: async () => ({}), productUrl: p => "https://favisionenterprize.github.io/p/" + p.id + ".html",
+      toast: (m, bad) => window.__toasts.push((bad ? "✗ " : "") + m), commit: async o => { list = o.mutate(list); window.__commits.push(o.message); return list; } };
+  }, { files, ESC });
+  for (const f of ["admin/captions.js", "admin/igauto.js", "admin/boxads.js"]) await page.addScriptTag({ content: fs.readFileSync(ROOT + f, "utf8") });
+  await page.evaluate(() => document.querySelector("[data-boxads]").click());
+  await page.waitForTimeout(600);
+  const prods = files["data/products.json"].filter(p => !p.placeholder && (p.images || []).length);
+  const st = await page.evaluate(() => ({ cards: document.querySelectorAll(".bx-card").length, hash: location.hash,
+    broken: [...document.querySelectorAll(".bx-card > a img")].filter(i => i.complete && !i.naturalWidth).map(i => i.closest(".bx-card").dataset.id) }));
+  if (st.cards !== prods.length) problems.push(`box ads screen shows ${st.cards} cards, expected ${prods.length}`);
+  if (st.hash !== "#boxads") problems.push("deep link #boxads not set");
+  if (st.broken.length) problems.push("box ad image missing for " + st.broken.join(", "));
+  for (const p of prods) if (!fs.existsSync(ROOT + `assets/images/ads/box/box-${p.id.toLowerCase()}.jpg`)) problems.push(`no assets/images/ads/box/box-${p.id.toLowerCase()}.jpg (run scripts/make_box_ads.py)`);
+  if (shot) await page.screenshot({ path: shot, fullPage: false });
+  await page.click('.bx-card[data-id="FAV-014"] [data-bx="copy"]'); await page.waitForTimeout(100);
+  const cap = await page.evaluate(() => { const t = window.__clip[0] || ""; return { t, ok: window.FAV_CAPTIONS.check(t, { net: "share" }).ok }; });
+  if (!/What's in the box|Unboxing/i.test(cap.t) || !/Desk top/.test(cap.t)) problems.push("Copy caption isn't a box caption: " + cap.t.slice(0, 120));
+  if (!cap.ok) problems.push("box caption fails the quality gate");
+  await page.click('.bx-card[data-id="FAV-014"] [data-bx="edit"]'); await page.waitForTimeout(100);
+  await page.fill('.bx-card[data-id="FAV-014"] .bx-it [data-i]', "Desk top (MDF, melamine)");
+  await page.click('.bx-card[data-id="FAV-014"] [data-bx="add"]');
+  await page.fill('.bx-card[data-id="FAV-014"] .bx-it:last-child [data-i]', "Assembly guide");
+  await page.click('.bx-card[data-id="FAV-014"] [data-bx="save"]'); await page.waitForTimeout(200);
+  const saved = await page.evaluate(() => { const p = window.__list().find(x => x.id === "FAV-014"); return { box: p.in_the_box, ok: p.in_the_box_confirmed, commits: window.__commits.slice() }; });
+  if (saved.commits.length !== 1 || saved.box[0].item !== "Desk top (MDF, melamine)" || saved.box[saved.box.length - 1].item !== "Assembly guide") problems.push("Edit contents didn't save: " + JSON.stringify(saved).slice(0, 300));
+  await page.check('.bx-card[data-id="FAV-014"] [data-bx-confirm]'); await page.waitForTimeout(200);
+  const conf = await page.evaluate(() => window.__list().find(x => x.id === "FAV-014").in_the_box_confirmed);
+  if (conf !== true) problems.push("✓ Confirmed toggle didn't save");
+  const pool = await page.evaluate(() => { try { return window.FAV_IGAUTO.pool().filter(i => i.kind === "Box ad").length; } catch (e) { return "error " + e.message; } });
+  if (typeof pool !== "number" || pool < 10) problems.push("Instagram/X/TikTok pool has no Box ads: " + pool);
+  const bad = await page.evaluate(() => window.__toasts.filter(t => t.startsWith("✗")));
+  bad.forEach(t => problems.push("error toast: " + t));
+  await page.close();
+  return { problems, cards: st.cards, pool };
+}
+
 (async () => {
   const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
   let failed = 0;
@@ -625,6 +686,9 @@ async function seo(browser, shot) {
   const so = await seo(browser, process.env.SEO_SHOT || "");
   if (so.problems.length) { failed++; console.log("✗ SEO & AI screen"); so.problems.forEach(p => console.log("    " + p)); }
   else console.log(`✓ SEO & AI screen: score ${so.score}, ${so.issues} issues drawn, Apply fix (${so.applied}) saves after preview + confirm, Run check now dispatches seo-watch.yml, quick check fallback works`);
+  const bx = await boxads(browser, process.env.BOX_SHOT || "");
+  if (bx.problems.length) { failed++; console.log("✗ What's in the Box ads screen"); bx.problems.forEach(p => console.log("    " + p)); }
+  else console.log(`✓ What's in the Box ads screen: ${bx.cards} box ads drawn, caption passes the gate, Edit contents and ✓ Confirmed save, ${bx.pool} Box ads in the posting pool`);
   await browser.close();
   console.log(failed ? `\n${failed} check(s) FAILED` : "\nAll admin checks passed.");
   process.exit(failed ? 1 : 0);

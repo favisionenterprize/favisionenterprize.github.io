@@ -2,7 +2,7 @@
 // X, TikTok, YouTube, videos, share buttons). Each call builds a fresh text from random
 // parts (hook, body, price, place, payment, call to action, hashtags), so posts never carry
 // the same description twice, and every text ends with a call to action.
-// window.FAV_CAPTIONS.write(p, { net, ad, studio, full, tags, subject, style })  → text  (style "classy": upscale TikTok caption)
+// window.FAV_CAPTIONS.write(p, { net, ad, studio, full, tags, subject, style, box })  → text  (style "classy": upscale TikTok caption; box: "📦 What's in the box?" contents caption)
 // window.FAV_CAPTIONS.title(p, { net })                                   → short title (YouTube / TikTok)
 // window.FAV_CAPTIONS.cta(p, { net })                                     → one call to action
 // window.FAV_CAPTIONS.ensure(text, p, { net, tags })                      → the quality gate every posting path uses
@@ -151,6 +151,20 @@
   }
 
   // ---------------------------------------------------------------- one product
+  // "What's in the box?" posts (box ads, scripts/make_box_ads.py): contents, size, price, packaging, call to action.
+  function box(p, o) {
+    const f = facts(p), net = o.net || "fb", name = short(p);
+    const items = (p.in_the_box || []).filter(x => x && x.item);
+    const word = /bag/i.test(p.box_title || "") ? "bag" : /carton/i.test(p.box_title || "") ? "carton" : /pack/i.test(p.box_title || "") ? "pack" : "box";
+    let price = money(p.price_ghs);
+    if (p.id === "FAV-014") price += " a set · GH₵640 each from 50 sets";
+    const size = /\d/.test(p.box_size || p.dimensions || "") && /cm|mm|\bm\b|in\b|×/.test(p.box_size || p.dimensions || "") ? (p.box_size || p.dimensions) : "";
+    const hook = pick([`📦 What's in the ${word}? ${name}`, `📦 Unboxing the ${name.toLowerCase()}: here's what you get`, `📦 What's in the ${word}? Everything that comes with the ${name} 👇`]);
+    const list = items.map(x => `✅ ${x.item} ×${x.qty == null ? 1 : x.qty}`).join(net === "x" ? ", " : "\n");
+    if (net === "x") return xTags(`📦 What's in the ${word}? ${name}: ${items.slice(0, 4).map(x => x.item + (String(x.qty) === "1" ? "" : ` ×${x.qty}`)).join(", ")}${items.length > 4 ? " & more" : ""}. ${money(p.price_ghs)}. WhatsApp ${f.wa} ${f.link}`, p);
+    const where = f.s ? `🏪 Sold & delivered by ${f.s.name}` : pick(["📍 Showroom: Tarazzo Road, Odorkor (opposite Pacific)", "🚚 Delivered across Accra, Tema & Kasoa"]);
+    return [hook, "", list, size ? `📏 Size: ${size}` : "", p.box_note ? `📦 ${p.box_note}` : "", "", `💰 ${price}`, where, cta(p, o), inBio(net) ? "" : `👉 ${f.link}`, "", tags(p, net, o.tags)].filter((l, i, a) => l !== "" || a[i - 1] !== "").join("\n");
+  }
   function product(p, o) {
     const f = facts(p), net = o.net || "fb", name = short(p);
     let price = money(p.price_ghs) + (p.negotiable ? pick([" (negotiable)", ", price negotiable", " (we can talk)"]) : "");
@@ -345,7 +359,7 @@
     let t = "";
     for (let i = 0; i < 6; i++) {
       // classy: its own comment-to-buy ask replaces the "where are you seeing this from" line
-      t = o.style === "classy" && p && !o.studio ? tidy(classy(p, o), o.net || "tiktok") : tidy(withAsk(o.studio ? studio(o) : p ? product(p, o) : general(o), o.net), o.net);
+      t = o.style === "classy" && p && !o.studio && !o.box ? tidy(classy(p, o), o.net || "tiktok") : tidy(withAsk(o.studio ? studio(o) : p && o.box && (p.in_the_box || []).length ? box(p, o) : p ? product(p, o) : general(o), o.net), o.net);
       if (!o._raw) t = ensure(t, p, { net: o.net, subject: o.subject, studio: o.studio, tags: o.gateTags });   // quality gate (below)
       if (!recent.includes(t)) break;
     }

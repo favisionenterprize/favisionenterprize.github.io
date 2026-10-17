@@ -95,6 +95,10 @@ Every product has a designed strategy ad (1080 × 1350, the size Facebook, Insta
 - Wording lives in `data/business.json` → `promos.ads` (headline, accent word, facts row, price seal, tag). Rebuild after editing: `python3 scripts/make_ads.py && python3 scripts/generate_listings.py`.
 - `promos.schedule` decides the announcement bar, the desk promo sticker and which ads lead the Deals row. The first entry whose dates include today wins. `YYYY-MM-DD` dates run once (the student desk consignment shows "just arrived" from 1 October until 15 November 2026); `MM-DD` dates repeat every year (festive, new-year office, Valentine's, Easter, mid-year office, back to school, home refresh). Nothing needs switching off by hand.
 
+## "What's in the Box?" ads
+
+`python3 scripts/make_box_ads.py` builds a black, oraimo-style "What's in the Box?" ad for every product (`assets/images/ads/box/box-<id>.jpg` feed and `-story.jpg`), from `in_the_box` in `data/products.json` (item, quantity, icon; plus optional `box_title`, `box_note`, `box_size`). Check and correct each list in the admin under **📦 What's in the Box ads** (`/admin/#boxads`) and tick **✓ Confirmed**; the ads rebuild automatically. The same ads show on product pages, in the product view and in the homepage section **How our products arrive**, and rotate into the social autopilot.
+
 ## Price sync (website ↔ Facebook Marketplace)
 
 `/admin/#pricesync` lists every Facebook listing linked to a product (`facebook_listings` in `data/products.json`) next to the website price. Facebook has no API for personal Marketplace listings, so the website can't change Facebook prices itself. The screen is built for speed instead: changing a price or tapping **✓ Done** updates the screen instantly and saves to GitHub in the background (quick taps are bundled into one save). Red rows need their price changed on Facebook: **Copy** → **Edit ↗** → paste → Update → **✓ Done**, or ask Claude to "sync my Facebook prices".
@@ -117,6 +121,7 @@ Ad copy and promo bars in `business.json` use `{price}` / `{price:FAV-001}` plac
 | `data/business.json` | Name, tagline, address, phone/WhatsApp numbers, service areas, hashtags |
 | `data/groups.csv` | Facebook groups you post in |
 | `scripts/make_ads.py` | Builds the strategy ads in `assets/images/ads/` from `promos.ads` |
+| `scripts/make_box_ads.py`, `admin/boxads.js` | "What's in the Box?" ads from `in_the_box`, and the admin screen to check them |
 | `admin/pricesync.js` | Price sync screen: website vs Facebook Marketplace prices |
 | `.github/workflows/rebuild-ads.yml` | Rebuilds ads and listing texts on GitHub whenever data changes |
 | `scripts/generate_listings.py` | Rebuilds `assets/js/products-data.js` and the bulk listing files in `output/` |

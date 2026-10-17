@@ -828,7 +828,32 @@ window.FAV_DATA = {
           "synced": "2026-09-29"
         }
       ],
-      "tiktok": 8
+      "tiktok": 8,
+      "in_the_box": [
+        {
+          "item": "Glass table top",
+          "qty": 1,
+          "icon": "glass"
+        },
+        {
+          "item": "Chrome legs & frame",
+          "qty": 1,
+          "icon": "frame"
+        },
+        {
+          "item": "Upholstered chairs",
+          "qty": 6,
+          "icon": "chair"
+        },
+        {
+          "item": "Fittings pack",
+          "qty": 1,
+          "icon": "screws",
+          "guess": true
+        }
+      ],
+      "box_note": "Delivered flat-packed and assembled for you on request within Accra.",
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-002",
@@ -869,7 +894,31 @@ window.FAV_DATA = {
           "synced": "2026-09-29"
         }
       ],
-      "tiktok": 9
+      "tiktok": 9,
+      "in_the_box": [
+        {
+          "item": "Black glass top",
+          "qty": 1,
+          "icon": "glass"
+        },
+        {
+          "item": "Chrome base",
+          "qty": 1,
+          "icon": "frame"
+        },
+        {
+          "item": "High-back chairs",
+          "qty": 6,
+          "icon": "chair"
+        },
+        {
+          "item": "Fittings pack",
+          "qty": 1,
+          "icon": "screws",
+          "guess": true
+        }
+      ],
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-003",
@@ -922,7 +971,32 @@ window.FAV_DATA = {
           "synced": "2026-09-29"
         }
       ],
-      "tiktok": 10
+      "tiktok": 10,
+      "in_the_box": [
+        {
+          "item": "Table top",
+          "qty": 1,
+          "icon": "glass"
+        },
+        {
+          "item": "Table base",
+          "qty": 1,
+          "icon": "frame"
+        },
+        {
+          "item": "Padded chairs",
+          "qty": 6,
+          "icon": "chair"
+        },
+        {
+          "item": "Fittings pack",
+          "qty": 1,
+          "icon": "screws",
+          "guess": true
+        }
+      ],
+      "box_note": "Delivery and assembly in Accra.",
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-004",
@@ -963,7 +1037,31 @@ window.FAV_DATA = {
           "synced": "2026-09-29"
         }
       ],
-      "tiktok": 11
+      "tiktok": 11,
+      "in_the_box": [
+        {
+          "item": "Red glass top",
+          "qty": 1,
+          "icon": "glass"
+        },
+        {
+          "item": "Steel frame",
+          "qty": 1,
+          "icon": "frame"
+        },
+        {
+          "item": "High-back chairs",
+          "qty": 6,
+          "icon": "chair"
+        },
+        {
+          "item": "Fittings pack",
+          "qty": 1,
+          "icon": "screws",
+          "guess": true
+        }
+      ],
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-005",
@@ -1016,7 +1114,20 @@ window.FAV_DATA = {
           "synced": "2026-09-29"
         }
       ],
-      "tiktok": 12
+      "tiktok": 12,
+      "in_the_box": [
+        {
+          "item": "Foldable table",
+          "qty": 1,
+          "icon": "table"
+        },
+        {
+          "item": "Cushioned chairs",
+          "qty": 6,
+          "icon": "chair"
+        }
+      ],
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-006",
@@ -1066,7 +1177,46 @@ window.FAV_DATA = {
           "synced": "2026-09-29"
         }
       ],
-      "tiktok": 5
+      "tiktok": 5,
+      "in_the_box": [
+        {
+          "item": "Seat & high back",
+          "qty": 1,
+          "icon": "office_chair",
+          "guess": true
+        },
+        {
+          "item": "Padded armrests",
+          "qty": 2,
+          "icon": "armrest",
+          "guess": true
+        },
+        {
+          "item": "Gas-lift cylinder",
+          "qty": 1,
+          "icon": "gaslift",
+          "guess": true
+        },
+        {
+          "item": "Chrome 5-star base",
+          "qty": 1,
+          "icon": "base",
+          "guess": true
+        },
+        {
+          "item": "Castor wheels",
+          "qty": 5,
+          "icon": "castor",
+          "guess": true
+        },
+        {
+          "item": "Screws & Allen key",
+          "qty": 1,
+          "icon": "allen",
+          "guess": true
+        }
+      ],
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-007",
@@ -1122,7 +1272,52 @@ window.FAV_DATA = {
           "synced": "2026-09-29"
         }
       ],
-      "tiktok": 6
+      "tiktok": 6,
+      "in_the_box": [
+        {
+          "item": "Mesh back",
+          "qty": 1,
+          "icon": "office_chair",
+          "guess": true
+        },
+        {
+          "item": "Padded seat",
+          "qty": 1,
+          "icon": "cushion",
+          "guess": true
+        },
+        {
+          "item": "Armrests",
+          "qty": 2,
+          "icon": "armrest",
+          "guess": true
+        },
+        {
+          "item": "Gas-lift cylinder",
+          "qty": 1,
+          "icon": "gaslift",
+          "guess": true
+        },
+        {
+          "item": "5-star base",
+          "qty": 1,
+          "icon": "base",
+          "guess": true
+        },
+        {
+          "item": "Castor wheels",
+          "qty": 5,
+          "icon": "castor",
+          "guess": true
+        },
+        {
+          "item": "Screws & Allen key",
+          "qty": 1,
+          "icon": "allen",
+          "guess": true
+        }
+      ],
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-008",
@@ -1161,7 +1356,33 @@ window.FAV_DATA = {
           "synced": "2026-09-29"
         }
       ],
-      "tiktok": 13
+      "tiktok": 13,
+      "in_the_box": [
+        {
+          "item": "Desk top",
+          "qty": 1,
+          "icon": "panel"
+        },
+        {
+          "item": "Side & back panels",
+          "qty": 1,
+          "icon": "panel",
+          "guess": true
+        },
+        {
+          "item": "3-drawer unit",
+          "qty": 1,
+          "icon": "drawers"
+        },
+        {
+          "item": "Fittings pack",
+          "qty": 1,
+          "icon": "screws",
+          "guess": true
+        }
+      ],
+      "box_note": "Supplied flat-packed, then assembled on site.",
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-009",
@@ -1224,7 +1445,31 @@ window.FAV_DATA = {
           "synced": "2026-09-29"
         }
       ],
-      "tiktok": 14
+      "tiktok": 14,
+      "in_the_box": [
+        {
+          "item": "Dressing table",
+          "qty": 1,
+          "icon": "drawers"
+        },
+        {
+          "item": "Arched mirror",
+          "qty": 1,
+          "icon": "mirror"
+        },
+        {
+          "item": "Padded stool",
+          "qty": 1,
+          "icon": "stool"
+        },
+        {
+          "item": "Fittings pack",
+          "qty": 1,
+          "icon": "screws",
+          "guess": true
+        }
+      ],
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-010",
@@ -1268,7 +1513,38 @@ window.FAV_DATA = {
           "synced": "2026-09-29"
         }
       ],
-      "tiktok": 15
+      "tiktok": 15,
+      "in_the_box": [
+        {
+          "item": "Wardrobe body panels",
+          "qty": 1,
+          "icon": "panel",
+          "guess": true
+        },
+        {
+          "item": "Quilted doors",
+          "qty": 4,
+          "icon": "door"
+        },
+        {
+          "item": "Top cabinets",
+          "qty": 1,
+          "icon": "drawers"
+        },
+        {
+          "item": "Shelves & hanging rail",
+          "qty": 1,
+          "icon": "shelf"
+        },
+        {
+          "item": "Fittings pack",
+          "qty": 1,
+          "icon": "screws",
+          "guess": true
+        }
+      ],
+      "box_note": "Delivered and assembled.",
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-011",
@@ -1309,7 +1585,32 @@ window.FAV_DATA = {
           "synced": "2026-09-29"
         }
       ],
-      "tiktok": 16
+      "tiktok": 16,
+      "in_the_box": [
+        {
+          "item": "Sofa sections",
+          "qty": 1,
+          "icon": "sofa",
+          "guess": true
+        },
+        {
+          "item": "Chaise end",
+          "qty": 1,
+          "icon": "sofa"
+        },
+        {
+          "item": "Scatter pillows",
+          "qty": 1,
+          "icon": "pillow"
+        },
+        {
+          "item": "Sofa legs",
+          "qty": 1,
+          "icon": "legs",
+          "guess": true
+        }
+      ],
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-014",
@@ -1361,7 +1662,49 @@ window.FAV_DATA = {
           "synced": "2026-09-29"
         }
       ],
-      "tiktok": 1
+      "tiktok": 1,
+      "in_the_box": [
+        {
+          "item": "Desk top (MDF)",
+          "qty": 1,
+          "icon": "panel"
+        },
+        {
+          "item": "Desk frame (steel)",
+          "qty": 1,
+          "icon": "frame"
+        },
+        {
+          "item": "Chair seat & back",
+          "qty": 1,
+          "icon": "chair"
+        },
+        {
+          "item": "Chair frame (steel)",
+          "qty": 1,
+          "icon": "frame"
+        },
+        {
+          "item": "Anti-slip floor caps",
+          "qty": 8,
+          "icon": "caps",
+          "guess": true
+        },
+        {
+          "item": "Bolts & screws",
+          "qty": 1,
+          "icon": "screws",
+          "guess": true
+        },
+        {
+          "item": "Allen key",
+          "qty": 1,
+          "icon": "allen",
+          "guess": true
+        }
+      ],
+      "box_note": "Knock-down packing: wood/plastic parts in a carton with bubble wrap, metal frames wrapped in nylon fabric. Delivery & school set-up available.",
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-015",
@@ -1398,7 +1741,28 @@ window.FAV_DATA = {
           "synced": "2026-10-01"
         }
       ],
-      "tiktok": 17
+      "tiktok": 17,
+      "in_the_box": [
+        {
+          "item": "Sofa sections (L-shape)",
+          "qty": 1,
+          "icon": "sofa",
+          "guess": true
+        },
+        {
+          "item": "Back cushions",
+          "qty": 1,
+          "icon": "pillow",
+          "guess": true
+        },
+        {
+          "item": "Sofa legs",
+          "qty": 1,
+          "icon": "legs",
+          "guess": true
+        }
+      ],
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-016",
@@ -1433,7 +1797,21 @@ window.FAV_DATA = {
         }
       ],
       "material": "Leather",
-      "tiktok": 18
+      "tiktok": 18,
+      "in_the_box": [
+        {
+          "item": "Leather sofa set",
+          "qty": 1,
+          "icon": "sofa"
+        },
+        {
+          "item": "Sofa legs",
+          "qty": 1,
+          "icon": "legs",
+          "guess": true
+        }
+      ],
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-017",
@@ -1473,7 +1851,48 @@ window.FAV_DATA = {
         "Blue",
         "Green"
       ],
-      "tiktok": 4
+      "tiktok": 4,
+      "in_the_box": [
+        {
+          "item": "Mesh back",
+          "qty": 1,
+          "icon": "office_chair"
+        },
+        {
+          "item": "Padded seat",
+          "qty": 1,
+          "icon": "cushion"
+        },
+        {
+          "item": "Arm rests",
+          "qty": 2,
+          "icon": "armrest"
+        },
+        {
+          "item": "Gas-lift cylinder",
+          "qty": 1,
+          "icon": "gaslift",
+          "guess": true
+        },
+        {
+          "item": "5-star base",
+          "qty": 1,
+          "icon": "base",
+          "guess": true
+        },
+        {
+          "item": "Castor wheels",
+          "qty": 5,
+          "icon": "castor"
+        },
+        {
+          "item": "Screws & Allen key",
+          "qty": 1,
+          "icon": "allen",
+          "guess": true
+        }
+      ],
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-018",
@@ -1506,7 +1925,20 @@ window.FAV_DATA = {
           "synced": "2026-10-01"
         }
       ],
-      "tiktok": 19
+      "tiktok": 19,
+      "in_the_box": [
+        {
+          "item": "Oval glass top",
+          "qty": 1,
+          "icon": "glass"
+        },
+        {
+          "item": "Sculpted base",
+          "qty": 1,
+          "icon": "base_table"
+        }
+      ],
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-019",
@@ -1541,7 +1973,15 @@ window.FAV_DATA = {
           "synced": "2026-10-01"
         }
       ],
-      "tiktok": 3
+      "tiktok": 3,
+      "in_the_box": [
+        {
+          "item": "Stackable chair",
+          "qty": 1,
+          "icon": "chair"
+        }
+      ],
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-020",
@@ -1576,7 +2016,21 @@ window.FAV_DATA = {
       "tiktok": 20,
       "material": "",
       "dimensions": "",
-      "colors": []
+      "colors": [],
+      "in_the_box": [
+        {
+          "item": "Business cards",
+          "qty": "100 or 200",
+          "icon": "cards"
+        },
+        {
+          "item": "Card design",
+          "qty": 1,
+          "icon": "booklet"
+        }
+      ],
+      "box_title": "What's in the Pack?",
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-021",
@@ -1622,7 +2076,17 @@ window.FAV_DATA = {
           "synced": "2026-10-01"
         }
       ],
-      "tiktok": 21
+      "tiktok": 21,
+      "in_the_box": [
+        {
+          "item": "Reams of copy paper",
+          "qty": 5,
+          "icon": "ream",
+          "guess": true
+        }
+      ],
+      "box_title": "What's in the Carton?",
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-022",
@@ -1659,7 +2123,50 @@ window.FAV_DATA = {
           "synced": "2026-10-01"
         }
       ],
-      "tiktok": 22
+      "tiktok": 22,
+      "in_the_box": [
+        {
+          "item": "43\" Smart TV",
+          "qty": 1,
+          "icon": "tv"
+        },
+        {
+          "item": "TV stand legs",
+          "qty": 2,
+          "icon": "legs",
+          "guess": true
+        },
+        {
+          "item": "Voice remote",
+          "qty": 1,
+          "icon": "remote"
+        },
+        {
+          "item": "Batteries",
+          "qty": 2,
+          "icon": "battery",
+          "guess": true
+        },
+        {
+          "item": "Power cable",
+          "qty": 1,
+          "icon": "cable",
+          "guess": true
+        },
+        {
+          "item": "Screws",
+          "qty": 1,
+          "icon": "screws",
+          "guess": true
+        },
+        {
+          "item": "Quick start guide",
+          "qty": 1,
+          "icon": "booklet",
+          "guess": true
+        }
+      ],
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-023",
@@ -1694,7 +2201,38 @@ window.FAV_DATA = {
           "synced": "2026-10-01"
         }
       ],
-      "tiktok": 23
+      "tiktok": 23,
+      "in_the_box": [
+        {
+          "item": "Indoor unit",
+          "qty": 1,
+          "icon": "ac_in"
+        },
+        {
+          "item": "Outdoor unit",
+          "qty": 1,
+          "icon": "ac_out"
+        },
+        {
+          "item": "Remote control",
+          "qty": 1,
+          "icon": "remote",
+          "guess": true
+        },
+        {
+          "item": "Wall mounting plate",
+          "qty": 1,
+          "icon": "plate",
+          "guess": true
+        },
+        {
+          "item": "User manual",
+          "qty": 1,
+          "icon": "booklet",
+          "guess": true
+        }
+      ],
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-024",
@@ -1743,7 +2281,32 @@ window.FAV_DATA = {
         "address": "Kantamanto, near Grandview Hotel, UTC, close to Barclays Bank, Mamleshie Rd, Accra",
         "note": "Sold and delivered by AGOODMANN VENTURES (a partner business). Contact them directly to order."
       },
-      "tiktok": 30
+      "tiktok": 30,
+      "in_the_box": [
+        {
+          "item": "Toilet bowl",
+          "qty": 1,
+          "icon": "toilet"
+        },
+        {
+          "item": "Cistern (tank)",
+          "qty": 1,
+          "icon": "cistern"
+        },
+        {
+          "item": "Seat & cover",
+          "qty": 1,
+          "icon": "toilet_seat",
+          "guess": true
+        },
+        {
+          "item": "Flush & fixing kit",
+          "qty": 1,
+          "icon": "screws",
+          "guess": true
+        }
+      ],
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-025",
@@ -1792,7 +2355,18 @@ window.FAV_DATA = {
         "address": "Kantamanto, near Grandview Hotel, UTC, close to Barclays Bank, Mamleshie Rd, Accra",
         "note": "Sold and delivered by AGOODMANN VENTURES (a partner business). Contact them directly to order."
       },
-      "tiktok": 31
+      "tiktok": 31,
+      "in_the_box": [
+        {
+          "item": "Floor or wall tiles",
+          "qty": 1,
+          "icon": "tiles",
+          "guess": true
+        }
+      ],
+      "box_title": "What's in the Carton?",
+      "box_note": "Grout and adhesive are sold separately by the seller.",
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-026",
@@ -1842,7 +2416,16 @@ window.FAV_DATA = {
       "was_price_ghs": 650,
       "sale_until": "2026-12-31",
       "sale_from": "2026-10-08",
-      "tiktok": 32
+      "tiktok": 32,
+      "in_the_box": [
+        {
+          "item": "Wheat flour, 50kg bag",
+          "qty": 1,
+          "icon": "sack"
+        }
+      ],
+      "box_title": "What's in the Bag?",
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-027",
@@ -1880,7 +2463,17 @@ window.FAV_DATA = {
       "placeholder": false,
       "tiktok": 24,
       "material": "",
-      "dimensions": ""
+      "dimensions": "",
+      "in_the_box": [
+        {
+          "item": "3D wallpaper roll",
+          "qty": 1,
+          "icon": "roll"
+        }
+      ],
+      "box_title": "What's in the Pack?",
+      "box_note": "Priced per roll; one roll covers about 5.3 m².",
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-028",
@@ -1907,7 +2500,15 @@ window.FAV_DATA = {
       "images": [
         "assets/images/products/fav-028-mv00kf41-1.jpg"
       ],
-      "tiktok": 2
+      "tiktok": 2,
+      "in_the_box": [
+        {
+          "item": "Stackable kids chair",
+          "qty": 1,
+          "icon": "plastic_chair"
+        }
+      ],
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-029",
@@ -1937,7 +2538,34 @@ window.FAV_DATA = {
       "images": [
         "assets/images/products/fav-029-mv00kf41-1.jpg"
       ],
-      "tiktok": 7
+      "tiktok": 7,
+      "in_the_box": [
+        {
+          "item": "Padded seat & back",
+          "qty": 1,
+          "icon": "office_chair",
+          "guess": true
+        },
+        {
+          "item": "Hydraulic base",
+          "qty": 1,
+          "icon": "gaslift",
+          "guess": true
+        },
+        {
+          "item": "Chrome footrest",
+          "qty": 1,
+          "icon": "footrest",
+          "guess": true
+        },
+        {
+          "item": "Fittings pack",
+          "qty": 1,
+          "icon": "screws",
+          "guess": true
+        }
+      ],
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-030",
@@ -1964,7 +2592,32 @@ window.FAV_DATA = {
       "images": [
         "assets/images/products/fav-030-mv00kf41-1.jpg"
       ],
-      "tiktok": 25
+      "tiktok": 25,
+      "in_the_box": [
+        {
+          "item": "Washing bowl",
+          "qty": 1,
+          "icon": "bowl"
+        },
+        {
+          "item": "Attached padded chair",
+          "qty": 1,
+          "icon": "chair"
+        },
+        {
+          "item": "Tap & hose",
+          "qty": 1,
+          "icon": "tap",
+          "guess": true
+        },
+        {
+          "item": "Fittings pack",
+          "qty": 1,
+          "icon": "screws",
+          "guess": true
+        }
+      ],
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-031",
@@ -1991,7 +2644,20 @@ window.FAV_DATA = {
       "images": [
         "assets/images/products/fav-031-mv00kf41-1.jpg"
       ],
-      "tiktok": 26
+      "tiktok": 26,
+      "in_the_box": [
+        {
+          "item": "Round foldable table",
+          "qty": 1,
+          "icon": "table"
+        },
+        {
+          "item": "White folding chairs",
+          "qty": 10,
+          "icon": "chair"
+        }
+      ],
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-032",
@@ -2018,7 +2684,26 @@ window.FAV_DATA = {
       "images": [
         "assets/images/products/fav-032-mv00kf41-1.jpg"
       ],
-      "tiktok": 27
+      "tiktok": 27,
+      "in_the_box": [
+        {
+          "item": "TV stand with drawer",
+          "qty": 1,
+          "icon": "drawers"
+        },
+        {
+          "item": "Marble-effect top",
+          "qty": 1,
+          "icon": "glass"
+        },
+        {
+          "item": "Fittings pack",
+          "qty": 1,
+          "icon": "screws",
+          "guess": true
+        }
+      ],
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-033",
@@ -2045,7 +2730,20 @@ window.FAV_DATA = {
       "images": [
         "assets/images/products/fav-033-mv00kf41-1.jpg"
       ],
-      "tiktok": 28
+      "tiktok": 28,
+      "in_the_box": [
+        {
+          "item": "TV stand",
+          "qty": 1,
+          "icon": "drawers"
+        },
+        {
+          "item": "Centre table",
+          "qty": 1,
+          "icon": "table"
+        }
+      ],
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-034",
@@ -2072,7 +2770,17 @@ window.FAV_DATA = {
       "images": [
         "assets/images/products/fav-034-mv00kf41-1.jpg"
       ],
-      "tiktok": 29
+      "tiktok": 29,
+      "in_the_box": [
+        {
+          "item": "Student mattress",
+          "qty": 1,
+          "icon": "mattress"
+        }
+      ],
+      "box_title": "What's in the Pack?",
+      "box_size": "27 × 75 in (a larger size is also available)",
+      "in_the_box_confirmed": false
     },
     {
       "id": "FAV-035",
@@ -2107,7 +2815,16 @@ window.FAV_DATA = {
         "address": "Kasoa, near Amanfrom Taxi Rank",
         "note": "Sold and delivered by MANYE OYE REHOBOTH (a partner business). Contact them directly to order."
       },
-      "tiktok": 33
+      "tiktok": 33,
+      "in_the_box": [
+        {
+          "item": "Jasmine rice, 25 lb bag",
+          "qty": 1,
+          "icon": "sack"
+        }
+      ],
+      "box_title": "What's in the Bag?",
+      "in_the_box_confirmed": false
     }
   ],
   "webp": [

@@ -623,3 +623,20 @@ section.shop-first { padding: 18px 0 64px; }
   .shop-first .toolbar select { flex: 0 0 104px; width: 104px; min-width: 0; padding: 0 10px; }
   .shop-first .chips { margin-bottom: 14px; }
 }
+
+/* ---------- "What's in the box" (in_the_box + scripts/make_box_ads.py) ---------- */
+.pd-box { border: 1px solid var(--line); border-radius: 16px; padding: 16px; background: #f7f9fc; }
+.pd-box h3 { font: 600 19px/1.3 var(--sans); margin: 0 0 12px; }
+.pd-box-grid { display: grid; grid-template-columns: minmax(0, 150px) 1fr; gap: 14px; align-items: start; }
+.pd-box-img img { display: block; width: 100%; height: auto; border-radius: 10px; box-shadow: var(--shadow); }
+.pd-box-list { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 6px; font-size: 14px; }
+.pd-box-list li { display: flex; justify-content: space-between; gap: 10px; padding: 7px 10px; background: #fff; border: 1px solid var(--line); border-radius: 10px; }
+.pd-box-list b { white-space: nowrap; }
+.pd-box p { margin: 6px 0 0; font-size: 14px; }
+.pd-box-fine { color: var(--muted); font-size: 12px !important; }
+@media (max-width: 420px) { .pd-box-grid { grid-template-columns: 1fr; } .pd-box-img { max-width: 240px; } }
+.arrive { background: #0c0c0f; color: #fff; }
+.arrive .section-sub { color: #c9cbd3; }
+.arrive .kicker { color: #ff8a8a; }
+.arrive .btn-ghost { color: #fff; border-color: rgba(255,255,255,.45); background: transparent; }
+.arrive .section-head h2 { color: #fff; }

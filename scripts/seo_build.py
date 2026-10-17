@@ -163,6 +163,29 @@ def faq_html(items):
     return f'{style}<section class="seo-faq" aria-label="Questions and answers"><h2>Questions and answers</h2>{qs}</section>{ld}'
 
 
+def box_html(p, biz):
+    """'What's in the box' section: the box ad (scripts/make_box_ads.py), contents list, size, packaging."""
+    items = [x for x in p.get("in_the_box") or [] if x.get("item")]
+    if not items:
+        return ""
+    title = p.get("box_title") or "What's in the Box?"
+    img = f"assets/images/ads/box/box-{p['id'].lower()}.jpg"
+    pic = (f'<img src="../{img}" alt="{html.escape(title)} {html.escape(short(p["name"]))}: '
+           f'{html.escape(", ".join(str(x["item"]) for x in items))}" loading="lazy" width="1080" height="1350">'
+           if (ROOT / img).exists() else "")
+    lis = "".join(f'<li><span>{html.escape(str(x["item"]))}</span> <b>×{html.escape(str(x.get("qty", 1)))}</b></li>' for x in items)
+    size = p.get("box_size") or p.get("dimensions") or ""
+    size = size if re.search(r"\d", size) and re.search(r"cm|mm|\bm\b|in\b|×", size) else ""
+    seller = p.get("seller")
+    how = p.get("box_note") or (f"Sold and delivered by {seller['name']}: ask them about delivery." if seller else (biz.get("delivery_note") or ""))
+    note = "" if p.get("in_the_box_confirmed") else '<p class="box-fine">Typical contents shown. Please confirm on WhatsApp before you order.</p>'
+    return (f'<section class="box" aria-labelledby="box-h"><h2 id="box-h">📦 {html.escape(title)}</h2>'
+            f'<div class="box-grid">{pic}<div><ul class="box-list">{lis}</ul>'
+            + (f'<p><b>Size:</b> {html.escape(size)}</p>' if size else "")
+            + (f'<p><b>How it\'s packaged &amp; delivered:</b> {html.escape(how)}</p>' if how else "")
+            + note + '</div></div></section>')
+
+
 def landing_page(p, biz, card):
     """A real product page (no redirect) for p/<ID>.html."""
     seller = p.get("seller") or {}
@@ -204,7 +227,11 @@ def landing_page(p, biz, card):
 nav{{font-size:14px}}nav a,a{{color:#0d55af}}h1{{font-size:clamp(24px,5vw,34px);margin:12px 0 4px}}.price{{font-size:24px;font-weight:700;color:#0d55af}}
 .gal{{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:14px 0}}.gal img{{width:100%;height:auto;border-radius:12px}}
 .btns{{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}}.btn{{display:inline-block;padding:12px 18px;border-radius:10px;font-weight:600;text-decoration:none}}
-.wa{{background:#1fa855;color:#fff}}.shop{{border:1px solid #0d55af}}table{{border-collapse:collapse}}th,td{{text-align:left;padding:6px 12px 6px 0;vertical-align:top}}</style>
+.wa{{background:#1fa855;color:#fff}}.shop{{border:1px solid #0d55af}}table{{border-collapse:collapse}}th,td{{text-align:left;padding:6px 12px 6px 0;vertical-align:top}}
+.box{{margin:22px 0;padding:16px;border:1px solid #e3e7ee;border-radius:16px;background:#f7f9fc}}.box h2{{margin:0 0 12px;font-size:22px}}
+.box-grid{{display:grid;grid-template-columns:minmax(0,320px) 1fr;gap:18px;align-items:start}}.box-grid img{{width:100%;height:auto;border-radius:12px;display:block}}
+.box-list{{list-style:none;padding:0;margin:0 0 10px;display:grid;gap:6px}}.box-list li{{display:flex;justify-content:space-between;gap:12px;padding:8px 12px;background:#fff;border-radius:10px;border:1px solid #e3e7ee}}
+.box p{{margin:6px 0}}.box-fine{{font-size:13px;color:#5f6b7a}}@media(max-width:620px){{.box-grid{{grid-template-columns:1fr}}}}</style>
 </head><body><main>
 <nav><a href="../">Home</a> › <a href="../products/">Products</a> › {html.escape(name)}</nav>
 <h1>{html.escape(name)}</h1>
@@ -213,6 +240,7 @@ nav{{font-size:14px}}nav a,a{{color:#0d55af}}h1{{font-size:clamp(24px,5vw,34px);
 <p>{html.escape(p.get('description') or '')}</p>
 {f'<ul>{hl}</ul>' if hl else ''}
 <table>{rows}</table>
+{box_html(p, biz)}
 <div class="btns"><a class="btn wa" href="{wa_link}">Order on WhatsApp</a><a class="btn shop" href="{shop}">See it in our shop →</a></div>
 <p>Call {html.escape(phones)}. {html.escape(biz.get('delivery_note') or '')}</p>
 </main>

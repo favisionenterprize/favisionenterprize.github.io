@@ -43,7 +43,7 @@
 
   function caption(net, it, v, full) {
     const classy = net === "tiktok" && S && S.settings.tiktok.classy && it.p && !it.studio && !full;
-    if (window.FAV_CAPTIONS) return window.FAV_CAPTIONS.write(it.studio ? null : it.p, { net, ad: it.ad, studio: !!it.studio, full: !!full, subject: it.subject, ...(classy ? { style: "classy" } : {}) });
+    if (window.FAV_CAPTIONS) return window.FAV_CAPTIONS.write(it.studio ? null : it.p, { net, ad: it.ad, studio: !!it.studio, box: !!it.box && !full && !classy, full: !!full, subject: it.subject, ...(classy ? { style: "classy" } : {}) });   // TikTok classy setting wins over the box caption
     const B = A.business();
     const site = location.origin + "/";
     if (it.studio) {
@@ -125,8 +125,9 @@
       for (const x of S.posts) if (x.net === net && x.ok && x.p && (!last[x.p] || x.t > last[x.p])) last[x.p] = x.t;
       q = opts.products
         .map(id => { const lastK = {}; for (const x of S.posts) if (x.net === net && x.ok && (!lastK[x.k] || x.t > lastK[x.k])) lastK[x.k] = x.t;
-          // rotate the designs: classic ad, tile, presence (least recently posted first)
-          return items.filter(i => i.p && i.p.id === id && i.ad).sort((a, b) => (lastK[a.k] || "").localeCompare(lastK[b.k] || ""))[0] || items.find(i => i.k === "card:" + id); })
+          // rotate the designs: classic ad, tile, presence, box ad (least recently posted first); no strategy ad: box ad + deal card
+          const mine = items.filter(i => i.p && i.p.id === id && i.ad);
+          return mine.concat(items.filter(i => i.p && i.p.id === id && (i.box || (!mine.length && i.k === "card:" + id)))).sort((a, b) => (lastK[a.k] || "").localeCompare(lastK[b.k] || ""))[0] || items.find(i => i.k === "card:" + id); })
         .filter(Boolean)
         .sort((a, b) => (last[a.p.id] || "").localeCompare(last[b.p.id] || ""))
         .slice(0, Math.max(1, opts.limit || 2));

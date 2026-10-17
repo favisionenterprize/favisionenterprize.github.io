@@ -211,10 +211,11 @@
     return variants[v % variants.length].replace(/\n{3,}/g, "\n\n").trim();
   }
 
-  // Picture for a group post: the product photo or one of its ad designs (classic, tile, presence), at random.
+  // Picture for a group post: the product photo or one of its ad designs (classic, tile, presence, box), at random.
   function postImg(p) {
     const ad = ((A.business().promos || {}).ads || []).find(a => a.product === p.id && !/-arrived$/.test(a.id));
     const pics = [p.images[0]].concat(ad ? [`assets/images/ads/${ad.id}.jpg`, `assets/images/ads/models/tile-${ad.id}.jpg`, `assets/images/ads/models/presence-${ad.id}.jpg`] : []);
+    if ((p.in_the_box || []).length) pics.push(`assets/images/ads/box/box-${p.id.toLowerCase()}.jpg`);   // "What's in the Box?" ad
     return location.origin + "/" + pics[Math.floor(Math.random() * pics.length)];
   }
   // ------------------------------------------------------------------ jobs for the add-on

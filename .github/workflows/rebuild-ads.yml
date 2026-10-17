@@ -13,6 +13,7 @@ on:
       - "data/business.json"
       - "scripts/make_ads.py"
       - "scripts/make_ad_models.py"
+      - "scripts/make_box_ads.py"
       - "scripts/make_share_cards.py"
       - "scripts/seo_build.py"
       - "scripts/generate_listings.py"
@@ -39,13 +40,14 @@ jobs:
 
       - name: Install Pillow and the DejaVu font (for the ₵ sign)
         run: |
-          pip install --quiet pillow
+          pip install --quiet pillow numpy opencv-python-headless   # OpenCV: line art for the box ads
           sudo apt-get install -y --no-install-recommends fonts-dejavu-core >/dev/null
 
       - name: Rebuild ads and listing texts
         run: |
           python3 scripts/make_ads.py
           python3 scripts/make_ad_models.py
+          python3 scripts/make_box_ads.py   # "What's in the Box?" ads (assets/images/ads/box/)
           python3 scripts/make_share_cards.py
           python3 scripts/seo_build.py   # Product schema + approved SEO fixes back into p/*.html
           python3 scripts/convert_webp.py     # lighter .webp copies of product photos

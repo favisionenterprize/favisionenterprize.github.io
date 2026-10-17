@@ -427,6 +427,48 @@
     if (card && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); location.hash = "product/" + card.dataset.id; }
   });
 
+  // ---------- "What's in the box" (data: in_the_box; ad image: scripts/make_box_ads.py) ----------
+  const boxImg = p => `assets/images/ads/box/box-${String(p.id).toLowerCase()}.jpg`;
+  const hasSize = s => /\d/.test(s || "") && /cm|mm|\bm\b|in\b|×/.test(s || "");
+  function boxHtml(p) {
+    const items = (p.in_the_box || []).filter(x => x && x.item);
+    if (!items.length) return "";
+    const title = p.box_title || "What's in the Box?";
+    const size = hasSize(p.box_size) ? p.box_size : hasSize(p.dimensions) ? p.dimensions : "";
+    const how = p.box_note || (p.seller ? `Sold and delivered by ${sellerName(p)}: ask them about delivery.` : (business.delivery_note || ""));
+    return `<section class="pd-box" aria-labelledby="pd-box-h">
+      <h3 id="pd-box-h">📦 ${esc(title)}</h3>
+      <div class="pd-box-grid">
+        <a class="pd-box-img" href="${esc(boxImg(p))}" target="_blank" rel="noopener"><img src="${esc(boxImg(p))}" alt="${esc(`${title} ${p.name}: ${items.map(x => x.item).join(", ")}`)}" loading="lazy" width="1080" height="1350" onerror="this.closest('a').hidden=true"></a>
+        <div>
+          <ul class="pd-box-list">${items.map(x => `<li><span>${esc(x.item)}</span><b>×${esc(x.qty == null ? 1 : x.qty)}</b></li>`).join("")}</ul>
+          ${size ? `<p><b>Size:</b> ${esc(size)}</p>` : ""}
+          ${how ? `<p><b>How it's packaged &amp; delivered:</b> ${esc(how)}</p>` : ""}
+          ${p.in_the_box_confirmed ? "" : `<p class="pd-box-fine">Typical contents shown. Please confirm on WhatsApp before you order.</p>`}
+        </div>
+      </div>
+    </section>`;
+  }
+
+  // ---------- "How our products arrive": a row of box ads, FAV-014 first ----------
+  const arrive = $("#arrive-track");
+  if (arrive) {
+    const order = ["FAV-014", "FAV-002", "FAV-022", "FAV-006", "FAV-008", "FAV-019", "FAV-032", "FAV-021"];
+    const list = order.map(id => products.find(p => p.id === id)).filter(p => p && (p.in_the_box || []).length && p.images && p.images.length)
+      .concat(products.filter(p => !order.includes(p.id) && !p.seller && (p.in_the_box || []).length && p.images && p.images.length)).slice(0, 10);
+    if (list.length) {
+      arrive.innerHTML = list.map(p => `<article class="deal">
+        <a class="deal-img" href="p/${esc(p.id)}.html" aria-label="${esc(`${p.box_title || "What's in the Box?"} ${p.name}`)}">
+          <img src="${esc(boxImg(p))}" alt="${esc(`${p.box_title || "What's in the Box?"} ${p.name}: ${(p.in_the_box || []).map(x => `${x.item} ×${x.qty}`).join(", ")}`)}" loading="lazy" width="1080" height="1350">
+        </a>
+        <div class="deal-actions">
+          <a class="btn btn-gold btn-sm" href="p/${esc(p.id)}.html">See it</a>
+          <a class="btn btn-ghost btn-sm" href="#product/${esc(p.id)}">Quick view</a>
+        </div>
+      </article>`).join("");
+    } else arrive.closest("section").hidden = true;
+  }
+
   // ---------- product detail (deep-linkable: #product/FAV-001) ----------
   const dlg = $("#pd");
   const HOME_TITLE = document.title;
@@ -458,6 +500,7 @@
         ${(p.highlights || []).length ? `<ul class="features">${p.highlights.map(h => `<li>${esc(h)}</li>`).join("")}</ul>` : ""}
         ${CO.canBuy(p) ? `<div class="pd-pay">${CO.badges()}<small>Pay in full, pay a deposit, pay on delivery or walk in and pay.</small></div>` : ""}
         <dl class="specs">${specs.map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("")}</dl>
+        ${boxHtml(p)}
         <div class="pd-actions">
           ${CO.canBuy(p) ? `<button class="btn btn-gold pd-buy" id="pd-buy" type="button">Buy now</button>` : ""}
           <a class="btn btn-wa" href="${waFor(p)}" target="_blank" rel="noopener">Order on WhatsApp</a>

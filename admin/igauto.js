@@ -87,6 +87,10 @@
       items.push({ k: "tile:" + a.id, img: `assets/images/ads/models/tile-${a.id}.jpg`, p, ad: a, kind: "Tile ad" });
       items.push({ k: "presence:" + a.id, img: `assets/images/ads/models/presence-${a.id}.jpg`, p, ad: a, kind: "Presence ad" });
     }
+    // "What's in the Box?" ads (scripts/make_box_ads.py, data in_the_box), one per product
+    for (const p of A.products().filter(ok).sort((a, b) => a.id.localeCompare(b.id))) {
+      if ((p.in_the_box || []).length && p.images && p.images.length) items.push({ k: "box:" + p.id, img: `assets/images/ads/box/box-${p.id.toLowerCase()}.jpg`, p, box: true, kind: "Box ad" });
+    }
     // seasonal ads, only while their dates run
     const day = new Date().toLocaleDateString("en-CA");
     for (const s of SEASONAL) if (day >= s.from && day <= s.to) items.push({ k: "season:" + s.id, img: s.img, p: null, seasonal: true, subject: s.subject, kind: "Seasonal" });
@@ -96,7 +100,7 @@
     }
     return items;
   }
-  const label = it => it.seasonal ? "Happy Customer Service Week" : it.studio ? "AI Studio: design your room free" : it.ad ? `${it.ad.headline} ${it.ad.accent} (${String(it.p.name).split(" — ")[0]})` : String(it.p.name).split(" — ")[0];
+  const label = it => it.seasonal ? "Happy Customer Service Week" : it.studio ? "AI Studio: design your room free" : it.box ? `What's in the box: ${String(it.p.name).split(" — ")[0]}` : it.ad ? `${it.ad.headline} ${it.ad.accent} (${String(it.p.name).split(" — ")[0]})` : String(it.p.name).split(" — ")[0];
 
   const ORDER = (items, keyOf, lastOf) => window.FAV_CAPTIONS && window.FAV_CAPTIONS.dailyOrder ? window.FAV_CAPTIONS.dailyOrder(items, keyOf, lastOf, 7) : items.slice().sort((a, b) => (lastOf(a) || "").localeCompare(lastOf(b) || ""));
   function plan() {
@@ -137,7 +141,7 @@
   function caption(it, v) {
     const B = A.business();
     const classy = window.FAV_BOOST && window.FAV_BOOST.hooks() && it.p && !it.studio && !it.seasonal;   // Boost: comment-inviting classy captions
-    if (window.FAV_CAPTIONS) return window.FAV_CAPTIONS.write(it.studio ? null : it.p, { net: "ig", ad: it.ad, studio: !!it.studio, subject: it.subject, ...(classy ? { style: "classy" } : {}), tags: it.studio ? S.settings.audiences.home : S.settings.audiences[audienceOf(it.p)] });
+    if (window.FAV_CAPTIONS) return window.FAV_CAPTIONS.write(it.studio ? null : it.p, { net: "ig", ad: it.ad, studio: !!it.studio, box: !!it.box, subject: it.subject, ...(classy && !it.box ? { style: "classy" } : {}), tags: it.studio ? S.settings.audiences.home : S.settings.audiences[audienceOf(it.p)] });
     const brand = "#FAVisionEnterprise #AccraFurniture #FurnitureGhana";
     if (it.studio) {
       return `See your room before you buy it ✨\n\nDesign your room free with F.A Vision AI Studio: pick sofas, dining sets, wardrobes and wallpaper, and see them in your space. You only pay for the pieces you order.\n\n🔗 favisionenterprize.github.io/studio (link in bio)\n📲 WhatsApp ${C.localPhone(B.whatsapp)}\n📍 Odorkor, Accra\n\n${S.settings.audiences.home} ${brand}`;
@@ -173,8 +177,9 @@
       for (const x of S.posts) if (x.ok && x.p && (!last[x.p] || x.t > last[x.p])) last[x.p] = x.t;
       q = opts.products
         .map(id => { const lastK = {}; for (const x of S.posts) if (x.ok && (!lastK[x.k] || x.t > lastK[x.k])) lastK[x.k] = x.t;
-          // rotate the designs: classic ad, tile, presence (least recently posted first)
-          return items.filter(i => i.p && i.p.id === id && i.ad).sort((a, b) => (lastK[a.k] || "").localeCompare(lastK[b.k] || ""))[0] || items.find(i => i.k === "card:" + id); })
+          // rotate the designs: classic ad, tile, presence, box ad (least recently posted first); no strategy ad: box ad + deal card
+          const mine = items.filter(i => i.p && i.p.id === id && i.ad);
+          return mine.concat(items.filter(i => i.p && i.p.id === id && (i.box || (!mine.length && i.k === "card:" + id)))).sort((a, b) => (lastK[a.k] || "").localeCompare(lastK[b.k] || ""))[0] || items.find(i => i.k === "card:" + id); })
         .filter(Boolean)
         .sort((a, b) => (last[a.p.id] || "").localeCompare(last[b.p.id] || ""))
         .slice(0, Math.max(1, opts.limit || 3));
