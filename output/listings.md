@@ -890,7 +890,7 @@ Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interes
 ```
 Student Desk Chair Set — Senior High to Tertiary Level by F.A Vision Enterprise.
 
-Height-adjustable desk and chair sets, perfect for classrooms from SHS through university. Anti-slip floor caps on the legs prevent sliding and cut down on distracting noise.
+Sturdy steel desk and chair sets, perfect for classrooms from SHS through university. Anti-slip floor caps on the legs prevent sliding and cut down on distracting noise.
 
 👉 See all photos, price and order online: https://favisionenterprize.github.io/#product/FAV-014
 
