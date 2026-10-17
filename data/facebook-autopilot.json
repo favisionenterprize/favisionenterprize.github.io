@@ -6388,6 +6388,78 @@
    "url": "https://www.facebook.com/groups/410303393384619/",
    "active": true,
    "added": "2026-10-16"
+  },
+  {
+   "id": "1376169313211052",
+   "name": "Ok furniture biggest sale.",
+   "url": "https://www.facebook.com/groups/1376169313211052/",
+   "added": "2026-10-17",
+   "members": 148000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "1360375038019726",
+   "name": "SECOND HAND BEDS AND FURNITURE",
+   "url": "https://www.facebook.com/groups/1360375038019726/",
+   "added": "2026-10-17",
+   "members": 127000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "DubaiInteriorDesignersForum",
+   "name": "Dubai Interior Designers",
+   "url": "https://www.facebook.com/groups/DubaiInteriorDesignersForum/",
+   "added": "2026-10-17",
+   "members": 153000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "1745077665718862",
+   "name": "Ghanaians living in Germany",
+   "url": "https://www.facebook.com/groups/1745077665718862/",
+   "added": "2026-10-17",
+   "members": 13000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "1434712039912937",
+   "name": "BUY AND SELL IN GHANA VERY GOOD ITEMS",
+   "url": "https://www.facebook.com/groups/1434712039912937/",
+   "added": "2026-10-17",
+   "members": 10000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "400333275396635",
+   "name": "buy and sell in Ghana",
+   "url": "https://www.facebook.com/groups/400333275396635/",
+   "added": "2026-10-17",
+   "members": 10000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "228215741084312",
+   "name": "Expats of Accra, Ghana",
+   "url": "https://www.facebook.com/groups/228215741084312/",
+   "added": "2026-10-17",
+   "members": 17000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "229343507183776",
+   "name": "Ghana Fashion Market",
+   "url": "https://www.facebook.com/groups/229343507183776/",
+   "added": "2026-10-17",
+   "members": 28000,
+   "source": "autopilot",
+   "active": true
   }
  ],
  "posts": [
@@ -11595,12 +11667,84 @@
    "members": 164000,
    "status": "joined",
    "url": "https://www.facebook.com/groups/175162353823750/"
+  },
+  {
+   "d": "2026-10-17",
+   "t": "2026-10-17T02:13:22.343Z",
+   "g": "1376169313211052",
+   "name": "Ok furniture biggest sale.",
+   "members": 148000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/1376169313211052/"
+  },
+  {
+   "d": "2026-10-17",
+   "t": "2026-10-17T02:14:08.240Z",
+   "g": "1360375038019726",
+   "name": "SECOND HAND BEDS AND FURNITURE",
+   "members": 127000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/1360375038019726/"
+  },
+  {
+   "d": "2026-10-17",
+   "t": "2026-10-17T02:16:45.164Z",
+   "g": "DubaiInteriorDesignersForum",
+   "name": "Dubai Interior Designers",
+   "members": 153000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/DubaiInteriorDesignersForum/"
+  },
+  {
+   "d": "2026-10-17",
+   "t": "2026-10-17T02:18:25.605Z",
+   "g": "1745077665718862",
+   "name": "Ghanaians living in Germany",
+   "members": 13000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/1745077665718862/"
+  },
+  {
+   "d": "2026-10-17",
+   "t": "2026-10-17T02:19:14.815Z",
+   "g": "1434712039912937",
+   "name": "BUY AND SELL IN GHANA VERY GOOD ITEMS",
+   "members": 10000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/1434712039912937/"
+  },
+  {
+   "d": "2026-10-17",
+   "t": "2026-10-17T02:20:24.537Z",
+   "g": "400333275396635",
+   "name": "buy and sell in Ghana",
+   "members": 10000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/400333275396635/"
+  },
+  {
+   "d": "2026-10-17",
+   "t": "2026-10-17T02:21:52.336Z",
+   "g": "228215741084312",
+   "name": "Expats of Accra, Ghana",
+   "members": 17000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/228215741084312/"
+  },
+  {
+   "d": "2026-10-17",
+   "t": "2026-10-17T02:23:52.246Z",
+   "g": "229343507183776",
+   "name": "Ghana Fashion Market",
+   "members": 28000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/229343507183776/"
   }
  ],
  "checks": {
   "sync": "2026-10-17",
   "declines": "2026-10-17",
-  "grow": "2026-10-16"
+  "grow": "2026-10-17"
  },
  "rounds": {
   "FAV-014": "2026-10-13T21:28:03.690Z",
@@ -11911,6 +12055,13 @@
    "kind": "declines",
    "found": 7,
    "left": 3
+  },
+  {
+   "d": "2026-10-17",
+   "t": "2026-10-17T02:26:13.836Z",
+   "kind": "grow",
+   "joined": 8,
+   "requested": 0
   }
  ],
  "renewLog": [
