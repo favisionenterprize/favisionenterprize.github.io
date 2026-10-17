@@ -26,6 +26,15 @@
    "pinOk": false,
    "why": "pin: couldn't find the post on TikTok (pin it in the app: open the post → ••• → Pin)",
    "mode": "pinswap"
+  },
+  "fb": {
+   "d": "2026-10-17",
+   "link": "favisionenterprize.github.io",
+   "pinned": null,
+   "linkOk": true,
+   "pinOk": false,
+   "why": "couldn't find a post with “Fresh stock, just arrived” on the profile",
+   "mode": "fix"
   }
  },
  "runs": [
@@ -34,6 +43,13 @@
    "net": "tiktok",
    "mode": "pinswap",
    "linkOk": false,
+   "pinOk": false
+  },
+  {
+   "d": "2026-10-17",
+   "net": "fb",
+   "mode": "fix",
+   "linkOk": true,
    "pinOk": false
   }
  ]
