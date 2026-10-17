@@ -15,9 +15,15 @@
   const productUrl = p => `${SITE}#product/${p.id}`;
 
   // ---------- helpers ----------
+  // Lighter .webp for photos listed in FAV_DATA.webp (scripts/convert_webp.py); others stay .jpg.
+  const WEBP = new Set((window.FAV_DATA && window.FAV_DATA.webp) || []);
+  function pic(src, alt, extra) {
+    const img = `<img src="${esc(src)}" alt="${esc(alt)}"${extra || ""}>`;
+    return WEBP.has(src) ? `<picture><source srcset="${esc(src.replace(/\.(jpe?g|png)$/i, ".webp"))}" type="image/webp">${img}</picture>` : img;
+  }
   function media(p, alt) {
     const img = (p.images || [])[0];
-    if (img) return `<img src="${esc(img)}" alt="${esc(alt || p.name)}" loading="lazy">`;
+    if (img) return pic(img, alt || p.name, ' loading="lazy"');
     return `<div class="ph" data-cat="${esc(p.category)}">${C.iconSvg(C.categoryIcon(p))}</div>`;
   }
   // Offer set in admin → Facebook catalog → Offers: price_ghs is the offer price,
@@ -440,7 +446,7 @@
     $("#pd-body").innerHTML = `
       <div class="gallery">
         <div class="media" id="pd-main">${media(p)}</div>
-        ${imgs.length > 1 ? `<div class="thumbs">${imgs.map((src, i) => `<button data-src="${esc(src)}" aria-current="${i === 0}" aria-label="Photo ${i + 1}"><img src="${esc(src)}" alt=""></button>`).join("")}</div>` : ""}
+        ${imgs.length > 1 ? `<div class="thumbs">${imgs.map((src, i) => `<button data-src="${esc(src)}" aria-current="${i === 0}" aria-label="Photo ${i + 1}">${pic(src, "", ' loading="lazy"')}</button>`).join("")}</div>` : ""}
         ${(() => { const cr = (p.image_credits || []).filter(c => imgs.includes(c.path)); return cr.length ? `<p class="pd-credit">Some photos show the same style of ${esc((p.type || "item").toLowerCase())}: ${cr.map(c => c.page ? `<a href="${esc(c.page)}" target="_blank" rel="noopener nofollow">${esc(c.creator || c.src)}</a>` : esc(c.creator || c.src)).join(", ")} (${esc([...new Set(cr.map(c => c.src))].join(", "))}).</p>` : ""; })()}
       </div>
       <div class="pd-info">
@@ -463,7 +469,7 @@
     if (thumbs) thumbs.addEventListener("click", e => {
       const b = e.target.closest("button");
       if (!b) return;
-      $("#pd-main").innerHTML = `<img src="${esc(b.dataset.src)}" alt="${esc(p.name)}">`;
+      $("#pd-main").innerHTML = pic(b.dataset.src, p.name);
       thumbs.querySelectorAll("button").forEach(x => x.setAttribute("aria-current", String(x === b)));
     });
     const buy = $("#pd-buy");

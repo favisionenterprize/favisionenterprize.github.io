@@ -3,7 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Furniture Shop in Accra · Sofas, Desks &amp; Office Chairs | F.A Vision</title>
+  <!-- Content Security Policy: only our own files plus Google Fonts, the Meta Pixel, Facebook video embeds,
+       the Apps Script backend and Paystack checkout may load. Add a host here before using a new one. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://connect.facebook.net https://js.paystack.co https://*.paystack.co https://*.paystack.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.paystack.co https://*.paystack.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; frame-src 'self' https://www.facebook.com https://web.facebook.com https://*.paystack.co https://*.paystack.com; connect-src 'self' https://connect.facebook.net https://www.facebook.com https://script.google.com https://script.googleusercontent.com https://*.paystack.co https://*.paystack.com; object-src 'none'; base-uri 'self'; form-action 'self' https://script.google.com">  <title>Furniture Shop in Accra · Sofas, Desks &amp; Office Chairs | F.A Vision</title>
   <meta name="description" content="We sell sofas, beds, dining sets, office chairs and student desks from GH₵650 in Odorkor, Accra. Delivery to Accra, Tema &amp; Kasoa. WhatsApp 057 264 6176.">
   <meta name="keywords" content="FA Vision Enterprise, F.A Vision Enterprise, wholesale furniture Accra, bulk furniture Ghana, school desks wholesale, office furniture Accra, upholstery Accra, sofa re-upholstery, bookstore Odorkor, stationery Accra, printing press Accra, printing press Kasoa, furniture Odorkor, furniture Omanjor, furniture Kasoa, 0207473267, 0572646176, 0546148923">
   <link rel="canonical" href="https://favisionenterprize.github.io/">
@@ -367,7 +369,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/site.css?v=20261017a">
+  <link rel="stylesheet" href="assets/css/site.css?v=20261017b">
   <link rel="stylesheet" href="assets/css/live-strip.css?v=20261002f">
 <!--seo:jsonld-index-html--><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "@id": "https://favisionenterprize.github.io/#org", "sameAs": ["https://www.facebook.com/FaVisionEnterprise", "https://www.facebook.com/FaVisionEnt/", "https://www.instagram.com/favisionent/", "https://x.com/FaVisionEnt", "https://www.tiktok.com/@favisionenterprise", "https://maps.app.goo.gl/Ct4oYoMkmTPGPX3P6", "https://maps.app.goo.gl/2czi91wUwRAwXcgd7", "https://maps.app.goo.gl/zrELKCZL1NWdqKiE9"]}</script><!--/seo:jsonld-index-html-->
 </head>
@@ -794,7 +796,7 @@
   <script src="assets/js/auto-carousel.js?v=20261002a"></script>
   <script src="assets/js/live-strip.js?v=20261002d"></script>
   <script src="assets/js/checkout.js?v=20260930d"></script>
-  <script src="assets/js/site.js?v=20261015q"></script>
+  <script src="assets/js/site.js?v=20261017b"></script>
   <script>
   /* Desk proof videos: data/videos.json entries with spots "home-desks" (managed in admin → Videos). */
   (function () {
@@ -802,7 +804,14 @@
     if (!box || !row || !window.fetch) return;
     var ok = function (u) { return /^https:\/\/www\.facebook\.com\/FaVisionEnterprise\/videos\/\d+\/?$/.test(String(u || "")); };
     var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
-    fetch("data/videos.json", { cache: "no-store" }).then(function (r) { return r.json(); }).then(function (lib) {
+    // 8 s timeout so a slow mobile connection never leaves the section hanging
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 8000);
+    fetch("data/videos.json", { cache: "no-store", signal: ctrl ? ctrl.signal : undefined }).then(function (r) {
+      clearTimeout(timer);
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    }).then(function (lib) {
       var vids = (lib.videos || []).filter(function (v) { return (v.spots || []).indexOf("home-desks") > -1 && v.website && v.website.status === "posted" && (ok(v.embed) || v.file); }).slice(0, 2);
       if (!vids.length) return;
       row.innerHTML = vids.map(function (v) {
@@ -812,7 +821,12 @@
           : '<video src="' + esc(v.file) + '" controls preload="none" playsinline></video>') + '<figcaption>' + t + '</figcaption></figure>';
       }).join("");
       box.hidden = false;
-    }).catch(function () {});
+    }).catch(function () {
+      clearTimeout(timer);
+      // Couldn't load the list: point to the videos on Facebook instead of an empty space
+      row.innerHTML = '<p class="promo-proof-fallback">Watch our team offloading &amp; loading desks on <a href="https://www.facebook.com/FaVisionEnterprise/videos" target="_blank" rel="noopener">our Facebook page</a>.</p>';
+      box.hidden = false;
+    });
   })();
   </script>
   <script src="assets/js/meta-pixel.js?v=20261008a"></script>

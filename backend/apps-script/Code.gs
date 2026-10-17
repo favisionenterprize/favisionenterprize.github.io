@@ -115,7 +115,30 @@ function setup() {
 
 // ---------- Web endpoints ----------
 
+// Entry points: any unexpected error is logged in full (Apps Script → Executions)
+// but the website / admin only ever sees a short, safe message, never a stack
+// trace, file name or line number.
+const SAFE_ERROR_ = 'Service temporarily unavailable. Please try again or WhatsApp us on 057 264 6176.';
+
 function doPost(e) {
+  try {
+    return handlePost_(e);
+  } catch (err) {
+    console.error('doPost failed: ' + (err && (err.stack || err.message) || err));
+    return json_({ ok: false, error: SAFE_ERROR_ });
+  }
+}
+
+function doGet(e) {
+  try {
+    return handleGet_(e);
+  } catch (err) {
+    console.error('doGet failed: ' + (err && (err.stack || err.message) || err));
+    return json_({ ok: false, error: SAFE_ERROR_ });
+  }
+}
+
+function handlePost_(e) {
   let data = {};
   try {
     data = JSON.parse(e.postData.contents);
@@ -212,7 +235,7 @@ function testSms() {
   sendSms_('FA Vision: test alert. SMS alerts are working.');
 }
 
-function doGet(e) {
+function handleGet_(e) {
   const p = (e && e.parameter) || {};
   if (p.action === 'unsubscribe' && p.token) {
     const found = markUnsubscribed_(p.token);

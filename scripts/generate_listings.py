@@ -294,6 +294,14 @@ def site_data_js(business, products):
     """The storefront and the admin page both read this file. admin/admin.js
     writes the same format when products are saved from the browser."""
     data = {"business": business, "products": products}
+    # Photos that have a lighter .webp copy (scripts/convert_webp.py); the shop only
+    # asks for a .webp on this list, so photos without one keep showing the .jpg.
+    webp = sorted({img for p in products for img in (p.get("images") or [])
+                   if not str(img).startswith(("http://", "https://"))
+                   and (ROOT / img).with_suffix(".webp").exists()
+                   and (ROOT / img).suffix.lower() != ".webp"})
+    if webp:
+        data["webp"] = webp
     return (
         "// Generated from data/business.json and data/products.json. Do not edit by hand.\n"
         f"window.FAV_DATA = {json.dumps(data, ensure_ascii=False, indent=2)};\n"
