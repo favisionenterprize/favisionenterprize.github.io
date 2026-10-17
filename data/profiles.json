@@ -35,6 +35,15 @@
    "pinOk": false,
    "why": "couldn't find a post with “Fresh stock, just arrived” on the profile",
    "mode": "fix"
+  },
+  "ig": {
+   "d": "2026-10-17",
+   "link": null,
+   "pinned": "Fresh stock, just arrived! 🎒📚\nOur new consignment of height-adjustable student desk & chair sets is IN STOCK now, for ",
+   "linkOk": false,
+   "pinOk": true,
+   "why": "Instagram lets you change the website link only in its phone app (Edit profile → Links)",
+   "mode": "fix"
   }
  },
  "runs": [
@@ -51,6 +60,13 @@
    "mode": "fix",
    "linkOk": true,
    "pinOk": false
+  },
+  {
+   "d": "2026-10-17",
+   "net": "ig",
+   "mode": "fix",
+   "linkOk": false,
+   "pinOk": true
   }
  ]
 }
