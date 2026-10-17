@@ -414,13 +414,6 @@
    "added": "2026-10-14"
   },
   {
-   "id": "617295088616357",
-   "name": "#Digital #Market #Ghana",
-   "url": "https://www.facebook.com/groups/617295088616357/",
-   "active": true,
-   "added": "2026-10-14"
-  },
-  {
    "id": "367918950553182",
    "name": "Naa Manye Buy And Sell Group",
    "url": "https://www.facebook.com/groups/367918950553182/",
@@ -686,15 +679,6 @@
    "active": true
   },
   {
-   "id": "726230881287548",
-   "name": "Home Decor",
-   "url": "https://www.facebook.com/groups/726230881287548/",
-   "added": "2026-10-14",
-   "members": 1300000,
-   "source": "autopilot",
-   "active": true
-  },
-  {
    "id": "homedecorationmaster",
    "name": "Home Decoration",
    "url": "https://www.facebook.com/groups/homedecorationmaster/",
@@ -785,15 +769,6 @@
    "active": true
   },
   {
-   "id": "3606667032919787",
-   "name": "Nigeria & Ghana Old items buyer and seller",
-   "url": "https://www.facebook.com/groups/3606667032919787/",
-   "added": "2026-10-14",
-   "members": 21000,
-   "source": "autopilot",
-   "active": true
-  },
-  {
    "id": "588648248521852",
    "name": "Accra & Tema Property Market",
    "url": "https://www.facebook.com/groups/588648248521852/",
@@ -821,15 +796,6 @@
    "active": true
   },
   {
-   "id": "2527153720918496",
-   "name": "Furniture's Home",
-   "url": "https://www.facebook.com/groups/2527153720918496/",
-   "added": "2026-10-15",
-   "members": 379000,
-   "source": "autopilot",
-   "active": true
-  },
-  {
    "id": "1663261044409334",
    "name": "Furniture works",
    "url": "https://www.facebook.com/groups/1663261044409334/",
@@ -853,15 +819,6 @@
    "url": "https://www.facebook.com/groups/2764329860556531/",
    "added": "2026-10-15",
    "members": 124000,
-   "source": "autopilot",
-   "active": true
-  },
-  {
-   "id": "412273526959933",
-   "name": "Interior design ideas",
-   "url": "https://www.facebook.com/groups/412273526959933/",
-   "added": "2026-10-15",
-   "members": 273000,
    "source": "autopilot",
    "active": true
   },
@@ -11219,6 +11176,72 @@
    "left": true,
    "tries": 1,
    "left_d": "2026-10-14"
+  },
+  {
+   "id": "2209484532640738",
+   "name": "Unread",
+   "url": "https://www.facebook.com/groups/2209484532640738/",
+   "why": "Declined our post (notification) · leave not confirmed",
+   "d": "2026-10-17",
+   "left": false,
+   "tries": 1
+  },
+  {
+   "id": "2527153720918496",
+   "name": "Furniture's Home",
+   "url": "https://www.facebook.com/groups/2527153720918496/",
+   "why": "Declined our post (notification)",
+   "d": "2026-10-17",
+   "left": true,
+   "tries": 1,
+   "left_d": "2026-10-17"
+  },
+  {
+   "id": "3606667032919787",
+   "name": "Nigeria & Ghana Old items buyer and seller",
+   "url": "https://www.facebook.com/groups/3606667032919787/",
+   "why": "Declined 1 of our posts",
+   "d": "2026-10-17",
+   "left": true,
+   "tries": 1,
+   "left_d": "2026-10-17"
+  },
+  {
+   "id": "412273526959933",
+   "name": "Interior design ideas",
+   "url": "https://www.facebook.com/groups/412273526959933/",
+   "why": "Declined our post (notification) · already left",
+   "d": "2026-10-17",
+   "left": true,
+   "tries": 1,
+   "left_d": "2026-10-17"
+  },
+  {
+   "id": "470433129379613",
+   "name": "Unread",
+   "url": "https://www.facebook.com/groups/470433129379613/",
+   "why": "Declined our post (notification) · leave not confirmed",
+   "d": "2026-10-17",
+   "left": false,
+   "tries": 1
+  },
+  {
+   "id": "617295088616357",
+   "name": "#Digital #Market #Ghana",
+   "url": "https://www.facebook.com/groups/617295088616357/",
+   "why": "Declined our post (notification) · leave not confirmed",
+   "d": "2026-10-17",
+   "left": false,
+   "tries": 1
+  },
+  {
+   "id": "726230881287548",
+   "name": "Home Decor",
+   "url": "https://www.facebook.com/groups/726230881287548/",
+   "why": "Declined our post (notification) · leave not confirmed",
+   "d": "2026-10-17",
+   "left": false,
+   "tries": 1
   }
  ],
  "joins": [
@@ -11576,7 +11599,7 @@
  ],
  "checks": {
   "sync": "2026-10-17",
-  "declines": "2026-10-16",
+  "declines": "2026-10-17",
   "grow": "2026-10-16"
  },
  "rounds": {
@@ -11881,6 +11904,13 @@
    "tried": 58,
    "ok": 51,
    "stopped": "Facebook showed \"Try again later\". Nothing more was posted."
+  },
+  {
+   "d": "2026-10-17",
+   "t": "2026-10-17T02:12:50.396Z",
+   "kind": "declines",
+   "found": 7,
+   "left": 3
   }
  ],
  "renewLog": [
