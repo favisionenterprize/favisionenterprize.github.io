@@ -489,7 +489,7 @@ window.FAV_DATA = {
           "kicker": "Back to school · Student desks",
           "headline": "Fresh stock, just",
           "accent": "arrived!",
-          "sub": "New consignment of height-adjustable desk & chair sets for SHS to university.",
+          "sub": "New consignment of sturdy steel desk & chair sets for SHS to university.",
           "facts": [
             [
               "{price}",
@@ -521,7 +521,7 @@ window.FAV_DATA = {
           "kicker": "School · Student desks",
           "headline": "Every student deserves a",
           "accent": "proper desk",
-          "sub": "Height-adjustable steel desk & chair sets for SHS to university.",
+          "sub": "Sturdy steel desk & chair sets for SHS to university.",
           "facts": [
             [
               "{price}",
