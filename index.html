@@ -367,7 +367,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/site.css?v=20261015q">
+  <link rel="stylesheet" href="assets/css/site.css?v=20261017a">
   <link rel="stylesheet" href="assets/css/live-strip.css?v=20261002f">
 <!--seo:jsonld-index-html--><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "@id": "https://favisionenterprize.github.io/#org", "sameAs": ["https://www.facebook.com/FaVisionEnterprise", "https://www.facebook.com/FaVisionEnt/", "https://www.instagram.com/favisionent/", "https://x.com/FaVisionEnt", "https://www.tiktok.com/@favisionenterprise", "https://maps.app.goo.gl/Ct4oYoMkmTPGPX3P6", "https://maps.app.goo.gl/2czi91wUwRAwXcgd7", "https://maps.app.goo.gl/zrELKCZL1NWdqKiE9"]}</script><!--/seo:jsonld-index-html-->
 </head>
@@ -514,6 +514,10 @@
               <span class="order-pointer" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v15M5 12l7 7 7-7"/></svg><em>Tap here to order</em></span>
             </span>
             <button class="btn btn-ghost" type="button" id="promo-share">Share with a friend</button>
+          </div>
+          <div class="promo-proof" id="promo-proof" hidden>
+            <p class="promo-calc-label">Real stock, real team: see our desks being offloaded &amp; loaded</p>
+            <div class="promo-proof-row" id="promo-proof-row"></div>
           </div>
           <p class="promo-fine">GH₵640 each from 50 sets · Delivery &amp; school set-up available · <a href="#invoice" data-invoice-for="Student Desk Chair Set (FAV-014), bulk order">Need a proforma invoice?</a></p>
         </div>
@@ -791,6 +795,26 @@
   <script src="assets/js/live-strip.js?v=20261002d"></script>
   <script src="assets/js/checkout.js?v=20260930d"></script>
   <script src="assets/js/site.js?v=20261015q"></script>
+  <script>
+  /* Desk proof videos: data/videos.json entries with spots "home-desks" (managed in admin → Videos). */
+  (function () {
+    var box = document.getElementById("promo-proof"), row = document.getElementById("promo-proof-row");
+    if (!box || !row || !window.fetch) return;
+    var ok = function (u) { return /^https:\/\/www\.facebook\.com\/FaVisionEnterprise\/videos\/\d+\/?$/.test(String(u || "")); };
+    var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
+    fetch("data/videos.json", { cache: "no-store" }).then(function (r) { return r.json(); }).then(function (lib) {
+      var vids = (lib.videos || []).filter(function (v) { return (v.spots || []).indexOf("home-desks") > -1 && v.website && v.website.status === "posted" && (ok(v.embed) || v.file); }).slice(0, 2);
+      if (!vids.length) return;
+      row.innerHTML = vids.map(function (v) {
+        var t = esc(v.title || "F.A Vision Enterprise");
+        return '<figure class="promo-proof-item">' + (ok(v.embed)
+          ? '<iframe src="https://www.facebook.com/plugins/video.php?href=' + encodeURIComponent(v.embed) + '&show_text=false" title="' + t + '" loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe>'
+          : '<video src="' + esc(v.file) + '" controls preload="none" playsinline></video>') + '<figcaption>' + t + '</figcaption></figure>';
+      }).join("");
+      box.hidden = false;
+    }).catch(function () {});
+  })();
+  </script>
   <script src="assets/js/meta-pixel.js?v=20261008a"></script>
   <script src="assets/js/nav.js?v=20261015p"></script>
 </body>

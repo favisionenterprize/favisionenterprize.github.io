@@ -1235,6 +1235,60 @@
     "voice": "en_US-ryan-high",
     "d": "2026-10-08"
    }
+  },
+  {
+   "id": "fb-desk-container-offload",
+   "title": "Our team offloading a container of student desks",
+   "description": "Fresh stock landing at F.A Vision: our team offloading a full container of student desk & chair sets. Bulk orders for schools welcome. Order on WhatsApp 057 264 6176 or see the set: https://favisionenterprize.github.io/p/FAV-014.html",
+   "embed": "https://www.facebook.com/FaVisionEnterprise/videos/442786224559428/",
+   "created": "2022-08-24",
+   "product": "FAV-014",
+   "kind": "video",
+   "source": "facebook",
+   "spots": [
+    "home-desks"
+   ],
+   "website": {
+    "status": "posted",
+    "d": "2026-10-17"
+   },
+   "youtube": {
+    "status": "n/a"
+   },
+   "tiktok": {
+    "status": "n/a"
+   },
+   "audio": {
+    "own_sound": true,
+    "skip": "facebook embed"
+   }
+  },
+  {
+   "id": "fb-desk-loading",
+   "title": "Loading a new consignment of student desks",
+   "description": "Another consignment, loaded and ready for schools. Our team loading student desk & chair sets for delivery. Order on WhatsApp 057 264 6176 or see the set: https://favisionenterprize.github.io/p/FAV-014.html",
+   "embed": "https://www.facebook.com/FaVisionEnterprise/videos/429661388617480/",
+   "created": "2021-12-05",
+   "product": "FAV-014",
+   "kind": "video",
+   "source": "facebook",
+   "spots": [
+    "home-desks"
+   ],
+   "website": {
+    "status": "posted",
+    "d": "2026-10-17"
+   },
+   "youtube": {
+    "status": "n/a"
+   },
+   "tiktok": {
+    "status": "n/a"
+   },
+   "audio": {
+    "own_sound": true,
+    "skip": "facebook embed"
+   }
   }
  ],
  "removed": []

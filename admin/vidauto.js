@@ -35,7 +35,11 @@
   const rerender = () => { if (F() && F().render) F().render(); };
   const product = v => (v.product && A.products().find(p => p.id === v.product)) || null;
   const isStudio = v => /^ai-studio/.test(v.id);
-  const junkName = t => !t || /^(vid|img|video|pxl|mov|snaptik|ssstik|tiktok)?[\s_-]*\d[\d\s_-]*$/i.test(String(t).replace(/\.\w+$/, "")) || /^[0-9a-f]{12,}$/i.test(t);
+  // Facebook videos too long to copy (e.g. the desk offloading videos) play from Facebook itself.
+  const fbFrame = u => /^https:\/\/www\.facebook\.com\/FaVisionEnterprise\/videos\/\d+\/?$/.test(String(u || ""))
+    ? `<iframe class="vid-embed" src="https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(u)}&show_text=false" loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen style="border:0;width:100%;aspect-ratio:9/16;max-height:420px"></iframe>`
+    : "";
+  const junkName = t =>!t || /^(vid|img|video|pxl|mov|snaptik|ssstik|tiktok)?[\s_-]*\d[\d\s_-]*$/i.test(String(t).replace(/\.\w+$/, "")) || /^[0-9a-f]{12,}$/i.test(t);
 
   // ------------------------------------------------------------------ descriptions (fresh each time)
   function describe(v, net) {
@@ -142,7 +146,7 @@
     if (fb.needExt()) return;
     if (!fb.liveAddon()) return A.toast("YouTube needs the add-on's automatic updates switched on (Today tab, top).", true);
     if (!shellOk()) return A.toast("Reload the add-on once in edge://extensions (it needs permission for YouTube), then refresh this page and try again.", true);
-    const vids = ids.map(id => S.videos.find(v => v.id === id)).filter(Boolean);
+    const vids = ids.map(id => S.videos.find(v => v.id === id)).filter(v => v && v.file);
     if (!vids.length) return A.toast("No videos to upload.", true);
     const q = vids.map(v => ({ k: v.id, file: location.origin + "/" + v.file, title: titleFor(v, "youtube"), description: textFor(v, "youtube") }));
     vids.forEach(reroll);
@@ -180,6 +184,7 @@
   // ------------------------------------------------------------------ screen
   function badge(v, net) {
     const r = v[net];
+    if (r.status === "n/a") return "";
     if (r.status === "posted") return `<span class="vid-tag ok">✓ ${NETS[net]}${r.url ? ` <a href="${esc(r.url)}" target="_blank" rel="noopener">open</a>` : ""}</span>`;
     if (r.status === "failed") return `<span class="vid-tag bad" title="${esc(r.why || "")}">✗ ${NETS[net]}</span>`;
     return `<span class="vid-tag">${NETS[net]}: waiting</span>`;
@@ -188,7 +193,7 @@
   function card(v) {
     const p = product(v), d = draft(v);
     return `<article class="vid-card" data-vid-card="${esc(v.id)}">
-      <video src="../${esc(v.file)}" ${v.poster ? `poster="../${esc(v.poster)}"` : ""} controls preload="none" playsinline></video>
+      ${v.embed ? fbFrame(v.embed) : `<video src="../${esc(v.file)}" ${v.poster ? `poster="../${esc(v.poster)}"` : ""} controls preload="none" playsinline></video>`}
       <div class="vid-info">
         <h3>${esc(junkName(v.title) ? (p ? String(p.name).split(" — ")[0] : "Video " + (v.created || "")) : v.title)}</h3>
         <p class="muted fa-small">${esc(SRC[v.source] || v.source || "")} · ${esc(v.created || "")}${p ? " · " + esc(p.id) : ""}${v.size_mb ? " · " + v.size_mb + " MB" : ""}</p>
@@ -199,12 +204,12 @@
         <div class="vid-actions">
           <button class="btn btn-ghost btn-sm" data-vid="reroll" data-id="${esc(v.id)}">🔄 New description</button>
           <button class="btn btn-ghost btn-sm" data-vid="copy" data-id="${esc(v.id)}">Copy description</button>
-          <a class="btn btn-ghost btn-sm" href="../${esc(v.file)}" download>Download</a>
+          ${v.embed ? `<a class="btn btn-ghost btn-sm" href="${esc(v.embed)}" target="_blank" rel="noopener">Open on Facebook</a>` : `<a class="btn btn-ghost btn-sm" href="../${esc(v.file)}" download>Download</a>`}
         </div>
         <div class="vid-actions">
           ${v.website.status === "posted" ? `<button class="btn btn-ghost btn-sm" data-vid="web-off" data-id="${esc(v.id)}">Remove from website</button>` : `<button class="btn btn-sell btn-sm" data-vid="web-on" data-id="${esc(v.id)}">Post to website</button>`}
-          <button class="btn btn-sell btn-sm" data-vid="yt" data-id="${esc(v.id)}">${v.youtube.status === "posted" ? "Post to YouTube again" : "Post to YouTube"}</button>
-          <button class="btn btn-ghost btn-sm" data-vid="tt" data-id="${esc(v.id)}">TikTok (copy + download)</button>
+          ${v.embed ? "" : `<button class="btn btn-sell btn-sm" data-vid="yt" data-id="${esc(v.id)}">${v.youtube.status === "posted" ? "Post to YouTube again" : "Post to YouTube"}</button>
+          <button class="btn btn-ghost btn-sm" data-vid="tt" data-id="${esc(v.id)}">TikTok (copy + download)</button>`}
         </div>
         <details class="vid-more"><summary>More</summary>
           <div class="vid-actions">
@@ -272,7 +277,7 @@
     if (k === "copy") { await copy(textFor(v, "tiktok")); reroll(v); rerender(); return A.toast("Description copied ✓ (a new one is ready for next time)"); }
     if (k === "web-on" || k === "web-off") return toWebsite(v, k === "web-on");
     if (k === "yt") return toYouTube([v.id], false);
-    if (k === "tt") return toTikTok(v);
+    if (k === "tt") return v.file ? toTikTok(v) : null;
     if (/^(yt|tt)-(un)?mark$/.test(k)) {
       const net = k.startsWith("yt") ? "youtube" : "tiktok", on = !k.includes("unmark");
       A.busy("Saving…");
@@ -286,7 +291,7 @@
       armed = null;
       A.busy("Deleting the video…");
       try {
-        const deletes = [v.file].concat(v.poster && v.poster.startsWith("assets/videos/") ? [v.poster] : []);
+        const deletes = [v.file].filter(Boolean).concat(v.poster && v.poster.startsWith("assets/videos/") ? [v.poster] : []);
         S = normalise(await A.commitFiles({ files: [], deletes, jsonPath: FILE, fallback: EMPTY, message: `Videos: delete ${v.id}`, mutate: s => { s = normalise(s); s.videos = s.videos.filter(x => x.id !== v.id); s.removed = [...new Set(s.removed.concat(v.id))]; return s; } }));
         A.toast("Video deleted");
       } catch (err) { A.toast(A.friendly(err), true); }

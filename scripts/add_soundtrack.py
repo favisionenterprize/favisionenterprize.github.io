@@ -262,6 +262,8 @@ def main():
     for i, v in enumerate(data["videos"]):
         if v["id"] in removed or (ONLY and v["id"] != ONLY) or (v.get("audio") and not FORCE and not ONLY):
             continue
+        if not v.get("file"):  # embedded videos (e.g. Facebook) have no file of ours
+            continue
         src = ROOT / v["file"]
         if not src.exists():
             continue

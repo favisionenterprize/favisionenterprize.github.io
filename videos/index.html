@@ -122,8 +122,11 @@
         const desc = v.website.description || v.description || "";
         const msg = encodeURIComponent(`Hello F.A Vision, I saw your video "${title}" and I'd like to order${name ? " the " + name : ""}.`);
         const yt = safeUrl(v.youtube && v.youtube.url);
+        const fb = /^https:\/\/www\.facebook\.com\/FaVisionEnterprise\/videos\/\d+\/?$/.test(String(v.embed || "")) ? v.embed : "";
+        if (!fb && !v.file) return "";
         return `<article class="vids-card">
-          <video src="../${esc(v.file)}" ${v.poster ? `poster="../${esc(v.poster)}"` : ""} controls preload="none" playsinline></video>
+          ${fb ? `<iframe src="https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(fb)}&show_text=false" title="${esc(title)}" loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen style="border:0;width:100%;aspect-ratio:9/16;display:block;background:#000"></iframe>`
+            : `<video src="../${esc(v.file)}" ${v.poster ? `poster="../${esc(v.poster)}"` : ""} controls preload="none" playsinline></video>`}
           <div class="vids-body">
             <h2>${esc(title)}</h2>
             ${desc ? `<div class="vids-desc">${linkify(desc)}</div><button class="vids-more" type="button">Read more</button>` : ""}
