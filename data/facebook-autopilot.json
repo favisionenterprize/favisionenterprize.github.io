@@ -11230,6 +11230,62 @@
    "ok": false,
    "now": true,
    "why": "Try again later"
+  },
+  {
+   "d": "2026-10-17",
+   "t": "2026-10-17T15:00:37.564Z",
+   "p": "FAV-023",
+   "g": "2350652831731838",
+   "ok": false,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-17",
+   "t": "2026-10-17T15:01:45.914Z",
+   "p": "FAV-023",
+   "g": "430899336118042",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-17",
+   "t": "2026-10-17T15:02:30.824Z",
+   "p": "FAV-023",
+   "g": "expatsinghana",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-17",
+   "t": "2026-10-17T15:03:26.340Z",
+   "p": "FAV-023",
+   "g": "1758276397875629",
+   "ok": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-17",
+   "t": "2026-10-17T15:06:48.042Z",
+   "p": "FAV-023",
+   "g": "1482964695349324",
+   "ok": false,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-17",
+   "t": "2026-10-17T15:07:33.020Z",
+   "p": "FAV-023",
+   "g": "133559973907173",
+   "ok": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-17",
+   "t": "2026-10-17T15:08:30.774Z",
+   "p": "FAV-023",
+   "g": "ghanasoftwareservices",
+   "ok": true,
+   "why": "first comment not added (post not found)"
   }
  ],
  "resets": {},
@@ -12062,6 +12118,14 @@
    "kind": "grow",
    "joined": 8,
    "requested": 0
+  },
+  {
+   "d": "2026-10-17",
+   "t": "2026-10-17T15:08:51.351Z",
+   "kind": "post",
+   "tried": 7,
+   "ok": 4,
+   "stopped": "Stopped by you."
   }
  ],
  "renewLog": [
