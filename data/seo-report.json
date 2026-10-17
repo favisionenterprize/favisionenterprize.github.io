@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-17T06:52:47Z",
+ "generated": "2026-10-17T12:44:08Z",
  "mode": "full",
  "score": 96,
  "prev_score": 96,
@@ -85,7 +85,7 @@
     "Service",
     "WebSite"
    ],
-   "bytes": 445804,
+   "bytes": 445746,
    "requests": 14,
    "redirect": false,
    "in_sitemap": true
@@ -104,7 +104,7 @@
     "ItemList",
     "ListItem"
    ],
-   "bytes": 200931,
+   "bytes": 200884,
    "requests": 8,
    "redirect": false,
    "in_sitemap": true
@@ -120,7 +120,7 @@
     "Smart help for your home, school and business"
    ],
    "schema": [],
-   "bytes": 296766,
+   "bytes": 296719,
    "requests": 10,
    "redirect": false,
    "in_sitemap": true
@@ -136,7 +136,7 @@
     "Shop our TikTok furniture"
    ],
    "schema": [],
-   "bytes": 228399,
+   "bytes": 228352,
    "requests": 9,
    "redirect": false,
    "in_sitemap": true
@@ -152,7 +152,7 @@
     "See it in action"
    ],
    "schema": [],
-   "bytes": 184248,
+   "bytes": 184201,
    "requests": 5,
    "redirect": false,
    "in_sitemap": true
@@ -163,10 +163,10 @@
    "url": "https://favisionenterprize.github.io/desks/",
    "title": "Student Desk & Chair Sets from GH₵650 · F.A Vision Enterprise",
    "title_len": 61,
-   "description": "Height-adjustable steel student desk & chair sets for SHS to University. GH₵650 per set, GH₵640 each from 50 sets. Delivery & school set-up available. Odorkor, Omanjor, Kasoa.",
+   "description": "Sturdy steel student desk & chair sets for SHS to University. GH₵650 per set, GH₵640 each from 50 sets. Delivery & school set-up available. Odorkor, Omanjor, Kasoa.",
    "h1": [],
    "schema": [],
-   "bytes": 2498,
+   "bytes": 2465,
    "requests": 1,
    "redirect": true,
    "in_sitemap": false
@@ -419,7 +419,7 @@
    "url": "https://favisionenterprize.github.io/p/FAV-014.html",
    "title": "Student Desk Chair Set · GH₵650 in Accra | F.A Vision Enterprise",
    "title_len": 64,
-   "description": "Height-adjustable desk and chair sets, perfect for classrooms from SHS through university. Anti-slip floor caps on the legs prevent sliding and cut down on di",
+   "description": "Sturdy steel desk and chair sets, perfect for classrooms from SHS through university. Anti-slip floor caps on the legs prevent sliding and cut down on distrac",
    "h1": [
     "Student Desk Chair Set"
    ],
@@ -430,7 +430,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 346341,
+   "bytes": 346278,
    "requests": 5,
    "redirect": false,
    "in_sitemap": true
@@ -549,9 +549,9 @@
    "page": "p/FAV-020.html",
    "label": "/p/FAV-020.html",
    "url": "https://favisionenterprize.github.io/p/FAV-020.html",
-   "title": "Business Cards · GH₵100 in Accra | F.A Vision Enterprise",
+   "title": "Business Cards · GH₵450 in Accra | F.A Vision Enterprise",
    "title_len": 56,
-   "description": "Professionally designed and printed business cards from our printing press at Omanjor. 100 pieces GH₵50 · 200 pieces GH₵100. Price with or without delivery.",
+   "description": "Professionally designed and printed business cards from our printing press at Omanjor.",
    "h1": [
     "Business Cards"
    ],
@@ -562,7 +562,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 15208,
+   "bytes": 14864,
    "requests": 2,
    "redirect": false,
    "in_sitemap": true
@@ -772,8 +772,8 @@
    "page": "p/FAV-030.html",
    "label": "/p/FAV-030.html",
    "url": "https://favisionenterprize.github.io/p/FAV-030.html",
-   "title": "Hair Dressers Washing Bowl with Bar Chair · GH₵9,300 in Accra | F.A Vision Enterprise",
-   "title_len": 85,
+   "title": "Hair Dressers Washing Bowl with Bar Chair · GH₵10,950 in Accra | F.A Vision Enterprise",
+   "title_len": 86,
    "description": "Salon backwash unit: hair washing bowl with attached padded chair, for hairdressers and barbering shops. Priced from GH₵9,300 to GH₵10,950 depending on model ",
    "h1": [
     "Hair Dressers Washing Bowl with Bar Chair"
@@ -785,7 +785,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 149057,
+   "bytes": 149063,
    "requests": 2,
    "redirect": false,
    "in_sitemap": true
@@ -1061,7 +1061,7 @@
       "kb": 302,
       "requests": 48,
       "img_no_alt": 0,
-      "secs": 0.4,
+      "secs": 0.6,
       "keywords": []
      },
      {
@@ -1082,7 +1082,7 @@
       "kb": 282,
       "requests": 48,
       "img_no_alt": 0,
-      "secs": 0.4,
+      "secs": 0.5,
       "keywords": []
      },
      {
@@ -1124,7 +1124,7 @@
       "kb": 193,
       "requests": 6,
       "img_no_alt": 3,
-      "secs": 0.3,
+      "secs": 0.5,
       "keywords": []
      }
     ],
@@ -1201,10 +1201,10 @@
       "whatsapp": true,
       "blog": false,
       "faq": false,
-      "kb": 133,
-      "requests": 120,
+      "kb": 135,
+      "requests": 123,
       "img_no_alt": 1,
-      "secs": 0.7,
+      "secs": 11.3,
       "keywords": []
      },
      {
@@ -1225,7 +1225,7 @@
       "kb": 163,
       "requests": 128,
       "img_no_alt": 1,
-      "secs": 0.5,
+      "secs": 12.6,
       "keywords": []
      },
      {
@@ -1246,13 +1246,13 @@
       "kb": 94,
       "requests": 102,
       "img_no_alt": 0,
-      "secs": 2.5,
+      "secs": 1.8,
       "keywords": []
      },
      {
-      "url": "https://furniturecityghana.com/product/bedroom-61/",
+      "url": "https://furniturecityghana.com/product/cl-985-101-black/",
       "title": true,
-      "title_len": 30,
+      "title_len": 41,
       "description": false,
       "h1": 1,
       "og": false,
@@ -1264,10 +1264,10 @@
       "whatsapp": true,
       "blog": false,
       "faq": false,
-      "kb": 117,
-      "requests": 118,
+      "kb": 111,
+      "requests": 112,
       "img_no_alt": 2,
-      "secs": 0.5,
+      "secs": 1.4,
       "keywords": []
      }
     ],
@@ -1367,7 +1367,7 @@
       "no FAQ",
       "no H1",
       "no link-preview tags",
-      "heavy home page (133 KB HTML, 120 files)",
+      "heavy home page (135 KB HTML, 123 files)",
       "no phone number on the home page",
       "targets none of our keywords in title/H1"
      ]
