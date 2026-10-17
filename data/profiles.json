@@ -44,6 +44,15 @@
    "pinOk": true,
    "why": "Instagram lets you change the website link only in its phone app (Edit profile → Links)",
    "mode": "fix"
+  },
+  "x": {
+   "d": "2026-10-17",
+   "link": "favisionenterprize.github.io",
+   "pinned": "Pls take Note that office is open for walk in purchases and delivery as well. STUDENT DESKS ARE AVAILABLE IN LARGE QUANTITIES!!!",
+   "linkOk": true,
+   "pinOk": false,
+   "why": "couldn't find a post with “Fresh stock, just arrived” on the profile",
+   "mode": "fix"
   }
  },
  "runs": [
@@ -67,6 +76,13 @@
    "mode": "fix",
    "linkOk": false,
    "pinOk": true
+  },
+  {
+   "d": "2026-10-17",
+   "net": "x",
+   "mode": "fix",
+   "linkOk": true,
+   "pinOk": false
   }
  ]
 }
