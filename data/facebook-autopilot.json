@@ -6451,6 +6451,60 @@
    "members": 28000,
    "source": "autopilot",
    "active": true
+  },
+  {
+   "id": "1245732986328769",
+   "name": "DIY home & garden decoration ��",
+   "url": "https://www.facebook.com/groups/1245732986328769/",
+   "added": "2026-10-18",
+   "members": 1500000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "homedecorinteriordesign",
+   "name": "Home Decor and Interior Design Ideas",
+   "url": "https://www.facebook.com/groups/homedecorinteriordesign/",
+   "added": "2026-10-18",
+   "members": 929000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "718143992098619",
+   "name": "Home Interior Designs",
+   "url": "https://www.facebook.com/groups/718143992098619/",
+   "added": "2026-10-18",
+   "members": 5700000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "msianinteriordesigners",
+   "name": "INTERIOR DESIGNERS",
+   "url": "https://www.facebook.com/groups/msianinteriordesigners/",
+   "added": "2026-10-18",
+   "members": 1300000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "180671011983926",
+   "name": "Interior Designer",
+   "url": "https://www.facebook.com/groups/180671011983926/",
+   "added": "2026-10-18",
+   "members": 183000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "329443866631729",
+   "name": "Murang bilihan ng mga furniture 😊❤😊💓",
+   "url": "https://www.facebook.com/groups/329443866631729/",
+   "added": "2026-10-18",
+   "members": 258000,
+   "source": "autopilot",
+   "active": true
   }
  ],
  "posts": [
@@ -11800,12 +11854,66 @@
    "members": 28000,
    "status": "joined",
    "url": "https://www.facebook.com/groups/229343507183776/"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T00:46:09.760Z",
+   "g": "1245732986328769",
+   "name": "DIY home & garden decoration ��",
+   "members": 1500000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/1245732986328769/"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T00:47:19.273Z",
+   "g": "homedecorinteriordesign",
+   "name": "Home Decor and Interior Design Ideas",
+   "members": 929000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/homedecorinteriordesign/"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T00:49:17.976Z",
+   "g": "718143992098619",
+   "name": "Home Interior Designs",
+   "members": 5700000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/718143992098619/"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T00:50:40.330Z",
+   "g": "msianinteriordesigners",
+   "name": "INTERIOR DESIGNERS",
+   "members": 1300000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/msianinteriordesigners/"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T00:52:11.456Z",
+   "g": "180671011983926",
+   "name": "Interior Designer",
+   "members": 183000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/180671011983926/"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T00:56:28.061Z",
+   "g": "329443866631729",
+   "name": "Murang bilihan ng mga furniture 😊❤😊💓",
+   "members": 258000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/329443866631729/"
   }
  ],
  "checks": {
   "sync": "2026-10-18",
   "declines": "2026-10-18",
-  "grow": "2026-10-17"
+  "grow": "2026-10-18"
  },
  "rounds": {
   "FAV-014": "2026-10-13T21:28:03.690Z",
@@ -12138,6 +12246,13 @@
    "kind": "declines",
    "found": 1,
    "left": 5
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T00:58:21.322Z",
+   "kind": "grow",
+   "joined": 6,
+   "requested": 0
   }
  ],
  "renewLog": [
