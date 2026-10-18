@@ -11331,6 +11331,166 @@
    "g": "ghanasoftwareservices",
    "ok": true,
    "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:02:24.104Z",
+   "p": "FAV-006",
+   "g": "213453265854018",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:05:06.992Z",
+   "p": "FAV-006",
+   "g": "GhanaintheUK",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:08:31.672Z",
+   "p": "FAV-006",
+   "g": "613870175328566",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:08:58.973Z",
+   "p": "FAV-006",
+   "g": "1307349760454711",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:09:29.101Z",
+   "p": "FAV-006",
+   "g": "1805318230880180",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:09:57.933Z",
+   "p": "FAV-006",
+   "g": "2706610592966637",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:12:50.387Z",
+   "p": "FAV-006",
+   "g": "3408875172467933",
+   "ok": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:15:19.257Z",
+   "p": "FAV-006",
+   "g": "297839381138160",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:17:15.662Z",
+   "p": "FAV-006",
+   "g": "548129135286196",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:18:56.657Z",
+   "p": "FAV-006",
+   "g": "482367426282568",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:21:24.114Z",
+   "p": "FAV-006",
+   "g": "3948861122106468",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:22:11.755Z",
+   "p": "FAV-006",
+   "g": "421634191032436",
+   "ok": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:24:36.674Z",
+   "p": "FAV-006",
+   "g": "360461425837432",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:27:13.382Z",
+   "p": "FAV-006",
+   "g": "246365003047126",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:29:12.039Z",
+   "p": "FAV-006",
+   "g": "1400061157227180",
+   "ok": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:30:42.181Z",
+   "p": "FAV-006",
+   "g": "571203385398009",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:31:08.671Z",
+   "p": "FAV-006",
+   "g": "676028904970756",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:33:15.584Z",
+   "p": "FAV-006",
+   "g": "968743035497423",
+   "ok": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:35:58.841Z",
+   "p": "FAV-006",
+   "g": "1188146491374311",
+   "ok": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:39:16.777Z",
+   "p": "FAV-006",
+   "g": "846228426160339",
+   "ok": true,
+   "why": "Waiting for admin approval"
   }
  ],
  "resets": {},
@@ -12253,6 +12413,13 @@
    "kind": "grow",
    "joined": 6,
    "requested": 0
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:39:35.665Z",
+   "kind": "post",
+   "tried": 20,
+   "ok": 15
   }
  ],
  "renewLog": [
