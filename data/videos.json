@@ -340,7 +340,7 @@
    },
    "youtube": {
     "status": "failed",
-    "why": "YouTube didn't confirm (check YouTube Studio → Content)",
+    "why": "The upload window didn't open",
     "d": "2026-10-18"
    },
    "audio": {
