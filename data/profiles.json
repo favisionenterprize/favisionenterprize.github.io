@@ -118,6 +118,13 @@
    "mode": "fix",
    "linkOk": true,
    "pinOk": false
+  },
+  {
+   "d": "2026-10-18",
+   "net": "ig",
+   "mode": "fix",
+   "linkOk": false,
+   "pinOk": true
   }
  ]
 }
