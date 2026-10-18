@@ -98,11 +98,6 @@
   },
   {
    "d": "2026-10-18",
-   "net": "fb",
-   "n": 557
-  },
-  {
-   "d": "2026-10-18",
    "net": "ig",
    "n": 892
   },
@@ -115,6 +110,11 @@
    "d": "2026-10-18",
    "net": "tiktok",
    "n": 282
+  },
+  {
+   "d": "2026-10-18",
+   "net": "fb",
+   "n": 558
   }
  ],
  "posts": {
@@ -155,7 +155,7 @@
    "checked": "2026-10-18",
    "likes": 1,
    "comments": 1,
-   "views": 139
+   "views": 140
   },
   "https://www.instagram.com/p/Dd8TbyNiKK8/": {
    "net": "ig",
@@ -562,9 +562,9 @@
    "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid02xf1iV7noxjRTQMXqJptyjTWc2gAvS2EPnKGLpAqnELaprdRGfnYX6gu8PNeRz7ywl",
    "first": "2026-10-18",
    "commented": [],
-   "title": "Fresh stock, just arrived! 🎒📚 Our new... - F.A Vision Enterprise",
+   "title": "(20+) Fresh stock, just arrived! 🎒📚 Our new... - F.A Vision Enterprise",
    "checked": "2026-10-18",
-   "likes": 5,
+   "likes": 10000,
    "views": 1
   },
   "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0XS33LduAo2jTCA3gftAyZ3faNka3EY7bgENR73USTRpepviT9GJRJAsArcNTBrrrl": {
@@ -572,9 +572,9 @@
    "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0XS33LduAo2jTCA3gftAyZ3faNka3EY7bgENR73USTRpepviT9GJRJAsArcNTBrrrl",
    "first": "2026-10-18",
    "commented": [],
-   "title": "Tertiary Student Desk is available. Hurry... - F.A Vision Enterprise",
+   "title": "(20+) Tertiary Student Desk is available. Hurry... - F.A Vision Enterprise",
    "checked": "2026-10-18",
-   "likes": 5
+   "likes": 10000
   },
   "https://www.instagram.com/reel/Denm512va3v/": {
    "net": "ig",
@@ -1392,6 +1392,21 @@
    "followers": 282,
    "stopped": "No posts found on your TikTok profile.",
    "commenting": true
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T16:03:04.197Z",
+   "net": "fb",
+   "mode": "likers",
+   "posts": 3,
+   "checked": 3,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 558,
+   "stopped": null,
+   "commenting": false
   }
  ],
  "liked": {}
