@@ -1937,6 +1937,96 @@
    "p": "FAV-014",
    "ok": true,
    "now": true
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:48:22.691Z",
+   "net": "x",
+   "k": "card:FAV-014",
+   "p": "FAV-014",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:49:29.421Z",
+   "net": "x",
+   "k": "box:FAV-024",
+   "p": "FAV-024",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:50:34.886Z",
+   "net": "x",
+   "k": "box:FAV-029",
+   "p": "FAV-029",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:51:41.781Z",
+   "net": "x",
+   "k": "box:FAV-015",
+   "p": "FAV-015",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:52:46.882Z",
+   "net": "x",
+   "k": "card:FAV-030",
+   "p": "FAV-030",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:54:00.041Z",
+   "net": "x",
+   "k": "ad:fav-025",
+   "p": "FAV-025",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:55:03.804Z",
+   "net": "x",
+   "k": "card:FAV-023",
+   "p": "FAV-023",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:56:08.926Z",
+   "net": "x",
+   "k": "box:FAV-018",
+   "p": "FAV-018",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:57:15.016Z",
+   "net": "x",
+   "k": "ad:fav-001",
+   "p": "FAV-001",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:58:19.685Z",
+   "net": "x",
+   "k": "box:FAV-009",
+   "p": "FAV-009",
+   "ok": false,
+   "why": "X didn't confirm the post"
   }
  ],
  "runs": [
@@ -2262,6 +2352,13 @@
    "kind": "tiktok",
    "tried": 1,
    "ok": 1
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:58:33.993Z",
+   "kind": "x",
+   "tried": 10,
+   "ok": 0
   }
  ]
 }
