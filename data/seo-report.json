@@ -1,6 +1,6 @@
 {
- "generated": "2026-10-17T14:30:30Z",
- "mode": "local",
+ "generated": "2026-10-18T07:16:33Z",
+ "mode": "full",
  "score": 96,
  "prev_score": 96,
  "counts": {
@@ -85,7 +85,7 @@
     "Service",
     "WebSite"
    ],
-   "bytes": 475354,
+   "bytes": 480789,
    "requests": 14,
    "redirect": false,
    "in_sitemap": true
@@ -104,7 +104,7 @@
     "ItemList",
     "ListItem"
    ],
-   "bytes": 223092,
+   "bytes": 228527,
    "requests": 8,
    "redirect": false,
    "in_sitemap": true
@@ -120,7 +120,7 @@
     "Smart help for your home, school and business"
    ],
    "schema": [],
-   "bytes": 318927,
+   "bytes": 324362,
    "requests": 10,
    "redirect": false,
    "in_sitemap": true
@@ -136,7 +136,7 @@
     "Shop our TikTok furniture"
    ],
    "schema": [],
-   "bytes": 250560,
+   "bytes": 255995,
    "requests": 9,
    "redirect": false,
    "in_sitemap": true
@@ -152,7 +152,7 @@
     "See it in action"
    ],
    "schema": [],
-   "bytes": 206893,
+   "bytes": 212328,
    "requests": 5,
    "redirect": false,
    "in_sitemap": true
@@ -188,7 +188,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 762387,
+   "bytes": 762370,
    "requests": 6,
    "redirect": false,
    "in_sitemap": true
@@ -210,7 +210,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 389664,
+   "bytes": 389639,
    "requests": 5,
    "redirect": false,
    "in_sitemap": true
@@ -232,7 +232,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 1028679,
+   "bytes": 1028657,
    "requests": 6,
    "redirect": false,
    "in_sitemap": true
@@ -254,7 +254,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 319818,
+   "bytes": 319794,
    "requests": 3,
    "redirect": false,
    "in_sitemap": true
@@ -276,7 +276,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 400104,
+   "bytes": 400076,
    "requests": 3,
    "redirect": false,
    "in_sitemap": true
@@ -298,7 +298,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 393602,
+   "bytes": 393565,
    "requests": 6,
    "redirect": false,
    "in_sitemap": true
@@ -320,7 +320,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 214976,
+   "bytes": 214941,
    "requests": 4,
    "redirect": false,
    "in_sitemap": true
@@ -342,7 +342,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 157116,
+   "bytes": 157096,
    "requests": 3,
    "redirect": false,
    "in_sitemap": true
@@ -364,7 +364,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 646641,
+   "bytes": 646617,
    "requests": 6,
    "redirect": false,
    "in_sitemap": true
@@ -386,7 +386,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 716279,
+   "bytes": 716263,
    "requests": 6,
    "redirect": false,
    "in_sitemap": true
@@ -408,7 +408,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 798275,
+   "bytes": 798244,
    "requests": 5,
    "redirect": false,
    "in_sitemap": true
@@ -430,7 +430,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 487298,
+   "bytes": 487266,
    "requests": 6,
    "redirect": false,
    "in_sitemap": true
@@ -452,7 +452,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 331329,
+   "bytes": 331277,
    "requests": 6,
    "redirect": false,
    "in_sitemap": true
@@ -474,7 +474,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 250206,
+   "bytes": 250199,
    "requests": 3,
    "redirect": false,
    "in_sitemap": true
@@ -496,7 +496,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 145748,
+   "bytes": 145736,
    "requests": 4,
    "redirect": false,
    "in_sitemap": true
@@ -518,7 +518,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 324528,
+   "bytes": 324525,
    "requests": 3,
    "redirect": false,
    "in_sitemap": true
@@ -540,7 +540,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 146033,
+   "bytes": 146015,
    "requests": 4,
    "redirect": false,
    "in_sitemap": true
@@ -562,7 +562,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 142445,
+   "bytes": 142436,
    "requests": 3,
    "redirect": false,
    "in_sitemap": true
@@ -584,7 +584,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 335317,
+   "bytes": 335312,
    "requests": 6,
    "redirect": false,
    "in_sitemap": true
@@ -606,7 +606,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 304701,
+   "bytes": 304669,
    "requests": 6,
    "redirect": false,
    "in_sitemap": true
@@ -628,7 +628,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 248301,
+   "bytes": 248290,
    "requests": 4,
    "redirect": false,
    "in_sitemap": true
@@ -719,7 +719,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 590260,
+   "bytes": 590147,
    "requests": 6,
    "redirect": false,
    "in_sitemap": true
@@ -741,7 +741,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 320698,
+   "bytes": 320660,
    "requests": 3,
    "redirect": false,
    "in_sitemap": true
@@ -763,7 +763,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 452486,
+   "bytes": 452470,
    "requests": 3,
    "redirect": false,
    "in_sitemap": true
@@ -785,7 +785,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 301909,
+   "bytes": 301882,
    "requests": 3,
    "redirect": false,
    "in_sitemap": true
@@ -807,7 +807,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 251676,
+   "bytes": 251667,
    "requests": 3,
    "redirect": false,
    "in_sitemap": true
@@ -829,7 +829,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 220888,
+   "bytes": 220872,
    "requests": 3,
    "redirect": false,
    "in_sitemap": true
@@ -851,7 +851,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 420015,
+   "bytes": 419993,
    "requests": 3,
    "redirect": false,
    "in_sitemap": true
@@ -873,7 +873,7 @@
     "Offer",
     "Product"
    ],
-   "bytes": 353604,
+   "bytes": 353589,
    "requests": 3,
    "redirect": false,
    "in_sitemap": true
@@ -1061,7 +1061,7 @@
       "kb": 302,
       "requests": 48,
       "img_no_alt": 0,
-      "secs": 0.6,
+      "secs": 0.4,
       "keywords": []
      },
      {
@@ -1082,7 +1082,7 @@
       "kb": 282,
       "requests": 48,
       "img_no_alt": 0,
-      "secs": 0.5,
+      "secs": 0.3,
       "keywords": []
      },
      {
@@ -1124,7 +1124,7 @@
       "kb": 193,
       "requests": 6,
       "img_no_alt": 3,
-      "secs": 0.5,
+      "secs": 0.3,
       "keywords": []
      }
     ],
@@ -1158,7 +1158,7 @@
       "kb": 4,
       "requests": 4,
       "img_no_alt": 0,
-      "secs": 0.4,
+      "secs": 0.1,
       "keywords": [
        "furniture shop Accra"
       ]
@@ -1201,10 +1201,10 @@
       "whatsapp": true,
       "blog": false,
       "faq": false,
-      "kb": 135,
-      "requests": 123,
+      "kb": 133,
+      "requests": 120,
       "img_no_alt": 1,
-      "secs": 11.3,
+      "secs": 1.1,
       "keywords": []
      },
      {
@@ -1225,7 +1225,7 @@
       "kb": 163,
       "requests": 128,
       "img_no_alt": 1,
-      "secs": 12.6,
+      "secs": 0.6,
       "keywords": []
      },
      {
@@ -1246,13 +1246,13 @@
       "kb": 94,
       "requests": 102,
       "img_no_alt": 0,
-      "secs": 1.8,
+      "secs": 0.7,
       "keywords": []
      },
      {
-      "url": "https://furniturecityghana.com/product/cl-985-101-black/",
+      "url": "https://furniturecityghana.com/product/sofya-yemek-3/",
       "title": true,
-      "title_len": 41,
+      "title_len": 38,
       "description": false,
       "h1": 1,
       "og": false,
@@ -1264,10 +1264,10 @@
       "whatsapp": true,
       "blog": false,
       "faq": false,
-      "kb": 111,
-      "requests": 112,
+      "kb": 115,
+      "requests": 114,
       "img_no_alt": 2,
-      "secs": 1.4,
+      "secs": 0.6,
       "keywords": []
      }
     ],
@@ -1308,7 +1308,7 @@
       "kb": 365,
       "requests": 129,
       "img_no_alt": 26,
-      "secs": 0.3,
+      "secs": 0.4,
       "keywords": []
      }
     ],
@@ -1367,7 +1367,7 @@
       "no FAQ",
       "no H1",
       "no link-preview tags",
-      "heavy home page (135 KB HTML, 123 files)",
+      "heavy home page (133 KB HTML, 120 files)",
       "no phone number on the home page",
       "targets none of our keywords in title/H1"
      ]
@@ -1432,6 +1432,11 @@
   },
   {
    "d": "2026-10-17",
+   "score": 96,
+   "ai": 0
+  },
+  {
+   "d": "2026-10-18",
    "score": 96,
    "ai": 0
   }
