@@ -257,7 +257,38 @@
   "replied": {}
  },
  "mk": {
-  "fixed": {}
+  "fixed": {
+   "1745025166730387": {
+    "d": "2026-10-18",
+    "ok": false,
+    "why": "already has a full description with the website link",
+    "skip": true
+   },
+   "1630630032048162": {
+    "d": "2026-10-18",
+    "ok": false,
+    "why": "already has a full description with the website link",
+    "skip": true
+   },
+   "1181731791186383": {
+    "d": "2026-10-18",
+    "ok": false,
+    "why": "already has a full description with the website link",
+    "skip": true
+   },
+   "4417065965273644": {
+    "d": "2026-10-18",
+    "ok": false,
+    "why": "already has a full description with the website link",
+    "skip": true
+   },
+   "1844320933688368": {
+    "d": "2026-10-18",
+    "ok": false,
+    "why": "already has a full description with the website link",
+    "skip": true
+   }
+  }
  },
  "runs": [
   {
@@ -467,6 +498,15 @@
    "kind": "scan",
    "net": "x",
    "n": 2,
+   "v": "2026-10-15.4"
+  },
+  {
+   "d": "2026-10-18",
+   "kind": "mkedit",
+   "net": "mk",
+   "tried": 5,
+   "ok": 0,
+   "skip": 5,
    "v": "2026-10-15.4"
   }
  ]
