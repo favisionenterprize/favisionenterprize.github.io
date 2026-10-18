@@ -1122,6 +1122,28 @@
    "p": "FAV-030",
    "ok": false,
    "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:46:24.461Z",
+   "k": "tile:fav-024",
+   "p": "FAV-024",
+   "ok": true
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:47:23.346Z",
+   "k": "card:FAV-035",
+   "p": "FAV-035",
+   "ok": true
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:49:23.563Z",
+   "k": "box:FAV-032",
+   "p": "FAV-032",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
   }
  ],
  "profile": [
@@ -1201,7 +1223,7 @@
    "d": "2026-10-18",
    "followers": 892,
    "following": 2024,
-   "posts": 265
+   "posts": 273
   }
  ],
  "runs": [
@@ -1374,6 +1396,13 @@
    "kind": "ig",
    "tried": 5,
    "ok": 3
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:49:43.757Z",
+   "kind": "ig",
+   "tried": 3,
+   "ok": 2
   }
  ]
 }
