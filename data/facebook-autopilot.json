@@ -524,6 +524,19 @@
    "tried": 53,
    "ok": 42,
    "stopped": "Facebook showed \"We limit how often\". Nothing more was posted."
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T17:50:01.344Z",
+   "kind": "renew",
+   "tried": 0,
+   "ok": 0,
+   "stopped": "No listings found on Your listings. Make sure Facebook is on your personal profile."
   }
- ]
+ ],
+ "selling": {
+  "d": "2026-10-18",
+  "cards": []
+ },
+ "renewLog": []
 }
