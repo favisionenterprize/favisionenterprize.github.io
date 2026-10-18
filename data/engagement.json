@@ -100,6 +100,11 @@
    "d": "2026-10-18",
    "net": "ig",
    "n": 892
+  },
+  {
+   "d": "2026-10-18",
+   "net": "fb",
+   "n": 557
   }
  ],
  "posts": {
@@ -137,10 +142,10 @@
    "first": "2026-10-13",
    "commented": [],
    "title": "(20+) Video",
-   "checked": "2026-10-17",
+   "checked": "2026-10-18",
    "likes": 1,
    "comments": 1,
-   "views": 131
+   "views": 139
   },
   "https://www.instagram.com/p/Dd8TbyNiKK8/": {
    "net": "ig",
@@ -541,6 +546,25 @@
    "commented": [],
    "title": "Instagram",
    "checked": "2026-10-17"
+  },
+  "https://www.facebook.com/FaVisionEnterprise/posts/pfbid02xf1iV7noxjRTQMXqJptyjTWc2gAvS2EPnKGLpAqnELaprdRGfnYX6gu8PNeRz7ywl": {
+   "net": "fb",
+   "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid02xf1iV7noxjRTQMXqJptyjTWc2gAvS2EPnKGLpAqnELaprdRGfnYX6gu8PNeRz7ywl",
+   "first": "2026-10-18",
+   "commented": [],
+   "title": "Fresh stock, just arrived! 🎒📚 Our new... - F.A Vision Enterprise",
+   "checked": "2026-10-18",
+   "likes": 5,
+   "views": 1
+  },
+  "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0XS33LduAo2jTCA3gftAyZ3faNka3EY7bgENR73USTRpepviT9GJRJAsArcNTBrrrl": {
+   "net": "fb",
+   "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0XS33LduAo2jTCA3gftAyZ3faNka3EY7bgENR73USTRpepviT9GJRJAsArcNTBrrrl",
+   "first": "2026-10-18",
+   "commented": [],
+   "title": "Tertiary Student Desk is available. Hurry... - F.A Vision Enterprise",
+   "checked": "2026-10-18",
+   "likes": 5
   }
  },
  "runs": [
@@ -1218,6 +1242,21 @@
    "followers": null,
    "stopped": "No posts found on your TikTok profile.",
    "commenting": false
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T04:11:15.810Z",
+   "net": "fb",
+   "mode": "comment",
+   "posts": 3,
+   "checked": 3,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 557,
+   "stopped": null,
+   "commenting": true
   }
  ],
  "liked": {}
