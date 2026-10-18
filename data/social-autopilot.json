@@ -2487,6 +2487,24 @@
    "ok": false,
    "now": true,
    "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T04:53:16.088Z",
+   "net": "tiktok",
+   "k": "box:FAV-030",
+   "p": "FAV-030",
+   "ok": true,
+   "now": true
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T04:57:31.944Z",
+   "net": "tiktok",
+   "k": "box:FAV-032",
+   "p": "FAV-032",
+   "ok": true,
+   "now": true
   }
  ],
  "runs": [
@@ -2868,6 +2886,13 @@
    "kind": "x",
    "tried": 2,
    "ok": 0
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T04:57:46.103Z",
+   "kind": "tiktok",
+   "tried": 2,
+   "ok": 2
   }
  ]
 }
