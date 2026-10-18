@@ -108,13 +108,13 @@
   },
   {
    "d": "2026-10-18",
-   "net": "ig",
-   "n": 892
+   "net": "x",
+   "n": 299
   },
   {
    "d": "2026-10-18",
-   "net": "x",
-   "n": 299
+   "net": "ig",
+   "n": 892
   }
  ],
  "posts": {
@@ -1530,6 +1530,21 @@
    "thanked": 0,
    "followers": null,
    "stopped": "No posts found on your Instagram profile.",
+   "commenting": false
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T17:47:03.751Z",
+   "net": "ig",
+   "mode": "reply",
+   "posts": 3,
+   "checked": 3,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 892,
+   "stopped": null,
    "commenting": false
   }
  ],
