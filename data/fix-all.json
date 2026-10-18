@@ -234,9 +234,9 @@
  },
  "x": {
   "scan": {
-   "d": "2026-10-16",
-   "t": "2026-10-16T21:57:53.667Z",
-   "n": 2,
+   "d": "2026-10-18",
+   "t": "2026-10-18T04:22:09.110Z",
+   "n": 8,
    "posts": [
     {
      "id": "1662447925388099587",
@@ -246,9 +246,51 @@
      "alt": ""
     },
     {
+     "id": "2111667365264146562",
+     "url": "https://x.com/FaVisionEnt/status/2111667365264146562",
+     "text": "",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2111673325038837821",
+     "url": "https://x.com/FaVisionEnt/status/2111673325038837821",
+     "text": "Where are you seeing this from? Tell us in the comments Then like, share and follow F.A Vision Enterprise for more. Page: https:// facebook.com/FaVisionEnterp rise … · Shop: https:// favisionenterprize.github.io",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2111253532766573046",
+     "url": "https://x.com/FaVisionEnt/status/2111253532766573046",
+     "text": "1.2 m Office Desk with Drawer Unit: GH₵ 4,500 (negotiable). WhatsApp 057 264 6176 to order https:// favisionenterprize.github.io/p/FAV-008.html #GhanaToTheWorld #FurnitureGhana Tell us where you're seeing this ad from, then like, share & follow!",
+     "kind": "post",
+     "alt": ""
+    },
+    {
      "id": "2110674176415859172",
      "url": "https://x.com/FaVisionEnt/status/2110674176415859172",
      "text": "TWYFORD Water Closet: GH₵ 750, price negotiable. WhatsApp 027 747 7752 to order https:// favisionenterprize.github.io/p/FAV-024.html #Ghana #GhanaBusiness Tell us where you're seeing this from, then like, share & follow!",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2110672401566466165",
+     "url": "https://x.com/FaVisionEnt/status/2110672401566466165",
+     "text": "Student Desk Chair Set: GH₵ 650, price negotiable per set (GH₵640 each for 50+). WhatsApp 057 264 6176 to order https:// favisionenterprize.github.io/p/FAV-014.html #GhanaToTheWorld #OdorkorAccra Where are you watching this video from? Like, share & follow us!",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2110187999602278406",
+     "url": "https://x.com/FaVisionEnt/status/2110187999602278406",
+     "text": "Upgrade alert Black Glass Dining Set Black Glass Dining Set: GH₵ 4,900 (we can talk). Ready to upgrade your space? WhatsApp 057 264 6176 today https:// favisionenterprize.github.io/p/FAV-002.html Tell us where you're seeing this video from, then like, share & follow!",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2110186805639127120",
+     "url": "https://x.com/FaVisionEnt/status/2110186805639127120",
+     "text": "Kavukçu Wheat Flour: GH₵ 640. WhatsApp 055 543 4994 to order https:// favisionenterprize.github.io/p/FAV-026.html #Kasoa #GhanaBusiness Where are you watching this ad from? Like, share & follow us!",
      "kind": "post",
      "alt": ""
     }
@@ -453,6 +495,13 @@
    "tried": 1,
    "ok": 0,
    "skip": 0,
+   "v": "2026-10-15.4"
+  },
+  {
+   "d": "2026-10-18",
+   "kind": "scan",
+   "net": "x",
+   "n": 8,
    "v": "2026-10-15.4"
   }
  ]
