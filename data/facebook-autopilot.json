@@ -715,15 +715,6 @@
    "active": true
   },
   {
-   "id": "homedecorinspirations",
-   "name": "Home Decor Ideas & DIY Inspiration",
-   "url": "https://www.facebook.com/groups/homedecorinspirations/",
-   "added": "2026-10-14",
-   "members": 108000,
-   "source": "autopilot",
-   "active": true
-  },
-  {
    "id": "308731027560672",
    "name": "AFFORDABLE CARS 4SALE CARS 🚗 IN GHANA ACCRA",
    "url": "https://www.facebook.com/groups/308731027560672/",
@@ -11311,8 +11302,9 @@
    "url": "https://www.facebook.com/groups/2209484532640738/",
    "why": "Declined our post (notification) · leave not confirmed",
    "d": "2026-10-17",
-   "left": false,
-   "tries": 1
+   "left": true,
+   "tries": 2,
+   "left_d": "2026-10-18"
   },
   {
    "id": "2527153720918496",
@@ -11350,8 +11342,9 @@
    "url": "https://www.facebook.com/groups/470433129379613/",
    "why": "Declined our post (notification) · leave not confirmed",
    "d": "2026-10-17",
-   "left": false,
-   "tries": 1
+   "left": true,
+   "tries": 2,
+   "left_d": "2026-10-18"
   },
   {
    "id": "617295088616357",
@@ -11359,8 +11352,9 @@
    "url": "https://www.facebook.com/groups/617295088616357/",
    "why": "Declined our post (notification) · leave not confirmed",
    "d": "2026-10-17",
-   "left": false,
-   "tries": 1
+   "left": true,
+   "tries": 2,
+   "left_d": "2026-10-18"
   },
   {
    "id": "726230881287548",
@@ -11368,8 +11362,19 @@
    "url": "https://www.facebook.com/groups/726230881287548/",
    "why": "Declined our post (notification) · leave not confirmed",
    "d": "2026-10-17",
-   "left": false,
-   "tries": 1
+   "left": true,
+   "tries": 2,
+   "left_d": "2026-10-18"
+  },
+  {
+   "id": "homedecorinspirations",
+   "name": "Home Decor Ideas & DIY Inspiration",
+   "url": "https://www.facebook.com/groups/homedecorinspirations/",
+   "why": "Declined 1 of our posts · already left",
+   "d": "2026-10-18",
+   "left": true,
+   "tries": 1,
+   "left_d": "2026-10-18"
   }
  ],
  "joins": [
@@ -11799,7 +11804,7 @@
  ],
  "checks": {
   "sync": "2026-10-18",
-  "declines": "2026-10-17",
+  "declines": "2026-10-18",
   "grow": "2026-10-17"
  },
  "rounds": {
@@ -12126,6 +12131,13 @@
    "tried": 7,
    "ok": 4,
    "stopped": "Stopped by you."
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T00:45:40.702Z",
+   "kind": "declines",
+   "found": 1,
+   "left": 5
   }
  ],
  "renewLog": [
