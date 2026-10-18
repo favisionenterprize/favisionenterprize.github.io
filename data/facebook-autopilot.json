@@ -11491,6 +11491,166 @@
    "g": "846228426160339",
    "ok": true,
    "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T00:59:03.125Z",
+   "p": "FAV-006",
+   "g": "213453265854018",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:02:04.728Z",
+   "p": "FAV-006",
+   "g": "GhanaintheUK",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:05:18.844Z",
+   "p": "FAV-006",
+   "g": "613870175328566",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:05:48.695Z",
+   "p": "FAV-006",
+   "g": "1307349760454711",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:06:14.888Z",
+   "p": "FAV-006",
+   "g": "1805318230880180",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:06:37.089Z",
+   "p": "FAV-006",
+   "g": "2706610592966637",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:09:40.582Z",
+   "p": "FAV-006",
+   "g": "3408875172467933",
+   "ok": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:12:23.931Z",
+   "p": "FAV-006",
+   "g": "297839381138160",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:13:48.745Z",
+   "p": "FAV-006",
+   "g": "548129135286196",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:16:21.554Z",
+   "p": "FAV-006",
+   "g": "482367426282568",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:19:17.095Z",
+   "p": "FAV-006",
+   "g": "3948861122106468",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:20:12.246Z",
+   "p": "FAV-006",
+   "g": "421634191032436",
+   "ok": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:21:48.670Z",
+   "p": "FAV-006",
+   "g": "360461425837432",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:24:05.356Z",
+   "p": "FAV-006",
+   "g": "246365003047126",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:27:42.250Z",
+   "p": "FAV-006",
+   "g": "1400061157227180",
+   "ok": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:30:53.444Z",
+   "p": "FAV-006",
+   "g": "571203385398009",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:31:23.119Z",
+   "p": "FAV-006",
+   "g": "676028904970756",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:34:35.734Z",
+   "p": "FAV-006",
+   "g": "968743035497423",
+   "ok": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:37:18.310Z",
+   "p": "FAV-006",
+   "g": "1188146491374311",
+   "ok": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:40:15.237Z",
+   "p": "FAV-006",
+   "g": "846228426160339",
+   "ok": true,
+   "why": "Waiting for admin approval"
   }
  ],
  "resets": {},
@@ -12417,6 +12577,13 @@
   {
    "d": "2026-10-18",
    "t": "2026-10-18T01:39:35.665Z",
+   "kind": "post",
+   "tried": 20,
+   "ok": 15
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:40:29.319Z",
    "kind": "post",
    "tried": 20,
    "ok": 15
