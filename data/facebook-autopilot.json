@@ -14347,6 +14347,15 @@
    "ok": false,
    "now": true,
    "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T16:10:20.417Z",
+   "p": "FAV-003",
+   "g": "page",
+   "ok": false,
+   "now": true,
+   "why": "Post button stayed off"
   }
  ],
  "resets": {},
@@ -15329,6 +15338,13 @@
   {
    "d": "2026-10-18",
    "t": "2026-10-18T09:50:14.920Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 0
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T16:10:39.308Z",
    "kind": "post",
    "tried": 1,
    "ok": 0
