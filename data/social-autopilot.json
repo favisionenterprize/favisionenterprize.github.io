@@ -2447,6 +2447,26 @@
    "k": "box:FAV-007",
    "p": "FAV-007",
    "ok": true
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T04:50:51.818Z",
+   "net": "x",
+   "k": "ad:fav-002",
+   "p": "FAV-002",
+   "ok": false,
+   "now": true,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T04:51:54.509Z",
+   "net": "x",
+   "k": "ad:fav-005",
+   "p": "FAV-005",
+   "ok": false,
+   "now": true,
+   "why": "X didn't confirm the post"
   }
  ],
  "runs": [
@@ -2814,6 +2834,13 @@
    "kind": "tiktok",
    "tried": 10,
    "ok": 10
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T04:52:06.676Z",
+   "kind": "x",
+   "tried": 2,
+   "ok": 0
   }
  ]
 }
