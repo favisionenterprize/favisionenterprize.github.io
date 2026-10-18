@@ -111,6 +111,13 @@
    "mode": "fix",
    "linkOk": false,
    "pinOk": false
+  },
+  {
+   "d": "2026-10-18",
+   "net": "fb",
+   "mode": "fix",
+   "linkOk": true,
+   "pinOk": false
   }
  ]
 }
