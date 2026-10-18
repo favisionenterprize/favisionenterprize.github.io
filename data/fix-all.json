@@ -13,8 +13,8 @@
  "ig": {
   "scan": {
    "d": "2026-10-18",
-   "t": "2026-10-18T04:01:37.523Z",
-   "n": 24,
+   "t": "2026-10-18T04:11:01.265Z",
+   "n": 12,
    "posts": [
     {
      "id": "Dd8TbyNiKK8",
@@ -96,90 +96,6 @@
     {
      "id": "Denh5PUCHPP",
      "url": "https://www.instagram.com/p/Denh5PUCHPP/",
-     "text": "",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "Denhy5eiO2o",
-     "url": "https://www.instagram.com/p/Denhy5eiO2o/",
-     "text": "",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "DenhyS6CFWB",
-     "url": "https://www.instagram.com/p/DenhyS6CFWB/",
-     "text": "",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "DenhrabiG2v",
-     "url": "https://www.instagram.com/p/DenhrabiG2v/",
-     "text": "",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "DenhrOHCOOI",
-     "url": "https://www.instagram.com/p/DenhrOHCOOI/",
-     "text": "",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "Denhkk_CF76",
-     "url": "https://www.instagram.com/p/Denhkk_CF76/",
-     "text": "",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "DenhiQGCPsA",
-     "url": "https://www.instagram.com/p/DenhiQGCPsA/",
-     "text": "",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "DenhTr5CPfb",
-     "url": "https://www.instagram.com/p/DenhTr5CPfb/",
-     "text": "",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "DenhFFiiL4g",
-     "url": "https://www.instagram.com/p/DenhFFiiL4g/",
-     "text": "",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "Deng2SjiAXV",
-     "url": "https://www.instagram.com/p/Deng2SjiAXV/",
-     "text": "",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "DengvTzCEZj",
-     "url": "https://www.instagram.com/p/DengvTzCEZj/",
-     "text": "",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "DenfR-GCHmC",
-     "url": "https://www.instagram.com/p/DenfR-GCHmC/",
-     "text": "",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "DenfJ5gCOMO",
-     "url": "https://www.instagram.com/p/DenfJ5gCOMO/",
      "text": "",
      "kind": "post",
      "alt": ""
@@ -437,6 +353,13 @@
    "skip": 0,
    "v": "2026-10-15.4",
    "more": 18
+  },
+  {
+   "d": "2026-10-18",
+   "kind": "scan",
+   "net": "ig",
+   "n": 12,
+   "v": "2026-10-15.4"
   }
  ]
 }
