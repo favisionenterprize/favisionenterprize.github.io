@@ -161,7 +161,8 @@
    "first": "2026-10-13",
    "commented": [],
    "title": "Instagram",
-   "checked": "2026-10-18"
+   "checked": "2026-10-18",
+   "views": 200
   },
   "https://www.instagram.com/reel/C1Tge8mgCKR/": {
    "net": "ig",
@@ -1186,6 +1187,21 @@
    "thanked": 0,
    "followers": null,
    "stopped": "No posts found on your TikTok profile.",
+   "commenting": false
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T03:53:22.536Z",
+   "net": "ig",
+   "mode": "reply",
+   "posts": 3,
+   "checked": 3,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 892,
+   "stopped": null,
    "commenting": false
   }
  ],
