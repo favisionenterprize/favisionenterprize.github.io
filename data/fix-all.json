@@ -191,7 +191,7 @@
    "DeniVjgiPhB": {
     "d": "2026-10-18",
     "ok": false,
-    "why": "Instagram didn't confirm the save",
+    "why": "the caption box didn't open",
     "mode": "set"
    }
   }
@@ -360,6 +360,16 @@
    "net": "ig",
    "n": 12,
    "v": "2026-10-15.4"
+  },
+  {
+   "d": "2026-10-18",
+   "kind": "fxfix",
+   "net": "ig",
+   "tried": 5,
+   "ok": 0,
+   "skip": 0,
+   "v": "2026-10-15.4",
+   "more": 18
   }
  ]
 }
