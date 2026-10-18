@@ -11825,6 +11825,15 @@
    "ok": false,
    "now": true,
    "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T02:32:26.523Z",
+   "p": null,
+   "g": "page",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
   }
  ],
  "resets": {},
@@ -12772,6 +12781,13 @@
   {
    "d": "2026-10-18",
    "t": "2026-10-18T02:25:51.307Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 0
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T02:32:39.776Z",
    "kind": "post",
    "tried": 1,
    "ok": 0
