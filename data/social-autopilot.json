@@ -2619,6 +2619,60 @@
    "ok": true,
    "now": true,
    "why": "Hillsong Worship: only tracks used lately · no sound"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T16:00:18.748Z",
+   "net": "x",
+   "k": "box:FAV-024",
+   "p": "FAV-024",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T16:02:27.126Z",
+   "net": "x",
+   "k": "box:FAV-029",
+   "p": "FAV-029",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T16:03:40.024Z",
+   "net": "x",
+   "k": "card:FAV-030",
+   "p": "FAV-030",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T16:05:03.312Z",
+   "net": "x",
+   "k": "box:FAV-018",
+   "p": "FAV-018",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T16:06:23.286Z",
+   "net": "x",
+   "k": "ad:fav-001",
+   "p": "FAV-001",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T16:07:43.508Z",
+   "net": "x",
+   "k": "box:FAV-009",
+   "p": "FAV-009",
+   "ok": false,
+   "why": "X didn't confirm the post"
   }
  ],
  "runs": [
@@ -3028,6 +3082,13 @@
    "kind": "tiktok",
    "tried": 1,
    "ok": 1
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T16:08:23.996Z",
+   "kind": "x",
+   "tried": 6,
+   "ok": 0
   }
  ]
 }
