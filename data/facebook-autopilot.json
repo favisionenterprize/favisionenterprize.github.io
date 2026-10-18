@@ -532,11 +532,85 @@
    "tried": 0,
    "ok": 0,
    "stopped": "No listings found on Your listings. Make sure Facebook is on your personal profile."
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T17:50:53.341Z",
+   "kind": "renew",
+   "tried": 5,
+   "ok": 0
   }
  ],
  "selling": {
   "d": "2026-10-18",
-  "cards": []
+  "cards": [
+   {
+    "t": "L-Shaped Sofa Set — Fabric & Leather",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "none": "2026-10-18"
+   },
+   {
+    "t": "Student Desk Chair Set — Senior High to Tertiary Level",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-10-24"
+   },
+   {
+    "t": "Dining Set Collection — 5 Designs, 6 Chairs",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-10-24"
+   },
+   {
+    "t": "Jasmine Rice — Long Grain Fragrant Rice",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "none": "2026-10-18"
+   },
+   {
+    "t": "TV Stand — Black Marble Top with Drawer",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "none": "2026-10-18"
+   }
+  ]
  },
- "renewLog": []
+ "renewLog": [
+  {
+   "d": "2026-10-18",
+   "t": "L-Shaped Sofa Set — Fabric & Leather",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "No Renew option"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "Student Desk Chair Set — Senior High to Tertiary Level",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 6 days"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "Dining Set Collection — 5 Designs, 6 Chairs",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 6 days"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "Jasmine Rice — Long Grain Fragrant Rice",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "No Renew option"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "TV Stand — Black Marble Top with Drawer",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "No Renew option"
+  }
+ ]
 }
