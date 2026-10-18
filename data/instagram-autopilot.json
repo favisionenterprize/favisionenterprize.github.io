@@ -935,6 +935,81 @@
    "k": "card:FAV-027",
    "p": "FAV-027",
    "ok": true
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:07:20.063Z",
+   "k": "card:FAV-014",
+   "p": "FAV-014",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:09:25.184Z",
+   "k": "tile:fav-024",
+   "p": "FAV-024",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:10:28.346Z",
+   "k": "card:FAV-017",
+   "p": "FAV-017",
+   "ok": true
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:11:27.492Z",
+   "k": "presence:fav-009",
+   "p": "FAV-009",
+   "ok": true
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:12:21.486Z",
+   "k": "box:FAV-001",
+   "p": "FAV-001",
+   "ok": true
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:14:29.255Z",
+   "k": "card:FAV-035",
+   "p": "FAV-035",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:16:29.797Z",
+   "k": "box:FAV-032",
+   "p": "FAV-032",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:18:33.202Z",
+   "k": "box:FAV-030",
+   "p": "FAV-030",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:19:34.316Z",
+   "k": "box:FAV-022",
+   "p": "FAV-022",
+   "ok": true
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:20:42.216Z",
+   "k": "box:FAV-021",
+   "p": "FAV-021",
+   "ok": true
   }
  ],
  "profile": [
@@ -1009,6 +1084,12 @@
    "followers": 892,
    "following": 2011,
    "posts": 241
+  },
+  {
+   "d": "2026-10-18",
+   "followers": 892,
+   "following": 2024,
+   "posts": 249
   }
  ],
  "runs": [
@@ -1153,6 +1234,13 @@
    "kind": "ig",
    "tried": 8,
    "ok": 4
+  },
+  {
+   "d": "2026-10-18",
+   "t": "2026-10-18T01:21:01.871Z",
+   "kind": "ig",
+   "tried": 10,
+   "ok": 5
   }
  ]
 }
