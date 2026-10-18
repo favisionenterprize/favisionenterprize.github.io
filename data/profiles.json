@@ -125,6 +125,13 @@
    "mode": "fix",
    "linkOk": false,
    "pinOk": true
+  },
+  {
+   "d": "2026-10-18",
+   "net": "x",
+   "mode": "fix",
+   "linkOk": true,
+   "pinOk": false
   }
  ]
 }
