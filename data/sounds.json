@@ -379,6 +379,37 @@
    "t": "2026-10-18T05:01:18.486Z",
    "fav": "Kojo Blak",
    "found": true
+  },
+  {
+   "name": "Kizz Daniel & Davido",
+   "platform": "tiktok",
+   "d": "2026-10-19",
+   "t": "2026-10-19T12:06:37.332Z",
+   "fav": "Davido",
+   "found": true
+  },
+  {
+   "name": "Kizz Daniel & Davido",
+   "platform": "tiktok",
+   "d": "2026-10-19",
+   "t": "2026-10-19T12:06:37.332Z",
+   "fav": "Davido",
+   "found": true
+  },
+  {
+   "name": "KOJO BLAK & Sarkodie",
+   "platform": "tiktok",
+   "d": "2026-10-19",
+   "t": "2026-10-19T12:06:37.332Z",
+   "fav": "Kojo Blak",
+   "found": true
+  },
+  {
+   "fav": "Davido",
+   "found": false,
+   "platform": "tiktok",
+   "d": "2026-10-19",
+   "t": "2026-10-19T12:06:37.332Z"
   }
  ],
  "notes": [
@@ -462,6 +493,11 @@
   {
    "d": "2026-10-19",
    "text": "no Instagram audio seen on Reels"
+  },
+  {
+   "d": "2026-10-19",
+   "platform": "tiktok",
+   "text": "5 posts went out without a sound"
   }
  ]
 }
