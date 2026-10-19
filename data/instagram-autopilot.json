@@ -1211,6 +1211,81 @@
    "ok": true,
    "now": true,
    "why": "no sound: Instagram's web editor has no audio picker (kept the video's own sound)"
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T10:19:00.684Z",
+   "k": "ad:fav-014-arrived",
+   "p": "FAV-014",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T10:20:31.090Z",
+   "k": "tile:fav-001",
+   "p": "FAV-001",
+   "ok": true
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T10:22:51.550Z",
+   "k": "tile:fav-025",
+   "p": "FAV-025",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T10:24:08.580Z",
+   "k": "box:FAV-007",
+   "p": "FAV-007",
+   "ok": true
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T10:26:48.185Z",
+   "k": "box:FAV-020",
+   "p": "FAV-020",
+   "ok": true
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T10:29:24.279Z",
+   "k": "card:FAV-010",
+   "p": "FAV-010",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T10:35:53.993Z",
+   "k": "box:FAV-026",
+   "p": "FAV-026",
+   "ok": true
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T10:38:16.791Z",
+   "k": "card:FAV-011",
+   "p": "FAV-011",
+   "ok": true
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T10:41:09.522Z",
+   "k": "box:FAV-029",
+   "p": "FAV-029",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T10:45:45.371Z",
+   "k": "box:FAV-027",
+   "p": "FAV-027",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
   }
  ],
  "profile": [
@@ -1291,6 +1366,12 @@
    "followers": 892,
    "following": 2024,
    "posts": 284
+  },
+  {
+   "d": "2026-10-19",
+   "followers": 892,
+   "following": 2024,
+   "posts": 285
   }
  ],
  "runs": [
@@ -1498,6 +1579,13 @@
    "kind": "ig",
    "tried": 1,
    "ok": 1
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T10:46:48.898Z",
+   "kind": "ig",
+   "tried": 10,
+   "ok": 5
   }
  ]
 }
