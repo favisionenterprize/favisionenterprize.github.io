@@ -2693,6 +2693,96 @@
    "ok": true,
    "now": true,
    "why": "Hillsong Worship: only tracks used lately · no sound"
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T10:49:24.420Z",
+   "net": "x",
+   "k": "box:FAV-014",
+   "p": "FAV-014",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T10:54:20.303Z",
+   "net": "x",
+   "k": "card:FAV-019",
+   "p": "FAV-019",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T10:56:28.469Z",
+   "net": "x",
+   "k": "card:FAV-032",
+   "p": "FAV-032",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T10:58:42.569Z",
+   "net": "x",
+   "k": "tile:fav-025",
+   "p": "FAV-025",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T11:00:19.891Z",
+   "net": "x",
+   "k": "tile:fav-005",
+   "p": "FAV-005",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T11:02:40.449Z",
+   "net": "x",
+   "k": "presence:fav-006",
+   "p": "FAV-006",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T11:05:12.580Z",
+   "net": "x",
+   "k": "box:FAV-027",
+   "p": "FAV-027",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T11:09:11.166Z",
+   "net": "x",
+   "k": "presence:fav-003",
+   "p": "FAV-003",
+   "ok": true,
+   "why": "Posted without photo"
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T11:13:37.707Z",
+   "net": "x",
+   "k": "box:FAV-017",
+   "p": "FAV-017",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T11:15:26.642Z",
+   "net": "x",
+   "k": "presence:fav-002",
+   "p": "FAV-002",
+   "ok": false,
+   "why": "X didn't confirm the post"
   }
  ],
  "runs": [
@@ -3122,6 +3212,13 @@
    "t": "2026-10-18T16:32:41.993Z",
    "kind": "tiktok",
    "tried": 1,
+   "ok": 1
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T11:17:48.295Z",
+   "kind": "x",
+   "tried": 10,
    "ok": 1
   }
  ]
