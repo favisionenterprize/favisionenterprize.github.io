@@ -29,7 +29,62 @@
    "ghana business"
   ]
  },
- "groups": [],
+ "groups": [
+  {
+   "id": "920644089831054",
+   "name": "Interior Design & Home Decor",
+   "url": "https://www.facebook.com/groups/920644089831054/",
+   "added": "2026-10-19",
+   "members": 391000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "lovenestconversation",
+   "name": "Interior Design & Decorating Help Forum",
+   "url": "https://www.facebook.com/groups/lovenestconversation/",
+   "added": "2026-10-19",
+   "members": 116000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "169536492639468",
+   "name": "DIY Garden And Home Decoration, Exterior And Interior",
+   "url": "https://www.facebook.com/groups/169536492639468/",
+   "added": "2026-10-19",
+   "members": 800000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "2188505244910936",
+   "name": "Home decor ideas",
+   "url": "https://www.facebook.com/groups/2188505244910936/",
+   "added": "2026-10-19",
+   "members": 104000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "3985694091681437",
+   "name": "OK FURNITURE",
+   "url": "https://www.facebook.com/groups/3985694091681437/",
+   "added": "2026-10-19",
+   "members": 105000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "1329039178112947",
+   "name": "Diy Garden And Home Decoration",
+   "url": "https://www.facebook.com/groups/1329039178112947/",
+   "added": "2026-10-19",
+   "members": 144000,
+   "source": "autopilot",
+   "active": true
+  }
+ ],
  "posts": [
   {
    "d": "2026-10-18",
@@ -513,8 +568,65 @@
  "today": null,
  "renewals": {},
  "removed": [],
- "joins": [],
- "checks": {},
+ "joins": [
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T09:59:49.021Z",
+   "g": "920644089831054",
+   "name": "Interior Design & Home Decor",
+   "members": 391000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/920644089831054/"
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T10:01:33.410Z",
+   "g": "lovenestconversation",
+   "name": "Interior Design & Decorating Help Forum",
+   "members": 116000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/lovenestconversation/"
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T10:07:02.430Z",
+   "g": "169536492639468",
+   "name": "DIY Garden And Home Decoration, Exterior And Interior",
+   "members": 800000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/169536492639468/"
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T10:08:21.901Z",
+   "g": "2188505244910936",
+   "name": "Home decor ideas",
+   "members": 104000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/2188505244910936/"
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T10:10:32.351Z",
+   "g": "3985694091681437",
+   "name": "OK FURNITURE",
+   "members": 105000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/3985694091681437/"
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T10:12:02.393Z",
+   "g": "1329039178112947",
+   "name": "Diy Garden And Home Decoration",
+   "members": 144000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/1329039178112947/"
+  }
+ ],
+ "checks": {
+  "grow": "2026-10-19"
+ },
  "rounds": {},
  "runs": [
   {
@@ -539,6 +651,13 @@
    "kind": "renew",
    "tried": 5,
    "ok": 0
+  },
+  {
+   "d": "2026-10-19",
+   "t": "2026-10-19T10:15:32.856Z",
+   "kind": "grow",
+   "joined": 6,
+   "requested": 0
   }
  ],
  "selling": {
