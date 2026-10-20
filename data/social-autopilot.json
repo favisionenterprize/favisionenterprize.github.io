@@ -2870,6 +2870,96 @@
    "p": "FAV-018",
    "ok": true,
    "why": "Hillsong Worship: only tracks used lately · no sound"
+  },
+  {
+   "d": "2026-10-20",
+   "t": "2026-10-20T11:52:22.522Z",
+   "net": "x",
+   "k": "presence:fav-014-arrived",
+   "p": "FAV-014",
+   "ok": false,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-10-20",
+   "t": "2026-10-20T11:53:09.614Z",
+   "net": "x",
+   "k": "card:FAV-022",
+   "p": "FAV-022",
+   "ok": false,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-10-20",
+   "t": "2026-10-20T11:53:49.009Z",
+   "net": "x",
+   "k": "box:FAV-006",
+   "p": "FAV-006",
+   "ok": false,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-10-20",
+   "t": "2026-10-20T11:54:26.088Z",
+   "net": "x",
+   "k": "ad:fav-010",
+   "p": "FAV-010",
+   "ok": false,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-10-20",
+   "t": "2026-10-20T11:55:08.278Z",
+   "net": "x",
+   "k": "box:FAV-029",
+   "p": "FAV-029",
+   "ok": false,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-10-20",
+   "t": "2026-10-20T11:55:45.197Z",
+   "net": "x",
+   "k": "tile:fav-024",
+   "p": "FAV-024",
+   "ok": false,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-10-20",
+   "t": "2026-10-20T11:56:22.325Z",
+   "net": "x",
+   "k": "tile:fav-005",
+   "p": "FAV-005",
+   "ok": false,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-10-20",
+   "t": "2026-10-20T11:57:58.716Z",
+   "net": "x",
+   "k": "card:FAV-004",
+   "p": "FAV-004",
+   "ok": false,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-10-20",
+   "t": "2026-10-20T11:58:37.604Z",
+   "net": "x",
+   "k": "box:FAV-030",
+   "p": "FAV-030",
+   "ok": false,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-10-20",
+   "t": "2026-10-20T11:59:16.174Z",
+   "net": "x",
+   "k": "card:FAV-002",
+   "p": "FAV-002",
+   "ok": false,
+   "why": "Couldn't find X's post box"
   }
  ],
  "runs": [
@@ -3322,6 +3412,13 @@
    "tried": 0,
    "ok": 0,
    "stopped": "TikTok isn't logged in. Log in to FA Vision Enterprise's TikTok in this browser, then run again."
+  },
+  {
+   "d": "2026-10-20",
+   "t": "2026-10-20T11:59:37.063Z",
+   "kind": "x",
+   "tried": 10,
+   "ok": 0
   }
  ]
 }
