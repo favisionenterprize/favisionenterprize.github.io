@@ -3419,6 +3419,14 @@
    "kind": "x",
    "tried": 10,
    "ok": 0
+  },
+  {
+   "d": "2026-10-20",
+   "t": "2026-10-20T12:00:17.956Z",
+   "kind": "tiktok",
+   "tried": 0,
+   "ok": 0,
+   "stopped": "TikTok isn't logged in. Log in to FA Vision Enterprise's TikTok in this browser, then run again."
   }
  ]
 }
