@@ -6340,6 +6340,14 @@
    "ok": false,
    "now": true,
    "why": "We limit how often"
+  },
+  {
+   "d": "2026-10-20",
+   "t": "2026-10-20T11:31:12.072Z",
+   "p": "FAV-034",
+   "g": "lovenestconversation",
+   "ok": false,
+   "why": "We limit how often"
   }
  ],
  "resets": {},
@@ -6509,6 +6517,14 @@
    "kind": "grow",
    "joined": 3,
    "requested": 0
+  },
+  {
+   "d": "2026-10-20",
+   "t": "2026-10-20T11:31:27.824Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 0,
+   "stopped": "Facebook showed \"We limit how often\". Nothing more was posted."
   }
  ],
  "selling": {
