@@ -5816,6 +5816,33 @@
    "url": "https://www.facebook.com/groups/103417196471063/",
    "active": true,
    "added": "2026-10-20"
+  },
+  {
+   "id": "229343507183776",
+   "name": "Ghana Fashion Market",
+   "url": "https://www.facebook.com/groups/229343507183776/",
+   "added": "2026-10-20",
+   "members": 28000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "726230881287548",
+   "name": "Home Decor",
+   "url": "https://www.facebook.com/groups/726230881287548/",
+   "added": "2026-10-20",
+   "members": 1300000,
+   "source": "autopilot",
+   "active": true
+  },
+  {
+   "id": "1413399719710873",
+   "name": "OK FURNITURE",
+   "url": "https://www.facebook.com/groups/1413399719710873/",
+   "added": "2026-10-20",
+   "members": 194000,
+   "source": "autopilot",
+   "active": true
   }
  ],
  "posts": [
@@ -6383,10 +6410,37 @@
    "members": 144000,
    "status": "joined",
    "url": "https://www.facebook.com/groups/1329039178112947/"
+  },
+  {
+   "d": "2026-10-20",
+   "t": "2026-10-20T11:22:41.855Z",
+   "g": "229343507183776",
+   "name": "Ghana Fashion Market",
+   "members": 28000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/229343507183776/"
+  },
+  {
+   "d": "2026-10-20",
+   "t": "2026-10-20T11:24:48.056Z",
+   "g": "726230881287548",
+   "name": "Home Decor",
+   "members": 1300000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/726230881287548/"
+  },
+  {
+   "d": "2026-10-20",
+   "t": "2026-10-20T11:26:23.287Z",
+   "g": "1413399719710873",
+   "name": "OK FURNITURE",
+   "members": 194000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/1413399719710873/"
   }
  ],
  "checks": {
-  "grow": "2026-10-19",
+  "grow": "2026-10-20",
   "sync": "2026-10-20",
   "declines": "2026-10-20"
  },
@@ -6445,6 +6499,13 @@
    "kind": "declines",
    "found": 1,
    "left": 0
+  },
+  {
+   "d": "2026-10-20",
+   "t": "2026-10-20T11:28:55.960Z",
+   "kind": "grow",
+   "joined": 3,
+   "requested": 0
   }
  ],
  "selling": {
