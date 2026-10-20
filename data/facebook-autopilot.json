@@ -6311,6 +6311,15 @@
    "ok": false,
    "now": true,
    "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-20",
+   "t": "2026-10-20T11:06:49.331Z",
+   "p": "FAV-014",
+   "g": "920644089831054",
+   "ok": false,
+   "now": true,
+   "why": "We limit how often"
   }
  ],
  "resets": {},
@@ -6417,6 +6426,14 @@
    "kind": "post",
    "tried": 1,
    "ok": 0
+  },
+  {
+   "d": "2026-10-20",
+   "t": "2026-10-20T11:07:03.984Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 0,
+   "stopped": "Facebook showed \"We limit how often\". Nothing more was posted."
   }
  ],
  "selling": {
