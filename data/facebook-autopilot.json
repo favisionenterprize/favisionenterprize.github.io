@@ -6348,6 +6348,15 @@
    "g": "lovenestconversation",
    "ok": false,
    "why": "We limit how often"
+  },
+  {
+   "d": "2026-10-20",
+   "t": "2026-10-20T12:01:57.656Z",
+   "p": "FAV-005",
+   "g": "page",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
   }
  ],
  "resets": {},
@@ -6525,6 +6534,13 @@
    "tried": 1,
    "ok": 0,
    "stopped": "Facebook showed \"We limit how often\". Nothing more was posted."
+  },
+  {
+   "d": "2026-10-20",
+   "t": "2026-10-20T12:02:22.202Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 0
   }
  ],
  "selling": {
