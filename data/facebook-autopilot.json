@@ -1240,13 +1240,6 @@
    "added": "2026-10-20"
   },
   {
-   "id": "839631155147546",
-   "name": "Home Decorations",
-   "url": "https://www.facebook.com/groups/839631155147546/",
-   "active": true,
-   "added": "2026-10-20"
-  },
-  {
    "id": "6238174109629576",
    "name": "DIY home & garden decorations",
    "url": "https://www.facebook.com/groups/6238174109629576/",
@@ -6325,7 +6318,17 @@
  "resets": {},
  "today": null,
  "renewals": {},
- "removed": [],
+ "removed": [
+  {
+   "id": "839631155147546",
+   "name": "Home Decorations",
+   "url": "https://www.facebook.com/groups/839631155147546/",
+   "why": "Declined 1 of our posts · leave not confirmed",
+   "d": "2026-10-20",
+   "left": false,
+   "tries": 1
+  }
+ ],
  "joins": [
   {
    "d": "2026-10-19",
@@ -6384,7 +6387,8 @@
  ],
  "checks": {
   "grow": "2026-10-19",
-  "sync": "2026-10-20"
+  "sync": "2026-10-20",
+  "declines": "2026-10-20"
  },
  "rounds": {
   "FAV-014": "2026-10-20T07:16:31.229Z"
@@ -6434,6 +6438,13 @@
    "tried": 1,
    "ok": 0,
    "stopped": "Facebook showed \"We limit how often\". Nothing more was posted."
+  },
+  {
+   "d": "2026-10-20",
+   "t": "2026-10-20T11:20:12.059Z",
+   "kind": "declines",
+   "found": 1,
+   "left": 0
   }
  ],
  "selling": {
