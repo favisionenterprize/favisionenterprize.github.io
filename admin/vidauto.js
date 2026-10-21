@@ -247,15 +247,15 @@
     const daily = (G.checklist || []).filter(c => c.when === "Daily"), dDone = daily.filter(ticked).length;
     return `<section class="fa-card" id="yt-grow">
         <header><h2>Grow your views (free, no paid promotion)</h2><span class="fa-big ${dDone < daily.length ? "hot" : ""}">${dDone}/${daily.length}</span></header>
-        ${G.goal ? `<p class="muted">Goal: ${esc(G.goal)}</p>` : ""}
-        <h3>Learning videos</h3>
-        ${refs ? `<ul>${refs}</ul>` : `<p class="muted">None yet.</p>`}
-        <form class="fa-settings" id="yt-grow-add">
+        ${G.goal ? `<p class="yt-grow-goal"><b>Goal:</b> ${esc(G.goal)}</p>` : ""}
+        <h3 class="yt-grow-h">Learning videos</h3>
+        ${refs ? `<ul class="yt-grow-refs">${refs}</ul>` : `<p class="muted">None yet.</p>`}
+        <form class="fa-settings yt-grow-add" id="yt-grow-add">
           <label>Add a link <input name="url" type="url" placeholder="https://…" required></label>
           <label>What is it? <input name="title" placeholder="e.g. How to grow your views"></label>
           <button class="btn btn-ghost btn-sm" type="submit">+ Add</button>
         </form>
-        ${groups.map(g => { const items = (G.checklist || []).filter(c => c.when === g); return items.length ? `<details ${g === "Daily" ? "open" : ""}><summary><b>${g === "Never" ? "Never do (breaks YouTube rules)" : g}</b></summary><ul class="yt-grow-list" style="list-style:none;padding-left:0">${items.map(c => g === "Never"
+        ${groups.map(g => { const items = (G.checklist || []).filter(c => c.when === g); return items.length ? `<details class="fa-more yt-grow-group${g === "Never" ? " never" : ""}" ${g === "Daily" ? "open" : ""}><summary>${g === "Never" ? "Never do (breaks YouTube rules)" : g}</summary><ul class="yt-grow-list">${items.map(c => g === "Never"
           ? `<li>✗ ${esc(c.text)}</li>`
           : `<li><label><input type="checkbox" data-ytgrow="${esc(c.id)}" ${ticked(c) ? "checked" : ""}> ${esc(c.text)}</label></li>`).join("")}</ul></details>` : ""; }).join("")}
         ${(G.sources || []).length ? `<p class="muted fa-small">Sources: ${G.sources.map(u => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(u.replace(/^https?:\/\/(www\.)?/, "").split("/")[0])}</a>`).join(" · ")}</p>` : ""}
