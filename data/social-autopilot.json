@@ -2960,6 +2960,96 @@
    "p": "FAV-002",
    "ok": false,
    "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:49:00.375Z",
+   "net": "x",
+   "k": "presence:fav-014",
+   "p": "FAV-014",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:50:03.963Z",
+   "net": "x",
+   "k": "tile:fav-002",
+   "p": "FAV-002",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:51:06.460Z",
+   "net": "x",
+   "k": "box:FAV-020",
+   "p": "FAV-020",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:52:08.777Z",
+   "net": "x",
+   "k": "card:FAV-025",
+   "p": "FAV-025",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:53:12.035Z",
+   "net": "x",
+   "k": "box:FAV-019",
+   "p": "FAV-019",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:54:14.509Z",
+   "net": "x",
+   "k": "presence:fav-006",
+   "p": "FAV-006",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:55:17.252Z",
+   "net": "x",
+   "k": "ad:fav-004",
+   "p": "FAV-004",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:56:19.016Z",
+   "net": "x",
+   "k": "card:FAV-007",
+   "p": "FAV-007",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:57:20.731Z",
+   "net": "x",
+   "k": "box:FAV-018",
+   "p": "FAV-018",
+   "ok": false,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:58:22.780Z",
+   "net": "x",
+   "k": "tile:fav-003",
+   "p": "FAV-003",
+   "ok": false,
+   "why": "X didn't confirm the post"
   }
  ],
  "runs": [
@@ -3427,6 +3517,13 @@
    "tried": 0,
    "ok": 0,
    "stopped": "TikTok isn't logged in. Log in to FA Vision Enterprise's TikTok in this browser, then run again."
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:58:37.041Z",
+   "kind": "x",
+   "tried": 10,
+   "ok": 0
   }
  ]
 }
