@@ -125,6 +125,11 @@
    "d": "2026-10-21",
    "net": "ig",
    "n": 893
+  },
+  {
+   "d": "2026-10-21",
+   "net": "x",
+   "n": 299
   }
  ],
  "posts": {
@@ -279,11 +284,11 @@
    "url": "https://x.com/FaVisionEnt/status/1662447925388099587",
    "first": "2026-10-13",
    "commented": [],
-   "checked": "2026-10-18",
+   "checked": "2026-10-21",
    "likes": 1,
-   "comments": 3,
+   "comments": 4,
    "shares": 1,
-   "views": 74,
+   "views": 75,
    "title": "X"
   },
   "https://x.com/FaVisionEnt/status/2110117861666771221": {
@@ -727,8 +732,9 @@
    "url": "https://x.com/FaVisionEnt/status/2111755092105863590",
    "first": "2026-10-18",
    "commented": [],
-   "checked": "2026-10-18",
-   "views": 12
+   "checked": "2026-10-21",
+   "views": 15,
+   "comments": 1
   },
   "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0twDXGotiJ66vDJm1b2jVqKhLhXAyw4yWEELGZTii48aCDVLxTpPP5kKTT61Q4vXcl": {
    "net": "fb",
@@ -946,6 +952,38 @@
    "title": "On Sale ! ! ! Jasmine Rice at MANYE OYE... - F.A Vision Enterprise",
    "checked": "2026-10-21",
    "likes": 565
+  },
+  "https://x.com/FaVisionEnt/status/2112138963586875504": {
+   "net": "x",
+   "url": "https://x.com/FaVisionEnt/status/2112138963586875504",
+   "first": "2026-10-21",
+   "commented": [],
+   "checked": "2026-10-21",
+   "views": 10
+  },
+  "https://x.com/FaVisionEnt/status/2111852501603586475": {
+   "net": "x",
+   "url": "https://x.com/FaVisionEnt/status/2111852501603586475",
+   "first": "2026-10-21",
+   "commented": [],
+   "checked": "2026-10-21",
+   "views": 1
+  },
+  "https://x.com/FaVisionEnt/status/2111754454769049759": {
+   "net": "x",
+   "url": "https://x.com/FaVisionEnt/status/2111754454769049759",
+   "first": "2026-10-21",
+   "commented": [],
+   "checked": "2026-10-21",
+   "views": 14
+  },
+  "https://x.com/FaVisionEnt/status/2111753238630543485": {
+   "net": "x",
+   "url": "https://x.com/FaVisionEnt/status/2111753238630543485",
+   "first": "2026-10-21",
+   "commented": [],
+   "checked": "2026-10-21",
+   "views": 16
   }
  },
  "runs": [
@@ -1906,6 +1944,21 @@
    "invited": 0,
    "thanked": 0,
    "followers": 893,
+   "stopped": null,
+   "commenting": false
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T04:22:41.467Z",
+   "net": "x",
+   "mode": "likers",
+   "posts": 6,
+   "checked": 6,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 299,
    "stopped": null,
    "commenting": false
   }
