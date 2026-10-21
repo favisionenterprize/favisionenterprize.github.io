@@ -755,7 +755,7 @@
    ],
    "title": "(20+) Fresh stock, just arrived! 🎒📚 Our new... - F.A Vision Enterprise",
    "checked": "2026-10-21",
-   "likes": 29
+   "likes": 15
   },
   "https://www.facebook.com/FaVisionEnterprise/posts/pfbid02b7KkEAZFpq2uUYsdrFf7TELhQ3XBGaQZa6w4ZqW7sdZDdTYfJ5ZPNqVy6KbUxkwhl": {
    "net": "fb",
@@ -2138,6 +2138,21 @@
    "followers": 559,
    "stopped": null,
    "commenting": true
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:49:15.385Z",
+   "net": "fb",
+   "mode": "reply",
+   "posts": 3,
+   "checked": 3,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 559,
+   "stopped": null,
+   "commenting": false
   }
  ],
  "liked": {}
