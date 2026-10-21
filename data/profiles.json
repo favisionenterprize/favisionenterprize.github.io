@@ -19,12 +19,12 @@
  },
  "status": {
   "tiktok": {
-   "d": "2026-10-18",
+   "d": "2026-10-21",
    "link": null,
    "pinned": null,
    "linkOk": false,
    "pinOk": false,
-   "why": "couldn't find the post on TikTok (pin it in the app: open the post → ••• → Pin) · couldn't find the post on TikTok (pin it in the app: open the post → ••• → Pin) · TikTok shows the website box only for business accounts with 1,000+ followers: add it in the TikTok app (Edit profile → Website)",
+   "why": "couldn't find the post on TikTok (pin it in the app: open the post → ••• → Pin) · couldn't find Edit profile",
    "mode": "fix"
   },
   "fb": {
@@ -159,6 +159,13 @@
    "net": "x",
    "mode": "fix",
    "linkOk": true,
+   "pinOk": false
+  },
+  {
+   "d": "2026-10-21",
+   "net": "tiktok",
+   "mode": "fix",
+   "linkOk": false,
    "pinOk": false
   }
  ]
