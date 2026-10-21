@@ -6510,6 +6510,166 @@
    "ok": false,
    "now": true,
    "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:06:52.735Z",
+   "p": "FAV-009",
+   "g": "169536492639468",
+   "ok": false,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:08:26.983Z",
+   "p": "FAV-009",
+   "g": "1329039178112947",
+   "ok": false,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:09:19.958Z",
+   "p": "FAV-009",
+   "g": "hongkongmoms",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:09:52.642Z",
+   "p": "FAV-009",
+   "g": "1968925946751585",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:10:24.458Z",
+   "p": "FAV-009",
+   "g": "378971703031985",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:11:08.151Z",
+   "p": "FAV-009",
+   "g": "572485050049323",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:11:47.270Z",
+   "p": "FAV-009",
+   "g": "1260426287321668",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:12:46.770Z",
+   "p": "FAV-009",
+   "g": "980376278667360",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:14:44.279Z",
+   "p": "FAV-009",
+   "g": "139560271489581",
+   "ok": false,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:16:22.362Z",
+   "p": "FAV-009",
+   "g": "180212603087458",
+   "ok": false,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:17:09.717Z",
+   "p": "FAV-009",
+   "g": "195199285857356",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:18:32.565Z",
+   "p": "FAV-009",
+   "g": "kofitv",
+   "ok": false,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:19:02.499Z",
+   "p": "FAV-009",
+   "g": "397641595383636",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:19:31.769Z",
+   "p": "FAV-009",
+   "g": "495508180829744",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:20:51.681Z",
+   "p": "FAV-009",
+   "g": "535325930759843",
+   "ok": false,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:22:13.713Z",
+   "p": "FAV-009",
+   "g": "582376070602961",
+   "ok": false,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:22:41.007Z",
+   "p": "FAV-009",
+   "g": "613870175328566",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:23:11.423Z",
+   "p": "FAV-009",
+   "g": "661332781128349",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:23:41.584Z",
+   "p": "FAV-009",
+   "g": "694644710640007",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:25:01.569Z",
+   "p": "FAV-009",
+   "g": "732658637184181",
+   "ok": false,
+   "why": "Facebook didn't confirm the post"
   }
  ],
  "resets": {},
@@ -6861,6 +7021,13 @@
    "kind": "grow",
    "joined": 17,
    "requested": 0
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:25:40.334Z",
+   "kind": "post",
+   "tried": 20,
+   "ok": 0
   }
  ],
  "selling": {
