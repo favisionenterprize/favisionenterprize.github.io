@@ -226,6 +226,63 @@
       </div>
     </article>`;
   }
+  // ------------------------------------------------- grow your views (free / organic)
+  // data/youtube-growth.json: learning links (e.g. videos on growing views) + a no-ad-spend checklist.
+  // Ticks are a per-browser convenience (localStorage): Daily resets each day, Weekly each Monday.
+  const GFILE = "data/youtube-growth.json", GEMPTY = { references: [], checklist: [] };
+  let G = null, gLoading = false;
+  function loadGrowth() {
+    if (G || gLoading) return;
+    gLoading = true;
+    A.readJsonFile(GFILE, GEMPTY).then(g => { G = { ...GEMPTY, ...g }; }).catch(() => { G = { ...GEMPTY }; }).finally(() => { gLoading = false; rerender(); });
+  }
+  const monday = () => { const d = new Date(); d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); return d.toLocaleDateString("en-CA"); };
+  const tickKey = c => `fa-ytgrow:${c.id}:${c.when === "Daily" ? today() : c.when === "Weekly" ? monday() : "x"}`;
+  const ticked = c => { try { return localStorage.getItem(tickKey(c)) === "1"; } catch (_) { return false; } };
+  function renderGrowth() {
+    loadGrowth();
+    if (!G) return `<section class="fa-card"><header><h2>Grow your views (free)</h2></header><p class="muted">Loading…</p></section>`;
+    const groups = ["Daily", "Each upload", "Weekly", "Never"];
+    const refs = (G.references || []).map(r => `<li><a href="${esc(r.url)}" target="_blank" rel="noopener">▶ ${esc(r.title || r.url)}</a>${r.note ? ` <span class="muted fa-small">${esc(r.note)}</span>` : ""}</li>`).join("");
+    const daily = (G.checklist || []).filter(c => c.when === "Daily"), dDone = daily.filter(ticked).length;
+    return `<section class="fa-card" id="yt-grow">
+        <header><h2>Grow your views (free, no paid promotion)</h2><span class="fa-big ${dDone < daily.length ? "hot" : ""}">${dDone}/${daily.length}</span></header>
+        ${G.goal ? `<p class="muted">Goal: ${esc(G.goal)}</p>` : ""}
+        <h3>Learning videos</h3>
+        ${refs ? `<ul>${refs}</ul>` : `<p class="muted">None yet.</p>`}
+        <form class="fa-settings" id="yt-grow-add">
+          <label>Add a link <input name="url" type="url" placeholder="https://…" required></label>
+          <label>What is it? <input name="title" placeholder="e.g. How to grow your views"></label>
+          <button class="btn btn-ghost btn-sm" type="submit">+ Add</button>
+        </form>
+        ${groups.map(g => { const items = (G.checklist || []).filter(c => c.when === g); return items.length ? `<details ${g === "Daily" ? "open" : ""}><summary><b>${g === "Never" ? "Never do (breaks YouTube rules)" : g}</b></summary><ul class="yt-grow-list" style="list-style:none;padding-left:0">${items.map(c => g === "Never"
+          ? `<li>✗ ${esc(c.text)}</li>`
+          : `<li><label><input type="checkbox" data-ytgrow="${esc(c.id)}" ${ticked(c) ? "checked" : ""}> ${esc(c.text)}</label></li>`).join("")}</ul></details>` : ""; }).join("")}
+        ${(G.sources || []).length ? `<p class="muted fa-small">Sources: ${G.sources.map(u => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(u.replace(/^https?:\/\/(www\.)?/, "").split("/")[0])}</a>`).join(" · ")}</p>` : ""}
+      </section>`;
+  }
+  document.addEventListener("change", e => {
+    const cb = e.target.closest && e.target.closest("[data-ytgrow]");
+    if (!cb || !G) return;
+    const c = G.checklist.find(x => x.id === cb.dataset.ytgrow);
+    if (!c) return;
+    try { cb.checked ? localStorage.setItem(tickKey(c), "1") : localStorage.removeItem(tickKey(c)); } catch (_) {}
+    rerender();
+  });
+  document.addEventListener("submit", async e => {
+    const f = e.target.closest && e.target.closest("#yt-grow-add");
+    if (!f) return;
+    e.preventDefault();
+    const url = f.elements.url.value.trim(), title = f.elements.title.value.trim();
+    if (!/^https?:\/\//.test(url)) return A.toast("Paste a full link starting with https://", true);
+    A.busy("Saving…");
+    try {
+      G = { ...GEMPTY, ...(await A.saveJson(GFILE, g => { g = { ...GEMPTY, ...g }; g.references = (g.references || []).filter(r => r.url !== url).concat({ title: title || url, url, added: today() }); return g; }, "YouTube growth: add learning link", GEMPTY)) };
+      A.toast("Link added ✓");
+    } catch (err) { A.toast(A.friendly(err), true); }
+    finally { A.busy(null); rerender(); }
+  });
+
   const isWaiting = v => v.website.status !== "posted" && v.youtube.status !== "posted";
   const inSrc = v => src === "all" || (v.source || "upload") === src;
   function renderTab() {
@@ -244,6 +301,7 @@
           <button class="btn btn-ghost" data-vid="yt-test">Test YouTube (no posting)</button>
         </div>
       </section>
+      ${renderGrowth()}
       <section class="fa-card">
         <header><h2>Add videos from your computer or phone</h2></header>
         <form class="fa-settings" id="vid-add">

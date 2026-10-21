@@ -1,0 +1,42 @@
+{
+  "updated": "2026-10-21",
+  "goal": "1,000 subscribers + 4,000 long-video watch hours in 12 months (or 10M Shorts views in 90 days) for the YouTube Partner Program. The lower 500-subscriber tier isn't open in Ghana yet.",
+  "references": [
+    {
+      "title": "How to grow your views (Facebook video)",
+      "url": "https://www.facebook.com/share/v/1EpvMeqbRa/",
+      "added": "2026-10-21",
+      "note": "Watch on Facebook. Add its tips to the checklist below."
+    }
+  ],
+  "checklist": [
+    { "id": "d1", "when": "Daily", "text": "Post 1 Short: a 12 s product clip, price hook in the first second, on-screen text and #shorts. Post 2–3 a day in the first week." },
+    { "id": "d2", "when": "Daily", "text": "Reply to every comment within a few hours. Pin the best question or answer." },
+    { "id": "d3", "when": "Daily", "text": "Share the newest video free on WhatsApp Status, TikTok, FB/IG Reels with \"Full video on YouTube\" + the channel link." },
+    { "id": "d4", "when": "Daily", "text": "Spend 5 min in YouTube Studio → Inspiration / Research. Use what people search for (e.g. \"school desk price Ghana\") in your next titles." },
+    { "id": "d5", "when": "Daily", "text": "Leave 2–3 helpful comments on Ghanaian home, interior or school channels. No links in them." },
+    { "id": "u1", "when": "Each upload", "text": "On every Short, set \"Related video\" to the matching long video. Also say \"full room design on my channel\" in a pinned comment." },
+    { "id": "u2", "when": "Each upload", "text": "Put the search keyword in the title, e.g. \"Designing a budget living room | Odorkor-made sofa\"." },
+    { "id": "u3", "when": "Each upload", "text": "First 2 lines of the description: price, WhatsApp link, favisionenterprize.github.io. Then chapters from 0:00." },
+    { "id": "u4", "when": "Each upload", "text": "End screen: Subscribe button + \"Best for viewer\" video or a playlist." },
+    { "id": "u5", "when": "Each upload", "text": "Custom thumbnail on long videos: finished room + price, readable on a phone." },
+    { "id": "u6", "when": "Each upload", "text": "Add the video to a playlist: School Desks · Sofas · Dining Sets · Beds · Design It With Me." },
+    { "id": "u7", "when": "Each upload", "text": "Ask for one action: \"Comment your room size and I'll design it next\". No rewards for likes or subscribes." },
+    { "id": "w1", "when": "Weekly", "text": "Post 2–3 times on the Posts tab: a poll (\"Which sofa colour next?\"), a before/after, a new-stock teaser." },
+    { "id": "w2", "when": "Weekly", "text": "Make 1 viewer-request design video from the comments." },
+    { "id": "w3", "when": "Weekly", "text": "Try 1 collaboration with a similar-size Ghanaian creator (interior, carpentry, teachers, Airbnb hosts)." },
+    { "id": "w4", "when": "Weekly", "text": "In Analytics, check \"viewed vs swiped away\" on Shorts and average view duration on long videos. Remake the winners." },
+    { "id": "w5", "when": "Weekly", "text": "Send the week's best video to WhatsApp broadcast lists and school administrators (desks)." },
+    { "id": "w6", "when": "Weekly", "text": "Cut one long video into 3–5 Shorts." },
+    { "id": "a1", "when": "Never", "text": "No sub4sub, bought views or subscribers, view bots or \"free subscriber\" apps. YouTube can delete the channel." },
+    { "id": "a2", "when": "Never", "text": "No like/comment-swap groups and no \"subscribe to win\" giveaways." },
+    { "id": "a3", "when": "Never", "text": "No misleading titles or thumbnails (wrong prices, stock photos that aren't your furniture)." },
+    { "id": "a4", "when": "Never", "text": "No off-topic viral Shorts. They bring subscribers who never buy furniture." }
+  ],
+  "sources": [
+    "https://support.google.com/youtube/answer/72851",
+    "https://support.google.com/youtube/answer/3399767",
+    "https://support.google.com/youtube/answer/2801973",
+    "https://metricool.com/how-to-grow-on-youtube/"
+  ]
+}
