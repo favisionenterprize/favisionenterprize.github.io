@@ -157,6 +157,14 @@
    "p": "FAV-005",
    "ok": false,
    "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-21",
+   "net": "fb",
+   "v": "fav-006-short",
+   "p": "FAV-006",
+   "ok": false,
+   "why": "Post button stayed off"
   }
  ],
  "runs": []
