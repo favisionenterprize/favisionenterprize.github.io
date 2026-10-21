@@ -783,7 +783,12 @@
    "net": "ig",
    "url": "https://www.instagram.com/p/DeveWHmCAw_/",
    "first": "2026-10-21",
-   "commented": [],
+   "commented": [
+    {
+     "d": "before",
+     "text": ""
+    }
+   ],
    "title": "Instagram",
    "checked": "2026-10-21"
   },
@@ -2157,6 +2162,21 @@
   {
    "d": "2026-10-21",
    "t": "2026-10-21T17:54:42.648Z",
+   "net": "ig",
+   "mode": "comment",
+   "posts": 12,
+   "checked": 12,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 893,
+   "stopped": null,
+   "commenting": true
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:55:01.843Z",
    "net": "ig",
    "mode": "comment",
    "posts": 12,
