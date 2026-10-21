@@ -1364,6 +1364,79 @@
    "p": "FAV-035",
    "ok": false,
    "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:26:52.306Z",
+   "k": "presence:fav-014",
+   "p": "FAV-014",
+   "ok": true
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:27:48.948Z",
+   "k": "tile:fav-003",
+   "p": "FAV-003",
+   "ok": true
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:28:44.689Z",
+   "k": "presence:fav-010",
+   "p": "FAV-010",
+   "ok": true
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:30:40.639Z",
+   "k": "box:FAV-027",
+   "p": "FAV-027",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:32:43.868Z",
+   "k": "box:FAV-029",
+   "p": "FAV-029",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:33:37.571Z",
+   "k": "tile:fav-006",
+   "p": "FAV-006",
+   "ok": true
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:34:34.847Z",
+   "k": "box:FAV-016",
+   "p": "FAV-016",
+   "ok": true
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:35:33.568Z",
+   "k": "presence:fav-025",
+   "p": "FAV-025",
+   "ok": true
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:37:37.575Z",
+   "k": "ad:ai-studio",
+   "p": null,
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:38:29.389Z",
+   "k": "card:FAV-026",
+   "p": "FAV-026",
+   "ok": true
   }
  ],
  "profile": [
@@ -1456,6 +1529,12 @@
    "followers": 892,
    "following": 2024,
    "posts": 295
+  },
+  {
+   "d": "2026-10-21",
+   "followers": 892,
+   "following": 2024,
+   "posts": 305
   }
  ],
  "runs": [
@@ -1677,6 +1756,13 @@
    "kind": "ig",
    "tried": 10,
    "ok": 2
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T03:38:47.509Z",
+   "kind": "ig",
+   "tried": 10,
+   "ok": 7
   }
  ]
 }
