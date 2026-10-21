@@ -2088,6 +2088,21 @@
    "followers": null,
    "stopped": "No posts found on your TikTok profile.",
    "commenting": false
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:41:25.386Z",
+   "net": "x",
+   "mode": "reply",
+   "posts": 0,
+   "checked": 0,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": null,
+   "stopped": "No posts found on your X profile.",
+   "commenting": false
   }
  ],
  "liked": {}
