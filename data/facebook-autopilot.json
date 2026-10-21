@@ -6670,6 +6670,15 @@
    "g": "732658637184181",
    "ok": false,
    "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T04:18:54.792Z",
+   "p": "FAV-006",
+   "g": "page",
+   "ok": false,
+   "now": true,
+   "why": "Post button stayed off"
   }
  ],
  "resets": {},
@@ -7027,6 +7036,13 @@
    "t": "2026-10-21T03:25:40.334Z",
    "kind": "post",
    "tried": 20,
+   "ok": 0
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T04:21:35.188Z",
+   "kind": "post",
+   "tried": 1,
    "ok": 0
   }
  ],
