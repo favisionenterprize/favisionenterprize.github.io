@@ -118,13 +118,13 @@
   },
   {
    "d": "2026-10-21",
-   "net": "ig",
-   "n": 893
+   "net": "fb",
+   "n": 557
   },
   {
    "d": "2026-10-21",
-   "net": "fb",
-   "n": 557
+   "net": "ig",
+   "n": 893
   }
  ],
  "posts": {
@@ -752,6 +752,78 @@
    "title": "Tertiary Student Desk is available. Hurry... - F.A Vision Enterprise",
    "checked": "2026-10-21",
    "likes": 562
+  },
+  "https://www.instagram.com/p/DevecpOiP0M/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/DevecpOiP0M/",
+   "first": "2026-10-21",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-10-21"
+  },
+  "https://www.instagram.com/p/DeveWHmCAw_/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/DeveWHmCAw_/",
+   "first": "2026-10-21",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-10-21"
+  },
+  "https://www.instagram.com/p/DevePIOiKQg/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/DevePIOiKQg/",
+   "first": "2026-10-21",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-10-21"
+  },
+  "https://www.instagram.com/p/DevdchtiFQQ/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/DevdchtiFQQ/",
+   "first": "2026-10-21",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-10-21"
+  },
+  "https://www.instagram.com/p/DevdOA5iNfz/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/DevdOA5iNfz/",
+   "first": "2026-10-21",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-10-21"
+  },
+  "https://www.instagram.com/p/DevdF-3iOSA/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/DevdF-3iOSA/",
+   "first": "2026-10-21",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-10-21"
+  },
+  "https://www.instagram.com/p/Devc-8_CMy2/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/Devc-8_CMy2/",
+   "first": "2026-10-21",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-10-21"
+  },
+  "https://www.instagram.com/p/Devc4j2CD_5/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/Devc4j2CD_5/",
+   "first": "2026-10-21",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-10-21"
+  },
+  "https://www.instagram.com/p/DevcqF8iC-g/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/DevcqF8iC-g/",
+   "first": "2026-10-21",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-10-21"
   }
  },
  "runs": [
@@ -1652,6 +1724,21 @@
    "invited": 0,
    "thanked": 0,
    "followers": 557,
+   "stopped": null,
+   "commenting": false
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T04:19:25.819Z",
+   "net": "ig",
+   "mode": "likers",
+   "posts": 12,
+   "checked": 12,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 893,
    "stopped": null,
    "commenting": false
   }
