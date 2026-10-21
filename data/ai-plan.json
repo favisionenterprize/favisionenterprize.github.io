@@ -1,0 +1,243 @@
+{
+ "owner": "Alexander Awuku",
+ "paused": false,
+ "paused_at": null,
+ "updated": "2026-10-21",
+ "source": "FA Vision AI Operating System Blueprint",
+ "rules": [
+  {
+   "id": "S1",
+   "dept": "Sales",
+   "task": "Reply to every new WhatsApp / Marketplace and any other channels, groups, posts, etc. an enquiry or engagement such as a like, or even views, within seconds, using an automated template or responses which always change, with price, HD real photos and website link",
+   "line": "ai",
+   "setting": "allow",
+   "status": "approved",
+   "steps": [
+    "engage:",
+    "reply3:",
+    "mkinbox"
+   ]
+  },
+  {
+   "id": "S2",
+   "dept": "Sales",
+   "task": "Write a one-page buyer brief for Alexander (what they want, budget, area, history)",
+   "line": "ai",
+   "setting": "allow",
+   "status": "approved",
+   "steps": []
+  },
+  {
+   "id": "S3",
+   "dept": "Sales",
+   "task": "Build quotes for custom pieces",
+   "line": "draft",
+   "setting": "approve",
+   "status": "approved",
+   "steps": []
+  },
+  {
+   "id": "S4",
+   "dept": "Sales",
+   "task": "Give discounts or change any price",
+   "line": "human",
+   "setting": "block",
+   "status": "approved",
+   "steps": []
+  },
+  {
+   "id": "M1",
+   "dept": "Marketing",
+   "task": "Post 20 times every hour in a day on all socials, and everywhere like pages, stories, groups, shops, stores etc., each with fresh description, trending hashtags, music and a call to action",
+   "line": "ai",
+   "setting": "allow",
+   "status": "approved",
+   "steps": [
+    "ig",
+    "x",
+    "tiktok",
+    "ignow",
+    "xnow",
+    "ttnow",
+    "igs:",
+    "xs:",
+    "tts:",
+    "page:",
+    "story:",
+    "reel:",
+    "sounds",
+    "fx:",
+    "ttcaps:",
+    "profile:",
+    "pinswap:",
+    "refresh:"
+   ]
+  },
+  {
+   "id": "M2",
+   "dept": "Marketing",
+   "task": "Share listings to 20 Facebook groups a day and renew Marketplace listings, run like Jiji: strategy and hourly postings. More suggestions to be added by only Alexander.",
+   "line": "ai",
+   "setting": "allow",
+   "status": "approved",
+   "steps": [
+    "renew",
+    "declines",
+    "sync",
+    "grow",
+    "post",
+    "postnow",
+    "allgroups:",
+    "tt1:",
+    "mkscan",
+    "mklist"
+   ]
+  },
+  {
+   "id": "M3",
+   "dept": "Marketing",
+   "task": "Email Alexander every day a report of posts, reach, enquiries and sales",
+   "line": "ai",
+   "setting": "allow",
+   "status": "approved",
+   "steps": [
+    "report"
+   ]
+  },
+  {
+   "id": "M4",
+   "dept": "Marketing",
+   "task": "Send a review request to every customer after delivery",
+   "line": "ai",
+   "setting": "allow",
+   "status": "approved",
+   "steps": []
+  },
+  {
+   "id": "M5",
+   "dept": "Marketing",
+   "task": "Use a customer's photo, name or story in a post (needs their written consent)",
+   "line": "draft",
+   "setting": "approve",
+   "status": "approved",
+   "steps": []
+  },
+  {
+   "id": "C1",
+   "dept": "Support",
+   "task": "Answer order-status and product questions from the company brain",
+   "line": "ai",
+   "setting": "allow",
+   "status": "approved",
+   "steps": []
+  },
+  {
+   "id": "C2",
+   "dept": "Support",
+   "task": "Offer a refund, free repair or replacement",
+   "line": "draft",
+   "setting": "approve",
+   "status": "approved",
+   "steps": []
+  },
+  {
+   "id": "C3",
+   "dept": "Support",
+   "task": "Handle complaints, disputes, legal or privacy matters",
+   "line": "ai",
+   "setting": "allow",
+   "status": "approved",
+   "steps": []
+  },
+  {
+   "id": "F1",
+   "dept": "Finance",
+   "task": "Draft the invoice from the agreed quote",
+   "line": "ai",
+   "setting": "approve",
+   "status": "approved",
+   "steps": []
+  },
+  {
+   "id": "F2",
+   "dept": "Finance",
+   "task": "Send balance reminders on day 3, 7 and 14",
+   "line": "ai",
+   "setting": "allow",
+   "status": "approved",
+   "steps": []
+  },
+  {
+   "id": "F3",
+   "dept": "Finance",
+   "task": "Flag and fix website vs Marketplace price mismatches",
+   "line": "draft",
+   "setting": "approve",
+   "status": "approved",
+   "steps": []
+  },
+  {
+   "id": "F4",
+   "dept": "Finance",
+   "task": "Pay anyone, add a new supplier, or change MoMo / bank details",
+   "line": "ai",
+   "setting": "approve",
+   "status": "approved",
+   "steps": []
+  },
+  {
+   "id": "W1",
+   "dept": "Workshop",
+   "task": "Open a job card and materials list once the deposit is confirmed",
+   "line": "ai",
+   "setting": "allow",
+   "status": "approved",
+   "steps": []
+  },
+  {
+   "id": "W2",
+   "dept": "Workshop",
+   "task": "Raise purchase orders for materials",
+   "line": "ai",
+   "setting": "approve",
+   "status": "approved",
+   "steps": []
+  },
+  {
+   "id": "W3",
+   "dept": "Workshop",
+   "task": "Quality and safety sign-off before dispatch",
+   "line": "human",
+   "setting": "block",
+   "status": "approved",
+   "steps": []
+  },
+  {
+   "id": "H1",
+   "dept": "Staff",
+   "task": "Draft the weekly artisan roster and job posts",
+   "line": "draft",
+   "setting": "approve",
+   "status": "approved",
+   "steps": []
+  },
+  {
+   "id": "H2",
+   "dept": "Staff",
+   "task": "Prepare the pay sheet (approved every time)",
+   "line": "draft",
+   "setting": "approve",
+   "status": "approved",
+   "steps": []
+  },
+  {
+   "id": "H3",
+   "dept": "Staff",
+   "task": "Hire, discipline or let anyone go",
+   "line": "human",
+   "setting": "block",
+   "status": "approved",
+   "steps": []
+  }
+ ]
+}

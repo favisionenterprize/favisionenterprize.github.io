@@ -235,6 +235,8 @@
     return job;
   }
   function launch(url, job) {
+    // AI Plan (admin/aiplan.js): Pause All stops every job before it reaches the add-on.
+    if (window.FAV_AIPLAN && window.FAV_AIPLAN.paused()) { A.toast("Paused in 🧭 AI Plan. Press Resume all there to run automations again.", true); return; }
     job.id = Date.now().toString(36);
     gateJob(job);
     // First comment under each Facebook group post (where are you seeing this from + like & follow).
@@ -334,8 +336,10 @@
   // passes it back when it returns, and receive() carries on with it.
   function runStep(steps, auto) {
     steps = (steps || []).slice();
+    const AP = window.FAV_AIPLAN, runId = new Date().toISOString().slice(0, 13);   // "Needs approval" asked once an hour
     while (steps.length) {
       const k = steps.shift();
+      if (AP && !AP.gate(k, runId)) continue;   // AI Plan: paused, not approved, retired, blocked or declined → skip this step
       if (k === "renew") return startRenew(steps);
       if (k === "declines" && cleanupWaiting()) return startDeclines(steps);
       if (k === "sync" && syncWaiting()) return startImport(steps);

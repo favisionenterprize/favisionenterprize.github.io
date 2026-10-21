@@ -662,6 +662,65 @@ async function boxads(browser, shot) {
   return { problems, cards: st.cards, pool };
 }
 
+// "🧭 AI Plan" screen (admin/aiplan.js, #aiplan): every rule in data/ai-plan.json drawn, edits + Pause All save
+// through FAV_ADMIN.saveJson, and the gate the Social autopilot uses (runStep/launch) obeys Status, Action
+// setting, Needs approval (confirm) and Pause All.
+async function aiplan(browser, shot) {
+  const page = await browser.newPage({ viewport: shot ? { width: 1280, height: 900 } : { width: 390, height: 900 } });
+  const problems = [];
+  page.on("pageerror", e => problems.push("page error: " + e.message));
+  const html = fs.readFileSync(ROOT + "admin/index.html", "utf8").replace(/<script[\s\S]*?<\/script>/g, "");
+  await page.route("http://smoke.test/**", r => r.fulfill({ status: 200, contentType: "text/html", body: html }));
+  await page.goto("http://smoke.test/admin/");
+  await page.addStyleTag({ content: fs.readFileSync(ROOT + "admin/admin.css", "utf8") });
+  const plan = JSON.parse(fs.readFileSync(ROOT + "data/ai-plan.json", "utf8"));
+  await page.evaluate(plan => {
+    window.__saves = []; window.__toasts = []; window.__confirms = 0; let disk = JSON.parse(JSON.stringify(plan));
+    window.confirm = () => { window.__confirms++; return true; };
+    window.__disk = () => disk;
+    window.FAV_ADMIN = { busy: () => {}, friendly: String, toast: (m, bad) => window.__toasts.push((bad ? "✗ " : "") + m),
+      readJsonFile: async () => JSON.parse(JSON.stringify(disk)),
+      saveJson: async (f, mutate, msg) => { disk = mutate(JSON.parse(JSON.stringify(disk))); window.__saves.push(f + ": " + msg); return JSON.parse(JSON.stringify(disk)); } };
+  }, plan);
+  await page.addScriptTag({ content: fs.readFileSync(ROOT + "admin/aiplan.js", "utf8") });
+  await page.evaluate(() => document.querySelector("[data-aiplan]").click());
+  await page.waitForTimeout(400);
+  const st = await page.evaluate(() => ({ rules: document.querySelectorAll(".ap-rule[data-rid]").length, hash: location.hash }));
+  if (st.rules !== plan.rules.length) problems.push(`AI Plan shows ${st.rules} rules, expected ${plan.rules.length}`);
+  if (st.hash !== "#aiplan") problems.push("deep link #aiplan not set");
+  if (plan.rules.some(r => !r.id || !r.task || !["ai", "draft", "human"].includes(r.line) || !["allow", "approve", "block"].includes(r.setting))) problems.push("data/ai-plan.json has a rule with a bad id/task/line/setting");
+  if (shot) await page.screenshot({ path: shot, fullPage: false });
+  const g = await page.evaluate(() => { const G = window.FAV_AIPLAN; return { renew: G.gate("renew", "t"), ig: G.gate("ig", "t"), engage: G.gate("engage:fb", "t"), other: G.gate("nothing-covers-this", "t") }; });
+  if (!g.renew || !g.ig || !g.engage || !g.other) problems.push("approved + Always allow steps should run: " + JSON.stringify(g));
+  // Alexander retires M1 (posting on all socials) and saves.
+  await page.selectOption('.ap-rule[data-rid="M1"] select[data-f="status"]', "retired");
+  await page.fill('.ap-rule[data-rid="M1"] textarea', "Post on all socials (test edit)");
+  await page.click("[data-ap-save]"); await page.waitForTimeout(200);
+  const r1 = await page.evaluate(() => ({ m1: window.__disk().rules.find(r => r.id === "M1"), ig: window.FAV_AIPLAN.gate("ig", "t2"), renew: window.FAV_AIPLAN.gate("renew", "t2") }));
+  if (r1.m1.status !== "retired" || r1.m1.task !== "Post on all socials (test edit)") problems.push("rule edit didn't save: " + JSON.stringify(r1.m1));
+  if (r1.ig !== false) problems.push("retired M1 still lets the Instagram step run");
+  if (r1.renew !== true) problems.push("retiring M1 stopped renewals (M2) too");
+  // Needs approval asks once per run.
+  await page.selectOption('.ap-rule[data-rid="M2"] select[data-f="setting"]', "approve");
+  await page.click("[data-ap-save]"); await page.waitForTimeout(200);
+  const r2 = await page.evaluate(() => { const a = window.FAV_AIPLAN.gate("renew", "t3"), b = window.FAV_AIPLAN.gate("post", "t3"); return { a, b, n: window.__confirms }; });
+  if (!r2.a || !r2.b || r2.n !== 1) problems.push("Needs approval should ask once per run and then run: " + JSON.stringify(r2));
+  // Pause All stops everything; Resume brings it back.
+  await page.click("[data-ap-pause]"); await page.waitForTimeout(200);
+  const r3 = await page.evaluate(() => ({ p: window.__disk().paused, renew: window.FAV_AIPLAN.gate("renew", "t4"), other: window.FAV_AIPLAN.gate("nothing", "t4"), paused: window.FAV_AIPLAN.paused() }));
+  if (!r3.p || r3.renew || r3.other || !r3.paused) problems.push("Pause All didn't stop everything: " + JSON.stringify(r3));
+  await page.click("[data-ap-pause]"); await page.waitForTimeout(200);
+  if (await page.evaluate(() => window.FAV_AIPLAN.paused())) problems.push("Resume all didn't resume");
+  // A new rule starts as Proposed and saves.
+  await page.fill("#ap-new", "Test rule"); await page.click("[data-ap-add]"); await page.click("[data-ap-save]"); await page.waitForTimeout(200);
+  const nr = await page.evaluate(() => window.__disk().rules.find(r => r.task === "Test rule"));
+  if (!nr || nr.status !== "proposed") problems.push("new rule didn't save as Proposed");
+  const bad = await page.evaluate(() => window.__toasts.filter(t => t.startsWith("✗")));
+  bad.forEach(t => problems.push("error toast: " + t));
+  await page.close();
+  return { problems, rules: st.rules };
+}
+
 (async () => {
   const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
   let failed = 0;
@@ -689,6 +748,9 @@ async function boxads(browser, shot) {
   const bx = await boxads(browser, process.env.BOX_SHOT || "");
   if (bx.problems.length) { failed++; console.log("✗ What's in the Box ads screen"); bx.problems.forEach(p => console.log("    " + p)); }
   else console.log(`✓ What's in the Box ads screen: ${bx.cards} box ads drawn, caption passes the gate, Edit contents and ✓ Confirmed save, ${bx.pool} Box ads in the posting pool`);
+  const ap = await aiplan(browser, process.env.AIPLAN_SHOT || "");
+  if (ap.problems.length) { failed++; console.log("✗ AI Plan screen"); ap.problems.forEach(p => console.log("    " + p)); }
+  else console.log(`✓ AI Plan screen: ${ap.rules} rules drawn; edits, Retired, Needs approval, Pause All / Resume and new rules work with the autopilot gate`);
   await browser.close();
   console.log(failed ? `\n${failed} check(s) FAILED` : "\nAll admin checks passed.");
   process.exit(failed ? 1 : 0);
