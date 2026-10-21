@@ -237,8 +237,9 @@
    "id": "claudecommunity",
    "name": "Claude Community",
    "url": "https://www.facebook.com/groups/claudecommunity/",
-   "active": true,
-   "added": "2026-10-20"
+   "active": false,
+   "added": "2026-10-20",
+   "off_why": "Couldn't find the post box"
   },
   {
    "id": "977797772413869",
@@ -258,8 +259,9 @@
    "id": "1145676989186606",
    "name": "ST . JOHN'S �GRAMMAR� SCHOOL��",
    "url": "https://www.facebook.com/groups/1145676989186606/",
-   "active": true,
-   "added": "2026-10-20"
+   "active": false,
+   "added": "2026-10-20",
+   "off_why": "Couldn't find the post box"
   },
   {
    "id": "1152937838806537",
@@ -272,8 +274,9 @@
    "id": "1307349760454711",
    "name": "ROCK AND ROLL ANNEX GROUP BY DORA FORDJOUR",
    "url": "https://www.facebook.com/groups/1307349760454711/",
-   "active": true,
-   "added": "2026-10-20"
+   "active": false,
+   "added": "2026-10-20",
+   "off_why": "Not a member of this group"
   },
   {
    "id": "1367025170347293",
@@ -286,8 +289,9 @@
    "id": "1412859638977189",
    "name": "Buy and Sell Hub",
    "url": "https://www.facebook.com/groups/1412859638977189/",
-   "active": true,
-   "added": "2026-10-20"
+   "active": false,
+   "added": "2026-10-20",
+   "off_why": "Couldn't find the post box"
   },
   {
    "id": "1603659139995662",
@@ -7707,6 +7711,321 @@
    "ok": false,
    "now": true,
    "why": "We limit how often"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:43:43.552Z",
+   "p": "FAV-011",
+   "g": "920644089831054",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:44:12.479Z",
+   "p": "FAV-011",
+   "g": "lovenestconversation",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:44:40.599Z",
+   "p": "FAV-011",
+   "g": "169536492639468",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:45:05.860Z",
+   "p": "FAV-011",
+   "g": "2188505244910936",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:45:54.461Z",
+   "p": "FAV-011",
+   "g": "3985694091681437",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:46:38.449Z",
+   "p": "FAV-011",
+   "g": "1329039178112947",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:47:08.622Z",
+   "p": "FAV-011",
+   "g": "hongkongmoms",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:48:17.348Z",
+   "p": "FAV-011",
+   "g": "1968925946751585",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:48:53.581Z",
+   "p": "FAV-011",
+   "g": "378971703031985",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:49:24.792Z",
+   "p": "FAV-011",
+   "g": "572485050049323",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:49:59.502Z",
+   "p": "FAV-011",
+   "g": "1260426287321668",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:50:44.535Z",
+   "p": "FAV-011",
+   "g": "980376278667360",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:51:35.264Z",
+   "p": "FAV-011",
+   "g": "139560271489581",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:52:20.704Z",
+   "p": "FAV-011",
+   "g": "180212603087458",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:52:46.239Z",
+   "p": "FAV-011",
+   "g": "195199285857356",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:53:33.547Z",
+   "p": "FAV-011",
+   "g": "kofitv",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:54:16.510Z",
+   "p": "FAV-011",
+   "g": "397641595383636",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:54:45.092Z",
+   "p": "FAV-011",
+   "g": "495508180829744",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:55:28.758Z",
+   "p": "FAV-011",
+   "g": "535325930759843",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:55:57.285Z",
+   "p": "FAV-011",
+   "g": "582376070602961",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:56:24.425Z",
+   "p": "FAV-011",
+   "g": "613870175328566",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:56:54.641Z",
+   "p": "FAV-011",
+   "g": "661332781128349",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:57:22.566Z",
+   "p": "FAV-011",
+   "g": "694644710640007",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:57:49.612Z",
+   "p": "FAV-011",
+   "g": "732658637184181",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:58:39.624Z",
+   "p": "FAV-011",
+   "g": "748111992059254",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:59:05.051Z",
+   "p": "FAV-011",
+   "g": "928755090542065",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:59:36.553Z",
+   "p": "FAV-011",
+   "g": "claudecommunity",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T18:00:25.058Z",
+   "p": "FAV-011",
+   "g": "977797772413869",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T18:01:10.537Z",
+   "p": "FAV-011",
+   "g": "1024060211323777",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T18:01:50.511Z",
+   "p": "FAV-011",
+   "g": "1145676989186606",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T18:02:22.671Z",
+   "p": "FAV-011",
+   "g": "1152937838806537",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T18:02:50.636Z",
+   "p": "FAV-011",
+   "g": "1307349760454711",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T18:03:35.988Z",
+   "p": "FAV-011",
+   "g": "1367025170347293",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T18:04:10.442Z",
+   "p": "FAV-011",
+   "g": "1412859638977189",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T18:05:44.054Z",
+   "p": "FAV-011",
+   "g": "1603659139995662",
+   "ok": false,
+   "now": true,
+   "why": "We limit how often"
   }
  ],
  "resets": {},
@@ -8126,6 +8445,14 @@
   {
    "d": "2026-10-21",
    "t": "2026-10-21T18:05:52.410Z",
+   "kind": "post",
+   "tried": 35,
+   "ok": 21,
+   "stopped": "Facebook showed \"We limit how often\". Nothing more was posted."
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T18:06:10.316Z",
    "kind": "post",
    "tried": 35,
    "ok": 21,
