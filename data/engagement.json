@@ -123,13 +123,13 @@
   },
   {
    "d": "2026-10-21",
-   "net": "x",
-   "n": 299
+   "net": "ig",
+   "n": 893
   },
   {
    "d": "2026-10-21",
-   "net": "ig",
-   "n": 893
+   "net": "x",
+   "n": 299
   }
  ],
  "posts": {
@@ -286,7 +286,7 @@
    "commented": [],
    "checked": "2026-10-21",
    "likes": 1,
-   "comments": 4,
+   "comments": 5,
    "shares": 1,
    "views": 75,
    "title": "X"
@@ -734,7 +734,7 @@
    "commented": [],
    "checked": "2026-10-21",
    "views": 15,
-   "comments": 1
+   "comments": 2
   },
   "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0twDXGotiJ66vDJm1b2jVqKhLhXAyw4yWEELGZTii48aCDVLxTpPP5kKTT61Q4vXcl": {
    "net": "fb",
@@ -959,7 +959,8 @@
    "first": "2026-10-21",
    "commented": [],
    "checked": "2026-10-21",
-   "views": 10
+   "views": 10,
+   "comments": 1
   },
   "https://x.com/FaVisionEnt/status/2111852501603586475": {
    "net": "x",
@@ -967,7 +968,8 @@
    "first": "2026-10-21",
    "commented": [],
    "checked": "2026-10-21",
-   "views": 1
+   "views": 1,
+   "comments": 1
   },
   "https://x.com/FaVisionEnt/status/2111754454769049759": {
    "net": "x",
@@ -975,7 +977,8 @@
    "first": "2026-10-21",
    "commented": [],
    "checked": "2026-10-21",
-   "views": 14
+   "views": 14,
+   "comments": 1
   },
   "https://x.com/FaVisionEnt/status/2111753238630543485": {
    "net": "x",
@@ -983,7 +986,8 @@
    "first": "2026-10-21",
    "commented": [],
    "checked": "2026-10-21",
-   "views": 16
+   "views": 16,
+   "comments": 1
   }
  },
  "runs": [
@@ -1974,6 +1978,21 @@
    "invited": 0,
    "thanked": 0,
    "followers": 893,
+   "stopped": null,
+   "commenting": false
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T04:23:13.002Z",
+   "net": "x",
+   "mode": "likers",
+   "posts": 6,
+   "checked": 6,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 299,
    "stopped": null,
    "commenting": false
   }
