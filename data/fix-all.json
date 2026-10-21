@@ -12,8 +12,8 @@
  },
  "ig": {
   "scan": {
-   "d": "2026-10-18",
-   "t": "2026-10-18T16:47:09.341Z",
+   "d": "2026-10-21",
+   "t": "2026-10-21T04:14:59.030Z",
    "n": 12,
    "posts": [
     {
@@ -38,64 +38,64 @@
      "alt": ""
     },
     {
-     "id": "Den3eaEiBkT",
-     "url": "https://www.instagram.com/p/Den3eaEiBkT/",
+     "id": "DevecpOiP0M",
+     "url": "https://www.instagram.com/p/DevecpOiP0M/",
      "text": "",
      "kind": "post",
      "alt": ""
     },
     {
-     "id": "Den3XhsCO5_",
-     "url": "https://www.instagram.com/p/Den3XhsCO5_/",
+     "id": "DeveWHmCAw_",
+     "url": "https://www.instagram.com/p/DeveWHmCAw_/",
      "text": "",
      "kind": "post",
      "alt": ""
     },
     {
-     "id": "Den3QeViM-V",
-     "url": "https://www.instagram.com/p/Den3QeViM-V/",
+     "id": "DevePIOiKQg",
+     "url": "https://www.instagram.com/p/DevePIOiKQg/",
      "text": "",
      "kind": "post",
      "alt": ""
     },
     {
-     "id": "Den3Kt7CJIf",
-     "url": "https://www.instagram.com/p/Den3Kt7CJIf/",
+     "id": "DevdchtiFQQ",
+     "url": "https://www.instagram.com/p/DevdchtiFQQ/",
      "text": "",
      "kind": "post",
      "alt": ""
     },
     {
-     "id": "Den3Dh7iJiD",
-     "url": "https://www.instagram.com/p/Den3Dh7iJiD/",
+     "id": "DevdOA5iNfz",
+     "url": "https://www.instagram.com/p/DevdOA5iNfz/",
      "text": "",
      "kind": "post",
      "alt": ""
     },
     {
-     "id": "Den28LTiOEw",
-     "url": "https://www.instagram.com/p/Den28LTiOEw/",
+     "id": "DevdF-3iOSA",
+     "url": "https://www.instagram.com/p/DevdF-3iOSA/",
      "text": "",
      "kind": "post",
      "alt": ""
     },
     {
-     "id": "Denm512va3v",
-     "url": "https://www.instagram.com/reel/Denm512va3v/",
-     "text": "",
-     "kind": "video",
-     "alt": ""
-    },
-    {
-     "id": "DenicYviAJF",
-     "url": "https://www.instagram.com/p/DenicYviAJF/",
+     "id": "Devc-8_CMy2",
+     "url": "https://www.instagram.com/p/Devc-8_CMy2/",
      "text": "",
      "kind": "post",
      "alt": ""
     },
     {
-     "id": "DeniVjgiPhB",
-     "url": "https://www.instagram.com/p/DeniVjgiPhB/",
+     "id": "Devc4j2CD_5",
+     "url": "https://www.instagram.com/p/Devc4j2CD_5/",
+     "text": "",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "DevcqF8iC-g",
+     "url": "https://www.instagram.com/p/DevcqF8iC-g/",
      "text": "",
      "kind": "post",
      "alt": ""
@@ -559,6 +559,13 @@
    "skip": 0,
    "v": "2026-10-15.4",
    "more": 6
+  },
+  {
+   "d": "2026-10-21",
+   "kind": "scan",
+   "net": "ig",
+   "n": 12,
+   "v": "2026-10-15.4"
   }
  ]
 }
