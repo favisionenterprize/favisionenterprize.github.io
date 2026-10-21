@@ -187,6 +187,14 @@
    "p": "FAV-007",
    "ok": false,
    "why": "Post button stayed off"
+  },
+  {
+   "d": "2026-10-21",
+   "net": "fb",
+   "v": "fav-008-short",
+   "p": "FAV-008",
+   "ok": false,
+   "why": "Post button stayed off"
   }
  ],
  "runs": []
