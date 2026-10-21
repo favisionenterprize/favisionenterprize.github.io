@@ -2266,5 +2266,173 @@
         "synced": "2026-10-17"
       }
     ]
+  },
+  {
+    "id": "FAV-036",
+    "icon": "🪑",
+    "condition": "Brand New",
+    "material": "White HDPE (plastic) top, black powder-coated steel frame",
+    "colors": [
+      "White",
+      "Black"
+    ],
+    "custom_order": false,
+    "in_stock": true,
+    "placeholder": false,
+    "category": "Dining",
+    "negotiable": true,
+    "sale_from": "2026-10-21",
+    "sale_until": "2026-12-31",
+    "in_the_box_confirmed": false,
+    "dimensions": "122 × 70 × 74 cm (48\" × 28\") (L × W × H)",
+    "name": "White Foldable Table — 4-Seater (4ft, Black Frame)",
+    "type": "Folding Table",
+    "price_ghs": 670,
+    "was_price_ghs": 750,
+    "description": "4ft white foldable table with a sturdy HDPE top and black steel legs that fold flat (about 3 inches thick) for easy transport and storage. Seats 4 (2 per side). Ideal for small meetings, homes and offices. Add matching white folding chairs at GH₵250 each.",
+    "highlights": [
+      "Seats 4 — 2 per side",
+      "Folds flat to ~3 inches",
+      "Great for small meetings",
+      "Bulk: 10% off 50+, 15% off 100+"
+    ],
+    "marketplace_category": "Home & Garden > Furniture > Tables",
+    "images": [
+      "assets/images/products/fav-036-1.jpg"
+    ],
+    "tiktok": 34,
+    "in_the_box": [
+      {
+        "item": "Foldable table",
+        "qty": 1,
+        "icon": "table"
+      }
+    ]
+  },
+  {
+    "id": "FAV-037",
+    "icon": "🪑",
+    "condition": "Brand New",
+    "material": "White HDPE (plastic) top, black powder-coated steel frame",
+    "colors": [
+      "White",
+      "Black"
+    ],
+    "custom_order": false,
+    "in_stock": true,
+    "placeholder": false,
+    "category": "Dining",
+    "negotiable": true,
+    "sale_from": "2026-10-21",
+    "sale_until": "2026-12-31",
+    "in_the_box_confirmed": false,
+    "dimensions": "183 × 76 × 74 cm (72\" × 30\") (L × W × H)",
+    "name": "White Foldable Table — 6-Seater (6ft, Black Frame)",
+    "type": "Folding Table",
+    "price_ghs": 950,
+    "was_price_ghs": 1100,
+    "description": "6ft white foldable table with a sturdy HDPE top and black steel legs that fold flat (about 3 inches thick) for easy transport and storage. Seats 6 (3 per side). Ideal for events, church and parties. Add matching white folding chairs at GH₵250 each.",
+    "highlights": [
+      "Seats 6 — 3 per side",
+      "Folds flat to ~3 inches",
+      "Great for events",
+      "Bulk: 10% off 50+, 15% off 100+"
+    ],
+    "marketplace_category": "Home & Garden > Furniture > Tables",
+    "images": [
+      "assets/images/products/fav-037-1.jpg"
+    ],
+    "tiktok": 35,
+    "in_the_box": [
+      {
+        "item": "Foldable table",
+        "qty": 1,
+        "icon": "table"
+      }
+    ]
+  },
+  {
+    "id": "FAV-038",
+    "icon": "🪑",
+    "condition": "Brand New",
+    "material": "White HDPE (plastic) top, black powder-coated steel frame",
+    "colors": [
+      "White",
+      "Black"
+    ],
+    "custom_order": false,
+    "in_stock": true,
+    "placeholder": false,
+    "category": "Dining",
+    "negotiable": true,
+    "sale_from": "2026-10-21",
+    "sale_until": "2026-12-31",
+    "in_the_box_confirmed": false,
+    "dimensions": "244 × 76 × 74 cm (96\" × 30\") (L × W × H)",
+    "name": "White Foldable Table — 8-Seater (8ft, Black Frame)",
+    "type": "Folding Table",
+    "price_ghs": 1200,
+    "was_price_ghs": 1400,
+    "description": "8ft white foldable table with a sturdy HDPE top and black steel legs that fold flat (about 3 inches thick) for easy transport and storage. Seats 8 (4 per side). Ideal for weddings, conferences and big events. Add matching white folding chairs at GH₵250 each.",
+    "highlights": [
+      "Seats 8 — 4 per side",
+      "Folds flat to ~3 inches",
+      "Great for weddings",
+      "Bulk: 10% off 50+, 15% off 100+"
+    ],
+    "marketplace_category": "Home & Garden > Furniture > Tables",
+    "images": [
+      "assets/images/products/fav-038-1.jpg"
+    ],
+    "tiktok": 36,
+    "in_the_box": [
+      {
+        "item": "Foldable table",
+        "qty": 1,
+        "icon": "table"
+      }
+    ]
+  },
+  {
+    "id": "FAV-039",
+    "icon": "🪑",
+    "condition": "Brand New",
+    "material": "White HDPE (plastic) top, black powder-coated steel frame",
+    "colors": [
+      "White",
+      "Black"
+    ],
+    "custom_order": false,
+    "in_stock": true,
+    "placeholder": false,
+    "category": "Dining",
+    "negotiable": true,
+    "sale_from": "2026-10-21",
+    "sale_until": "2026-12-31",
+    "in_the_box_confirmed": false,
+    "dimensions": "Height ~85 cm (2.8 ft); folds to ~15 cm (6\")",
+    "name": "White Foldable Chair — Black Frame, Handle Slot",
+    "type": "Folding Chair",
+    "price_ghs": 250,
+    "was_price_ghs": 300,
+    "description": "White folding chair with a black steel frame and a handle slot in the backrest for easy carrying. Folds to about 6 inches, so dozens stack in a small space. Matches our white foldable tables — perfect for events, church, school and offices.",
+    "highlights": [
+      "Handle slot for easy carrying",
+      "Folds to ~6 inches",
+      "Matches our white foldable tables",
+      "Bulk: 10% off 50+, 15% off 100+"
+    ],
+    "marketplace_category": "Home & Garden > Furniture > Chairs",
+    "images": [
+      "assets/images/products/fav-039-1.jpg"
+    ],
+    "tiktok": 37,
+    "in_the_box": [
+      {
+        "item": "Foldable chair",
+        "qty": 1,
+        "icon": "chair"
+      }
+    ]
   }
 ]
