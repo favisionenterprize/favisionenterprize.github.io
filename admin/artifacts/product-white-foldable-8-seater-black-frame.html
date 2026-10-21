@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>White Foldable Rectangular Table - 8 Seater (Black Frame) - FA Vision Enterprise</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+<header class="bg-white border-b p-4 flex justify-between"><div><h1 class="font-bold">FA Vision Enterprise</h1><p class="text-xs text-gray-500">Odorkor Tarazzo Rd | Omanjor | Kasoa — 0572646176</p></div><div class="text-sm font-bold text-green-600">GH₵1200</div></header>
+<main class="max-w-5xl mx-auto p-4 grid md:grid-cols-2 gap-6">
+<div class="bg-white rounded-xl p-4 border">
+<img src="/assets/images/white-foldable-8-seater-black-frame.jpg" alt="White Foldable Rectangular Table - 8 Seater (Black Frame)" class="w-full rounded" onerror="this.src='/mnt/data/photo6925172597898006689.jpeg'">
+<div class="mt-4 grid grid-cols-2 gap-2">
+<div class="bg-gray-100 p-3 rounded text-center"><div class="text-xs">Table Only</div><div class="font-bold">GH₵1200</div></div>
+<div class="bg-green-50 p-3 rounded text-center border border-green-200"><div class="text-xs">Pay 50% Deposit Now</div><div class="font-bold text-green-700">GH₵600 via MoMo</div></div>
+</div>
+</div>
+<div class="bg-white rounded-xl p-6 border">
+<h1 class="text-2xl font-bold">White Foldable Rectangular Table - 8 Seater (Black Frame)</h1>
+<p class="text-sm text-gray-600 mt-2">Extended 8ft version same model - White top + Black frame - Seats 8 - For weddings, conferences</p>
+<div class="mt-4">
+<div class="text-3xl font-bold text-green-600">GH₵1200</div>
+<div class="text-sm text-gray-400 line-through">GH₵1400</div>
+</div>
+<div class="mt-6 p-4 bg-gray-900 text-white rounded font-mono text-xs">
+<div class="font-bold mb-2">Bulk Calculator — FA Vision</div>
+<div>Qty: <input type="number" id="qty" value="1" min="1" class="text-black px-2 py-1 rounded w-20" oninput="calcBulk()"> x GH₵1200</div>
+<div class="mt-2">Total: <span id="total" class="font-bold text-green-400">GH₵1200</span></div>
+<div>50+ : 10% off → <span id="bulk50">GH₵1080</span> each</div>
+<div>100+ : 15% off → <span id="bulk100">GH₵1020</span> each</div>
+<div class="mt-2">Deposit 50%: <span id="deposit" class="font-bold">GH₵600</span></div>
+</div>
+<div class="mt-6 space-y-2">
+<button onclick="checkout(1200)" class="w-full bg-green-600 text-white py-3 rounded font-bold">Pay GH₵1200 — MoMo/Card — Paystack (GHS Kobo Fixed)</button>
+<button onclick="whatsapp()" class="w-full bg-gray-900 text-white py-3 rounded font-bold">WhatsApp 0572646176 — Order Now</button>
+</div>
+<div class="mt-6 text-xs text-gray-500">
+📍 Odorkor Tarazzo Rd | Omanjor | Kasoa<br>
+🚚 Accra GH₵50 FREE 20+ sets | Tema | Kasoa | Kumasi<br>
+✅ Foldable | Sturdy | Event Furniture | Paystack Secure
+</div>
+</div>
+</main>
+<script>
+function calcBulk(){
+let qty=parseInt(document.getElementById('qty').value)||1;
+let price=1200;
+let total=qty*price;
+if(qty>=100) total=qty*price*0.85;
+else if(qty>=50) total=qty*price*0.9;
+document.getElementById('total').innerText='GH₵'+total;
+document.getElementById('deposit').innerText='GH₵'+Math.round(total*0.5);
+}
+function checkout(amount){
+let kobo=amount*100;
+let ref='FAV-'+Date.now();
+alert('Paystack: GH₵'+amount+' = '+kobo+' kobo GHS mobile_money channels — Ref: '+ref+' — Redirect to /paystack/callback.html?ref='+ref);
+// window.location.href='/paystack/callback.html?ref='+ref+'&amount='+kobo;
+}
+function whatsapp(){
+window.open('https://wa.me/233572646176?text=Hi FA Vision, I want White Foldable Rectangular Table - 8 Seater (Black Frame) GH₵1200', '_blank');
+}
+</script>
+</body>
+</html>

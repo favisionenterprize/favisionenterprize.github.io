@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Artifacts · F.A Vision Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../admin.css?v=20261021a">
+  <style>
+    .art-wrap { max-width: 1040px; margin: 0 auto; padding: 20px 16px 48px; }
+    .art-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+    .art-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
+    .art-brand b { color: var(--brand-blue); }
+    .art-brand .tag { background: var(--brand-red); color: #fff; font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
+    .art-hero { border-top: 4px solid var(--brand-blue); margin-bottom: 20px; }
+    .art-hero h1 { color: var(--brand-blue); }
+    .art-group h2 { font-family: "Poppins", "Inter", sans-serif; color: var(--brand-blue); margin: 26px 0 12px; }
+    .art-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); gap: 14px; }
+    .art-card { display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--brand-blue); border-radius: var(--radius); padding: 14px 16px; transition: border-color .15s, transform .1s; }
+    .art-card:hover { border-color: var(--brand-blue); transform: translateY(-1px); }
+    .art-card.pdf { border-left-color: var(--brand-red); }
+    .art-card h3 { margin: 0; font-size: 16px; }
+    .art-card p { color: var(--muted); font-size: 14px; }
+    .art-open { margin-top: auto; color: var(--brand-blue); font-weight: 600; font-size: 14px; }
+    .art-card.pdf .art-open { color: var(--brand-red); }
+  </style>
+</head>
+<body>
+  <div class="art-wrap">
+    <div class="art-top">
+      <a class="art-brand" href="../"><img src="../../assets/images/logo.png" alt="" width="36" height="36"><span><b>F.A</b> Vision</span> <span class="tag">Admin</span></a>
+      <a class="btn btn-ghost btn-sm" href="../">← Back to admin</a>
+    </div>
+    <section class="fa-card art-hero">
+      <h1>Artifacts</h1>
+      <p class="muted">Tools, guides and product pages made with Meta AI / Claude. Each one opens in a new tab.</p>
+    </section>
+
+    <div class="art-group">
+      <h2>Tools</h2>
+      <div class="art-grid">
+        <a class="art-card" href="ai-workbench-v2.html" target="_blank" rel="noopener"><h3>AI Workbench v2</h3><p>Model picker (Meta AI, Claude, Gemini, OpenAI), open-items banner, Paystack error highlights.</p><span class="art-open">Open →</span></a>
+        <a class="art-card" href="one-click-autopost.html" target="_blank" rel="noopener"><h3>One-click autopost</h3><p>Post products to your socials in one press.</p><span class="art-open">Open →</span></a>
+        <a class="art-card" href="seo-pack.html" target="_blank" rel="noopener"><h3>SEO pack</h3><p>Titles and meta descriptions for school desks and wholesale furniture in Accra.</p><span class="art-open">Open →</span></a>
+      </div>
+    </div>
+
+    <div class="art-group">
+      <h2>Products</h2>
+      <div class="art-grid">
+        <a class="art-card" href="productworld-3-products.html" target="_blank" rel="noopener"><h3>Product world: 3 products</h3><p>Showcase page for three products.</p><span class="art-open">Open →</span></a>
+        <a class="art-card" href="product-white-foldable-4-seater-black-frame.html" target="_blank" rel="noopener"><h3>White foldable table, 4-seater</h3><p>Black frame, HDPE top.</p><span class="art-open">Open →</span></a>
+        <a class="art-card" href="product-white-foldable-6-seater-black-frame.html" target="_blank" rel="noopener"><h3>White foldable table, 6-seater</h3><p>Black frame, HDPE top.</p><span class="art-open">Open →</span></a>
+        <a class="art-card" href="product-white-foldable-8-seater-black-frame.html" target="_blank" rel="noopener"><h3>White foldable table, 8-seater</h3><p>Black frame, HDPE top.</p><span class="art-open">Open →</span></a>
+        <a class="art-card" href="product-white-foldable-chair-black-frame.html" target="_blank" rel="noopener"><h3>White foldable chair</h3><p>Black frame, handle slot.</p><span class="art-open">Open →</span></a>
+        <a class="art-card pdf" href="tables-price-sheet.pdf" target="_blank" rel="noopener"><h3>Tables price sheet (PDF)</h3><p>Sizes, seats and prices for the white foldable tables.</p><span class="art-open">Open PDF →</span></a>
+      </div>
+    </div>
+
+    <div class="art-group">
+      <h2>Learning</h2>
+      <div class="art-grid">
+        <a class="art-card" href="ai-student-study-guide.html" target="_blank" rel="noopener"><h3>Good AI student study guide</h3><p>Learning AI tools, including Copilot in VS Code.</p><span class="art-open">Open →</span></a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
