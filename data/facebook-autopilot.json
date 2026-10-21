@@ -6816,6 +6816,15 @@
    "ok": false,
    "now": true,
    "why": "We limit how often"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:44:59.384Z",
+   "p": "FAV-008",
+   "g": "page",
+   "ok": false,
+   "now": true,
+   "why": "Post button stayed off"
   }
  ],
  "resets": {},
@@ -7200,6 +7209,13 @@
    "tried": 1,
    "ok": 0,
    "stopped": "Facebook showed \"We limit how often\". Nothing more was posted."
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:45:16.041Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 0
   }
  ],
  "selling": {
