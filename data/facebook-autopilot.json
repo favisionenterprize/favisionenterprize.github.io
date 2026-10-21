@@ -6115,6 +6115,15 @@
    "url": "https://www.facebook.com/groups/3108712636082022/",
    "active": true,
    "added": "2026-10-21"
+  },
+  {
+   "id": "596297788574851",
+   "name": "Murang bilihan Ng mga furniture's dinning set Sala set bed frame",
+   "url": "https://www.facebook.com/groups/596297788574851/",
+   "added": "2026-10-21",
+   "members": 312000,
+   "source": "autopilot",
+   "active": true
   }
  ],
  "posts": [
@@ -7078,6 +7087,15 @@
    "members": 114000,
    "status": "joined",
    "url": "https://www.facebook.com/groups/789579941115543/"
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:43:32.827Z",
+   "g": "596297788574851",
+   "name": "Murang bilihan Ng mga furniture's dinning set Sala set bed frame",
+   "members": 312000,
+   "status": "joined",
+   "url": "https://www.facebook.com/groups/596297788574851/"
   }
  ],
  "checks": {
@@ -7216,6 +7234,13 @@
    "kind": "post",
    "tried": 1,
    "ok": 0
+  },
+  {
+   "d": "2026-10-21",
+   "t": "2026-10-21T17:46:52.333Z",
+   "kind": "grow",
+   "joined": 1,
+   "requested": 0
   }
  ],
  "selling": {
