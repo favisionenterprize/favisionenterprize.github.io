@@ -2540,14 +2540,14 @@ Order: https://wa.me/233535700722?text=Hello%20MANYE%20OYE%20REHOBOTH%2C%20I%27m
 - **Category:** Home & Garden > Furniture > Tables
 - **Condition:** Brand New
 - **Location:** Odorkor, Accra
-- **Photos:** assets/images/products/fav-036-1.jpg
+- **Photos:** assets/images/products/fav-036-plan.jpg, assets/images/products/fav-036-1.jpg, assets/images/products/foldable-price-table.jpg
 
 **Description:**
 
 ```
 White Foldable Table — 4-Seater (4ft, Black Frame) by F.A Vision Enterprise.
 
-4ft white foldable table with a sturdy HDPE top and black steel legs that fold flat (about 3 inches thick) for easy transport and storage. Seats 4 (2 per side). Ideal for small meetings, homes and offices. Add matching white folding chairs at GH₵250 each.
+4ft white foldable table with a sturdy HDPE top and black steel legs that fold flat (about 3 inches thick) for easy transport and storage. Seats 4 (2 per side). Ideal for small meetings, homes and offices. Add matching white folding chairs at GH₵250 each. Price every option and bulk order in the calculator: favisionenterprize.github.io/foldable/
 
 👉 See all photos, price and order online: https://favisionenterprize.github.io/#product/FAV-036
 
@@ -2619,14 +2619,14 @@ Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interes
 - **Category:** Home & Garden > Furniture > Tables
 - **Condition:** Brand New
 - **Location:** Odorkor, Accra
-- **Photos:** assets/images/products/fav-037-1.jpg
+- **Photos:** assets/images/products/fav-037-plan.jpg, assets/images/products/fav-037-1.jpg, assets/images/products/foldable-price-table.jpg
 
 **Description:**
 
 ```
 White Foldable Table — 6-Seater (6ft, Black Frame) by F.A Vision Enterprise.
 
-6ft white foldable table with a sturdy HDPE top and black steel legs that fold flat (about 3 inches thick) for easy transport and storage. Seats 6 (3 per side). Ideal for events, church and parties. Add matching white folding chairs at GH₵250 each.
+6ft white foldable table with a sturdy HDPE top and black steel legs that fold flat (about 3 inches thick) for easy transport and storage. Seats 6 (3 per side). Ideal for events, church and parties. Add matching white folding chairs at GH₵250 each. Price every option and bulk order in the calculator: favisionenterprize.github.io/foldable/
 
 👉 See all photos, price and order online: https://favisionenterprize.github.io/#product/FAV-037
 
@@ -2698,14 +2698,14 @@ Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interes
 - **Category:** Home & Garden > Furniture > Tables
 - **Condition:** Brand New
 - **Location:** Odorkor, Accra
-- **Photos:** assets/images/products/fav-038-1.jpg
+- **Photos:** assets/images/products/fav-038-plan.jpg, assets/images/products/fav-038-1.jpg, assets/images/products/foldable-price-table.jpg
 
 **Description:**
 
 ```
 White Foldable Table — 8-Seater (8ft, Black Frame) by F.A Vision Enterprise.
 
-8ft white foldable table with a sturdy HDPE top and black steel legs that fold flat (about 3 inches thick) for easy transport and storage. Seats 8 (4 per side). Ideal for weddings, conferences and big events. Add matching white folding chairs at GH₵250 each.
+8ft white foldable table with a sturdy HDPE top and black steel legs that fold flat (about 3 inches thick) for easy transport and storage. Seats 8 (4 per side). Ideal for weddings, conferences and big events. Add matching white folding chairs at GH₵250 each. Price every option and bulk order in the calculator: favisionenterprize.github.io/foldable/
 
 👉 See all photos, price and order online: https://favisionenterprize.github.io/#product/FAV-038
 
@@ -2777,14 +2777,14 @@ Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interes
 - **Category:** Home & Garden > Furniture > Chairs
 - **Condition:** Brand New
 - **Location:** Odorkor, Accra
-- **Photos:** assets/images/products/fav-039-1.jpg
+- **Photos:** assets/images/products/fav-039-plan.jpg, assets/images/products/fav-039-1.jpg, assets/images/products/foldable-price-table.jpg
 
 **Description:**
 
 ```
 White Foldable Chair — Black Frame, Handle Slot by F.A Vision Enterprise.
 
-White folding chair with a black steel frame and a handle slot in the backrest for easy carrying. Folds to about 6 inches, so dozens stack in a small space. Matches our white foldable tables — perfect for events, church, school and offices.
+White folding chair with a black steel frame and a handle slot in the backrest for easy carrying. Folds to about 6 inches, so dozens stack in a small space. Matches our white foldable tables — perfect for events, church, school and offices. Price every option and bulk order in the calculator: favisionenterprize.github.io/foldable/
 
 👉 See all photos, price and order online: https://favisionenterprize.github.io/#product/FAV-039
 
@@ -2845,4 +2845,320 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 White Foldable Chair — Black Frame, Handle Slot 🔥
 GH₵ 250
 Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20White%20Foldable%20Chair%20%E2%80%94%20Black%20Frame%2C%20Handle%20Slot%20%28FAV-039%29.
+```
+
+## FAV-040 · White Foldable 4-Seater Set — 4ft Table + 4 Chairs
+
+### Facebook Marketplace
+
+- **Title:** White Foldable 4-Seater Set — 4ft Table + 4 Chairs
+- **Price:** 1650
+- **Category:** Home & Garden > Furniture > Tables
+- **Condition:** Brand New
+- **Location:** Odorkor, Accra
+- **Photos:** assets/images/products/fav-040-plan.jpg, assets/images/products/fav-040-1.jpg, assets/images/products/foldable-price-table.jpg
+
+**Description:**
+
+```
+White Foldable 4-Seater Set — 4ft Table + 4 Chairs by F.A Vision Enterprise.
+
+Complete 4-seater set: one 4ft white foldable table with black steel legs plus 4 matching white folding chairs (handle slot, packed). Chairs are 2% off in the set: GH₵670 table + 4 × GH₵245 = GH₵1,650. Seats 4 (2 per side). Ideal for homes, small meetings and offices. Everything folds flat for easy transport and storage. Price every option and bulk order in the calculator: favisionenterprize.github.io/foldable/
+
+👉 See all photos, price and order online: https://favisionenterprize.github.io/#product/FAV-040
+
+✔ 4ft table + 4 chairs
+✔ Chairs 2% off in the set
+✔ Seats 4 — 2 per side
+✔ Bulk: 10% off 50+, 15% off 100+
+
+Material: White HDPE (plastic) top, black powder-coated steel frame
+Size: Table 122 × 70 × 74 cm; chairs ~85 cm high (L × W × H)
+Colours: White, Black
+
+Price negotiable for bulk orders.
+💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
+🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
+📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
+📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+🌐 https://favisionenterprize.github.io/
+Ref: FAV-040
+```
+
+### Group posts (use a different variant in each group)
+
+**Variant 1**
+
+```
+🪑 White Foldable 4-Seater Set — 4ft Table + 4 Chairs available now!
+• 4ft table + 4 chairs
+• Chairs 2% off in the set
+• Seats 4 — 2 per side
+• Bulk: 10% off 50+, 15% off 100+
+💰 GH₵ 1,650
+📍 Odorkor, Accra, delivery available
+📞 WhatsApp 057 264 6176
+#FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+**Variant 2**
+
+```
+Looking for a quality white foldable 4-seater set — 4ft table + 4 chairs? 4ft table + 4 chairs.
+Available at Odorkor, Accra. GH₵ 1,650.
+Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+**Variant 3**
+
+```
+NEW FROM F.A VISION ✨ White Foldable 4-Seater Set — 4ft Table + 4 Chairs
+GH₵ 1,650 | Ready for pickup
+Homes • Offices • Schools
+DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+### WhatsApp status
+
+```
+White Foldable 4-Seater Set — 4ft Table + 4 Chairs 🔥
+GH₵ 1,650
+Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20White%20Foldable%204-Seater%20Set%20%E2%80%94%204ft%20Table%20%2B%204%20Chairs%20%28FAV-040%29.
+```
+
+## FAV-041 · White Foldable 6-Seater Set — 6ft Table + 6 Chairs
+
+### Facebook Marketplace
+
+- **Title:** White Foldable 6-Seater Set — 6ft Table + 6 Chairs
+- **Price:** 2420
+- **Category:** Home & Garden > Furniture > Tables
+- **Condition:** Brand New
+- **Location:** Odorkor, Accra
+- **Photos:** assets/images/products/fav-041-plan.jpg, assets/images/products/fav-041-1.jpg, assets/images/products/foldable-price-table.jpg
+
+**Description:**
+
+```
+White Foldable 6-Seater Set — 6ft Table + 6 Chairs by F.A Vision Enterprise.
+
+Complete 6-seater set: one 6ft white foldable table with black steel legs plus 6 matching white folding chairs (handle slot, packed). Chairs are 2% off in the set: GH₵950 table + 6 × GH₵245 = GH₵2,420. Seats 6 (3 per side). Ideal for events, church and parties. Everything folds flat for easy transport and storage. Price every option and bulk order in the calculator: favisionenterprize.github.io/foldable/
+
+👉 See all photos, price and order online: https://favisionenterprize.github.io/#product/FAV-041
+
+✔ 6ft table + 6 chairs
+✔ Chairs 2% off in the set
+✔ Seats 6 — 3 per side
+✔ Bulk: 10% off 50+, 15% off 100+
+
+Material: White HDPE (plastic) top, black powder-coated steel frame
+Size: Table 183 × 76 × 74 cm; chairs ~85 cm high (L × W × H)
+Colours: White, Black
+
+Price negotiable for bulk orders.
+💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
+🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
+📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
+📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+🌐 https://favisionenterprize.github.io/
+Ref: FAV-041
+```
+
+### Group posts (use a different variant in each group)
+
+**Variant 1**
+
+```
+🪑 White Foldable 6-Seater Set — 6ft Table + 6 Chairs available now!
+• 6ft table + 6 chairs
+• Chairs 2% off in the set
+• Seats 6 — 3 per side
+• Bulk: 10% off 50+, 15% off 100+
+💰 GH₵ 2,420
+📍 Odorkor, Accra, delivery available
+📞 WhatsApp 057 264 6176
+#FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+**Variant 2**
+
+```
+Looking for a quality white foldable 6-seater set — 6ft table + 6 chairs? 6ft table + 6 chairs.
+Available at Odorkor, Accra. GH₵ 2,420.
+Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+**Variant 3**
+
+```
+NEW FROM F.A VISION ✨ White Foldable 6-Seater Set — 6ft Table + 6 Chairs
+GH₵ 2,420 | Ready for pickup
+Homes • Offices • Schools
+DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+### WhatsApp status
+
+```
+White Foldable 6-Seater Set — 6ft Table + 6 Chairs 🔥
+GH₵ 2,420
+Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20White%20Foldable%206-Seater%20Set%20%E2%80%94%206ft%20Table%20%2B%206%20Chairs%20%28FAV-041%29.
+```
+
+## FAV-042 · White Foldable 8-Seater Set — 8ft Table + 8 Chairs
+
+### Facebook Marketplace
+
+- **Title:** White Foldable 8-Seater Set — 8ft Table + 8 Chairs
+- **Price:** 3160
+- **Category:** Home & Garden > Furniture > Tables
+- **Condition:** Brand New
+- **Location:** Odorkor, Accra
+- **Photos:** assets/images/products/fav-042-plan.jpg, assets/images/products/fav-042-1.jpg, assets/images/products/foldable-price-table.jpg
+
+**Description:**
+
+```
+White Foldable 8-Seater Set — 8ft Table + 8 Chairs by F.A Vision Enterprise.
+
+Complete 8-seater set: one 8ft white foldable table with black steel legs plus 8 matching white folding chairs (handle slot, packed). Chairs are 2% off in the set: GH₵1,200 table + 8 × GH₵245 = GH₵3,160. Seats 8 (4 per side). Ideal for weddings, conferences and big events. Everything folds flat for easy transport and storage. Price every option and bulk order in the calculator: favisionenterprize.github.io/foldable/
+
+👉 See all photos, price and order online: https://favisionenterprize.github.io/#product/FAV-042
+
+✔ 8ft table + 8 chairs
+✔ Chairs 2% off in the set
+✔ Seats 8 — 4 per side
+✔ Bulk: 10% off 50+, 15% off 100+
+
+Material: White HDPE (plastic) top, black powder-coated steel frame
+Size: Table 244 × 76 × 74 cm; chairs ~85 cm high (L × W × H)
+Colours: White, Black
+
+Price negotiable for bulk orders.
+💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
+🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
+📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
+📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+🌐 https://favisionenterprize.github.io/
+Ref: FAV-042
+```
+
+### Group posts (use a different variant in each group)
+
+**Variant 1**
+
+```
+🪑 White Foldable 8-Seater Set — 8ft Table + 8 Chairs available now!
+• 8ft table + 8 chairs
+• Chairs 2% off in the set
+• Seats 8 — 4 per side
+• Bulk: 10% off 50+, 15% off 100+
+💰 GH₵ 3,160
+📍 Odorkor, Accra, delivery available
+📞 WhatsApp 057 264 6176
+#FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+**Variant 2**
+
+```
+Looking for a quality white foldable 8-seater set — 8ft table + 8 chairs? 8ft table + 8 chairs.
+Available at Odorkor, Accra. GH₵ 3,160.
+Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+**Variant 3**
+
+```
+NEW FROM F.A VISION ✨ White Foldable 8-Seater Set — 8ft Table + 8 Chairs
+GH₵ 3,160 | Ready for pickup
+Homes • Offices • Schools
+DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+### WhatsApp status
+
+```
+White Foldable 8-Seater Set — 8ft Table + 8 Chairs 🔥
+GH₵ 3,160
+Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20White%20Foldable%208-Seater%20Set%20%E2%80%94%208ft%20Table%20%2B%208%20Chairs%20%28FAV-042%29.
+```
+
+## FAV-043 · White Foldable Chairs — Pack of 10 (Black Frame)
+
+### Facebook Marketplace
+
+- **Title:** White Foldable Chairs — Pack of 10 (Black Frame)
+- **Price:** 2425
+- **Category:** Home & Garden > Furniture > Chairs
+- **Condition:** Brand New
+- **Location:** Odorkor, Accra
+- **Photos:** assets/images/products/fav-043-plan.jpg, assets/images/products/fav-043-1.jpg, assets/images/products/foldable-price-table.jpg
+
+**Description:**
+
+```
+White Foldable Chairs — Pack of 10 (Black Frame) by F.A Vision Enterprise.
+
+Pack of 10 white folding chairs with black steel frames and a handle slot for easy carrying. 3% off the single price: 10 × GH₵242.50 = GH₵2,425. Each folds to about 6 inches, so the whole pack stores in a small space. Perfect for events, church, schools and offices. Price every option and bulk order in the calculator: favisionenterprize.github.io/foldable/
+
+👉 See all photos, price and order online: https://favisionenterprize.github.io/#product/FAV-043
+
+✔ 10 chairs in a pack
+✔ 3% off — GH₵242.50 each
+✔ Folds to ~6 inches
+✔ Bulk: 10% off 50+, 15% off 100+
+
+Material: White HDPE (plastic) top, black powder-coated steel frame
+Size: Each chair ~85 cm high (2.8 ft); folds to ~15 cm (6")
+Colours: White, Black
+
+Price negotiable for bulk orders.
+💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
+🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
+📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
+📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+🌐 https://favisionenterprize.github.io/
+Ref: FAV-043
+```
+
+### Group posts (use a different variant in each group)
+
+**Variant 1**
+
+```
+🪑 White Foldable Chairs — Pack of 10 (Black Frame) available now!
+• 10 chairs in a pack
+• 3% off — GH₵242.50 each
+• Folds to ~6 inches
+• Bulk: 10% off 50+, 15% off 100+
+💰 GH₵ 2,425
+📍 Odorkor, Accra, delivery available
+📞 WhatsApp 057 264 6176
+#FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+**Variant 2**
+
+```
+Looking for a quality white foldable chairs — pack of 10 (black frame)? 10 chairs in a pack.
+Available at Odorkor, Accra. GH₵ 2,425.
+Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+**Variant 3**
+
+```
+NEW FROM F.A VISION ✨ White Foldable Chairs — Pack of 10 (Black Frame)
+GH₵ 2,425 | Ready for pickup
+Homes • Offices • Schools
+DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+```
+
+### WhatsApp status
+
+```
+White Foldable Chairs — Pack of 10 (Black Frame) 🔥
+GH₵ 2,425
+Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20White%20Foldable%20Chairs%20%E2%80%94%20Pack%20of%2010%20%28Black%20Frame%29%20%28FAV-043%29.
 ```

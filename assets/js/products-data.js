@@ -3029,7 +3029,7 @@ window.FAV_DATA = {
       "type": "Folding Table",
       "price_ghs": 670,
       "was_price_ghs": 750,
-      "description": "4ft white foldable table with a sturdy HDPE top and black steel legs that fold flat (about 3 inches thick) for easy transport and storage. Seats 4 (2 per side). Ideal for small meetings, homes and offices. Add matching white folding chairs at GH₵250 each.",
+      "description": "4ft white foldable table with a sturdy HDPE top and black steel legs that fold flat (about 3 inches thick) for easy transport and storage. Seats 4 (2 per side). Ideal for small meetings, homes and offices. Add matching white folding chairs at GH₵250 each. Price every option and bulk order in the calculator: favisionenterprize.github.io/foldable/",
       "highlights": [
         "Seats 4 — 2 per side",
         "Folds flat to ~3 inches",
@@ -3038,7 +3038,9 @@ window.FAV_DATA = {
       ],
       "marketplace_category": "Home & Garden > Furniture > Tables",
       "images": [
-        "assets/images/products/fav-036-1.jpg"
+        "assets/images/products/fav-036-plan.jpg",
+        "assets/images/products/fav-036-1.jpg",
+        "assets/images/products/foldable-price-table.jpg"
       ],
       "tiktok": 34,
       "in_the_box": [
@@ -3071,7 +3073,7 @@ window.FAV_DATA = {
       "type": "Folding Table",
       "price_ghs": 950,
       "was_price_ghs": 1100,
-      "description": "6ft white foldable table with a sturdy HDPE top and black steel legs that fold flat (about 3 inches thick) for easy transport and storage. Seats 6 (3 per side). Ideal for events, church and parties. Add matching white folding chairs at GH₵250 each.",
+      "description": "6ft white foldable table with a sturdy HDPE top and black steel legs that fold flat (about 3 inches thick) for easy transport and storage. Seats 6 (3 per side). Ideal for events, church and parties. Add matching white folding chairs at GH₵250 each. Price every option and bulk order in the calculator: favisionenterprize.github.io/foldable/",
       "highlights": [
         "Seats 6 — 3 per side",
         "Folds flat to ~3 inches",
@@ -3080,7 +3082,9 @@ window.FAV_DATA = {
       ],
       "marketplace_category": "Home & Garden > Furniture > Tables",
       "images": [
-        "assets/images/products/fav-037-1.jpg"
+        "assets/images/products/fav-037-plan.jpg",
+        "assets/images/products/fav-037-1.jpg",
+        "assets/images/products/foldable-price-table.jpg"
       ],
       "tiktok": 35,
       "in_the_box": [
@@ -3113,7 +3117,7 @@ window.FAV_DATA = {
       "type": "Folding Table",
       "price_ghs": 1200,
       "was_price_ghs": 1400,
-      "description": "8ft white foldable table with a sturdy HDPE top and black steel legs that fold flat (about 3 inches thick) for easy transport and storage. Seats 8 (4 per side). Ideal for weddings, conferences and big events. Add matching white folding chairs at GH₵250 each.",
+      "description": "8ft white foldable table with a sturdy HDPE top and black steel legs that fold flat (about 3 inches thick) for easy transport and storage. Seats 8 (4 per side). Ideal for weddings, conferences and big events. Add matching white folding chairs at GH₵250 each. Price every option and bulk order in the calculator: favisionenterprize.github.io/foldable/",
       "highlights": [
         "Seats 8 — 4 per side",
         "Folds flat to ~3 inches",
@@ -3122,7 +3126,9 @@ window.FAV_DATA = {
       ],
       "marketplace_category": "Home & Garden > Furniture > Tables",
       "images": [
-        "assets/images/products/fav-038-1.jpg"
+        "assets/images/products/fav-038-plan.jpg",
+        "assets/images/products/fav-038-1.jpg",
+        "assets/images/products/foldable-price-table.jpg"
       ],
       "tiktok": 36,
       "in_the_box": [
@@ -3155,7 +3161,7 @@ window.FAV_DATA = {
       "type": "Folding Chair",
       "price_ghs": 250,
       "was_price_ghs": 300,
-      "description": "White folding chair with a black steel frame and a handle slot in the backrest for easy carrying. Folds to about 6 inches, so dozens stack in a small space. Matches our white foldable tables — perfect for events, church, school and offices.",
+      "description": "White folding chair with a black steel frame and a handle slot in the backrest for easy carrying. Folds to about 6 inches, so dozens stack in a small space. Matches our white foldable tables — perfect for events, church, school and offices. Price every option and bulk order in the calculator: favisionenterprize.github.io/foldable/",
       "highlights": [
         "Handle slot for easy carrying",
         "Folds to ~6 inches",
@@ -3164,13 +3170,211 @@ window.FAV_DATA = {
       ],
       "marketplace_category": "Home & Garden > Furniture > Chairs",
       "images": [
-        "assets/images/products/fav-039-1.jpg"
+        "assets/images/products/fav-039-plan.jpg",
+        "assets/images/products/fav-039-1.jpg",
+        "assets/images/products/foldable-price-table.jpg"
       ],
       "tiktok": 37,
       "in_the_box": [
         {
-          "item": "Foldable chair",
+          "item": "Foldable chair (packed)",
           "qty": 1,
+          "icon": "chair"
+        }
+      ],
+      "box_title": "Pack"
+    },
+    {
+      "id": "FAV-040",
+      "icon": "🪑",
+      "condition": "Brand New",
+      "material": "White HDPE (plastic) top, black powder-coated steel frame",
+      "colors": [
+        "White",
+        "Black"
+      ],
+      "custom_order": false,
+      "in_stock": true,
+      "placeholder": false,
+      "category": "Dining",
+      "negotiable": true,
+      "sale_from": "2026-10-21",
+      "sale_until": "2026-12-31",
+      "in_the_box_confirmed": false,
+      "dimensions": "Table 122 × 70 × 74 cm; chairs ~85 cm high (L × W × H)",
+      "name": "White Foldable 4-Seater Set — 4ft Table + 4 Chairs",
+      "type": "Table & Chairs Set",
+      "price_ghs": 1650,
+      "was_price_ghs": 1950,
+      "description": "Complete 4-seater set: one 4ft white foldable table with black steel legs plus 4 matching white folding chairs (handle slot, packed). Chairs are 2% off in the set: GH₵670 table + 4 × GH₵245 = GH₵1,650. Seats 4 (2 per side). Ideal for homes, small meetings and offices. Everything folds flat for easy transport and storage. Price every option and bulk order in the calculator: favisionenterprize.github.io/foldable/",
+      "highlights": [
+        "4ft table + 4 chairs",
+        "Chairs 2% off in the set",
+        "Seats 4 — 2 per side",
+        "Bulk: 10% off 50+, 15% off 100+"
+      ],
+      "marketplace_category": "Home & Garden > Furniture > Tables",
+      "images": [
+        "assets/images/products/fav-040-plan.jpg",
+        "assets/images/products/fav-040-1.jpg",
+        "assets/images/products/foldable-price-table.jpg"
+      ],
+      "tiktok": 38,
+      "box_title": "Pack",
+      "in_the_box": [
+        {
+          "item": "Foldable table 4ft",
+          "qty": 1,
+          "icon": "table"
+        },
+        {
+          "item": "Foldable chairs (packed)",
+          "qty": 4,
+          "icon": "chair"
+        }
+      ]
+    },
+    {
+      "id": "FAV-041",
+      "icon": "🪑",
+      "condition": "Brand New",
+      "material": "White HDPE (plastic) top, black powder-coated steel frame",
+      "colors": [
+        "White",
+        "Black"
+      ],
+      "custom_order": false,
+      "in_stock": true,
+      "placeholder": false,
+      "category": "Dining",
+      "negotiable": true,
+      "sale_from": "2026-10-21",
+      "sale_until": "2026-12-31",
+      "in_the_box_confirmed": false,
+      "dimensions": "Table 183 × 76 × 74 cm; chairs ~85 cm high (L × W × H)",
+      "name": "White Foldable 6-Seater Set — 6ft Table + 6 Chairs",
+      "type": "Table & Chairs Set",
+      "price_ghs": 2420,
+      "was_price_ghs": 2900,
+      "description": "Complete 6-seater set: one 6ft white foldable table with black steel legs plus 6 matching white folding chairs (handle slot, packed). Chairs are 2% off in the set: GH₵950 table + 6 × GH₵245 = GH₵2,420. Seats 6 (3 per side). Ideal for events, church and parties. Everything folds flat for easy transport and storage. Price every option and bulk order in the calculator: favisionenterprize.github.io/foldable/",
+      "highlights": [
+        "6ft table + 6 chairs",
+        "Chairs 2% off in the set",
+        "Seats 6 — 3 per side",
+        "Bulk: 10% off 50+, 15% off 100+"
+      ],
+      "marketplace_category": "Home & Garden > Furniture > Tables",
+      "images": [
+        "assets/images/products/fav-041-plan.jpg",
+        "assets/images/products/fav-041-1.jpg",
+        "assets/images/products/foldable-price-table.jpg"
+      ],
+      "tiktok": 39,
+      "box_title": "Pack",
+      "in_the_box": [
+        {
+          "item": "Foldable table 6ft",
+          "qty": 1,
+          "icon": "table"
+        },
+        {
+          "item": "Foldable chairs (packed)",
+          "qty": 6,
+          "icon": "chair"
+        }
+      ]
+    },
+    {
+      "id": "FAV-042",
+      "icon": "🪑",
+      "condition": "Brand New",
+      "material": "White HDPE (plastic) top, black powder-coated steel frame",
+      "colors": [
+        "White",
+        "Black"
+      ],
+      "custom_order": false,
+      "in_stock": true,
+      "placeholder": false,
+      "category": "Dining",
+      "negotiable": true,
+      "sale_from": "2026-10-21",
+      "sale_until": "2026-12-31",
+      "in_the_box_confirmed": false,
+      "dimensions": "Table 244 × 76 × 74 cm; chairs ~85 cm high (L × W × H)",
+      "name": "White Foldable 8-Seater Set — 8ft Table + 8 Chairs",
+      "type": "Table & Chairs Set",
+      "price_ghs": 3160,
+      "was_price_ghs": 3800,
+      "description": "Complete 8-seater set: one 8ft white foldable table with black steel legs plus 8 matching white folding chairs (handle slot, packed). Chairs are 2% off in the set: GH₵1,200 table + 8 × GH₵245 = GH₵3,160. Seats 8 (4 per side). Ideal for weddings, conferences and big events. Everything folds flat for easy transport and storage. Price every option and bulk order in the calculator: favisionenterprize.github.io/foldable/",
+      "highlights": [
+        "8ft table + 8 chairs",
+        "Chairs 2% off in the set",
+        "Seats 8 — 4 per side",
+        "Bulk: 10% off 50+, 15% off 100+"
+      ],
+      "marketplace_category": "Home & Garden > Furniture > Tables",
+      "images": [
+        "assets/images/products/fav-042-plan.jpg",
+        "assets/images/products/fav-042-1.jpg",
+        "assets/images/products/foldable-price-table.jpg"
+      ],
+      "tiktok": 40,
+      "box_title": "Pack",
+      "in_the_box": [
+        {
+          "item": "Foldable table 8ft",
+          "qty": 1,
+          "icon": "table"
+        },
+        {
+          "item": "Foldable chairs (packed)",
+          "qty": 8,
+          "icon": "chair"
+        }
+      ]
+    },
+    {
+      "id": "FAV-043",
+      "icon": "🪑",
+      "condition": "Brand New",
+      "material": "White HDPE (plastic) top, black powder-coated steel frame",
+      "colors": [
+        "White",
+        "Black"
+      ],
+      "custom_order": false,
+      "in_stock": true,
+      "placeholder": false,
+      "category": "Dining",
+      "negotiable": true,
+      "sale_from": "2026-10-21",
+      "sale_until": "2026-12-31",
+      "in_the_box_confirmed": false,
+      "dimensions": "Each chair ~85 cm high (2.8 ft); folds to ~15 cm (6\")",
+      "name": "White Foldable Chairs — Pack of 10 (Black Frame)",
+      "type": "Folding Chair",
+      "price_ghs": 2425,
+      "was_price_ghs": 3000,
+      "description": "Pack of 10 white folding chairs with black steel frames and a handle slot for easy carrying. 3% off the single price: 10 × GH₵242.50 = GH₵2,425. Each folds to about 6 inches, so the whole pack stores in a small space. Perfect for events, church, schools and offices. Price every option and bulk order in the calculator: favisionenterprize.github.io/foldable/",
+      "highlights": [
+        "10 chairs in a pack",
+        "3% off — GH₵242.50 each",
+        "Folds to ~6 inches",
+        "Bulk: 10% off 50+, 15% off 100+"
+      ],
+      "marketplace_category": "Home & Garden > Furniture > Chairs",
+      "images": [
+        "assets/images/products/fav-043-plan.jpg",
+        "assets/images/products/fav-043-1.jpg",
+        "assets/images/products/foldable-price-table.jpg"
+      ],
+      "tiktok": 41,
+      "box_title": "Pack",
+      "in_the_box": [
+        {
+          "item": "Foldable chairs (packed)",
+          "qty": 10,
           "icon": "chair"
         }
       ]
