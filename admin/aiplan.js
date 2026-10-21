@@ -124,7 +124,7 @@
 .ap-rule:first-of-type{border-top:0}.ap-id{font-weight:700;color:#0d55af;padding-top:6px}
 .ap-rule textarea{width:100%;box-sizing:border-box;font:inherit;font-size:14px;min-height:48px;padding:7px;border:1px solid #dadce0;border-radius:8px;resize:vertical}
 .ap-ctl{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;align-items:center}
-.ap-ctl select{font:inherit;font-size:13px;padding:5px 6px;border:1px solid #dadce0;border-radius:8px;background:#fff;max-width:100%}
+.ap-ctl select{font:inherit;font-size:13px;padding:5px 6px;border:1px solid #dadce0;border-radius:8px;background:#fff;width:auto;max-width:100%;flex:0 1 auto}
 .ap-ctl select.s-approved{background:#e3f4ea;border-color:#9fd4b2}.ap-ctl select.s-retired{background:#fdecea;border-color:#f0b3ac}.ap-ctl select.s-proposed{background:#fff6e0;border-color:#f0d58c}
 .ap-steps{font-size:12px;color:#5f6368}.ap-bar{position:sticky;bottom:0;display:flex;gap:10px;justify-content:flex-end;padding:10px;background:rgba(255,255,255,.95);border-top:1px solid #e3e7ee}
 .ap-log{font-size:12px;color:#3c4043;max-height:220px;overflow:auto;margin:0;padding-left:18px}
