@@ -251,6 +251,26 @@
     job.q = job.q.map((it, i) => [it, i]).sort((a, b) => ((a[0].as ? 1 : 0) - (b[0].as ? 1 : 0)) || String(a[0].as || "").localeCompare(String(b[0].as || "")) || a[1] - b[1]).map(x => x[0]);
     return job;
   }
+  // Instagram, X and TikTok have one account each for now. Until a brand has its own (🏷 Brands →
+  // status Live with a handle), a post that belongs to another brand is held back instead of going
+  // out on F.A Vision's account. Once the account is Live the item carries `as` = that handle, and
+  // the add-on refuses to post it unless the browser is signed in to that account.
+  const BRAND_NET = { ig: "instagram", x: "x", tiktok: "tiktok" };
+  function brandHold(job) {
+    const BR = window.FAV_BRANDS, net = BRAND_NET[job.kind];
+    if (!BR || !net || !Array.isArray(job.q)) return job;
+    const held = [];
+    job.q = job.q.filter(it => {
+      const b = BR.detect(it.text);
+      if (!b || b.default) return true;
+      const acc = (b.accounts || {})[net] || {};
+      if (acc.status === "live" && acc.handle) { it.as = acc.handle; it.brand = b.id; return true; }
+      held.push(b.name || b.id);
+      return false;
+    });
+    if (held.length) job.held = [...new Set(held)];
+    return job;
+  }
   function launch(url, job) {
     // AI Plan (admin/aiplan.js): Pause All stops every job before it reaches the add-on.
     if (window.FAV_AIPLAN && window.FAV_AIPLAN.paused()) { A.toast("Paused in 🧭 AI Plan. Press Resume all there to run automations again.", true); return; }
@@ -259,6 +279,12 @@
     // First comment under each Facebook group post (where are you seeing this from + like & follow).
     if (job.kind === "post") { job.sw_on = S.settings.switch_on !== false; job.sw_profiles = S.settings.switch_profiles || []; job.sw_max = S.settings.switch_max || 3; brandRoute(job); if (job.q && job.q[0] && job.q[0].url) url = job.q[0].url; }
     if (job.kind === "post" && Array.isArray(job.q) && window.FAV_CAPTIONS) job.q.forEach(x => { if (!x.comment) x.comment = window.FAV_CAPTIONS.comment("fb", "this post"); });
+    if (BRAND_NET[job.kind]) {
+      brandHold(job);
+      const NAME = { ig: "Instagram", x: "X", tiktok: "TikTok" }[job.kind];
+      if (job.held) A.toast(`${job.held.join(" and ")} ${job.held.length > 1 ? "have" : "has"} no ${NAME} account yet, so ${job.held.length > 1 ? "those posts" : "that post"} stayed behind. Create the account in 🏷 Brands.`, true);
+      if (!job.q.length) return;
+    }
     job.back = location.origin + location.pathname;
     if (Number(ext()) >= 3) {
       job.navFor = 0;                                   // the add-on opens the first page itself

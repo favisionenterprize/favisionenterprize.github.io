@@ -142,6 +142,12 @@
     const record = (ok, why) => { job.res.push({ k: it.k, p: it.p || null, ok, why: [why, it.soundNote].filter(Boolean).join(" · "), sound: it.soundUsed || null, ...(it.soundFav ? { fav: it.soundFav, fav_found: !!it.soundFavFound, fav_tried: !!it.soundFavTried } : {}), t: new Date().toISOString() }); job.i++; return save(); };
     const fail = async why => { await record(false, why); box(`${n}: ${why}. Moving on…`, true); await sleep(4000); };
     if (realLen(it.text) < 15) { await fail(BLANK); continue; }
+    // Brand posts (🏷 Brands): never go out on another brand's account. Step 1 above has already
+    // checked this browser is signed in as @job.account.
+    if (it.as && it.as.replace(/^@/, "").toLowerCase() !== String(job.account).replace(/^@/, "").toLowerCase()) {
+      await fail(`this post belongs to @${it.as.replace(/^@/, "")}, and Instagram is signed in as @${job.account} — not posted`);
+      continue;
+    }
 
     box(`${n}: opening Create…`);
     await sleep(rand(2500, 4000));

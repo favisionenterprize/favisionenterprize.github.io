@@ -88,6 +88,21 @@ async function autopilot(browser, day) {
   }, JSON.parse(fs.readFileSync(ROOT + "data/brands.json", "utf8")));
   const bj = brandJob[0];
   if (!bj || JSON.stringify(bj.q) !== JSON.stringify([{ g: "8", as: null }, { g: "9", as: "Oteng Furniture" }]) || !/groups\/8\//.test(bj.url)) problems.push("brand routing: Oteng's post should go last as the Oteng Furniture Page, starting at the F.A Vision group: " + JSON.stringify(brandJob));
+  // Instagram / X / TikTok: a brand post waits until that brand's own account is Live, then carries its handle.
+  const holdJob = await page.evaluate(brands => {
+    const seen = []; window.addEventListener("message", e => { if (e.data && e.data.type === "favauto-start") seen.push(e.data.job); });
+    const texts = [{ k: "a", p: "FAV-001", text: "Oteng Furniture: 3-seater sofa GH₵5,000. WhatsApp 057 264 6176. #OtengFurniture" },
+                   { k: "b", p: "FAV-014", text: "Student desk GH₵650 from F.A Vision. WhatsApp 057 264 6176. #FAVisionEnterprise" }];
+    const go = ig => { const list = JSON.parse(JSON.stringify(brands.brands));
+      list.find(b => b.id === "oteng-furniture").accounts.instagram = ig;
+      window.FAV_BRANDS._test.set({ brands: list });
+      window.FAV_FBAUTO.launch("https://www.instagram.com/favisionent/", { kind: "ig", account: "favisionent", q: JSON.parse(JSON.stringify(texts)) }); };
+    go({ handle: "otengfurniture", status: "to_create" });                       // no account yet → held back
+    go({ handle: "otengfurniture", status: "live" });                            // Live → carries the handle
+    return new Promise(r => setTimeout(() => r(seen.map(j => ({ ks: j.q.map(x => x.k + ":" + (x.as || "-")), held: j.held || null }))), 250));
+  }, JSON.parse(fs.readFileSync(ROOT + "data/brands.json", "utf8")));
+  const want = [{ ks: ["b:-"], held: ["Oteng Furniture"] }, { ks: ["a:otengfurniture", "b:-"], held: null }];
+  if (JSON.stringify(holdJob) !== JSON.stringify(want)) problems.push("Instagram brand hold: expected " + JSON.stringify(want) + ", got " + JSON.stringify(holdJob));
   const desk = hrJobs.find(j => j.kind === "post"), hx = hrJobs.find(j => j.kind === "x");
   if (!desk || desk.n < 1 || desk.n > 10 || desk.ps.join() !== "FAV-014") problems.push("desk:FAV-014:10 didn't post the desk into ≤10 groups: " + JSON.stringify(hrJobs));
   if (!hx || hx.n !== 2) problems.push("hr:x:2 didn't build 2 X posts: " + JSON.stringify(hrJobs));

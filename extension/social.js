@@ -272,6 +272,19 @@
   }
   if (realLen(it.text) < 15) { await record(it, false, BLANK); return next(false); }
   if (!(await arrive(composeUrl()))) return;
+  // Brand posts (🏷 Brands): a post that belongs to another brand is only posted when this browser is
+  // signed in to that brand's own account. X knows the handle from the job; on TikTok we read it off
+  // the page, and when it can't be read the post waits rather than going out under the wrong name.
+  if (it.as) {
+    const want = it.as.replace(/^@/, "").toLowerCase();
+    const link = document.querySelector('a[href^="/@"]');
+    const signed = (job.kind === "x" ? String(job.account || "").replace(/^@/, "")
+      : (((link && link.getAttribute("href")) || "").match(/^\/@([^/?#]+)/) || [, ""])[1] || "").toLowerCase();
+    if (signed !== want) {
+      await record(it, false, `this post belongs to @${want}, and ${NET} is ${signed ? "signed in as @" + signed : "signed in to another account"} — not posted`);
+      return next(false);
+    }
+  }
   const n = `Post ${job.i + 1} of ${job.q.length}`;
   box(`${n}: opening…`);
   await sleep(rand(2500, 4000));
