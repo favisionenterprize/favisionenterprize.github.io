@@ -28,13 +28,13 @@
    "mode": "fix"
   },
   "fb": {
-   "d": "2026-10-21",
+   "d": "2026-10-22",
    "link": "favisionenterprize.github.io",
    "pinned": null,
    "linkOk": true,
    "pinOk": false,
-   "why": "couldn't find a post with “Fresh stock, just arrived” on the profile",
-   "mode": "fix"
+   "why": "pin: couldn't find a post with “Your space deserves this student desk ch” on the profile",
+   "mode": "pinswap"
   },
   "ig": {
    "d": "2026-10-21",
@@ -166,6 +166,13 @@
    "net": "tiktok",
    "mode": "fix",
    "linkOk": false,
+   "pinOk": false
+  },
+  {
+   "d": "2026-10-22",
+   "net": "fb",
+   "mode": "pinswap",
+   "linkOk": true,
    "pinOk": false
   }
  ]
