@@ -106,6 +106,13 @@
    "p": "FAV-014",
    "ok": false,
    "why": "Facebook didn't show “Create a photo story” (switch Facebook to your Page, then try again)."
+  },
+  {
+   "d": "2026-10-22",
+   "net": "fb",
+   "p": "FAV-014",
+   "ok": false,
+   "why": "Facebook didn't show “Create a photo story” (switch Facebook to your Page, then try again)."
   }
  ],
  "reels": [
