@@ -20,6 +20,13 @@
    "net": "tiktok",
    "p": "FAV-014",
    "ok": true
+  },
+  {
+   "d": "2026-10-22",
+   "net": "fb",
+   "p": "FAV-014",
+   "ok": false,
+   "why": "Couldn't find the post box"
   }
  ],
  "stories": [
