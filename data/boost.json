@@ -27,6 +27,13 @@
    "p": "FAV-014",
    "ok": false,
    "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-22",
+   "net": "ig",
+   "p": "FAV-014",
+   "ok": false,
+   "why": "Instagram didn't take the photo"
   }
  ],
  "stories": [
