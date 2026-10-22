@@ -91,9 +91,12 @@
     const hit = t.match(NOPOST);
     return hit ? hit[0] : null;
   }
-  const canSwitch = () => job.sw_on !== false && (job.switched || []).length < (Number(job.sw_max) || 3);
-  async function startSwitch(reason) {
-    job.sw = { stage: "menu", reason, at: job.i };
+  // Brand posts (item.as = that brand's Page name, set by the admin from data/brands.json) never fall back to
+  // another profile: posting a brand's ad under the wrong name is worse than skipping it.
+  const canSwitch = () => job.sw_on !== false && !(job.q && job.q[job.i] && job.q[job.i].as) && (job.switched || []).filter(x => !x.brand).length < (Number(job.sw_max) || 3);
+  const sameName = (a, b) => String(a || "").trim().toLowerCase() === String(b || "").trim().toLowerCase();
+  async function startSwitch(reason, target) {
+    job.sw = { stage: "menu", reason, at: job.i, ...(target ? { target } : {}) };
     job.tried = job.tried || [];
     if (job.actor && !job.tried.includes(job.actor)) job.tried.push(job.actor);
     job.navFor = -1;
@@ -107,13 +110,13 @@
     const sw = job.sw, tried = job.tried || [];
     const fail = async why => {
       job.sw = null; job.navFor = -1;
-      job.switched = (job.switched || []).concat({ from: job.actor || "", to: null, why: sw.reason, t: new Date().toISOString(), fail: why });
+      job.switched = (job.switched || []).concat({ from: job.actor || "", to: null, why: sw.reason, t: new Date().toISOString(), fail: why, ...(sw.target ? { brand: true } : {}) });
       await save();
-      return { ok: false, why };
+      return { ok: false, why, target: sw.target || null };
     };
     if (sw.stage === "after") {
       job.sw = null; job.navFor = -1;
-      job.switched = (job.switched || []).concat({ from: tried[tried.length - 2] || "", to: job.actor, why: sw.reason, t: new Date().toISOString() });
+      job.switched = (job.switched || []).concat({ from: sw.from || tried[tried.length - 2] || "", to: job.actor, why: sw.reason, t: new Date().toISOString(), ...(sw.target ? { brand: true } : {}) });
       await save();
       return { ok: true };
     }
@@ -131,13 +134,22 @@
       .filter(el => visible(el) && nameOf(el) && !skip.test(nameOf(el)) && nameOf(el).length < 80);
     const current = items.find(el => el.getAttribute("aria-checked") === "true" || el.getAttribute("aria-current") === "true");
     if (current && !job.actor) { job.actor = nameOf(current); if (!tried.includes(job.actor)) tried.push(job.actor); }
-    const usable = items.filter(el => el !== current && !tried.includes(nameOf(el)));
-    const want = (job.sw_profiles || []).map(x => String(x).trim().toLowerCase()).filter(Boolean);
-    const pick = want.length
-      ? want.map(w => usable.find(el => nameOf(el).toLowerCase() === w || nameOf(el).toLowerCase().includes(w))).find(Boolean)
-      : usable[0];
-    if (!pick) return fail(want.length ? "none of your chosen profiles is left to try" : "no other profile or Page to switch to");
+    if (current && !job.home) job.home = nameOf(current);           // the profile the run started as: switched back to at the end
+    let pick;
+    if (sw.target) {                                                  // brand switch: exactly that Page
+      if (current && sameName(nameOf(current), sw.target)) { job.actor = nameOf(current); job.sw = null; job.navFor = -1; await save(); document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true })); return { ok: true }; }
+      pick = items.find(el => sameName(nameOf(el), sw.target)) || items.find(el => nameOf(el).toLowerCase().includes(String(sw.target).toLowerCase()));
+      if (!pick) return fail(`"${sw.target}" isn't in your profile list`);
+    } else {
+      const usable = items.filter(el => el !== current && !tried.includes(nameOf(el)));
+      const want = (job.sw_profiles || []).map(x => String(x).trim().toLowerCase()).filter(Boolean);
+      pick = want.length
+        ? want.map(w => usable.find(el => nameOf(el).toLowerCase() === w || nameOf(el).toLowerCase().includes(w))).find(Boolean)
+        : usable[0];
+      if (!pick) return fail(want.length ? "none of your chosen profiles is left to try" : "no other profile or Page to switch to");
+    }
     const name = nameOf(pick);
+    job.sw.from = job.actor || (current ? nameOf(current) : "");
     job.actor = name; job.tried = tried.concat(name); job.sw.stage = "after";
     await save();
     box(`Switching to ${name}…`);
@@ -217,7 +229,14 @@
   // ============================================================= post into groups
   if (job.kind === "post" && job.sw) {
     const r = await doSwitch();
-    if (!r.ok) {
+    if (!r.ok && r.target && job.i >= job.q.length) return finish(`Couldn't switch back to ${r.target}: ${r.why}. Switch back by hand before the next run.`);
+    if (!r.ok && r.target) {                       // brand Page not found: skip that brand's post, carry on with the rest
+      const it = job.q[job.i];
+      job.res.push({ g: it.g, p: it.p, ok: false, why: `Brand post for ${r.target} not posted: ${r.why}`, t: new Date().toISOString() });
+      job.i++; job.skipAs = r.target; await save();
+      if (job.i >= job.q.length) return finish();
+      box(`Couldn't switch to ${r.target}. Skipping its posts…`, true); await sleep(2500);
+    } else if (!r.ok) {
       const it = job.q[job.i];
       job.res.push({ g: it.g, p: it.p, ok: false, why: `No access to post; couldn't switch profile (${r.why})`, t: new Date().toISOString() });
       job.i++; await save();
@@ -227,13 +246,25 @@
     await sleep(1500);
   }
   if (job.kind === "post") {
-    if (job.i >= job.q.length) return finish();
+    // Brand posts may have switched the profile: switch back to the profile the run started as before finishing.
+    if (job.i >= job.q.length) {
+      if (job.home && job.actor && !sameName(job.actor, job.home) && !job.returned && (job.switched || []).some(x => x.brand && x.to)) { job.returned = true; await save(); return startSwitch("back to your main profile", job.home); }
+      return finish();
+    }
     const it = job.q[job.i];
+    if (it.as && job.skipAs && sameName(it.as, job.skipAs)) {
+      job.res.push({ g: it.g, p: it.p, ok: false, why: `Brand post for ${it.as} not posted: Page not found earlier in this run`, t: new Date().toISOString() });
+      job.i++; job.navFor = -1; await save(); return location.reload();
+    }
+    if (it.as && !sameName(it.as, job.actor)) return startSwitch(`${it.as} post`, it.as);
     if (!(await arrive(it.url))) return;
     const asWho = () => job.actor && (job.switched || []).some(x => x.to) ? `posted as ${job.actor}` : "";
     const record = (ok, why) => { job.res.push({ g: it.g, p: it.p, ok, why: [why, ok && asWho()].filter(Boolean).join(" · "), t: new Date().toISOString(), ...(job.actor ? { as: job.actor } : {}) }); job.i++; save(); };
     const next = async ok => {
-      if (job.i >= job.q.length) { box("All done. Going back to your admin…"); await sleep(1500); return finish(); }
+      if (job.i >= job.q.length) {
+        if (job.home && job.actor && !sameName(job.actor, job.home) && !job.returned && (job.switched || []).some(x => x.brand && x.to)) { job.returned = true; await save(); return startSwitch("back to your main profile", job.home); }
+        box("All done. Going back to your admin…"); await sleep(1500); return finish();
+      }
       if (ok) await countdown(rand(job.min || 60, job.max || 180), `Posted ✓ (${job.res.filter(r => r.ok).length} so far). Next group in`);
       else await sleep(4000);
       if (stopAsked) return;

@@ -17,7 +17,7 @@ try { ({ chromium } = require("playwright")); } catch (e) {
   }
 }
 const ROOT = path.resolve(__dirname, "..") + "/";
-const SCRIPTS = ["admin/captions.js", "admin/igauto.js", "admin/ttshop.js", "admin/socauto.js", "admin/vidauto.js", "admin/engage.js", "admin/mkauto.js", "admin/profiles.js", "admin/ttcaptions.js", "admin/boost.js", "admin/fixall.js", "admin/fbauto.js"];
+const SCRIPTS = ["admin/captions.js", "admin/igauto.js", "admin/ttshop.js", "admin/socauto.js", "admin/vidauto.js", "admin/engage.js", "admin/mkauto.js", "admin/profiles.js", "admin/ttcaptions.js", "admin/boost.js", "admin/fixall.js", "admin/brands.js", "admin/fbauto.js"];
 const MIN_TEXT = 150; // a tab with less text than this counts as blank
 
 const files = {};
@@ -76,6 +76,18 @@ async function autopilot(browser, day) {
     window.FAV_FBAUTO.runStep(["hr:x:2"], true);
     return new Promise(r => setTimeout(() => r(jobs.map(j => ({ kind: j.kind, n: j.q.length, ps: [...new Set(j.q.map(x => x.p))] }))), 300));
   });
+  // Brand routing: a post for Oteng Furniture (its name, not F.A Vision's contacts) gets as = its Page and goes last.
+  const brandJob = await page.evaluate(brands => {
+    const jobs = []; window.addEventListener("message", e => { if (e.data && e.data.type === "favauto-start") jobs.push(e.data); });
+    const list = JSON.parse(JSON.stringify(brands.brands)); list.find(b => b.id === "oteng-furniture").accounts.facebook = { handle: "Oteng Furniture", status: "live" };
+    window.FAV_BRANDS._test.set({ brands: list });
+    window.FAV_FBAUTO.launch("https://www.facebook.com/groups/9/", { kind: "post", mode: "now", q: [
+      { g: "9", url: "https://www.facebook.com/groups/9/", p: "FAV-001", text: "Oteng Furniture: 3-seater sofa GH₵5,000. WhatsApp 024 000 0000 to order. #OtengFurniture #FurnitureGhana" },
+      { g: "8", url: "https://www.facebook.com/groups/8/", p: "FAV-014", text: "Student desk GH₵650. WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana" }] });
+    return new Promise(r => setTimeout(() => r(jobs.map(j => ({ url: j.url, q: j.job.q.map(x => ({ g: x.g, as: x.as || null })) }))), 200));
+  }, JSON.parse(fs.readFileSync(ROOT + "data/brands.json", "utf8")));
+  const bj = brandJob[0];
+  if (!bj || JSON.stringify(bj.q) !== JSON.stringify([{ g: "8", as: null }, { g: "9", as: "Oteng Furniture" }]) || !/groups\/8\//.test(bj.url)) problems.push("brand routing: Oteng's post should go last as the Oteng Furniture Page, starting at the F.A Vision group: " + JSON.stringify(brandJob));
   const desk = hrJobs.find(j => j.kind === "post"), hx = hrJobs.find(j => j.kind === "x");
   if (!desk || desk.n < 1 || desk.n > 10 || desk.ps.join() !== "FAV-014") problems.push("desk:FAV-014:10 didn't post the desk into ≤10 groups: " + JSON.stringify(hrJobs));
   if (!hx || hx.n !== 2) problems.push("hr:x:2 didn't build 2 X posts: " + JSON.stringify(hrJobs));

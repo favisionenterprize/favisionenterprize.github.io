@@ -317,7 +317,7 @@ const FB_HOME = page(`<div role="main">facebook home</div><div role="button" ari
     document.body.appendChild(m);
     m.querySelector("#all").onclick = () => {
       const d = document.createElement("div"); d.setAttribute("role", "dialog");
-      d.innerHTML = ["Alexander Awuku", "Fa Vision Furnitures", "F.A Vision Enterprise"].map(n => '<div role="radio" aria-checked="' + (n === actor) + '">' + n + '</div>').join("") + '<div role="button">Create new profile or Page</div>';
+      d.innerHTML = ["Alexander Awuku", "Fa Vision Furnitures", "F.A Vision Enterprise", "Oteng Furniture"].map(n => '<div role="radio" aria-checked="' + (n === actor) + '">' + n + '</div>').join("") + '<div role="button">Create new profile or Page</div>';
       document.body.appendChild(d);
       d.querySelectorAll("[role=radio]").forEach(r => r.onclick = () => { localStorage.setItem("fb-actor", r.innerText); location.reload(); });
     };
@@ -331,7 +331,7 @@ const FB_GROUP = page(`<div role="main"><h1>Accra Buy and Sell</h1><div role="bu
     const ed = d.querySelector("#ed"); let model = "";
     ed.addEventListener("paste", e => { e.preventDefault(); const f = e.clipboardData.files; if (f && f.length) { if (localStorage.getItem("fb-wipe")) { model = ""; ed.innerText = ""; } return; } model = e.clipboardData.getData("text/plain"); ed.innerText = model; });
     ed.addEventListener("input", () => setTimeout(() => { ed.innerText = model; }, 50));
-    d.querySelector("#post").onclick = () => { const all = JSON.parse(localStorage.getItem("group-posts") || "[]"); all.push(model); localStorage.setItem("group-posts", JSON.stringify(all)); d.remove(); };
+    d.querySelector("#post").onclick = () => { const all = JSON.parse(localStorage.getItem("group-posts") || "[]"); all.push(model); localStorage.setItem("group-posts", JSON.stringify(all)); const who = JSON.parse(localStorage.getItem("group-posters") || "[]"); who.push(localStorage.getItem("fb-actor") || "Alexander Awuku"); localStorage.setItem("group-posters", JSON.stringify(who)); d.remove(); };
   };`);
 
 function serve(url) {
@@ -478,6 +478,20 @@ async function run(browser, job, startUrl, setup, skip) {
   want(r.out.res.length === 1 && !r.out.res[0].ok && /couldn't switch/.test(r.out.res[0].why) && /Nothing more was posted/.test(r.out.stopped || "") && !r.state["group-posts"], "no chosen profile left → that group fails with the reason and the run stops: " + JSON.stringify([r.out.res, r.out.stopped]));
   r = await run(browser, { kind: "post", mode: "now", q: swq, min: 1, max: 2, sw_on: false }, swq[0].url, () => localStorage.setItem("fb-noaccess", "1"));
   want(r.out.res.length === 1 && !r.out.res[0].ok && /No access to post: Only admins can post/i.test(r.out.res[0].why) && !r.state["fb-actor"], "switching off → the group is skipped with the reason, no profile change: " + JSON.stringify(r.out.res));
+
+  console.log("brand posts (autopilot.js): F.A Vision posts as you, Oteng's post as the Oteng Furniture Page, then back to you");
+  const otText = "Oteng Furniture: 3-seater sofa GH₵5,000, delivered across Accra. WhatsApp 024 000 0000 to order.\n\n#OtengFurniture #FurnitureGhana";
+  const bq = [{ g: "4", name: "Accra Buy and Sell", url: "https://www.facebook.com/groups/4/", p: "FAV-014", text: gq[1].text, img: S + "a.jpg" },
+    { g: "5", name: "Ghana Market", url: "https://www.facebook.com/groups/5/", p: "FAV-001", text: otText, img: S + "a.jpg", as: "Oteng Furniture", brand: "oteng-furniture" }];
+  r = await run(browser, { kind: "post", mode: "now", q: bq, min: 1, max: 2, sw_on: true, sw_max: 3 }, bq[0].url);
+  const BP = JSON.parse(r.state["group-posters"] || "[]");
+  want(r.out.res.length === 2 && r.out.res.every(x => x.ok) && JSON.stringify(BP) === JSON.stringify(["Alexander Awuku", "Oteng Furniture"]), "each post went out as its own brand: " + JSON.stringify([r.out.res, BP]));
+  want((r.state["fb-actor"] || "Alexander Awuku") === "Alexander Awuku" && (r.out.switched || []).filter(x => x.brand && x.to).length === 2, "switched to the brand Page and back to the main profile at the end: " + JSON.stringify([r.state["fb-actor"], r.out.switched]));
+  want(!r.errors.length, "no page errors: " + r.errors.join("; "));
+  const bq2 = [bq[0], Object.assign({}, bq[1], { as: "Nobody's Page" })];
+  r = await run(browser, { kind: "post", mode: "now", q: bq2, min: 1, max: 2, sw_on: true, sw_max: 3 }, bq2[0].url);
+  const BP2 = JSON.parse(r.state["group-posters"] || "[]");
+  want(r.out.res.length === 2 && r.out.res[0].ok && !r.out.res[1].ok && /not posted/.test(r.out.res[1].why) && BP2.length === 1, "a brand Page that isn't there → that post is skipped, never posted under another name: " + JSON.stringify([r.out.res, BP2]));
 
   console.log("quality gate in a story (boost.js): no text → nothing shared");
   r = await run(browser, { kind: "story", img: S + "a.jpg", text: "  " }, "https://www.facebook.com/stories/create");

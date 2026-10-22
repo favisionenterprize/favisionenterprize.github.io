@@ -237,13 +237,27 @@
     if (job.kind === "story") job.text = W.ensure(job.text, prod(job.p), { net: "story" });
     return job;
   }
+  // Brand-specific posting (admin/brands.js): a group post whose text belongs to another brand (its name or
+  // contacts, and not F.A Vision's) goes out as that brand's Facebook Page when the Page is set to Live on the
+  // Brands screen. F.A Vision posts go first; the add-on switches Page for the brand posts and back at the end.
+  function brandRoute(job) {
+    const BR = window.FAV_BRANDS;
+    if (!BR || !Array.isArray(job.q)) return job;
+    job.q.forEach(it => {
+      if (it.g === "page") return;
+      const b = BR.detect(it.text), fb = b && !b.default && b.accounts && b.accounts.facebook;
+      if (fb && fb.status === "live" && fb.handle) { it.as = fb.handle; it.brand = b.id; }
+    });
+    job.q = job.q.map((it, i) => [it, i]).sort((a, b) => ((a[0].as ? 1 : 0) - (b[0].as ? 1 : 0)) || String(a[0].as || "").localeCompare(String(b[0].as || "")) || a[1] - b[1]).map(x => x[0]);
+    return job;
+  }
   function launch(url, job) {
     // AI Plan (admin/aiplan.js): Pause All stops every job before it reaches the add-on.
     if (window.FAV_AIPLAN && window.FAV_AIPLAN.paused()) { A.toast("Paused in 🧭 AI Plan. Press Resume all there to run automations again.", true); return; }
     job.id = Date.now().toString(36);
     gateJob(job);
     // First comment under each Facebook group post (where are you seeing this from + like & follow).
-    if (job.kind === "post") { job.sw_on = S.settings.switch_on !== false; job.sw_profiles = S.settings.switch_profiles || []; job.sw_max = S.settings.switch_max || 3; }
+    if (job.kind === "post") { job.sw_on = S.settings.switch_on !== false; job.sw_profiles = S.settings.switch_profiles || []; job.sw_max = S.settings.switch_max || 3; brandRoute(job); if (job.q && job.q[0] && job.q[0].url) url = job.q[0].url; }
     if (job.kind === "post" && Array.isArray(job.q) && window.FAV_CAPTIONS) job.q.forEach(x => { if (!x.comment) x.comment = window.FAV_CAPTIONS.comment("fb", "this post"); });
     job.back = location.origin + location.pathname;
     if (Number(ext()) >= 3) {
@@ -662,7 +676,7 @@
           return s;
         }, `Autopilot: posted in ${ok} of ${out.res.length} groups`);
         if (out.res.length === 1 && out.res[0].g === "page") A.toast(out.res[0].ok ? "Posted on your Facebook Page ✓" : "Facebook Page post failed: " + (out.res[0].why || out.stopped || ""), !out.res[0].ok);
-        else A.toast(`Posted in ${plural(ok, "group")}${out.res.length - ok ? `, ${out.res.length - ok} skipped` : ""}.${(out.switched || []).filter(x => x.to).map(x => ` No access to post, so it switched to ${x.to}.`).join("")}${out.stopped ? " Stopped: " + out.stopped : ""}`, !!out.stopped);
+        else A.toast(`Posted in ${plural(ok, "group")}${out.res.length - ok ? `, ${out.res.length - ok} skipped` : ""}.${(out.switched || []).filter(x => x.to && !x.brand).map(x => ` No access to post, so it switched to ${x.to}.`).join("")}${[...new Set((out.switched || []).filter(x => x.to && x.brand && x.why !== "back to your main profile").map(x => x.to))].map(n => ` Posted ${n}'s posts as ${n}.`).join("")}${(out.switched || []).filter(x => x.brand && x.fail).map(x => ` ${x.fail}.`).join("")}${out.stopped ? " Stopped: " + out.stopped : ""}`, !!out.stopped);
       } else if (out.kind === "import") {
         const found = (out.groups || []).filter(g => g.id && g.name);
         let added = 0, accepted = 0;

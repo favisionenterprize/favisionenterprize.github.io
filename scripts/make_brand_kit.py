@@ -37,7 +37,7 @@ def monogram(size, b, bg=True):
     t = b["initials"]; bb = d.textbbox((0, 0), t, font=f)
     d.text(((S - (bb[2] - bb[0])) / 2 - bb[0], (S - (bb[3] - bb[1])) / 2 - bb[1] - S * 0.02), t, font=f, fill=gold)
     small = font(INTER_B, int(S * 0.045))
-    center(d, (S / 2, S * 0.685), "EST. ACCRA", small, gold, spacing=int(S * 0.008))
+    center(d, (S / 2, S * 0.685), b.get("est", "EST. ACCRA"), small, gold, spacing=int(S * 0.008))
     return im.resize((size, size), Image.LANCZOS)
 
 def wordmark_lockup(b, W, H, bg):

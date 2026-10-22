@@ -166,7 +166,8 @@
     "long": "Oteng Furniture sells well-made furniture for homes, schools and offices in Ghana: sofas, beds, dining sets, wardrobes, desks and chairs. Quality you can feel, prices that make sense, delivery across Accra, Tema and Kasoa. Message us on WhatsApp to order."
    },
    "kit": "assets/brands/oteng-furniture/",
-   "category": "Furniture store"
+   "category": "Furniture store",
+   "est": "EST. ACCRA"
   },
   {
    "id": "agoodmann-ventures",
@@ -174,9 +175,17 @@
    "short": "Agoodmann Ventures",
    "initials": "AV",
    "default": false,
-   "colors": null,
-   "fonts": null,
-   "tagline": "",
+   "colors": {
+    "primary": "#1E3A5F",
+    "accent": "#2BB3C0",
+    "light": "#F2F6F9",
+    "dark": "#14202E"
+   },
+   "fonts": {
+    "heading": "Lora Bold",
+    "body": "Inter"
+   },
+   "tagline": "Quality sanitaryware & tiles",
    "phones": [
     "+233277477752",
     "+233244772036"
@@ -230,9 +239,23 @@
      "status": "to_create"
     }
    },
-   "kit": null,
+   "kit": "assets/brands/agoodmann-ventures/",
    "partner": true,
-   "category": "Building materials & sanitaryware"
+   "category": "Building materials & sanitaryware",
+   "cover_line": "Water closets · Tiles · Bathroom fittings · Kantamanto, Accra",
+   "est": "EST. ACCRA",
+   "voice": "Practical and trustworthy. Talks about durability, genuine brands (TWYFORD) and fair prices for builders and homeowners.",
+   "bio": {
+    "short": "Genuine water closets, tiles & bathroom fittings. Kantamanto, Accra. 📲 WhatsApp to order",
+    "long": "AGOODMANN VENTURES sells genuine sanitaryware and tiles: TWYFORD water closets, wall and floor tiles and bathroom fittings for builders and homeowners. Visit us at Kantamanto, near Grandview Hotel, Accra, or WhatsApp us to order."
+   },
+   "hashtags": [
+    "#AgoodmannVentures",
+    "#TilesGhana",
+    "#SanitarywareGhana",
+    "#BuildingMaterialsAccra",
+    "#Kantamanto"
+   ]
   },
   {
    "id": "anac-essentials",
@@ -240,9 +263,17 @@
    "short": "Anac Essentials",
    "initials": "AE",
    "default": false,
-   "colors": null,
-   "fonts": null,
-   "tagline": "",
+   "colors": {
+    "primary": "#5B3A1E",
+    "accent": "#E3B23C",
+    "light": "#FBF4E6",
+    "dark": "#2B1B0E"
+   },
+   "fonts": {
+    "heading": "Lora Bold",
+    "body": "Inter"
+   },
+   "tagline": "Quality flour for every kitchen",
    "phones": [
     "+233555434994",
     "+233557033525"
@@ -297,9 +328,23 @@
      "status": "to_create"
     }
    },
-   "kit": null,
+   "kit": "assets/brands/anac-essentials/",
    "partner": true,
-   "category": "Food & grocery"
+   "category": "Food & grocery",
+   "cover_line": "Kavukçu wheat flour · Bulk & retail · Accra",
+   "est": "EST. ACCRA",
+   "voice": "Friendly and dependable. Talks to bakers, caterers and home cooks about consistent quality and good prices in bulk.",
+   "bio": {
+    "short": "Kavukçu wheat flour for bakers, caterers & homes. Bulk & retail. 📲 WhatsApp to order",
+    "long": "ANAC Essentials (formerly ANAC Ventures) sells Kavukçu wheat flour in bulk and retail for bakers, caterers, food businesses and home kitchens in Ghana. Consistent quality, fair prices. WhatsApp us to order."
+   },
+   "hashtags": [
+    "#ANACEssentials",
+    "#WheatFlourGhana",
+    "#BakersGhana",
+    "#FlourAccra",
+    "#GhanaBakery"
+   ]
   },
   {
    "id": "manye-oye-rehoboth",
@@ -307,9 +352,17 @@
    "short": "Manye Oye Rehoboth",
    "initials": "MO",
    "default": false,
-   "colors": null,
-   "fonts": null,
-   "tagline": "",
+   "colors": {
+    "primary": "#6B1D3A",
+    "accent": "#F2A541",
+    "light": "#FFF6EC",
+    "dark": "#2E0C19"
+   },
+   "fonts": {
+    "heading": "Lora Bold",
+    "body": "Inter"
+   },
+   "tagline": "Rice and cooking oil for every home",
    "phones": [
     "+233535700722"
    ],
@@ -361,9 +414,23 @@
      "status": "to_create"
     }
    },
-   "kit": null,
+   "kit": "assets/brands/manye-oye-rehoboth/",
    "partner": true,
-   "category": "Food & grocery"
+   "category": "Food & grocery",
+   "cover_line": "Rice · Canola oil · Kasoa, near Amanfrom Taxi Rank",
+   "est": "EST. KASOA",
+   "voice": "Warm, homely and honest. Talks about family meals, value for money and dependable supply.",
+   "bio": {
+    "short": "Quality rice & canola oil for every home. Kasoa, near Amanfrom Taxi Rank. 📲 WhatsApp to order",
+    "long": "MANYE OYE REHOBOTH sells quality rice and canola cooking oil for homes, chop bars and caterers. Find us in Kasoa, near Amanfrom Taxi Rank, or WhatsApp us to order."
+   },
+   "hashtags": [
+    "#ManyeOyeRehoboth",
+    "#RiceGhana",
+    "#CookingOilGhana",
+    "#Kasoa",
+    "#GhanaFood"
+   ]
   }
  ]
 }
