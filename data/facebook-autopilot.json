@@ -8026,6 +8026,15 @@
    "ok": false,
    "now": true,
    "why": "We limit how often"
+  },
+  {
+   "d": "2026-10-22",
+   "t": "2026-10-22T15:35:06.090Z",
+   "p": "FAV-014",
+   "g": "page",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
   }
  ],
  "resets": {},
@@ -8457,6 +8466,13 @@
    "tried": 35,
    "ok": 21,
    "stopped": "Facebook showed \"We limit how often\". Nothing more was posted."
+  },
+  {
+   "d": "2026-10-22",
+   "t": "2026-10-22T15:36:01.564Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 0
   }
  ],
  "selling": {
