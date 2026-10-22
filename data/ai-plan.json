@@ -2,13 +2,13 @@
  "owner": "Alexander Awuku",
  "paused": false,
  "paused_at": null,
- "updated": "2026-10-21",
+ "updated": "2026-10-22",
  "source": "FA Vision AI Operating System Blueprint",
  "rules": [
   {
    "id": "S1",
    "dept": "Sales",
-   "task": "Reply to every new WhatsApp / Marketplace and any other channels, groups, posts, etc. an enquiry or engagement such as a like, or even views, within seconds, using an automated template or responses which always change, with price, HD real photos and website link",
+   "task": "Reply to every new comment and message on WhatsApp, Marketplace, Facebook, Instagram, X and TikTok as soon as it is seen, with a changing reply that has the price, HD real photos and the website link. Thank people who like or share with an @mention and ask them to follow. (Platforms don't show who viewed a post, and don't let a Page message people who only liked.)",
    "line": "ai",
    "setting": "allow",
    "status": "approved",
@@ -48,35 +48,36 @@
   {
    "id": "M1",
    "dept": "Marketing",
-   "task": "Post 20 times every hour in a day on all socials, and everywhere like pages, stories, groups, shops, stores etc., each with fresh description, trending hashtags, music and a call to action",
+   "task": "Post every hour from 7am to 9pm on Instagram, X and TikTok (rates in Hourly posting below: start 1 Instagram, 2 X, 1 TikTok an hour, raised step by step), each with fresh description, trending hashtags, music and a call to action, plus the daily plan, stories, reels and pages.",
    "line": "ai",
    "setting": "allow",
    "status": "approved",
    "steps": [
-    "ig",
-    "x",
-    "tiktok",
-    "ignow",
-    "xnow",
-    "ttnow",
-    "igs:",
-    "xs:",
-    "tts:",
-    "page:",
-    "story:",
-    "reel:",
-    "sounds",
     "fx:",
-    "ttcaps:",
-    "profile:",
+    "hr:",
+    "ig",
+    "ignow",
+    "igs:",
+    "page:",
     "pinswap:",
-    "refresh:"
+    "profile:",
+    "reel:",
+    "refresh:",
+    "sounds",
+    "story:",
+    "tiktok",
+    "ttcaps:",
+    "ttnow",
+    "tts:",
+    "x",
+    "xnow",
+    "xs:"
    ]
   },
   {
    "id": "M2",
    "dept": "Marketing",
-   "task": "Share listings to 20 Facebook groups a day and renew Marketplace listings, run like Jiji: strategy and hourly postings. More suggestions to be added by only Alexander.",
+   "task": "Share listings to Facebook groups and renew Marketplace listings, run like Jiji: strategy and hourly postings. Student desk & chair set (FAV-014) into 10 fresh groups every 3 hours. More suggestions to be added by only Alexander.",
    "line": "ai",
    "setting": "allow",
    "status": "approved",
@@ -90,7 +91,8 @@
     "allgroups:",
     "tt1:",
     "mkscan",
-    "mklist"
+    "mklist",
+    "desk:"
    ]
   },
   {
@@ -144,8 +146,8 @@
    "id": "C3",
    "dept": "Support",
    "task": "Handle complaints, disputes, legal or privacy matters",
-   "line": "ai",
-   "setting": "allow",
+   "line": "draft",
+   "setting": "approve",
    "status": "approved",
    "steps": []
   },
@@ -180,8 +182,8 @@
    "id": "F4",
    "dept": "Finance",
    "task": "Pay anyone, add a new supplier, or change MoMo / bank details",
-   "line": "ai",
-   "setting": "approve",
+   "line": "human",
+   "setting": "block",
    "status": "approved",
    "steps": []
   },
@@ -239,5 +241,22 @@
    "status": "approved",
    "steps": []
   }
- ]
+ ],
+ "hourly": {
+  "on": true,
+  "start_hour": 7,
+  "end_hour": 21,
+  "per_hour": {
+   "ig": 1,
+   "x": 2,
+   "tiktok": 1
+  },
+  "desk": {
+   "on": true,
+   "product": "FAV-014",
+   "groups": 10,
+   "every_hours": 3
+  },
+  "notify": true
+ }
 }

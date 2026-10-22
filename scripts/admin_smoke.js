@@ -68,6 +68,17 @@ async function autopilot(browser, day) {
     window.__toasts.filter(t => t.startsWith("✗")).forEach(t => out.problems.push("error toast: " + t));
     return out;
   }, MIN_TEXT);
+  // Hourly posting steps from the AI Plan (hr:<net>:<n>, desk:<product>:<groups>) launch real add-on jobs.
+  const hrJobs = await page.evaluate(() => {
+    const jobs = []; window.addEventListener("message", e => { if (e.data && e.data.type === "favauto-start") jobs.push(e.data.job); });
+    document.documentElement.dataset.favautoExt = "5"; document.documentElement.dataset.favautoMode = "live";
+    window.FAV_FBAUTO.runStep(["desk:FAV-014:10"], true);
+    window.FAV_FBAUTO.runStep(["hr:x:2"], true);
+    return new Promise(r => setTimeout(() => r(jobs.map(j => ({ kind: j.kind, n: j.q.length, ps: [...new Set(j.q.map(x => x.p))] }))), 300));
+  });
+  const desk = hrJobs.find(j => j.kind === "post"), hx = hrJobs.find(j => j.kind === "x");
+  if (!desk || desk.n < 1 || desk.n > 10 || desk.ps.join() !== "FAV-014") problems.push("desk:FAV-014:10 didn't post the desk into ≤10 groups: " + JSON.stringify(hrJobs));
+  if (!hx || hx.n !== 2) problems.push("hr:x:2 didn't build 2 X posts: " + JSON.stringify(hrJobs));
   await page.close();
   return { tabs: res.tabs, problems: [...problems, ...res.problems] };
 }
@@ -711,6 +722,23 @@ async function aiplan(browser, shot) {
   if (!r3.p || r3.renew || r3.other || !r3.paused) problems.push("Pause All didn't stop everything: " + JSON.stringify(r3));
   await page.click("[data-ap-pause]"); await page.waitForTimeout(200);
   if (await page.evaluate(() => window.FAV_AIPLAN.paused())) problems.push("Resume all didn't resume");
+  // Hourly posting: card drawn, steps follow the rates, Run this hour now starts them, save keeps the safe caps.
+  const hr = await page.evaluate(() => {
+    window.__runs = []; window.FAV_FBAUTO = { runStep: s => window.__runs.push(s), liveAddon: () => true };
+    try { localStorage.removeItem("fa-hourly"); } catch (e) { /* */ }
+    const steps = window.FAV_AIPLAN._test.hourlySteps(Date.now(), {});
+    document.querySelector("[data-ap-hr-run]").click();
+    return { card: !!document.querySelector("#ap-hourly"), steps, runs: window.__runs.slice() };
+  });
+  if (!hr.card) problems.push("Hourly posting card missing");
+  if (JSON.stringify(hr.steps) !== JSON.stringify(["hr:ig:1", "hr:x:2", "hr:tiktok:1", "desk:FAV-014:10"])) problems.push("hourly steps wrong: " + JSON.stringify(hr.steps));
+  if (hr.runs.length !== 1 || hr.runs[0][hr.runs[0].length - 1] !== "report" || !hr.runs[0].includes("desk:FAV-014:10")) problems.push("Run this hour now didn't start the steps: " + JSON.stringify(hr.runs));
+  await page.fill('#ap-hourly input[name="x"]', "9"); await page.fill('#ap-hourly input[name="desk_groups"]', "50");
+  await page.click("[data-ap-hr-save]"); await page.waitForTimeout(200);
+  const hs = await page.evaluate(() => window.__disk().hourly);
+  if (!hs || hs.per_hour.x !== 4 || hs.desk.groups !== 20) problems.push("hourly save didn't keep the safe caps (4/h, 20 groups): " + JSON.stringify(hs));
+  const c3 = await page.evaluate(() => window.FAV_AIPLAN.decide("x").v + "/" + (window.__disk().rules.find(r => r.id === "C3") || {}).setting);
+  if (!/approve$/.test(c3)) problems.push("C3 should need approval: " + c3);
   // A new rule starts as Proposed and saves.
   await page.fill("#ap-new", "Test rule"); await page.click("[data-ap-add]"); await page.click("[data-ap-save]"); await page.waitForTimeout(200);
   const nr = await page.evaluate(() => window.__disk().rules.find(r => r.task === "Test rule"));

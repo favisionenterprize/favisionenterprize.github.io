@@ -170,7 +170,7 @@
   //  - products posted least recently and groups rested longest go first;
   //  - groups posted in during the last `group_rest_hours` rest (fewer declines);
   //  - at most `now_limit` group posts per session.
-  function planNow(ids) {
+  function planNow(ids, capOverride) {
     ids = ids || selection().ids;
     const prods = nowPostable().filter(p => ids.includes(p.id)).sort((a, b) => lastPostOf(a.id).localeCompare(lastPostOf(b.id)));
     const lastUse = {};
@@ -180,7 +180,7 @@
     const groups = all.filter(g => !lastUse[g.id] || now - Date.parse(lastUse[g.id]) >= restMs)
       .sort((a, b) => (lastUse[a.id] || "").localeCompare(lastUse[b.id] || ""));
     const cov = Object.fromEntries(prods.map(p => [p.id, coverage(p)]));
-    const pairs = [], used = new Set(), cap = S.settings.now_limit;
+    const pairs = [], used = new Set(), cap = capOverride || S.settings.now_limit;
     for (let more = true; more && pairs.length < cap;) {
       more = false;
       for (const p of prods) {
@@ -370,8 +370,24 @@
       if (k.startsWith("pinswap:") && BST() && BST().state()) return BST().pinswap(k.slice(8), steps);
       if (k.startsWith("reply3:") && ENG() && ENG().state()) return ENG().start(k.slice(7), steps, { mode: "reply", limit: 3 });
       if (k.startsWith("profile:") && PRO() && PRO().state()) { const [, net, mode] = k.split(":"); return PRO().start(net, mode, steps); }
+      // Hourly posting (AI Plan → admin/aiplan.js): rotating products, least recently posted first, outside the daily quotas.
+      if (k.startsWith("hr:")) {
+        const [, net, nStr] = k.split(":"), n = Math.max(1, Number(nStr) || 1), ids = nowPostable().map(p => p.id);
+        if (net === "ig" && IG() && Number(ext()) >= 4) return startIg({ products: ids, limit: n }, steps);
+        if ((net === "x" || net === "tiktok") && SOC() && SOC().state() && liveAddon()) return startSoc(net, { products: ids, limit: n }, steps);
+      }
+      if (k.startsWith("desk:") && activeGroups().length) return startDesk(k.split(":")[1], Number(k.split(":")[2]) || 10, steps);
       if (k === "report") return sendReport(true);
     }
+  }
+  // One product (the student desk by default) into up to `n` groups it hasn't been in this round, rested groups first.
+  function startDesk(pid, n, then) {
+    if (needExt()) return;
+    const go = () => { if (then && then.length) setTimeout(() => runStep(then, true), 1500); };
+    const pl = planNow([pid], Math.min(Math.max(1, n), 30));
+    if (!pl.pairs.length) { A.toast(pl.resting ? "Hourly posting: every group is resting; the desk waits for the next slot." : "Hourly posting: the desk has been in every group this round.", true); return go(); }
+    const q = pl.pairs.map(({ p, g }, i) => ({ g: g.id, name: g.name, url: g.url, p: p.id, text: caption(p, S.posts.filter(x => x.p === p.id).length + i + 1), img: postImg(p) }));
+    launch(q[0].url, { kind: "post", mode: "now", q, min: S.settings.pause_min_s, max: S.settings.pause_max_s, then: then || null });
   }
   function runAll(auto) {
     if (needExt()) return;

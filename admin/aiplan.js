@@ -34,6 +34,9 @@
       r.steps = Array.isArray(r.steps) ? r.steps : [];
     });
     p.paused = !!p.paused;
+    const h = p.hourly = Object.assign({ on: false, start_hour: 7, end_hour: 21, notify: true }, p.hourly || {});
+    h.per_hour = Object.assign({ ig: 1, x: 2, tiktok: 1 }, h.per_hour || {});
+    h.desk = Object.assign({ on: true, product: "FAV-014", groups: 10, every_hours: 3 }, h.desk || {});
     return p;
   }
   async function load(force) {
@@ -102,6 +105,50 @@
   }
   const paused = () => !!(P && P.paused);
 
+  // ---------------------------------------------------------------- hourly posting
+  // While the admin is open (PC on), at the start of each hour between start_hour and end_hour (Ghana time = GMT)
+  // it runs hr:<net>:<n> for each network and, every desk.every_hours, desk:<product>:<groups>. Each step still
+  // goes through gate() (rules M1 / M2, Pause All). Last runs in localStorage "fa-hourly".
+  const HR_KEY = "fa-hourly", HR_MAX = 4, DESK_MAX = 20;
+  const lsGet = () => { try { return JSON.parse(localStorage.getItem(HR_KEY) || "{}"); } catch (e) { return {}; } };
+  const lsSet = v => { try { localStorage.setItem(HR_KEY, JSON.stringify(v)); } catch (e) { /* storage off */ } };
+  const hourKey = d => d.toISOString().slice(0, 13);
+  function hourlySteps(now, last) {
+    const h = P.hourly, steps = [];
+    for (const net of ["ig", "x", "tiktok"]) { const n = Math.min(HR_MAX, Number(h.per_hour[net]) || 0); if (n > 0) steps.push(`hr:${net}:${n}`); }
+    const d = h.desk;
+    if (d.on && d.product && (!last.desk || now - Date.parse(last.desk) >= (Number(d.every_hours) || 3) * 36e5 - 5 * 6e4))
+      steps.push(`desk:${d.product}:${Math.min(DESK_MAX, Number(d.groups) || 10)}`);
+    return steps;
+  }
+  function notify(msg) {
+    toast(msg);
+    try { if (P.hourly.notify && window.Notification && Notification.permission === "granted") new Notification("F.A Vision autopilot", { body: msg, icon: "../assets/images/logo.png", tag: "fa-hourly" }); } catch (e) { /* ignore */ }
+  }
+  function runHour(force) {
+    const F = window.FAV_FBAUTO, now = Date.now(), last = lsGet();
+    if (!P || !F) return "not ready";
+    if (P.paused) return "paused";
+    if (document.querySelector("#favautobox")) return "busy";   // a run is already going
+    const steps = hourlySteps(now, force ? {} : last).filter(k => decide(k).v !== "skip");
+    if (!steps.length) return "nothing";
+    const posts = steps.filter(k => k.startsWith("hr:")).reduce((a, k) => a + Number(k.split(":")[2]), 0);
+    const desk = steps.find(k => k.startsWith("desk:"));
+    lsSet(Object.assign(last, { hour: hourKey(new Date(now)), ran: new Date(now).toISOString() }, desk ? { desk: new Date(now).toISOString() } : {}));
+    notify(`Hourly posting starting: ${posts} post${posts === 1 ? "" : "s"} on Instagram/X/TikTok${desk ? ` + ${desk.split(":")[1]} into ${desk.split(":")[2]} Facebook groups` : ""}.`);
+    F.runStep(steps.concat("report"), true);
+    return "started";
+  }
+  function hourlyTick() {
+    if (!P || !P.hourly.on || P.paused) return;
+    const d = new Date(), hr = d.getUTCHours(), last = lsGet();
+    if (hr < P.hourly.start_hour || hr >= P.hourly.end_hour) return;
+    if (last.hour === hourKey(d)) return;
+    if (!window.FAV_FBAUTO || !window.FAV_FBAUTO.liveAddon || !window.FAV_FBAUTO.liveAddon()) return;   // add-on not ready: try next minute
+    runHour(false);
+  }
+  setInterval(() => { try { hourlyTick(); } catch (e) { /* never break the admin */ } }, 60000);
+
   // ---------------------------------------------------------------- screen
   let screen = $("#screen-aiplan");
   if (!screen) {
@@ -126,7 +173,7 @@
 .ap-ctl{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;align-items:center}
 .ap-ctl select{font:inherit;font-size:13px;padding:5px 6px;border:1px solid #dadce0;border-radius:8px;background:#fff;width:auto;max-width:100%;flex:0 1 auto}
 .ap-ctl select.s-approved{background:#e3f4ea;border-color:#9fd4b2}.ap-ctl select.s-retired{background:#fdecea;border-color:#f0b3ac}.ap-ctl select.s-proposed{background:#fff6e0;border-color:#f0d58c}
-.ap-steps{font-size:12px;color:#5f6368}.ap-bar{position:sticky;bottom:0;display:flex;gap:10px;justify-content:flex-end;padding:10px;background:rgba(255,255,255,.95);border-top:1px solid #e3e7ee}
+.ap-steps{font-size:12px;color:#5f6368}.ap-conf{display:flex;align-items:center;gap:6px;font-size:14px}.ap-hr input[type=number],.ap-hr input[name=desk_product]{font:inherit;font-size:13px;padding:4px 6px;border:1px solid #dadce0;border-radius:6px}.ap-bar{position:sticky;bottom:0;display:flex;gap:10px;justify-content:flex-end;padding:10px;background:rgba(255,255,255,.95);border-top:1px solid #e3e7ee}
 .ap-log{font-size:12px;color:#3c4043;max-height:220px;overflow:auto;margin:0;padding-left:18px}
 @media (max-width:600px){.ap-rule{grid-template-columns:1fr}.ap-id{padding:0}}`;
     document.head.appendChild(st);
@@ -166,6 +213,7 @@
         <button class="btn ${P.paused ? "btn-sell" : "btn-ghost"}" data-ap-pause>${P.paused ? "▶ Resume all" : "⏸ Pause All"}</button>
       </div>
       <div class="ap-sum"><span class="ap-pill">${P.rules.length} rules</span><span class="ap-pill">✓ ${count("approved")} approved</span><span class="ap-pill">● ${count("proposed")} proposed</span><span class="ap-pill">✕ ${count("retired")} retired</span><span class="ap-pill">Final say: ${esc(P.owner || "Alexander Awuku")}</span>${P.updated ? `<span class="ap-pill">Saved ${esc(P.updated)}</span>` : ""}</div>
+      ${hourlyCard()}
       ${depts.map(d => {
         const rs = P.rules.filter(r => r.dept === d);
         if (!rs.length) return "";
@@ -192,6 +240,23 @@
         <button class="btn btn-sell" data-ap-save${dirty ? "" : " disabled"}>Save my rules</button></div>`;
   }
 
+  function hourlyCard() {
+    const h = P.hourly, last = lsGet(), notif = window.Notification ? Notification.permission : "unsupported";
+    const n = (name, v, max) => `<input type="number" name="${name}" min="0" max="${max}" value="${esc(v)}" style="width:64px">`;
+    return `<section class="ap-dept" id="ap-hourly"><h2>⏱ Hourly posting (rules M1 and M2)</h2><form class="ap-hr" style="padding:12px 14px;display:grid;gap:10px">
+      <label class="ap-conf"><input type="checkbox" name="on"${h.on ? " checked" : ""}> Post every hour while this admin is open on your PC</label>
+      <div class="ap-ctl">From ${n("start_hour", h.start_hour, 23)} to ${n("end_hour", h.end_hour, 24)} o'clock (Ghana time)</div>
+      <div class="ap-ctl">Each hour: Instagram ${n("ig", h.per_hour.ig, HR_MAX)} · X ${n("x", h.per_hour.x, HR_MAX)} · TikTok ${n("tiktok", h.per_hour.tiktok, HR_MAX)} posts</div>
+      <div class="ap-ctl"><label class="ap-conf"><input type="checkbox" name="desk_on"${h.desk.on ? " checked" : ""}> Student desk</label> <input name="desk_product" value="${esc(h.desk.product)}" style="width:90px"> into ${n("desk_groups", h.desk.groups, DESK_MAX)} new groups every ${n("desk_every", h.desk.every_hours, 24)} hours</div>
+      <label class="ap-conf"><input type="checkbox" name="notify"${h.notify ? " checked" : ""}> Alert me on this PC when posting starts</label>
+      <p class="muted" style="margin:0;font-size:13px">Safe limits: up to ${HR_MAX} posts an hour per network and ${DESK_MAX} groups per desk session. Faster than this, Facebook, Instagram and TikTok treat it as spam and can block the Page and your profile. Raise slowly, a little each week.
+      ${last.ran ? `<br>Last hourly run: ${esc(String(last.ran).replace("T", " ").slice(0, 16))}${last.desk ? ` · last desk run: ${esc(String(last.desk).replace("T", " ").slice(0, 16))}` : ""}` : ""}</p>
+      <div class="ap-ctl"><button type="button" class="btn btn-sell btn-sm" data-ap-hr-save>Save hourly posting</button>
+        <button type="button" class="btn btn-ghost btn-sm" data-ap-hr-run>▶ Run this hour now</button>
+        ${notif === "default" ? `<button type="button" class="btn btn-ghost btn-sm" data-ap-hr-notify>🔔 Allow alerts</button>` : notif === "denied" ? `<span class="ap-steps">Alerts are blocked in this browser's site settings.</span>` : ""}</div>
+    </form></section>`;
+  }
+
   // ---------------------------------------------------------------- events
   document.addEventListener("click", async e => {
     if (e.target.closest("[data-aiplan]")) { e.preventDefault(); show(); return; }
@@ -210,6 +275,21 @@
         mine.forEach(r => { if (!cur.rules.some(x => x.id === r.id)) cur.rules.push(r); });
         return cur;
       });
+      return;
+    }
+    if (e.target.closest("[data-ap-hr-notify]")) { try { await Notification.requestPermission(); } catch (x) { /* */ } render(); return; }
+    if (e.target.closest("[data-ap-hr-run]")) {
+      const r = runHour(true);
+      if (r !== "started") toast({ paused: "Pause All is on.", busy: "A run is already going.", nothing: "Nothing to post: rules M1/M2 are off or set to 0.", "not ready": "Open the Social autopilot once so the add-on connects, then try again." }[r] || r, true);
+      return;
+    }
+    if (e.target.closest("[data-ap-hr-save]")) {
+      const f = $("#ap-hourly form"), num = (k, lo, hi) => Math.min(hi, Math.max(lo, Math.round(Number(f[k].value) || 0)));
+      const h = { on: f.on.checked, notify: f.notify.checked, start_hour: num("start_hour", 0, 23), end_hour: num("end_hour", 1, 24),
+        per_hour: { ig: num("ig", 0, HR_MAX), x: num("x", 0, HR_MAX), tiktok: num("tiktok", 0, HR_MAX) },
+        desk: { on: f.desk_on.checked, product: (f.desk_product.value || "FAV-014").trim().toUpperCase(), groups: num("desk_groups", 1, DESK_MAX), every_hours: num("desk_every", 1, 24) } };
+      if (h.end_hour <= h.start_hour) return toast("The end hour must be after the start hour.", true);
+      await save("AI plan: hourly posting updated by Alexander", cur => { cur.hourly = h; return cur; });
       return;
     }
     if (e.target.closest("[data-ap-add]")) {
@@ -246,5 +326,5 @@
     else if (tries < 40) setTimeout(() => warm(tries + 1), 500);
   })(0);
 
-  window.FAV_AIPLAN = { open: show, load, gate, decide, paused, render, _test: { set: p => { P = normalise(p); asked = {}; }, state: () => P } };
+  window.FAV_AIPLAN = { open: show, load, gate, decide, paused, render, runHour, _test: { set: p => { P = normalise(p); asked = {}; }, state: () => P, hourlySteps, hourlyTick } };
 })();
