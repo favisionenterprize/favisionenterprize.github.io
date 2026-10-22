@@ -1458,6 +1458,15 @@
    "k": "ad:ai-studio",
    "p": null,
    "ok": true
+  },
+  {
+   "d": "2026-10-22",
+   "t": "2026-10-22T15:37:18.641Z",
+   "k": "tile:fav-014-arrived",
+   "p": "FAV-014",
+   "ok": false,
+   "now": true,
+   "why": "Instagram didn't take the photo"
   }
  ],
  "profile": [
@@ -1556,6 +1565,12 @@
    "followers": 892,
    "following": 2024,
    "posts": 315
+  },
+  {
+   "d": "2026-10-22",
+   "followers": 893,
+   "following": 2024,
+   "posts": 318
   }
  ],
  "runs": [
@@ -1791,6 +1806,13 @@
    "kind": "ig",
    "tried": 3,
    "ok": 3
+  },
+  {
+   "d": "2026-10-22",
+   "t": "2026-10-22T15:37:48.207Z",
+   "kind": "ig",
+   "tried": 1,
+   "ok": 0
   }
  ]
 }
