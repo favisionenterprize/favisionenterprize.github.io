@@ -3528,6 +3528,26 @@
    "ok": false,
    "now": true,
    "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-10-22",
+   "t": "2026-10-22T18:04:18.209Z",
+   "net": "x",
+   "k": "ad:fav-002",
+   "p": "FAV-002",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-10-22",
+   "t": "2026-10-22T18:04:54.105Z",
+   "net": "x",
+   "k": "ad:fav-005",
+   "p": "FAV-005",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find X's post box"
   }
  ],
  "runs": [
@@ -4167,6 +4187,13 @@
   {
    "d": "2026-10-22",
    "t": "2026-10-22T18:04:52.904Z",
+   "kind": "x",
+   "tried": 2,
+   "ok": 0
+  },
+  {
+   "d": "2026-10-22",
+   "t": "2026-10-22T18:05:07.695Z",
    "kind": "x",
    "tried": 2,
    "ok": 0
