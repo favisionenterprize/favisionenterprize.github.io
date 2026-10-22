@@ -810,7 +810,14 @@ async function brands(browser, shot) {
     fa: d("Student desk GH₵650. WhatsApp 057 264 6176. favisionenterprize.github.io"),
     faWins: d("Oteng Furniture sofa now at F.A Vision. Call 0572646176"),
     anac: d("Kavukçu wheat flour from ANAC Essentials. Call 055 543 4994"),
-    plain: d("Sofa for sale, DM to order") }; });
+    plain: d("Sofa for sale, DM to order"),
+    // Oteng Furniture shares F.A Vision's phone numbers: the name decides, the shared number doesn't
+    shared: (() => { const L = [{ id: "fa-vision", default: true, match: ["F.A Vision"], phones: ["+233572646176"] },
+                                { id: "oteng-furniture", match: ["Oteng Furniture"], phones: ["+233572646176"] }];
+      return { named: (window.FAV_BRANDS.detect("Oteng Furniture bed frame GH₵3,200. WhatsApp 057 264 6176.", L) || {}).id,
+               numOnly: (window.FAV_BRANDS.detect("Bed frame GH₵3,200. WhatsApp 057 264 6176.", L) || {}).id }; })() }; });
+  if (det.shared.named !== "oteng-furniture") problems.push(`shared number: a post naming Oteng went to ${det.shared.named}`);
+  if (det.shared.numOnly !== "fa-vision") problems.push(`shared number alone: went to ${det.shared.numOnly}, expected fa-vision`);
   const wantDet = { ot: "oteng-furniture", otNum: "oteng-furniture", fa: "fa-vision", faWins: "fa-vision", anac: "anac-essentials", plain: "fa-vision" };
   for (const k in wantDet) if (det[k] !== wantDet[k]) problems.push(`detect ${k}: got ${det[k]}, expected ${wantDet[k]}`);
   const bad = await page.evaluate(() => window.__toasts.filter(t => t.startsWith("✗")));

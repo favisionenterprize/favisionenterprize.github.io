@@ -47,9 +47,16 @@
     if (!home) return null;
     const t = String(text || ""), low = t.toLowerCase();
     const numbers = (t.match(/\+?\d[\d\s-]{7,}\d/g) || []).map(digits);
-    const hits = b => { const s = signals(b); return s.words.some(w => low.includes(w)) || s.nums.some(n => numbers.includes(n)); };
-    if (hits(home)) return home;                    // carries F.A Vision's name or contacts → F.A Vision
-    return all.find(b => b !== home && hits(b)) || home;
+    const named = b => signals(b).words.some(w => low.includes(w));
+    const called = b => signals(b).nums.some(n => numbers.includes(n));
+    // The name comes first: Oteng Furniture shares F.A Vision's phone numbers, so a post that names
+    // Oteng is Oteng's even when it carries one of those numbers. Numbers only decide when no brand
+    // is named, which is how the partner businesses (their own numbers) are recognised.
+    if (named(home)) return home;
+    const byName = all.find(b => b !== home && named(b));
+    if (byName) return byName;
+    if (called(home)) return home;
+    return all.find(b => b !== home && called(b)) || home;
   }
 
   // ---------------------------------------------------------------- screen

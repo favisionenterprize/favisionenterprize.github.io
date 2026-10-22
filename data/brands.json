@@ -101,9 +101,11 @@
    "tagline": "Well-made furniture for every home",
    "cover_line": "Sofas · Beds · Dining · Office · Delivered across Accra",
    "voice": "Warm, calm and confident. Short sentences. Talks about comfort, durability and value; never shouts or uses ALL CAPS hype.",
-   "phones": [],
-   "whatsapp": "",
-   "contacts_pending": true,
+   "phones": [
+    "+233572646176",
+    "+233207473267"
+   ],
+   "whatsapp": "+233572646176",
    "match": [
     "Oteng Furniture",
     "Oteng Furnitures",
@@ -157,8 +159,8 @@
     },
     "whatsapp_business": {
      "handle": "",
-     "status": "to_create",
-     "note": "needs its own number"
+     "status": "skip",
+     "note": "057 264 6176 is already F.A Vision's WhatsApp Business number; Oteng needs a new number for its own."
     }
    },
    "bio": {
@@ -167,7 +169,8 @@
    },
    "kit": "assets/brands/oteng-furniture/",
    "category": "Furniture store",
-   "est": "EST. ACCRA"
+   "est": "EST. ACCRA",
+   "contacts_note": "Shares F.A Vision's 057 264 6176 and 020 747 3267, so a post is routed to Oteng Furniture by its name, not by the phone number."
   },
   {
    "id": "agoodmann-ventures",
