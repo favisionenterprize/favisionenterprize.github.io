@@ -1572,6 +1572,15 @@
    "ok": false,
    "now": true,
    "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-22",
+   "t": "2026-10-22T19:01:48.945Z",
+   "k": "box:FAV-038",
+   "p": "FAV-038",
+   "ok": false,
+   "now": true,
+   "why": "The Create post window didn't open"
   }
  ],
  "profile": [
@@ -1675,7 +1684,7 @@
    "d": "2026-10-22",
    "followers": 893,
    "following": 2024,
-   "posts": 326
+   "posts": 329
   }
  ],
  "runs": [
@@ -1999,6 +2008,13 @@
   {
    "d": "2026-10-22",
    "t": "2026-10-22T18:03:35.662Z",
+   "kind": "ig",
+   "tried": 1,
+   "ok": 0
+  },
+  {
+   "d": "2026-10-22",
+   "t": "2026-10-22T19:02:07.217Z",
    "kind": "ig",
    "tried": 1,
    "ok": 0
