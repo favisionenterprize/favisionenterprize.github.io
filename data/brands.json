@@ -1,0 +1,369 @@
+{
+ "note": "Alexander's brands. Posting is brand-specific: a post that names another brand and doesn't carry F.A Vision's contacts goes out on that brand's own Page and accounts. Alexander creates accounts himself; Claude only prepares them.",
+ "brands": [
+  {
+   "id": "fa-vision",
+   "name": "F.A Vision Enterprise",
+   "short": "F.A Vision",
+   "initials": "FA",
+   "default": true,
+   "colors": {
+    "primary": "#0D55AF",
+    "accent": "#E53935",
+    "light": "#FFFFFF",
+    "dark": "#1A1A1A"
+   },
+   "fonts": {
+    "heading": "Poppins Bold",
+    "body": "Poppins"
+   },
+   "tagline": "More comfort. More style.",
+   "phones": [
+    "+233572646176",
+    "+233207473267",
+    "+233546148923"
+   ],
+   "whatsapp": "+233572646176",
+   "match": [
+    "F.A Vision",
+    "FA Vision",
+    "favisionenterprize.github.io",
+    "0572646176",
+    "057 264 6176",
+    "0207473267",
+    "020 747 3267",
+    "0546148923",
+    "054 614 8923"
+   ],
+   "accounts": {
+    "facebook": {
+     "handle": "F.A Vision Enterprise",
+     "id": "110032960671410",
+     "status": "live"
+    },
+    "instagram": {
+     "handle": "favisionent",
+     "status": "live"
+    },
+    "tiktok": {
+     "handle": "favisionenterprise",
+     "status": "live"
+    },
+    "x": {
+     "handle": "FaVisionEnt",
+     "status": "live"
+    },
+    "youtube": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "threads": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "pinterest": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "linkedin": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "snapchat": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "whatsapp_business": {
+     "handle": "",
+     "status": "to_create"
+    }
+   },
+   "kit": "existing FA Vision brand kit (assets/images, Poppins)",
+   "category": "Furniture store"
+  },
+  {
+   "id": "oteng-furniture",
+   "name": "Oteng Furniture",
+   "short": "Oteng Furniture",
+   "initials": "OF",
+   "default": false,
+   "colors": {
+    "primary": "#1F4D3A",
+    "accent": "#C9A227",
+    "light": "#F6F1E7",
+    "dark": "#1E1E1E",
+    "muted": "#7A8B7F"
+   },
+   "fonts": {
+    "heading": "Lora Bold",
+    "body": "Inter"
+   },
+   "tagline": "Well-made furniture for every home",
+   "cover_line": "Sofas · Beds · Dining · Office · Delivered across Accra",
+   "voice": "Warm, calm and confident. Short sentences. Talks about comfort, durability and value; never shouts or uses ALL CAPS hype.",
+   "phones": [],
+   "whatsapp": "",
+   "contacts_pending": true,
+   "match": [
+    "Oteng Furniture",
+    "Oteng Furnitures",
+    "#OtengFurniture"
+   ],
+   "hashtags": [
+    "#OtengFurniture",
+    "#FurnitureGhana",
+    "#AccraHomes",
+    "#HomeDecorGhana",
+    "#GhanaInteriors"
+   ],
+   "accounts": {
+    "facebook": {
+     "handle": "Oteng Furniture",
+     "status": "live",
+     "note": "one of Alexander's Pages; exact Page name to confirm"
+    },
+    "instagram": {
+     "handle": "otengfurniture",
+     "status": "to_create"
+    },
+    "tiktok": {
+     "handle": "otengfurniture",
+     "status": "to_create"
+    },
+    "x": {
+     "handle": "OtengFurniture",
+     "status": "to_create"
+    },
+    "youtube": {
+     "handle": "OtengFurniture",
+     "status": "to_create"
+    },
+    "threads": {
+     "handle": "otengfurniture",
+     "status": "to_create",
+     "note": "comes with the Instagram account"
+    },
+    "pinterest": {
+     "handle": "otengfurniture",
+     "status": "to_create"
+    },
+    "linkedin": {
+     "handle": "Oteng Furniture",
+     "status": "to_create"
+    },
+    "snapchat": {
+     "handle": "otengfurniture",
+     "status": "to_create"
+    },
+    "whatsapp_business": {
+     "handle": "",
+     "status": "to_create",
+     "note": "needs its own number"
+    }
+   },
+   "bio": {
+    "short": "Well-made sofas, beds, dining & office furniture. Delivered across Accra. 📲 Order on WhatsApp",
+    "long": "Oteng Furniture sells well-made furniture for homes, schools and offices in Ghana: sofas, beds, dining sets, wardrobes, desks and chairs. Quality you can feel, prices that make sense, delivery across Accra, Tema and Kasoa. Message us on WhatsApp to order."
+   },
+   "kit": "assets/brands/oteng-furniture/",
+   "category": "Furniture store"
+  },
+  {
+   "id": "agoodmann-ventures",
+   "name": "AGOODMANN VENTURES",
+   "short": "Agoodmann Ventures",
+   "initials": "AV",
+   "default": false,
+   "colors": null,
+   "fonts": null,
+   "tagline": "",
+   "phones": [
+    "+233277477752",
+    "+233244772036"
+   ],
+   "whatsapp": "+233277477752",
+   "address": "Kantamanto, near Grandview Hotel, UTC, close to Barclays Bank, Mamleshie Rd, Accra",
+   "match": [
+    "AGOODMANN VENTURES",
+    "0277477752",
+    "0244772036"
+   ],
+   "accounts": {
+    "facebook": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "instagram": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "tiktok": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "x": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "youtube": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "threads": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "pinterest": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "linkedin": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "snapchat": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "whatsapp_business": {
+     "handle": "",
+     "status": "to_create"
+    }
+   },
+   "kit": null,
+   "partner": true,
+   "category": "Building materials & sanitaryware"
+  },
+  {
+   "id": "anac-essentials",
+   "name": "ANAC Essentials",
+   "short": "Anac Essentials",
+   "initials": "AE",
+   "default": false,
+   "colors": null,
+   "fonts": null,
+   "tagline": "",
+   "phones": [
+    "+233555434994",
+    "+233557033525"
+   ],
+   "whatsapp": "+233555434994",
+   "address": "",
+   "match": [
+    "ANAC Essentials",
+    "ANAC Ventures",
+    "0555434994",
+    "0557033525"
+   ],
+   "accounts": {
+    "facebook": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "instagram": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "tiktok": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "x": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "youtube": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "threads": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "pinterest": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "linkedin": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "snapchat": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "whatsapp_business": {
+     "handle": "",
+     "status": "to_create"
+    }
+   },
+   "kit": null,
+   "partner": true,
+   "category": "Food & grocery"
+  },
+  {
+   "id": "manye-oye-rehoboth",
+   "name": "MANYE OYE REHOBOTH",
+   "short": "Manye Oye Rehoboth",
+   "initials": "MO",
+   "default": false,
+   "colors": null,
+   "fonts": null,
+   "tagline": "",
+   "phones": [
+    "+233535700722"
+   ],
+   "whatsapp": "+233535700722",
+   "address": "Kasoa, near Amanfrom Taxi Rank",
+   "match": [
+    "MANYE OYE REHOBOTH",
+    "0535700722"
+   ],
+   "accounts": {
+    "facebook": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "instagram": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "tiktok": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "x": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "youtube": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "threads": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "pinterest": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "linkedin": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "snapchat": {
+     "handle": "",
+     "status": "to_create"
+    },
+    "whatsapp_business": {
+     "handle": "",
+     "status": "to_create"
+    }
+   },
+   "kit": null,
+   "partner": true,
+   "category": "Food & grocery"
+  }
+ ]
+}

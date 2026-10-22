@@ -749,6 +749,64 @@ async function aiplan(browser, shot) {
   return { problems, rules: st.rules };
 }
 
+// "🏷 Brands" screen (admin/brands.js, #brands): every brand drawn with its kit and accounts, setup pack opens,
+// edits save, and FAV_BRANDS.detect() sends a post to the brand it names unless it carries F.A Vision's contacts.
+async function brands(browser, shot) {
+  const page = await browser.newPage({ viewport: shot ? { width: 1280, height: 900 } : { width: 390, height: 900 } });
+  const problems = [];
+  page.on("pageerror", e => problems.push("page error: " + e.message));
+  const html = fs.readFileSync(ROOT + "admin/index.html", "utf8").replace(/<script[\s\S]*?<\/script>/g, "");
+  await page.route("http://smoke.test/**", r => {
+    const u = new URL(r.request().url()), f = decodeURIComponent(u.pathname).replace(/^\//, "");
+    if (u.pathname === "/admin/") return r.fulfill({ status: 200, contentType: "text/html", body: html });
+    if (!fs.existsSync(ROOT + f) || fs.statSync(ROOT + f).isDirectory()) return r.fulfill({ status: 404, body: "" });
+    return r.fulfill({ status: 200, body: fs.readFileSync(ROOT + f), contentType: /\.png$/.test(f) ? "image/png" : "image/jpeg" });
+  });
+  await page.goto("http://smoke.test/admin/");
+  await page.addStyleTag({ content: fs.readFileSync(ROOT + "admin/admin.css", "utf8") });
+  const data = JSON.parse(fs.readFileSync(ROOT + "data/brands.json", "utf8"));
+  await page.evaluate(data => {
+    window.__toasts = []; let disk = JSON.parse(JSON.stringify(data)); window.__disk = () => disk;
+    window.FAV_ADMIN = { busy: () => {}, friendly: String, toast: (m, bad) => window.__toasts.push((bad ? "✗ " : "") + m),
+      readJsonFile: async () => JSON.parse(JSON.stringify(disk)), saveJson: async (f, mutate) => { disk = mutate(JSON.parse(JSON.stringify(disk))); return JSON.parse(JSON.stringify(disk)); } };
+  }, data);
+  await page.addScriptTag({ content: fs.readFileSync(ROOT + "admin/brands.js", "utf8") });
+  await page.evaluate(() => document.querySelector("[data-brands]").click());
+  await page.waitForTimeout(600);
+  const st = await page.evaluate(() => ({ cards: document.querySelectorAll(".br-card").length, hash: location.hash,
+    broken: [...document.querySelectorAll(".br-card img")].filter(i => i.complete && !i.naturalWidth).map(i => i.src) }));
+  if (st.cards !== data.brands.length) problems.push(`Brands shows ${st.cards} cards, expected ${data.brands.length}`);
+  if (st.hash !== "#brands") problems.push("deep link #brands not set");
+  if (st.broken.length) problems.push("brand kit image missing: " + st.broken.join(", "));
+  const ot = data.brands.findIndex(b => b.id === "oteng-furniture");
+  if (ot < 0) problems.push("Oteng Furniture missing from data/brands.json");
+  for (const f of ["avatar.png", "logo-light.png", "logo-dark.png", "logo-mark.png", "facebook-cover.jpg", "x-header.jpg", "youtube-banner.jpg", "linkedin-cover.jpg"])
+    if (!fs.existsSync(ROOT + "assets/brands/oteng-furniture/" + f)) problems.push("no assets/brands/oteng-furniture/" + f + " (run scripts/make_brand_kit.py)");
+  if (shot) await page.screenshot({ path: shot, fullPage: false });
+  await page.click(`.br-card[data-bi="${ot}"] [data-net="instagram"] [data-br-pack]`); await page.waitForTimeout(150);
+  const pk = await page.evaluate(i => (document.querySelector(`.br-card[data-bi="${i}"] .br-pack`) || {}).innerText || "", ot);
+  if (!/Setup pack: Instagram/.test(pk) || !/instagram\.com\/accounts\/emailsignup|Open Instagram signup/.test(pk)) problems.push("Instagram setup pack didn't open: " + pk.slice(0, 120));
+  await page.fill(`.br-card[data-bi="${ot}"] input[data-f="whatsapp"]`, "+233240000000");
+  await page.fill(`.br-card[data-bi="${ot}"] [data-net="instagram"] input[data-a="handle"]`, "otengfurniture");
+  await page.selectOption(`.br-card[data-bi="${ot}"] [data-net="instagram"] select[data-a="status"]`, "live");
+  await page.click("[data-br-save]"); await page.waitForTimeout(200);
+  const sv = await page.evaluate(() => window.__disk().brands.find(b => b.id === "oteng-furniture"));
+  if (sv.whatsapp !== "+233240000000" || sv.accounts.instagram.status !== "live" || sv.accounts.instagram.handle !== "otengfurniture" || "__open" in sv) problems.push("brand edits didn't save: " + JSON.stringify([sv.whatsapp, sv.accounts.instagram]));
+  const det = await page.evaluate(() => { const d = t => (window.FAV_BRANDS.detect(t) || {}).id; return {
+    ot: d("Oteng Furniture: 3-seater sofa GH₵5,000. WhatsApp 024 000 0000 to order."),
+    otNum: d("3-seater sofa GH₵5,000. Order on WhatsApp +233 24 000 0000"),
+    fa: d("Student desk GH₵650. WhatsApp 057 264 6176. favisionenterprize.github.io"),
+    faWins: d("Oteng Furniture sofa now at F.A Vision. Call 0572646176"),
+    anac: d("Kavukçu wheat flour from ANAC Essentials. Call 055 543 4994"),
+    plain: d("Sofa for sale, DM to order") }; });
+  const wantDet = { ot: "oteng-furniture", otNum: "oteng-furniture", fa: "fa-vision", faWins: "fa-vision", anac: "anac-essentials", plain: "fa-vision" };
+  for (const k in wantDet) if (det[k] !== wantDet[k]) problems.push(`detect ${k}: got ${det[k]}, expected ${wantDet[k]}`);
+  const bad = await page.evaluate(() => window.__toasts.filter(t => t.startsWith("✗")));
+  bad.forEach(t => problems.push("error toast: " + t));
+  await page.close();
+  return { problems, cards: st.cards };
+}
+
 (async () => {
   const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
   let failed = 0;
@@ -779,6 +837,9 @@ async function aiplan(browser, shot) {
   const ap = await aiplan(browser, process.env.AIPLAN_SHOT || "");
   if (ap.problems.length) { failed++; console.log("✗ AI Plan screen"); ap.problems.forEach(p => console.log("    " + p)); }
   else console.log(`✓ AI Plan screen: ${ap.rules} rules drawn; edits, Retired, Needs approval, Pause All / Resume and new rules work with the autopilot gate`);
+  const brs = await brands(browser, process.env.BRANDS_SHOT || "");
+  if (brs.problems.length) { failed++; console.log("✗ Brands screen"); brs.problems.forEach(p => console.log("    " + p)); }
+  else console.log(`✓ Brands screen: ${brs.cards} brands drawn with kits; setup pack, edits and brand detection work`);
   await browser.close();
   console.log(failed ? `\n${failed} check(s) FAILED` : "\nAll admin checks passed.");
   process.exit(failed ? 1 : 0);
