@@ -1,22 +1,46 @@
 {
- "generated": "2026-10-21T07:30:55Z",
+ "generated": "2026-10-22T07:29:49Z",
  "mode": "full",
- "score": 96,
+ "score": 80,
  "prev_score": 96,
  "counts": {
-  "high": 0,
-  "medium": 0,
-  "low": 3
+  "high": 1,
+  "medium": 1,
+  "low": 5
  },
  "site": {
   "robots": true,
   "robots_sitemap": true,
-  "sitemap_urls": 38,
+  "sitemap_urls": 39,
   "llms": true,
-  "product_pages": 33,
+  "product_pages": 41,
   "product_pages_indexable": 33
  },
  "issues": [
+  {
+   "id": "product-pages:p/",
+   "sev": "high",
+   "page": "p/",
+   "check": "product-pages",
+   "msg": "8 product pages (p/FAV-xxx.html) redirect straight to the home page, so Google and AI engines can't index a single product page. Competitors like Kpogas have their own indexable product and category pages.",
+   "count": 8,
+   "fix": {
+    "kind": "product_landing",
+    "page": "p/",
+    "label": "Make real product pages",
+    "value": "Each p/FAV-xxx.html becomes a real page: name, price, photos, highlights, Order on WhatsApp, See it in our shop, Product + Breadcrumb schema, self canonical, added to sitemap.xml. Share links keep the same preview card.",
+    "id": "product_landing:p/",
+    "applied": true
+   }
+  },
+  {
+   "id": "jsonld-product:p/",
+   "sev": "medium",
+   "page": "p/",
+   "check": "jsonld-product",
+   "msg": "8 product pages have no Product schema (price in GHS, availability). The next build adds it.",
+   "count": 8
+  },
   {
    "id": "title:index.html",
    "sev": "low",
@@ -47,6 +71,38 @@
     "value": "We sell sofas, beds, dining sets, office chairs and student desks from GH₵650 in Odorkor, Accra. Delivery to Accra, Tema & Kasoa. WhatsApp 057 264 6176.",
     "id": "description:products/index.html",
     "applied": true
+   }
+  },
+  {
+   "id": "title:foldable/index.html",
+   "sev": "low",
+   "page": "foldable/index.html",
+   "check": "title",
+   "msg": "/foldable/ title is 78 characters (aim for 30–65 so Google shows it in full).",
+   "count": 1,
+   "fix": {
+    "kind": "title",
+    "page": "foldable/index.html",
+    "label": "Rewrite title",
+    "value": "Foldable · F.A Vision Enterprise, Accra",
+    "id": "title:foldable/index.html",
+    "applied": false
+   }
+  },
+  {
+   "id": "description:foldable/index.html",
+   "sev": "low",
+   "page": "foldable/index.html",
+   "check": "description",
+   "msg": "/foldable/ meta description is 197 characters (aim for 70–160).",
+   "count": 1,
+   "fix": {
+    "kind": "description",
+    "page": "foldable/index.html",
+    "label": "Rewrite meta description",
+    "value": "We sell sofas, beds, dining sets, office chairs and student desks from GH₵650 in Odorkor, Accra. Delivery to Accra, Tema & Kasoa. WhatsApp 057 264 6176.",
+    "id": "description:foldable/index.html",
+    "applied": false
    }
   },
   {
@@ -85,7 +141,7 @@
     "Service",
     "WebSite"
    ],
-   "bytes": 480789,
+   "bytes": 494730,
    "requests": 14,
    "redirect": false,
    "in_sitemap": true
@@ -104,7 +160,7 @@
     "ItemList",
     "ListItem"
    ],
-   "bytes": 228527,
+   "bytes": 242468,
    "requests": 8,
    "redirect": false,
    "in_sitemap": true
@@ -120,8 +176,24 @@
     "Smart help for your home, school and business"
    ],
    "schema": [],
-   "bytes": 324362,
+   "bytes": 338303,
    "requests": 10,
+   "redirect": false,
+   "in_sitemap": true
+  },
+  {
+   "page": "foldable/index.html",
+   "label": "/foldable/",
+   "url": "https://favisionenterprize.github.io/foldable/",
+   "title": "White Foldable Tables & Chairs · Bulk Price Calculator · F.A Vision Enterprise",
+   "title_len": 78,
+   "description": "White foldable tables (4ft, 6ft, 8ft) and folding chairs in Accra. Sets from GH₵1,650, chairs GH₵250, 10-chair pack GH₵2,425. Work out bulk prices: 10% off 50+, 15% off 100+. WhatsApp 057 264 6176.",
+   "h1": [
+    "White Foldable Tables & Chairs"
+   ],
+   "schema": [],
+   "bytes": 365473,
+   "requests": 3,
    "redirect": false,
    "in_sitemap": true
   },
@@ -136,7 +208,7 @@
     "Shop our TikTok furniture"
    ],
    "schema": [],
-   "bytes": 255995,
+   "bytes": 269936,
    "requests": 9,
    "redirect": false,
    "in_sitemap": true
@@ -152,7 +224,7 @@
     "See it in action"
    ],
    "schema": [],
-   "bytes": 212328,
+   "bytes": 226269,
    "requests": 5,
    "redirect": false,
    "in_sitemap": true
@@ -900,6 +972,118 @@
    "requests": 4,
    "redirect": false,
    "in_sitemap": true
+  },
+  {
+   "page": "p/FAV-036.html",
+   "label": "/p/FAV-036.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-036.html",
+   "title": "White Foldable Table · GH₵670 | F.A Vision Enterprise",
+   "title_len": 53,
+   "description": "Seats 4 — 2 per side · Folds flat to ~3 inches",
+   "h1": [],
+   "schema": [],
+   "bytes": 183538,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-037.html",
+   "label": "/p/FAV-037.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-037.html",
+   "title": "White Foldable Table · GH₵950 | F.A Vision Enterprise",
+   "title_len": 53,
+   "description": "Seats 6 — 3 per side · Folds flat to ~3 inches",
+   "h1": [],
+   "schema": [],
+   "bytes": 185669,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-038.html",
+   "label": "/p/FAV-038.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-038.html",
+   "title": "White Foldable Table · GH₵1,200 | F.A Vision Enterprise",
+   "title_len": 55,
+   "description": "Seats 8 — 4 per side · Folds flat to ~3 inches",
+   "h1": [],
+   "schema": [],
+   "bytes": 188313,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-039.html",
+   "label": "/p/FAV-039.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-039.html",
+   "title": "White Foldable Chair · GH₵250 | F.A Vision Enterprise",
+   "title_len": 53,
+   "description": "Handle slot for easy carrying · Folds to ~6 inches",
+   "h1": [],
+   "schema": [],
+   "bytes": 171617,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-040.html",
+   "label": "/p/FAV-040.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-040.html",
+   "title": "White Foldable 4-Seater Set · GH₵1,650 | F.A Vision Enterprise",
+   "title_len": 62,
+   "description": "4ft table + 4 chairs · Chairs 2% off in the set",
+   "h1": [],
+   "schema": [],
+   "bytes": 184892,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-041.html",
+   "label": "/p/FAV-041.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-041.html",
+   "title": "White Foldable 6-Seater Set · GH₵2,420 | F.A Vision Enterprise",
+   "title_len": 62,
+   "description": "6ft table + 6 chairs · Chairs 2% off in the set",
+   "h1": [],
+   "schema": [],
+   "bytes": 188125,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-042.html",
+   "label": "/p/FAV-042.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-042.html",
+   "title": "White Foldable 8-Seater Set · GH₵3,160 | F.A Vision Enterprise",
+   "title_len": 62,
+   "description": "8ft table + 8 chairs · Chairs 2% off in the set",
+   "h1": [],
+   "schema": [],
+   "bytes": 190947,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
+  },
+  {
+   "page": "p/FAV-043.html",
+   "label": "/p/FAV-043.html",
+   "url": "https://favisionenterprize.github.io/p/FAV-043.html",
+   "title": "White Foldable Chairs · GH₵2,425 | F.A Vision Enterprise",
+   "title_len": 56,
+   "description": "10 chairs in a pack · 3% off — GH₵242.50 each",
+   "h1": [],
+   "schema": [],
+   "bytes": 181908,
+   "requests": 2,
+   "redirect": true,
+   "in_sitemap": false
   }
  ],
  "keywords": [
@@ -1061,7 +1245,7 @@
       "kb": 302,
       "requests": 48,
       "img_no_alt": 0,
-      "secs": 0.1,
+      "secs": 0.2,
       "keywords": []
      },
      {
@@ -1082,7 +1266,7 @@
       "kb": 282,
       "requests": 48,
       "img_no_alt": 0,
-      "secs": 0.1,
+      "secs": 0.3,
       "keywords": []
      },
      {
@@ -1124,7 +1308,7 @@
       "kb": 193,
       "requests": 6,
       "img_no_alt": 3,
-      "secs": 0.3,
+      "secs": 0.2,
       "keywords": []
      }
     ],
@@ -1204,7 +1388,7 @@
       "kb": 134,
       "requests": 121,
       "img_no_alt": 1,
-      "secs": 1.1,
+      "secs": 0.5,
       "keywords": []
      },
      {
@@ -1246,13 +1430,13 @@
       "kb": 94,
       "requests": 102,
       "img_no_alt": 0,
-      "secs": 0.6,
+      "secs": 0.5,
       "keywords": []
      },
      {
-      "url": "https://furniturecityghana.com/product/cb68l/",
+      "url": "https://furniturecityghana.com/product/mp8328-15-relax-time/",
       "title": true,
-      "title_len": 28,
+      "title_len": 45,
       "description": false,
       "h1": 1,
       "og": false,
@@ -1264,10 +1448,10 @@
       "whatsapp": true,
       "blog": false,
       "faq": false,
-      "kb": 114,
+      "kb": 115,
       "requests": 114,
       "img_no_alt": 2,
-      "secs": 0.6,
+      "secs": 0.5,
       "keywords": []
      }
     ],
@@ -1308,7 +1492,7 @@
       "kb": 366,
       "requests": 129,
       "img_no_alt": 26,
-      "secs": 0.5,
+      "secs": 0.3,
       "keywords": []
      }
     ],
@@ -1453,6 +1637,11 @@
   {
    "d": "2026-10-21",
    "score": 96,
+   "ai": 0
+  },
+  {
+   "d": "2026-10-22",
+   "score": 80,
    "ai": 0
   }
  ]
