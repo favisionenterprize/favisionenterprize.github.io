@@ -3344,6 +3344,15 @@
    "ok": false,
    "now": true,
    "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-10-22",
+   "t": "2026-10-22T16:08:22.492Z",
+   "net": "tiktok",
+   "k": "box:FAV-035",
+   "p": "FAV-035",
+   "ok": true,
+   "now": true
   }
  ],
  "runs": [
@@ -3895,6 +3904,13 @@
    "kind": "x",
    "tried": 2,
    "ok": 0
+  },
+  {
+   "d": "2026-10-22",
+   "t": "2026-10-22T16:08:42.250Z",
+   "kind": "tiktok",
+   "tried": 1,
+   "ok": 1
   }
  ]
 }
