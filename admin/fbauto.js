@@ -26,6 +26,9 @@
       daily_limit: 20, renew_after_days: 7, renew_batch: 20, pause_min_s: 60, pause_max_s: 180, auto_run: false, auto_time: "09:00",
       now_limit: 20,                            // "Post now": most group posts per session
       group_rest_hours: 6,                      // "Post now": skip groups posted in within this many hours
+      switch_on: true,                          // no access to post → switch to another Facebook profile / Page (extension/autopilot.js)
+      switch_profiles: [],                      // names to try, in order (empty = any other profile on the account)
+      switch_max: 3,                            // most switches in one run
       cleanup_on: true,                         // find groups that decline our posts, leave them and drop them from the list
       grow_on: true, grow_daily: 20,
       grow_min_members: 10000,                 // Ghana/Accra groups qualify from this size…
@@ -240,6 +243,7 @@
     job.id = Date.now().toString(36);
     gateJob(job);
     // First comment under each Facebook group post (where are you seeing this from + like & follow).
+    if (job.kind === "post") { job.sw_on = S.settings.switch_on !== false; job.sw_profiles = S.settings.switch_profiles || []; job.sw_max = S.settings.switch_max || 3; }
     if (job.kind === "post" && Array.isArray(job.q) && window.FAV_CAPTIONS) job.q.forEach(x => { if (!x.comment) x.comment = window.FAV_CAPTIONS.comment("fb", "this post"); });
     job.back = location.origin + location.pathname;
     if (Number(ext()) >= 3) {
@@ -634,6 +638,7 @@
             s.selling = { d, cards };
           }
           runLog(s, { tried: out.res.length, ok });
+          if (Array.isArray(out.switched) && out.switched.length) s.switches = (s.switches || []).concat(out.switched.map(x => ({ d, ...x }))).slice(-50);
           s.renewLog = (s.renewLog || []).concat(out.res.map(r => ({ d, t: r.t, listed: r.listed, ok: r.ok, ...(r.why ? { why: r.why } : {}) }))).slice(-200);
           return s;
         }, `Autopilot: renewed ${ok} of ${out.res.length} Marketplace listings`);
@@ -657,7 +662,7 @@
           return s;
         }, `Autopilot: posted in ${ok} of ${out.res.length} groups`);
         if (out.res.length === 1 && out.res[0].g === "page") A.toast(out.res[0].ok ? "Posted on your Facebook Page ✓" : "Facebook Page post failed: " + (out.res[0].why || out.stopped || ""), !out.res[0].ok);
-        else A.toast(`Posted in ${plural(ok, "group")}${out.res.length - ok ? `, ${out.res.length - ok} skipped` : ""}.${out.stopped ? " Stopped: " + out.stopped : ""}`, !!out.stopped);
+        else A.toast(`Posted in ${plural(ok, "group")}${out.res.length - ok ? `, ${out.res.length - ok} skipped` : ""}.${(out.switched || []).filter(x => x.to).map(x => ` No access to post, so it switched to ${x.to}.`).join("")}${out.stopped ? " Stopped: " + out.stopped : ""}`, !!out.stopped);
       } else if (out.kind === "import") {
         const found = (out.groups || []).filter(g => g.id && g.name);
         let added = 0, accepted = 0;
@@ -796,6 +801,10 @@
           <label>Renew in batches of <input id="fa-batch" name="renew_batch" type="number" min="1" max="50" value="${S.settings.renew_batch}"></label>
           <label>Post now: most group posts a session <input name="now_limit" type="number" min="1" max="50" value="${S.settings.now_limit}"></label>
           <label>Rest between posts in a group (hours) <input name="group_rest_hours" type="number" min="0" max="72" value="${S.settings.group_rest_hours}"></label>
+          <label class="fa-check"><input name="switch_on" type="checkbox" ${S.settings.switch_on !== false ? "checked" : ""}> When Facebook gives no access to post, switch to another profile or Page and try again</label>
+          <label>Profiles / Pages to switch to, in order (comma-separated; empty = any other) <input name="switch_profiles" type="text" value="${esc((S.settings.switch_profiles || []).join(", "))}" placeholder="F.A Vision Enterprise, Fa Vision Furnitures"></label>
+          <label>Most switches in one run <input name="switch_max" type="number" min="1" max="5" value="${S.settings.switch_max || 3}"></label>
+          ${(S.switches || []).length ? `<details class="fa-more"><summary>Profile switches (${S.switches.length})</summary><ul class="fa-list">${S.switches.slice().reverse().map(x => `<li class="${x.to ? "" : "bad"}"><span>${x.to ? `→ ${esc(x.to)}` : "✗ couldn't switch"}</span><small>${esc(x.d)} · ${esc(x.why || "")}${x.fail ? " · " + esc(x.fail) : ""}${x.from ? " · was " + esc(x.from) : ""}</small></li>`).join("")}</ul></details>` : ""}
           <label class="fa-check"><input name="cleanup_on" type="checkbox" ${S.settings.cleanup_on ? "checked" : ""}> Leave and remove groups that decline our posts</label>
           <label class="fa-check"><input name="grow_on" type="checkbox" ${S.settings.grow_on ? "checked" : ""}> Join new big groups every day</label>
           <label>New groups a day <input name="grow_daily" type="number" min="1" max="30" value="${S.settings.grow_daily}"></label>
@@ -1089,6 +1098,8 @@
       daily_limit: clamp(f.daily_limit.value, 1, 50), renew_batch: clamp(f.renew_batch.value, 1, 50),
       now_limit: clamp(f.now_limit.value, 1, 50), group_rest_hours: clamp(f.group_rest_hours.value, 0, 72),
       cleanup_on: f.cleanup_on.checked, grow_on: f.grow_on.checked,
+      switch_on: f.switch_on.checked, switch_max: clamp(f.switch_max.value, 1, 5),
+      switch_profiles: f.switch_profiles.value.split(",").map(x => x.trim()).filter(Boolean).slice(0, 10),
       grow_daily: clamp(f.grow_daily.value, 1, 30), grow_min_members: clamp(f.grow_min_members.value, 1000, 1e9), grow_min_global: clamp(f.grow_min_global.value, 1000, 1e9),
       grow_keywords: f.grow_keywords.value.split(",").map(x => x.trim()).filter(Boolean).slice(0, 30)
     };

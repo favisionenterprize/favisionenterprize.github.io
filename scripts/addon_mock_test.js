@@ -308,8 +308,23 @@ const MK_EDIT = id => page(`<div role="main"><h1>Edit listing</h1><label><span>T
   document.getElementById("up").onclick = () => { D[id] = document.getElementById("desc").value; localStorage.setItem("mk-desc", JSON.stringify(D)); localStorage.setItem("mk-title-" + id, document.getElementById("t").value); location.href = "/marketplace/you/selling/"; };`);
 // A Facebook group (autopilot.js "post"): Draft-like post box; with "fb-wipe" the photo paste wipes the caption
 // (the gate must put it back before Post).
+// Facebook home with the profile switcher (Your profile → See all profiles → pick one → reload as that profile).
+const FB_HOME = page(`<div role="main">facebook home</div><div role="button" aria-label="Your profile" id="me">AA</div>`, `
+  const actor = localStorage.getItem("fb-actor") || "Alexander Awuku";
+  document.getElementById("me").onclick = () => {
+    const m = document.createElement("div"); m.setAttribute("role", "menu");
+    m.innerHTML = '<div role="button">' + actor + '</div><div role="button" id="all">See all profiles</div>';
+    document.body.appendChild(m);
+    m.querySelector("#all").onclick = () => {
+      const d = document.createElement("div"); d.setAttribute("role", "dialog");
+      d.innerHTML = ["Alexander Awuku", "Fa Vision Furnitures", "F.A Vision Enterprise"].map(n => '<div role="radio" aria-checked="' + (n === actor) + '">' + n + '</div>').join("") + '<div role="button">Create new profile or Page</div>';
+      document.body.appendChild(d);
+      d.querySelectorAll("[role=radio]").forEach(r => r.onclick = () => { localStorage.setItem("fb-actor", r.innerText); location.reload(); });
+    };
+  };`);
 const FB_GROUP = page(`<div role="main"><h1>Accra Buy and Sell</h1><div role="button" id="open">Write something...</div></div>`, `
-  document.getElementById("open").onclick = () => {
+  if (localStorage.getItem("fb-noaccess") && localStorage.getItem("fb-actor") !== "F.A Vision Enterprise") document.querySelector("[role=main]").innerHTML = "<h1>Accra Buy and Sell</h1><p>Only admins can post in this group.</p>";
+  if (document.getElementById("open")) document.getElementById("open").onclick = () => {
     const d = document.createElement("div"); d.setAttribute("role", "dialog");
     d.innerHTML = '<div contenteditable="true" role="textbox" id="ed"></div><div id="att"></div><div role="button" id="post">Post</div>';
     document.body.appendChild(d);
@@ -342,6 +357,7 @@ function serve(url) {
   const me = p.startsWith("/marketplace/edit") && u.searchParams.get("listing_id"); if (me) return MK_EDIT(me);
   if (p.startsWith("/groups/")) return FB_GROUP;
   if (p.startsWith("/stories/create")) return FB_STORY;
+  if (p === "/" || p === "") return FB_HOME;
   return page("<div role=main>facebook home</div>");
 }
 
@@ -450,6 +466,18 @@ async function run(browser, job, startUrl, setup, skip) {
   want(r.out.res.length === 2 && !r.out.res[0].ok && /blank description — not posted/.test(r.out.res[0].why) && r.out.res[1].ok, "blank caption skipped with the reason, the other posted: " + JSON.stringify(r.out.res));
   want(GP.length === 1 && GP[0] === gq[1].text, "what Facebook got is the full caption WITH its hashtags (re-pasted before Post): " + JSON.stringify(GP));
   want(!r.errors.length, "no page errors: " + r.errors.join("; "));
+
+  console.log("no access to post (autopilot.js): switches to the chosen Page and posts there; stops when no profile is left");
+  const swq = [{ g: "3", name: "Accra Buy and Sell", url: "https://www.facebook.com/groups/3/", p: "FAV-014", text: gq[1].text, img: S + "a.jpg" }];
+  r = await run(browser, { kind: "post", mode: "now", q: swq, min: 1, max: 2, sw_on: true, sw_profiles: ["F.A Vision Enterprise"], sw_max: 3 }, swq[0].url, () => localStorage.setItem("fb-noaccess", "1"));
+  const SP = JSON.parse(r.state["group-posts"] || "[]");
+  want(r.out.res.length === 1 && r.out.res[0].ok && /posted as F\.A Vision Enterprise/.test(r.out.res[0].why) && SP.length === 1 && r.state["fb-actor"] === "F.A Vision Enterprise", "posted in the group after switching to the Page: " + JSON.stringify([r.out.res, r.state["fb-actor"]]));
+  want((r.out.switched || []).length === 1 && r.out.switched[0].to === "F.A Vision Enterprise" && /only admins/i.test(r.out.switched[0].why), "the switch is reported with its reason: " + JSON.stringify(r.out.switched));
+  want(!r.errors.length, "no page errors: " + r.errors.join("; "));
+  r = await run(browser, { kind: "post", mode: "now", q: swq, min: 1, max: 2, sw_on: true, sw_profiles: ["Nobody Here"], sw_max: 3 }, swq[0].url, () => localStorage.setItem("fb-noaccess", "1"));
+  want(r.out.res.length === 1 && !r.out.res[0].ok && /couldn't switch/.test(r.out.res[0].why) && /Nothing more was posted/.test(r.out.stopped || "") && !r.state["group-posts"], "no chosen profile left → that group fails with the reason and the run stops: " + JSON.stringify([r.out.res, r.out.stopped]));
+  r = await run(browser, { kind: "post", mode: "now", q: swq, min: 1, max: 2, sw_on: false }, swq[0].url, () => localStorage.setItem("fb-noaccess", "1"));
+  want(r.out.res.length === 1 && !r.out.res[0].ok && /No access to post: Only admins can post/i.test(r.out.res[0].why) && !r.state["fb-actor"], "switching off → the group is skipped with the reason, no profile change: " + JSON.stringify(r.out.res));
 
   console.log("quality gate in a story (boost.js): no text → nothing shared");
   r = await run(browser, { kind: "story", img: S + "a.jpg", text: "  " }, "https://www.facebook.com/stories/create");

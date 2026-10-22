@@ -69,7 +69,7 @@
   }
 
   async function finish(stopped) {
-    const out = { kind: job.kind, id: job.id, res: job.res, stopped: stopped || null, then: job.then || null, groups: job.groups || null, dry: !!job.dry, snapshot: job.snapshot || null, mode: job.mode || null };
+    const out = { kind: job.kind, id: job.id, res: job.res, stopped: stopped || null, switched: job.switched || null, actor: job.actor || null, then: job.then || null, groups: job.groups || null, dry: !!job.dry, snapshot: job.snapshot || null, mode: job.mode || null };
     await bg({ type: "clearJob" });
     location.href = job.back + "#favauto-done=" + encodeURIComponent(JSON.stringify(out));
   }
@@ -80,6 +80,71 @@
     const t = (document.querySelector("[role=dialog]") || document.body).innerText || "";
     const hit = t.match(WARN);
     return hit ? hit[0] : null;
+  }
+
+  // No access to post (this group, or this profile for now) → switch to another Facebook profile / Page and
+  // try the same group again (job.sw_on, order job.sw_profiles, at most job.sw_max switches a run). Security
+  // checks ("confirm your identity", "suspicious activity") are NOT in this list: they still stop the run.
+  const NOPOST = /you can('|’)t post (right now|in this group|here|to this group)|only admins( and moderators)? (can|are allowed to) post|posting (has been |is )?(turned off|disabled|paused|limited)|you('|’)re (temporarily )?(blocked|restricted) from posting|you can('|’)t use this feature|we limit how often|temporarily (blocked|restricted)|you('|’)re restricted|your account (has been |is )?restricted/i;
+  function noPost() {
+    const t = (document.querySelector("[role=dialog]") || document.querySelector("[role=main]") || document.body).innerText || "";
+    const hit = t.match(NOPOST);
+    return hit ? hit[0] : null;
+  }
+  const canSwitch = () => job.sw_on !== false && (job.switched || []).length < (Number(job.sw_max) || 3);
+  async function startSwitch(reason) {
+    job.sw = { stage: "menu", reason, at: job.i };
+    job.tried = job.tried || [];
+    if (job.actor && !job.tried.includes(job.actor)) job.tried.push(job.actor);
+    job.navFor = -1;
+    await save();
+    box(`No access to post ("${reason}"). Switching to another profile…`, true);
+    await sleep(1500);
+    location.href = "https://www.facebook.com/";
+  }
+  // Runs on facebook.com home while job.sw is set. Returns true when it moved on (switched or gave up).
+  async function doSwitch() {
+    const sw = job.sw, tried = job.tried || [];
+    const fail = async why => {
+      job.sw = null; job.navFor = -1;
+      job.switched = (job.switched || []).concat({ from: job.actor || "", to: null, why: sw.reason, t: new Date().toISOString(), fail: why });
+      await save();
+      return { ok: false, why };
+    };
+    if (sw.stage === "after") {
+      job.sw = null; job.navFor = -1;
+      job.switched = (job.switched || []).concat({ from: tried[tried.length - 2] || "", to: job.actor, why: sw.reason, t: new Date().toISOString() });
+      await save();
+      return { ok: true };
+    }
+    box("Opening your profiles…");
+    await sleep(rand(1500, 2500));
+    const menu = await waitFor(() => findBtn(/^(your profile|account controls and settings|account|switch profiles?)$/i), 15000);
+    if (!menu) return fail("couldn't find the profile menu");
+    menu.click();
+    const all = await waitFor(() => findBtn(/see all profiles|switch profiles?|see more profiles/i), 8000);
+    if (all) { all.click(); await sleep(rand(1200, 2000)); }
+    const root = await waitFor(() => [...document.querySelectorAll("[role=dialog],[role=menu]")].filter(visible).pop(), 8000) || document;
+    const skip = /^(see all profiles|see more profiles|switch profiles?|create (new )?(profile|page)|settings|log out|close|back|help)/i;
+    const nameOf = el => ((el.getAttribute("aria-label") || el.innerText || "").split("\n")[0] || "").replace(/^switch to\s+/i, "").trim();
+    const items = [...root.querySelectorAll('[role=radio],[role=menuitemradio],[role=button],[role=link],[role=menuitem]')]
+      .filter(el => visible(el) && nameOf(el) && !skip.test(nameOf(el)) && nameOf(el).length < 80);
+    const current = items.find(el => el.getAttribute("aria-checked") === "true" || el.getAttribute("aria-current") === "true");
+    if (current && !job.actor) { job.actor = nameOf(current); if (!tried.includes(job.actor)) tried.push(job.actor); }
+    const usable = items.filter(el => el !== current && !tried.includes(nameOf(el)));
+    const want = (job.sw_profiles || []).map(x => String(x).trim().toLowerCase()).filter(Boolean);
+    const pick = want.length
+      ? want.map(w => usable.find(el => nameOf(el).toLowerCase() === w || nameOf(el).toLowerCase().includes(w))).find(Boolean)
+      : usable[0];
+    if (!pick) return fail(want.length ? "none of your chosen profiles is left to try" : "no other profile or Page to switch to");
+    const name = nameOf(pick);
+    job.actor = name; job.tried = tried.concat(name); job.sw.stage = "after";
+    await save();
+    box(`Switching to ${name}…`);
+    pick.click();
+    await sleep(rand(5000, 7000));               // Facebook usually reloads here; the next load finishes the switch
+    if (job.sw && job.sw.stage === "after") return doSwitch();
+    return { ok: true };
   }
 
   // Quality gate (same rule as admin/captions.js ensure): never post a blank description. Real text =
@@ -150,11 +215,23 @@
   box("Starting…");
 
   // ============================================================= post into groups
+  if (job.kind === "post" && job.sw) {
+    const r = await doSwitch();
+    if (!r.ok) {
+      const it = job.q[job.i];
+      job.res.push({ g: it.g, p: it.p, ok: false, why: `No access to post; couldn't switch profile (${r.why})`, t: new Date().toISOString() });
+      job.i++; await save();
+      return finish(`No access to post and ${r.why}. Nothing more was posted.`);
+    }
+    box(`Now posting as ${job.actor}. Back to the group…`);
+    await sleep(1500);
+  }
   if (job.kind === "post") {
     if (job.i >= job.q.length) return finish();
     const it = job.q[job.i];
     if (!(await arrive(it.url))) return;
-    const record = (ok, why) => { job.res.push({ g: it.g, p: it.p, ok, why: why || "", t: new Date().toISOString() }); job.i++; save(); };
+    const asWho = () => job.actor && (job.switched || []).some(x => x.to) ? `posted as ${job.actor}` : "";
+    const record = (ok, why) => { job.res.push({ g: it.g, p: it.p, ok, why: [why, ok && asWho()].filter(Boolean).join(" · "), t: new Date().toISOString(), ...(job.actor ? { as: job.actor } : {}) }); job.i++; save(); };
     const next = async ok => {
       if (job.i >= job.q.length) { box("All done. Going back to your admin…"); await sleep(1500); return finish(); }
       if (ok) await countdown(rand(job.min || 60, job.max || 180), `Posted ✓ (${job.res.filter(r => r.ok).length} so far). Next group in`);
@@ -166,12 +243,15 @@
     if (realLen(it.text) < 15) { record(false, BLANK); box(`${n}: ${BLANK}. Skipping…`, true); return next(false); }
     box(`${n}: opening ${it.name}…`);
     await sleep(rand(2500, 4500));
+    let np = noPost(); if (np && canSwitch()) return startSwitch(np);
     let w = warning(); if (w) return finish(`Facebook showed "${w}". Nothing more was posted.`);
 
     const opener = await waitFor(() =>
       findBtn(/^(write something|start discussion|create a public post|what('|’)s on your mind|create post)/i), 15000);
     if (!opener) {
-      const why = findBtn(/^join group$/i) ? "Not a member of this group" : "Couldn't find the post box";
+      np = noPost();
+      if (np && canSwitch()) return startSwitch(np);
+      const why = findBtn(/^join group$/i) ? "Not a member of this group" : np ? `No access to post: ${np}` : "Couldn't find the post box";
       record(false, why); box(`${n}: ${why}. Skipping…`, true); return next(false);
     }
     opener.click();
@@ -213,6 +293,7 @@
       }
     } catch (e) { photoNote = "Posted without photo"; }
 
+    np = noPost(); if (np && canSwitch()) return startSwitch(np);
     w = warning(); if (w) return finish(`Facebook showed "${w}". Nothing more was posted.`);
     const post = await waitFor(() => { const b = findBtn(/^post$/i, dialog); return b && b.getAttribute("aria-disabled") !== "true" ? b : null; }, 30000);
     if (!post) { record(false, "Post button stayed off"); box(`${n}: Post button stayed off. Skipping…`, true); return next(false); }
@@ -243,6 +324,7 @@
     box(`${n}: posting…`);
     const closed = await waitFor(() => !document.contains(editor) || !visible(editor), 60000);
     await sleep(1500);
+    np = noPost(); if (np && canSwitch()) return startSwitch(np);
     w = warning(); if (w) { record(false, w); return finish(`Facebook showed "${w}". Nothing more was posted.`); }
     if (!closed) { record(false, "Facebook didn't confirm the post"); return next(false); }
     const pending = /pending|admin approval|submitted|will be reviewed/i.test(document.body.innerText.slice(0, 5000));
