@@ -1706,6 +1706,15 @@
    "ok": false,
    "now": true,
    "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T11:02:08.690Z",
+   "k": "box:FAV-039",
+   "p": "FAV-039",
+   "ok": false,
+   "now": true,
+   "why": "Instagram didn't confirm the post"
   }
  ],
  "profile": [
@@ -1815,7 +1824,7 @@
    "d": "2026-10-23",
    "followers": 893,
    "following": 2024,
-   "posts": 339
+   "posts": 340
   }
  ],
  "runs": [
@@ -2195,6 +2204,13 @@
   {
    "d": "2026-10-23",
    "t": "2026-10-23T10:02:39.333Z",
+   "kind": "ig",
+   "tried": 1,
+   "ok": 0
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T11:03:18.507Z",
    "kind": "ig",
    "tried": 1,
    "ok": 0
