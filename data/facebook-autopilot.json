@@ -84,7 +84,17 @@
    "added": "2026-10-23"
   }
  ],
- "posts": [],
+ "posts": [
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T03:43:13.795Z",
+   "p": "FAV-014",
+   "g": "page",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  }
+ ],
  "resets": {},
  "today": null,
  "renewals": {},
@@ -157,6 +167,13 @@
    "kind": "declines",
    "found": 0,
    "left": 0
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T03:43:52.070Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 0
   }
  ],
  "renewLog": []
