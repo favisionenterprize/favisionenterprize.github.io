@@ -327,6 +327,166 @@
    "ok": false,
    "now": true,
    "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T04:10:12.363Z",
+   "p": "FAV-001",
+   "g": "351437262561935",
+   "ok": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T04:13:12.494Z",
+   "p": "FAV-001",
+   "g": "516679296673025",
+   "ok": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T04:16:24.771Z",
+   "p": "FAV-001",
+   "g": "1166899307145476",
+   "ok": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T04:19:38.456Z",
+   "p": "FAV-001",
+   "g": "623981551575192",
+   "ok": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T04:21:37.609Z",
+   "p": "FAV-001",
+   "g": "403028860570846",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T04:22:30.284Z",
+   "p": "FAV-001",
+   "g": "444635012242059",
+   "ok": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T04:24:33.403Z",
+   "p": "FAV-001",
+   "g": "663709417564481",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T04:24:56.737Z",
+   "p": "FAV-001",
+   "g": "264559953895459",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T04:26:27.380Z",
+   "p": "FAV-001",
+   "g": "717976401601485",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T04:29:24.108Z",
+   "p": "FAV-001",
+   "g": "328463177191460",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T04:32:27.559Z",
+   "p": "FAV-001",
+   "g": "287708489529311",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T04:33:12.470Z",
+   "p": "FAV-001",
+   "g": "838348073702031",
+   "ok": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T04:35:56.461Z",
+   "p": "FAV-001",
+   "g": "768106223731259",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T04:39:07.971Z",
+   "p": "FAV-001",
+   "g": "198029967316435",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T04:41:41.200Z",
+   "p": "FAV-001",
+   "g": "492106280882193",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T04:44:31.606Z",
+   "p": "FAV-001",
+   "g": "546213353030012",
+   "ok": false,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T04:45:53.950Z",
+   "p": "FAV-001",
+   "g": "229343507183776",
+   "ok": false,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T04:46:16.371Z",
+   "p": "FAV-001",
+   "g": "137653684399760",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T04:48:14.942Z",
+   "p": "FAV-001",
+   "g": "650579767131006",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T04:48:37.183Z",
+   "p": "FAV-001",
+   "g": "Houseofcomedyandjokes",
+   "ok": true,
+   "why": "Waiting for admin approval"
   }
  ],
  "resets": {},
@@ -613,6 +773,13 @@
    "tried": 0,
    "ok": 0,
    "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile in Facebook, then tap Renew again."
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T04:48:50.380Z",
+   "kind": "post",
+   "tried": 20,
+   "ok": 14
   }
  ],
  "renewLog": []
