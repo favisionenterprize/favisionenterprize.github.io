@@ -585,6 +585,54 @@
    "t": "2026-10-22T17:14:06.661Z",
    "fav": "Kojo Blak",
    "found": true
+  },
+  {
+   "name": "Davido & Popcaan",
+   "platform": "tiktok",
+   "d": "2026-10-23",
+   "t": "2026-10-23T14:49:21.985Z",
+   "fav": "Davido",
+   "found": true
+  },
+  {
+   "name": "KOJO BLAK & King Promise",
+   "platform": "tiktok",
+   "d": "2026-10-23",
+   "t": "2026-10-23T14:49:21.985Z",
+   "fav": "Kojo Blak",
+   "found": true
+  },
+  {
+   "name": "Davido & Popcaan",
+   "platform": "tiktok",
+   "d": "2026-10-23",
+   "t": "2026-10-23T14:49:21.985Z",
+   "fav": "Davido",
+   "found": true
+  },
+  {
+   "name": "KOJO BLAK & King Promise",
+   "platform": "tiktok",
+   "d": "2026-10-23",
+   "t": "2026-10-23T14:49:21.985Z",
+   "fav": "Kojo Blak",
+   "found": true
+  },
+  {
+   "name": "Davido & Popcaan",
+   "platform": "tiktok",
+   "d": "2026-10-23",
+   "t": "2026-10-23T14:49:21.985Z",
+   "fav": "Davido",
+   "found": true
+  },
+  {
+   "name": "KOJO BLAK & King Promise",
+   "platform": "tiktok",
+   "d": "2026-10-23",
+   "t": "2026-10-23T14:49:21.985Z",
+   "fav": "Kojo Blak",
+   "found": true
   }
  ],
  "notes": [
@@ -771,6 +819,11 @@
    "d": "2026-10-23",
    "platform": "tiktok",
    "text": "1 post went out without a sound"
+  },
+  {
+   "d": "2026-10-23",
+   "platform": "tiktok",
+   "text": "4 posts went out without a sound"
   }
  ]
 }
