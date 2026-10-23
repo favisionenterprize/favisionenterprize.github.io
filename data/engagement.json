@@ -2340,6 +2340,21 @@
    "followers": 893,
    "stopped": null,
    "commenting": false
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T03:58:27.935Z",
+   "net": "ig",
+   "mode": "likers",
+   "posts": 12,
+   "checked": 12,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": null,
+   "stopped": null,
+   "commenting": false
   }
  ],
  "liked": {}
