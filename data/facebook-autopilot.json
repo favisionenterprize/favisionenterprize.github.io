@@ -330,7 +330,10 @@
   }
  ],
  "resets": {},
- "today": null,
+ "today": {
+  "d": "2026-10-23",
+  "p": "FAV-001"
+ },
  "renewals": {},
  "removed": [],
  "joins": [
