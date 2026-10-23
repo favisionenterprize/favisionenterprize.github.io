@@ -887,5 +887,90 @@
    "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile in Facebook, then tap Renew again."
   }
  ],
- "renewLog": []
+ "renewLog": [],
+ "relay": {
+  "settings": {
+   "join_target": 40,
+   "groups_per_brand": 40,
+   "batch": 10,
+   "pmin": 40,
+   "pmax": 100,
+   "profiles": [
+    {
+     "name": "Alexander Awuku",
+     "on": true
+    },
+    {
+     "name": "F.A Vision Enterprise",
+     "on": true
+    },
+    {
+     "name": "Fa Vision Furnitures",
+     "on": true
+    },
+    {
+     "name": "Oteng Furniture",
+     "on": true
+    },
+    {
+     "name": "Agoodmann Ventures",
+     "on": true
+    },
+    {
+     "name": "Manye Oye Rehoboth",
+     "on": true
+    },
+    {
+     "name": "Rubaks Catering Services",
+     "on": false
+    },
+    {
+     "name": "Christ Kingdom Christian Mission International",
+     "on": false
+    }
+   ],
+   "brands": [
+    {
+     "key": "fav",
+     "page": "F.A Vision Enterprise",
+     "brand": "fa-vision",
+     "products": [
+      "FAV-014"
+     ],
+     "on": true
+    },
+    {
+     "key": "favf",
+     "page": "Fa Vision Furnitures",
+     "brand": "fa-vision",
+     "products": [
+      "FAV-014"
+     ],
+     "on": true
+    },
+    {
+     "key": "oteng",
+     "page": "Oteng Furniture",
+     "brand": "oteng-furniture",
+     "products": [
+      "FAV-014"
+     ],
+     "on": true
+    },
+    {
+     "key": "agood",
+     "page": "",
+     "brand": "agoodmann-ventures",
+     "products": [
+      "FAV-024"
+     ],
+     "on": true
+    }
+   ]
+  },
+  "joins": [],
+  "posts": [],
+  "manual": [],
+  "runs": []
+ }
 }
