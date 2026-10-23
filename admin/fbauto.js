@@ -50,6 +50,7 @@
   const ENG = () => window.FAV_ENGAGE;           // Engagement: comment on all posts + followers/likes (admin/engage.js + extension/engage.js)          // Videos & YouTube (admin/vidauto.js + extension/youtube.js)          // X and TikTok (admin/socauto.js + extension/social.js)
   const MK = () => window.FAV_MKAUTO;            // Marketplace sync: scan, list missing products, buyer messages (admin/mkauto.js + extension/marketplace.js)
   const PRO = () => window.FAV_PROFILES;
+  const VIRAL = () => window.FAV_VIRAL;          // Go-viral settings checklist (admin/viral.js), Engagement tab under the Profile check
   const TTC = () => window.FAV_TTCAPS;
   const FX = () => window.FAV_FIXALL;            // Fix all tab: Facebook Page, Instagram, X, Marketplace, website (admin/fixall.js + extension/fixall.js)
   const RLY = () => window.FAV_RELAY;            // Profile relay: profiles take turns joining, then each Page posts (admin/relay.js)
@@ -1060,7 +1061,7 @@
 
   function render() {
     if (!S) return;
-    const body = tab === "facebook" ? renderFacebook() : tab === "instagram" ? (IG() ? IG().renderTab() : "") : tab === "now" ? renderNow() : tab === "social" ? (SOC() ? SOC().renderTab() : "") : tab === "ttcap" ? (FX() ? FX().renderTab() : TTC() ? TTC().renderCard() : "") : tab === "videos" ? (VID() ? VID().renderTab() : "") : tab === "engage" ? (PRO() ? PRO().renderCard() : "") + (ENG() ? ENG().renderTab() : "") : tab === "market" ? (MK() ? MK().renderTab() : "") : tab === "boost" ? (BST() ? BST().renderTab() : "") : renderToday();
+    const body = tab === "facebook" ? renderFacebook() : tab === "instagram" ? (IG() ? IG().renderTab() : "") : tab === "now" ? renderNow() : tab === "social" ? (SOC() ? SOC().renderTab() : "") : tab === "ttcap" ? (FX() ? FX().renderTab() : TTC() ? TTC().renderCard() : "") : tab === "videos" ? (VID() ? VID().renderTab() : "") : tab === "engage" ? (PRO() ? PRO().renderCard() : "") + (VIRAL() ? VIRAL().renderCard() : "") + (ENG() ? ENG().renderTab() : "") : tab === "market" ? (MK() ? MK().renderTab() : "") : tab === "boost" ? (BST() ? BST().renderTab() : "") : renderToday();
     $("#fa-body").innerHTML = `<nav class="fa-tabs" role="tablist">${TABS.map(([k, t]) => `<button type="button" role="tab" aria-selected="${tab === k}" data-fa-tab="${k}">${t}</button>`).join("")}</nav>` + body;
   }
 
@@ -1189,7 +1190,7 @@
     $("#top-actions").hidden = false;
     window.scrollTo(0, 0);
     if (location.hash !== "#fbauto") history.replaceState(null, "", "#fbauto");
-    if (!S || (IG() && !IG().state()) || (SOC() && !SOC().state()) || (VID() && !VID().state()) || (ENG() && !ENG().state()) || (MK() && !MK().state())) { $("#fa-body").innerHTML = `<p class="muted">Loading…</p>`; await Promise.all([load(), IG() ? IG().load() : null, SOC() ? SOC().load() : null, VID() ? VID().load().catch(() => null) : null, ENG() ? ENG().load().catch(() => null) : null, MK() ? MK().load().catch(() => null) : null, PRO() ? PRO().load().catch(() => null) : null, TTC() ? TTC().load().catch(() => null) : null, FX() ? FX().load().catch(() => null) : null, BST() ? BST().load().catch(() => null) : null, STAMP() ? STAMP().load().catch(() => null) : null, window.FAV_BRANDS ? window.FAV_BRANDS.load().catch(() => null) : null, window.FAV_CAPTIONS && window.FAV_CAPTIONS.loadTrends ? window.FAV_CAPTIONS.loadTrends().catch(() => null) : null]).catch(err => A.toast(A.friendly(err), true)); }
+    if (!S || (IG() && !IG().state()) || (SOC() && !SOC().state()) || (VID() && !VID().state()) || (ENG() && !ENG().state()) || (MK() && !MK().state())) { $("#fa-body").innerHTML = `<p class="muted">Loading…</p>`; await Promise.all([load(), IG() ? IG().load() : null, SOC() ? SOC().load() : null, VID() ? VID().load().catch(() => null) : null, ENG() ? ENG().load().catch(() => null) : null, MK() ? MK().load().catch(() => null) : null, PRO() ? PRO().load().catch(() => null) : null, VIRAL() ? VIRAL().load().catch(() => null) : null, TTC() ? TTC().load().catch(() => null) : null, FX() ? FX().load().catch(() => null) : null, BST() ? BST().load().catch(() => null) : null, STAMP() ? STAMP().load().catch(() => null) : null, window.FAV_BRANDS ? window.FAV_BRANDS.load().catch(() => null) : null, window.FAV_CAPTIONS && window.FAV_CAPTIONS.loadTrends ? window.FAV_CAPTIONS.loadTrends().catch(() => null) : null]).catch(err => A.toast(A.friendly(err), true)); }
     render();
   }
   document.addEventListener("click", e => {
@@ -1204,7 +1205,7 @@
   const wait = setInterval(async () => {
     if (!A.signedIn() || !A.products().length) return;
     clearInterval(wait);
-    try { await Promise.all([load(), IG() ? IG().load() : null, SOC() ? SOC().load() : null, VID() ? VID().load().catch(() => null) : null, ENG() ? ENG().load().catch(() => null) : null, MK() ? MK().load().catch(() => null) : null, PRO() ? PRO().load().catch(() => null) : null, TTC() ? TTC().load().catch(() => null) : null, FX() ? FX().load().catch(() => null) : null, BST() ? BST().load().catch(() => null) : null, STAMP() ? STAMP().load().catch(() => null) : null, window.FAV_CAPTIONS && window.FAV_CAPTIONS.loadTrends ? window.FAV_CAPTIONS.loadTrends().catch(() => null) : null]); } catch (err) { return; }
+    try { await Promise.all([load(), IG() ? IG().load() : null, SOC() ? SOC().load() : null, VID() ? VID().load().catch(() => null) : null, ENG() ? ENG().load().catch(() => null) : null, MK() ? MK().load().catch(() => null) : null, PRO() ? PRO().load().catch(() => null) : null, VIRAL() ? VIRAL().load().catch(() => null) : null, TTC() ? TTC().load().catch(() => null) : null, FX() ? FX().load().catch(() => null) : null, BST() ? BST().load().catch(() => null) : null, STAMP() ? STAMP().load().catch(() => null) : null, window.FAV_CAPTIONS && window.FAV_CAPTIONS.loadTrends ? window.FAV_CAPTIONS.loadTrends().catch(() => null) : null]); } catch (err) { return; }
     updateBadge();
     const m = hash.match(/^#favauto-done=(.+)$/);
     if (m) {

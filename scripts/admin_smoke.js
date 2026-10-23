@@ -17,7 +17,7 @@ try { ({ chromium } = require("playwright")); } catch (e) {
   }
 }
 const ROOT = path.resolve(__dirname, "..") + "/";
-const SCRIPTS = ["admin/captions.js", "admin/igauto.js", "admin/ttshop.js", "admin/socauto.js", "admin/vidauto.js", "admin/engage.js", "admin/mkauto.js", "admin/profiles.js", "admin/ttcaptions.js", "admin/boost.js", "admin/fixall.js", "admin/brands.js", "admin/aiplan.js", "admin/brandstamp.js", "admin/relay.js", "admin/fbauto.js"];
+const SCRIPTS = ["admin/captions.js", "admin/igauto.js", "admin/ttshop.js", "admin/socauto.js", "admin/vidauto.js", "admin/engage.js", "admin/mkauto.js", "admin/profiles.js", "admin/viral.js", "admin/ttcaptions.js", "admin/boost.js", "admin/fixall.js", "admin/brands.js", "admin/aiplan.js", "admin/brandstamp.js", "admin/relay.js", "admin/fbauto.js"];
 const MIN_TEXT = 150; // a tab with less text than this counts as blank
 
 const files = {};
@@ -167,6 +167,28 @@ async function autopilot(browser, day) {
   const okPlan = (i, page, brand, groups, stampDir) => pl[i] && pl[i].page === page && !pl[i].skip && pl[i].q.map(x => x.g).join() === groups && pl[i].q.every(x => x.as === page && x.brand === brand && (x.img.startsWith(stampDir) || (brand === "fa-vision" && /ads\//.test(x.img))));
   if (!okPlan(0, "F.A Vision Enterprise", "fa-vision", "g1,g2", "assets/images/stamped/fa-vision/") || !okPlan(1, "Fa Vision Furnitures", "fa-vision", "g2,g3", "assets/images/stamped/fa-vision/") || !okPlan(2, "Oteng Furniture", "oteng-furniture", "g4", "assets/images/stamped/oteng-furniture/") || !okPlan(3, "Agoodmann Ventures", "agoodmann-ventures", "g5", "assets/images/stamped/agoodmann-ventures/"))
     problems.push("Profile relay posting plans wrong (own groups, as each Page, its own stamped picture): " + JSON.stringify(pl));
+  // Go-viral settings card (admin/viral.js) on the Engagement tab: live accounts only, ticks saved, shadow check manual.
+  const vs = await page.evaluate(async () => {
+    const wait = ms => new Promise(r => setTimeout(r, ms));
+    try { localStorage.removeItem("fa-viral-acct"); } catch (e) {}
+    window.__files["data/viral-settings.json"] = { checked: { "fa-vision:ig:hq": "2026-01-01" }, shadow: {} };
+    await window.FAV_BRANDS.load(true); await window.FAV_VIRAL.load(true);
+    window.FAV_FBAUTO._test.setTab("engage"); await wait(150);
+    const card = document.querySelector("#vs-card"); if (!card) return { card: false };
+    const out = { card: true, live: card.querySelectorAll("[data-vs-acct]").length, notYet: ((card.querySelector(".vs-notyet") || {}).innerText || "").split(" · ").length,
+      rows: card.querySelectorAll(".vs-row").length, badge: !!card.querySelector("#vs-badge"), stale: /check again/.test(card.innerText), apps: card.querySelectorAll(".vs-row .pill.est").length };
+    const box = card.querySelector('[data-vs-tick="fa-vision:ig:reshare"]'); box.checked = true; box.dispatchEvent(new Event("change", { bubbles: true })); await wait(150);
+    out.saved = !!(window.__files["data/viral-settings.json"].checked || {})["fa-vision:ig:reshare"];
+    out.bar = (document.querySelector("#vs-card .st-progress span") || {}).innerText || "";
+    document.querySelector('#vs-card [data-vs-shadow="ok"]').click(); await wait(150);
+    const sh = (window.__files["data/viral-settings.json"].shadow || {})["fa-vision:ig"];
+    out.shadow = !!(sh && sh.ok) && !!window.__files["data/viral-settings.json"].checked["fa-vision:ig:status"];
+    document.querySelector('#vs-card [data-vs-acct="fa-vision:fb"]').click(); await wait(150);
+    out.fbRows = document.querySelectorAll("#vs-card .vs-row").length;
+    return out;
+  });
+  if (!vs.card || vs.live !== 5 || vs.notYet !== 5 || vs.rows !== 7 || !vs.badge || !vs.stale || vs.apps !== 1 || !vs.saved || !/^2 of 7 done/.test(vs.bar) || !vs.shadow || vs.fbRows !== 5)
+    problems.push("Go-viral settings card: expected 5 live accounts (1 Instagram + 4 Facebook Pages), 5 not created yet, 7 Instagram rows (1 app-only), reminder badge, old tick flagged, tick + manual shadow check saved, 5 Facebook rows: " + JSON.stringify(vs));
   const desk = hrJobs.find(j => j.kind === "post"), hx = hrJobs.find(j => j.kind === "x");
   if (!desk || desk.n < 1 || desk.n > 10 || desk.ps.join() !== "FAV-014") problems.push("desk:FAV-014:10 didn't post the desk into ≤10 groups: " + JSON.stringify(hrJobs));
   if (!hx || hx.n !== 2) problems.push("hr:x:2 didn't build 2 X posts: " + JSON.stringify(hrJobs));

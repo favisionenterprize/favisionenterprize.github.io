@@ -801,3 +801,15 @@ input.now-num { width: 4.5em !important; display: inline-block; padding: 2px 6px
 .rl-warn { margin: 4px 0 0; padding: 8px 10px; border-radius: 8px; background: #fff6e0; border: 1px solid #f0d58c; font-size: 13px; }
 .rl-qa li { flex-wrap: wrap; }
 .rl-qa li small { max-width: 100%; text-align: left; white-space: normal; }
+/* Go-viral settings card (admin/viral.js) */
+#vs-card { margin-top: 16px; }
+.vs-accts { margin: 10px 0 12px; }
+.vs-accts button small { color: inherit; opacity: .75; }
+.vs-accts button:disabled { opacity: .5; cursor: not-allowed; }
+.vs-list { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 10px; }
+.vs-row { border: 1px solid var(--line); border-left: 4px solid var(--brand-red); border-radius: 10px; padding: 10px 12px; }
+.vs-row.done { border-left-color: var(--ok); }
+.vs-row p { margin: 6px 0; overflow-wrap: anywhere; }
+.vs-row .fa-actions { flex-wrap: wrap; align-items: center; }
+.vs-shadow { margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--line); }
+.vs-shadow input[type=text] { flex: 1 1 200px; min-width: 0; }
