@@ -360,8 +360,8 @@
  },
  "x": {
   "scan": {
-   "d": "2026-10-18",
-   "t": "2026-10-18T04:22:49.038Z",
+   "d": "2026-10-23",
+   "t": "2026-10-23T03:59:29.423Z",
    "n": 2,
    "posts": [
     {
@@ -372,9 +372,9 @@
      "alt": ""
     },
     {
-     "id": "2111667365264146562",
-     "url": "https://x.com/FaVisionEnt/status/2111667365264146562",
-     "text": "",
+     "id": "2112946125451980936",
+     "url": "https://x.com/FaVisionEnt/status/2112946125451980936",
+     "text": "Student Desk Chair Set: GH₵ 650, price negotiable a set · GH₵640 each from 50 sets. WhatsApp 057 264 6176 to order https:// favisionenterprize.github.io/p/FAV-014.html #GhanaiansAbroad #OdorkorAccra Where are you seeing this video from? Reply, then like, share & follow us!",
      "kind": "post",
      "alt": ""
     }
@@ -738,6 +738,13 @@
    "tried": 1,
    "ok": 0,
    "skip": 0,
+   "v": "2026-10-15.4"
+  },
+  {
+   "d": "2026-10-23",
+   "kind": "scan",
+   "net": "x",
+   "n": 2,
    "v": "2026-10-15.4"
   }
  ]
