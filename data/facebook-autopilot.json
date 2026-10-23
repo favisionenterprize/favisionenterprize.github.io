@@ -129,7 +129,8 @@
  ],
  "checks": {
   "grow": "2026-10-22",
-  "sync": "2026-10-23"
+  "sync": "2026-10-23",
+  "declines": "2026-10-23"
  },
  "rounds": {
   "FAV-014": "2026-10-23T03:43:02.736Z"
@@ -149,6 +150,13 @@
    "tried": 0,
    "ok": 0,
    "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile in Facebook, then tap Renew again."
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T03:43:36.722Z",
+   "kind": "declines",
+   "found": 0,
+   "left": 0
   }
  ],
  "renewLog": []
