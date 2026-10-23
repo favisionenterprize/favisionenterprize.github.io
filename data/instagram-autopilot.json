@@ -1599,6 +1599,77 @@
    "ok": false,
    "now": true,
    "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T03:45:32.368Z",
+   "k": "ad:fav-014",
+   "p": "FAV-014",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T03:47:38.428Z",
+   "k": "card:FAV-021",
+   "p": "FAV-021",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T03:48:04.686Z",
+   "k": "box:FAV-010",
+   "p": "FAV-010",
+   "ok": false,
+   "why": "The Create post window didn't open"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T03:50:13.441Z",
+   "k": "presence:fav-003",
+   "p": "FAV-003",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T03:52:23.097Z",
+   "k": "box:FAV-017",
+   "p": "FAV-017",
+   "ok": false,
+   "why": "The Create post window didn't open"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T03:52:49.920Z",
+   "k": "box:FAV-023",
+   "p": "FAV-023",
+   "ok": false,
+   "why": "The Create post window didn't open"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T03:53:14.391Z",
+   "k": "box:FAV-024",
+   "p": "FAV-024",
+   "ok": false,
+   "why": "The Create post window didn't open"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T03:54:48.771Z",
+   "k": "presence:fav-011",
+   "p": "FAV-011",
+   "ok": true
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T03:55:14.354Z",
+   "k": "card:FAV-030",
+   "p": "FAV-030",
+   "ok": false,
+   "why": "The Create post window didn't open"
   }
  ],
  "profile": [
@@ -1708,7 +1779,7 @@
    "d": "2026-10-23",
    "followers": 893,
    "following": 2024,
-   "posts": 330
+   "posts": 329
   }
  ],
  "runs": [
@@ -2056,6 +2127,13 @@
    "kind": "ig",
    "tried": 1,
    "ok": 0
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T03:55:42.299Z",
+   "kind": "ig",
+   "tried": 9,
+   "ok": 1
   }
  ]
 }
