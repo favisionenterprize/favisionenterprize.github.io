@@ -68,6 +68,20 @@
    "members": 121000,
    "source": "autopilot",
    "active": true
+  },
+  {
+   "id": "ghanasoftwareservices",
+   "name": "Ghana Software Developers (Showcase & Services)",
+   "url": "https://www.facebook.com/groups/ghanasoftwareservices/",
+   "active": true,
+   "added": "2026-10-23"
+  },
+  {
+   "id": "2198886853692812",
+   "name": "COLSAR AFRICA (Quality Northern Kente & Smock)",
+   "url": "https://www.facebook.com/groups/2198886853692812/",
+   "active": true,
+   "added": "2026-10-23"
   }
  ],
  "posts": [],
@@ -114,7 +128,8 @@
   }
  ],
  "checks": {
-  "grow": "2026-10-22"
+  "grow": "2026-10-22",
+  "sync": "2026-10-23"
  },
  "rounds": {},
  "runs": [
