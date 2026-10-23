@@ -487,6 +487,96 @@
    "g": "Houseofcomedyandjokes",
    "ok": true,
    "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T11:13:43.311Z",
+   "p": "FAV-014",
+   "g": "351437262561935",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T11:18:03.123Z",
+   "p": "FAV-014",
+   "g": "516679296673025",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T11:21:52.092Z",
+   "p": "FAV-014",
+   "g": "1166899307145476",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T11:25:12.500Z",
+   "p": "FAV-014",
+   "g": "623981551575192",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T11:28:33.527Z",
+   "p": "FAV-014",
+   "g": "403028860570846",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T11:29:16.787Z",
+   "p": "FAV-014",
+   "g": "444635012242059",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T11:32:12.195Z",
+   "p": "FAV-014",
+   "g": "663709417564481",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T11:33:45.694Z",
+   "p": "FAV-014",
+   "g": "264559953895459",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T11:35:36.686Z",
+   "p": "FAV-014",
+   "g": "717976401601485",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T11:38:22.647Z",
+   "p": "FAV-014",
+   "g": "328463177191460",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
   }
  ],
  "resets": {},
@@ -780,6 +870,13 @@
    "kind": "post",
    "tried": 20,
    "ok": 14
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T11:39:35.360Z",
+   "kind": "post",
+   "tried": 10,
+   "ok": 8
   }
  ],
  "renewLog": []
