@@ -1249,23 +1249,28 @@ function sessionAlert_(data) {
     const groups = (data.groups || []).slice(0, 60);
     const mb = (n) => (n >= 1e6 ? (n / 1e6).toFixed(1) + 'M' : n >= 1e3 ? Math.round(n / 1e3) + 'K' : String(n || '?'));
     const milestone = data.kind === 'milestone';
+    const relayDone = data.kind === 'relay_done';   // Profile relay finished (admin/relay.js): joins per profile, posts per Page
     if (milestone) {
       const k = 'ALERT20_' + day;
       if (authProps_().getProperty(k)) return json_({ ok: true, to: reportEmail_(), already: true });
       authProps_().setProperty(k, '1');
     }
-    const subject = milestone
+    const subject = relayDone
+      ? `FA Vision: Profile relay done — ${h(t.joined_today || 0)} groups joined (${day})`
+      : milestone
       ? `🎉 ${t.joined_today || joins.length} new Facebook groups added today (${day})`
       : `FA Vision: posting session starting — ${groups.length} group post${groups.length === 1 ? '' : 's'} (${day})`;
     const list = (rows) => rows.length ? '<ul>' + rows.join('') + '</ul>' : '<p style="color:#777">None.</p>';
     const statusText = { joined: 'joined', pending: 'waiting for the group admin', questions: 'answer the group\'s questions on Facebook', failed: 'failed' };
     const html = `<div style="font-family:Arial,sans-serif;max-width:620px">` +
-      (milestone
+      (relayDone
+        ? `<h2 style="margin:0 0 8px">Profile relay done</h2><p>${h(t.joined_today || 0)} of ${h(t.target)} groups joined. Posts per Page:</p>${list(groups.map((g) => `<li>${h(g)}</li>`))}`
+        : milestone
         ? `<h2 style="margin:0 0 8px">🎉 ${h(t.joined_today)} of ${h(t.target)} new groups added today</h2>`
         : `<h2 style="margin:0 0 8px">Posting session starting now</h2><p>Today's listing: <b>${h(data.listing || '—')}</b>, into ${groups.length} group${groups.length === 1 ? '' : 's'}.</p>`) +
       `<p>Groups on the list: <b>${h(t.active)}</b> active · ${h(t.pending || 0)} waiting for admins · ${h(t.removed || 0)} removed for declining our posts. New today: <b>${h(t.joined_today || 0)}/${h(t.target)}</b>.</p>` +
-      (milestone ? '' : `<h3>Posting into</h3>${list(groups.map((g) => `<li>${h(g)}</li>`))}`) +
-      `<h3>New groups today</h3>${list(joins.map((j) => `<li>${j.url ? `<a href="${h(j.url)}">${h(j.name)}</a>` : h(j.name)} — ${mb(j.members)} members · ${h(statusText[j.status] || j.status)}</li>`))}` +
+      (milestone || relayDone ? '' : `<h3>Posting into</h3>${list(groups.map((g) => `<li>${h(g)}</li>`))}`) +
+      `<h3>${relayDone ? 'Groups joined in this run' : 'New groups today'}</h3>${list(joins.map((j) => `<li>${j.url ? `<a href="${h(j.url)}">${h(j.name)}</a>` : h(j.name)} — ${mb(j.members)} members · ${h(statusText[j.status] || j.status)}</li>`))}` +
       `<h3>Removed today (declined our posts)</h3>${list(removed.map((r) => `<li>${h(r.name)} — ${h(r.why)} · ${r.left ? 'left on Facebook' : 'still to leave on Facebook'}</li>`))}` +
       `<p style="color:#777;font-size:12px">Sent by your FA Vision admin (Social autopilot). The full day's report follows when the run ends.</p></div>`;
     MailApp.sendEmail({ to: reportEmail_(), subject, htmlBody: html, body: subject, name: BUSINESS.name });

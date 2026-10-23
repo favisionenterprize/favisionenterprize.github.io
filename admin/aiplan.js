@@ -67,7 +67,7 @@
   function ruleFor(key) {
     if (!P) return null;
     let best = null, len = -1;
-    for (const r of P.rules) for (const s of r.steps) {
+    for (const r of P.rules) if (!r.enforces) for (const s of r.steps) {   // P1/P2 are posting rules, not gates (see on())
       const hit = s.endsWith(":") ? key.startsWith(s) : key === s;
       if (hit && s.length > len) { best = r; len = s.length; }
     }
@@ -104,6 +104,9 @@
     return true;
   }
   const paused = () => !!(P && P.paused);
+  // Posting rules (P1 brand stamp, P2 join questions): on unless Alexander retires or blocks them. They apply to the
+  // steps they list; switching one off switches that behaviour off, it never stops the posting itself.
+  const on = id => { const r = P && P.rules.find(x => x.id === id); return !r || (r.status === "approved" && r.setting !== "block" && r.line !== "human"); };
 
   // ---------------------------------------------------------------- hourly posting
   // While the admin is open (PC on), at the start of each hour between start_hour and end_hour (Ghana time = GMT)
@@ -174,6 +177,7 @@
 .ap-ctl select{font:inherit;font-size:13px;padding:5px 6px;border:1px solid #dadce0;border-radius:8px;background:#fff;width:auto;max-width:100%;flex:0 1 auto}
 .ap-ctl select.s-approved{background:#e3f4ea;border-color:#9fd4b2}.ap-ctl select.s-retired{background:#fdecea;border-color:#f0b3ac}.ap-ctl select.s-proposed{background:#fff6e0;border-color:#f0d58c}
 .ap-steps{font-size:12px;color:#5f6368}.ap-conf{display:flex;align-items:center;gap:6px;font-size:14px}.ap-hr input[type=number],.ap-hr input[name=desk_product]{font:inherit;font-size:13px;padding:4px 6px;border:1px solid #dadce0;border-radius:6px}.ap-bar{position:sticky;bottom:0;display:flex;gap:10px;justify-content:flex-end;padding:10px;background:rgba(255,255,255,.95);border-top:1px solid #e3e7ee}
+.ap-prules{border-color:#bcd3f2}.ap-prule{display:grid;grid-template-columns:44px 1fr;gap:10px;padding:10px 14px;border-top:1px solid #f1f3f6}.ap-prule:first-of-type{border-top:0}.ap-pill.ok{background:#e3f4ea;color:#1b6b3a}.ap-pill.no{background:#fdecea;color:#b3261e}.ap-rule-on{color:#1b6b3a}
 .ap-log{font-size:12px;color:#3c4043;max-height:220px;overflow:auto;margin:0;padding-left:18px}
 @media (max-width:600px){.ap-rule{grid-template-columns:1fr}.ap-id{padding:0}}`;
     document.head.appendChild(st);
@@ -213,6 +217,7 @@
         <button class="btn ${P.paused ? "btn-sell" : "btn-ghost"}" data-ap-pause>${P.paused ? "▶ Resume all" : "⏸ Pause All"}</button>
       </div>
       <div class="ap-sum"><span class="ap-pill">${P.rules.length} rules</span><span class="ap-pill">✓ ${count("approved")} approved</span><span class="ap-pill">● ${count("proposed")} proposed</span><span class="ap-pill">✕ ${count("retired")} retired</span><span class="ap-pill">Final say: ${esc(P.owner || "Alexander Awuku")}</span>${P.updated ? `<span class="ap-pill">Saved ${esc(P.updated)}</span>` : ""}</div>
+      ${postingRules()}
       ${hourlyCard()}
       ${depts.map(d => {
         const rs = P.rules.filter(r => r.dept === d);
@@ -225,7 +230,7 @@
                 <select data-f="line" aria-label="Line">${opts(LINES, r.line)}</select>
                 <select data-f="setting" aria-label="Action setting">${opts(SETTINGS, r.setting)}</select>
                 <select data-f="status" class="s-${esc(r.status)}" aria-label="Status">${opts(STATUS, r.status)}</select>
-                <span class="ap-steps">${r.steps.length ? "Controls: " + esc(r.steps.join(", ")) : "Not automated yet"}</span>
+                <span class="ap-steps">${r.enforces ? `<b class="ap-rule-on">${r.status === "approved" && r.setting !== "block" ? "✓ On for" : "✕ Off for"}</b> every posting and joining step: ${esc(r.steps.join(", "))}` : r.steps.length ? "Controls: " + esc(r.steps.join(", ")) : "Not automated yet"}</span>
               </div></div>
           </div>`).join("")}</section>`;
       }).join("")}
@@ -240,6 +245,11 @@
         <button class="btn btn-sell" data-ap-save${dirty ? "" : " disabled"}>Save my rules</button></div>`;
   }
 
+  function postingRules() {
+    const rs = P.rules.filter(r => r.enforces);
+    if (!rs.length) return "";
+    return `<section class="ap-dept ap-prules"><h2>📌 Posting rules (apply to every post and join)</h2>${rs.map(r => `<div class="ap-prule"><span class="ap-id">${esc(r.id)}</span><div><b>${esc(String(r.task).split(":")[0])}</b> <span class="ap-pill ${on(r.id) ? "ok" : "no"}">${on(r.id) ? "✓ On" : "✕ Off"}</span><br><span class="muted">Owner: ${esc(r.owner || P.owner || "Alexander Awuku")} · change its Status below to switch it off.</span></div></div>`).join("")}</section>`;
+  }
   function hourlyCard() {
     const h = P.hourly, last = lsGet(), notif = window.Notification ? Notification.permission : "unsupported";
     const n = (name, v, max) => `<input type="number" name="${name}" min="0" max="${max}" value="${esc(v)}" style="width:64px">`;
@@ -326,5 +336,5 @@
     else if (tries < 40) setTimeout(() => warm(tries + 1), 500);
   })(0);
 
-  window.FAV_AIPLAN = { open: show, load, gate, decide, paused, render, runHour, _test: { set: p => { P = normalise(p); asked = {}; }, state: () => P, hourlySteps, hourlyTick } };
+  window.FAV_AIPLAN = { open: show, load, gate, decide, paused, on, render, runHour, _test: { set: p => { P = normalise(p); asked = {}; }, state: () => P, hourlySteps, hourlyTick } };
 })();

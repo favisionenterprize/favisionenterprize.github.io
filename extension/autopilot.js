@@ -69,7 +69,8 @@
   }
 
   async function finish(stopped) {
-    const out = { kind: job.kind, id: job.id, res: job.res, stopped: stopped || null, switched: job.switched || null, actor: job.actor || null, then: job.then || null, groups: job.groups || null, dry: !!job.dry, snapshot: job.snapshot || null, mode: job.mode || null };
+    const out = { kind: job.kind, id: job.id, res: job.res, stopped: stopped || null, switched: job.switched || null, actor: job.actor || null, then: job.then || null, groups: job.groups || null, dry: !!job.dry, snapshot: job.snapshot || null, mode: job.mode || null,
+      ...(job.as ? { as: job.as } : {}), ...(job.rb ? { rb: job.rb } : {}), ...(job.relay ? { relay: true, rb: job.rb || null, dropped: job.dropped || [], turn: job.turn || 0, kwi: job.kwi || {}, skipBy: job.skipBy || {}, home: job.home || null, more: !!job.more } : {}) };
     await bg({ type: "clearJob" });
     location.href = job.back + "#favauto-done=" + encodeURIComponent(JSON.stringify(out));
   }
@@ -101,7 +102,7 @@
     if (job.actor && !job.tried.includes(job.actor)) job.tried.push(job.actor);
     job.navFor = -1;
     await save();
-    box(`No access to post ("${reason}"). Switching to another profile…`, true);
+    box(target ? `Switching to ${target} (${reason})…` : `No access to post ("${reason}"). Switching to another profile…`, !target);
     await sleep(1500);
     location.href = "https://www.facebook.com/";
   }
@@ -164,6 +165,7 @@
   const realLen = t => { const m = String(t || "").replace(/https?:\/\/\S+/g, "").replace(/[#@][\p{L}\p{N}_.]+/gu, "").replace(/\s+/g, " ").trim(); return /^(no description|add (a )?description)\.?$/i.test(m) ? 0 : m.length; };
   const tagged = t => /(^|\s)#[\p{L}\p{N}_]{2,}/u.test(String(t || ""));
   const BLANK = "blank description — not posted";
+  const NOSTAMP = "no brand stamp — not posted";   // rule P1: every picture shows the posting brand's name + logo (admin/brandstamp.js sets it.stamp)
   const visible = el => !!el && el.getClientRects().length > 0;
   const matches = (el, re) => re.test((el.getAttribute("aria-label") || "").trim()) || re.test((el.innerText || "").trim());
   function findBtn(re, root) {
@@ -223,8 +225,238 @@
     } catch (e) { return "first comment not added"; }
   }
 
+  // ------------------------------------------------------------- membership questions (every join path: daily grow + Profile relay)
+  // After "Join", Facebook may open a dialog with the group's questions. answerQuestions() fills it from the
+  // acting profile's own brand data (job.qa[profile name], else job.qa_default; sent by the admin from
+  // data/brands.json + data/business.json): rules boxes ticked, yes/agree/seller options picked, short honest
+  // answers for why/where/how found/follow the rules, phone/email ONLY from the brand's stored public contacts.
+  // Anything asking for passwords, ID numbers, bank/card/MoMo details, payment or inviting friends — or a required
+  // question it can't answer truthfully — cancels that join: { status: "manual", qs: [question] }. Answered and
+  // submitted → { status: "pending", qa: [{ q, a }] } (counts once the group's admin accepts). dry (Test) fills
+  // the dialog but never presses Submit → { status: "test", qa }. Never clicks anything outside the dialog.
+  const FORBID_Q = /password|passcode|\bpin\b|\botp\b|verification code|\bid (number|no|card)|ghana ?card|national id|passport|social security|\bssn\b|\bbank\b|account (number|no)|card (number|details|no)|\bcvv\b|\bmomo\b|mobile money|payment|\bpay\b|\bfee\b|send money|invite|add (\d+ )?friends|tag (\d+ )?friends|refer (\d+ )?(friends|people)/i;
+  const pickOne = a => a[Math.floor(Math.random() * a.length)];
+  // The acting profile's answers; actor not known yet (no switch in this run) → the main profile's (F.A Vision).
+  function qaProfile() { const all = job.qa || {}; const k = job.actor && Object.keys(all).find(n => sameName(n, job.actor)); return (k && all[k]) || job.qa_default || null; }
+  function answerText(q, b) {
+    const ql = String(q || "").toLowerCase();
+    if (FORBID_Q.test(ql)) return { manual: "asks for private, payment or invite details" };
+    if (/e-?mail/.test(ql)) return b && b.email ? { a: b.email } : { manual: "asks for an email (none stored for this brand)" };
+    if (/phone|whatsapp|mobile|contact|number/.test(ql)) return b && b.wa ? { a: b.wa } : { manual: "asks for a phone number (none stored for this brand)" };
+    if (/how did you (find|hear|know|come|get)|where did you (find|hear|see)|who (invited|referred|added)|referr?ed|find (this|the|our) group|hear about/.test(ql))
+      return { a: /who/.test(ql) ? "No one, I found the group on Facebook search." : pickOne(["Facebook search", "Through Facebook search.", "I found it on Facebook search."]) };
+    if (/rule|agree|spam|respect|abide|comply|guideline|promise|will you|do you accept/.test(ql)) return { a: pickOne(["Yes, I will follow the group rules.", "Yes. I'll follow the rules and won't spam.", "Yes, I agree to follow the group rules."]) };
+    if (!b) return null;
+    if (/buyer|seller/.test(ql)) return { a: pickOne([`Seller (and buyer too): ${b.name} sells ${b.what}.`, `Both. ${b.name} sells ${b.what} and buys from members too.`]) };
+    if (/where|location|locat|city|town|country|based|\bfrom\b|live|reside|region|area/.test(ql)) return { a: b.place };
+    if (/name/.test(ql) && /business|page|shop|company|brand|store/.test(ql)) return { a: b.name };
+    if (/why|join|reason|purpose|interest|what do you (sell|do|deal)|business|\bbuy|\bsell|intend|plan to|hope|tell us about/.test(ql))
+      return { a: pickOne([`${b.name} sells ${b.what}. We'd like to share genuine deals with members and buy from them too.`, `We sell ${b.what} (${b.name}) and want to share good offers with the group.`, `${b.name} here: we deal in ${b.what} and would love to connect with buyers and sellers in the group.`]) };
+    return null;
+  }
+  async function answerQuestions(dlg, dry) {
+    const b = qaProfile(), qa = [], qs = [];
+    let manual = null;
+    const textOf = el => ((el && (el.innerText || el.textContent)) || "").trim();
+    const firstLine = s => String(s || "").split("\n").map(x => x.trim()).filter(Boolean)[0] || "";
+    function qText(el, skipTexts) {
+      const al = el.getAttribute("aria-label");
+      if (al && al.length > 3 && !/^(write an answer|answer|type here|write something)/i.test(al)) return al.trim();
+      const lb = el.getAttribute("aria-labelledby");
+      if (lb) { const t = lb.split(/\s+/).map(id => textOf(document.getElementById(id))).join(" ").trim(); if (t) return t; }
+      if (el.id) { const l = dlg.querySelector(`label[for="${CSS.escape(el.id)}"]`); if (l && textOf(l)) return textOf(l); }
+      let c = el;
+      for (let k = 0; k < 6 && c && c !== dlg; k++) {
+        c = c.parentElement;
+        let rest = textOf(c);
+        for (const s of (skipTexts || []).concat(textOf(el))) if (s) rest = rest.split(s).join("\n");
+        const line = firstLine(rest);
+        if (line.length > 3) return line;
+      }
+      return "";
+    }
+    const required = (el, q) => el.getAttribute("aria-required") === "true" || el.required || /\*|\brequired\b/i.test(q);
+    const setVal = (el, v) => {
+      el.focus();
+      if (el.isContentEditable) { document.execCommand("selectAll", false, null); document.execCommand("insertText", false, v); return; }
+      const proto = el.tagName === "TEXTAREA" ? HTMLTextAreaElement.prototype : HTMLInputElement.prototype;
+      Object.getOwnPropertyDescriptor(proto, "value").set.call(el, v);
+      el.dispatchEvent(new Event("input", { bubbles: true })); el.dispatchEvent(new Event("change", { bubbles: true }));
+    };
+    const isOn = el => el.getAttribute("aria-checked") === "true" || el.checked === true;
+    if (dlg.querySelector("input[type=password]")) manual = "the dialog asks for a password";
+    // 1. free-text answers
+    const fields = [...dlg.querySelectorAll('textarea, input[type=text], input[type=email], input[type=tel], input:not([type]), [contenteditable=true][role=textbox]')].filter(visible).filter(el => !/search/i.test(el.getAttribute("aria-label") || ""));
+    for (const el of fields) {
+      if (manual) break;
+      const q = qText(el);
+      const r = answerText(q, b);
+      if (r && r.manual) { manual = r.manual; qs.push(q); break; }
+      if (!r) { if (required(el, q)) { manual = "a required question it can't answer truthfully"; qs.push(q); } continue; }
+      setVal(el, r.a); qa.push({ q: q.slice(0, 200), a: r.a });
+      await sleep(rand(500, 1100));
+    }
+    // 2. multiple choice / yes-no: radio groups
+    const radios = [...dlg.querySelectorAll('[role=radio], input[type=radio]')].filter(el => visible(el) || el.type === "radio");
+    const groups = new Map();
+    for (const r of radios) { const g = r.closest("[role=radiogroup]") || (r.name && r.form) || r.parentElement.parentElement; if (!groups.has(g)) groups.set(g, []); groups.get(g).push(r); }
+    for (const [g, opts] of groups) {
+      if (manual) break;
+      if (opts.some(isOn)) continue;
+      const optText = o => (o.getAttribute("aria-label") || textOf(o) || textOf(o.closest("label")) || textOf(o.parentElement)).trim();
+      const texts = opts.map(optText);
+      const q = (g.getAttribute && g.getAttribute("aria-label")) || qText(opts[0], texts) || "";
+      if (FORBID_Q.test(q)) { manual = "asks for private, payment or invite details"; qs.push(q); break; }
+      const good = /\b(yes|i agree|agree|i will|accept|i do|both|seller|business|vendor|follow|sure)\b/i, bad = /\b(no|not|disagree|won'?t|never|decline)\b/i;
+      let i = /buyer|seller/i.test(q) ? texts.findIndex(t => /both/i.test(t)) : -1;
+      if (i < 0 && /buyer|seller/i.test(q)) i = texts.findIndex(t => /seller|business|vendor/i.test(t));
+      if (i < 0) i = texts.findIndex(t => good.test(t) && !bad.test(t));
+      if (i < 0 && b && b.place) { const words = b.place.toLowerCase().split(/[\s,]+/).filter(w => w.length > 3); i = texts.findIndex(t => words.some(w => t.toLowerCase().includes(w))); }
+      if (i < 0) { manual = "a multiple-choice question it can't answer truthfully"; qs.push(q); break; }
+      opts[i].click(); qa.push({ q: q.slice(0, 200), a: texts[i] });
+      await sleep(rand(400, 900));
+    }
+    // 3. checkboxes: rules / terms / "I agree" (other multi-select boxes only when they agree or say seller/business)
+    for (const cb of [...dlg.querySelectorAll('[role=checkbox], input[type=checkbox]')]) {
+      if (manual) break;
+      if (isOn(cb)) continue;
+      const t = (cb.getAttribute("aria-label") || textOf(cb.closest("label")) || textOf(cb) || qText(cb)).trim();
+      if (FORBID_Q.test(t)) continue;
+      if (/agree|rules|terms|i will|accept|confirm|understand|seller|business/i.test(t)) { cb.click(); qa.push({ q: t.slice(0, 200), a: "✓ ticked" }); await sleep(rand(300, 700)); }
+    }
+    const closeDialog = async () => {
+      const close = findBtn(/^close$|^cancel$|^not now$/i, dlg); if (close) close.click(); await sleep(1200);
+      const d2 = [...document.querySelectorAll("[role=dialog]")].filter(visible).pop();
+      const exit = d2 && findBtn(/^(exit|discard|leave|exit without (submitting|answering))$/i, d2); if (exit) exit.click();
+      await sleep(800);
+    };
+    if (manual) { await closeDialog(); return { status: "manual", why: manual, qs: qs.filter(Boolean).map(x => x.slice(0, 200)), qa }; }
+    if (dry) { await sleep(1500); await closeDialog(); return { status: "test", qa, why: "Test only: answers filled, Submit not pressed" }; }
+    const submit = await waitFor(() => { const s = findBtn(/^(submit|send|join group|request to join|done)$/i, dlg); return s && s.getAttribute("aria-disabled") !== "true" ? s : null; }, 6000);
+    if (!submit) { await closeDialog(); return { status: "manual", why: "the Submit button stayed off (a question is still unanswered)", qs: [firstLine(textOf(dlg)).slice(0, 200)], qa }; }
+    submit.click();
+    await sleep(2500);
+    if (document.contains(dlg) && visible(dlg) && findBtn(/^(submit|send)$/i, dlg)) { await closeDialog(); return { status: "manual", why: "Facebook didn't accept the answers", qs: [firstLine(textOf(dlg)).slice(0, 200)], qa }; }
+    return { status: "pending", qa };
+  }
+  // The dialog (if any) after pressing Join → status for that join.
+  async function afterJoin(row) {
+    const dlg = [...document.querySelectorAll("[role=dialog]")].find(visible);
+    if (dlg && /question|answer|rules|agree/i.test(dlg.innerText || "")) {
+      if (job.qa_on === false) {                     // rule P2 switched off in 🧭 AI Plan: leave the questions for Alexander
+        const close = findBtn(/^close$|^cancel$|^not now$/i, dlg); if (close) close.click(); await sleep(1200);
+        const exit = findBtn(/^(exit|leave|discard)$/i); if (exit) exit.click();
+        return { status: "questions", why: "Join request needs answers (automatic answers are off in AI Plan)" };
+      }
+      return answerQuestions(dlg, !!job.dry);
+    }
+    const t = (row.innerText || "");
+    return { status: /cancel request|pending|requested/i.test(t) ? "pending" : /joined|visit|view group|member/i.test(t) ? "joined" : "pending" };
+  }
+
   await sleep(1500);
   box("Starting…");
+
+  // ============================================================= Profile relay, join phase (job.kind "grow", job.relay)
+  // The ticked profiles / Pages take turns: profile A joins one group, switch, profile B joins one, … until
+  // job.limit groups are joined (pending requests don't count) or job.batch attempts are made (then it hands
+  // back with more: true so the admin saves the log and starts the next batch). A profile Facebook limits
+  // ("can't join right now", "temporarily blocked", …) is dropped for the day; security checks stop the run.
+  const ACCOUNT = /suspicious activity|confirm your identity|security check|account (has been |is )?(disabled|locked|suspended)/i;
+  const JOINLIMIT = /can('|’)t join|joined too many|join.*limit|try again later|temporarily|restricted|we limit how often|you can('|’)t use this feature/i;
+  if (job.kind === "grow" && job.relay) {
+    job.dropped = job.dropped || []; job.turn = job.turn || 0; job.skipBy = job.skipBy || {}; job.kwi = job.kwi || {}; job.step = job.step || 0;
+    const joined = () => job.res.filter(r => r.status === "joined").length;
+    const tries = () => job.res.filter(r => r.status !== "failed").length;
+    const alive = () => (job.profiles || []).filter(p => !job.dropped.some(d => sameName(d, p)));
+    const whoNow = () => { const a = alive(); return a.length ? a[job.turn % a.length] : null; };
+    const kwOf = who => job.kwi[who] || 0;
+    const end = async (why, final) => {
+      if (final && job.home && job.actor && !sameName(job.actor, job.home) && !job.returned) { job.returned = true; job.endWhy = why || null; await save(); return startSwitch("back to your main profile", job.home); }
+      box(`Relay: ${joined()} joined. Going back to your admin…`); await sleep(1500); return finish(why || job.endWhy || null);
+    };
+    const drop = async (who, why) => {
+      job.dropped.push(who);
+      job.res.push({ g: null, name: "", status: "failed", as: who, drop: true, why: `${who} dropped for today: ${why}`, t: new Date().toISOString() });
+      await save();
+      box(`${who} can't join more groups today ("${why}"). Carrying on with the others…`, true); await sleep(2500);
+    };
+    // One page load per step: job.step counts the steps, job.navStep is the step the current page was opened for.
+    const go = async () => {
+      job.step++; job.navFor = -1; await save();
+      const nw = whoNow();
+      if (nw && !sameName(nw, job.actor)) return startSwitch(`${nw}'s turn`, nw);
+      location.reload();
+    };
+    if (job.sw) {
+      const target = job.sw.target;
+      const r = await doSwitch();
+      if (job.returned) return finish(job.endWhy || null);
+      if (!r.ok) { await drop(target, `couldn't switch to it (${r.why})`); job.step++; await save(); }
+    }
+    if (!alive().length) return end("Every profile was limited by Facebook today (or none could be switched to). Try again tomorrow, or press Skip to posting.", true);
+    if (joined() >= job.limit) return end(null, true);
+    if (tries() >= (job.batch || 10)) { job.more = !job.dry; await save(); return end(null, !!job.dry); }
+    const who = whoNow();
+    if (kwOf(who) >= job.q.length) { await drop(who, "no more big groups found for it with your search words"); return go(); }
+    if (!sameName(who, job.actor)) return startSwitch(`${who}'s turn`, who);
+    const it = job.q[kwOf(who)];
+    if (job.navStep !== job.step) { job.navStep = job.step; await save(); location.href = it.url; return; }
+    await sleep(rand(3500, 5500));
+    let w = warning();
+    if (w && ACCOUNT.test(w)) return finish(`Facebook showed "${w}". The relay stopped.`);
+    if (w) { await drop(who, w); return go(); }
+    const skip = new Set(job.skip || []);           // every profile joins DIFFERENT groups (40 distinct new groups in all)
+    const deny = job.deny ? new RegExp(job.deny, "i") : null;
+    const num = s => { const m = String(s).match(/([\d.,]+)\s*([KkMm])?\s*members/); if (!m) return 0; const n = parseFloat(m[1].replace(/,/g, "")); return Math.round(n * ({ k: 1e3, m: 1e6 }[(m[2] || "").toLowerCase()] || 1)); };
+    const local = new RegExp(job.local || "ghana|accra|kumasi|tema|kasoa|odorkor|weija|madina|legon|ashaiman|takoradi|\\bgh\\b", "i");
+    const fits = r => r.members >= (job.minGlobal || job.min) || (r.members >= job.min && local.test(r.name));
+    box(`Relay · ${who}: searching "${it.kw}"… ${joined()}/${job.limit} joined`);
+    for (let t = 0; t < 4 && !stopAsked; t++) { window.scrollBy(0, 1500); await sleep(1500); }
+    window.scrollTo(0, 0); await sleep(800);
+    const rows = [], seen = new Set();
+    for (const b of document.querySelectorAll('[role=button],button')) {
+      if (!visible(b) || !/^join( group)?$/i.test((b.innerText || b.getAttribute("aria-label") || "").trim())) continue;
+      let c = b;
+      for (let k = 0; k < 12 && c; k++) { c = c.parentElement; if (c && /members/i.test(c.innerText || "") && c.querySelector('a[href*="/groups/"]')) break; }
+      const a = c && c.querySelector('a[href*="/groups/"]'), mm = a && a.href.match(/\/groups\/([^/?#]+)/);
+      if (!mm || seen.has(mm[1])) continue;
+      seen.add(mm[1]);
+      rows.push({ id: mm[1], name: (a.innerText || "").trim().split("\n")[0], members: num(c.innerText), btn: b, row: c });
+    }
+    const testQs = job.dry && job.test_join;      // Test: open ONE private group's questions (filled, never submitted)
+    const r = rows.filter(x => x.name && fits(x) && !skip.has(x.id) && !(deny && deny.test(x.name)) && (!testQs || /private/i.test(x.row.innerText || ""))).sort((a, b) => b.members - a.members)[0];
+    if (!r) { job.kwi[who] = kwOf(who) + 1; await save(); return go(); }   // nothing left here for this profile: its next search word
+    job.skip = (job.skip || []).concat(r.id); job.skipBy[who] = (job.skipBy[who] || []).concat(r.id);
+    const size = r.members >= 1e6 ? (r.members / 1e6).toFixed(1) + "M" : Math.round(r.members / 1e3) + "K";
+    if (job.dry && !testQs) {
+      job.res.push({ g: r.id, name: r.name, members: r.members, status: "test", as: who, why: "Test only: would join this group", url: `https://www.facebook.com/groups/${r.id}/`, t: new Date().toISOString() });
+      job.turn++; await save(); box(`Test · ${who} would join ${r.name} (${size}). Not joining.`); await sleep(2500); return go();
+    }
+    box(`Relay · ${who}: joining ${r.name} (${size} members)… ${joined()}/${job.limit} joined`);
+    r.btn.scrollIntoView({ block: "center" });
+    await sleep(rand(1200, 2600));
+    if (testQs) { job.test_join = false; await save(); }
+    r.btn.click();
+    await sleep(3000);
+    w = warning();
+    const dlgText = ([...document.querySelectorAll("[role=dialog]")].find(visible) || {}).innerText || "";
+    if (w && ACCOUNT.test(w)) { job.res.push({ g: r.id, name: r.name, members: r.members, status: "failed", as: who, why: w, t: new Date().toISOString() }); await save(); return finish(`Facebook showed "${w}". The relay stopped.`); }
+    if (w || JOINLIMIT.test(dlgText)) {
+      const why = w || (dlgText.split("\n").map(x => x.trim()).find(x => JOINLIMIT.test(x)) || "").slice(0, 120) || "can't join right now";
+      const close = findBtn(/^close$|^ok$|^cancel$/i, [...document.querySelectorAll("[role=dialog]")].find(visible) || undefined); if (close) close.click();
+      job.res.push({ g: r.id, name: r.name, members: r.members, status: "failed", as: who, why, t: new Date().toISOString() });
+      await drop(who, why); return go();
+    }
+    const a = await afterJoin(r.row);
+    const status = testQs && a.status !== "test" && a.status !== "manual" ? "pending" : a.status;   // Test with no questions: Facebook sent a request
+    job.res.push({ g: r.id, name: r.name, members: r.members, status, as: who, url: `https://www.facebook.com/groups/${r.id}/`, t: new Date().toISOString(), ...(a.why ? { why: a.why } : testQs && status === "pending" ? { why: "Test: this group had no questions, so Facebook sent a join request" } : {}), ...(a.qa && a.qa.length ? { qa: a.qa } : {}), ...(a.qs && a.qs.length ? { qs: a.qs } : {}) });
+    job.turn++; await save();
+    const label = { joined: "joined", pending: "asked to join (waiting for the group's admin)", manual: "needs a manual answer, skipped", test: "test: answers filled, not sent" }[status] || status;
+    if (joined() < job.limit && tries() < (job.batch || 10)) await countdown(rand(job.pmin || 40, job.pmax || 100), `${who} ${label} · ${joined()}/${job.limit} joined. Next profile in`);
+    if (stopAsked) return;
+    return go();
+  }
 
   // ============================================================= post into groups
   if (job.kind === "post" && job.sw) {
@@ -272,6 +504,7 @@
     };
     const n = `Group ${job.i + 1} of ${job.q.length}`;
     if (realLen(it.text) < 15) { record(false, BLANK); box(`${n}: ${BLANK}. Skipping…`, true); return next(false); }
+    if (it.img && !it.stamp) { record(false, NOSTAMP); box(`${n}: ${NOSTAMP}. Skipping…`, true); return next(false); }
     box(`${n}: opening ${it.name}…`);
     await sleep(rand(2500, 4500));
     let np = noPost(); if (np && canSwitch()) return startSwitch(np);
@@ -592,19 +825,11 @@
       const dlgText = ([...document.querySelectorAll("[role=dialog]")].find(visible) || {}).innerText || "";
       if (!w && /can('|’)t join|joined too many|join.*limit/i.test(dlgText)) w = "You can't join more groups right now";
       if (w) { job.res.push({ g: r.id, name: r.name, members: r.members, status: "failed", why: w }); await save(); return finish(`Facebook showed "${w}". Joining stopped for today.`); }
-      let status = "joined";
-      const dlg = [...document.querySelectorAll("[role=dialog]")].find(visible);
-      if (dlg && /question|answer|rules|agree/i.test(dlg.innerText || "")) {
-        // Membership questions: agree to group rules if that's all it asks, otherwise close and leave it pending.
-        const agree = findBtn(/^(i agree|agree|submit)$/i, dlg);
-        const textNeeded = dlg.querySelector("textarea,[contenteditable=true],input[type=text]");
-        if (agree && !textNeeded) { agree.click(); await sleep(2000); status = "pending"; }
-        else { const close = findBtn(/^close$|^cancel$|^not now$/i, dlg); if (close) close.click(); await sleep(1200); const exit = findBtn(/^(exit|leave|discard)$/i); if (exit) exit.click(); status = "questions"; }
-      } else {
-        const t = (r.row.innerText || "");
-        status = /cancel request|pending|requested/i.test(t) ? "pending" : /joined|visit|view group|member/i.test(t) ? "joined" : "pending";
-      }
-      job.res.push({ g: r.id, name: r.name, members: r.members, status, url: `https://www.facebook.com/groups/${r.id}/`, t: new Date().toISOString() });
+      // Membership questions: answered from the profile's brand data and submitted (shared answerQuestions above);
+      // anything it mustn't or can't answer → "manual" (join cancelled, question shown in the admin).
+      const a = await afterJoin(r.row);
+      const status = a.status;
+      job.res.push({ g: r.id, name: r.name, members: r.members, status, url: `https://www.facebook.com/groups/${r.id}/`, t: new Date().toISOString(), ...(job.actor ? { as: job.actor } : {}), ...(a.why ? { why: a.why } : {}), ...(a.qa && a.qa.length ? { qa: a.qa } : {}), ...(a.qs && a.qs.length ? { qs: a.qs } : {}) });
       await save();
       if (added() < job.limit) await countdown(rand(job.pmin || 40, job.pmax || 100), `Joined ${added()}/${job.limit} today. Next in`);
     }
@@ -618,6 +843,19 @@
 
   // ============================================================= import joined groups
   if (job.kind === "import") {
+    // Profile relay: read the groups of one Page / profile (job.as), switching to it first; the admin then
+    // knows which groups that Page is a member of (it only posts there). Switches back at the end.
+    if (job.as) {
+      if (job.sw) {
+        const back = job.returned, r = await doSwitch();
+        if (back) return finish(r.ok ? null : `Couldn't switch back to ${job.home}: ${r.why}. Switch back by hand before the next run.`);
+        if (!r.ok) return finish(`Couldn't switch to ${job.as}: ${r.why}`);
+        job.navFor = -1; await save();
+      }
+      if (!job.groups && !sameName(job.actor, job.as)) return startSwitch(`read ${job.as}'s groups`, job.as);
+      if (job.groups && job.home && !sameName(job.actor, job.home) && !job.returned) { job.returned = true; await save(); return startSwitch("back to your main profile", job.home); }
+      if (job.groups) return finish();
+    }
     if (!/^\/groups\/joins/.test(location.pathname) && !(await arrive("https://www.facebook.com/groups/joins/?nav_source=tab"))) return;
     const SKIP = /^(joins|feed|discover|create|notifications|search|you|categories|membership_requests)$/i;
     const seen = new Map();
@@ -645,9 +883,10 @@
     }
     if (stopAsked) return;
     job.groups = [...seen.values()].filter(g => g.name);
-    save();
-    box(`Found ${job.groups.length} groups. Going back to your admin…`);
+    await save();
+    box(`Found ${job.groups.length} groups${job.as ? ` for ${job.as}` : ""}. Going back to your admin…`);
     await sleep(1200);
+    if (job.as && job.home && job.actor && !sameName(job.actor, job.home) && !job.returned) { job.returned = true; await save(); return startSwitch("back to your main profile", job.home); }
     return finish();
   }
 })();

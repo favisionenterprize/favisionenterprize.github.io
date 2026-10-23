@@ -74,6 +74,7 @@
   const realLen = t => { const m = String(t || "").replace(/https?:\/\/\S+/g, "").replace(/[#@][\p{L}\p{N}_.]+/gu, "").replace(/\s+/g, " ").trim(); return /^(no description|add (a )?description)\.?$/i.test(m) ? 0 : m.length; };
   const tagged = t => /(^|\s)#[\p{L}\p{N}_]{2,}/u.test(String(t || ""));
   const BLANK = "blank description — not posted";
+  const NOSTAMP = "no brand stamp — not posted";   // rule P1: every picture shows the posting brand's name + logo (admin/brandstamp.js sets it.stamp)
   const visible = el => !!el && el.getClientRects().length > 0;
   function findBtn(re, root) {
     return [...(root || document).querySelectorAll('[role=button],button,a[role=link],a')]
@@ -142,6 +143,7 @@
     const record = (ok, why) => { job.res.push({ k: it.k, p: it.p || null, ok, why: [why, it.soundNote].filter(Boolean).join(" · "), sound: it.soundUsed || null, ...(it.soundFav ? { fav: it.soundFav, fav_found: !!it.soundFavFound, fav_tried: !!it.soundFavTried } : {}), t: new Date().toISOString() }); job.i++; return save(); };
     const fail = async why => { await record(false, why); box(`${n}: ${why}. Moving on…`, true); await sleep(4000); };
     if (realLen(it.text) < 15) { await fail(BLANK); continue; }
+    if (it.img && !it.stamp) { await fail(NOSTAMP); continue; }
     // Brand posts (🏷 Brands): never go out on another brand's account. Step 1 above has already
     // checked this browser is signed in as @job.account.
     if (it.as && it.as.replace(/^@/, "").toLowerCase() !== String(job.account).replace(/^@/, "").toLowerCase()) {

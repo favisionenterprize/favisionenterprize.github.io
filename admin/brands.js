@@ -168,5 +168,20 @@
   document.addEventListener("input", edit);
   document.addEventListener("change", edit);
   (function warm(t) { if (A().readJsonFile) load().catch(() => {}); else if (t < 40) setTimeout(() => warm(t + 1), 500); })(0);
-  window.FAV_BRANDS = { open: show, load, detect, list: () => (B ? B.brands : []), _test: { set: b => { B = norm(b); }, state: () => B } };
+  // Answers for Facebook group membership questions (extension/autopilot.js answerQuestions), per acting
+  // profile / Page: the brand's name, what it sells, where it is, and ONLY its stored public contacts.
+  // The personal profile answers as F.A Vision (the business it joins groups for).
+  function qa(main) {
+    const list = B ? B.brands : [], out = {};
+    const lp = n => (window.FAV_CONFIG && window.FAV_CONFIG.localPhone && n ? window.FAV_CONFIG.localPhone(n) : n || "");
+    let def = null;
+    for (const b of list) {
+      const info = { name: b.name, what: b.sells || b.category || "quality products", place: b.place || b.address || "Accra, Ghana", wa: lp(b.whatsapp || (b.phones || [])[0]), email: b.email || "" };
+      for (const n of [].concat(b.pages || [], (b.accounts.facebook || {}).handle || [])) if (n) out[n] = info;
+      if (b.default) def = info;
+    }
+    if (def && main) out[main] = def;
+    return { qa: out, qa_default: def };
+  }
+  window.FAV_BRANDS = { open: show, load, detect, qa, list: () => (B ? B.brands : []), _test: { set: b => { B = norm(b); }, state: () => B } };
 })();

@@ -77,6 +77,7 @@
   const realLen = t => { const m = String(t || "").replace(/https?:\/\/\S+/g, "").replace(/[#@][\p{L}\p{N}_.]+/gu, "").replace(/\s+/g, " ").trim(); return /^(no description|add (a )?description)\.?$/i.test(m) ? 0 : m.length; };
   const tagged = t => /(^|\s)#[\p{L}\p{N}_]{2,}/u.test(String(t || ""));
   const BLANK = "blank description — not posted";
+  const NOSTAMP = "no brand stamp — not posted";   // rule P1: every picture shows the posting brand's name + logo (admin/brandstamp.js sets it.stamp)
   const visible = el => !!el && el.getClientRects().length > 0;
   const textOf = el => ((el && (el.innerText || el.getAttribute("aria-label"))) || "").trim();
   function findBtn(re, root) {
@@ -335,6 +336,7 @@
     const cond = await choose(/^condition$/i, [it.cond || "New"]);
     if (!cond) return skip("couldn't pick the condition");
     if (realLen(it.text) < 15) return skip(BLANK);
+    if ((it.imgs || []).length && !it.stamp) return skip(NOSTAMP);
     const desc = field(/^description$/i);
     if (desc) { typeIn(desc, it.text); await sleep(rand(500, 900)); }
     if (desc && realLen(desc.value || desc.innerText) < 15) { typeIn(desc, it.text); await sleep(rand(500, 900)); }

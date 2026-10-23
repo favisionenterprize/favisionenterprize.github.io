@@ -52,6 +52,8 @@
   const PRO = () => window.FAV_PROFILES;
   const TTC = () => window.FAV_TTCAPS;
   const FX = () => window.FAV_FIXALL;            // Fix all tab: Facebook Page, Instagram, X, Marketplace, website (admin/fixall.js + extension/fixall.js)
+  const RLY = () => window.FAV_RELAY;            // Profile relay: profiles take turns joining, then each Page posts (admin/relay.js)
+  const STAMP = () => window.FAV_STAMP;          // brand name + logo on every post picture (admin/brandstamp.js, rule P1)
   const BST = () => window.FAV_BOOST;            // Boost: trending sounds, refresh pinned, stories, reels, best time, first-hour replies (admin/boost.js + extension/boost.js)           // TikTok captions for posts without a description (admin/ttcaptions.js + extension/ttcaptions.js)         // Profile check: bio link + pinned post (admin/profiles.js + extension/profile.js)
   const liveAddon = () => document.documentElement.dataset.favautoMode === "live";
   const REPORT_TO = "nanaotengdonkor1@gmail.com";
@@ -105,7 +107,7 @@
   const attemptsToday = () => S.posts.filter(x => x.d === today() && !x.now).length;   // daily plan only; "Post now" has its own limit
 
   // ------------------------------------------------------------------ clean-up (groups that decline us) and growth (new big groups)
-  const joinsToday = () => S.joins.filter(j => j.d === today() && j.status !== "failed").length;
+  const joinsToday = () => S.joins.filter(j => j.d === today() && !/^(failed|manual|test)$/.test(j.status)).length;
   const pendingGroups = () => S.groups.filter(g => g.pending);
   const cleanupWaiting = () => S.settings.cleanup_on && S.groups.length > 0 && S.checks.declines !== today();
   const syncWaiting = () => pendingGroups().length > 0 && S.checks.sync !== today();
@@ -276,9 +278,20 @@
     if (window.FAV_AIPLAN && window.FAV_AIPLAN.paused()) { A.toast("Paused in 🧭 AI Plan. Press Resume all there to run automations again.", true); return; }
     job.id = Date.now().toString(36);
     gateJob(job);
+    // Rule P1: every picture shows the posting brand's name + logo. Pictures without a stamped copy are dropped (logged).
+    if (STAMP() && !(window.FAV_AIPLAN && window.FAV_AIPLAN.on && !window.FAV_AIPLAN.on("P1"))) {
+      const before = Array.isArray(job.q) ? job.q.length : 0;
+      STAMP().apply(job);
+      if (job.refused && job.refused.length) A.toast(`${plural(job.refused.length, "post")} held back: ${job.refused[0].why}.`, true);
+      if ((Array.isArray(job.q) && before && !job.q.length) || (job.kind === "story" && !job.stamp)) {
+        if (job.then && job.then.length) setTimeout(() => runStep(job.then, true), 1500);
+        return;
+      }
+    } else if (Array.isArray(job.q)) job.q.forEach(it => { if (it.img || it.imgs) it.stamp = it.stamp || "off"; });   // P1 switched off in 🧭 AI Plan
     // First comment under each Facebook group post (where are you seeing this from + like & follow).
     if (job.kind === "post") { job.sw_on = S.settings.switch_on !== false; job.sw_profiles = S.settings.switch_profiles || []; job.sw_max = S.settings.switch_max || 3; brandRoute(job); if (job.q && job.q[0] && job.q[0].url) url = job.q[0].url; }
-    if (job.kind === "post" && Array.isArray(job.q) && window.FAV_CAPTIONS) job.q.forEach(x => { if (!x.comment) x.comment = window.FAV_CAPTIONS.comment("fb", "this post"); });
+    // (another brand's post gets its own name in the ask and no F.A Vision links)
+    if (job.kind === "post" && Array.isArray(job.q) && window.FAV_CAPTIONS) job.q.forEach(x => { if (!x.comment) x.comment = window.FAV_CAPTIONS.comment("fb", "this post", x.brand && window.FAV_BRANDS ? window.FAV_BRANDS.list().find(b => b.id === x.brand) : null); });
     if (BRAND_NET[job.kind]) {
       brandHold(job);
       const NAME = { ig: "Instagram", x: "X", tiktok: "TikTok" }[job.kind];
@@ -421,6 +434,7 @@
         if ((net === "x" || net === "tiktok") && SOC() && SOC().state() && liveAddon()) return startSoc(net, { products: ids, limit: n }, steps);
       }
       if (k.startsWith("desk:") && activeGroups().length) return startDesk(k.split(":")[1], Number(k.split(":")[2]) || 10, steps);
+      if (k.startsWith("relay:") && RLY()) return RLY().step(k, steps);
       if (k === "report") return sendReport(true);
     }
   }
@@ -596,7 +610,8 @@
     const shift = Math.floor(Date.now() / 864e5) % kws.length;
     const q = kws.slice(shift).concat(kws.slice(0, shift)).map(kw => ({ kw, url: `https://www.facebook.com/search/groups/?q=${encodeURIComponent(kw)}` }));
     const skip = [...new Set([...S.groups.map(g => g.id), ...S.removed.map(r => r.id), ...S.joins.map(j => j.g)])];
-    launch(q[0].url, { kind: "grow", q, skip, limit: room, min: S.settings.grow_min_members, minGlobal: Math.max(S.settings.grow_min_global, S.settings.grow_min_members), deny: GROW_DENY, pmin: 40, pmax: 100, then: then || null });
+    const qa = window.FAV_BRANDS && window.FAV_BRANDS.qa ? { ...window.FAV_BRANDS.qa("Alexander Awuku"), qa_on: !(window.FAV_AIPLAN && window.FAV_AIPLAN.on && !window.FAV_AIPLAN.on("P2")) } : {};   // membership questions: answered from the profile's brand
+    launch(q[0].url, { kind: "grow", q, skip, limit: room, min: S.settings.grow_min_members, minGlobal: Math.max(S.settings.grow_min_global, S.settings.grow_min_members), deny: GROW_DENY, pmin: 40, pmax: 100, ...qa, then: then || null });
   }
 
   // Alert before every posting session (email via the backend, plus the badge here).
@@ -606,7 +621,7 @@
     const short = p => String(p.name).split(" — ")[0];
     const payload = {
       action: "session_alert", kind: kind || "session", day: d,
-      listing: nowPlan ? `Post now: ${nowPlan.products} product${nowPlan.products === 1 ? "" : "s"}` : pl.p ? short(pl.p) : "",
+      listing: nowPlan ? nowPlan.listing || `Post now: ${nowPlan.products} product${nowPlan.products === 1 ? "" : "s"}` : pl.p ? short(pl.p) : "",
       groups: nowPlan ? nowPlan.pairs.map(x => `${x.g.name} ← ${short(x.p)}`) : pl.groups.map(g => g.name),
       joins: S.joins.filter(j => j.d === d).map(j => ({ name: j.name, members: j.members, status: j.status, url: j.url || "" })),
       removed: S.removed.filter(r => r.d === d).map(r => ({ name: r.name, why: r.why, left: !!r.left })),
@@ -626,7 +641,13 @@
     A.busy("Saving what the add-on did…");
     const runLog = (s, extra) => { s.runs = (s.runs || []).concat([{ d, t: new Date().toISOString(), kind: out.kind, ...extra, ...(out.stopped ? { stopped: out.stopped } : {}) }]).slice(-200); };
     try {
-      if ((out.kind === "sounds" || out.kind === "story") && BST()) {
+      if ((out.relay || out.rb) && RLY()) {
+        const r = await RLY().receive(out);
+        if (r.text) A.toast(r.text, r.bad);
+        if (r.then) out.then = r.then;
+        tab = "facebook";
+        if (Array.isArray(out.switched) && out.switched.length) await save(s => { s.switches = (s.switches || []).concat(out.switched.map(x => ({ d, ...x }))).slice(-50); return s; }, "Autopilot: profile switches (relay)");
+      } else if ((out.kind === "sounds" || out.kind === "story") && BST()) {
         const r = await BST().receive(out);
         A.toast(r.text, r.bad);
         tab = "boost";
@@ -745,8 +766,8 @@
           runLog(s, { joined: res.filter(r => r.status === "joined").length, requested: res.filter(r => /pending|questions/.test(r.status)).length });
           s.checks.grow = d;
           for (const r of res) {
-            s.joins.push({ d, t: r.t || new Date().toISOString(), g: r.g, name: r.name, members: r.members, status: r.status, url: r.url, ...(r.why ? { why: r.why } : {}) });
-            if (r.status === "failed" || s.groups.some(x => x.id === r.g)) continue;
+            s.joins.push({ d, t: r.t || new Date().toISOString(), g: r.g, name: r.name, members: r.members, status: r.status, url: r.url, ...(r.as ? { as: r.as } : {}), ...(r.why ? { why: r.why } : {}), ...(r.qa ? { qa: r.qa } : {}), ...(r.qs ? { qs: r.qs } : {}) });
+            if (r.status === "failed" || r.status === "manual" || r.status === "test" || s.groups.some(x => x.id === r.g)) continue;   // manual: join cancelled, question shown in the list
             const g = { id: r.g, name: r.name, url: r.url, added: d, members: r.members, source: "autopilot" };
             if (r.status === "joined") g.active = true;
             else Object.assign(g, { active: false, pending: true, off_why: r.status === "questions" ? "Join request needs answers: open the group on Facebook and answer its questions" : "Waiting for the group's admin to accept us" });
@@ -756,7 +777,7 @@
           return s;
         }, `Autopilot: joined ${res.filter(r => r.status !== "failed").length} new Facebook groups`);
         const n = joinsToday();
-        A.toast(`${plural(n, "new group")} today (${res.filter(r => r.status === "joined").length} joined now, ${res.filter(r => /pending|questions/.test(r.status)).length} waiting for approval).${res.length ? "" : ` No new groups big enough turned up: add search words or lower the sizes in Settings.`}${out.stopped ? " Stopped: " + out.stopped : ""}`, !!out.stopped);
+        A.toast(`${plural(n, "new group")} today (${res.filter(r => r.status === "joined").length} joined now, ${res.filter(r => /pending|questions/.test(r.status)).length} waiting for approval${res.some(r => r.status === "manual") ? `, ${res.filter(r => r.status === "manual").length} need a manual answer` : ""}).${res.length ? "" : ` No new groups big enough turned up: add search words or lower the sizes in Settings.`}${out.stopped ? " Stopped: " + out.stopped : ""}`, !!out.stopped);
         if (before < S.settings.grow_daily && n >= S.settings.grow_daily) await sendAlert("milestone");
       }
       if (BST() && BST().state()) await BST().afterRun(out);   // logs Boost reels/refreshes, sounds used, first-hour reply timers
@@ -773,6 +794,15 @@
   }
 
   // ------------------------------------------------------------------ rendering
+  // "Posting rules" note (Today / Post now / Facebook tabs): rules P1 and P2 from 🧭 AI Plan.
+  function rulesNote() {
+    const P = window.FAV_AIPLAN && window.FAV_AIPLAN._test && window.FAV_AIPLAN._test.state();
+    const r = id => P && (P.rules || []).find(x => x.id === id);
+    const on = x => x && x.status === "approved" && x.setting !== "block";
+    const p1 = r("P1"), p2 = r("P2");
+    const pill = (x, label) => `<span class="pr-pill ${x ? (on(x) ? "on" : "off") : "on"}">${x && !on(x) ? "✕" : "✓"} ${label}</span>`;
+    return `<div class="pr-note" role="note"><b>Posting rules</b>${pill(p1, "Brand name + logo on every picture")}${pill(p2, "Group questions answered, then the job carries on")}<button type="button" class="btn btn-ghost btn-sm" data-aiplan>See in 🧭 AI Plan</button></div>`;
+  }
   function renderFacebook() {
     const dl = dueList(), due = dl || [], pl = plan(), groups = S.groups;
     const sell = S.selling;
@@ -783,7 +813,7 @@
     const order = postable();
     const cur = pl.p ? order.findIndex(p => p.id === pl.p.id) : -1;
     const recentRenew = (S.renewLog || []).slice(-10).reverse();
-    return `
+    return `${rulesNote()}${RLY() ? RLY().renderCard() : ""}
 
       <section class="fa-card">
         <header><h2>Marketplace renewals</h2><span class="fa-big ${dl === null || due.length ? "hot" : ""}">${dl === null ? "?" : due.length}</span></header>
@@ -824,7 +854,7 @@
         <header><h2>New big groups</h2><span class="fa-big ${joinsToday() >= S.settings.grow_daily ? "" : "hot"}">${joinsToday()}/${S.settings.grow_daily}</span></header>
         <p class="muted">Every day the run searches Facebook and joins up to ${S.settings.grow_daily} groups that fit furniture selling, biggest first: any group with ${membersText(S.settings.grow_min_global)}+ members (1M+ always), and Ghana/Accra groups from ${membersText(S.settings.grow_min_members)}. You get an email before each posting session, and a special one the day ${S.settings.grow_daily} are added.${pendingGroups().length ? ` ${plural(pendingGroups().length, "join request")} waiting for group admins.` : ""}</p>
         <div class="fa-actions"><button class="btn btn-primary" data-fa="grow" ${S.settings.grow_on && joinsToday() < S.settings.grow_daily ? "" : "disabled"}>Find &amp; join groups now</button></div>
-        ${S.joins.length ? `<details class="fa-more"><summary>Recently added (${S.joins.length})</summary><ul class="fa-list">${S.joins.slice(-30).reverse().map(j => `<li class="${j.status === "failed" ? "bad" : ""}"><span>${j.status === "joined" ? "✓" : j.status === "failed" ? "✗" : "…"} ${j.url ? `<a href="${esc(j.url)}" target="_blank" rel="noopener">${esc(j.name)}</a>` : esc(j.name)}</span><small>${membersText(j.members)} members · ${esc(j.d)} · ${esc({ joined: "joined", pending: "waiting for admin", questions: "answer the group's questions", failed: j.why || "failed" }[j.status] || j.status)}</small></li>`).join("")}</ul></details>` : ""}
+        ${S.joins.length ? `<details class="fa-more"><summary>Recently added (${S.joins.length})</summary><ul class="fa-list">${S.joins.slice(-30).reverse().map(j => `<li class="${j.status === "failed" ? "bad" : ""}"><span>${j.status === "joined" ? "✓" : j.status === "failed" ? "✗" : "…"} ${j.url ? `<a href="${esc(j.url)}" target="_blank" rel="noopener">${esc(j.name)}</a>` : esc(j.name)}</span><small>${membersText(j.members)} members · ${esc(j.d)} · ${esc({ joined: "joined", pending: "waiting for admin", questions: "answer the group's questions", failed: j.why || "failed", manual: "needs a manual answer: " + ((j.qs || []).join(" · ") || j.why || "") }[j.status] || j.status)}${(j.qa || []).length ? " · answered: " + esc(j.qa.map(x => x.q + " → " + x.a).join(" | ")) : ""}${j.as ? " · by " + esc(j.as) : ""}</small></li>`).join("")}</ul></details>` : ""}
       </section>
 
       <section class="fa-card">
@@ -872,7 +902,7 @@
       : "the ticked products are already in all your groups";
     const chosen = list.filter(p => on.has(p.id));
     const seasonal = IG() && IG().state() ? IG().pool().filter(i => i.seasonal) : [];
-    return `${seasonal.map(it => `
+    return `${rulesNote()}${seasonal.map(it => `
       <section class="fa-card season-card">
         <header><h2>📣 ${esc(it.subject.split(/[!.]/)[0])}</h2></header>
         <div class="season-row"><img src="../${esc(it.img)}" alt="" width="120" height="150" loading="lazy">
@@ -925,7 +955,8 @@
     if (kind === "copy") return A.toast("Caption copied ✓");
     if (kind === "page") { window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(page), "_blank", "width=680,height=640"); return A.toast("Caption copied: choose “Share to a Page”, paste it, then Post."); }
     if (kind === "tt") {
-      const a = document.createElement("a"); a.href = "../" + p.images[0]; a.download = p.id + ".jpg"; document.body.appendChild(a); a.click(); a.remove();
+      const st = STAMP() && STAMP().preview(p, (STAMP().brandOf({}, p) || {}).id);   // rule P1: the downloaded picture carries the brand
+      const a = document.createElement("a"); a.href = "../" + (st || p.images[0]); a.download = p.id + ".jpg"; document.body.appendChild(a); a.click(); a.remove();
       window.open("https://www.tiktok.com/tiktokstudio/upload", "_blank", "noopener");
       return A.toast("Caption copied and photo saved: add them in TikTok Studio (Photos).");
     }
@@ -968,7 +999,7 @@
       : Number(ext()) >= 5 && ds.favautoMode === "live" ? `<p class="fa-ext ok">✓ The add-on updates itself from your website${ds.favautoVersion ? ` (version ${esc(ds.favautoVersion)})` : ""}. Nothing to download.</p>` : "";
     const days = lastDays(7);
     return `
-      ${extMsg ? `<p class="fa-ext bad">✗ ${extMsg}</p>` : updMsg}
+      ${extMsg ? `<p class="fa-ext bad">✗ ${extMsg}</p>` : updMsg}${rulesNote()}
       <section class="fa-card run-card">
         <header><h2>Today's posting</h2><span class="muted fa-small">${esc(new Date().toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" }))}</span></header>
         <ol class="run-steps">
@@ -1044,7 +1075,9 @@
     if (alert) {
       const bits = [dl === null ? `<b>Your Marketplace listings haven't been checked for renewal yet.</b>` : due && `<b>${plural(due, "Marketplace listing")} ready to renew.</b>`, postsWaiting && `<b>Today's group posts haven't run yet.</b>`, igWaiting && `<b>Today's Instagram posts haven't run yet.</b>`,
         joinsToday() >= S.settings.grow_daily && `<b>🎉 ${joinsToday()} new big groups added today.</b>`,
-        S.removed.filter(r => r.d === today()).length && `<b>${plural(S.removed.filter(r => r.d === today()).length, "group")} removed today for declining our posts.</b>`].filter(Boolean);
+        S.removed.filter(r => r.d === today()).length && `<b>${plural(S.removed.filter(r => r.d === today()).length, "group")} removed today for declining our posts.</b>`,
+        S.relay && S.relay.last && S.relay.last.d === today() && !S.relay.last.dry && `<b>Profile relay done: ${S.relay.last.joined} groups joined, ${(S.relay.last.by_brand || []).reduce((n, b) => n + b.ok, 0)} posts.</b>`,
+        S.relay && (S.relay.manual || []).some(m => m.d === today()) && `<b>${plural(S.relay.manual.filter(m => m.d === today()).length, "group")} need a manual answer to join.</b>`].filter(Boolean);
       alert.hidden = !bits.length;
       alert.innerHTML = bits.join(" ") + " Open Social autopilot and tap Run →";
     }
@@ -1156,7 +1189,7 @@
     $("#top-actions").hidden = false;
     window.scrollTo(0, 0);
     if (location.hash !== "#fbauto") history.replaceState(null, "", "#fbauto");
-    if (!S || (IG() && !IG().state()) || (SOC() && !SOC().state()) || (VID() && !VID().state()) || (ENG() && !ENG().state()) || (MK() && !MK().state())) { $("#fa-body").innerHTML = `<p class="muted">Loading…</p>`; await Promise.all([load(), IG() ? IG().load() : null, SOC() ? SOC().load() : null, VID() ? VID().load().catch(() => null) : null, ENG() ? ENG().load().catch(() => null) : null, MK() ? MK().load().catch(() => null) : null, PRO() ? PRO().load().catch(() => null) : null, TTC() ? TTC().load().catch(() => null) : null, FX() ? FX().load().catch(() => null) : null, BST() ? BST().load().catch(() => null) : null, window.FAV_CAPTIONS && window.FAV_CAPTIONS.loadTrends ? window.FAV_CAPTIONS.loadTrends().catch(() => null) : null]).catch(err => A.toast(A.friendly(err), true)); }
+    if (!S || (IG() && !IG().state()) || (SOC() && !SOC().state()) || (VID() && !VID().state()) || (ENG() && !ENG().state()) || (MK() && !MK().state())) { $("#fa-body").innerHTML = `<p class="muted">Loading…</p>`; await Promise.all([load(), IG() ? IG().load() : null, SOC() ? SOC().load() : null, VID() ? VID().load().catch(() => null) : null, ENG() ? ENG().load().catch(() => null) : null, MK() ? MK().load().catch(() => null) : null, PRO() ? PRO().load().catch(() => null) : null, TTC() ? TTC().load().catch(() => null) : null, FX() ? FX().load().catch(() => null) : null, BST() ? BST().load().catch(() => null) : null, STAMP() ? STAMP().load().catch(() => null) : null, window.FAV_BRANDS ? window.FAV_BRANDS.load().catch(() => null) : null, window.FAV_CAPTIONS && window.FAV_CAPTIONS.loadTrends ? window.FAV_CAPTIONS.loadTrends().catch(() => null) : null]).catch(err => A.toast(A.friendly(err), true)); }
     render();
   }
   document.addEventListener("click", e => {
@@ -1171,7 +1204,7 @@
   const wait = setInterval(async () => {
     if (!A.signedIn() || !A.products().length) return;
     clearInterval(wait);
-    try { await Promise.all([load(), IG() ? IG().load() : null, SOC() ? SOC().load() : null, VID() ? VID().load().catch(() => null) : null, ENG() ? ENG().load().catch(() => null) : null, MK() ? MK().load().catch(() => null) : null, PRO() ? PRO().load().catch(() => null) : null, TTC() ? TTC().load().catch(() => null) : null, FX() ? FX().load().catch(() => null) : null, BST() ? BST().load().catch(() => null) : null, window.FAV_CAPTIONS && window.FAV_CAPTIONS.loadTrends ? window.FAV_CAPTIONS.loadTrends().catch(() => null) : null]); } catch (err) { return; }
+    try { await Promise.all([load(), IG() ? IG().load() : null, SOC() ? SOC().load() : null, VID() ? VID().load().catch(() => null) : null, ENG() ? ENG().load().catch(() => null) : null, MK() ? MK().load().catch(() => null) : null, PRO() ? PRO().load().catch(() => null) : null, TTC() ? TTC().load().catch(() => null) : null, FX() ? FX().load().catch(() => null) : null, BST() ? BST().load().catch(() => null) : null, STAMP() ? STAMP().load().catch(() => null) : null, window.FAV_CAPTIONS && window.FAV_CAPTIONS.loadTrends ? window.FAV_CAPTIONS.loadTrends().catch(() => null) : null]); } catch (err) { return; }
     updateBadge();
     const m = hash.match(/^#favauto-done=(.+)$/);
     if (m) {
@@ -1198,5 +1231,6 @@
     }
     if (e.source === window && e.data && e.data.type === "favauto-start-failed") A.toast("The add-on couldn't start the run. Reload the add-on in edge://extensions and try again.", true);
   });
-  window.FAV_FBAUTO = { open, launch, needExt, liveAddon, runStep, render: () => { if (!screen.hidden || tab === "videos" || tab === "engage" || tab === "market" || tab === "boost" || tab === "social" || tab === "ttcap") render(); }, _test: { set: s => { S = normalise(s); }, dueList, plan, caption, gateJob, receive, state: () => S, stepsToday, runStep, setTab: t => { tab = t; render(); } } };
+  window.FAV_FBAUTO_DENY = GROW_DENY;
+  window.FAV_FBAUTO = { open, launch, needExt, liveAddon, runStep, sendAlert, keepNote, render: () => { if (!screen.hidden || tab === "videos" || tab === "engage" || tab === "market" || tab === "boost" || tab === "social" || tab === "ttcap") render(); }, _test: { set: s => { S = normalise(s); }, save, dueList, plan, caption, gateJob, receive, state: () => S, stepsToday, runStep, setTab: t => { tab = t; render(); } } };
 })();

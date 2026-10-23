@@ -168,6 +168,7 @@
   const realLen = t => { const m = String(t || "").replace(/https?:\/\/\S+/g, "").replace(/[#@][\p{L}\p{N}_.]+/gu, "").replace(/\s+/g, " ").trim(); return /^(no description|add (a )?description)\.?$/i.test(m) ? 0 : m.length; };
   const tagged = t => /(^|\s)#[\p{L}\p{N}_]{2,}/u.test(String(t || ""));
   const BLANK = "blank description — not posted";
+  const NOSTAMP = "no brand stamp — not posted";   // rule P1: every picture shows the posting brand's name + logo (admin/brandstamp.js sets it.stamp)
   const composeUrl = () => job.kind === "x" ? "https://x.com/compose/post" : "https://www.tiktok.com/tiktokstudio/upload?from=webapp&tab=photo";
   const record = (it, ok, why) => { job.res.push({ k: it.k, p: it.p || null, ok, why: [why, it.soundNote].filter(Boolean).join(" · "), sound: it.soundUsed || null, ...(it.soundFav ? { fav: it.soundFav, fav_found: !!it.soundFavFound, fav_tried: !!it.soundFavTried } : {}), t: new Date().toISOString() }); job.i++; return save(); };
   // Boost: sounds only from TikTok's own picker (business accounts only see the Commercial Music Library
@@ -271,6 +272,7 @@
     return next(true);
   }
   if (realLen(it.text) < 15) { await record(it, false, BLANK); return next(false); }
+  if (it.img && !it.stamp) { await record(it, false, NOSTAMP); return next(false); }
   if (!(await arrive(composeUrl()))) return;
   // Brand posts (🏷 Brands): a post that belongs to another brand is only posted when this browser is
   // signed in to that brand's own account. X knows the handle from the job; on TikTok we read it off

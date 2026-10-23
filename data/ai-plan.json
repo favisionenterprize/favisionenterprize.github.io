@@ -2,7 +2,7 @@
  "owner": "Alexander Awuku",
  "paused": false,
  "paused_at": null,
- "updated": "2026-10-22",
+ "updated": "2026-10-23",
  "source": "FA Vision AI Operating System Blueprint",
  "rules": [
   {
@@ -92,7 +92,8 @@
     "tt1:",
     "mkscan",
     "mklist",
-    "desk:"
+    "desk:",
+    "relay:"
    ]
   },
   {
@@ -240,6 +241,57 @@
    "setting": "block",
    "status": "approved",
    "steps": []
+  },
+  {
+   "id": "P1",
+   "dept": "Marketing",
+   "owner": "Alexander Awuku",
+   "task": "Brand name + logo on every post picture: every picture the autopilot posts (Facebook groups and Page, Instagram, X, TikTok, stories, reels, Marketplace, Post now, Post to all groups, hourly, seasonal, Profile relay) shows the brand it goes out as, with that brand's own contacts. Pictures that already show the same brand are kept; another brand's picture is never used (a clean product photo stamped with the right brand instead). No stamp → not posted, reason logged.",
+   "line": "ai",
+   "setting": "allow",
+   "status": "approved",
+   "rule_of": "posting",
+   "enforces": true,
+   "steps": [
+    "post",
+    "postnow",
+    "allgroups:",
+    "tt1:",
+    "desk:",
+    "page:",
+    "igs:",
+    "xs:",
+    "tts:",
+    "hr:",
+    "ig",
+    "ignow",
+    "x",
+    "xnow",
+    "tiktok",
+    "ttnow",
+    "mklist",
+    "story:",
+    "reel:",
+    "refresh:",
+    "pinswap:",
+    "relay:"
+   ]
+  },
+  {
+   "id": "P2",
+   "dept": "Marketing",
+   "owner": "Alexander Awuku",
+   "task": "Answer group joining questions automatically, then carry on with the job: rules boxes ticked, honest short answers from the joining profile's own brand (what it sells, where it is, found via Facebook search, will follow the rules), only its public business contacts. Never passwords, ID numbers, bank/card/MoMo details, payments or invites: those groups are skipped and marked 'needs a manual answer' with the question shown. Every answer is logged; Test fills the questions but never submits.",
+   "line": "ai",
+   "setting": "allow",
+   "status": "approved",
+   "rule_of": "joining",
+   "enforces": true,
+   "steps": [
+    "grow",
+    "sync",
+    "relay:"
+   ]
   }
  ],
  "hourly": {

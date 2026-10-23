@@ -17,7 +17,7 @@ try { ({ chromium } = require("playwright")); } catch (e) {
   }
 }
 const ROOT = path.resolve(__dirname, "..") + "/";
-const SCRIPTS = ["admin/captions.js", "admin/igauto.js", "admin/ttshop.js", "admin/socauto.js", "admin/vidauto.js", "admin/engage.js", "admin/mkauto.js", "admin/profiles.js", "admin/ttcaptions.js", "admin/boost.js", "admin/fixall.js", "admin/brands.js", "admin/fbauto.js"];
+const SCRIPTS = ["admin/captions.js", "admin/igauto.js", "admin/ttshop.js", "admin/socauto.js", "admin/vidauto.js", "admin/engage.js", "admin/mkauto.js", "admin/profiles.js", "admin/ttcaptions.js", "admin/boost.js", "admin/fixall.js", "admin/brands.js", "admin/aiplan.js", "admin/brandstamp.js", "admin/relay.js", "admin/fbauto.js"];
 const MIN_TEXT = 150; // a tab with less text than this counts as blank
 
 const files = {};
@@ -72,7 +72,9 @@ async function autopilot(browser, day) {
   const hrJobs = await page.evaluate(() => {
     const jobs = []; window.addEventListener("message", e => { if (e.data && e.data.type === "favauto-start") jobs.push(e.data.job); });
     document.documentElement.dataset.favautoExt = "5"; document.documentElement.dataset.favautoMode = "live";
-    window.FAV_FBAUTO.runStep(["desk:FAV-014:10"], true);
+    // The real log may have every group posted in within the rest window (or "in the future" on a past test day): start clean.
+    const fbS = window.FAV_FBAUTO._test.state(), keepPosts = fbS.posts; fbS.posts = [];
+    window.FAV_FBAUTO.runStep(["desk:FAV-014:10"], true); fbS.posts = keepPosts;
     window.FAV_FBAUTO.runStep(["hr:x:2"], true);
     return new Promise(r => setTimeout(() => r(jobs.map(j => ({ kind: j.kind, n: j.q.length, ps: [...new Set(j.q.map(x => x.p))] }))), 300));
   });
@@ -103,6 +105,68 @@ async function autopilot(browser, day) {
   }, JSON.parse(fs.readFileSync(ROOT + "data/brands.json", "utf8")));
   const want = [{ ks: ["b:-"], held: ["Oteng Furniture"] }, { ks: ["a:otengfurniture", "b:-"], held: null }];
   if (JSON.stringify(holdJob) !== JSON.stringify(want)) problems.push("Instagram brand hold: expected " + JSON.stringify(want) + ", got " + JSON.stringify(holdJob));
+  // Rule P1 (admin/brandstamp.js): every picture in every job shows the posting brand; no stamp → dropped.
+  // Profile relay (admin/relay.js): card, captions per brand, the join job, posting plans per Page.
+  const rel = await page.evaluate(async () => {
+    const out = { problems: [] }, jobs = [];
+    window.addEventListener("message", e => { if (e.data && e.data.type === "favauto-start") jobs.push(e.data.job); });
+    const wait = ms => new Promise(r => setTimeout(r, ms));
+    const ST = window.FAV_STAMP, F = window.FAV_FBAUTO, RL = window.FAV_RELAY, CAP = window.FAV_CAPTIONS;
+    await ST.load(true); await window.FAV_BRANDS.load(true);
+    const prods = window.FAV_ADMIN.products(), desk = prods.find(p => p.id === "FAV-014"), wc = prods.find(p => p.id === "FAV-024");
+    // stamp: FA Vision ad kept; plain photo swapped; Oteng never gets an F.A Vision ad; AGOODMANN gets its own stamp; unknown photo dropped
+    const site = location.origin + "/";
+    F.launch("https://www.facebook.com/groups/1/", { kind: "post", mode: "now", q: [
+      { g: "1", url: "https://www.facebook.com/groups/1/", p: "FAV-014", text: "Student desk GH₵650. WhatsApp 057 264 6176 to order. #FurnitureGhana", img: site + "assets/images/ads/fav-014-arrived.jpg" },
+      { g: "2", url: "https://www.facebook.com/groups/2/", p: "FAV-014", text: "Student desk GH₵650. WhatsApp 057 264 6176 to order. #FurnitureGhana", img: site + desk.images[0] },
+      { g: "3", url: "https://www.facebook.com/groups/3/", p: "FAV-014", text: "Oteng Furniture: student desk GH₵650. WhatsApp 057 264 6176 to order. #OtengFurniture", img: site + "assets/images/ads/fav-014-arrived.jpg", brand: "oteng-furniture" },
+      { g: "4", url: "https://www.facebook.com/groups/4/", p: "FAV-024", text: "TWYFORD water closet GH₵750. WhatsApp 027 747 7752 to order. #Ghana", img: site + "assets/images/ads/fav-024.jpg" },
+      { g: "5", url: "https://www.facebook.com/groups/5/", p: null, text: "Quality furniture in Accra. WhatsApp 057 264 6176 to order. #FurnitureGhana", img: site + "assets/images/products/not-ours.jpg" }] });
+    await wait(150);
+    const sj = jobs.pop() || { q: [] };
+    out.stamp = sj.q.map(x => ({ g: x.g, stamp: x.stamp || null, img: String(x.img).replace(site, "") }));
+    out.refused = (sj.refused || []).map(x => x.g);
+    // relay card renders on the Facebook tab, with the four brands and the eight profiles
+    F._test.setTab("facebook"); await wait(150);
+    const card = document.querySelector("#relay-card");
+    out.card = card ? { text: card.innerText.length, brands: card.querySelectorAll(".rl-brand").length, profs: card.querySelectorAll("[name^=prof_]").length - 1, on: [...card.querySelectorAll("[name^=prof_]:checked")].length, thumbs: card.querySelectorAll("img.rl-thumb").length, agoodWarn: /Add AGOODMANN/.test(card.innerText) } : null;
+    out.rulesNote = !!document.querySelector(".pr-note");
+    // captions per brand
+    const br = id => window.FAV_BRANDS.list().find(b => b.id === id);
+    const fav = RL._test.captionFor(desk, br("fa-vision"), "Fa Vision Furnitures"), ot = RL._test.captionFor(desk, br("oteng-furniture"), "Oteng Furniture"), ag = RL._test.captionFor(wc, br("agoodmann-ventures"), "Agoodmann Ventures");
+    out.cap = { favSign: fav.includes(RL.SIGNOFF), favOk: CAP.check(fav, { net: "fb" }).ok, otOk: CAP.check(ot, { net: "fb" }).ok, otNoFav: !/F\.?A Vision|favision/i.test(ot), otNum: /057 264 6176|\+233572646176/.test(ot), agOk: CAP.check(ag, { net: "fb" }).ok, agNoFav: !/F\.?A Vision|favision|057 264 6176|020 747 3267|\+233572646176|\+233207473267/i.test(ag), agNum: /027 747 7752|\+233277477752/.test(ag), agName: /AGOODMANN/i.test(ag) };
+    const many = Array.from({ length: 12 }, () => RL._test.captionFor(desk, br("fa-vision"), "F.A Vision Enterprise"));
+    out.cap.unique = new Set(many).size;
+    // the relay job: begin → grow job with relay, profiles ticked by default, membership answers per Page
+    document.documentElement.dataset.favautoExt = "5";
+    window.confirm = () => true;
+    await RL.begin(true, false); await wait(300);
+    const gj = jobs.find(j => j.kind === "grow" && j.relay);
+    out.grow = gj ? { profiles: gj.profiles, limit: gj.limit, dry: gj.dry, qaKeys: Object.keys(gj.qa || {}).sort(), agoodWhat: ((gj.qa || {})["Agoodmann Ventures"] || {}).what, manyeWa: ((gj.qa || {})["Manye Oye Rehoboth"] || {}).wa, then: gj.then } : null;
+    // phase 2: with members read for each Page, each brand's queue is its own groups, as that Page, with its stamp
+    const S = F._test.state();
+    S.relay.cur.members = { "F.A Vision Enterprise": [{ id: "g1", name: "A" }, { id: "g2", name: "B" }], "Fa Vision Furnitures": [{ id: "g2", name: "B" }, { id: "g3", name: "C" }], "Oteng Furniture": [{ id: "g4", name: "D" }], "Agoodmann Ventures": [{ id: "g5", name: "E" }] };
+    out.plans = [0, 1, 2, 3].map(i => { const p = RL._test.buildPost(i); return p && { page: p.page, skip: p.skip || null, q: (p.q || []).map(x => ({ g: x.g, as: x.as, brand: x.brand, img: String(x.img).replace(site, "").replace(location.origin + "/", "") })) }; });
+    window.FAV_RELAY.step("relay:done", []); await wait(200);
+    return out;
+  });
+  const st = rel.stamp || [];
+  const by = g => st.find(x => x.g === g) || {};
+  if (by("1").img !== "assets/images/ads/fav-014-arrived.jpg" || by("1").stamp !== "fa-vision") problems.push("brand stamp: F.A Vision's own ad should be kept as it is: " + JSON.stringify(st));
+  if (!/^assets\/images\/stamped\/fa-vision\//.test(by("2").img || "")) problems.push("brand stamp: a plain desk photo should become F.A Vision's stamped copy: " + JSON.stringify(st));
+  if (!/^assets\/images\/stamped\/oteng-furniture\//.test(by("3").img || "") || by("3").stamp !== "oteng-furniture") problems.push("brand stamp: an Oteng post must never carry the F.A Vision ad; it gets Oteng's stamped photo: " + JSON.stringify(st));
+  if (!/^assets\/images\/stamped\/agoodmann-ventures\//.test(by("4").img || "") || by("4").stamp !== "agoodmann-ventures") problems.push("brand stamp: the TWYFORD post must carry AGOODMANN's own stamp: " + JSON.stringify(st));
+  if (by("5").g || !(rel.refused || []).includes("5")) problems.push("brand stamp: a picture with no stamped copy must be dropped (gate): " + JSON.stringify([st, rel.refused]));
+  if (!rel.card || rel.card.brands !== 4 || rel.card.profs !== 8 || rel.card.on !== 6 || rel.card.thumbs < 4 || rel.card.agoodWarn) problems.push("Profile relay card: expected 4 brands with stamped previews, 8 profiles (6 ticked), no AGOODMANN warning (its Page is set): " + JSON.stringify(rel.card));
+  if (!rel.rulesNote) problems.push("Posting rules note missing on the Facebook tab");
+  const cp = rel.cap || {};
+  if (!cp.favSign || !cp.favOk || !cp.otOk || !cp.otNoFav || !cp.otNum || !cp.agOk || !cp.agNoFav || !cp.agNum || !cp.agName || cp.unique < 12) problems.push("Profile relay captions: FA Vision sign-off, gate ok, Oteng without F.A Vision's name but with its numbers, AGOODMANN with only its own name and contacts, all different: " + JSON.stringify(cp));
+  const gr = rel.grow;
+  if (!gr || gr.profiles.join() !== "Alexander Awuku,F.A Vision Enterprise,Fa Vision Furnitures,Oteng Furniture,Agoodmann Ventures,Manye Oye Rehoboth" || gr.limit !== 40 || !gr.dry || !gr.qaKeys.includes("Agoodmann Ventures") || !/TWYFORD/.test(gr.agoodWhat || "") || gr.manyeWa !== "+233535700722") problems.push("Profile relay join job wrong: " + JSON.stringify(gr));
+  const pl = rel.plans || [];
+  const okPlan = (i, page, brand, groups, stampDir) => pl[i] && pl[i].page === page && !pl[i].skip && pl[i].q.map(x => x.g).join() === groups && pl[i].q.every(x => x.as === page && x.brand === brand && (x.img.startsWith(stampDir) || (brand === "fa-vision" && /ads\//.test(x.img))));
+  if (!okPlan(0, "F.A Vision Enterprise", "fa-vision", "g1,g2", "assets/images/stamped/fa-vision/") || !okPlan(1, "Fa Vision Furnitures", "fa-vision", "g2,g3", "assets/images/stamped/fa-vision/") || !okPlan(2, "Oteng Furniture", "oteng-furniture", "g4", "assets/images/stamped/oteng-furniture/") || !okPlan(3, "Agoodmann Ventures", "agoodmann-ventures", "g5", "assets/images/stamped/agoodmann-ventures/"))
+    problems.push("Profile relay posting plans wrong (own groups, as each Page, its own stamped picture): " + JSON.stringify(pl));
   const desk = hrJobs.find(j => j.kind === "post"), hx = hrJobs.find(j => j.kind === "x");
   if (!desk || desk.n < 1 || desk.n > 10 || desk.ps.join() !== "FAV-014") problems.push("desk:FAV-014:10 didn't post the desk into ≤10 groups: " + JSON.stringify(hrJobs));
   if (!hx || hx.n !== 2) problems.push("hr:x:2 didn't build 2 X posts: " + JSON.stringify(hrJobs));

@@ -63,6 +63,7 @@
   const realLen = t => { const m = String(t || "").replace(/https?:\/\/\S+/g, "").replace(/[#@][\p{L}\p{N}_.]+/gu, "").replace(/\s+/g, " ").trim(); return /^(no description|add (a )?description)\.?$/i.test(m) ? 0 : m.length; };
   const tagged = t => /(^|\s)#[\p{L}\p{N}_]{2,}/u.test(String(t || ""));
   const BLANK = "blank description — not posted";
+  const NOSTAMP = "no brand stamp — not posted";   // rule P1: every picture shows the posting brand's name + logo (admin/brandstamp.js sets it.stamp)
   const visible = el => !!el && el.getClientRects().length > 0;
   const findBtn = (re, root) => [...(root || document).querySelectorAll("[role=button],button,[role=tab],[role=checkbox],[role=switch],label,[role=menuitem]")].find(b => visible(b) && (re.test((b.getAttribute("aria-label") || "").trim()) || re.test((b.innerText || "").trim())));
   async function waitFor(fn, ms) { for (let t = 0; t < ms; t += 300) { if (stopAsked) return null; const v = fn(); if (v) return v; await sleep(300); } return null; }
@@ -163,6 +164,7 @@
     if (!share) return finish("The story editor didn't open (photo not taken).");
     // Quality gate: a story always carries its text (product, price, WhatsApp, link); without it, nothing is shared.
     if (realLen(job.text) < 15) { job.res.push({ net: "fb", ok: false, why: BLANK }); return finish(BLANK + ": the story had no text."); }
+    if (!job.stamp) { job.res.push({ net: "fb", ok: false, why: NOSTAMP }); return finish(NOSTAMP + ": the story picture has no brand name/logo."); }
     const addText = findBtn(/^add text$/i);
     let storyEd = null;
     if (addText) {

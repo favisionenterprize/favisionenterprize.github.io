@@ -317,7 +317,7 @@ const FB_HOME = page(`<div role="main">facebook home</div><div role="button" ari
     document.body.appendChild(m);
     m.querySelector("#all").onclick = () => {
       const d = document.createElement("div"); d.setAttribute("role", "dialog");
-      d.innerHTML = ["Alexander Awuku", "Fa Vision Furnitures", "F.A Vision Enterprise", "Oteng Furniture"].map(n => '<div role="radio" aria-checked="' + (n === actor) + '">' + n + '</div>').join("") + '<div role="button">Create new profile or Page</div>';
+      d.innerHTML = ["Alexander Awuku", "Fa Vision Furnitures", "F.A Vision Enterprise", "Oteng Furniture", "Agoodmann Ventures", "Manye Oye Rehoboth"].map(n => '<div role="radio" aria-checked="' + (n === actor) + '">' + n + '</div>').join("") + '<div role="button">Create new profile or Page</div>';
       document.body.appendChild(d);
       d.querySelectorAll("[role=radio]").forEach(r => r.onclick = () => { localStorage.setItem("fb-actor", r.innerText); location.reload(); });
     };
@@ -333,6 +333,53 @@ const FB_GROUP = page(`<div role="main"><h1>Accra Buy and Sell</h1><div role="bu
     ed.addEventListener("input", () => setTimeout(() => { ed.innerText = model; }, 50));
     d.querySelector("#post").onclick = () => { const all = JSON.parse(localStorage.getItem("group-posts") || "[]"); all.push(model); localStorage.setItem("group-posts", JSON.stringify(all)); const who = JSON.parse(localStorage.getItem("group-posters") || "[]"); who.push(localStorage.getItem("fb-actor") || "Alexander Awuku"); localStorage.setItem("group-posters", JSON.stringify(who)); d.remove(); };
   };`);
+
+// Facebook group search (autopilot.js grow + Profile relay): result rows with "Join"; some groups ask membership
+// questions in a dialog. mock-limit-<profile> → that profile gets "You can't join more groups right now".
+const FB_SEARCH = page(`<div role="main" id="res"></div>`, `
+  const actor = localStorage.getItem("fb-actor") || "Alexander Awuku";
+  const G = [["101", "Accra Buy and Sell Market", "380K members", ""], ["102", "Ghana Furniture Deals", "1.2M members", "private"], ["103", "Home Decor Ideas Worldwide", "5.7M members", "private-bad"],
+    ["104", "Kasoa Buy and Sell", "60K members", ""], ["105", "Accra Rentals and Rooms", "500K members", ""], ["106", "Interior Design Lovers", "2.1M members", "private-rules"], ["107", "Tiny Group", "900 members", ""], ["108", "Furniture For Sale Ghana", "120K members", ""]];
+  const res = document.getElementById("res");
+  G.forEach(([id, name, mem, kind]) => {
+    const row = document.createElement("div"); row.className = "row";
+    row.innerHTML = '<a href="/groups/' + id + '/">' + name + '</a><div>' + (kind ? "Private group · " : "Public group · ") + mem + '</div><div role="button">Join</div>';
+    const btn = row.lastChild;
+    btn.onclick = () => {
+      if (localStorage.getItem("mock-limit-" + actor)) { const d = document.createElement("div"); d.setAttribute("role", "dialog"); d.innerHTML = "You can't join more groups right now<div role=button>OK</div>"; d.lastChild.onclick = () => d.remove(); document.body.appendChild(d); return; }
+      const log = JSON.parse(localStorage.getItem("joins") || "[]");
+      if (!kind) { btn.textContent = "Visit"; row.lastChild.insertAdjacentHTML("beforebegin", "<div>Joined</div>"); log.push(actor + ":" + id); localStorage.setItem("joins", JSON.stringify(log)); return; }
+      const d = document.createElement("div"); d.setAttribute("role", "dialog");
+      const qs = kind === "private-bad"
+        ? '<div><span>Please answer: What is your MoMo number for the membership fee?</span><input type="text" aria-required="true"></div>'
+        : kind === "private-rules" ? '<div role="checkbox" aria-checked="false">I agree to the group rules</div>'
+        : '<div><span id="q1">Why do you want to join this group?</span><textarea aria-labelledby="q1"></textarea></div>' +
+          '<div><span id="q2">Where are you from?</span><input type="text" aria-labelledby="q2"></div>' +
+          '<div><span id="q3">What is your WhatsApp number?</span><input type="text" aria-labelledby="q3"></div>' +
+          '<div role="radiogroup" aria-label="Are you a buyer or a seller?"><div role="radio" aria-checked="false">Buyer</div><div role="radio" aria-checked="false">Seller</div><div role="radio" aria-checked="false">Both</div></div>' +
+          '<div role="radiogroup" aria-label="Will you follow the rules (no spam)?"><div role="radio" aria-checked="false">No</div><div role="radio" aria-checked="false">Yes</div></div>' +
+          '<div role="checkbox" aria-checked="false">I agree to the group rules</div>';
+      d.innerHTML = '<h2>Answer questions</h2><p>The admins want to know more about you.</p>' + qs + '<div role="button" id="cancel">Cancel</div><div role="button" id="submit">Submit</div><div role="button" id="pay">Pay now</div>';
+      d.querySelectorAll("[role=radio]").forEach(r => r.onclick = () => { r.parentElement.querySelectorAll("[role=radio]").forEach(x => x.setAttribute("aria-checked", "false")); r.setAttribute("aria-checked", "true"); });
+      d.querySelectorAll("[role=checkbox]").forEach(c => c.onclick = () => c.setAttribute("aria-checked", c.getAttribute("aria-checked") === "true" ? "false" : "true"));
+      d.querySelector("#pay").onclick = () => localStorage.setItem("mock-violation", "pay");
+      d.querySelector("#cancel").onclick = () => d.remove();
+      d.querySelector("#submit").onclick = () => {
+        const ans = [...d.querySelectorAll("textarea,input")].map(x => x.value);
+        const all = JSON.parse(localStorage.getItem("answers") || "{}"); all[actor + ":" + id] = { ans, radios: [...d.querySelectorAll("[role=radio][aria-checked=true]")].map(x => x.innerText), boxes: [...d.querySelectorAll("[role=checkbox][aria-checked=true]")].length };
+        localStorage.setItem("answers", JSON.stringify(all)); log.push(actor + ":" + id + ":req"); localStorage.setItem("joins", JSON.stringify(log));
+        d.remove(); btn.textContent = "Cancel request";
+      };
+      document.body.appendChild(d);
+    };
+    res.appendChild(row);
+  });`);
+// Your groups (import): the groups this profile is in (mock: all of 101–108 joined by anyone, plus 201/202).
+const FB_JOINS = page(`<div role="main" id="list"></div>`, `
+  const actor = localStorage.getItem("fb-actor") || "Alexander Awuku";
+  const mine = JSON.parse(localStorage.getItem("member-" + actor) || '["201","202"]');
+  const l = document.getElementById("list");
+  mine.forEach(id => { const a = document.createElement("a"); a.href = "/groups/" + id + "/"; a.textContent = "Group " + id + " (" + actor + ")"; l.appendChild(a); });`);
 
 function serve(url) {
   const u = new URL(url);
@@ -355,6 +402,8 @@ function serve(url) {
   if (p.startsWith("/FaVisionEnterprise") && u.searchParams.has("fxmock")) return FB_FEED;
   if (p.startsWith("/FaVisionEnterprise")) return FB_PAGE;
   const me = p.startsWith("/marketplace/edit") && u.searchParams.get("listing_id"); if (me) return MK_EDIT(me);
+  if (p.startsWith("/search/groups")) return FB_SEARCH;
+  if (p.startsWith("/groups/joins")) return FB_JOINS;
   if (p.startsWith("/groups/")) return FB_GROUP;
   if (p.startsWith("/stories/create")) return FB_STORY;
   if (p === "/" || p === "") return FB_HOME;
@@ -410,11 +459,12 @@ async function run(browser, job, startUrl, setup, skip) {
   const problems = [];
   const want = (c, msg) => { if (!c) problems.push(msg); else console.log("  ✓ " + msg.replace(/:.*$/, "")); };
   const item = (p, title, price, imgs) => ({ p, title, price, cats: ["Furniture", "Household"], cond: "New", loc: "Odorkor",
-    text: `${title} in stock. WhatsApp 0572646176\n\nOrder or see more: https://favisionenterprize.github.io/p/${p}.html`, imgs });
+    text: `${title} in stock. WhatsApp 0572646176\n\nOrder or see more: https://favisionenterprize.github.io/p/${p}.html`, imgs, stamp: "fa-vision" });
   const S = "https://favisionenterprize.github.io/assets/images/";
   let r;
 
   // ================================================================ Fix all + quality gate (extension/fixall.js, autopilot.js, boost.js)
+  if (!process.env.RELAY_ONLY) {
   console.log("fxscan (Facebook Page: posts, empty captions, shared post, comments ignored)");
   r = await run(browser, { kind: "fxscan", net: "fb", max: 100, page: "https://www.facebook.com/FaVisionEnterprise?fxmock=1" }, "https://www.facebook.com/FaVisionEnterprise?fxmock=1");
   const fbs = r.out.res || [];
@@ -459,8 +509,8 @@ async function run(browser, job, startUrl, setup, skip) {
   want(!r.errors.length, "no page errors: " + r.errors.join("; "));
 
   console.log("quality gate in a group post (autopilot.js): blank never posted; caption wiped by the photo is put back with its hashtags");
-  const gq = [{ g: "1", name: "Accra Buy and Sell", url: "https://www.facebook.com/groups/1/", p: "FAV-014", text: "   #fyp  ", img: S + "a.jpg" },
-    { g: "2", name: "Ghana Market", url: "https://www.facebook.com/groups/2/", p: "FAV-014", text: "Student desk and chair set GH₵650. WhatsApp 0572646176 to order.\n\n#AccraFurniture #FurnitureGhana", img: S + "a.jpg" }];
+  const gq = [{ g: "1", name: "Accra Buy and Sell", url: "https://www.facebook.com/groups/1/", p: "FAV-014", text: "   #fyp  ", img: S + "a.jpg", stamp: "fa-vision" },
+    { g: "2", name: "Ghana Market", url: "https://www.facebook.com/groups/2/", p: "FAV-014", text: "Student desk and chair set GH₵650. WhatsApp 0572646176 to order.\n\n#AccraFurniture #FurnitureGhana", img: S + "a.jpg", stamp: "fa-vision" }];
   r = await run(browser, { kind: "post", mode: "now", q: gq, min: 1, max: 2 }, gq[0].url, () => localStorage.setItem("fb-wipe", "1"));
   const GP = JSON.parse(r.state["group-posts"] || "[]");
   want(r.out.res.length === 2 && !r.out.res[0].ok && /blank description — not posted/.test(r.out.res[0].why) && r.out.res[1].ok, "blank caption skipped with the reason, the other posted: " + JSON.stringify(r.out.res));
@@ -468,7 +518,7 @@ async function run(browser, job, startUrl, setup, skip) {
   want(!r.errors.length, "no page errors: " + r.errors.join("; "));
 
   console.log("no access to post (autopilot.js): switches to the chosen Page and posts there; stops when no profile is left");
-  const swq = [{ g: "3", name: "Accra Buy and Sell", url: "https://www.facebook.com/groups/3/", p: "FAV-014", text: gq[1].text, img: S + "a.jpg" }];
+  const swq = [{ g: "3", name: "Accra Buy and Sell", url: "https://www.facebook.com/groups/3/", p: "FAV-014", text: gq[1].text, img: S + "a.jpg", stamp: "fa-vision" }];
   r = await run(browser, { kind: "post", mode: "now", q: swq, min: 1, max: 2, sw_on: true, sw_profiles: ["F.A Vision Enterprise"], sw_max: 3 }, swq[0].url, () => localStorage.setItem("fb-noaccess", "1"));
   const SP = JSON.parse(r.state["group-posts"] || "[]");
   want(r.out.res.length === 1 && r.out.res[0].ok && /posted as F\.A Vision Enterprise/.test(r.out.res[0].why) && SP.length === 1 && r.state["fb-actor"] === "F.A Vision Enterprise", "posted in the group after switching to the Page: " + JSON.stringify([r.out.res, r.state["fb-actor"]]));
@@ -481,8 +531,8 @@ async function run(browser, job, startUrl, setup, skip) {
 
   console.log("brand posts (autopilot.js): F.A Vision posts as you, Oteng's post as the Oteng Furniture Page, then back to you");
   const otText = "Oteng Furniture: 3-seater sofa GH₵5,000, delivered across Accra. WhatsApp 024 000 0000 to order.\n\n#OtengFurniture #FurnitureGhana";
-  const bq = [{ g: "4", name: "Accra Buy and Sell", url: "https://www.facebook.com/groups/4/", p: "FAV-014", text: gq[1].text, img: S + "a.jpg" },
-    { g: "5", name: "Ghana Market", url: "https://www.facebook.com/groups/5/", p: "FAV-001", text: otText, img: S + "a.jpg", as: "Oteng Furniture", brand: "oteng-furniture" }];
+  const bq = [{ g: "4", name: "Accra Buy and Sell", url: "https://www.facebook.com/groups/4/", p: "FAV-014", text: gq[1].text, img: S + "a.jpg", stamp: "fa-vision" },
+    { g: "5", name: "Ghana Market", url: "https://www.facebook.com/groups/5/", p: "FAV-001", text: otText, img: S + "a.jpg", as: "Oteng Furniture", brand: "oteng-furniture", stamp: "oteng-furniture" }];
   r = await run(browser, { kind: "post", mode: "now", q: bq, min: 1, max: 2, sw_on: true, sw_max: 3 }, bq[0].url);
   const BP = JSON.parse(r.state["group-posters"] || "[]");
   want(r.out.res.length === 2 && r.out.res.every(x => x.ok) && JSON.stringify(BP) === JSON.stringify(["Alexander Awuku", "Oteng Furniture"]), "each post went out as its own brand: " + JSON.stringify([r.out.res, BP]));
@@ -494,7 +544,7 @@ async function run(browser, job, startUrl, setup, skip) {
   want(r.out.res.length === 2 && r.out.res[0].ok && !r.out.res[1].ok && /not posted/.test(r.out.res[1].why) && BP2.length === 1, "a brand Page that isn't there → that post is skipped, never posted under another name: " + JSON.stringify([r.out.res, BP2]));
 
   console.log("quality gate in a story (boost.js): no text → nothing shared");
-  r = await run(browser, { kind: "story", img: S + "a.jpg", text: "  " }, "https://www.facebook.com/stories/create");
+  r = await run(browser, { kind: "story", img: S + "a.jpg", text: "  ", stamp: "fa-vision" }, "https://www.facebook.com/stories/create");
   want(r.out.res[0] && !r.out.res[0].ok && /blank description — not posted/.test(r.out.res[0].why) && !("story" in r.state), "a story without text is never shared: " + JSON.stringify(r.out));
 
   console.log("ttfix hashtags mode (TikTok: hashtags added at the end of a post that has text)");
@@ -503,6 +553,56 @@ async function run(browser, job, startUrl, setup, skip) {
   want(r.out.res[0].ok && r.out.res[0].mode === "tags" && TD["7400000000000000001"] === "Luxury leather sofa set now in stock at Odorkor\n\n#AccraFurniture #fyp", "hashtags appended, the text kept: " + JSON.stringify([r.out.res[0], TD["7400000000000000001"]]));
   want(!r.out.res[1].ok && /no description/.test(r.out.res[1].why) && TD["7400000000000000003"] === "#fyp #accra", "a post with only hashtags isn't touched in hashtags mode: " + JSON.stringify(r.out.res[1]));
   want(!r.state["tt-violation"], "never ••• / Post: " + r.state["tt-violation"]);
+  }
+  console.log("brand stamp gate (rule P1): a picture without the brand stamp is never posted (group post, story)");
+  const nsq = [{ g: "7", name: "Accra Buy and Sell", url: "https://www.facebook.com/groups/7/", p: "FAV-014", text: "Student desk and chair set GH₵650. WhatsApp 0572646176 to order.\n\n#AccraFurniture #FurnitureGhana", img: S + "a.jpg" }, { g: "8", name: "Ghana Market", url: "https://www.facebook.com/groups/8/", p: "FAV-014", text: "Student desk and chair set GH₵650. WhatsApp 0572646176 to order.\n\n#AccraFurniture #FurnitureGhana", img: S + "a.jpg", stamp: "fa-vision" }];
+  r = await run(browser, { kind: "post", mode: "now", q: nsq, min: 1, max: 2 }, nsq[0].url);
+  const NS = JSON.parse(r.state["group-posts"] || "[]");
+  want(r.out.res.length === 2 && !r.out.res[0].ok && /no brand stamp — not posted/.test(r.out.res[0].why) && r.out.res[1].ok && NS.length === 1, "unstamped picture skipped with the reason, the stamped one posted: " + JSON.stringify([r.out.res, NS.length]));
+  r = await run(browser, { kind: "story", img: S + "a.jpg", text: "Student Desk · GH₵650\nfavisionenterprize.github.io/p/FAV-014.html" }, "https://www.facebook.com/stories/create");
+  want(r.out.res[0] && !r.out.res[0].ok && /no brand stamp/.test(r.out.res[0].why) && !("story" in r.state), "a story picture without the stamp is never shared: " + JSON.stringify(r.out));
+
+  // membership answers as the admin sends them (admin/brands.js qa())
+  const QA = { qa: { "Alexander Awuku": { name: "F.A Vision Enterprise", what: "quality furniture: sofas, beds, dining sets and student desks", place: "Odorkor, Accra, Ghana", wa: "057 264 6176", email: "favisionenterprise1@gmail.com" },
+    "F.A Vision Enterprise": { name: "F.A Vision Enterprise", what: "quality furniture", place: "Odorkor, Accra, Ghana", wa: "057 264 6176" },
+    "Agoodmann Ventures": { name: "AGOODMANN VENTURES", what: "TWYFORD water closets, tiles and bathroom fittings", place: "Kantamanto, Accra, Ghana", wa: "027 747 7752" } },
+    qa_default: { name: "F.A Vision Enterprise", what: "quality furniture: sofas, beds, dining sets and student desks", place: "Odorkor, Accra, Ghana", wa: "057 264 6176", email: "favisionenterprise1@gmail.com" } };
+  const SQ = kw => ({ kw, url: "https://www.facebook.com/search/groups/?q=" + encodeURIComponent(kw) });
+  console.log("daily grow (autopilot.js): membership questions answered from the profile's brand, submitted; MoMo/fee question → needs a manual answer; rules box ticked");
+  r = await run(browser, { kind: "grow", q: [SQ("furniture ghana")], skip: [], limit: 5, min: 10000, minGlobal: 100000, deny: "rent|rooms?\\b", pmin: 1, pmax: 1, ...QA }, SQ("x").url);
+  const GJ = r.out.res, ans = JSON.parse(r.state.answers || "{}");
+  const st = id => (GJ.find(x => x.g === id) || {}).status;
+  want(st("103") === "manual" && /private, payment/.test((GJ.find(x => x.g === "103") || {}).why || "") && /MoMo/.test(((GJ.find(x => x.g === "103") || {}).qs || [])[0] || ""), "the MoMo / fee question is never answered: join cancelled, question kept for Alexander: " + JSON.stringify(GJ.find(x => x.g === "103")));
+  const a102 = ans["Alexander Awuku:102"] || {};
+  want(st("102") === "pending" && a102.ans && /F\.A Vision Enterprise sells|We sell|F\.A Vision Enterprise here/.test(a102.ans[0]) && a102.ans[1] === "Odorkor, Accra, Ghana" && a102.ans[2] === "057 264 6176" && a102.radios.join() === "Both,Yes" && a102.boxes === 1, "questions answered truthfully from F.A Vision's data and submitted (pending until accepted): " + JSON.stringify([st("102"), a102]));
+  want(((GJ.find(x => x.g === "102") || {}).qa || []).length >= 5, "every question + answer is logged: " + JSON.stringify((GJ.find(x => x.g === "102") || {}).qa));
+  want(st("106") === "pending" && (ans["Alexander Awuku:106"] || {}).boxes === 1, "a rules-only dialog: box ticked, submitted: " + JSON.stringify([st("106"), ans["Alexander Awuku:106"]]));
+  want(st("101") === "joined" && !GJ.some(x => x.g === "105" || x.g === "107"), "public group joined; rentals and small groups never joined: " + JSON.stringify(GJ.map(x => x.g + ":" + x.status)));
+  want(!r.state["mock-violation"], "never pressed Pay / anything outside the join dialog: " + r.state["mock-violation"]);
+  want(!r.errors.length, "no page errors: " + r.errors.join("; "));
+
+  console.log("Profile relay join (autopilot.js grow relay): profiles take turns, a limited profile is dropped, different groups, stops at the target");
+  r = await run(browser, { kind: "grow", relay: true, rb: "t1", q: [SQ("furniture ghana"), SQ("accra market")], skip: [], limit: 3, batch: 10, profiles: ["Alexander Awuku", "F.A Vision Enterprise", "Agoodmann Ventures"], min: 10000, minGlobal: 100000, deny: "rent|rooms?\\b", pmin: 1, pmax: 1, ...QA }, SQ("x").url, () => localStorage.setItem("mock-limit-F.A Vision Enterprise", "1"));
+  const RJ = r.out.res.filter(x => !x.drop), joinsLog = JSON.parse(r.state.joins || "[]"), ra = JSON.parse(r.state.answers || "{}");
+  want(r.out.relay && r.out.rb === "t1" && (r.out.dropped || []).includes("F.A Vision Enterprise") && r.out.res.some(x => x.drop && /can't join more groups/i.test(x.why)), "the limited Page is dropped for the day with the reason: " + JSON.stringify([r.out.dropped, r.out.res.filter(x => x.drop)]));
+  const asSeq = RJ.filter(x => x.status !== "failed").map(x => x.as);
+  want(asSeq.includes("Alexander Awuku") && asSeq.includes("Agoodmann Ventures") && asSeq.every((a, i) => !i || a !== asSeq[i - 1]), "the profiles took turns (never the same one twice in a row): " + JSON.stringify(asSeq));
+  want(RJ.filter(x => x.status === "joined").length === 3 && new Set(RJ.map(x => x.g)).size === RJ.length, "stopped at the 3 joined target; every join a different group: " + JSON.stringify(RJ.map(x => x.as + ":" + x.g + ":" + x.status)));
+  const agAns = Object.entries(ra).find(([k]) => k.startsWith("Agoodmann Ventures:"));
+  want(!agAns || (/AGOODMANN|TWYFORD/.test(agAns[1].ans[0]) && agAns[1].ans[2] === "027 747 7752" && !/057 264 6176/.test(agAns[1].ans.join(" "))), "Agoodmann's answers use its own business and number: " + JSON.stringify(agAns));
+  want((r.state["fb-actor"] || "Alexander Awuku") === "Alexander Awuku", "switched back to the main profile at the end: " + r.state["fb-actor"]);
+  want(!r.state["mock-violation"] && !r.errors.length, "no Pay click, no page errors: " + [r.state["mock-violation"], ...r.errors].join("; "));
+
+  console.log("Profile relay test (dry): questions are filled but never submitted; nothing else is joined");
+  r = await run(browser, { kind: "grow", relay: true, rb: "t2", dry: true, test_join: true, q: [SQ("furniture ghana")], skip: ["103", "106"], limit: 40, batch: 3, profiles: ["Alexander Awuku", "Agoodmann Ventures"], min: 10000, minGlobal: 100000, deny: "rent", pmin: 1, pmax: 1, ...QA }, SQ("x").url);
+  const DJ = r.out.res;
+  want(DJ.filter(x => x.status === "test" && (x.qa || []).length >= 5 && /Submit not pressed/.test(x.why)).length === 1 && !r.state.answers && !(JSON.parse(r.state.joins || "[]")).length && !r.out.more, "test fills ONE group's questions (5 answers), submits nothing, joins nothing: " + JSON.stringify([DJ.map(x => x.g + ":" + x.status), r.state.answers, r.state.joins]));
+
+  console.log("Profile relay: read one Page's groups (import as a Page), then switch back");
+  r = await run(browser, { kind: "import", as: "Agoodmann Ventures", rb: "t3" }, "https://www.facebook.com/groups/joins/?nav_source=tab", () => localStorage.setItem("member-Agoodmann Ventures", '["301","302"]'));
+  want(r.out.as === "Agoodmann Ventures" && (r.out.groups || []).map(g => g.id).join() === "301,302" && (r.state["fb-actor"] || "Alexander Awuku") === "Alexander Awuku", "read Agoodmann's own groups as Agoodmann, then back to you: " + JSON.stringify([r.out.groups, r.state["fb-actor"], r.out.stopped]));
+
+  if (process.env.RELAY_ONLY) { await browser.close(); console.log(problems.length ? `\n${problems.length} problem(s):\n  ✗ ` + problems.join("\n  ✗ ") : "\nAll relay mock checks passed."); process.exit(problems.length ? 1 : 0); }
   if (process.env.FX_ONLY) { await browser.close(); console.log(problems.length ? `\n${problems.length} problem(s):\n  ✗ ` + problems.join("\n  ✗ ") : "\nAll Fix all mock checks passed."); process.exit(problems.length ? 1 : 0); }
 
   console.log("mkscan (Your listings, renew menus)");
@@ -610,11 +710,11 @@ async function run(browser, job, startUrl, setup, skip) {
   want(!r.errors.length, "no page errors: " + r.errors.join("; "));
 
   console.log("story (Facebook photo story with the product link)");
-  r = await run(browser, { kind: "story", img: S + "a.jpg", text: "Student Desk · GH₵650\nfavisionenterprize.github.io/p/FAV-014.html" }, "https://www.facebook.com/stories/create");
+  r = await run(browser, { kind: "story", stamp: "fa-vision", img: S + "a.jpg", text: "Student Desk · GH₵650\nfavisionenterprize.github.io/p/FAV-014.html" }, "https://www.facebook.com/stories/create");
   want(r.out.res[0] && r.out.res[0].ok && /FAV-014\.html/.test(r.state.story || ""), "shares the story with the link text: " + JSON.stringify(r.out));
 
   console.log("tiktok post with a trending sound (social.js)");
-  r = await run(browser, { kind: "tiktok", q: [{ k: "card:FAV-014", p: "FAV-014", img: S + "a.jpg", text: "The desk that ends homework fights.\nGH₵650", title: "Student desk", sound: { name: "Highlife Groove", artist: "CML Band" } }, { k: "card:FAV-016", p: "FAV-016", img: S + "b.jpg", text: "Quiet luxury.\nGH₵8,500", title: "Sofa", sound: { name: "Unknown Tune" } }], min: 1, max: 2 }, "https://www.tiktok.com/tiktokstudio/upload?from=webapp&tab=photo");
+  r = await run(browser, { kind: "tiktok", q: [{ k: "card:FAV-014", p: "FAV-014", img: S + "a.jpg", stamp: "fa-vision", text: "The desk that ends homework fights.\nGH₵650", title: "Student desk", sound: { name: "Highlife Groove", artist: "CML Band" } }, { k: "card:FAV-016", p: "FAV-016", img: S + "b.jpg", stamp: "fa-vision", text: "Quiet luxury.\nGH₵8,500", title: "Sofa", sound: { name: "Unknown Tune" } }], min: 1, max: 2 }, "https://www.tiktok.com/tiktokstudio/upload?from=webapp&tab=photo");
   want(r.out.res.length === 2 && r.out.res[0].ok && r.out.res[0].sound === "Highlife Groove" && r.out.res[1].ok && !r.out.res[1].sound && /no sound/.test(r.out.res[1].why), "picks the sound in TikTok's picker; posts without one when it isn't found: " + JSON.stringify(r.out.res));
   want(!r.errors.length, "no page errors: " + r.errors.join("; "));
   const posted = JSON.parse(r.state["tt-posts"] || "[]");
@@ -622,19 +722,19 @@ async function run(browser, job, startUrl, setup, skip) {
   want(r.out.res[1].ok && /posted/.test(r.out.res[1].why), "a Post that reloads the tab into Posts counts as posted: " + JSON.stringify(r.out.res[1]));
 
   console.log("tiktok favourite artists (social.js): Davido found (skips a track used lately), Hillsong Worship not → trending; no dialog → no sound");
-  r = await run(browser, { kind: "tiktok", q: [{ k: "card:FAV-014", p: "FAV-014", img: S + "a.jpg", text: "The desk that ends homework fights.\nGH₵650", title: "Student desk", sound: { name: "Highlife Groove", artist: "CML Band", fav: "Davido", avoid: ["Fall"] } }, { k: "card:FAV-016", p: "FAV-016", img: S + "b.jpg", text: "Quiet luxury.\nGH₵8,500", title: "Sofa", sound: { name: "Highlife Groove", fav: "Hillsong Worship" } }], min: 1, max: 2 }, "https://www.tiktok.com/tiktokstudio/upload?from=webapp&tab=photo");
+  r = await run(browser, { kind: "tiktok", q: [{ k: "card:FAV-014", p: "FAV-014", img: S + "a.jpg", stamp: "fa-vision", text: "The desk that ends homework fights.\nGH₵650", title: "Student desk", sound: { name: "Highlife Groove", artist: "CML Band", fav: "Davido", avoid: ["Fall"] } }, { k: "card:FAV-016", p: "FAV-016", img: S + "b.jpg", stamp: "fa-vision", text: "Quiet luxury.\nGH₵8,500", title: "Sofa", sound: { name: "Highlife Groove", fav: "Hillsong Worship" } }], min: 1, max: 2 }, "https://www.tiktok.com/tiktokstudio/upload?from=webapp&tab=photo");
   const fr = r.out.res;
   want(fr.length === 2 && fr[0].ok && fr[0].sound === "Feel" && fr[0].fav === "Davido" && fr[0].fav_found, "Davido found in the picker, a track not used lately: " + JSON.stringify(fr[0]));
   want(fr[1] && fr[1].ok && fr[1].sound === "Highlife Groove" && fr[1].fav === "Hillsong Worship" && !fr[1].fav_found && fr[1].fav_tried && /artist not available in picker: Hillsong Worship/.test(fr[1].why), "Hillsong Worship not in the picker → trending sound, logged: " + JSON.stringify(fr[1]));
   want(JSON.parse(r.state["tt-posts"] || "[]").map(p => p.sound).join() === "Feel,Highlife Groove", "TikTok got the picked sounds: " + r.state["tt-posts"]);
   want(!r.errors.length, "no page errors: " + r.errors.join("; "));
-  r = await run(browser, { kind: "tiktok", q: [{ k: "card:FAV-014", p: "FAV-014", img: S + "a.jpg", text: "The desk that ends homework fights.\nGH₵650", title: "Student desk", sound: { name: "Highlife Groove", fav: "Davido" } }], min: 1, max: 2 }, "https://www.tiktok.com/tiktokstudio/upload?from=webapp&tab=photo", () => localStorage.setItem("tt-nodialog", "1"));
+  r = await run(browser, { kind: "tiktok", q: [{ k: "card:FAV-014", p: "FAV-014", img: S + "a.jpg", stamp: "fa-vision", text: "The desk that ends homework fights.\nGH₵650", title: "Student desk", sound: { name: "Highlife Groove", fav: "Davido" } }], min: 1, max: 2 }, "https://www.tiktok.com/tiktokstudio/upload?from=webapp&tab=photo", () => localStorage.setItem("tt-nodialog", "1"));
   const nd = r.out.res[0] || {};
   want(nd.ok && !nd.sound && !nd.fav_tried && /no sound picker dialog/.test(nd.why) && JSON.parse(r.state["tt-posts"] || "[]")[0].sound === "", "no picker dialog → posts with no sound: " + JSON.stringify(nd));
   want(!r.state["tt-outside"], "nothing outside the picker clicked: " + r.state["tt-outside"]);
 
   console.log("tiktok post when the description box stays empty (social.js)");
-  r = await run(browser, { kind: "tiktok", q: [{ k: "card:FAV-014", p: "FAV-014", img: S + "a.jpg", text: "The desk that ends homework fights.\nGH₵650", title: "Student desk" }, { k: "card:FAV-016", p: "FAV-016", img: S + "b.jpg", text: "Quiet luxury.", title: "Sofa" }], min: 1, max: 2 }, "https://www.tiktok.com/tiktokstudio/upload?from=webapp&tab=photo", () => localStorage.setItem("tt-blank", "1"));
+  r = await run(browser, { kind: "tiktok", q: [{ k: "card:FAV-014", p: "FAV-014", img: S + "a.jpg", stamp: "fa-vision", text: "The desk that ends homework fights.\nGH₵650", title: "Student desk" }, { k: "card:FAV-016", p: "FAV-016", img: S + "b.jpg", stamp: "fa-vision", text: "Quiet luxury.", title: "Sofa" }], min: 1, max: 2 }, "https://www.tiktok.com/tiktokstudio/upload?from=webapp&tab=photo", () => localStorage.setItem("tt-blank", "1"));
   want(!r.state["tt-posts"] && r.out.res.length === 1 && !r.out.res[0].ok && /empty/.test(r.out.stopped || ""), "never posts a blank description, stops the run: " + JSON.stringify(r.out).slice(0, 300));
 
   console.log("pinswap (X: pin the new post, unpin the old one)");

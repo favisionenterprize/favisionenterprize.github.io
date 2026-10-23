@@ -22,18 +22,21 @@
   const a_ = name => (/s$/i.test(name) ? "" : /^[aeiou]/i.test(name) ? "an " : "a ");
   const inBio = net => net === "ig" || net === "tiktok";
 
-  function facts(p) {
-    const B = biz(), s = p && p.seller;
-    const wa = local((s && s.whatsapp) || B.whatsapp || "0572646176");
-    const calls = [].concat((s && s.phones) || B.phones || []).map(local).filter(Boolean);
-    const link = p ? `${site()}p/${p.id}.html` : site();
-    return { B, s, wa, calls, link };
+  // o.brand (Profile relay, admin/relay.js): the brand the post goes out as, from data/brands.json. A brand that
+  // isn't F.A Vision gets its own name and contacts and no F.A Vision links (they'd put F.A Vision's name on it).
+  const otherBrand = o => !!(o && o.brand && !o.brand.default);
+  function facts(p, o) {
+    const B = biz(), s = p && p.seller, br = o && o.brand;
+    const wa = local((s && s.whatsapp) || (br && br.whatsapp) || B.whatsapp || "0572646176");
+    const calls = [].concat((s && s.phones) || (br && br.phones && br.phones.length ? br.phones : null) || B.phones || []).map(local).filter(Boolean);
+    const link = otherBrand(o) ? "" : p ? `${site()}p/${p.id}.html` : site();
+    return { B, s, wa, calls, link, br };
   }
 
   // ---------------------------------------------------------------- calls to action (always one)
   function cta(p, o) {
     o = o || {};
-    const f = facts(p), net = o.net || "fb";
+    const f = facts(p, o), net = o.net || "fb";
     const link = inBio(net) ? "the link in our bio" : f.link;
     const call = f.calls[1] || f.calls[0] || f.wa;
     const it = p ? `the ${short(p).toLowerCase()}` : "yours";
@@ -49,8 +52,9 @@
       `Reserve ${it} with 50% now: WhatsApp ${f.wa}.`,
       `Save this post and share it with someone who needs it! Orders: WhatsApp ${f.wa}.`
     ];
-    if (!f.s) list.push(`Visit our showroom at Odorkor (Tarazzo Road, opposite Pacific) or WhatsApp ${f.wa}.`, `Follow us for more and WhatsApp ${f.wa} to order 🛋️`);
-    return pick(list);
+    if (!f.s && !otherBrand(o)) list.push(`Visit our showroom at Odorkor (Tarazzo Road, opposite Pacific) or WhatsApp ${f.wa}.`, `Follow us for more and WhatsApp ${f.wa} to order 🛋️`);
+    if (otherBrand(o)) list.push(`Follow ${f.br.name} for more and WhatsApp ${f.wa} to order.`);
+    return pick(link ? list : list.filter(x => !/\btap\s/i.test(x)));   // no link (another brand): drop the "tap <link>" lines
   }
 
   // ---------------------------------------------------------------- hashtags
@@ -87,23 +91,24 @@
     for (const k of order) { if (out.length >= n) break; const t = shuffle(audience(k)).find(x => !out.includes(x)); if (t) out.push(t); }
     return out;
   }
-  function tags(p, net, extra, force) {
+  function tags(p, net, extra, force, br) {
     const s = p && p.seller;
+    const own = br && !br.default && (br.hashtags || []).length ? clean(br.hashtags) : null;   // e.g. #OtengFurniture
     const tr = shuffle(trending(net));
     if (net === "story") return pick(TAGS.brand);
     if (net === "fb" || net === "share") {
       if (Math.random() < 0.3 && !force) return "";
-      return [...new Set(tr.slice(0, 1).concat(audienceTags(1), shuffle(s ? TAGS.partner : TAGS.home).slice(0, 1)))].join(" ");
+      return [...new Set(tr.slice(0, 1).concat(audienceTags(1), shuffle(own || (s ? TAGS.partner : TAGS.home)).slice(0, own ? 2 : 1)))].join(" ");
     }
     if (net === "x") {   // trending first so it survives the 280-character trim
       return [...new Set(tr.slice(0, 1).concat(audienceTags(1), shuffle(s ? TAGS.partner : TAGS.home).slice(0, 1)))].join(" ");
     }
-    const pool = s ? TAGS.partner : TAGS.home;
+    const pool = own || (s ? TAGS.partner : TAGS.home);
     const n = net === "youtube" ? 3 : 4;
     let t = shuffle(pool).slice(0, n).concat(tr.slice(0, 3), audienceTags(net === "youtube" ? 1 : 2));
     if (net === "tiktok") t = t.concat(shuffle(TAGS.tiktok).slice(0, 2));
     if (net === "youtube") t.unshift("#Shorts");
-    if (!s) t.push(pick(TAGS.brand));
+    if (!s && !(br && !br.default)) t.push(pick(TAGS.brand));
     if (extra) t = String(extra).split(/\s+/).filter(Boolean).slice(0, 4).concat(t);
     return [...new Set(t)].slice(0, net === "ig" ? 15 : 12).join(" ");
   }
@@ -166,7 +171,7 @@
     return [hook, "", list, size ? `📏 Size: ${size}` : "", p.box_note ? `📦 ${p.box_note}` : "", "", `💰 ${price}`, where, cta(p, o), inBio(net) ? "" : `👉 ${f.link}`, "", tags(p, net, o.tags)].filter((l, i, a) => l !== "" || a[i - 1] !== "").join("\n");
   }
   function product(p, o) {
-    const f = facts(p), net = o.net || "fb", name = short(p);
+    const f = facts(p, o), net = o.net || "fb", name = short(p);
     let price = money(p.price_ghs) + (p.negotiable ? pick([" (negotiable)", ", price negotiable", " (we can talk)"]) : "");
     if (p.id === "FAV-014") price += pick([" a set · GH₵640 each from 50 sets", " per set (GH₵640 each for 50+)"]);
     const head = o.ad && o.ad.headline ? `${o.ad.headline} ${o.ad.accent || ""}`.trim() : null;
@@ -196,10 +201,11 @@
     const priceLine = pick([`💰 ${price}`, `Price: ${price}`, `Only ${price}`, `💵 ${price}`, `Going for ${price}`]);
     const place = f.s
       ? pick([`🏪 Sold by ${f.s.name}${f.s.address ? " · " + f.s.address : ""}`, `Sold by ${f.s.name}`])
+      : otherBrand(o) ? pick([`🏪 ${f.br.name} · delivered across Accra, Tema & Kasoa`, `🏪 ${f.br.name} · delivery across Accra and beyond`, `From ${f.br.name} · we deliver across Accra`])
       : pick(["📍 Showroom: Tarazzo Road, Odorkor (opposite Pacific), Accra", "📍 Odorkor, Accra · delivery available", "🚚 Delivery across Accra and beyond", "📍 Visit us at Odorkor, Accra. We deliver too.", "🚚 Fast delivery in Accra, Kasoa and beyond"]);
     const pay = f.s ? "" : pick(["💳 Pay 50% now and the rest on delivery (MoMo, GhanaPay or card).", "Pay 50% to book, balance on delivery.", "MoMo, GhanaPay or card accepted.", ""]);
     const extra = o.full ? [p.dimensions && `Size: ${p.dimensions}`, p.material && `Material: ${p.material}`, [].concat(p.colors || []).length && `Colours: ${[].concat(p.colors).join(", ")}`].filter(Boolean).join("\n") : "";
-    const link = inBio(net) ? "" : pick([`👉 ${f.link}`, `See all photos: ${f.link}`, `More photos: ${f.link}`]);
+    const link = inBio(net) || !f.link ? "" : pick([`👉 ${f.link}`, `See all photos: ${f.link}`, `More photos: ${f.link}`]);
 
     if (net === "x") {
       let t = [hook, `${name}: ${price}.`, hl[0] && hl[0] + ".", cta(p, o)].filter(Boolean).join(" ");
@@ -210,7 +216,7 @@
       return xTags(t, p);
     }
     const body = shuffle([blurb, hl.map(h => `${bullet} ${h}`).join("\n")]).filter(Boolean);
-    return [hook, "", ...body.flatMap(b => [b, ""]), priceLine, extra, place, pay, "", cta(p, o), link, "", tags(p, net, o.tags)].join("\n");
+    return [hook, "", ...body.flatMap(b => [b, ""]), priceLine, extra, place, pay, "", cta(p, o), link, "", tags(p, net, o.tags, o.forceTags, o.brand)].join("\n");
   }
 
   // ---------------------------------------------------------------- "classy" TikTok captions (style: "classy")
@@ -324,13 +330,13 @@
   }
   // Engagement ask under every post: where are you seeing this from, then like, share and follow.
   const ASK_LINKS = " 👉 Page: facebook.com/FaVisionEnterprise · 🌐 Shop: favisionenterprize.github.io";
-  function comment(net, kind) {
-    const base = commentBase(net, kind);
-    return net === "x" ? base : base + ASK_LINKS;
+  function comment(net, kind, br) {
+    const base = commentBase(net, kind, br);
+    return net === "x" || (br && !br.default) ? base : base + ASK_LINKS;
   }
-  function commentBase(net, kind) {
+  function commentBase(net, kind, br) {
     const what = kind || pick(["this", "this ad", "this post", "this video"]);
-    const page = net === "x" ? "us" : pick(["our page", "the page", "F.A Vision Enterprise"]);
+    const page = net === "x" ? "us" : pick(["our page", "the page", (br && br.name) || "F.A Vision Enterprise"]);
     if (net === "x") return pick([`📍 Where are you seeing ${what} from? Reply, then like, share & follow ${page}!`, `Where are you watching ${what} from? 👇 Like, share & follow ${page}!`, `📍 Tell us where you're seeing ${what} from, then like, share & follow!`]);
     return pick([
       `📍 Where are you seeing ${what} from? Tell us in the comments 👇 Then like, share and follow ${page} for more.`,
@@ -341,8 +347,8 @@
     ]);
   }
   // Put the ask after the call to action, before the hashtags (X: keep within 280 characters).
-  function withAsk(t, net) {
-    const ask = comment(net);
+  function withAsk(t, net, br) {
+    const ask = comment(net, null, br);
     if (net === "x") {
       if ((t + " " + ask).length <= 280) return t + " " + ask;
       const bare = t.replace(/(\s#\w+)+\s*$/, "");
@@ -359,8 +365,8 @@
     let t = "";
     for (let i = 0; i < 6; i++) {
       // classy: its own comment-to-buy ask replaces the "where are you seeing this from" line
-      t = o.style === "classy" && p && !o.studio && !o.box ? tidy(classy(p, o), o.net || "tiktok") : tidy(withAsk(o.studio ? studio(o) : p && o.box && (p.in_the_box || []).length ? box(p, o) : p ? product(p, o) : general(o), o.net), o.net);
-      if (!o._raw) t = ensure(t, p, { net: o.net, subject: o.subject, studio: o.studio, tags: o.gateTags });   // quality gate (below)
+      t = o.style === "classy" && p && !o.studio && !o.box ? tidy(classy(p, o), o.net || "tiktok") : tidy(withAsk(o.studio ? studio(o) : p && o.box && (p.in_the_box || []).length ? box(p, o) : p ? product(p, o) : general(o), o.net, o.brand), o.net);
+      if (!o._raw) t = ensure(t, p, { net: o.net, subject: o.subject, studio: o.studio, tags: o.gateTags, brand: o.brand });   // quality gate (below)
       if (!recent.includes(t)) break;
     }
     recent.push(t); if (recent.length > 300) recent.shift();
@@ -409,13 +415,13 @@
       if (net === "mk") t = t.split("\n").filter(l => !/where are you (seeing|watching)|which town are you|comment where you|tell us where you/i.test(l)).join("\n");
     }
     if (!CTA_RE.test(t)) {
-      const c = cta(p || null, { net: net === "mk" || net === "story" ? "share" : net });
+      const c = cta(p || null, { net: net === "mk" || net === "story" ? "share" : net, brand: o.brand });
       const lines = t.split("\n");
       const last = (lines[lines.length - 1] || "").trim();
       if (/^#/.test(last) && lines.length > 1) { lines.splice(lines.length - 1, 0, c, ""); t = lines.join("\n"); } else t = t + (net === "x" ? " " : net === "story" ? "\n" : "\n\n") + c;
     }
     if (tagsWanted(net, o) && !hasTags(t)) {
-      const tg = tags(p || null, net === "mk" ? "share" : net, null, true) || pick(TAGS.brand);
+      const tg = tags(p || null, net === "mk" ? "share" : net, null, true, o.brand) || (o.brand && !o.brand.default ? "#Ghana #Accra" : pick(TAGS.brand));
       t = t + (net === "x" ? " " : net === "story" ? "\n" : "\n\n") + tg;
     }
     if (net === "x") t = fitX(t, p);

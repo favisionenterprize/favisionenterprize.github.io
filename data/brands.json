@@ -79,7 +79,14 @@
     }
    },
    "kit": "existing FA Vision brand kit (assets/images, Poppins)",
-   "category": "Furniture store"
+   "category": "Furniture store",
+   "sells": "quality furniture: sofas, beds, dining sets, wardrobes, office furniture and student desks",
+   "place": "Odorkor, Accra, Ghana",
+   "pages": [
+    "F.A Vision Enterprise",
+    "Fa Vision Furnitures"
+   ],
+   "email": "favisionenterprise1@gmail.com"
   },
   {
    "id": "oteng-furniture",
@@ -122,7 +129,7 @@
     "facebook": {
      "handle": "Oteng Furniture",
      "status": "live",
-     "note": "one of Alexander's Pages; exact Page name to confirm"
+     "note": "one of Alexander's Pages (seen in the profile switcher 23 Oct 2026)"
     },
     "instagram": {
      "handle": "otengfurniture",
@@ -170,7 +177,9 @@
    "kit": "assets/brands/oteng-furniture/",
    "category": "Furniture store",
    "est": "EST. ACCRA",
-   "contacts_note": "Shares F.A Vision's 057 264 6176 and 020 747 3267, so a post is routed to Oteng Furniture by its name, not by the phone number."
+   "contacts_note": "Shares F.A Vision's 057 264 6176 and 020 747 3267, so a post is routed to Oteng Furniture by its name, not by the phone number.",
+   "sells": "well-made furniture for homes, schools and offices (sofas, beds, dining, desks and chairs)",
+   "place": "Accra, Ghana"
   },
   {
    "id": "agoodmann-ventures",
@@ -202,8 +211,9 @@
    ],
    "accounts": {
     "facebook": {
-     "handle": "",
-     "status": "to_create"
+     "handle": "Agoodmann Ventures",
+     "status": "live",
+     "note": "Facebook Page name (double n), seen in the profile switcher 23 Oct 2026"
     },
     "instagram": {
      "handle": "",
@@ -258,7 +268,9 @@
     "#SanitarywareGhana",
     "#BuildingMaterialsAccra",
     "#Kantamanto"
-   ]
+   ],
+   "sells": "TWYFORD water closets, tiles and bathroom fittings",
+   "place": "Kantamanto, Accra, Ghana"
   },
   {
    "id": "anac-essentials",
@@ -347,7 +359,9 @@
     "#BakersGhana",
     "#FlourAccra",
     "#GhanaBakery"
-   ]
+   ],
+   "sells": "wheat flour for bakers, caterers and homes",
+   "place": "Accra, Ghana"
   },
   {
    "id": "manye-oye-rehoboth",
@@ -377,8 +391,9 @@
    ],
    "accounts": {
     "facebook": {
-     "handle": "",
-     "status": "to_create"
+     "handle": "Manye Oye Rehoboth",
+     "status": "live",
+     "note": "Facebook Page seen in the profile switcher 23 Oct 2026"
     },
     "instagram": {
      "handle": "",
@@ -433,7 +448,9 @@
     "#CookingOilGhana",
     "#Kasoa",
     "#GhanaFood"
-   ]
+   ],
+   "sells": "rice and canola oil",
+   "place": "Kasoa, Ghana"
   }
  ]
 }
