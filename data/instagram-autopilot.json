@@ -1724,6 +1724,67 @@
    "ok": false,
    "now": true,
    "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T13:41:03.302Z",
+   "k": "ad:fav-014",
+   "p": "FAV-014",
+   "ok": true
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T13:43:23.025Z",
+   "k": "card:FAV-021",
+   "p": "FAV-021",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T13:45:32.850Z",
+   "k": "box:FAV-010",
+   "p": "FAV-010",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T13:46:42.846Z",
+   "k": "presence:fav-003",
+   "p": "FAV-003",
+   "ok": true
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T13:48:45.775Z",
+   "k": "box:FAV-017",
+   "p": "FAV-017",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T13:49:56.724Z",
+   "k": "box:FAV-023",
+   "p": "FAV-023",
+   "ok": true
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T13:52:05.878Z",
+   "k": "box:FAV-024",
+   "p": "FAV-024",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T13:54:20.316Z",
+   "k": "card:FAV-030",
+   "p": "FAV-030",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
   }
  ],
  "profile": [
@@ -1833,7 +1894,7 @@
    "d": "2026-10-23",
    "followers": 893,
    "following": 2024,
-   "posts": 341
+   "posts": 343
   }
  ],
  "runs": [
@@ -2230,6 +2291,13 @@
    "kind": "ig",
    "tried": 1,
    "ok": 0
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T13:55:08.162Z",
+   "kind": "ig",
+   "tried": 8,
+   "ok": 3
   }
  ]
 }
