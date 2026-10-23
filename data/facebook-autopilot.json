@@ -93,6 +93,60 @@
    "ok": false,
    "now": true,
    "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T03:43:52.387Z",
+   "p": "FAV-014",
+   "g": "329443866631729",
+   "ok": false,
+   "now": true,
+   "why": "Post box didn't open"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T03:45:35.532Z",
+   "p": "FAV-014",
+   "g": "718143992098619",
+   "ok": false,
+   "now": true,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T03:47:13.292Z",
+   "p": "FAV-014",
+   "g": "msianinteriordesigners",
+   "ok": false,
+   "now": true,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T03:48:37.991Z",
+   "p": "FAV-014",
+   "g": "531561801524080",
+   "ok": false,
+   "now": true,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T03:49:26.602Z",
+   "p": "FAV-014",
+   "g": "ghanasoftwareservices",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T03:50:06.627Z",
+   "p": "FAV-014",
+   "g": "2198886853692812",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
   }
  ],
  "resets": {},
@@ -173,6 +227,13 @@
    "t": "2026-10-23T03:43:52.070Z",
    "kind": "post",
    "tried": 1,
+   "ok": 0
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T03:50:59.622Z",
+   "kind": "post",
+   "tried": 6,
    "ok": 0
   }
  ],
