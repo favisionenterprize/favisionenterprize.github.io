@@ -9,6 +9,9 @@
   "auto_time": "09:00",
   "now_limit": 20,
   "group_rest_hours": 6,
+  "switch_on": true,
+  "switch_profiles": [],
+  "switch_max": 3,
   "cleanup_on": true,
   "grow_on": true,
   "grow_daily": 20,
@@ -121,6 +124,15 @@
    "kind": "grow",
    "joined": 4,
    "requested": 0
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T03:41:59.813Z",
+   "kind": "renew",
+   "tried": 0,
+   "ok": 0,
+   "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile in Facebook, then tap Renew again."
   }
- ]
+ ],
+ "renewLog": []
 }
