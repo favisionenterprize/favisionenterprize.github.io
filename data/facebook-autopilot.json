@@ -877,6 +877,14 @@
    "kind": "post",
    "tried": 10,
    "ok": 8
+  },
+  {
+   "d": "2026-10-23",
+   "t": "2026-10-23T13:39:34.579Z",
+   "kind": "renew",
+   "tried": 0,
+   "ok": 0,
+   "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile in Facebook, then tap Renew again."
   }
  ],
  "renewLog": []
