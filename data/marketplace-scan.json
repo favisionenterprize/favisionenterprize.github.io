@@ -10,30 +10,34 @@
   "photos": 8
  },
  "scan": {
-  "d": "2026-10-20",
-  "t": "2026-10-20T11:12:03.740Z",
-  "n": 5,
+  "d": "2026-10-23",
+  "t": "2026-10-23T04:44:38.600Z",
+  "n": 35,
   "listings": [
    {
     "t": "L-Shaped Sofa Set — Fabric & Leather",
     "price": 5500,
     "status": "Active",
     "listed": "2026-10-17",
-    "renew": "none"
+    "id": "1745025166730387",
+    "renew": "wait",
+    "next": "2026-10-25"
    },
    {
     "t": "Student Desk Chair Set — Senior High to Tertiary Level",
     "price": 650,
     "status": "Active",
     "listed": "2026-10-17",
-    "renew": "none"
+    "id": "1630630032048162",
+    "renew": "wait",
+    "next": "2026-10-25"
    },
    {
     "t": "Dining Set Collection — 5 Designs, 6 Chairs",
     "price": 12600,
     "status": "Active",
     "listed": "2026-10-17",
-    "id": "1745025166730387",
+    "id": "1181731791186383",
     "renew": "wait",
     "next": "2026-10-25"
    },
@@ -42,7 +46,7 @@
     "price": 400,
     "status": "Active",
     "listed": "2026-10-17",
-    "id": "1745025166730387",
+    "id": "4417065965273644",
     "renew": "wait",
     "next": "2026-10-25"
    },
@@ -51,9 +55,270 @@
     "price": 6950,
     "status": "Active",
     "listed": "2026-10-17",
-    "id": "1745025166730387",
+    "id": "1844320933688368",
     "renew": "wait",
     "next": "2026-10-25"
+   },
+   {
+    "t": "10 Seater Foldable Round Table with Chairs",
+    "price": 9650,
+    "status": "Active",
+    "listed": "2026-10-17",
+    "id": "1129011836190246",
+    "renew": "wait",
+    "next": "2026-10-25"
+   },
+   {
+    "t": "Kids Plastic Chair — Stackable, Assorted Colours",
+    "price": 550,
+    "status": "Active",
+    "listed": "2026-10-17",
+    "id": "1653412249725072",
+    "renew": "wait",
+    "next": "2026-10-25"
+   },
+   {
+    "t": "Kavukçu Wheat Flour — 50kg Baking Flour",
+    "price": 640,
+    "status": "Active",
+    "listed": "2026-10-17",
+    "id": "1086294804390655",
+    "renew": "wait",
+    "next": "2026-10-25"
+   },
+   {
+    "t": "Tiles & Finishes — Floor & Wall",
+    "price": 1000,
+    "status": "Active",
+    "listed": "2026-10-17",
+    "id": "931168873150502",
+    "renew": "wait",
+    "next": "2026-10-25"
+   },
+   {
+    "t": "TWYFORD Water Closet — Two-Piece, Premium",
+    "price": 750,
+    "status": "Active",
+    "listed": "2026-10-17",
+    "id": "1790166538957973",
+    "renew": "wait",
+    "next": "2026-10-25"
+   },
+   {
+    "t": "Sigma 1.5HP Split Air Conditioner (BREEZE-HY12SB)",
+    "price": 6500,
+    "status": "Active",
+    "listed": "2026-10-17",
+    "id": "1098545739740008",
+    "renew": "wait",
+    "next": "2026-10-25"
+   },
+   {
+    "t": "TCL 43\" Smart Android TV — Full HD (43S5400A)",
+    "price": 6500,
+    "status": "Active",
+    "listed": "2026-10-17",
+    "id": "1451664136898948",
+    "renew": "wait",
+    "next": "2026-10-25"
+   },
+   {
+    "t": "A4 & A3 Copy Paper — Rotatrim, PaperOne, Double A",
+    "price": 450,
+    "status": "Active",
+    "listed": "2026-10-17",
+    "id": "1507552074510540",
+    "renew": "wait",
+    "next": "2026-10-25"
+   },
+   {
+    "t": "Business Cards — 100 or 200 Pieces",
+    "price": 450,
+    "status": "Active",
+    "listed": "2026-10-17",
+    "id": "1817098926207285",
+    "renew": "wait",
+    "next": "2026-10-25"
+   },
+   {
+    "t": "Auditorium / Conference Chair",
+    "price": 405,
+    "status": "Active",
+    "listed": "2026-10-17",
+    "id": "2204005653861982",
+    "renew": "wait",
+    "next": "2026-10-25"
+   },
+   {
+    "t": "Strong Glass Centre Table",
+    "price": 800,
+    "status": "Active",
+    "listed": "2026-10-17",
+    "id": "913470438368416",
+    "renew": "wait",
+    "next": "2026-10-25"
+   },
+   {
+    "t": "Mesh Secretary Chair — Swivel, Arm Rests",
+    "price": 4500,
+    "status": "Active",
+    "listed": "2026-10-17",
+    "id": "940522158828122",
+    "renew": "wait",
+    "next": "2026-10-25"
+   },
+   {
+    "t": "Luxury Leather Sofa Set",
+    "price": 8500,
+    "status": "Active",
+    "listed": "2026-10-17",
+    "id": "1738911440551218",
+    "renew": "wait",
+    "next": "2026-10-25"
+   },
+   {
+    "t": "L-Shaped Sectional Sofa — Grey Fabric",
+    "price": 15500,
+    "status": "Active",
+    "listed": "2026-10-17",
+    "id": "1663204832036993",
+    "renew": "wait",
+    "next": "2026-10-25"
+   },
+   {
+    "t": "Wardrobe — 4-Door with Top Cabinets",
+    "price": 9800,
+    "status": "Active",
+    "listed": "2026-10-17",
+    "id": "1472896918048864",
+    "renew": "wait",
+    "next": "2026-10-25"
+   },
+   {
+    "t": "White Dressing Table with Mirror & Stool",
+    "price": 7450,
+    "status": "Active",
+    "listed": "2026-10-17",
+    "renew": "none"
+   },
+   {
+    "t": "1.2 m Office Desk with Drawer Unit",
+    "price": 4500,
+    "status": "Active",
+    "listed": "2026-10-17",
+    "id": "1110537861350483",
+    "renew": "wait",
+    "next": "2026-10-25"
+   },
+   {
+    "t": "Mesh Secretary Chair — Ergonomic Swivel",
+    "price": 9500,
+    "status": "Active",
+    "listed": "2026-10-17",
+    "id": "2632470250583339",
+    "renew": "wait",
+    "next": "2026-10-25"
+   },
+   {
+    "t": "Executive Director Chair — Leather, High Back",
+    "price": 9500,
+    "status": "Active",
+    "listed": "2026-10-17",
+    "id": "3161561380714152",
+    "renew": "wait",
+    "next": "2026-10-25"
+   },
+   {
+    "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
+    "price": 11900,
+    "status": "Active",
+    "listed": "2026-10-17",
+    "id": "1847862492868412",
+    "renew": "wait",
+    "next": "2026-10-25"
+   },
+   {
+    "t": "Red Glass Dining Set — 6 Chairs",
+    "price": 12600,
+    "status": "Active",
+    "listed": "2026-10-17",
+    "id": "1786121632606050",
+    "renew": "wait",
+    "next": "2026-10-25"
+   },
+   {
+    "t": "Black Glass Dining Set — 6 High-Back Chairs",
+    "price": 4900,
+    "status": "Active",
+    "listed": "2026-10-17",
+    "id": "1486101121254456",
+    "renew": "wait",
+    "next": "2026-10-25"
+   },
+   {
+    "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
+    "price": 12600,
+    "status": "Active",
+    "listed": "2026-10-17",
+    "id": "1394887792628703",
+    "renew": "wait",
+    "next": "2026-10-25"
+   },
+   {
+    "t": "3D Wallpaper — Brick, Stone & Pattern (per roll)",
+    "price": 650,
+    "status": "Active",
+    "listed": "2026-10-15",
+    "id": "1424483486497081",
+    "renew": "ready"
+   },
+   {
+    "t": "Student Mattress — 2 Sizes",
+    "price": 1200,
+    "status": "Active",
+    "listed": "2026-10-15",
+    "id": "4500044700267467",
+    "renew": "ready"
+   },
+   {
+    "t": "TV Stand + Centre Table Set — Marble Top",
+    "price": 16800,
+    "status": "Active",
+    "listed": "2026-10-15",
+    "id": "2694330591023020",
+    "renew": "ready"
+   },
+   {
+    "t": "Hair Dressers Washing Bowl with Bar Chair",
+    "price": 10950,
+    "status": "Active",
+    "listed": "2026-10-15",
+    "id": "3014582455544691",
+    "renew": "ready"
+   },
+   {
+    "t": "Salon Chair — Hydraulic, Red or Black",
+    "price": 12500,
+    "status": "Active",
+    "listed": "2026-10-15",
+    "id": "975247691651140",
+    "renew": "ready"
+   },
+   {
+    "t": "Kids Plastic Chair — Stackable, Assorted Colours",
+    "price": 550,
+    "status": "Active",
+    "listed": "2026-10-15",
+    "id": "1126956876529819",
+    "renew": "ready"
+   },
+   {
+    "t": "10 Seater Foldable Round Table with Chairs",
+    "price": 9650,
+    "status": "Active",
+    "listed": "2026-10-14",
+    "id": "1762978168090788",
+    "renew": "ready"
    }
   ]
  },
@@ -698,6 +963,11 @@
    "tried": 0,
    "ok": 0,
    "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile in Facebook, then press the button again."
+  },
+  {
+   "d": "2026-10-23",
+   "kind": "scan",
+   "n": 35
   }
  ],
  "skip": []
