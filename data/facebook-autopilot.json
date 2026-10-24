@@ -255,7 +255,8 @@
    "added": "2026-10-23",
    "members": 13000,
    "source": "autopilot",
-   "active": true
+   "active": false,
+   "off_why": "Couldn't find the post box"
   },
   {
    "id": "Houseofcomedyandjokes",
@@ -850,6 +851,60 @@
    "ok": true,
    "now": true,
    "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T13:06:04.057Z",
+   "p": "FAV-014",
+   "g": "492106280882193",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T13:07:50.424Z",
+   "p": "FAV-014",
+   "g": "546213353030012",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T13:09:35.295Z",
+   "p": "FAV-014",
+   "g": "229343507183776",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T13:12:16.685Z",
+   "p": "FAV-014",
+   "g": "137653684399760",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T13:14:59.001Z",
+   "p": "FAV-014",
+   "g": "650579767131006",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T13:15:24.043Z",
+   "p": "FAV-014",
+   "g": "Houseofcomedyandjokes",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
   }
  ],
  "resets": {},
@@ -1187,6 +1242,13 @@
    "kind": "post",
    "tried": 10,
    "ok": 7
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T13:15:40.658Z",
+   "kind": "post",
+   "tried": 6,
+   "ok": 5
   }
  ],
  "renewLog": [],
