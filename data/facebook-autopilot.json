@@ -1085,6 +1085,78 @@
    "ok": true,
    "now": true,
    "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T19:06:59.915Z",
+   "p": "FAV-014",
+   "g": "444635012242059",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T19:09:11.195Z",
+   "p": "FAV-014",
+   "g": "264559953895459",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T19:11:52.595Z",
+   "p": "FAV-014",
+   "g": "717976401601485",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T19:15:18.310Z",
+   "p": "FAV-014",
+   "g": "328463177191460",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T19:18:09.301Z",
+   "p": "FAV-014",
+   "g": "838348073702031",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T19:19:53.493Z",
+   "p": "FAV-014",
+   "g": "768106223731259",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T19:21:36.562Z",
+   "p": "FAV-014",
+   "g": "198029967316435",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T19:22:08.462Z",
+   "p": "FAV-014",
+   "g": "492106280882193",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
   }
  ],
  "resets": {},
@@ -1443,6 +1515,13 @@
    "kind": "post",
    "tried": 10,
    "ok": 10
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T19:22:24.732Z",
+   "kind": "post",
+   "tried": 8,
+   "ok": 7
   }
  ],
  "renewLog": [],
