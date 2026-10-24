@@ -4528,6 +4528,26 @@
    "ok": true,
    "now": true,
    "why": "Hillsong Worship: only tracks used lately · no sound"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T16:02:37.684Z",
+   "net": "x",
+   "k": "ad:fav-007",
+   "p": "FAV-007",
+   "ok": false,
+   "now": true,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T16:03:42.533Z",
+   "net": "x",
+   "k": "ad:fav-009",
+   "p": "FAV-009",
+   "ok": false,
+   "now": true,
+   "why": "X didn't confirm the post"
   }
  ],
  "runs": [
@@ -5569,6 +5589,13 @@
    "kind": "tiktok",
    "tried": 1,
    "ok": 1
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T16:03:57.247Z",
+   "kind": "x",
+   "tried": 2,
+   "ok": 0
   }
  ]
 }
