@@ -647,11 +647,6 @@
    "text": "1 post went out without a sound"
   },
   {
-   "d": "2026-10-18",
-   "platform": "tiktok",
-   "text": "1 post went out without a sound"
-  },
-  {
    "d": "2026-10-19",
    "text": "no 'Approved for business use' filter seen: check the sounds are in TikTok's Commercial Music Library"
   },
@@ -857,6 +852,11 @@
   {
    "d": "2026-10-24",
    "text": "couldn't read the Creative Center song list"
+  },
+  {
+   "d": "2026-10-24",
+   "platform": "tiktok",
+   "text": "1 post went out without a sound"
   },
   {
    "d": "2026-10-24",
