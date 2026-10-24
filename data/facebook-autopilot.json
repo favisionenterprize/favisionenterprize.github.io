@@ -995,6 +995,96 @@
    "ok": true,
    "now": true,
    "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T16:07:28.352Z",
+   "p": "FAV-014",
+   "g": "329443866631729",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T16:09:38.826Z",
+   "p": "FAV-014",
+   "g": "718143992098619",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T16:12:58.305Z",
+   "p": "FAV-014",
+   "g": "msianinteriordesigners",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T16:15:13.361Z",
+   "p": "FAV-014",
+   "g": "531561801524080",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T16:17:06.389Z",
+   "p": "FAV-014",
+   "g": "ghanasoftwareservices",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T16:19:44.532Z",
+   "p": "FAV-014",
+   "g": "2198886853692812",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T16:22:49.902Z",
+   "p": "FAV-014",
+   "g": "351437262561935",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T16:24:58.293Z",
+   "p": "FAV-014",
+   "g": "516679296673025",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T16:28:32.101Z",
+   "p": "FAV-014",
+   "g": "1166899307145476",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T16:31:34.030Z",
+   "p": "FAV-014",
+   "g": "623981551575192",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
   }
  ],
  "resets": {},
@@ -1343,6 +1433,13 @@
   {
    "d": "2026-10-24",
    "t": "2026-10-24T16:28:39.885Z",
+   "kind": "post",
+   "tried": 10,
+   "ok": 10
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T16:31:47.542Z",
    "kind": "post",
    "tried": 10,
    "ok": 10
