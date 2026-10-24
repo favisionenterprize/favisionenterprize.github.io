@@ -4608,6 +4608,26 @@
    "ok": false,
    "now": true,
    "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T17:03:36.461Z",
+   "net": "x",
+   "k": "ad:fav-007",
+   "p": "FAV-007",
+   "ok": false,
+   "now": true,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T17:04:37.948Z",
+   "net": "x",
+   "k": "ad:fav-009",
+   "p": "FAV-009",
+   "ok": false,
+   "now": true,
+   "why": "X didn't confirm the post"
   }
  ],
  "runs": [
@@ -5681,6 +5701,13 @@
   {
    "d": "2026-10-24",
    "t": "2026-10-24T17:03:51.813Z",
+   "kind": "x",
+   "tried": 2,
+   "ok": 0
+  },
+  {
+   "d": "2026-10-24",
+   "t": "2026-10-24T17:05:03.951Z",
    "kind": "x",
    "tried": 2,
    "ok": 0
