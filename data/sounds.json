@@ -638,10 +638,6 @@
  "notes": [
   {
    "d": "2026-10-18",
-   "text": "couldn't read the Creative Center song list"
-  },
-  {
-   "d": "2026-10-18",
    "text": "no Instagram audio seen on Reels"
   },
   {
@@ -833,6 +829,11 @@
   },
   {
    "d": "2026-10-23",
+   "platform": "tiktok",
+   "text": "1 post went out without a sound"
+  },
+  {
+   "d": "2026-10-24",
    "platform": "tiktok",
    "text": "1 post went out without a sound"
   },
