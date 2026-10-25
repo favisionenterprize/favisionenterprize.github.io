@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-24T07:14:01Z",
+ "generated": "2026-10-25T07:32:20Z",
  "mode": "full",
  "score": 80,
  "prev_score": 80,
@@ -1266,7 +1266,7 @@
       "kb": 282,
       "requests": 48,
       "img_no_alt": 0,
-      "secs": 0.4,
+      "secs": 0.2,
       "keywords": []
      },
      {
@@ -1287,7 +1287,7 @@
       "kb": 191,
       "requests": 5,
       "img_no_alt": 2,
-      "secs": 0.4,
+      "secs": 0.3,
       "keywords": []
      },
      {
@@ -1308,7 +1308,7 @@
       "kb": 193,
       "requests": 6,
       "img_no_alt": 3,
-      "secs": 0.4,
+      "secs": 0.2,
       "keywords": []
      }
     ],
@@ -1342,7 +1342,7 @@
       "kb": 4,
       "requests": 4,
       "img_no_alt": 0,
-      "secs": 0.7,
+      "secs": 0.4,
       "keywords": [
        "furniture shop Accra"
       ]
@@ -1388,7 +1388,7 @@
       "kb": 134,
       "requests": 120,
       "img_no_alt": 1,
-      "secs": 3.0,
+      "secs": 0.9,
       "keywords": []
      },
      {
@@ -1409,7 +1409,7 @@
       "kb": 163,
       "requests": 128,
       "img_no_alt": 1,
-      "secs": 0.7,
+      "secs": 0.5,
       "keywords": []
      },
      {
@@ -1430,13 +1430,13 @@
       "kb": 94,
       "requests": 102,
       "img_no_alt": 0,
-      "secs": 0.6,
+      "secs": 0.5,
       "keywords": []
      },
      {
-      "url": "https://furniturecityghana.com/product/s%cc%a7ato-koltuk-krem-13/",
+      "url": "https://furniturecityghana.com/product/sofas-92/",
       "title": true,
-      "title_len": 45,
+      "title_len": 28,
       "description": false,
       "h1": 1,
       "og": false,
@@ -1448,10 +1448,10 @@
       "whatsapp": true,
       "blog": false,
       "faq": false,
-      "kb": 115,
+      "kb": 114,
       "requests": 114,
       "img_no_alt": 2,
-      "secs": 0.6,
+      "secs": 0.5,
       "keywords": []
      }
     ],
@@ -1492,7 +1492,7 @@
       "kb": 366,
       "requests": 129,
       "img_no_alt": 26,
-      "secs": 0.6,
+      "secs": 0.4,
       "keywords": []
      }
     ],
@@ -1651,6 +1651,11 @@
   },
   {
    "d": "2026-10-24",
+   "score": 80,
+   "ai": 0
+  },
+  {
+   "d": "2026-10-25",
    "score": 80,
    "ai": 0
   }
