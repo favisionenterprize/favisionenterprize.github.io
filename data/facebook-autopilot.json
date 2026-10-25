@@ -1612,6 +1612,15 @@
    "ok": true,
    "now": true,
    "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T01:40:46.510Z",
+   "p": "FAV-014",
+   "g": "329443866631729",
+   "ok": false,
+   "now": true,
+   "why": "No access to post; couldn't switch profile (couldn't find the profile menu)"
   }
  ],
  "resets": {},
@@ -1984,6 +1993,14 @@
    "kind": "renew",
    "tried": 35,
    "ok": 2
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T01:40:58.837Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 0,
+   "stopped": "No access to post and couldn't find the profile menu. Nothing more was posted."
   }
  ],
  "renewLog": [
