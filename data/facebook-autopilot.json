@@ -589,7 +589,7 @@
    "url": "https://www.facebook.com/groups/789579941115543/",
    "active": false,
    "added": "2026-10-25",
-   "off_why": "Not a member of this group"
+   "off_why": "Post box didn't open"
   },
   {
    "id": "homedecorinspirations",
@@ -597,7 +597,7 @@
    "url": "https://www.facebook.com/groups/homedecorinspirations/",
    "active": false,
    "added": "2026-10-25",
-   "off_why": "Not a member of this group"
+   "off_why": "Post box didn't open"
   },
   {
    "id": "755614535841357",
@@ -605,7 +605,7 @@
    "url": "https://www.facebook.com/groups/755614535841357/",
    "active": false,
    "added": "2026-10-25",
-   "off_why": "Not a member of this group"
+   "off_why": "Couldn't find the post box"
   },
   {
    "id": "7064480850327890",
@@ -3067,6 +3067,96 @@
    "ok": false,
    "now": true,
    "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:39:16.791Z",
+   "p": "FAV-014",
+   "g": "226910456304636",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:42:03.484Z",
+   "p": "FAV-014",
+   "g": "18020874123",
+   "ok": false,
+   "now": true,
+   "why": "Post box didn't open"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:42:48.529Z",
+   "p": "FAV-014",
+   "g": "391960286954584",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:46:07.726Z",
+   "p": "FAV-014",
+   "g": "583352032851222",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:46:36.421Z",
+   "p": "FAV-014",
+   "g": "1371907773293669",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:47:04.953Z",
+   "p": "FAV-014",
+   "g": "1968925946751585",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:47:42.389Z",
+   "p": "FAV-014",
+   "g": "789579941115543",
+   "ok": false,
+   "now": true,
+   "why": "Post box didn't open"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:48:06.726Z",
+   "p": "FAV-014",
+   "g": "homedecorinspirations",
+   "ok": false,
+   "now": true,
+   "why": "Post box didn't open"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:48:34.702Z",
+   "p": "FAV-014",
+   "g": "755614535841357",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:49:03.251Z",
+   "p": "FAV-014",
+   "g": "7064480850327890",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
   }
  ],
  "resets": {},
@@ -3585,6 +3675,13 @@
    "kind": "post",
    "tried": 10,
    "ok": 3
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:49:31.550Z",
+   "kind": "post",
+   "tried": 10,
+   "ok": 2
   }
  ],
  "renewLog": [
