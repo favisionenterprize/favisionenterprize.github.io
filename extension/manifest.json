@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "FA Vision Autopilot",
-  "version": "5.4.0",
+  "version": "5.5.0",
   "description": "Works with your FA Vision admin: renews Facebook Marketplace listings, posts into Facebook groups on Instagram, X, TikTok and YouTube, and syncs prices. Updates itself from your website. Keeps running when the browser is minimised or the screen is locked. Click the icon for the FA Vision Agent (does tasks in your browser, searches the web) and a searchable automation-script library.",
   "icons": {
     "128": "icon128.png"

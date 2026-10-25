@@ -30,7 +30,7 @@
   const SOURCES = {
     website: "Website form", whatsapp: "WhatsApp tap", "ai-studio": "AI Studio", "room-designer": "Room Designer",
     order: "Website order", invoice: "Invoice request", facebook: "Facebook Marketplace", "facebook-page": "Facebook Page",
-    instagram: "Instagram", tiktok: "TikTok", x: "X", call: "Phone call", "walk-in": "Walk-in (showroom)", referral: "Referral", other: "Other"
+    instagram: "Instagram", tiktok: "TikTok", x: "X", call: "Phone call", "walk-in": "Walk-in (showroom)", referral: "Referral", prospect: "Bulk-buyer prospect", other: "Other"
   };
   const MANUAL = ["facebook", "facebook-page", "instagram", "tiktok", "x", "call", "walk-in", "referral", "other"];
   const srcName = s => SOURCES[s] || (s ? String(s) : "Website form");
@@ -347,8 +347,7 @@
       const d = Object.fromEntries(new FormData(f).entries());
       const btn = f.querySelector("[type=submit]"); btn.disabled = true; btn.textContent = "Saving…";
       try {
-        await fetch(endpoint, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify({ name: d.name, phone: d.phone, product: d.product, message: d.message, source: d.source }) });
+        await addLead({ name: d.name, phone: d.phone, product: d.product, message: d.message, source: d.source });
         adding = false;
         if (window.FAV_ADMIN && window.FAV_ADMIN.toast) window.FAV_ADMIN.toast("Lead saved ✓");
         render();
@@ -357,10 +356,21 @@
     }
   });
 
+  // The one "add a lead" path (the form above and 🏢 Bulk buyers → "Add to Leads", source "prospect"): a plain
+  // enquiry row in the Sheet, never anything in the public repo.
+  async function addLead(l) {
+    await settings();
+    if (!endpoint) throw new Error("The backend isn't connected yet");
+    if (!l || !String(l.name || "").trim()) throw new Error("A lead needs a name");
+    await fetch(endpoint, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ name: l.name, organisation: l.organisation || "", phone: l.phone || "", product: l.product || "", quantity: l.quantity || "", message: l.message || "", source: l.source || "other" }) });
+    if (loaded) setTimeout(() => poll(false).catch(() => {}), 2500);
+  }
+
   const rb = $("#leads-refresh"); if (rb) rb.addEventListener("click", refresh);
   document.addEventListener("click", e => { if (e.target.closest("[data-leads]")) { e.preventDefault(); open(); } });
   // Check for new leads as soon as the admin has a key (saved once in Orders, Customers or here).
   if (key()) startPolling();
 
-  window.FAV_LEADS = { open, refresh, _test: { flatten, poll, get: () => leads } };
+  window.FAV_LEADS = { open, refresh, add: addLead, _test: { flatten, poll, get: () => leads } };
 })();

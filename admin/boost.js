@@ -247,6 +247,7 @@
   // First-hour replies: reply mode on the newest posts at +15, +30 and +60 minutes.
   function afterPost(net) {
     if (!B || !B.settings.first_hour || !/^(fb|ig|x|tiktok)$/.test(net)) return;
+    if (window.FAV_PRIME && window.FAV_PRIME.fast()) return;   // ⚡ Prime replies in the same run (engage:<net>:reply), no timers
     const t = (ls("fa-boost-timers") || []).filter(x => Date.parse(x.at) > Date.now() - 6 * 36e5);
     for (const m of [15, 30, 60]) {
       const at = Date.now() + m * 6e4;

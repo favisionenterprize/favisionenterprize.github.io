@@ -1,0 +1,100 @@
+{
+ "updated": "2026-10-25",
+ "trend": {
+  "name": "Miniature me cleans my profile",
+  "note": "AI-video trend (Oct 2026): a tiny version of the creator climbs out of their own profile picture and tidies, dusts and rearranges the profile grid like a little room.",
+  "max_per_week": 1
+ },
+ "tools": [
+  {
+   "id": "veo",
+   "name": "Google Veo (Gemini / Flow)",
+   "url": "https://labs.google/fx/tools/flow"
+  },
+  {
+   "id": "sora",
+   "name": "OpenAI Sora",
+   "url": "https://sora.com/"
+  },
+  {
+   "id": "kling",
+   "name": "Kling AI",
+   "url": "https://klingai.com/"
+  },
+  {
+   "id": "hailuo",
+   "name": "Hailuo (MiniMax)",
+   "url": "https://hailuoai.video/"
+  },
+  {
+   "id": "capcut",
+   "name": "CapCut (AI video)",
+   "url": "https://www.capcut.com/"
+  },
+  {
+   "id": "metaai",
+   "name": "Meta AI",
+   "url": "https://www.meta.ai/"
+  }
+ ],
+ "templates": [
+  {
+   "id": "fa-vision-desk",
+   "brand": "fa-vision",
+   "product": "FAV-014",
+   "title": "Miniature Alexander tidies the F.A Vision profile",
+   "prompt": "Vertical 9:16 video, 10 seconds, bright and cheerful, photoreal miniature style. Start on a phone screen showing the F.A Vision Enterprise TikTok profile (blue and red F.A Vision logo as the round profile picture, a grid of furniture photos below). A tiny, palm-sized version of the man in my reference photo, in a navy polo shirt, climbs out of the round F.A Vision logo, stretches, then hops down onto the grid. He dusts the photo tiles with a little feather duster, then carries a miniature grey-and-gold steel student desk and chair set onto the top tile and lines it up neatly, wiping the desk top with a cloth. He steps back, gives a thumbs up to the camera and points at the profile name. Soft daylight, shallow depth of field, smooth camera push-in. No text except the profile itself. No other brands or logos.",
+   "caption_hint": "Little me came to tidy the shop 🧹 Student desk & chair sets GH₵650 a set, GH₵640 each from 50. WhatsApp 057 264 6176."
+  },
+  {
+   "id": "fa-vision-sofa",
+   "brand": "fa-vision",
+   "product": "FAV-016",
+   "title": "Miniature Alexander fluffs the sofa on the profile",
+   "prompt": "Vertical 9:16 video, 8 seconds, warm living-room light, photoreal miniature style. A phone screen shows the F.A Vision Enterprise Instagram profile. A tiny version of the man in my reference photo climbs out of the round F.A Vision logo profile picture, slides down onto the first post and finds a miniature leather sofa set. He plumps the cushions, straightens a throw pillow and sits down with a satisfied smile, then waves at the camera. Gentle push-in, soft focus background. No text overlays, no other brands.",
+   "caption_hint": "He couldn't resist the sofa 😄 See every sofa at favisionenterprize.github.io or WhatsApp 057 264 6176."
+  },
+  {
+   "id": "fa-vision-furnitures",
+   "brand": "fa-vision",
+   "profile": "Fa Vision Furnitures (Instagram @favisionfurnitures_)",
+   "product": "FAV-014",
+   "title": "Miniature me rearranges the Fa Vision Furnitures grid",
+   "prompt": "Vertical 9:16 video, 10 seconds, clean bright studio light, photoreal miniature style. A phone screen shows the Instagram profile @favisionfurnitures_ with a grid of furniture photos. A tiny version of the man in my reference photo climbs out of the round profile picture holding a small broom, sweeps the top row, then pushes the photo tiles into a neater order and places a miniature student desk and chair on the middle tile. He dusts his hands and bows. Smooth camera, no text overlays, no other brands or logos.",
+   "caption_hint": "Spring cleaning the page 🧹 Student desk & chair sets for schools: WhatsApp 057 264 6176."
+  },
+  {
+   "id": "oteng-furniture",
+   "brand": "oteng-furniture",
+   "product": null,
+   "title": "Miniature me tidies the Oteng Furniture profile",
+   "prompt": "Vertical 9:16 video, 8 seconds, calm warm light, photoreal miniature style. A phone screen shows the Oteng Furniture Facebook page in forest green and gold, with the round \"OF\" monogram as the profile picture. A tiny version of the man in my reference photo climbs out of the OF monogram, walks across the cover photo and polishes a miniature wooden bed frame and sofa sitting on the posts, then straightens them and smiles at the camera. No text overlays, no other brands or logos.",
+   "caption_hint": "Oteng Furniture: well-made furniture for every home. WhatsApp 057 264 6176 to order."
+  },
+  {
+   "id": "agoodmann",
+   "brand": "agoodmann-ventures",
+   "product": "FAV-024",
+   "title": "Miniature me polishes the AGOODMANN tiles",
+   "prompt": "Vertical 9:16 video, 8 seconds, bright clean bathroom light, photoreal miniature style. A phone screen shows the AGOODMANN VENTURES Facebook page in navy and aqua with the round \"AV\" crest as the profile picture. A tiny version of the man in my reference photo climbs out of the AV crest, mops a row of shiny floor tiles on the posts and polishes a miniature white water closet until it sparkles, then gives a thumbs up. No text overlays, no other brands or logos.",
+   "caption_hint": "Genuine TWYFORD water closets and tiles at Kantamanto. WhatsApp AGOODMANN VENTURES to order."
+  },
+  {
+   "id": "anac",
+   "brand": "anac-essentials",
+   "product": "FAV-026",
+   "title": "Miniature me stacks the ANAC flour",
+   "prompt": "Vertical 9:16 video, 8 seconds, warm bakery light, photoreal miniature style. A phone screen shows the ANAC Essentials profile in brown and wheat gold with the round \"AE\" crest. A tiny version of the man in my reference photo climbs out of the AE crest, dusts flour off the posts with a small brush and stacks miniature 50 kg flour sacks neatly on the grid, then wipes his forehead and smiles. No text overlays, no other brands or logos.",
+   "caption_hint": "Wheat flour for bakers, caterers and homes. WhatsApp ANAC Essentials to order."
+  },
+  {
+   "id": "manye-oye",
+   "brand": "manye-oye-rehoboth",
+   "product": "FAV-035",
+   "title": "Miniature me arranges the MANYE OYE shelf",
+   "prompt": "Vertical 9:16 video, 8 seconds, homely warm light, photoreal miniature style. A phone screen shows the MANYE OYE REHOBOTH Facebook page in burgundy and orange with the round \"MO\" crest. A tiny version of the man in my reference photo climbs out of the MO crest and lines up miniature rice bags and canola oil bottles neatly along the posts like a shop shelf, then waves at the camera. No text overlays, no other brands or logos.",
+   "caption_hint": "Quality rice and canola oil in Kasoa. WhatsApp MANYE OYE REHOBOTH to order."
+  }
+ ],
+ "made": []
+}

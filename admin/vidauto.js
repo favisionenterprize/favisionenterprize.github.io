@@ -87,10 +87,11 @@
   }
   const slug = s => String(s).replace(/\.\w+$/, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40) || "video";
 
-  async function addFiles(list) {
+  // opts (🎬 Trend video card, admin/trendvideo.js): { source, product, kind, title, description } instead of the form.
+  async function addFiles(list, opts) {
     const form = document.getElementById("vid-add");
-    const source = (form && form.source.value) || "tiktok";
-    const pid = (form && form.product.value) || "";
+    const source = (opts && opts.source) || (form && form.source.value) || "tiktok";
+    const pid = opts ? (opts.product || "") : (form && form.product.value) || "";
     const files = [...list].filter(f => /^video\//.test(f.type) || /\.(mp4|mov|m4v|webm)$/i.test(f.name));
     const big = files.filter(f => f.size > MAX_MB * 1048576);
     const ok = files.filter(f => f.size <= MAX_MB * 1048576);
@@ -107,9 +108,10 @@
         if (poster) up.push({ path: `assets/videos/uploads/${base}.jpg`, b64: poster, label: f.name + " (cover)" });
         const p = pid && A.products().find(x => x.id === pid);
         const entry = {
-          id: base, title: junkName(f.name) ? "" : f.name.replace(/\.\w+$/, "").replace(/[_-]+/g, " ").trim(),
-          description: "", file: up[0].path, poster: poster ? up[1].path : (p && p.images && p.images[0]) || "",
-          product: pid || null, kind: "video", source, created: today(), size_mb: +(f.size / 1048576).toFixed(1),
+          id: base, title: (opts && opts.title) || (junkName(f.name) ? "" : f.name.replace(/\.\w+$/, "").replace(/[_-]+/g, " ").trim()),
+          description: (opts && opts.description) || "", file: up[0].path, poster: poster ? up[1].path : (p && p.images && p.images[0]) || "",
+          product: pid || null, kind: (opts && opts.kind) || "video", source, created: today(), size_mb: +(f.size / 1048576).toFixed(1),
+          ...(opts && opts.trend ? { trend: opts.trend } : {}),
           website: { status: "waiting" }, youtube: { status: "waiting" }, tiktok: source === "tiktok" ? { status: "posted", d: "before" } : { status: "waiting" }
         };
         S = normalise(await A.commitFiles({ files: up, jsonPath: FILE, fallback: EMPTY, message: `Videos: add ${f.name}`, mutate: s => { s = normalise(s); s.videos.push(entry); return s; } }));
@@ -151,6 +153,16 @@
     const q = vids.map(v => ({ k: v.id, file: location.origin + "/" + v.file, title: titleFor(v, "youtube"), description: textFor(v, "youtube") }));
     vids.forEach(reroll);
     fb.launch("https://www.youtube.com/upload", { kind: "youtube", q: dry ? q.slice(0, 1) : q, dry: !!dry, then: null });
+  }
+  // ⚡ Prime / AI Fix: every waiting video with a file → YouTube in one add-on job, then the rest of the steps.
+  function postWaiting(then) {
+    const fb = F(), go = () => { if (then && then.length && fb) setTimeout(() => fb.runStep(then, true), 300); };
+    const ids = S ? S.videos.filter(v => v.file && v.youtube.status !== "posted").map(v => v.id) : [];
+    if (!fb || !ids.length || !fb.liveAddon() || !shellOk()) return go();
+    const vids = ids.map(id => S.videos.find(v => v.id === id));
+    const q = vids.map(v => ({ k: v.id, file: location.origin + "/" + v.file, title: titleFor(v, "youtube"), description: textFor(v, "youtube") }));
+    vids.forEach(reroll);
+    fb.launch("https://www.youtube.com/upload", { kind: "youtube", q, then: then && then.length ? then : null });
   }
   async function receive(out) {
     const res = out.res || [];
@@ -377,5 +389,5 @@
     finally { A.busy(null); rerender(); }
   });
 
-  window.FAV_VIDAUTO = { load, state: () => S, renderTab, receive, describe, textFor, titleFor, _set: s => { S = normalise(s); } };
+  window.FAV_VIDAUTO = { load, state: () => S, renderTab, addFiles, postWaiting, receive, describe, textFor, titleFor, _set: s => { S = normalise(s); } };
 })();
