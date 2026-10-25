@@ -2340,6 +2340,96 @@
    "ok": false,
    "now": true,
    "why": "Post box didn't open"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:06:41.157Z",
+   "p": "FAV-014",
+   "g": "1805318230880180",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:07:25.216Z",
+   "p": "FAV-014",
+   "g": "2706610592966637",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:08:06.751Z",
+   "p": "FAV-014",
+   "g": "3408875172467933",
+   "ok": false,
+   "now": true,
+   "why": "Post box didn't open"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:08:45.421Z",
+   "p": "FAV-014",
+   "g": "4343810679056037",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:09:25.521Z",
+   "p": "FAV-014",
+   "g": "287605296209211",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:10:04.108Z",
+   "p": "FAV-014",
+   "g": "810777041068177",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:10:49.774Z",
+   "p": "FAV-014",
+   "g": "806092550980651",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:11:35.705Z",
+   "p": "FAV-014",
+   "g": "1979530982218307",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:12:18.534Z",
+   "p": "FAV-014",
+   "g": "1077214214124042",
+   "ok": false,
+   "now": true,
+   "why": "Post box didn't open"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:13:06.436Z",
+   "p": "FAV-014",
+   "g": "1978556739022353",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
   }
  ],
  "resets": {},
@@ -2799,6 +2889,13 @@
   {
    "d": "2026-10-25",
    "t": "2026-10-25T10:12:52.511Z",
+   "kind": "post",
+   "tried": 10,
+   "ok": 0
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:13:19.666Z",
    "kind": "post",
    "tried": 10,
    "ok": 0
