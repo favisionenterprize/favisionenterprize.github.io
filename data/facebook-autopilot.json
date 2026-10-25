@@ -2039,6 +2039,118 @@
    "g": "977797772413869",
    "ok": true,
    "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T05:00:43.410Z",
+   "p": "FAV-016",
+   "g": "180212603087458",
+   "ok": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T05:03:06.836Z",
+   "p": "FAV-016",
+   "g": "195199285857356",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T05:06:17.889Z",
+   "p": "FAV-016",
+   "g": "kofitv",
+   "ok": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T05:08:37.904Z",
+   "p": "FAV-016",
+   "g": "397641595383636",
+   "ok": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T05:10:45.711Z",
+   "p": "FAV-016",
+   "g": "495508180829744",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T05:13:05.610Z",
+   "p": "FAV-016",
+   "g": "535325930759843",
+   "ok": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T05:16:14.355Z",
+   "p": "FAV-016",
+   "g": "582376070602961",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T05:16:42.120Z",
+   "p": "FAV-016",
+   "g": "613870175328566",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T05:17:08.316Z",
+   "p": "FAV-016",
+   "g": "661332781128349",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T05:20:02.312Z",
+   "p": "FAV-016",
+   "g": "732658637184181",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T05:21:52.422Z",
+   "p": "FAV-016",
+   "g": "748111992059254",
+   "ok": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T05:23:42.668Z",
+   "p": "FAV-016",
+   "g": "928755090542065",
+   "ok": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T05:25:29.288Z",
+   "p": "FAV-016",
+   "g": "claudecommunity",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T05:26:12.709Z",
+   "p": "FAV-016",
+   "g": "977797772413869",
+   "ok": true,
+   "why": "first comment not added (post not found)"
   }
  ],
  "resets": {},
@@ -2473,6 +2585,13 @@
    "kind": "post",
    "tried": 14,
    "ok": 10
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T05:26:27.327Z",
+   "kind": "post",
+   "tried": 14,
+   "ok": 11
   }
  ],
  "renewLog": [
