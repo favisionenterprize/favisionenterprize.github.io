@@ -154,6 +154,16 @@
     vids.forEach(reroll);
     fb.launch("https://www.youtube.com/upload", { kind: "youtube", q: dry ? q.slice(0, 1) : q, dry: !!dry, then: null });
   }
+  // ⚡ Prime / AI Fix: every waiting video with a file → YouTube in one add-on job, then the rest of the steps.
+  function postWaiting(then) {
+    const fb = F(), go = () => { if (then && then.length && fb) setTimeout(() => fb.runStep(then, true), 300); };
+    const ids = S ? S.videos.filter(v => v.file && v.youtube.status !== "posted").map(v => v.id) : [];
+    if (!fb || !ids.length || !fb.liveAddon() || !shellOk()) return go();
+    const vids = ids.map(id => S.videos.find(v => v.id === id));
+    const q = vids.map(v => ({ k: v.id, file: location.origin + "/" + v.file, title: titleFor(v, "youtube"), description: textFor(v, "youtube") }));
+    vids.forEach(reroll);
+    fb.launch("https://www.youtube.com/upload", { kind: "youtube", q, then: then && then.length ? then : null });
+  }
   async function receive(out) {
     const res = out.res || [];
     if (out.dry) return { text: out.stopped ? "YouTube test: " + out.stopped : res[0] && res[0].ok ? "YouTube test passed ✓ The upload window opened; nothing was uploaded." : "YouTube test failed: " + ((res[0] && res[0].why) || "no result"), bad: !(res[0] && res[0].ok) };
@@ -379,5 +389,5 @@
     finally { A.busy(null); rerender(); }
   });
 
-  window.FAV_VIDAUTO = { load, state: () => S, renderTab, addFiles, receive, describe, textFor, titleFor, _set: s => { S = normalise(s); } };
+  window.FAV_VIDAUTO = { load, state: () => S, renderTab, addFiles, postWaiting, receive, describe, textFor, titleFor, _set: s => { S = normalise(s); } };
 })();

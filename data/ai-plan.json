@@ -160,6 +160,18 @@
    "steps": []
   },
   {
+   "id": "M8",
+   "dept": "Marketing",
+   "owner": "Alexander Awuku",
+   "task": "⚡ Prime: one press runs every tab at once (Facebook/Marketplace, Instagram, X, TikTok, YouTube side by side + trends, leads, sales, SEO, ads, AI Fix), aiming for ~6 minutes. Optional waits are dropped, but at least 8–12 s between two posts/comments on the same account, daily caps unchanged, every step still passes its own rule here, and a network stops on any warning or security check.",
+   "line": "ai",
+   "setting": "approve",
+   "status": "proposed",
+   "steps": [
+    "prime"
+   ]
+  },
+  {
    "id": "C1",
    "dept": "Support",
    "task": "Answer order-status and product questions from the company brain",

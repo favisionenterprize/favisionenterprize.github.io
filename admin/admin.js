@@ -161,7 +161,8 @@
       const blob = await gh("/git/blobs", { method: "POST", body: JSON.stringify({ content: uploads[i].b64, encoding: "base64" }) });
       blobShas[uploads[i].path] = blob.sha;
     }
-    for (let attempt = 0; attempt < 3; attempt++) {
+    for (let attempt = 0; attempt < 6; attempt++) {   // 6 tries: ⚡ Prime lanes in other tabs commit at the same time
+      if (attempt) await new Promise(r => setTimeout(r, 300 + Math.random() * 1200));
       busy("Saving to your website…");
       const head = (await gh(`/git/ref/heads/${BRANCH}`)).object.sha;
       const baseTree = (await gh(`/git/commits/${head}`)).tree.sha;
@@ -181,7 +182,7 @@
         products = next;
         return next;
       } catch (err) {
-        if (err.status !== 422 || attempt === 2) throw err;   // 422 = branch moved; rebuild on the new head
+        if (err.status !== 422 || attempt === 5) throw err;   // 422 = branch moved; rebuild on the new head
       }
     }
   }
@@ -201,7 +202,8 @@
       const b = await gh("/git/blobs", { method: "POST", body: JSON.stringify({ content: files[i].b64, encoding: "base64" }) });
       blobs.push({ path: files[i].path, mode: "100644", type: "blob", sha: b.sha });
     }
-    for (let attempt = 0; attempt < 3; attempt++) {
+    for (let attempt = 0; attempt < 6; attempt++) {   // 6 tries: ⚡ Prime lanes in other tabs commit at the same time
+      if (attempt) await new Promise(r => setTimeout(r, 300 + Math.random() * 1200));
       busy("Saving to your website…");
       const head = (await gh(`/git/ref/heads/${BRANCH}`)).object.sha;
       const baseTree = (await gh(`/git/commits/${head}`)).tree.sha;
@@ -217,7 +219,7 @@
         await gh(`/git/refs/heads/${BRANCH}`, { method: "PATCH", body: JSON.stringify({ sha: newCommit.sha }) });
         return next;
       } catch (err) {
-        if (err.status !== 422 || attempt === 2) throw err;
+        if (err.status !== 422 || attempt === 5) throw err;
       }
     }
   }
@@ -225,7 +227,8 @@
   // Apply `mutate` to the latest copy of one JSON file and commit it on its own
   // (used by the Facebook autopilot log). Retries if the branch moved meanwhile.
   async function saveJson(path, mutate, message, fallback) {
-    for (let attempt = 0; attempt < 3; attempt++) {
+    for (let attempt = 0; attempt < 6; attempt++) {   // 6 tries: ⚡ Prime lanes in other tabs commit at the same time
+      if (attempt) await new Promise(r => setTimeout(r, 300 + Math.random() * 1200));
       const head = (await gh(`/git/ref/heads/${BRANCH}`)).object.sha;
       const baseTree = (await gh(`/git/commits/${head}`)).tree.sha;
       let current;
@@ -238,7 +241,7 @@
         await gh(`/git/refs/heads/${BRANCH}`, { method: "PATCH", body: JSON.stringify({ sha: newCommit.sha }) });
         return next;
       } catch (err) {
-        if (err.status !== 422 || attempt === 2) throw err;
+        if (err.status !== 422 || attempt === 5) throw err;
       }
     }
   }
@@ -1108,7 +1111,7 @@
   (async function init() {
     // Deep links: /admin/#invoices, #orders, #customers, #leads, #prospects, #profilekit, #sales … open those screens directly.
     const deepLink = () => {
-      const sel = { "#invoices": "[data-invoices]", "#orders": "[data-orders]", "#customers": "[data-customers]", "#leads": "[data-leads]", "#catalog": "[data-catalog]", "#boxads": "[data-boxads]", "#aiplan": "[data-aiplan]", "#brands": "[data-brands]", "#prospects": "[data-prospects]", "#profilekit": "[data-profilekit]", "#sales": "[data-sales]", "#trendvideo": "[data-trendvideo]" }[location.hash];
+      const sel = { "#invoices": "[data-invoices]", "#orders": "[data-orders]", "#customers": "[data-customers]", "#leads": "[data-leads]", "#catalog": "[data-catalog]", "#boxads": "[data-boxads]", "#aiplan": "[data-aiplan]", "#brands": "[data-brands]", "#prospects": "[data-prospects]", "#profilekit": "[data-profilekit]", "#sales": "[data-sales]", "#trendvideo": "[data-trendvideo]", "#prime": "[data-prime]" }[location.hash];
       const el = sel && document.querySelector(sel);
       if (el) el.click();
       return !!el;

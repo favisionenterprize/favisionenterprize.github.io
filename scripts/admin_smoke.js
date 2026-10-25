@@ -17,7 +17,7 @@ try { ({ chromium } = require("playwright")); } catch (e) {
   }
 }
 const ROOT = path.resolve(__dirname, "..") + "/";
-const SCRIPTS = ["admin/captions.js", "admin/igauto.js", "admin/ttshop.js", "admin/socauto.js", "admin/vidauto.js", "admin/trendvideo.js", "admin/engage.js", "admin/mkauto.js", "admin/profiles.js", "admin/viral.js", "admin/ttcaptions.js", "admin/boost.js", "admin/fixall.js", "admin/brands.js", "admin/aiplan.js", "admin/brandstamp.js", "admin/relay.js", "admin/fbauto.js"];
+const SCRIPTS = ["admin/captions.js", "admin/igauto.js", "admin/ttshop.js", "admin/socauto.js", "admin/vidauto.js", "admin/trendvideo.js", "admin/engage.js", "admin/mkauto.js", "admin/profiles.js", "admin/viral.js", "admin/ttcaptions.js", "admin/boost.js", "admin/fixall.js", "admin/brands.js", "admin/aiplan.js", "admin/brandstamp.js", "admin/relay.js", "admin/fbauto.js", "admin/prime.js"];
 const MIN_TEXT = 150; // a tab with less text than this counts as blank
 
 const files = {};
@@ -68,6 +68,68 @@ async function autopilot(browser, day) {
     window.__toasts.filter(t => t.startsWith("✗")).forEach(t => out.problems.push("error toast: " + t));
     return out;
   }, MIN_TEXT);
+  // ⚡ Prime: every lane starts at once, jobs use the 8–12 s floor (no optional waits), each lane chains to the end, the
+  // admin lane finishes in seconds, and the parallel plan's non-posting work fits well inside 6 minutes.
+  if (day === today) {
+    const pr = await page.evaluate(async () => {
+      const wait = ms => new Promise(r => setTimeout(r, ms));
+      const P = window.FAV_PRIME, F = window.FAV_FBAUTO, AP = window.FAV_AIPLAN;
+      const out = { problems: [] };
+      P._test.reset();
+      document.documentElement.dataset.favautoExt = "5"; document.documentElement.dataset.favautoMode = "live"; document.documentElement.dataset.favautoUs = "1"; document.documentElement.dataset.favautoShell = "5.5.0";
+      await AP.load(); const plan = AP._test.state();
+      // M8 still Proposed → Prime refuses
+      plan.rules.find(r => r.id === "M8").status = "proposed";
+      const jobs = [];
+      const onMsg = e => { if (e.data && e.data.type === "favauto-start") jobs.push({ at: Date.now(), job: e.data.job }); };
+      window.addEventListener("message", onMsg);
+      await P.start({ inline: true }); await wait(100);
+      out.refused = !P.fast() && jobs.length === 0;
+      plan.rules.find(r => r.id === "M8").status = "approved";
+      window.confirm = () => true;
+      // planned work, estimated at the floor pace
+      const lanes = P.plan();
+      const nonPost = /^(post|ig|x|tiktok|mklist|grow|prime:relay|yt:all|reel:|story:|engage:.*:(reply|likers))/;
+      out.lanes = Object.fromEntries(Object.entries(lanes).map(([l, ks]) => [l, ks.length]));
+      out.serial = Object.values(lanes).flat().filter(k => !nonPost.test(k)).reduce((s, k) => s + P.estimate(k), 0);
+      out.parallel = Math.max(...Object.values(lanes).map(ks => ks.filter(k => !nonPost.test(k)).reduce((s, k) => s + P.estimate(k), 0)));
+      const t0 = Date.now();
+      await P.start({ inline: true });
+      // the add-on: answer each job at once (nothing posted), with the steps it carried
+      const answered = new Set();
+      for (let i = 0; i < 400; i++) {
+        await wait(60);
+        for (const j of jobs.filter(x => !answered.has(x.job.id))) {
+          answered.add(j.job.id);
+          try { await F._test.receive({ kind: j.job.kind, id: j.job.id, net: j.job.net, mode: j.job.mode, res: [], stopped: null, then: j.job.then || null, v: "mock", groups: [], snapshot: null }); } catch (e) { out.problems.push("receive " + j.job.kind + ": " + e.message); }
+        }
+        const s = P.summary(); if (s && !s.running.length) break;
+      }
+      const s = P.summary();
+      out.ms = Date.now() - t0;
+      out.first = jobs.filter(j => j.at >= t0).slice(0, 6).map(j => j.at - t0);
+      out.kinds = [...new Set(jobs.filter(j => j.at >= t0).map(j => j.job.kind))];
+      out.slow = jobs.filter(j => j.at >= t0 && /^(post|ig|x|tiktok|engage|fxfix|ttfix|mklist)$/.test(j.job.kind) && (j.job.min !== 8 || j.job.max !== 12 || "wait_first" in j.job)).map(j => j.job.kind + ":" + j.job.min + "-" + j.job.max);
+      out.done = s ? s.lanes.map(l => l.lane + ":" + l.status) : [];
+      out.admin = s ? (s.lanes.find(l => l.lane === "admin") || {}).status : null;
+      F._test.setTab("today"); await wait(100);
+      out.panel = (document.querySelector("#fa-body [data-prime-panel]") || {}).innerText || "";
+      out.todayBtn = !!document.querySelector("#fa-body [data-prime-go]");
+      window.removeEventListener("message", onMsg);
+      P._test.reset(); F._test.setTab("today");
+      return out;
+    });
+    pr.problems.forEach(p => problems.push("Prime: " + p));
+    if (!pr.refused) problems.push("Prime ran while rule M8 is only Proposed");
+    if (pr.parallel >= 360 || pr.parallel >= pr.serial) problems.push(`Prime: parallel non-posting work ${pr.parallel} s (serial ${pr.serial} s) should be well under 6:00 and shorter than one-by-one`);
+    if (pr.first.length < 4 || Math.max(...pr.first) > 1500) problems.push("Prime: the lanes didn't start together: " + JSON.stringify(pr.first));
+    if (pr.slow.length) problems.push("Prime: jobs not at the 8–12 s floor: " + pr.slow.join(", "));
+    if (pr.admin !== "done" || pr.done.some(x => !/:(done|stopped)$/.test(x))) problems.push("Prime: not every lane finished: " + JSON.stringify(pr.done));
+    if (pr.ms > 60000) problems.push("Prime mock run took " + pr.ms + " ms");
+    if (!pr.todayBtn) problems.push("Prime button missing on the Today tab");
+    if (!/Summary|Finished/.test(pr.panel)) problems.push("Prime panel shows no summary: " + pr.panel.slice(0, 120));
+    if (!problems.length) console.log(`    ⚡ Prime: ${Object.keys(pr.lanes).length} lanes ${JSON.stringify(pr.lanes)}, ${pr.kinds.length} job kinds started together (first ${Math.max(...pr.first)} ms); non-posting work ${pr.parallel} s side by side vs ${pr.serial} s one by one; mock run ${pr.ms} ms`);
+  }
   // 🎬 Trend video card on the Boost tab: one prompt per template, caution line, Copy prompt, Add video → videos library.
   const tv = await page.evaluate(async () => {
     const wait = ms => new Promise(r => setTimeout(r, ms));

@@ -201,6 +201,16 @@ listen((msg, sender, reply) => {
 });
 chrome.tabs.onRemoved.addListener(tabId => chrome.storage.session.remove("job" + tabId).then(awake));
 
+// 5.5+: ⚡ Prime lanes. The admin asks for one more admin tab per network (Facebook, Instagram, X, TikTok,
+// YouTube) so the networks run side by side; only admin pages are ever opened this way.
+chrome.runtime.onMessage.addListener((msg, sender, reply) => {
+  if (!msg || msg.type !== "lane") return;
+  const url = String(msg.url || "");
+  if (!url.startsWith(ADMIN) || !sender.tab) { reply({ ok: false }); return; }
+  chrome.tabs.create({ url, active: false, openerTabId: sender.tab.id }).then(() => reply({ ok: true }), () => reply({ ok: false }));
+  return true;
+});
+
 // Keep running when Edge is minimised or the screen is locked (5.2+):
 //  - while any run is going, ask Windows to keep the screen and PC awake (no sleep, no screen-off lock);
 //  - run tabs are never put to sleep / discarded by the browser;

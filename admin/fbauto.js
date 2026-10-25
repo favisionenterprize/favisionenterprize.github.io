@@ -300,6 +300,7 @@
       if (!job.q.length) return;
     }
     job.back = location.origin + location.pathname;
+    if (window.FAV_PRIME && window.FAV_PRIME.fast()) window.FAV_PRIME.tune(job);   // ⚡ Prime: 8–12 s floor, no optional waits
     if (Number(ext()) >= 3) {
       job.navFor = 0;                                   // the add-on opens the first page itself
       window.postMessage({ type: "favauto-start", url, job }, location.origin);
@@ -348,7 +349,7 @@
       }, `Autopilot: ${pid} is today's group listing`);
     } catch (err) { A.busy(null); return A.toast(A.friendly(err), true); }
     A.busy(null);
-    await sendAlert("session");
+    if (window.FAV_PRIME && window.FAV_PRIME.fast()) sendAlert("session").catch(() => null); else await sendAlert("session");
     const p = pl.p, start = S.posts.filter(x => x.p === p.id).length;
     const img = postImg(p);
     const q = pl.groups.map((g, i) => ({ g: g.id, name: g.name, url: g.url, p: p.id, text: caption(p, start + i), img }));
@@ -395,9 +396,11 @@
   function runStep(steps, auto) {
     steps = (steps || []).slice();
     const AP = window.FAV_AIPLAN, runId = new Date().toISOString().slice(0, 13);   // "Needs approval" asked once an hour
+    let lastK = steps[0];
     while (steps.length) {
-      const k = steps.shift();
-      if (AP && !AP.gate(k, runId)) continue;   // AI Plan: paused, not approved, retired, blocked or declined → skip this step
+      const k = lastK = steps.shift();
+      if (window.FAV_PRIME) window.FAV_PRIME.onStep(k, steps);
+      if (AP && !AP.gate(k, runId)) { if (window.FAV_PRIME) window.FAV_PRIME.onSkip(k, "AI Plan"); continue; }   // AI Plan: paused, not approved, retired, blocked or declined → skip this step
       if (k === "renew") return startRenew(steps);
       if (k === "declines" && cleanupWaiting()) return startDeclines(steps);
       if (k === "sync" && syncWaiting()) return startImport(steps);
@@ -410,7 +413,9 @@
       if (k === "ignow" && IG() && Number(ext()) >= 4) { const sel = selection(); return startIg({ products: sel.ids, limit: sel.ig_n }, steps); }
       if ((k === "x" || k === "tiktok") && SOC() && SOC().summary(k).waiting && liveAddon()) return startSoc(k, {}, steps);
       if ((k === "xnow" || k === "ttnow") && SOC() && liveAddon()) { const sel = selection(), net = k === "xnow" ? "x" : "tiktok"; return startSoc(net, { products: sel.ids, limit: net === "x" ? sel.x_n : sel.tt_n }, steps); }
-      if (k.startsWith("engage:") && ENG() && ENG().state()) return ENG().start(k.slice(7), steps);
+      if (k.startsWith("engage:") && ENG() && ENG().state()) { const [net, mode] = k.slice(7).split(":"); return ENG().start(net, steps, mode ? { mode } : undefined); }   // engage:<net>[:stats|reply|likers]
+      if (k === "yt:all" && VID() && VID().postWaiting) return VID().postWaiting(steps);
+      if (k.startsWith("prime:") && window.FAV_PRIME) return window.FAV_PRIME.step(k, steps);
       if (k.startsWith("page:")) return startPagePost(k.slice(5), steps);
       if (k.startsWith("igs:") && IG() && Number(ext()) >= 4) return startIg({ keys: [k.slice(4)] }, steps);
       if ((k.startsWith("xs:") || k.startsWith("tts:")) && SOC() && SOC().state() && liveAddon()) return startSoc(k.startsWith("xs:") ? "x" : "tiktok", { keys: [k.slice(k.indexOf(":") + 1)] }, steps);
@@ -436,8 +441,10 @@
       }
       if (k.startsWith("desk:") && activeGroups().length) return startDesk(k.split(":")[1], Number(k.split(":")[2]) || 10, steps);
       if (k.startsWith("relay:") && RLY()) return RLY().step(k, steps);
-      if (k === "report") return sendReport(true);
+      if (k === "report") { const r = sendReport(true); if (window.FAV_PRIME) { window.FAV_PRIME.onIdle(k); } return r; }
+      if (window.FAV_PRIME) window.FAV_PRIME.onSkip(k, "nothing to do");
     }
+    if (window.FAV_PRIME && lastK) window.FAV_PRIME.onIdle(lastK);
   }
   // One product (the student desk by default) into up to `n` groups it hasn't been in this round, rested groups first.
   function startDesk(pid, n, then) {
@@ -676,7 +683,10 @@
         const r = await VID().receive(out);
         A.toast(r.text, r.bad);
         tab = "videos";
-        A.busy(null); render(); return;
+        A.busy(null); render();
+        if (Array.isArray(out.then) && out.then.length) { if (window.FAV_PRIME) window.FAV_PRIME.onResult(out, out.then); setTimeout(() => runStep(out.then, true), window.FAV_PRIME && window.FAV_PRIME.fast() ? window.FAV_PRIME.gap(out) : 1500); }
+        else if (window.FAV_PRIME) { window.FAV_PRIME.onResult(out, []); window.FAV_PRIME.onIdle(out); }
+        return;
       } else if ((out.kind === "x" || out.kind === "tiktok") && SOC()) {
         const r = await SOC().receive(out);
         A.toast(r.text, r.bad);
@@ -791,7 +801,9 @@
     // pressing Stop does (only the report is still sent).
     let then = Array.isArray(out.then) ? out.then : out.then === "post" ? ["post"] : [];
     if (out.stopped === "Stopped by you.") then = then.filter(k => k === "report");
-    if (then.length) setTimeout(() => runStep(then, true), 1500);
+    if (window.FAV_PRIME) window.FAV_PRIME.onResult(out, then);
+    if (then.length) setTimeout(() => runStep(then, true), window.FAV_PRIME && window.FAV_PRIME.fast() ? window.FAV_PRIME.gap(out) : 1500);   // Prime: never under the 8–12 s floor after a post on this network
+    else if (window.FAV_PRIME) window.FAV_PRIME.onIdle(out);
   }
 
   // ------------------------------------------------------------------ rendering
@@ -999,7 +1011,7 @@
       ? `<div class="fa-upd bad"><p><b>Switch on automatic updates.</b> In Edge open <code>edge://extensions</code> and turn on <b>Developer mode</b> (left side of the page). Then click <b>Details</b> under FA Vision Autopilot and, if you see <b>Allow user scripts</b>, turn it on too. The add-on then fetches its latest version from your website by itself. Until then it uses the copy in its folder.</p><button class="btn btn-ghost btn-sm" data-fa="recheck">I've switched it on, check again</button></div>`
       : Number(ext()) >= 5 && ds.favautoMode === "live" ? `<p class="fa-ext ok">✓ The add-on updates itself from your website${ds.favautoVersion ? ` (version ${esc(ds.favautoVersion)})` : ""}. Nothing to download.</p>` : "";
     const days = lastDays(7);
-    return `
+    return `${window.FAV_PRIME ? window.FAV_PRIME.button() : ""}
       ${extMsg ? `<p class="fa-ext bad">✗ ${extMsg}</p>` : updMsg}${rulesNote()}
       <section class="fa-card run-card">
         <header><h2>Today's posting</h2><span class="muted fa-small">${esc(new Date().toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" }))}</span></header>

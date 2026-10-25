@@ -2,7 +2,8 @@
 // updates, and passes jobs from the autopilot screen (Facebook and Instagram) to the add-on.
 const mark = () => {
   document.documentElement.dataset.favsyncExt = "1";
-  document.documentElement.dataset.favautoExt = "5";   // 4 = Instagram, 5 = updates itself from the website
+  document.documentElement.dataset.favautoExt = "5";
+  document.documentElement.dataset.favautoLanes = "1";   // 5.5: can open ⚡ Prime lane tabs   // 4 = Instagram, 5 = updates itself from the website
 };
 if (document.documentElement) mark(); else document.addEventListener("readystatechange", mark, { once: true });
 
@@ -26,6 +27,11 @@ hello(false);
 window.addEventListener("message", e => {
   if (e.source !== window || e.origin !== location.origin || !e.data) return;
   if (e.data.type === "favauto-recheck") return hello(true);
+  // 5.5+: ⚡ Prime opens one admin tab per network lane (a page may only open one pop-up per click).
+  if (e.data.type === "favauto-lane") {
+    chrome.runtime.sendMessage({ type: "lane", url: e.data.url }, r => window.postMessage({ type: "favauto-lane-ok", id: e.data.id, ok: !!(r && r.ok) }, location.origin));
+    return;
+  }
   if (e.data.type !== "favauto-start") return;
   chrome.runtime.sendMessage({ type: "start", url: e.data.url, job: e.data.job }, r => {
     if (!r || !r.ok) window.postMessage({ type: "favauto-start-failed" }, location.origin);
