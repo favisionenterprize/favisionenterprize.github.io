@@ -340,7 +340,7 @@
    },
    "youtube": {
     "status": "failed",
-    "why": "YouTube didn't open the video details",
+    "why": "YouTube didn't confirm (check YouTube Studio → Content)",
     "d": "2026-10-25"
    },
    "audio": {
