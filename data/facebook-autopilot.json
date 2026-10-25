@@ -2160,6 +2160,96 @@
    "ok": false,
    "now": true,
    "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T07:16:52.095Z",
+   "p": "FAV-014",
+   "g": "1024060211323777",
+   "ok": false,
+   "now": true,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T07:17:37.593Z",
+   "p": "FAV-014",
+   "g": "1145676989186606",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T07:18:24.311Z",
+   "p": "FAV-014",
+   "g": "1152937838806537",
+   "ok": false,
+   "now": true,
+   "why": "Post box didn't open"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T07:19:31.461Z",
+   "p": "FAV-014",
+   "g": "1307349760454711",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T07:21:43.481Z",
+   "p": "FAV-014",
+   "g": "1367025170347293",
+   "ok": false,
+   "now": true,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T07:23:35.728Z",
+   "p": "FAV-014",
+   "g": "1412859638977189",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T07:27:00.699Z",
+   "p": "FAV-014",
+   "g": "1603659139995662",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T07:28:24.642Z",
+   "p": "FAV-014",
+   "g": "1709817569323257",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T07:32:15.154Z",
+   "p": "FAV-014",
+   "g": "1754360848215346",
+   "ok": false,
+   "now": true,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T07:35:16.869Z",
+   "p": "FAV-014",
+   "g": "1780893349074019",
+   "ok": false,
+   "now": true,
+   "why": "Facebook didn't confirm the post"
   }
  ],
  "resets": {},
@@ -2608,6 +2698,13 @@
    "kind": "post",
    "tried": 1,
    "ok": 0
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T07:35:38.405Z",
+   "kind": "post",
+   "tried": 10,
+   "ok": 2
   }
  ],
  "renewLog": [
