@@ -570,43 +570,49 @@
    "id": "1371907773293669",
    "name": "Ghana food",
    "url": "https://www.facebook.com/groups/1371907773293669/",
-   "active": true,
-   "added": "2026-10-25"
+   "active": false,
+   "added": "2026-10-25",
+   "off_why": "Not a member of this group"
   },
   {
    "id": "1968925946751585",
    "name": "Universal Yoga Community",
    "url": "https://www.facebook.com/groups/1968925946751585/",
-   "active": true,
-   "added": "2026-10-25"
+   "active": false,
+   "added": "2026-10-25",
+   "off_why": "Couldn't find the post box"
   },
   {
    "id": "789579941115543",
    "name": "MODERN ARCHITECTURE IN NIGERIA AND THE WORLD",
    "url": "https://www.facebook.com/groups/789579941115543/",
-   "active": true,
-   "added": "2026-10-25"
+   "active": false,
+   "added": "2026-10-25",
+   "off_why": "Post box didn't open"
   },
   {
    "id": "homedecorinspirations",
    "name": "Home Decor Ideas & DIY Inspiration",
    "url": "https://www.facebook.com/groups/homedecorinspirations/",
-   "active": true,
-   "added": "2026-10-25"
+   "active": false,
+   "added": "2026-10-25",
+   "off_why": "Not a member of this group"
   },
   {
    "id": "755614535841357",
    "name": "🏡✨ Dream Home Interiors Hub ✨🏡",
    "url": "https://www.facebook.com/groups/755614535841357/",
-   "active": true,
-   "added": "2026-10-25"
+   "active": false,
+   "added": "2026-10-25",
+   "off_why": "Couldn't find the post box"
   },
   {
    "id": "7064480850327890",
    "name": "Decoration Ideas!",
    "url": "https://www.facebook.com/groups/7064480850327890/",
-   "active": true,
-   "added": "2026-10-25"
+   "active": false,
+   "added": "2026-10-25",
+   "off_why": "Not a member of this group"
   },
   {
    "id": "7445609635478377",
@@ -2610,6 +2616,96 @@
    "ok": false,
    "now": true,
    "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:35:50.441Z",
+   "p": "FAV-014",
+   "g": "226910456304636",
+   "ok": false,
+   "now": true,
+   "why": "Post box didn't open"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:36:58.658Z",
+   "p": "FAV-014",
+   "g": "18020874123",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:39:11.115Z",
+   "p": "FAV-014",
+   "g": "391960286954584",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:43:15.915Z",
+   "p": "FAV-014",
+   "g": "583352032851222",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:44:48.200Z",
+   "p": "FAV-014",
+   "g": "1371907773293669",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:45:17.801Z",
+   "p": "FAV-014",
+   "g": "1968925946751585",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:45:55.529Z",
+   "p": "FAV-014",
+   "g": "789579941115543",
+   "ok": false,
+   "now": true,
+   "why": "Post box didn't open"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:46:26.027Z",
+   "p": "FAV-014",
+   "g": "homedecorinspirations",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:46:54.813Z",
+   "p": "FAV-014",
+   "g": "755614535841357",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:47:23.169Z",
+   "p": "FAV-014",
+   "g": "7064480850327890",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
   }
  ],
  "resets": {},
@@ -3093,6 +3189,13 @@
    "kind": "post",
    "tried": 10,
    "ok": 1
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:47:39.851Z",
+   "kind": "post",
+   "tried": 10,
+   "ok": 3
   }
  ],
  "renewLog": [
