@@ -37,6 +37,8 @@
   const rand = (a, b) => Math.round(a + Math.random() * (b - a));
   const bg = msg => new Promise(res => { try { chrome.runtime.sendMessage(msg, r => res(r || {})); } catch (e) { res({}); } });
   let job = null;
+  // Dialog handler context: "Discard post?" may discard only OUR unsent text from this job.
+  const DCTX = () => ({ ours: () => { try { const it = job && job.q && job.q[job.i]; const want = it && String(it.text || it.description || "").slice(0, 30).trim(); const box = [...document.querySelectorAll("[contenteditable=true],textarea")].map(e => e.innerText || e.value || "").join(" "); return !!want && box.includes(want); } catch (e) { return false; } } });
   try { job = (await bg({ type: "getJob" })).job || null; } catch (e) { job = null; }
   if (!job || !/^(fxscan|fxfix|fxreply|mkedit)$/.test(job.kind)) return;    // not a Fix all tab: do nothing
   const host = location.hostname;
@@ -72,11 +74,14 @@
     const more = /^(fxfix|mkedit|fxreply)$/.test(job.kind) && !stopped ? q.length - job.i : 0;
     const out = { kind: job.kind, net: NET, id: job.id, v: VERSION, res: job.res, n: q.length || job.res.length, stopped: stopped || null,
       then: more > 0 && Array.isArray(job.cont) ? job.cont.concat(job.then || []) : job.then || null, ...(more > 0 ? { more } : {}) };
+    if (window.FAV_DIALOGS) { const dl = window.FAV_DIALOGS.log(); if (dl.length) out.dialogs = dl; }
     await bg({ type: "clearJob" });
+    if (window.FAV_DIALOGS) window.FAV_DIALOGS.leaving();
     location.href = job.back + "#favauto-done=" + encodeURIComponent(JSON.stringify(out));
   }
   const WARN = /temporarily blocked|temporarily restricted|you('|’)re restricted|your account (has been |is )?restricted|we limit how often|you can('|’)t use this feature|try again later|suspicious activity|confirm your identity|too many (attempts|requests)|action blocked|community (guidelines|standards)/i;
   function warning() {
+    { const dg = window.FAV_DIALOGS && window.FAV_DIALOGS.tick(DCTX()); if (dg && dg.stop) return dg.stop; }   // shared dialog handler (extension/dialogs.js)
     const t = [...document.querySelectorAll("[role=dialog],[role=alert],[data-testid=toast]")].map(d => d.innerText || "").join("\n");
     const m = t.match(WARN);
     return m ? m[0] : null;
@@ -89,12 +94,13 @@
   // Never these: the menus that hold them are only read, and only "Edit post" / "Edit" is ever clicked.
   const DANGER = /delete|trash|remove|archive|discard post|turn off commenting|hide from profile/i;
   const enabled = b => b && b.getAttribute("aria-disabled") !== "true" && !b.disabled;
-  async function waitFor(fn, ms) { for (let t = 0; t < ms; t += 300) { if (stopAsked) return null; const v = fn(); if (v) return v; await sleep(300); } return null; }
+  async function waitFor(fn, ms) { for (let t = 0; t < ms; t += 300) { if (stopAsked) return null; if (window.FAV_DIALOGS) window.FAV_DIALOGS.tick(DCTX()); const v = fn(); if (v) return v; await sleep(300); } return null; }
   async function countdown(secs, text) { for (let s = secs; s > 0 && !stopAsked; s--) { box(`${text} ${s} s…`); await sleep(1000); } }
   async function go(url) {
     job.hops++;
     await save();
     if (job.hops > (job.maxHops || 300)) return finish("The site kept sending the tab to another page. Stopped.");
+    if (window.FAV_DIALOGS) window.FAV_DIALOGS.leaving();
     location.href = url;
   }
   const escKey = () => document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", code: "Escape", keyCode: 27, bubbles: true }));

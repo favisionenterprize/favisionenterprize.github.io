@@ -31,6 +31,10 @@
   const bg = msg => new Promise(res => { try { chrome.runtime.sendMessage(msg, r => res(r || {})); } catch (e) { res({}); } });
 
   let job = null;
+
+  // Dialog handler context: "Discard post?" may discard only OUR unsent text from this job.
+
+  const DCTX = () => ({ ours: () => { try { const it = job && job.q && job.q[job.i]; const want = it && String(it.text || it.description || "").slice(0, 30).trim(); const box = [...document.querySelectorAll("[contenteditable=true],textarea")].map(e => e.innerText || e.value || "").join(" "); return !!want && box.includes(want); } catch (e) { return false; } } });
   try { job = (await bg({ type: "getJob" })).job || null; } catch (e) { job = null; }
   if (!job || job.kind !== "ig") return;               // not an autopilot tab: do nothing
   job.i = job.i || 0;
@@ -59,12 +63,15 @@
 
   async function finish(stopped) {
     const out = { kind: "ig", id: job.id, res: job.res, stats: job.stats || null, spot: job.spot || [], stopped: stopped || null, then: job.then || null, dry: !!job.dry, mode: job.mode || null };
+    if (window.FAV_DIALOGS) { const dl = window.FAV_DIALOGS.log(); if (dl.length) out.dialogs = dl; }
     await bg({ type: "clearJob" });
+    if (window.FAV_DIALOGS) window.FAV_DIALOGS.leaving();
     location.href = job.back + "#favauto-done=" + encodeURIComponent(JSON.stringify(out));
   }
 
   const WARN = /try again later|action blocked|we restrict certain activity|temporarily (blocked|restricted|locked)|suspicious (activity|login)|confirm (it('|’)s you|your identity)|your account has been (disabled|suspended)|we limit how often/i;
   function warning() {
+    { const dg = window.FAV_DIALOGS && window.FAV_DIALOGS.tick(DCTX()); if (dg && dg.stop) return dg.stop; }   // shared dialog handler (extension/dialogs.js)
     const t = [...document.querySelectorAll("[role=dialog]")].map(d => d.innerText || "").join("\n") || "";
     const hit = t.match(WARN);
     return hit ? hit[0] : null;
@@ -86,7 +93,9 @@
     return svg ? (svg.closest('[role=button],button,a') || svg.parentElement) : null;
   }
   async function waitFor(fn, ms) {
+    if (window.FAV_DIALOGS) window.FAV_DIALOGS.tick(DCTX());
     for (let t = 0; t < ms; t += 250) {
+      if (window.FAV_DIALOGS && t % 1000 < 300) window.FAV_DIALOGS.tick(DCTX());
       if (stopAsked) return null;
       const v = fn();
       if (v) return v;
@@ -105,6 +114,7 @@
     if (job.navFor === step) return true;
     job.navFor = step;
     await save();
+    if (window.FAV_DIALOGS) window.FAV_DIALOGS.leaving();
     location.href = url;
     return false;
   }
@@ -258,7 +268,7 @@
     // "Share to Facebook" must stay off (it would post to the personal Facebook profile)
     const dialog = editor.closest("[role=dialog]") || document;
     for (const sw of dialog.querySelectorAll('input[type=checkbox], [role=switch]')) {
-      const row = sw.closest("label, [role=button], div");
+      const row = (sw.parentElement || sw).closest("label, [role=button], div");   // the row around the switch (closest() alone returns the switch itself)
       const txt = ((row && row.innerText) || "") + " " + (sw.getAttribute("aria-label") || "");
       const on = sw.checked === true || sw.getAttribute("aria-checked") === "true";
       if (/facebook/i.test(txt) && on) { sw.click(); await sleep(500); }
@@ -284,6 +294,12 @@
       if (realLen(editor.innerText) < 15) { document.execCommand("insertText", false, it.text); await sleep(600); }
     }
     if (realLen(editor.innerText) < 15) { await fail(BLANK); continue; }
+    // Shared dialog handler: last check before Share; after a handled popup, the caption is checked again.
+    if (window.FAV_DIALOGS) {
+      const before = window.FAV_DIALOGS.log().length, dg = window.FAV_DIALOGS.tick(DCTX());
+      if (dg && dg.stop) { await record(false, dg.stop); return finish(`Instagram showed ${dg.stop}. Nothing more was posted.`); }
+      if (window.FAV_DIALOGS.log().length > before && realLen(editor.innerText) < 15) { await fail(BLANK); continue; }
+    }
     share.click();
     box(`${n}: sharing…`);
     const done = await waitFor(() => /your (post|reel) has been shared|(post|reel) shared/i.test((document.querySelector("[role=dialog]") || {}).innerText || "") || warning(), it.video ? 240000 : 90000);

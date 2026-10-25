@@ -44,7 +44,9 @@
   const nth = s.done.length + s.skip.length + 1;
   box(`listing ${nth} of ${s.q.length}: setting GH₵${Number(job.price).toLocaleString()}…`);
   let pi = null;
+  const dlg = () => { const r = window.FAV_DIALOGS && window.FAV_DIALOGS.tick(); return r && r.stop; };   // shared dialog handler (extension/dialogs.js)
   for (let t = 0; t < 80 && !pi; t++) {
+    const st = dlg(); if (st) { box("Stopped: " + st, true); return; }
     pi = [...document.querySelectorAll("input[type=text]")].find(i => ((i.closest("label") || {}).innerText || "").trim().startsWith("Price"));
     if (!pi) await new Promise(r => setTimeout(r, 250));
   }
@@ -56,9 +58,10 @@
   if (pi.value.replace(/\D/g, "") !== String(job.price) || !/^GH/.test(pi.value)) return skip(`This listing shows "${pi.value}" (check its currency).`);
   const btn = [...document.querySelectorAll('[role=button],button')].find(b => (b.innerText || "").trim() === "Update");
   if (!btn) return skip("No Update button on this page.");
+  { const st = dlg(); if (st) { box("Stopped: " + st, true); return; } }
   btn.click();
   box(`listing ${nth} of ${s.q.length}: saving…`);
-  for (let t = 0; t < 100 && location.pathname.includes("/edit"); t++) await new Promise(r => setTimeout(r, 250));
+  for (let t = 0; t < 100 && location.pathname.includes("/edit"); t++) { const st = dlg(); if (st) { box("Stopped: " + st, true); return; } await new Promise(r => setTimeout(r, 250)); }
   if (location.pathname.includes("/edit")) return skip("Facebook didn't confirm the save.");
   s.done.push(id); save();
   box(`saved ${s.done.length} of ${s.q.length}.`);

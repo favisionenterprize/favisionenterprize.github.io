@@ -1246,5 +1246,7 @@
     if (e.source === window && e.data && e.data.type === "favauto-start-failed") A.toast("The add-on couldn't start the run. Reload the add-on in edge://extensions and try again.", true);
   });
   window.FAV_FBAUTO_DENY = GROW_DENY;
-  window.FAV_FBAUTO = { open, launch, needExt, liveAddon, runStep, sendAlert, keepNote, render: () => { if (!screen.hidden || tab === "videos" || tab === "engage" || tab === "market" || tab === "boost" || tab === "social" || tab === "ttcap") render(); }, _test: { set: s => { S = normalise(s); }, save, dueList, plan, caption, gateJob, receive, state: () => S, stepsToday, runStep, setTab: t => { tab = t; render(); } } };
+  window.FAV_FBAUTO = { open, launch, needExt, liveAddon, runStep, sendAlert, keepNote, render: () => { if (!screen.hidden || tab === "videos" || tab === "engage" || tab === "market" || tab === "boost" || tab === "social" || tab === "ttcap") render(); }, _test: { set: s => { S = normalise(s); }, save, dueList, plan, caption, gateJob, receive, state: () => S, stepsToday, runStep, setTab: t => { tab = t; render(); } },
+    // 📱 Phone posting (admin/phonepost.js): the same plans, groups and log, read and written without the add-on.
+    phone: { load, state: () => S, plan, planNow, selection, activeGroups, coverage, caption, save } };
 })();

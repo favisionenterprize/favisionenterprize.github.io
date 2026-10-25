@@ -35,6 +35,10 @@
   const bg = msg => new Promise(res => { try { chrome.runtime.sendMessage(msg, r => res(r || {})); } catch (e) { res({}); } });
 
   let job = null;
+
+  // Dialog handler context: "Discard post?" may discard only OUR unsent text from this job.
+
+  const DCTX = () => ({ ours: () => { try { const it = job && job.q && job.q[job.i]; const want = it && String(it.text || it.description || "").slice(0, 30).trim(); const box = [...document.querySelectorAll("[contenteditable=true],textarea")].map(e => e.innerText || e.value || "").join(" "); return !!want && box.includes(want); } catch (e) { return false; } } });
   try { job = (await bg({ type: "getJob" })).job || null; } catch (e) { job = null; }
   if (!job || (job.kind !== "x" && job.kind !== "tiktok")) return;   // not an autopilot tab
   const NET = job.kind === "x" ? "X" : "TikTok";
@@ -63,13 +67,16 @@
   }
   async function finish(stopped) {
     const out = { kind: job.kind, id: job.id, res: job.res, stopped: stopped || null, then: job.then || null, dry: !!job.dry, mode: job.mode || null };
+    if (window.FAV_DIALOGS) { const dl = window.FAV_DIALOGS.log(); if (dl.length) out.dialogs = dl; }
     await bg({ type: "clearJob" });
+    if (window.FAV_DIALOGS) window.FAV_DIALOGS.leaving();
     location.href = job.back + "#favauto-done=" + encodeURIComponent(JSON.stringify(out));
   }
 
   const WARN = /try again later|rate limit|temporarily (blocked|restricted|locked|limited)|your account (is|has been) (locked|suspended|restricted)|suspicious activity|confirm (it('|’)s you|your identity)|verify (you('|’)re|that you are) (human|not a robot)|too many (attempts|requests)|daily limit|something went wrong/i;
   const visible = el => !!el && el.getClientRects().length > 0;
   function warning() {
+    { const dg = window.FAV_DIALOGS && window.FAV_DIALOGS.tick(DCTX()); if (dg && dg.stop) return dg.stop; }   // shared dialog handler (extension/dialogs.js)
     const t = [...document.querySelectorAll('[role=dialog],[role=alert],[data-testid=toast]')].filter(visible).map(d => d.innerText || "").join("\n");
     const hit = t.match(WARN);
     return hit ? hit[0] : null;
@@ -79,7 +86,9 @@
       .find(b => visible(b) && (re.test((b.innerText || "").trim()) || re.test((b.getAttribute("aria-label") || "").trim())));
   }
   async function waitFor(fn, ms) {
+    if (window.FAV_DIALOGS) window.FAV_DIALOGS.tick(DCTX());
     for (let t = 0; t < ms; t += 250) {
+      if (window.FAV_DIALOGS && t % 1000 < 300) window.FAV_DIALOGS.tick(DCTX());
       if (stopAsked) return null;
       const v = fn();
       if (v) return v;
@@ -102,6 +111,7 @@
     if (job.navFor === job.i) return true;
     job.navFor = job.i;
     await save();
+    if (window.FAV_DIALOGS) window.FAV_DIALOGS.leaving();
     location.href = url;
     return false;
   }
@@ -328,6 +338,11 @@
       if (realLen(ed.innerText) < 15) { const dt = new DataTransfer(); dt.setData("text/plain", it.text); ed.dispatchEvent(new ClipboardEvent("paste", { clipboardData: dt, bubbles: true, cancelable: true })); await sleep(800); }
     }
     if (realLen(ed.innerText) < 15) { await record(it, false, BLANK); return next(false); }
+    if (window.FAV_DIALOGS) {   // shared dialog handler: last check before Post; re-check the caption after a handled popup
+      const before = window.FAV_DIALOGS.log().length, dg = window.FAV_DIALOGS.tick(DCTX());
+      if (dg && dg.stop) { await record(it, false, dg.stop); return finish(`X showed ${dg.stop}. Nothing more was posted.`); }
+      if (window.FAV_DIALOGS.log().length > before && realLen(ed.innerText) < 15) { typeInto(ed, it.text); await sleep(800); if (realLen(ed.innerText) < 15) { await record(it, false, BLANK); return next(false); } }
+    }
     if (job.dry) {
       box(`${n}: test passed ✓ (caption typed${photoNote ? ", photo NOT attached" : ", photo attached"}). Not posting.`);
       await sleep(2500);
@@ -382,6 +397,11 @@
     if (discard) { discard.click(); const sure = await waitFor(() => findBtn(/^discard edits$/i), 5000); if (sure) sure.click(); }
     await record(it, true, "Test only, not posted");
     return next(false);
+  }
+  if (window.FAV_DIALOGS) {   // shared dialog handler: last check before Post; description checked again after a handled popup
+    const before = window.FAV_DIALOGS.log().length, dg = window.FAV_DIALOGS.tick(DCTX());
+    if (dg && dg.stop) { await record(it, false, dg.stop); return finish(`TikTok showed ${dg.stop}. Nothing more was posted.`); }
+    if (window.FAV_DIALOGS.log().length > before && realLen(edNow()) < 15 && !(await setDescription(it.text))) { await record(it, false, BLANK); return finish("TikTok's description box was empty right before Post: " + BLANK + "."); }
   }
   post.scrollIntoView({ block: "center" });
   job.posted = job.i;               // if Post reloads the tab, the next page load counts it as posted

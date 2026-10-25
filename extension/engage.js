@@ -31,6 +31,8 @@
   const rand = (a, b) => Math.round(a + Math.random() * (b - a));
   const bg = msg => new Promise(res => { try { chrome.runtime.sendMessage(msg, r => res(r || {})); } catch (e) { res({}); } });
   let job = null;
+  // Dialog handler context: "Discard post?" may discard only OUR unsent text from this job.
+  const DCTX = () => ({ ours: () => { try { const it = job && job.q && job.q[job.i]; const want = it && String(it.text || it.description || "").slice(0, 30).trim(); const box = [...document.querySelectorAll("[contenteditable=true],textarea")].map(e => e.innerText || e.value || "").join(" "); return !!want && box.includes(want); } catch (e) { return false; } } });
   try { job = (await bg({ type: "getJob" })).job || null; } catch (e) { job = null; }
   if (!job || job.kind !== "engage") return;
   const NET = job.net;
@@ -63,17 +65,21 @@
   async function finish(stopped) {
     const out = { kind: "engage", net: NET, id: job.id, res: job.res, followers: job.followers == null ? null : job.followers, posts: job.urls.length,
       stopped: stopped || null, then: job.then || null, commenting: !!job.text && !job.statsOnly && job.mode !== "reply" && job.mode !== "invite" && job.mode !== "likers", mode: job.mode || "comment", handle: job.handle || null };
+    if (window.FAV_DIALOGS) { const dl = window.FAV_DIALOGS.log(); if (dl.length) out.dialogs = dl; }
     await bg({ type: "clearJob" });
+    if (window.FAV_DIALOGS) window.FAV_DIALOGS.leaving();
     location.href = job.back + "#favauto-done=" + encodeURIComponent(JSON.stringify(out));
   }
   const WARN = /temporarily blocked|temporarily restricted|you('|’)re restricted|we limit how often|you can('|’)t (use this feature|comment|post) right now|try again later|suspicious activity|confirm (your identity|it('|’)s you)|action blocked|rate limit|too many (comments|requests)/i;
   function warning() {
+    { const dg = window.FAV_DIALOGS && window.FAV_DIALOGS.tick(DCTX()); if (dg && dg.stop) return dg.stop; }   // shared dialog handler (extension/dialogs.js)
     const t = [...document.querySelectorAll("[role=dialog],[role=alert],[data-testid=toast]")].map(d => d.innerText || "").join("\n");
     const hit = t.match(WARN);
     return hit ? hit[0] : null;
   }
   const visible = el => !!el && el.getClientRects().length > 0;
   async function waitFor(fn, ms) {
+    if (window.FAV_DIALOGS) window.FAV_DIALOGS.tick(DCTX());
     for (let t = 0; t < ms; t += 300) { if (stopAsked) return null; const v = fn(); if (v) return v; await sleep(300); }
     return null;
   }
@@ -237,6 +243,7 @@
   };
   async function expandComments() {
     for (let i = 0; i < 6; i++) {
+      if (window.FAV_DIALOGS && t % 1000 < 300) window.FAV_DIALOGS.tick(DCTX());
       const more = [...document.querySelectorAll("[role=button],button")].find(b => visible(b) && /^(View (more|all|previous|\d+ more) (comments?|replies)|View \d+ repl(y|ies)|See more comments|Load more comments|View more replies)/i.test((b.innerText || "").trim()));
       if (!more) break;
       more.click(); await sleep(rand(1500, 2500));

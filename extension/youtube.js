@@ -28,6 +28,10 @@
   const bg = msg => new Promise(res => { try { chrome.runtime.sendMessage(msg, r => res(r || {})); } catch (e) { res({}); } });
 
   let job = null;
+
+  // Dialog handler context: "Discard post?" may discard only OUR unsent text from this job.
+
+  const DCTX = () => ({ ours: () => { try { const it = job && job.q && job.q[job.i]; const want = it && String(it.text || it.description || "").slice(0, 30).trim(); const box = [...document.querySelectorAll("[contenteditable=true],textarea")].map(e => e.innerText || e.value || "").join(" "); return !!want && box.includes(want); } catch (e) { return false; } } });
   try { job = (await bg({ type: "getJob" })).job || null; } catch (e) { job = null; }
   if (!job || job.kind !== "youtube") return;
   job.i = job.i || 0;
@@ -54,7 +58,9 @@
   }
   async function finish(stopped) {
     const out = { kind: "youtube", id: job.id, res: job.res, stopped: stopped || null, then: job.then || null, dry: !!job.dry, mode: job.mode || null };
+    if (window.FAV_DIALOGS) { const dl = window.FAV_DIALOGS.log(); if (dl.length) out.dialogs = dl; }
     await bg({ type: "clearJob" });
+    if (window.FAV_DIALOGS) window.FAV_DIALOGS.leaving();
     location.href = job.back + "#favauto-done=" + encodeURIComponent(JSON.stringify(out));
   }
   // Quality gate (same rule as admin/captions.js ensure): never post a blank description. Real text =
@@ -65,12 +71,15 @@
   const visible = el => !!el && el.getClientRects().length > 0;
   const WARN = /daily upload limit|upload limit reached|too many uploads|verify (it('|’)s you|your account)|account (is|has been) (suspended|terminated)|community guidelines strike/i;
   function warning() {
+    { const dg = window.FAV_DIALOGS && window.FAV_DIALOGS.tick(DCTX()); if (dg && dg.stop) return dg.stop; }   // shared dialog handler (extension/dialogs.js)
     const t = [...document.querySelectorAll("tp-yt-paper-dialog,ytcp-dialog,[role=dialog],[role=alert]")].filter(visible).map(d => d.innerText || "").join("\n");
     const hit = t.match(WARN);
     return hit ? hit[0] : null;
   }
   async function waitFor(fn, ms) {
+    if (window.FAV_DIALOGS) window.FAV_DIALOGS.tick(DCTX());
     for (let t = 0; t < ms; t += 400) {
+      if (window.FAV_DIALOGS && t % 1000 < 300) window.FAV_DIALOGS.tick(DCTX());
       if (stopAsked) return null;
       const v = fn();
       if (v) return v;

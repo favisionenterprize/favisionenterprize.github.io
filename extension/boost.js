@@ -26,6 +26,8 @@
   });
   const bg = msg => new Promise(res => { try { chrome.runtime.sendMessage(msg, r => res(r || {})); } catch (e) { res({}); } });
   let job = null;
+  // Dialog handler context: "Discard post?" may discard only OUR unsent text from this job.
+  const DCTX = () => ({ ours: () => { try { const it = job && job.q && job.q[job.i]; const want = it && String(it.text || it.description || "").slice(0, 30).trim(); const box = [...document.querySelectorAll("[contenteditable=true],textarea")].map(e => e.innerText || e.value || "").join(" "); return !!want && box.includes(want); } catch (e) { return false; } } });
   try { job = (await bg({ type: "getJob" })).job || null; } catch (e) { job = null; }
   if (!job || (job.kind !== "sounds" && job.kind !== "story")) return;
   job.res = job.res || [];
@@ -53,11 +55,13 @@
   }
   async function finish(stopped) {
     const out = { kind: job.kind, id: job.id, res: job.res, notes: job.notes, stopped: stopped || null, then: job.then || null };
+    if (window.FAV_DIALOGS) { const dl = window.FAV_DIALOGS.log(); if (dl.length) out.dialogs = dl; }
     await bg({ type: "clearJob" });
+    if (window.FAV_DIALOGS) window.FAV_DIALOGS.leaving();
     location.href = job.back + "#favauto-done=" + encodeURIComponent(JSON.stringify(out));
   }
   const WARN = /temporarily blocked|temporarily restricted|you('|’)re restricted|we limit how often|try again later|suspicious activity|confirm (your identity|it('|’)s you)|action blocked/i;
-  const warning = () => { const t = [...document.querySelectorAll("[role=dialog],[role=alert]")].map(d => d.innerText || "").join("\n"); const m = t.match(WARN); return m ? m[0] : null; };
+  const warning = () => { const dg = window.FAV_DIALOGS && window.FAV_DIALOGS.tick(DCTX()); if (dg && dg.stop) return dg.stop; const t = [...document.querySelectorAll("[role=dialog],[role=alert]")].map(d => d.innerText || "").join("\n"); const m = t.match(WARN); return m ? m[0] : null; };
   // Quality gate (same rule as admin/captions.js ensure): never post a blank description. Real text =
   // what's left without hashtags, @mentions and links; 15+ characters needed.
   const realLen = t => { const m = String(t || "").replace(/https?:\/\/\S+/g, "").replace(/[#@][\p{L}\p{N}_.]+/gu, "").replace(/\s+/g, " ").trim(); return /^(no description|add (a )?description)\.?$/i.test(m) ? 0 : m.length; };
@@ -66,11 +70,12 @@
   const NOSTAMP = "no brand stamp — not posted";   // rule P1: every picture shows the posting brand's name + logo (admin/brandstamp.js sets it.stamp)
   const visible = el => !!el && el.getClientRects().length > 0;
   const findBtn = (re, root) => [...(root || document).querySelectorAll("[role=button],button,[role=tab],[role=checkbox],[role=switch],label,[role=menuitem]")].find(b => visible(b) && (re.test((b.getAttribute("aria-label") || "").trim()) || re.test((b.innerText || "").trim())));
-  async function waitFor(fn, ms) { for (let t = 0; t < ms; t += 300) { if (stopAsked) return null; const v = fn(); if (v) return v; await sleep(300); } return null; }
+  async function waitFor(fn, ms) { for (let t = 0; t < ms; t += 300) { if (stopAsked) return null; if (window.FAV_DIALOGS) window.FAV_DIALOGS.tick(DCTX()); const v = fn(); if (v) return v; await sleep(300); } return null; }
   async function go(url, stage) {
     job.stage = stage; job.hops++;
     await save();
     if (job.hops > 15) return finish("The page kept changing. Stopped.");
+    if (window.FAV_DIALOGS) window.FAV_DIALOGS.leaving();
     location.href = url;
   }
   const clip = (s, n) => String(s || "").replace(/\s+/g, " ").trim().slice(0, n);

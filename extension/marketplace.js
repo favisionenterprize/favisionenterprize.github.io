@@ -33,6 +33,8 @@
   const rand = (a, b) => Math.round(a + Math.random() * (b - a));
   const bg = msg => new Promise(res => { try { chrome.runtime.sendMessage(msg, r => res(r || {})); } catch (e) { res({}); } });
   let job = null;
+  // Dialog handler context: "Discard post?" may discard only OUR unsent text from this job.
+  const DCTX = () => ({ ours: () => { try { const it = job && job.q && job.q[job.i]; const want = it && String(it.text || it.description || "").slice(0, 30).trim(); const box = [...document.querySelectorAll("[contenteditable=true],textarea")].map(e => e.innerText || e.value || "").join(" "); return !!want && box.includes(want); } catch (e) { return false; } } });
   try { job = (await bg({ type: "getJob" })).job || null; } catch (e) { job = null; }
   if (!job || !/^mk(scan|list|inbox)$/.test(job.kind)) return;   // not a Marketplace tab: do nothing
   job.i = job.i || 0;
@@ -63,11 +65,14 @@
   async function finish(stopped) {
     const out = { kind: job.kind, id: job.id, res: job.res, stopped: stopped || null, then: job.then || null, dry: !!job.dry };
     if (job.kind === "mkinbox") { out.threads = job.threads || []; out.locked = job.locked || 0; out.res = []; }
+    if (window.FAV_DIALOGS) { const dl = window.FAV_DIALOGS.log(); if (dl.length) out.dialogs = dl; }
     await bg({ type: "clearJob" });
+    if (window.FAV_DIALOGS) window.FAV_DIALOGS.leaving();
     location.href = job.back + "#favauto-done=" + encodeURIComponent(JSON.stringify(out));
   }
   const WARN = /temporarily blocked|temporarily restricted|you('|’)re restricted|your account (has been |is )?restricted|we limit how often|you can('|’)t use this feature|you can('|’)t (post|sell|list) right now|try again later|suspicious activity|confirm your identity|your listing (was|has been) (removed|rejected)|doesn('|’)t follow our commerce policies/i;
   function warning() {
+    { const dg = window.FAV_DIALOGS && window.FAV_DIALOGS.tick(DCTX()); if (dg && dg.stop) return dg.stop; }   // shared dialog handler (extension/dialogs.js)
     const t = [...document.querySelectorAll("[role=dialog],[role=alert]")].map(d => d.innerText || "").join("\n") + "\n" + ((document.querySelector("[role=main]") || {}).innerText || "").slice(0, 3000);
     const hit = t.match(WARN);
     return hit ? hit[0] : null;
@@ -85,6 +90,7 @@
   }
   const enabled = b => b && b.getAttribute("aria-disabled") !== "true" && !b.disabled;
   async function waitFor(fn, ms) {
+    if (window.FAV_DIALOGS) window.FAV_DIALOGS.tick(DCTX());
     for (let t = 0; t < ms; t += 250) { if (stopAsked) return null; const v = fn(); if (v) return v; await sleep(250); }
     return null;
   }
@@ -96,6 +102,7 @@
     job.hops++;
     await save();
     if (job.hops > (job.maxHops || 80)) return finish("Facebook kept sending the tab to another page. Stopped.");
+    if (window.FAV_DIALOGS) window.FAV_DIALOGS.leaving();
     location.href = url;
   }
   function getImage(url) {
@@ -158,6 +165,7 @@
   async function loadAll() {
     let last = -1;
     for (let t = 0; t < 40 && !stopAsked; t++) {
+      if (window.FAV_DIALOGS && t % 1000 < 300) window.FAV_DIALOGS.tick(DCTX());
       window.scrollTo(0, document.documentElement.scrollHeight);
       await sleep(1500);
       const n = document.querySelectorAll(MORE).length;

@@ -22,7 +22,19 @@ const BACK = "https://favisionenterprize.github.io/admin/";
 const JPG = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAP//////////////////////////////////////////////////////////////////////////////////////wgALCAABAAEBAREA/8QAFBABAAAAAAAAAAAAAAAAAAAAAP/aAAgBAQABPxA=";
 
 // ------------------------------------------------------------------ mock pages
-const page = (body, script) => `<!doctype html><html><head><meta charset="utf-8"><title>Facebook</title></head><body>${body}<script>${script || ""}</script></body></html>`;
+// Dialog injector (shared dialog handler tests): localStorage "dlg-plan" = [{at: "load"|"compose"|"post", html, once}].
+// "load" = when the page opens, "compose" = when a composer/caption box appears, "post" = right after a Post/Share click.
+// Clicks on dialog buttons are logged in "dlg-clicks"; a dialog's button with data-bad marks a violation.
+const DLG = `(() => { const plan = JSON.parse(localStorage.getItem("dlg-plan") || "[]"); if (!plan.length) return;
+  const used = JSON.parse(localStorage.getItem("dlg-used") || "[]");
+  const show = at => plan.forEach((d, i) => { if (d.at !== at || used.includes(i)) return; used.push(i); localStorage.setItem("dlg-used", JSON.stringify(used));
+    setTimeout(() => { const w = document.createElement("div"); w.setAttribute("role", d.role || "dialog"); w.innerHTML = d.html; w.dataset.mockDlg = i; document.body.appendChild(w);
+      w.querySelectorAll("button,[role=button]").forEach(b => b.addEventListener("click", () => { const c = JSON.parse(localStorage.getItem("dlg-clicks") || "[]"); c.push(i + ":" + (b.innerText || b.getAttribute("aria-label") || "").trim()); localStorage.setItem("dlg-clicks", JSON.stringify(c)); if (b.dataset.bad) localStorage.setItem("dlg-violation", b.dataset.bad); if (!b.dataset.keep) w.remove(); })); }, d.delay || 50); });
+  addEventListener("DOMContentLoaded", () => { show("load");
+    let composeShown = false; new MutationObserver(() => { if (!composeShown && document.querySelector("[contenteditable=true],[data-testid=tweetTextarea_0]")) { composeShown = true; show("compose"); } }).observe(document.body, { childList: true, subtree: true, attributes: true });
+    document.addEventListener("click", e => { const b = e.target.closest("button,[role=button]"); if (b && /^(post|share|tweet)$/i.test((b.innerText || "").trim()) && !b.closest("[data-mock-dlg]")) show("post"); }, true); });
+})();`;
+const page = (body, script) => `<!doctype html><html><head><meta charset="utf-8"><title>Facebook</title><script>${DLG}</script></head><body>${body}<script>${script || ""}</script></body></html>`;
 const SELLING = page(`<div role="main"><h1>Your listings</h1><div id="list"></div></div>`, `
   const seed = [{ id: "1001", t: "Student Desk Chair Set", price: 650, listed: "9/1", renew: "Renew listing" },
                 { id: "1002", t: "Dinning Set with Chairs", price: 12000, listed: "9/2", renew: "Renew (3 days)" },
@@ -237,6 +249,30 @@ const TT_UPLOAD = page(`<main><div role="tab" aria-selected="true">Photos</div><
     history.pushState(null, "", "/tiktokstudio/content"); document.body.insertAdjacentHTML("beforeend", "<p>Manage your posts</p>"); };`);
 
 
+// Instagram home with Create → file input → Next → Next → caption → Share (dialog-handler tests).
+const IG_HOME = page(`<main><h2>favisionent</h2><header>12 posts 300 followers 10 following</header><a role="button" href="#">Edit profile</a><div role="button"><svg aria-label="New post"></svg>+</div></main>`, `
+  document.querySelector("[role=button] svg[aria-label='New post']").parentElement.onclick = () => {
+    const d = document.createElement("div"); d.setAttribute("role", "dialog"); d.id = "create";
+    d.innerHTML = '<input type="file" accept="image/*">'; document.body.appendChild(d);
+    d.querySelector("input").addEventListener("change", () => {
+      d.innerHTML = '<div role="button" id="n1">Next</div>';
+      d.querySelector("#n1").onclick = () => { d.innerHTML = '<div role="button" id="n2">Next</div>';
+        d.querySelector("#n2").onclick = () => { d.innerHTML = '<div contenteditable="true" aria-label="Write a caption..." id="cap"></div><label><span>Share to Facebook</span><div role="switch" aria-checked="true" id="fbsw"></div></label><div role="button" id="share">Share</div>';
+          const cap = d.querySelector("#cap"); let model = "";
+          cap.addEventListener("paste", e => { e.preventDefault(); model = e.clipboardData.getData("text/plain"); cap.innerText = model; });
+          d.querySelector("#fbsw").onclick = e => e.currentTarget.setAttribute("aria-checked", e.currentTarget.getAttribute("aria-checked") === "true" ? "false" : "true");
+          d.querySelector("#share").onclick = () => { const all = JSON.parse(localStorage.getItem("ig-shared") || "[]"); all.push({ text: model, fb: d.querySelector("#fbsw").getAttribute("aria-checked") }); localStorage.setItem("ig-shared", JSON.stringify(all));
+            setTimeout(() => { d.innerHTML = "<p>Your post has been shared.</p><div role='button' aria-label='Close'><svg aria-label='Close'></svg>x</div>"; }, 400); };
+        };
+      };
+    });
+  };`);
+// X compose page: tweetTextarea_0 (contenteditable), fileInput, tweetButton.
+const X_COMPOSE = page(`<div role="dialog" id="cmp"><div data-testid="tweetTextarea_0" contenteditable="true" role="textbox"></div><input type="file" data-testid="fileInput"><div data-testid="attachments"></div><div role="button" data-testid="tweetButton">Post</div></div>`, `
+  const ed = document.querySelector("[data-testid=tweetTextarea_0]");
+  document.querySelector("[data-testid=fileInput]").addEventListener("change", () => { document.querySelector("[data-testid=attachments]").innerHTML = "<img>"; });
+  document.querySelector("[data-testid=tweetButton]").onclick = () => { const all = JSON.parse(localStorage.getItem("x-posts") || "[]"); all.push(ed.innerText); localStorage.setItem("x-posts", JSON.stringify(all)); setTimeout(() => { ed.remove(); }, 300); };`);
+
 // ------------------------------------------------------------------ Fix all mocks (extension/fixall.js) + quality gate
 // Facebook Page feed (?fxmock): top-level posts [role=article] with the caption in [data-ad-preview=message] (none =
 // empty caption), a link to the post, a "shared a post" one, and a comment article nested inside a post.
@@ -385,14 +421,14 @@ function serve(url) {
   const u = new URL(url);
   if (u.hostname === "favisionenterprize.github.io") return page("<p>admin</p>");
   if (u.hostname === "ads.tiktok.com") return CC;
-  if (u.hostname === "www.instagram.com") { const m = u.pathname.match(/^\/(?:p|reel)\/([\w-]+)/); return m ? IG_POST(m[1]) : /^\/favisionent\/?$/.test(u.pathname) ? IG_GRID : IG_REELS; }
+  if (u.hostname === "www.instagram.com") { const m = u.pathname.match(/^\/(?:p|reel)\/([\w-]+)/); return m ? IG_POST(m[1]) : /^\/favisionent\/?$/.test(u.pathname) ? (IG_PROFILE_HOME ? IG_HOME : IG_GRID) : u.pathname === "/" ? IG_HOME : IG_REELS; }
   if (u.hostname === "www.tiktok.com" && u.pathname.startsWith("/tiktokstudio/upload/post/")) {
     const id = u.searchParams.get("item_id") || "", k = Object.keys(TT_SEED).indexOf(id), kind = k % 3 ? "photo" : "video";
     return k >= 0 && !id.endsWith("14") && u.pathname.endsWith("/" + kind) ? TT_EDIT(id) : TT_NOEDIT;
   }
   if (u.hostname === "www.tiktok.com" && u.pathname.startsWith("/tiktokstudio/upload")) return TT_UPLOAD;
   if (u.hostname === "www.tiktok.com") { const e = u.pathname.match(/\/tiktokstudio\/content\/(\d+)\/edit/); return e ? TT_EDIT(e[1]) : TT_CONTENT; }
-  if (u.hostname === "x.com") return u.pathname.startsWith("/settings/profile") ? X_EDIT : X_PROFILE;
+  if (u.hostname === "x.com") return u.pathname.startsWith("/settings/profile") ? X_EDIT : u.pathname.startsWith("/compose/post") ? X_COMPOSE : X_PROFILE;
   const p = u.pathname;
   if (p.startsWith("/marketplace/you/selling")) return SELLING;
   if (p.startsWith("/marketplace/create/item")) return CREATE;
@@ -410,6 +446,7 @@ function serve(url) {
   return page("<div role=main>facebook home</div>");
 }
 
+let IG_PROFILE_HOME = false;   // dialog tests: the profile page is the posting home (Edit profile + New post)
 // ------------------------------------------------------------------ one job run
 async function run(browser, job, startUrl, setup, skip) {
   const ctx = await browser.newContext();
@@ -424,7 +461,7 @@ async function run(browser, job, startUrl, setup, skip) {
     return {};
   });
   await ctx.route(/^https:\/\/(www\.facebook\.com|x\.com|www\.tiktok\.com|ads\.tiktok\.com|www\.instagram\.com|favisionenterprize\.github\.io)\//, r => r.fulfill({ status: 200, contentType: "text/html; charset=utf-8", body: serve(r.request().url()) }));
-  const scripts = { fb: ["autopilot.js", "engage.js", "marketplace.js", "profile.js", "boost.js", "fixall.js"], cc: ["boost.js"], ig: ["instagram.js", "engage.js", "profile.js", "boost.js", "fixall.js"], x: ["engage.js", "profile.js", "social.js", "fixall.js"], tt: ["engage.js", "profile.js", "social.js", "ttcaptions.js", "ttids.js"].filter(f => !(skip || []).includes(f)) };
+  const scripts = { fb: ["dialogs.js", "autopilot.js", "engage.js", "marketplace.js", "profile.js", "boost.js", "fixall.js"], cc: ["dialogs.js", "boost.js"], ig: ["dialogs.js", "instagram.js", "engage.js", "profile.js", "boost.js", "fixall.js"], x: ["dialogs.js", "engage.js", "profile.js", "social.js", "fixall.js"], tt: ["dialogs.js", "engage.js", "profile.js", "social.js", "ttcaptions.js", "ttids.js"].filter(f => !(skip || []).includes(f)) };
   const wrap = (host, files) => `if (location.hostname === ${JSON.stringify(host)} && !/^\\/(setup|state)$/.test(location.pathname)) {
     window.chrome = window.chrome || {}; chrome.runtime = { lastError: null, sendMessage: (m, cb) => { window.__bg(m).then(r => cb && cb(r)); } };
     document.addEventListener("DOMContentLoaded", () => setTimeout(() => { ${files.map(f => `try { ${code(f)} } catch (e) { console.error(e); }`).join("\n")} }, 0));
@@ -464,7 +501,7 @@ async function run(browser, job, startUrl, setup, skip) {
   let r;
 
   // ================================================================ Fix all + quality gate (extension/fixall.js, autopilot.js, boost.js)
-  if (!process.env.RELAY_ONLY) {
+  if (!process.env.RELAY_ONLY && !process.env.DLG_ONLY) {
   console.log("fxscan (Facebook Page: posts, empty captions, shared post, comments ignored)");
   r = await run(browser, { kind: "fxscan", net: "fb", max: 100, page: "https://www.facebook.com/FaVisionEnterprise?fxmock=1" }, "https://www.facebook.com/FaVisionEnterprise?fxmock=1");
   const fbs = r.out.res || [];
@@ -562,6 +599,7 @@ async function run(browser, job, startUrl, setup, skip) {
   r = await run(browser, { kind: "story", img: S + "a.jpg", text: "Student Desk · GH₵650\nfavisionenterprize.github.io/p/FAV-014.html" }, "https://www.facebook.com/stories/create");
   want(r.out.res[0] && !r.out.res[0].ok && /no brand stamp/.test(r.out.res[0].why) && !("story" in r.state), "a story picture without the stamp is never shared: " + JSON.stringify(r.out));
 
+  if (!process.env.DLG_ONLY) {
   // membership answers as the admin sends them (admin/brands.js qa())
   const QA = { qa: { "Alexander Awuku": { name: "F.A Vision Enterprise", what: "quality furniture: sofas, beds, dining sets and student desks", place: "Odorkor, Accra, Ghana", wa: "057 264 6176", email: "favisionenterprise1@gmail.com" },
     "F.A Vision Enterprise": { name: "F.A Vision Enterprise", what: "quality furniture", place: "Odorkor, Accra, Ghana", wa: "057 264 6176" },
@@ -602,8 +640,71 @@ async function run(browser, job, startUrl, setup, skip) {
   r = await run(browser, { kind: "import", as: "Agoodmann Ventures", rb: "t3" }, "https://www.facebook.com/groups/joins/?nav_source=tab", () => localStorage.setItem("member-Agoodmann Ventures", '["301","302"]'));
   want(r.out.as === "Agoodmann Ventures" && (r.out.groups || []).map(g => g.id).join() === "301,302" && (r.state["fb-actor"] || "Alexander Awuku") === "Alexander Awuku", "read Agoodmann's own groups as Agoodmann, then back to you: " + JSON.stringify([r.out.groups, r.state["fb-actor"], r.out.stopped]));
 
+  }
   if (process.env.RELAY_ONLY) { await browser.close(); console.log(problems.length ? `\n${problems.length} problem(s):\n  ✗ ` + problems.join("\n  ✗ ") : "\nAll relay mock checks passed."); process.exit(problems.length ? 1 : 0); }
-  if (process.env.FX_ONLY) { await browser.close(); console.log(problems.length ? `\n${problems.length} problem(s):\n  ✗ ` + problems.join("\n  ✗ ") : "\nAll Fix all mock checks passed."); process.exit(problems.length ? 1 : 0); }
+  // ================================================================ shared dialog handler (extension/dialogs.js)
+  if (!process.env.RELAY_ONLY) {
+  const DL = (at, html, extra) => Object.assign({ at, html }, extra || {});
+  const NOTIF = DL("load", '<p>Turn on notifications</p><button>Not now</button><button data-bad="turned on notifications">Turn on</button>');
+  const tour = DL("compose", "<p>What's new: try our new editor</p><button>Got it</button>");
+  const boostDlg = DL("post", '<p>Boost this post? Get more views with Boost</p><button>Not now</button><button data-bad="boosted">Boost post</button>', { delay: 30 });
+  const SECURITY = DL("compose", '<p>Security check: confirm your identity to continue</p><button data-bad="clicked through security">Continue</button>');
+  const setPlan = plan => `localStorage.setItem("dlg-plan", ${JSON.stringify(JSON.stringify(plan))}); localStorage.removeItem("dlg-used"); localStorage.removeItem("dlg-clicks"); localStorage.removeItem("dlg-violation");`;
+  const dlgOk = (r, label, n) => {
+    const clicks = JSON.parse(r.state["dlg-clicks"] || "[]"), dl = r.out.dialogs || [];
+    want(!r.state["dlg-violation"] && clicks.length >= n && dl.length >= n, label + ": " + JSON.stringify({ clicks, viol: r.state["dlg-violation"], dialogs: dl.map(d => d.kind + ":" + d.clicked), stopped: r.out.stopped }));
+  };
+
+  console.log("dialogs: Facebook group post with a notification prompt before, a tour during and a Boost offer after posting");
+  let dq = [{ g: "1", name: "Accra Buy and Sell", url: "https://www.facebook.com/groups/1/", p: "FAV-014", text: "Student desk and chair set GH₵650. WhatsApp 0572646176 to order.\n\n#AccraFurniture #FurnitureGhana", img: S + "a.jpg", stamp: "fa-vision" }];
+  r = await run(browser, { kind: "post", mode: "now", q: dq, min: 1, max: 2 }, dq[0].url, setPlan([NOTIF, tour, boostDlg]));
+  want(r.out.res.length === 1 && r.out.res[0].ok && JSON.parse(r.state["group-posts"] || "[]").length === 1 && /#AccraFurniture/.test(JSON.parse(r.state["group-posts"] || "[]")[0] || ""), "posted with its caption and hashtags: " + JSON.stringify([r.out.res, r.state["group-posts"]]));
+  dlgOk(r, "Not now / Got it / Boost declined, all logged in dialogs[]", 2);
+  console.log("dialogs: Facebook group post stops on a security check (never clicked through)");
+  r = await run(browser, { kind: "post", mode: "now", q: dq, min: 1, max: 2 }, dq[0].url, setPlan([SECURITY]));
+  want(/security|identity/i.test(r.out.stopped || "") && !JSON.parse(r.state["group-posts"] || "[]").length && !r.state["dlg-violation"], "stopped, nothing posted: " + JSON.stringify([r.out.stopped, r.state["group-posts"], r.state["dlg-violation"]]));
+
+  console.log("dialogs: X post with a cookie banner before, an image-description prompt during, a slow-down notice after");
+  const xq = [{ k: "card:FAV-014", p: "FAV-014", img: S + "a.jpg", stamp: "fa-vision", text: "Student desk & chair sets GH₵650. WhatsApp 0572646176 #AccraFurniture" }];
+  r = await run(browser, { kind: "x", account: "FaVisionEnt", q: xq, min: 1, max: 2 }, "https://x.com/compose/post", setPlan([
+    DL("load", '<p>We use cookies to improve X.</p><button data-bad="accepted all cookies">Accept all cookies</button><button>Refuse non-essential cookies</button>'.replace("Refuse non-essential cookies", "Reject optional cookies")),
+    DL("compose", "<p>Add image description so more people can enjoy it</p><button>Not this time</button><button data-bad=\"added alt\">Add</button>"),
+    DL("post", "<p>You're posting a lot. Slow down a little.</p><button>OK</button>", { delay: 20 })]));
+  want(r.out.res.length === 1 && r.out.res[0].ok && JSON.parse(r.state["x-posts"] || "[]").length === 1, "posted on X: " + JSON.stringify([r.out.res, r.out.stopped]));
+  dlgOk(r, "cookies essential only / Not this time / OK", 2);
+  console.log("dialogs: X stops on a payment / subscription prompt");
+  r = await run(browser, { kind: "x", account: "FaVisionEnt", q: xq, min: 1, max: 2 }, "https://x.com/compose/post", setPlan([DL("compose", '<p>Subscribe to X Premium to keep posting</p><button data-bad="subscribed">Subscribe</button><button>Maybe later</button>')]));
+  want(/payment|subscription/i.test(r.out.stopped || "") && !JSON.parse(r.state["x-posts"] || "[]").length && !r.state["dlg-violation"], "stopped, nothing posted, nothing paid: " + JSON.stringify([r.out.stopped, r.state["dlg-violation"]]));
+
+  console.log("dialogs: TikTok post with a Studio tip before, a notification prompt during, a 'what's new' after");
+  const tq = [{ k: "card:FAV-014", p: "FAV-014", img: S + "a.jpg", stamp: "fa-vision", text: "The desk that ends homework fights.\nGH₵650 #AccraFurniture", title: "Student desk" }];
+  r = await run(browser, { kind: "tiktok", q: tq, min: 1, max: 2 }, "https://www.tiktok.com/tiktokstudio/upload?from=webapp&tab=photo", setPlan([
+    DL("load", "<p>Tips for TikTok Studio: welcome to the new upload page</p><button>Got it</button>"),
+    DL("compose", '<p>Turn on notifications to know when your post is live</p><button>Not now</button>'),
+    DL("post", "<p>What's new: scheduling</p><button>Got it</button>", { delay: 20 })]));
+  want(r.out.res.length === 1 && r.out.res[0].ok && JSON.parse(r.state["tt-posts"] || "[]").length === 1 && /homework/.test((JSON.parse(r.state["tt-posts"] || "[]")[0] || {}).text || ""), "posted on TikTok with its description: " + JSON.stringify([r.out.res, r.out.stopped]));
+  dlgOk(r, "tip / notifications / what's new closed", 2);
+  console.log("dialogs: TikTok 'Discard post?' that isn't ours → Keep editing (the user's draft is never discarded)");
+  r = await run(browser, { kind: "tiktok", q: tq, min: 1, max: 2 }, "https://www.tiktok.com/tiktokstudio/upload?from=webapp&tab=photo", setPlan([DL("load", '<p>Discard post? Your unsaved draft will be lost.</p><button data-bad="discarded the user\'s draft">Discard</button><button>Keep editing</button>')]));
+  want(!r.state["dlg-violation"] && r.out.res[0] && r.out.res[0].ok, "kept the user's draft and posted ours: " + JSON.stringify([r.state["dlg-violation"], r.out.res, r.out.stopped]));
+
+  console.log("dialogs: Instagram post with Save login before, Share-to-Facebook on during, notifications after");
+  IG_PROFILE_HOME = true;
+  const iq = [{ k: "card:FAV-014", p: "FAV-014", img: S + "a.jpg", stamp: "fa-vision", text: "Student desk & chair sets GH₵650. WhatsApp 0572646176 #AccraFurniture" }];
+  r = await run(browser, { kind: "ig", account: "favisionent", q: iq, min: 1, max: 2 }, "https://www.instagram.com/favisionent/", setPlan([
+    DL("load", "<p>Save your login info?</p><button>Not now</button><button data-bad=\"saved login\">Save info</button>"),
+    DL("compose", "<p>Turn on notifications</p><button>Not now</button>"),
+    DL("post", "<p>Add Instagram to your home screen</p><button>Cancel</button>", { delay: 20 })]));
+  const ish = JSON.parse(r.state["ig-shared"] || "[]");
+  want(ish.length === 1 && ish[0].fb === "false" && /#AccraFurniture/.test(ish[0].text), "shared on Instagram with Share-to-Facebook OFF: " + JSON.stringify([ish, r.out.res, r.out.stopped]));
+  dlgOk(r, "Save login / notifications / home screen declined", 2);
+  console.log("dialogs: Instagram stops on a policy warning");
+  r = await run(browser, { kind: "ig", account: "favisionent", q: iq, min: 1, max: 2 }, "https://www.instagram.com/favisionent/", setPlan([DL("compose", '<p>Your post goes against our Community Guidelines</p><button data-bad="clicked OK on policy">OK</button>')]));
+  want(/policy|guidelines|goes against/i.test(r.out.stopped || "") && !JSON.parse(r.state["ig-shared"] || "[]").length && !r.state["dlg-violation"], "stopped, nothing shared: " + JSON.stringify([r.out.stopped, r.state["dlg-violation"]]));
+  IG_PROFILE_HOME = false;
+  }
+
+  if (process.env.FX_ONLY || process.env.DLG_ONLY) { await browser.close(); console.log(problems.length ? `\n${problems.length} problem(s):\n  ✗ ` + problems.join("\n  ✗ ") : "\nAll Fix all mock checks passed."); process.exit(problems.length ? 1 : 0); }
 
   console.log("mkscan (Your listings, renew menus)");
   r = await run(browser, { kind: "mkscan", menus: true }, "https://www.facebook.com/marketplace/you/selling");

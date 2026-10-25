@@ -76,6 +76,7 @@ async function check() {
 
 // ============================================================= self-update from the website
 const BUNDLED = [   // fallback: the copies in this folder
+  { id: "dialogs", file: "dialogs.js", matches: ["https://*.facebook.com/*", "https://www.instagram.com/*"] },   // shared dialog handler, first
   { id: "fb-autopilot", file: "autopilot.js", matches: ["https://*.facebook.com/*"] },
   { id: "fb-pricesync", file: "facebook.js", matches: ["https://*.facebook.com/marketplace/*"], world: "MAIN" },
   { id: "instagram", file: "instagram.js", matches: ["https://www.instagram.com/*"] }

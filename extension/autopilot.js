@@ -33,6 +33,8 @@
   // ------------------------------------------------------------- job (kept by the background script, per tab)
   const bg = msg => new Promise(res => { try { chrome.runtime.sendMessage(msg, r => res(r || {})); } catch (e) { res({}); } });
   let job = null;
+  // Dialog handler context: "Discard post?" may discard only OUR unsent text from this job.
+  const DCTX = () => ({ ours: () => { try { const it = job && job.q && job.q[job.i]; const want = it && String(it.text || it.description || "").slice(0, 30).trim(); const box = [...document.querySelectorAll("[contenteditable=true],textarea")].map(e => e.innerText || e.value || "").join(" "); return !!want && box.includes(want); } catch (e) { return false; } } });
   const m = location.hash.match(/favauto=([^&]+)/);
   try {
     const fresh = m ? JSON.parse(decodeURIComponent(m[1])) : null;
@@ -71,13 +73,16 @@
   async function finish(stopped) {
     const out = { kind: job.kind, id: job.id, res: job.res, stopped: stopped || null, switched: job.switched || null, actor: job.actor || null, then: job.then || null, groups: job.groups || null, dry: !!job.dry, snapshot: job.snapshot || null, mode: job.mode || null,
       ...(job.as ? { as: job.as } : {}), ...(job.rb ? { rb: job.rb } : {}), ...(job.relay ? { relay: true, rb: job.rb || null, dropped: job.dropped || [], turn: job.turn || 0, kwi: job.kwi || {}, skipBy: job.skipBy || {}, home: job.home || null, more: !!job.more } : {}) };
+    if (window.FAV_DIALOGS) { const dl = window.FAV_DIALOGS.log(); if (dl.length) out.dialogs = dl; }
     await bg({ type: "clearJob" });
+    if (window.FAV_DIALOGS) window.FAV_DIALOGS.leaving();
     location.href = job.back + "#favauto-done=" + encodeURIComponent(JSON.stringify(out));
   }
 
   // Any of these on screen means Facebook is limiting the account: stop at once.
   const WARN = /temporarily blocked|temporarily restricted|you('|’)re restricted|your account (has been |is )?restricted|we limit how often|you can('|’)t use this feature|you can('|’)t post right now|try again later|suspicious activity|confirm your identity/i;
   function warning() {
+    { const dg = window.FAV_DIALOGS && window.FAV_DIALOGS.tick(DCTX()); if (dg && dg.stop) return dg.stop; }   // shared dialog handler (extension/dialogs.js)
     const t = (document.querySelector("[role=dialog]") || document.body).innerText || "";
     const hit = t.match(WARN);
     return hit ? hit[0] : null;
@@ -104,6 +109,7 @@
     await save();
     box(target ? `Switching to ${target} (${reason})…` : `No access to post ("${reason}"). Switching to another profile…`, !target);
     await sleep(1500);
+    if (window.FAV_DIALOGS) window.FAV_DIALOGS.leaving();
     location.href = "https://www.facebook.com/";
   }
   // Runs on facebook.com home while job.sw is set. Returns true when it moved on (switched or gave up).
@@ -177,7 +183,9 @@
     return new Promise((res, rej) => chrome.runtime.sendMessage({ type: "image", url }, r => (r && r.dataUrl ? res(r.dataUrl) : rej(new Error((r && r.error) || "no image")))));
   }
   async function waitFor(fn, ms) {
+    if (window.FAV_DIALOGS) window.FAV_DIALOGS.tick(DCTX());
     for (let t = 0; t < ms; t += 250) {
+      if (window.FAV_DIALOGS && t % 1000 < 300) window.FAV_DIALOGS.tick(DCTX());
       if (stopAsked) return null;
       const v = fn();
       if (v) return v;
@@ -193,6 +201,7 @@
     if (job.navFor === job.i) return true;
     job.navFor = job.i;
     await save();
+    if (window.FAV_DIALOGS) window.FAV_DIALOGS.leaving();
     location.href = url;
     return false;
   }
@@ -583,6 +592,16 @@
       if (close) { close.click(); await sleep(1200); const discard = findBtn(/^discard$/i); if (discard) discard.click(); }
       record(true, "Test only, not posted" + (photoNote ? " · photo didn't attach" : ""));
       return next(false);
+    }
+    // Shared dialog handler: one last check for a popup over the composer; a dialog handled now → re-check the caption.
+    if (window.FAV_DIALOGS) {
+      const before = window.FAV_DIALOGS.log().length, dg = window.FAV_DIALOGS.tick(DCTX());
+      if (dg && dg.stop) { record(false, dg.stop); return finish(`Facebook showed ${dg.stop}. Nothing more was posted.`); }
+      if (window.FAV_DIALOGS.log().length > before && (realLen(editor.innerText) < 15 || (tagged(it.text) && !tagged(editor.innerText)))) {
+        const dt3 = new DataTransfer(); dt3.setData("text/plain", it.text); editor.focus();
+        editor.dispatchEvent(new ClipboardEvent("paste", { clipboardData: dt3, bubbles: true, cancelable: true })); await sleep(800);
+        if (realLen(editor.innerText) < 15) { record(false, BLANK); return next(false); }
+      }
     }
     post.click();
     box(`${n}: posting…`);
