@@ -83,6 +83,16 @@
   .toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(140px + var(--safe-b)); background: #1d2433; color: #fff; padding: 10px 16px; border-radius: 12px; font-size: 14px; z-index: 20; max-width: 90vw; box-shadow: 0 8px 24px rgba(0,0,0,.3); }
   .thinking::after { content: "Thinking…"; color: var(--muted); }
   iframe.preview { width: 100%; height: 380px; border: 1px solid var(--line); border-radius: 12px; background: #fff; margin-top: 8px; }
+  .pill[aria-pressed="true"] { background: rgba(255,255,255,.18); }
+  .meta { color: var(--muted); font-size: 12px; margin-top: 6px; white-space: normal; overflow-wrap: anywhere; }
+  .msg.a .meta { border-top: 1px dashed var(--line); padding-top: 4px; }
+  ul.list .sub { display: block; color: var(--muted); font-size: 12px; }
+  .err { color: #c0392b; }
+  @media (prefers-color-scheme: dark) { .err { color: #ff9b9b; } }
+  ul.list.days li { align-items: center; }
+  ul.list.days .day { flex: 0 0 44px; }
+  ul.list.days .bar { flex: 1; min-width: 30px; height: 8px; border-radius: 4px; background: var(--bg); overflow: hidden; }
+  ul.list.days .bar i { display: block; height: 100%; background: var(--blue-2); }
   [hidden] { display: none !important; }
 </style>
 </head>
@@ -91,6 +101,7 @@
     <div class="logo" aria-hidden="true">M</div>
     <h1>Muse AI <small id="ver">F.A Vision</small></h1>
     <button class="pill" id="install" hidden>Install</button>
+    <button class="pill" id="usage" data-tab="usage" aria-pressed="false" hidden>Usage</button>
     <button class="pill" id="signout" hidden>Sign out</button>
   </header>
 
