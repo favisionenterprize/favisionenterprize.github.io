@@ -1687,6 +1687,15 @@
    "g": "139560271489581",
    "ok": false,
    "why": "No access to post; couldn't switch profile (couldn't find the profile menu)"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T02:48:47.816Z",
+   "p": "FAV-009",
+   "g": "page",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
   }
  ],
  "resets": {},
@@ -2107,6 +2116,13 @@
    "tried": 6,
    "ok": 0,
    "stopped": "No access to post and couldn't find the profile menu. Nothing more was posted."
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T02:48:58.835Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 0
   }
  ],
  "renewLog": [
