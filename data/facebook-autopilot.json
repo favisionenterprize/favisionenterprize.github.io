@@ -1639,6 +1639,54 @@
    "ok": false,
    "now": true,
    "why": "No access to post; couldn't switch profile (couldn't find the profile menu)"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T01:49:20.695Z",
+   "p": "FAV-016",
+   "g": "hongkongmoms",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T01:49:48.604Z",
+   "p": "FAV-016",
+   "g": "378971703031985",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T01:50:16.260Z",
+   "p": "FAV-016",
+   "g": "572485050049323",
+   "ok": false,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T01:50:44.956Z",
+   "p": "FAV-016",
+   "g": "1260426287321668",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T01:51:13.238Z",
+   "p": "FAV-016",
+   "g": "980376278667360",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T01:52:58.879Z",
+   "p": "FAV-016",
+   "g": "139560271489581",
+   "ok": false,
+   "why": "No access to post; couldn't switch profile (couldn't find the profile menu)"
   }
  ],
  "resets": {},
@@ -2051,6 +2099,14 @@
    "kind": "grow",
    "joined": 0,
    "requested": 0
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T01:53:10.527Z",
+   "kind": "post",
+   "tried": 6,
+   "ok": 0,
+   "stopped": "No access to post and couldn't find the profile menu. Nothing more was posted."
   }
  ],
  "renewLog": [
