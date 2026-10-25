@@ -17,7 +17,7 @@ try { ({ chromium } = require("playwright")); } catch (e) {
   }
 }
 const ROOT = path.resolve(__dirname, "..") + "/";
-const SCRIPTS = ["admin/captions.js", "admin/igauto.js", "admin/ttshop.js", "admin/socauto.js", "admin/vidauto.js", "admin/engage.js", "admin/mkauto.js", "admin/profiles.js", "admin/viral.js", "admin/ttcaptions.js", "admin/boost.js", "admin/fixall.js", "admin/brands.js", "admin/aiplan.js", "admin/brandstamp.js", "admin/relay.js", "admin/fbauto.js"];
+const SCRIPTS = ["admin/captions.js", "admin/igauto.js", "admin/ttshop.js", "admin/socauto.js", "admin/vidauto.js", "admin/trendvideo.js", "admin/engage.js", "admin/mkauto.js", "admin/profiles.js", "admin/viral.js", "admin/ttcaptions.js", "admin/boost.js", "admin/fixall.js", "admin/brands.js", "admin/aiplan.js", "admin/brandstamp.js", "admin/relay.js", "admin/fbauto.js"];
 const MIN_TEXT = 150; // a tab with less text than this counts as blank
 
 const files = {};
@@ -68,6 +68,36 @@ async function autopilot(browser, day) {
     window.__toasts.filter(t => t.startsWith("✗")).forEach(t => out.problems.push("error toast: " + t));
     return out;
   }, MIN_TEXT);
+  // 🎬 Trend video card on the Boost tab: one prompt per template, caution line, Copy prompt, Add video → videos library.
+  const tv = await page.evaluate(async () => {
+    const wait = ms => new Promise(r => setTimeout(r, ms));
+    window.__clip = []; Object.defineProperty(navigator, "clipboard", { configurable: true, value: { writeText: async t => { window.__clip.push(t); } } });
+    window.FAV_FBAUTO._test.setTab("boost"); await wait(200);
+    const c = document.querySelector("#trendvid-card");
+    if (!c) return { card: false };
+    const out = { card: true, rows: c.querySelectorAll("[data-tv]").length, caution: /demonetis/i.test(c.innerText), tool: !!c.querySelector("[data-tv-tool]") };
+    c.querySelector("[data-tv] [data-tv-copy]").click(); await wait(50);
+    out.copied = (window.__clip[0] || "").length;
+    // Add video: FAV_VIDAUTO.addFiles gets the trend options; the card logs it in made[]
+    const V = window.FAV_VIDAUTO, real = V.addFiles; let got = null;
+    V.addFiles = async (files, o) => { got = o; const S = V.state(); S.videos.push({ id: "trend-test", website: {}, youtube: {}, tiktok: {} }); };
+    const inp = document.querySelector("#trendvid-card [data-tv] [data-tv-file]");
+    const dt = new DataTransfer(); dt.items.add(new File([new Uint8Array(10)], "mini.mp4", { type: "video/mp4" })); inp.files = dt.files;
+    inp.dispatchEvent(new Event("change", { bubbles: true })); await wait(200);
+    V.addFiles = real; V.state().videos = V.state().videos.filter(v => v.id !== "trend-test");
+    out.opts = got; out.made = (window.FAV_TRENDVID.state().made || []).slice(-1)[0] || null;
+    return out;
+  });
+  const tvT = files["data/trend-videos.json"].templates.length;
+  if (!tv.card) problems.push("🎬 Trend video card missing from the Boost tab");
+  else {
+    if (tv.rows !== tvT) problems.push(`Trend video card shows ${tv.rows} prompts, expected ${tvT}`);
+    if (!tv.caution) problems.push("Trend video card has no demonetisation caution line");
+    if (!(tv.copied > 100)) problems.push("Trend video Copy prompt copied nothing");
+    if (!tv.opts || tv.opts.kind !== "trend" || tv.opts.source !== "upload" || !tv.opts.trend) problems.push("Add video didn't go into the videos library as a trend video: " + JSON.stringify(tv.opts));
+    if (!tv.made || !tv.made.video) problems.push("Add video wasn't logged in data/trend-videos.json made[]");
+  }
+  for (const b of new Set(files["data/trend-videos.json"].templates.map(t => t.brand))) if (!files["data/brands.json"].brands.some(x => x.id === b)) problems.push("trend-videos.json template for unknown brand " + b);
   // Hourly posting steps from the AI Plan (hr:<net>:<n>, desk:<product>:<groups>) launch real add-on jobs.
   const hrJobs = await page.evaluate(() => {
     const jobs = []; window.addEventListener("message", e => { if (e.data && e.data.type === "favauto-start") jobs.push(e.data.job); });
@@ -927,6 +957,192 @@ async function brands(browser, shot) {
   return { problems, cards: st.cards };
 }
 
+// Shared setup for the screens added 25 Oct 2026 (prospects, profile kit, sales): admin/index.html without its
+// scripts, real data files, FAV_ADMIN stubbed (saveJson writes to window.__files), clipboard + window.open captured.
+async function plainPage(browser, problems, extra) {
+  const page = await browser.newPage({ viewport: { width: 390, height: 900 } });
+  page.on("pageerror", e => problems.push("page error: " + e.message));
+  const html = fs.readFileSync(ROOT + "admin/index.html", "utf8").replace(/<script[\s\S]*?<\/script>/g, "");
+  await page.route("http://smoke.test/**", r => r.fulfill({ status: 200, contentType: "text/html", body: html }));
+  if (extra) await extra(page);
+  await page.goto("http://smoke.test/admin/");
+  await page.addStyleTag({ content: fs.readFileSync(ROOT + "admin/admin.css", "utf8") });
+  await page.evaluate(({ files, ESC }) => {
+    window.__files = JSON.parse(JSON.stringify(files)); window.__toasts = []; window.__clip = []; window.__opened = []; window.__muse = []; window.__saves = [];
+    Object.defineProperty(navigator, "clipboard", { value: { writeText: async t => { window.__clip.push(t); } } });
+    window.open = (u) => { const doc = { html: "", write(h) { this.html += h; }, close() {} }; window.__opened.push({ u, doc }); return { document: doc }; };
+    window.confirm = () => true;
+    window.FAV_CONFIG = { escapeHtml: (0, eval)(ESC), localPhone: x => String(x).replace(/^\+233/, "0"), formatPrice: n => "GH₵" + Number(n).toLocaleString() };
+    window.FAV_ADMIN = { products: () => window.__files["data/products.json"], business: () => Object.assign({}, window.__files["data/business.json"], { enquiry_endpoint: "https://backend.smoke.test/exec" }),
+      signedIn: () => true, show: () => {}, busy: () => {}, friendly: e => String(e && e.message || e), productUrl: p => "https://favisionenterprize.github.io/p/" + p.id + ".html",
+      toast: (m, bad) => window.__toasts.push((bad ? "✗ " : "") + m),
+      readJsonFile: async (f, e) => JSON.parse(JSON.stringify(window.__files[f] || e)),
+      saveJson: async (f, m, msg, e) => { window.__files[f] = m(JSON.parse(JSON.stringify(window.__files[f] || e))); window.__saves.push(f); return JSON.parse(JSON.stringify(window.__files[f])); },
+      backendSigned: async payload => { window.__muse.push(payload); return window.__museReply ? window.__museReply(payload) : { ok: false, error: "no_ai_key" }; } };
+  }, { files, ESC });
+  return page;
+}
+
+// "🏢 Bulk buyers" (admin/prospects.js, #prospects): AI suggestions arrive unverified, chains are dropped, keepers
+// need a source, drafting STOPS while quantity or price is empty, pitches/quote/WhatsApp/Add to Leads work, only
+// public info goes into data/prospects.json, and the AI Plan rule S5 gates the AI.
+async function prospects(browser) {
+  const problems = [], want = (ok, m) => { if (!ok) problems.push(m); };
+  const posts = [];
+  const page = await plainPage(browser, problems, async pg => pg.route("https://backend.smoke.test/**", r => { posts.push(r.request().postData()); r.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ok: true, customers: [] }) }); }));
+  for (const f of ["admin/captions.js", "admin/aiplan.js", "admin/leads.js", "admin/prospects.js", "assets/js/invoice.js"]) await page.addScriptTag({ content: fs.readFileSync(ROOT + f, "utf8") });
+  await page.evaluate(() => { window.__museReply = p => ({ ok: true, text: JSON.stringify({ prospects: [
+    { name: "Bright Future Academy", area: "Kasoa", why: "Private JHS/SHS, growing", source_url: "https://www.google.com/maps/place/bright-future" },
+    { name: "Hope Montessori School", area: "Kasoa", why: "Basic school", source_url: "" },
+    { name: "KFC Kasoa", area: "Kasoa", why: "restaurant", source_url: "https://kfc.com.gh", chain: false },
+    { name: "Big Group School Ltd", area: "Kasoa", why: "chain", source_url: "", chain: true }] }) }); });
+  await page.evaluate(() => document.querySelector("[data-prospects]").click());
+  await page.waitForTimeout(300);
+  want(await page.evaluate(() => location.hash) === "#prospects", "deep link #prospects not set");
+  // S5 is Proposed: AI is off, nothing asked
+  await page.click("[data-pr=find]"); await page.waitForTimeout(150);
+  want(await page.evaluate(() => window.__muse.length) === 0, "AI ran while rule S5 is only Proposed");
+  want(await page.evaluate(() => /AI suggestions are off/.test(document.querySelector("#pr-body").innerText)), "no 'AI suggestions are off' notice while S5 is Proposed");
+  // approve S5 → suggestions
+  await page.evaluate(async () => { const P = window.FAV_AIPLAN._test.state(); P.rules.find(r => r.id === "S5").status = "approved"; });
+  await page.evaluate(() => window.FAV_PROSPECTS.open()); await page.waitForTimeout(200);
+  await page.click("[data-pr=find]"); await page.waitForTimeout(300);
+  const st = await page.evaluate(() => window.FAV_PROSPECTS._test.state().prospects.map(x => ({ n: x.name, src: x.source, ok: x.checked })));
+  want(st.length === 2 && st.every(x => !x.ok), "expected 2 unverified prospects (KFC + chain dropped): " + JSON.stringify(st));
+  want(!st.some(x => /KFC|Big Group/.test(x.n)), "a chain wasn't filtered out");
+  want(await page.evaluate(() => document.querySelectorAll(".pr-card .pill.warn").length) === 2, "suggested prospects aren't marked unverified");
+  // keeper without a source refused
+  await page.evaluate(() => { const c = [...document.querySelectorAll(".pr-card")].find(x => /Hope Montessori/.test(x.innerText)); c.querySelector("[data-pr=keep]").click(); });
+  await page.waitForTimeout(100);
+  want(await page.evaluate(() => !window.FAV_PROSPECTS._test.state().prospects.find(x => /Hope/.test(x.name)).keep), "a prospect with no source became a keeper");
+  // keeper with source: drafting blocked until qty + price
+  const sel = '.pr-card[data-pid*="bright-future"]';
+  await page.click(sel + " [data-pr=checked]"); await page.waitForTimeout(80);
+  await page.click(sel + " [data-pr=keep]"); await page.waitForTimeout(100);
+  const stop = await page.evaluate(s => (document.querySelector(s + " .pr-stop") || {}).innerText || "", sel);
+  want(/won't guess/.test(stop) && !(await page.$(sel + " [data-pv=draft]")), "drafting not blocked with empty quantity: " + stop);
+  await page.fill(sel + " [data-pv=qty]", "60"); await page.dispatchEvent(sel + " [data-pv=qty]", "change"); await page.waitForTimeout(100);
+  const stop2 = await page.evaluate(s => (document.querySelector(s + " .pr-stop") || {}).innerText || "", sel);
+  want(/Enter the price — I won't guess/.test(stop2), "price-empty stop message missing: " + stop2);
+  await page.click(sel + " [data-pr=catalog]"); await page.waitForTimeout(100);
+  const draft = await page.evaluate(s => (document.querySelector(s + " [data-pv=draft]") || {}).value || "", sel);
+  want(/60 × Student Desk Chair Set @ GH₵640 = GH₵38,400/.test(draft), "catalogue bulk price (GH₵640 from 50) not in the pitch: " + draft.slice(0, 200));
+  want(/we sell/i.test(draft) && !/we make/i.test(draft) && /057 ?264 ?6176/.test(draft), "pitch must say 'we sell' and carry the F.A Vision WhatsApp");
+  await page.click(sel + " [data-pr=kind][data-k=email]"); await page.waitForTimeout(80);
+  want(/^Subject: /.test(await page.evaluate(s => document.querySelector(s + " [data-pv=draft]").value, sel)), "email pitch has no subject line");
+  await page.fill(sel + " [data-pv=phone]", "0240000001"); await page.dispatchEvent(sel + " [data-pv=phone]", "change"); await page.waitForTimeout(80);
+  await page.click(sel + " [data-pr=copy]"); await page.waitForTimeout(50);
+  want((await page.evaluate(() => window.__clip.slice(-1)[0] || "")).includes("GH₵38,400"), "Copy didn't copy the pitch");
+  const wa = await page.evaluate(s => document.querySelector(s + " [data-pr-wa]").getAttribute("href"), sel);
+  want(/^https:\/\/wa\.me\/233240000001\?text=/.test(wa), "Open WhatsApp link wrong: " + wa);
+  await page.click(sel + " [data-pr=quote]"); await page.waitForTimeout(80);
+  want(await page.evaluate(() => /PROFORMA INVOICE/.test((window.__opened.slice(-1)[0] || { doc: { html: "" } }).doc.html) && /Bright Future Academy/.test(window.__opened.slice(-1)[0].doc.html)), "quote page didn't open as a proforma for the prospect");
+  await page.click(sel + " [data-pr=lead]"); await page.waitForTimeout(250);
+  const lead = posts.map(x => { try { return JSON.parse(x); } catch (e) { return null; } }).filter(Boolean).find(x => x.source === "prospect");
+  want(lead && lead.organisation === "Bright Future Academy" && lead.phone === "0240000001" && /GH₵38,400/.test(lead.message), "Add to Leads didn't post a prospect lead: " + JSON.stringify(lead));
+  want(await page.evaluate(() => document.documentElement.scrollWidth) <= 392, "Bulk buyers screen scrolls sideways on a phone");
+  if (process.env.PROSPECTS_SHOT) await page.screenshot({ path: process.env.PROSPECTS_SHOT, fullPage: true });
+  // save: only public fields reach the repo
+  await page.click("[data-pr=save]"); await page.waitForTimeout(150);
+  const saved = await page.evaluate(() => window.__files["data/prospects.json"]);
+  const raw = JSON.stringify(saved);
+  want(saved.prospects.length === 2 && saved.prospects.some(x => x.keep && x.checked), "shortlist didn't save: " + raw.slice(0, 200));
+  want(!/0240000001|38,400|draft|"qty"|"price"/.test(raw), "private data leaked into data/prospects.json: " + raw.slice(0, 300));
+  want(await page.evaluate(() => !window.__muse.some(m => m.action !== "muse")), "a backend action other than muse was called");
+  const bad = await page.evaluate(() => window.__toasts.filter(t => t.startsWith("✗") && !/AI suggestions are off|source link first/.test(t)));
+  bad.forEach(t => problems.push("error toast: " + t));
+  await page.close();
+  return { problems };
+}
+
+// "🪪 Profile kit" (admin/profilekit.js, #profilekit): every prompt card, per-platform limits, brand facts only,
+// M6 gate, bio ranking + "Save to brand" writes accounts.<net>.bio in brands.json only on click.
+async function profilekit(browser) {
+  const problems = [], want = (ok, m) => { if (!ok) problems.push(m); };
+  const page = await plainPage(browser, problems);
+  for (const f of ["admin/aiplan.js", "admin/brands.js", "admin/profilekit.js"]) await page.addScriptTag({ content: fs.readFileSync(ROOT + f, "utf8") });
+  await page.evaluate(() => document.querySelector("[data-profilekit]").click());
+  await page.waitForTimeout(300);
+  const st = await page.evaluate(() => ({ hash: location.hash, cards: document.querySelectorAll("[data-pk]").length, brands: document.querySelectorAll("[data-pk-sel=brand] option").length, off: /AI writing is off/.test(document.querySelector("#pk-body").innerText) }));
+  want(st.hash === "#profilekit", "deep link #profilekit not set");
+  want(st.cards === 8, "expected 8 prompt cards, got " + st.cards);
+  want(st.brands === files["data/brands.json"].brands.length + 1, "brand picker should list every brand + Fa Vision Furnitures: " + st.brands);
+  want(st.off, "no 'AI writing is off' notice while M6 is Proposed");
+  await page.click("[data-pk-run=bio]"); await page.waitForTimeout(100);
+  want(await page.evaluate(() => window.__muse.length) === 0, "AI ran while M6 is Proposed");
+  // Copy prompt works without AI, carries the limit and only this brand's facts
+  await page.evaluate(() => window.FAV_PROFILEKIT._test.sel({ brand: "oteng-furniture", net: "tiktok" }));
+  await page.click("[data-pk-prompt=bio]"); await page.waitForTimeout(50);
+  const pr = await page.evaluate(() => window.__clip.slice(-1)[0] || "");
+  want(/80 characters/.test(pr) && /Oteng Furniture/.test(pr) && !/favisionenterprize|F\.A Vision Enterprise\b(?! \()/.test(pr.replace("do not use F.A Vision's links", "")), "Oteng TikTok prompt wrong (limit 80, own facts only): " + pr.slice(0, 300));
+  // approve M6, write bios (one too long), save #1 to brand
+  await page.evaluate(() => { window.FAV_AIPLAN._test.state().rules.find(r => r.id === "M6").status = "approved";
+    window.__museReply = () => ({ ok: true, text: JSON.stringify({ options: [{ text: "x".repeat(200), why: "too long" }, { text: "Fresh student desks for every classroom 📚 Delivered in Accra. WhatsApp to order", why: "promise + CTA" }, { text: "Furniture you can trust. WhatsApp us", why: "short" }] }) }); });
+  await page.evaluate(() => window.FAV_PROFILEKIT._test.sel({ brand: "fa-vision", net: "instagram" }));
+  await page.click("[data-pk-run=bio]"); await page.waitForTimeout(200);
+  const opts = await page.evaluate(() => [...document.querySelectorAll("[data-pk=bio] .pk-opt")].map(o => ({ t: o.innerText.slice(0, 40), over: !!o.querySelector(".pk-n.over"), save: !!o.querySelector("[data-pk-savebio]") })));
+  want(opts.length === 3 && opts[2].over && !opts[2].save && !opts[0].over, "bio over the 150 limit should rank last without Save: " + JSON.stringify(opts));
+  want(await page.evaluate(() => window.__saves.length) === 0, "something saved before any click");
+  want(await page.evaluate(() => document.documentElement.scrollWidth) <= 392, "Profile kit screen scrolls sideways on a phone");
+  if (process.env.PROFILEKIT_SHOT) await page.screenshot({ path: process.env.PROFILEKIT_SHOT, fullPage: true });
+  await page.click("[data-pk=bio] [data-pk-savebio='0']"); await page.waitForTimeout(150);
+  const b = await page.evaluate(() => window.__files["data/brands.json"].brands.find(x => x.id === "fa-vision").accounts.instagram);
+  want(b.bio === "Fresh student desks for every classroom 📚 Delivered in Accra. WhatsApp to order" && b.handle === "favisionent" && b.status === "live", "Save to brand didn't write the Instagram bio: " + JSON.stringify(b));
+  await page.click("[data-pk-save]"); await page.waitForTimeout(100);
+  want(!!(await page.evaluate(() => (window.__files["data/profile-kits.json"].kits["fa-vision:instagram"] || {}).outputs)), "Save kit didn't store the outputs");
+  want(await page.evaluate(() => window.__muse.every(m => m.action === "muse")), "a backend action other than muse was called");
+  (await page.evaluate(() => window.__toasts.filter(t => t.startsWith("✗") && !/AI writing is off/.test(t)))).forEach(t => problems.push("error toast: " + t));
+  await page.close();
+  return { problems };
+}
+
+// "📊 Sales" (admin/sales.js, #sales): 4 tiles, 2 charts, 1 table from the orders + customers reads; channels;
+// Record a sale posts the existing order + update_order actions.
+async function sales(browser) {
+  const problems = [], want = (ok, m) => { if (!ok) problems.push(m); };
+  const posts = [], gets = [];
+  const now = Date.now(), iso = d => new Date(now - d * 864e5).toISOString();
+  const ORD = [
+    { Timestamp: iso(1), Reference: "FAV-A1", Product: "Student Desk Chair Set — Senior High (FAV-014)", Quantity: 60, TotalGHS: 38400, PaidNowGHS: 19200, BalanceGHS: 19200, PaymentOption: "Pay a deposit", Progress: "Confirmed", Notes: "" },
+    { Timestamp: iso(3), Reference: "FAV-A2", Product: "Luxury Leather Sofa Set · via TikTok (FAV-016)", Quantity: 1, TotalGHS: 8500, PaidNowGHS: 8500, BalanceGHS: 0, PaymentOption: "Pay in full", Progress: "Delivered", Notes: "" },
+    { Timestamp: iso(5), Reference: "FAV-A3", Product: "Centre Table (FAV-018)", Quantity: 2, TotalGHS: 1600, PaidNowGHS: 0, BalanceGHS: 0, PaymentOption: "Walk-in sale (recorded in admin)", Progress: "Balance paid", Notes: "Channel: walk-in · recorded in admin" },
+    { Timestamp: iso(8), Reference: "FAV-A4", Product: "Centre Table (FAV-018)", Quantity: 1, TotalGHS: 800, PaidNowGHS: 0, BalanceGHS: 800, PaymentOption: "Pay on delivery", Progress: "Cancelled", Notes: "" },
+    { Timestamp: iso(60), Reference: "FAV-A5", Product: "Office Chair (FAV-017)", Quantity: 1, TotalGHS: 4500, PaidNowGHS: 4500, BalanceGHS: 0, PaymentOption: "Pay in full", Progress: "Delivered", Notes: "Channel: marketplace" }];
+  const page = await plainPage(browser, problems, async pg => pg.route("https://backend.smoke.test/**", r => {
+    const u = new URL(r.request().url());
+    if (r.request().method() === "POST") { posts.push(JSON.parse(r.request().postData())); return r.fulfill({ status: 200, contentType: "application/json", body: '{"ok":true}' }); }
+    gets.push(u.searchParams.get("action"));
+    if (u.searchParams.get("action") === "orders") return r.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ok: true, orders: ORD }) });
+    return r.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ok: true, customers: [{ name: "X", enquiries: [{ row: 2, when: iso(2), source: "whatsapp", status: "Won" }] }] }) });
+  }));
+  await page.evaluate(() => localStorage.setItem("fav-orders-key", "smoke"));
+  await page.addScriptTag({ content: fs.readFileSync(ROOT + "admin/sales.js", "utf8") });
+  await page.evaluate(() => document.querySelector("[data-sales]").click());
+  await page.waitForTimeout(500);
+  const st = await page.evaluate(() => ({ hash: location.hash, tiles: [...document.querySelectorAll("#sl-body .stat")].map(s => s.innerText.split("\n")[0]), svgs: document.querySelectorAll("#sl-body svg").length, bars: document.querySelectorAll(".sl-chrow").length, rows: document.querySelectorAll(".sl-table tbody tr").length, ch: [...document.querySelectorAll(".sl-chrow")].map(r => r.innerText.replace(/\s+/g, " ")), w: document.documentElement.scrollWidth }));
+  want(st.hash === "#sales", "deep link #sales not set");
+  want(st.tiles.length === 4, "expected 4 KPI tiles, got " + st.tiles.length);
+  want(JSON.stringify(st.tiles) === JSON.stringify(["GH₵48,500", "3", "GH₵16,167", "GH₵19,200"]), "KPI tiles wrong (30 days, cancelled left out): " + JSON.stringify(st.tiles));
+  want(st.svgs === 1 && st.bars === 5, "expected the 30-day SVG chart and 5 channel bars: " + JSON.stringify([st.svgs, st.bars]));
+  want(st.rows === 3, "by-product table should have 3 rows for 30 days: " + st.rows);
+  want(/TikTok.*8,500/.test(st.ch.join("|")) && /Walk-in.*1,600/.test(st.ch.join("|")) && /WhatsApp.*\+1 won/.test(st.ch.join("|")), "channels wrong: " + JSON.stringify(st.ch));
+  want(st.w <= 392, "sales screen scrolls sideways on a phone: " + st.w);
+  if (process.env.SALES_SHOT) await page.screenshot({ path: process.env.SALES_SHOT, fullPage: true });
+  want(gets.includes("orders") && gets.includes("customers"), "didn't read orders + customers");
+  await page.click("[data-sl-period='0']"); await page.waitForTimeout(400);
+  want(await page.evaluate(() => document.querySelector("#sl-body .stat b").innerText) === "GH₵53,000", "All time revenue wrong");
+  await page.click("[data-sl-rec]"); await page.waitForTimeout(100);
+  await page.fill("#sl-rec-form [name=name]", "Walk-in buyer"); await page.selectOption("#sl-rec-form [name=product]", "FAV-014"); await page.fill("#sl-rec-form [name=qty]", "2");
+  await page.click("#sl-rec-form [type=submit]"); await page.waitForTimeout(2200);
+  const o = posts.find(p => p.action === "order"), u = posts.find(p => p.action === "update_order");
+  want(o && o.product_id === "FAV-014" && o.quantity === 2 && o.amount_due === 0 && /^FAV-[A-Z0-9]{6,20}$/.test(o.reference), "Record a sale didn't post a valid order: " + JSON.stringify(o));
+  want(u && u.reference === (o || {}).reference && u.progress === "Balance paid" && /Channel: walk-in/.test(u.note), "Record a sale didn't mark it paid with the channel: " + JSON.stringify(u));
+  want(await page.evaluate(() => window.FAV_SALES._test.channelOf({ PaymentOption: "WhatsApp sale (recorded in admin)", Notes: "" })) === "whatsapp", "channel fallback from the payment label failed");
+  (await page.evaluate(() => window.__toasts.filter(t => t.startsWith("✗")))).forEach(t => problems.push("error toast: " + t));
+  await page.close();
+  return { problems, tiles: st.tiles };
+}
+
 (async () => {
   const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
   let failed = 0;
@@ -957,6 +1173,15 @@ async function brands(browser, shot) {
   const ap = await aiplan(browser, process.env.AIPLAN_SHOT || "");
   if (ap.problems.length) { failed++; console.log("✗ AI Plan screen"); ap.problems.forEach(p => console.log("    " + p)); }
   else console.log(`✓ AI Plan screen: ${ap.rules} rules drawn; edits, Retired, Needs approval, Pause All / Resume and new rules work with the autopilot gate`);
+  const pro = await prospects(browser);
+  if (pro.problems.length) { failed++; console.log("✗ Bulk buyers screen"); pro.problems.forEach(p => console.log("    " + p)); }
+  else console.log("✓ Bulk buyers screen: S5 gate, unverified AI suggestions, chains dropped, keepers need a source, price/quantity stop, pitch + email + quote + WhatsApp + Add to Leads, only public info saved");
+  const pk = await profilekit(browser);
+  if (pk.problems.length) { failed++; console.log("✗ Profile kit screen"); pk.problems.forEach(p => console.log("    " + p)); }
+  else console.log("✓ Profile kit screen: 8 prompt cards per brand × platform, M6 gate, limits, brand facts only, bio ranking, Save to brand on click only");
+  const sl = await sales(browser);
+  if (sl.problems.length) { failed++; console.log("✗ Sales screen"); sl.problems.forEach(p => console.log("    " + p)); }
+  else console.log(`✓ Sales screen: ${sl.tiles.join(" · ")}; 30-day chart, channels, by product, phone width, Record a sale`);
   const brs = await brands(browser, process.env.BRANDS_SHOT || "");
   if (brs.problems.length) { failed++; console.log("✗ Brands screen"); brs.problems.forEach(p => console.log("    " + p)); }
   else console.log(`✓ Brands screen: ${brs.cards} brands drawn with kits; setup pack, edits and brand detection work`);

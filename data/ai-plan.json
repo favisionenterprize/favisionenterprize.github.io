@@ -2,7 +2,7 @@
  "owner": "Alexander Awuku",
  "paused": false,
  "paused_at": null,
- "updated": "2026-10-23",
+ "updated": "2026-10-25",
  "source": "FA Vision AI Operating System Blueprint",
  "rules": [
   {
@@ -44,6 +44,18 @@
    "setting": "block",
    "status": "approved",
    "steps": []
+  },
+  {
+   "id": "S5",
+   "dept": "Sales",
+   "owner": "Alexander Awuku",
+   "task": "Bulk-buyer finder (🏢 Bulk buyers): AI suggests local, independent schools, churches, hotels, offices, hostels, event centres and restaurants in Accra/Tema/Kasoa (chains left out), each marked unverified until Alexander opens its public source; for the keepers it drafts a WhatsApp/email pitch + quote line. Stops when the quantity or price is empty (never guesses). Never sends: Copy / Open WhatsApp / Add to Leads only.",
+   "line": "draft",
+   "setting": "approve",
+   "status": "proposed",
+   "steps": [
+    "prospects:"
+   ]
   },
   {
    "id": "M1",
@@ -126,6 +138,28 @@
    "steps": []
   },
   {
+   "id": "M6",
+   "dept": "Marketing",
+   "owner": "Alexander Awuku",
+   "task": "Brand profile kit (🪪 Profile kit): AI writes profile rebuild plans, bios (within each platform's limit), highlights, pinned trio, banner brief, title audit, keyword clusters and pinned-comment funnel per brand and platform from that brand's own facts. A bio is saved to 🏷 Brands only when Alexander clicks Save to brand; no live account is ever changed.",
+   "line": "draft",
+   "setting": "approve",
+   "status": "proposed",
+   "steps": [
+    "profilekit:"
+   ]
+  },
+  {
+   "id": "M7",
+   "dept": "Marketing",
+   "owner": "Alexander Awuku",
+   "task": "Trend videos (🎬 card on the Boost tab): ready prompts for the 'miniature me cleans my profile' AI-video trend per brand. Alexander makes the video in his own AI video tool and adds it to the videos library; posting goes through the normal video rules. Max about 1 a week (AI-only content risks demonetisation).",
+   "line": "human",
+   "setting": "approve",
+   "status": "proposed",
+   "steps": []
+  },
+  {
    "id": "C1",
    "dept": "Support",
    "task": "Answer order-status and product questions from the company brain",
@@ -186,6 +220,16 @@
    "line": "human",
    "setting": "block",
    "status": "approved",
+   "steps": []
+  },
+  {
+   "id": "F5",
+   "dept": "Finance",
+   "owner": "Alexander Awuku",
+   "task": "Sales dashboard (📊 Sales): read-only revenue, orders, average order and balances owed by channel and product from the Orders sheet. 'Record a sale' is typed by Alexander himself; the AI never records or changes a sale.",
+   "line": "human",
+   "setting": "approve",
+   "status": "proposed",
    "steps": []
   },
   {

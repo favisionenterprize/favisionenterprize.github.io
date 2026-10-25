@@ -1061,7 +1061,7 @@
 
   function render() {
     if (!S) return;
-    const body = tab === "facebook" ? renderFacebook() : tab === "instagram" ? (IG() ? IG().renderTab() : "") : tab === "now" ? renderNow() : tab === "social" ? (SOC() ? SOC().renderTab() : "") : tab === "ttcap" ? (FX() ? FX().renderTab() : TTC() ? TTC().renderCard() : "") : tab === "videos" ? (VID() ? VID().renderTab() : "") : tab === "engage" ? (PRO() ? PRO().renderCard() : "") + (VIRAL() ? VIRAL().renderCard() : "") + (ENG() ? ENG().renderTab() : "") : tab === "market" ? (MK() ? MK().renderTab() : "") : tab === "boost" ? (BST() ? BST().renderTab() : "") : renderToday();
+    const body = tab === "facebook" ? renderFacebook() : tab === "instagram" ? (IG() ? IG().renderTab() : "") : tab === "now" ? renderNow() : tab === "social" ? (SOC() ? SOC().renderTab() : "") : tab === "ttcap" ? (FX() ? FX().renderTab() : TTC() ? TTC().renderCard() : "") : tab === "videos" ? (VID() ? VID().renderTab() : "") : tab === "engage" ? (PRO() ? PRO().renderCard() : "") + (VIRAL() ? VIRAL().renderCard() : "") + (ENG() ? ENG().renderTab() : "") : tab === "market" ? (MK() ? MK().renderTab() : "") : tab === "boost" ? (window.FAV_TRENDVID ? window.FAV_TRENDVID.renderCard() : "") + (BST() ? BST().renderTab() : "") : renderToday();
     $("#fa-body").innerHTML = `<nav class="fa-tabs" role="tablist">${TABS.map(([k, t]) => `<button type="button" role="tab" aria-selected="${tab === k}" data-fa-tab="${k}">${t}</button>`).join("")}</nav>` + body;
   }
 
@@ -1184,8 +1184,9 @@
     finally { A.busy(null); }
   });
 
-  async function open() {
+  async function open(toTab) {
     if (!A.signedIn()) return A.show("login");
+    if (typeof toTab === "string" && TABS.some(t => t[0] === toTab)) tab = toTab;   // e.g. 🎬 Trend video → Boost tab
     document.querySelectorAll(".screen").forEach(s => { s.hidden = s !== screen; });
     $("#top-actions").hidden = false;
     window.scrollTo(0, 0);
