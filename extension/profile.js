@@ -27,6 +27,8 @@
   });
   const bg = msg => new Promise(res => { try { chrome.runtime.sendMessage(msg, r => res(r || {})); } catch (e) { res({}); } });
   let job = null;
+  // Dialog handler context: "Discard post?" may discard only OUR unsent text from this job.
+  const DCTX = () => ({ ours: () => { try { const it = job && job.q && job.q[job.i]; const want = it && String(it.text || it.description || "").slice(0, 30).trim(); const box = [...document.querySelectorAll("[contenteditable=true],textarea")].map(e => e.innerText || e.value || "").join(" "); return !!want && box.includes(want); } catch (e) { return false; } } });
   try { job = (await bg({ type: "getJob" })).job || null; } catch (e) { job = null; }
   if (!job || job.kind !== "profile") return;
   const NET = job.net;
@@ -64,19 +66,22 @@
       kind: "profile", net: NET, mode: job.mode, id: job.id, pin: job.pin || null, then: job.then || null, stopped: stopped || null,
       res: [{ link: r.link || null, pinned: r.pinned || null, linkOk: !!want && has === want, pinOk: !!pinProbe && norm(r.pinned).includes(pinProbe), why: job.notes.join(" · ") }]
     };
+    if (window.FAV_DIALOGS) { const dl = window.FAV_DIALOGS.log(); if (dl.length) out.dialogs = dl; }
     await bg({ type: "clearJob" });
+    if (window.FAV_DIALOGS) window.FAV_DIALOGS.leaving();
     location.href = job.back + "#favauto-done=" + encodeURIComponent(JSON.stringify(out));
   }
   const WARN = /temporarily blocked|temporarily restricted|you('|’)re restricted|we limit how often|try again later|suspicious activity|confirm (your identity|it('|’)s you)|action blocked|rate limit/i;
-  const warning = () => { const t = [...document.querySelectorAll("[role=dialog],[role=alert],[data-testid=toast]")].map(d => d.innerText || "").join("\n"); const m = t.match(WARN); return m ? m[0] : null; };
+  const warning = () => { const dg = window.FAV_DIALOGS && window.FAV_DIALOGS.tick(DCTX()); if (dg && dg.stop) return dg.stop; const t = [...document.querySelectorAll("[role=dialog],[role=alert],[data-testid=toast]")].map(d => d.innerText || "").join("\n"); const m = t.match(WARN); return m ? m[0] : null; };
   const visible = el => !!el && el.getClientRects().length > 0;
   const textOf = el => ((el && (el.innerText || el.getAttribute("aria-label"))) || "").trim();
   const findBtn = (re, root) => [...(root || document).querySelectorAll('[role=button],button,[role=menuitem],[role=link],a')].find(b => visible(b) && (re.test((b.getAttribute("aria-label") || "").trim()) || re.test((b.innerText || "").trim())));
-  async function waitFor(fn, ms) { for (let t = 0; t < ms; t += 300) { if (stopAsked) return null; const v = fn(); if (v) return v; await sleep(300); } return null; }
+  async function waitFor(fn, ms) { for (let t = 0; t < ms; t += 300) { if (stopAsked) return null; if (window.FAV_DIALOGS) window.FAV_DIALOGS.tick(DCTX()); const v = fn(); if (v) return v; await sleep(300); } return null; }
   async function go(url, step) {
     job.step = step; job.hops++;
     await save();
     if (job.hops > 12) return finish("The page kept changing. Stopped.");
+    if (window.FAV_DIALOGS) window.FAV_DIALOGS.leaving();
     location.href = url;
   }
   function typeIn(el, value) {

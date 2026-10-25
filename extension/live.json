@@ -1,7 +1,28 @@
 {
-  "version": "2026-10-15.4",
-  "note": "The FA Vision add-on (5.0+) downloads these scripts from the live site and runs them, so pushing a change here updates everyone's add-on within the hour. Changing the version is optional (it is only shown in the admin); any change to a file is picked up.",
+  "version": "2026-10-25.1",
+  "note": "The FA Vision add-on (5.0+) downloads these scripts from the live site and runs them, so pushing a change here updates everyone's add-on within the hour. Changing the version is optional (it is only shown in the admin); any change to a file is picked up. dialogs.js (shared dialog handler) must stay FIRST: the other scripts use window.FAV_DIALOGS.",
   "scripts": [
+    {
+      "id": "dialogs",
+      "file": "dialogs.js",
+      "matches": [
+        "https://*.facebook.com/*",
+        "https://www.instagram.com/*",
+        "https://x.com/*",
+        "https://www.tiktok.com/*",
+        "https://ads.tiktok.com/*",
+        "https://www.youtube.com/*",
+        "https://studio.youtube.com/*"
+      ]
+    },
+    {
+      "id": "dialogs-main",
+      "file": "dialogs.js",
+      "matches": [
+        "https://*.facebook.com/marketplace/*"
+      ],
+      "world": "MAIN"
+    },
     {
       "id": "fb-autopilot",
       "file": "autopilot.js",
