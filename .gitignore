@@ -13,3 +13,4 @@ node_modules/
 service-account*.json
 
 __pycache__/
+.claude/worktrees/
