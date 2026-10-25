@@ -259,15 +259,6 @@
    "off_why": "Couldn't find the post box"
   },
   {
-   "id": "Houseofcomedyandjokes",
-   "name": "Buying and Selling Furniture",
-   "url": "https://www.facebook.com/groups/Houseofcomedyandjokes/",
-   "added": "2026-10-23",
-   "members": 865000,
-   "source": "autopilot",
-   "active": true
-  },
-  {
    "id": "hongkongmoms",
    "name": "Hong Kong Moms",
    "url": "https://www.facebook.com/groups/hongkongmoms/",
@@ -1656,7 +1647,17 @@
   "p": "FAV-001"
  },
  "renewals": {},
- "removed": [],
+ "removed": [
+  {
+   "id": "Houseofcomedyandjokes",
+   "name": "Buying and Selling Furniture",
+   "url": "https://www.facebook.com/groups/Houseofcomedyandjokes/",
+   "why": "Declined 3 of our posts · leave not confirmed",
+   "d": "2026-10-25",
+   "left": false,
+   "tries": 1
+  }
+ ],
  "joins": [
   {
    "d": "2026-10-22",
@@ -1878,7 +1879,7 @@
  "checks": {
   "grow": "2026-10-23",
   "sync": "2026-10-25",
-  "declines": "2026-10-23"
+  "declines": "2026-10-25"
  },
  "rounds": {
   "FAV-014": "2026-10-25T01:36:59.223Z"
@@ -2036,6 +2037,13 @@
    "tried": 3,
    "ok": 0,
    "stopped": "No access to post and couldn't find the profile menu. Nothing more was posted."
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T01:44:16.130Z",
+   "kind": "declines",
+   "found": 1,
+   "left": 0
   }
  ],
  "renewLog": [
