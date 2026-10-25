@@ -345,6 +345,22 @@
     ]
    },
    "applied_at": "2026-10-15"
+  },
+  {
+   "id": "title:foldable/index.html",
+   "kind": "title",
+   "page": "foldable/index.html",
+   "value": "Foldable · F.A Vision Enterprise, Accra",
+   "applied_at": "2026-10-25",
+   "by": "AI Fix"
+  },
+  {
+   "id": "description:foldable/index.html",
+   "kind": "description",
+   "page": "foldable/index.html",
+   "value": "We sell sofas, beds, dining sets, office chairs and student desks from GH₵650 in Odorkor, Accra. Delivery to Accra, Tema & Kasoa. WhatsApp 057 264 6176.",
+   "applied_at": "2026-10-25",
+   "by": "AI Fix"
   }
  ]
 }
