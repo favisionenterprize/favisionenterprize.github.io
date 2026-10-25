@@ -580,7 +580,7 @@
    "url": "https://www.facebook.com/groups/1968925946751585/",
    "active": false,
    "added": "2026-10-25",
-   "off_why": "Couldn't find the post box"
+   "off_why": "Not a member of this group"
   },
   {
    "id": "789579941115543",
@@ -2706,6 +2706,96 @@
    "ok": false,
    "now": true,
    "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:33:59.689Z",
+   "p": "FAV-014",
+   "g": "226910456304636",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:37:47.331Z",
+   "p": "FAV-014",
+   "g": "18020874123",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:40:05.056Z",
+   "p": "FAV-014",
+   "g": "391960286954584",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:43:15.615Z",
+   "p": "FAV-014",
+   "g": "583352032851222",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:45:23.143Z",
+   "p": "FAV-014",
+   "g": "1371907773293669",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:45:52.614Z",
+   "p": "FAV-014",
+   "g": "1968925946751585",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:46:35.357Z",
+   "p": "FAV-014",
+   "g": "789579941115543",
+   "ok": false,
+   "now": true,
+   "why": "Post box didn't open"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:47:04.097Z",
+   "p": "FAV-014",
+   "g": "homedecorinspirations",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:47:33.709Z",
+   "p": "FAV-014",
+   "g": "755614535841357",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:48:02.046Z",
+   "p": "FAV-014",
+   "g": "7064480850327890",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
   }
  ],
  "resets": {},
@@ -3196,6 +3286,13 @@
    "kind": "post",
    "tried": 10,
    "ok": 3
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:48:16.657Z",
+   "kind": "post",
+   "tried": 10,
+   "ok": 4
   }
  ],
  "renewLog": [
