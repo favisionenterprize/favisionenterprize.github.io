@@ -2151,6 +2151,15 @@
    "g": "977797772413869",
    "ok": true,
    "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T05:26:14.869Z",
+   "p": "FAV-010",
+   "g": "page",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
   }
  ],
  "resets": {},
@@ -2592,6 +2601,13 @@
    "kind": "post",
    "tried": 14,
    "ok": 11
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T05:26:40.451Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 0
   }
  ],
  "renewLog": [
