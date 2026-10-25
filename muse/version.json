@@ -1,1 +1,1 @@
-{ "version": "1.0.0", "date": "2026-10-07", "notes": "First version: Create, Ask, Code and Today tabs; installs on Android and iPhone; updates itself." }
+{ "version": "1.1.0", "date": "2026-10-25", "notes": "AI usage: model and tokens under each reply, and a Usage screen (today and last 7 days)." }

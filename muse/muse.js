@@ -3,6 +3,7 @@
 //   Ask    – personal assistant chat
 //   Code   – writes working code (with copy, download and live preview)
 //   Today  – the social autopilot at a glance (new groups, removed groups, posts)
+//   Usage  – (header button) AI calls, tokens and errors per model, today and last 7 days
 // The AI runs in the Apps Script backend (action "muse"), so no key is on the phone.
 // Self-updating: sw.js fetches the latest files from the website every time Muse opens,
 // and this script checks version.json every 30 minutes and reloads itself when it changes.
@@ -112,12 +113,53 @@
     return `${hook}\n${hl.map(h => "✔ " + h).join("\n")}\n💰 ${price}\n📍 Odorkor, Accra · delivery available\n📞 WhatsApp ${c.wa}\n👉 ${pageUrl(p)}\n${plat === "insta" ? (business.hashtags || []).join(" ") : tags}`;
   }
 
+  // ------------------------------------------------------------------ usage log
+  // localStorage "muse-usage" = { "YYYY-MM-DD": { "<model>": { calls, input, output, total, errors, last_error? } } }.
+  // Filled from the backend's { model, usage, ms } (Code.gs museAsk_ since the usage patch); an older
+  // backend sends no usage, so its calls count with no tokens (under the last model seen, else "model not reported").
+  const USAGE_KEY = "muse-usage", NO_MODEL = "model not reported";
+  let lastMeta = null;
+  function usageLog() { try { return JSON.parse(localStorage.getItem(USAGE_KEY) || "{}") || {}; } catch (e) { return {}; } }
+  function logUsage(meta, error) {
+    const log = usageLog(), d = today();
+    const model = (meta && meta.model) || LS.get("lastModel", "") || NO_MODEL;
+    const day = log[d] = log[d] || {};
+    const row = day[model] = day[model] || { calls: 0, input: 0, output: 0, total: 0, errors: 0 };
+    row.calls++;
+    if (error) { row.errors++; row.last_error = String(error).slice(0, 120); }
+    const u = meta && meta.usage;
+    if (u) { row.input += +u.input || 0; row.output += +u.output || 0; row.total += +u.total || ((+u.input || 0) + (+u.output || 0)); }
+    Object.keys(log).sort().slice(0, -60).forEach(k => delete log[k]); // keep about two months
+    try { localStorage.setItem(USAGE_KEY, JSON.stringify(log)); } catch (e) { /* storage full or blocked */ }
+    if (meta && meta.model) LS.set("lastModel", meta.model);
+  }
+  const num = n => Number(n || 0).toLocaleString("en-GB");
+  // "gemini-flash-lite-latest · in 412 · out 230 · total 642 tokens · 1.2 s"; "" when the backend sent no usage.
+  function usageLine(meta) {
+    if (!meta || !meta.usage) return "";
+    const u = meta.usage;
+    return [meta.model || "AI", "in " + num(u.input), "out " + num(u.output)]
+      .concat(u.thinking ? ["thinking " + num(u.thinking)] : [])
+      .concat(["total " + num(u.total) + " tokens"])
+      .concat(meta.ms ? [(meta.ms / 1000).toFixed(1) + " s"] : []).join(" · ");
+  }
+  const metaHtml = meta => { const t = usageLine(meta); return t ? `<div class="meta">${esc(t)}</div>` : ""; };
+
   // ------------------------------------------------------------------ AI call
+  // Returns the text; the call's { model, provider, usage, ms } is left in lastMeta (null on an old backend).
   async function askAI(mode, messages, context) {
     if (!session) throw Object.assign(new Error("Sign in first."), { code: "signed_out" });
-    const r = await backend({ action: "muse", session, mode, messages, context: context || "" });
-    // Posts are pasted into Facebook/WhatsApp, which don't render markdown: drop ** and # markers there.
-    if (r.ok) return mode === "content" ? String(r.text).replace(/\*\*(.+?)\*\*/g, "$1").replace(/^#{1,6}\s*/gm, "") : r.text;
+    lastMeta = null;
+    let r;
+    try { r = await backend({ action: "muse", session, mode, messages, context: context || "" }); }
+    catch (e) { logUsage(null, "network: " + e.message); throw e; }
+    if (r.ok) {
+      lastMeta = r.usage ? { model: r.model || "", provider: r.provider || "", usage: r.usage, ms: r.ms || 0 } : null;
+      logUsage(lastMeta || { model: r.model }, null);
+      // Posts are pasted into Facebook/WhatsApp, which don't render markdown: drop ** and # markers there.
+      return mode === "content" ? String(r.text).replace(/\*\*(.+?)\*\*/g, "$1").replace(/^#{1,6}\s*/gm, "") : r.text;
+    }
+    if (r.error !== "signed_out" && r.error !== "no_ai_key") logUsage(null, r.error);
     if (r.error === "signed_out") { session = null; LS.set("session", null); setTimeout(render, 1500); }
     const msg = {
       no_ai_key: "Muse's AI isn't switched on yet: add GEMINI_API_KEY (free) in Apps Script → Project settings → Script properties. Until then Create uses built-in templates.",
@@ -171,7 +213,7 @@
   }
 
   const cState = LS.get("create", { p: "", plat: "group", tone: "friendly" });
-  let lastOut = "";
+  let lastOut = "", lastOutMeta = null;
   function viewCreate() {
     const list = sellable();
     if (!cState.p || !list.some(p => p.id === cState.p)) cState.p = (auto && auto.today && list.some(p => p.id === auto.today.p)) ? auto.today.p : (list[0] || {}).id || "";
@@ -185,7 +227,7 @@
       <label>Tone</label><div class="chips">${Object.entries(TONES).map(([k, v]) => chip("tone", k, v, k === cState.tone)).join("")}</div>
       <label for="cx">Anything to add? (optional)</label><input id="cx" placeholder="e.g. free delivery in Kasoa this week">
       <button class="btn block" id="gen">✨ Write it</button>
-      <div id="gen-out">${lastOut ? outBlock(lastOut) : ""}</div>
+      <div id="gen-out">${lastOut ? outBlock(lastOut, lastOutMeta) : ""}</div>
     </section>
     <section class="card">
       <h2>Today's pack</h2>
@@ -194,9 +236,9 @@
       <div id="pack-out"></div>
     </section>`;
   }
-  function outBlock(text) {
+  function outBlock(text, meta) {
     const p = products.find(x => x.id === cState.p);
-    return `<div class="out">${esc(text)}</div><div class="out-actions">
+    return `<div class="out">${esc(text)}</div>${metaHtml(meta)}<div class="out-actions">
       <button class="btn sm" data-out="copy">Copy</button>
       <button class="btn sm wa" data-out="wa">WhatsApp</button>
       ${navigator.share ? `<button class="btn sm ghost" data-out="share">Share…</button>` : ""}
@@ -215,11 +257,15 @@
     return `<section class="card"><h2>${mode === "code" ? "Code" : "Ask Muse"}</h2><p class="muted">${intro}</p>
       ${msgs.length ? `<div class="row" style="margin-top:8px"><button class="btn sm ghost" data-clear="${mode}">New chat</button></div>` : `<div class="chips" style="margin-top:8px">${starters.map(s => `<button type="button" class="chip" data-starter="${esc(s)}">${esc(s)}</button>`).join("")}</div>`}
     </section>
-    <div class="chat" id="chat">${msgs.map(m => `<div class="msg ${m.role === "user" ? "u" : "a"}">${m.role === "user" ? esc(m.text) : richText(m.text)}</div>`).join("")}</div>`;
+    <div class="chat" id="chat">${msgs.map(m => `<div class="msg ${m.role === "user" ? "u" : "a"}">${m.role === "user" ? esc(m.text) : richText(m.text) + metaHtml(m.meta)}</div>`).join("")}</div>`;
   }
 
+  function usageCard() {
+    const r = Object.values(usageLog()[today()] || {}).reduce((a, x) => ({ calls: a.calls + (+x.calls || 0), total: a.total + (+x.total || 0), errors: a.errors + (+x.errors || 0) }), { calls: 0, total: 0, errors: 0 });
+    return `<section class="card"><h2>AI usage today</h2><p class="muted">${plural(r.calls, "call")} · ${num(r.total)} tokens${r.errors ? ` · ${plural(r.errors, "error")}` : ""}</p><button class="btn ghost block" data-tab="usage">See usage</button></section>`;
+  }
   function viewToday() {
-    if (!auto) return `<section class="card"><p class="muted">Loading the autopilot…</p></section>`;
+    if (!auto) return `<section class="card"><p class="muted">Loading the autopilot…</p></section>${usageCard()}`;
     const d = today(), s = Object.assign({ grow_daily: 20 }, auto.settings || {});
     const joins = (auto.joins || []).filter(j => j.d === d && j.status !== "failed");
     const removed = auto.removed || [];
@@ -236,7 +282,48 @@
         <a class="btn ghost block" style="display:block;text-align:center;text-decoration:none" href="../admin/#fbauto">Open the autopilot (computer)</a>
       </section>
       ${joins.length ? `<section class="card"><h2>New today</h2><ul class="list">${joins.map(j => `<li><span>${j.url ? `<a href="${esc(j.url)}" target="_blank" rel="noopener">${esc(j.name)}</a>` : esc(j.name)}</span><small>${mText(j.members)} · ${j.status === "joined" ? "joined" : "waiting"}</small></li>`).join("")}</ul></section>` : ""}
+      ${usageCard()}
       ${removed.length ? `<section class="card"><h2>Removed (declined our posts)</h2><ul class="list">${removed.slice(-15).reverse().map(r => `<li><span>${esc(r.name)}</span><small>${esc(r.d)} · ${r.left ? "left" : "to leave"}</small></li>`).join("")}</ul></section>` : ""}`;
+  }
+
+  // Usage view (header "Usage" button, or "See usage" on the Today tab): today and the last 7 days per model.
+  function viewUsage() {
+    const log = usageLog(), d = today();
+    const days = [];
+    for (let i = 0; i < 7; i++) { const x = new Date(); x.setDate(x.getDate() - i); days.push(x.toLocaleDateString("en-CA")); }
+    const sum = keys => {
+      const by = {};
+      keys.forEach(k => Object.entries(log[k] || {}).forEach(([m, r]) => {
+        const t = by[m] = by[m] || { calls: 0, input: 0, output: 0, total: 0, errors: 0, last_error: "" };
+        ["calls", "input", "output", "total", "errors"].forEach(f => { t[f] += +r[f] || 0; });
+        if (r.last_error) t.last_error = r.last_error;
+      }));
+      return by;
+    };
+    const tot = by => Object.values(by).reduce((a, r) => ({ calls: a.calls + r.calls, total: a.total + r.total, errors: a.errors + r.errors }), { calls: 0, total: 0, errors: 0 });
+    const table = by => {
+      const rows = Object.entries(by).sort((a, b) => b[1].calls - a[1].calls);
+      if (!rows.length) return `<p class="muted">No AI calls yet.</p>`;
+      return `<ul class="list">${rows.map(([m, r]) => `<li><span><b>${esc(m)}</b><span class="sub">${plural(r.calls, "call")} · in ${num(r.input)} · out ${num(r.output)}${r.errors ? ` · <span class="err">${plural(r.errors, "error")}</span>` : ""}</span>${r.errors && r.last_error ? `<span class="sub">Last error: ${esc(r.last_error)}</span>` : ""}</span><small>${num(r.total)}<br>tokens</small></li>`).join("")}</ul>`;
+    };
+    const t1 = sum([d]), t7 = sum(days), a = tot(t1), b = tot(t7);
+    const perDay = days.map(k => Object.assign({ k }, tot(sum([k]))));
+    const max = Math.max(1, ...perDay.map(x => x.total));
+    return `<section class="card"><h2>AI usage</h2>
+        <p class="muted">What Muse's AI calls used on this phone: model, tokens in and out, and errors (like “high demand” or “busy”).</p>
+        <div class="stat" style="margin-top:10px"><div><b>${a.calls}</b><small>calls today</small></div><div><b>${num(a.total)}</b><small>tokens today</small></div><div><b>${a.errors}</b><small>errors today</small></div></div>
+      </section>
+      <section class="card"><h2>Today by model</h2>${table(t1)}</section>
+      <section class="card"><h2>Last 7 days</h2>
+        <div class="stat"><div><b>${b.calls}</b><small>calls</small></div><div><b>${num(b.total)}</b><small>tokens</small></div><div><b>${b.errors}</b><small>errors</small></div></div>
+        <ul class="list days">${perDay.map(x => `<li><span class="day">${esc(x.k.slice(5))}</span><span class="bar"><i style="width:${Math.round(100 * x.total / max)}%"></i></span><small>${plural(x.calls, "call")} · ${num(x.total)}${x.errors ? ` · <span class="err">⚠ ${x.errors}</span>` : ""}</small></li>`).join("")}</ul>
+        ${table(t7)}
+      </section>
+      <section class="card"><h2>Limits</h2>
+        <p class="muted">The free Gemini tier has daily limits on requests and tokens per model. When they run out, or Google is busy, Muse shows an AI error (often “high demand”) until it resets. See the real numbers in Google AI Studio: <a href="https://aistudio.google.com/usage" target="_blank" rel="noopener">aistudio.google.com/usage</a>.</p>
+        <p class="muted">Counts here come from this phone only. Calls made before the backend update show no tokens.</p>
+        <button class="btn sm ghost" id="usage-clear">Clear this phone's usage log</button>
+      </section>`;
   }
 
   function render() {
@@ -248,7 +335,9 @@
     app.classList.toggle("chatting", chatting);
     document.querySelectorAll("#tabs [data-tab]").forEach(b => b.setAttribute("aria-selected", String(b.dataset.tab === tab)));
     if (!signed) { app.innerHTML = viewSignIn(); return; }
-    app.innerHTML = tab === "ask" ? viewChat("assistant") : tab === "code" ? viewChat("code") : tab === "today" ? viewToday() : viewCreate();
+    $("#usage").hidden = !signed;
+    $("#usage").setAttribute("aria-pressed", String(tab === "usage"));
+    app.innerHTML = tab === "ask" ? viewChat("assistant") : tab === "code" ? viewChat("code") : tab === "today" ? viewToday() : tab === "usage" ? viewUsage() : viewCreate();
     $("#ask-input").placeholder = tab === "code" ? "Describe the code you need…" : "Ask Muse…";
     if (chatting) window.scrollTo(0, document.body.scrollHeight);
   }
@@ -263,11 +352,12 @@
     try {
       const prompt = `Write ${PLATFORMS[cState.plat].ask} for this product. Tone: ${TONES[cState.tone]}.${extra ? " Also: " + extra : ""} Reply with the post text only.`;
       lastOut = await askAI("content", [{ role: "user", text: prompt }], productContext(p));
+      lastOutMeta = lastMeta;
     } catch (e) {
-      lastOut = template(p, cState.plat, cState.tone);
+      lastOut = template(p, cState.plat, cState.tone); lastOutMeta = null;
       toast(e.code === "no_ai_key" ? "Built-in template used (AI not switched on yet)." : e.message, 4500);
     }
-    $("#gen-out").innerHTML = outBlock(lastOut);
+    $("#gen-out").innerHTML = outBlock(lastOut, lastOutMeta);
     btn.disabled = false; btn.textContent = "✨ Write another";
   }
   async function pack() {
@@ -276,16 +366,17 @@
     if (!p) return;
     const box = $("#pack-out"), btn = $("#pack");
     btn.disabled = true; box.innerHTML = `<p class="thinking"></p>`;
-    let text;
+    let text, meta = null;
     try {
       text = await askAI("content", [{ role: "user", text: "Make today's posting pack for this product, with clear headings: 1) Facebook group post 2) Instagram caption 3) Three WhatsApp status lines 4) TikTok script (30-45 s). Ready to paste." }], productContext(p));
+      meta = lastMeta;
     } catch (e) {
       text = ["FACEBOOK GROUP POST", template(p, "group", "friendly"), "", "INSTAGRAM", template(p, "insta", "premium"), "", "WHATSAPP STATUS", template(p, "status", "deal"), "", "TIKTOK SCRIPT", template(p, "tiktok", "friendly")].join("\n");
       if (e.code !== "no_ai_key") toast(e.message, 4500);
     }
     const id = "c" + Math.random().toString(36).slice(2, 8);
     codeStore[id] = { lang: "text", code: text };
-    box.innerHTML = `<p class="muted" style="margin:10px 0 0">For <b>${esc(shortName(p))}</b></p><div class="out">${esc(text)}</div><div class="out-actions"><button class="btn sm" data-copy-code="${id}">Copy all</button><button class="btn sm wa" data-wa-code="${id}">WhatsApp</button></div>`;
+    box.innerHTML = `<p class="muted" style="margin:10px 0 0">For <b>${esc(shortName(p))}</b></p><div class="out">${esc(text)}</div>${metaHtml(meta)}<div class="out-actions"><button class="btn sm" data-copy-code="${id}">Copy all</button><button class="btn sm wa" data-wa-code="${id}">WhatsApp</button></div>`;
     btn.disabled = false;
   }
   async function send(text) {
@@ -297,13 +388,14 @@
     const wait = document.createElement("div"); wait.className = "msg a thinking"; $("#chat").appendChild(wait);
     window.scrollTo(0, document.body.scrollHeight);
     $("#ask-send").disabled = true;
-    let reply;
+    let reply, meta = null;
     try {
       const ctx = mode === "assistant" ? "Products in stock: " + sellable().map(p => `${shortName(p)} ${money(p.price_ghs)}`).join("; ") : "";
-      reply = await askAI(mode, msgs.slice(-12), ctx);
+      reply = await askAI(mode, msgs.slice(-12).map(m => ({ role: m.role, text: m.text })), ctx);
+      meta = lastMeta;
     } catch (e) { reply = "⚠️ " + e.message; }
     const c2 = LS.get("chats", {});
-    c2[mode] = (c2[mode] || []).concat([{ role: "assistant", text: reply }]).slice(-40);
+    c2[mode] = (c2[mode] || []).concat([meta ? { role: "assistant", text: reply, meta } : { role: "assistant", text: reply }]).slice(-40);
     LS.set("chats", c2);
     $("#ask-send").disabled = false;
     if ((tab === "code" ? "code" : "assistant") === mode) render();
@@ -345,11 +437,12 @@
       slot.appendChild(f);
       return;
     }
+    if (e.target.closest("#usage-clear")) { if (confirm("Clear the AI usage log on this phone?")) { try { localStorage.removeItem(USAGE_KEY); } catch (x) { /* blocked */ } render(); } return; }
     const st = e.target.closest("[data-starter]"); if (st) return send(st.dataset.starter);
     const cl = e.target.closest("[data-clear]");
     if (cl) { const c = LS.get("chats", {}); delete c[cl.dataset.clear]; LS.set("chats", c); render(); }
   });
-  document.addEventListener("change", e => { if (e.target.id === "cp") { cState.p = e.target.value; lastOut = ""; LS.set("create", cState); $("#gen-out").innerHTML = ""; } });
+  document.addEventListener("change", e => { if (e.target.id === "cp") { cState.p = e.target.value; lastOut = ""; lastOutMeta = null; LS.set("create", cState); $("#gen-out").innerHTML = ""; } });
   document.addEventListener("submit", async e => {
     if (e.target.id === "ask-form") {
       e.preventDefault();

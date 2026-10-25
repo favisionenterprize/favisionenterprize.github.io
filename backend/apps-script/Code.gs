@@ -1310,7 +1310,8 @@ function museAsk_(data) {
   try {
     const gem = props.getProperty('GEMINI_API_KEY');
     const claude = props.getProperty('ANTHROPIC_API_KEY');
-    let text = '';
+    let text = '', usedModel = '', provider = '', usage = null;
+    const t0 = Date.now();
     if (gem) {
       const model = props.getProperty('GEMINI_MODEL') || 'gemini-2.5-flash';
       const res = UrlFetchApp.fetch('https://generativelanguage.googleapis.com/v1beta/models/' + encodeURIComponent(model) + ':generateContent', {
@@ -1324,22 +1325,29 @@ function museAsk_(data) {
       const out = JSON.parse(res.getContentText() || '{}');
       if (res.getResponseCode() >= 300) return json_({ ok: false, error: 'ai: ' + ((out.error && out.error.message) || res.getResponseCode()) });
       text = ((((out.candidates || [])[0] || {}).content || {}).parts || []).map((p) => p.text || '').join('');
+      const u = out.usageMetadata || {};
+      provider = 'gemini'; usedModel = out.modelVersion || model;
+      usage = { input: u.promptTokenCount || 0, output: u.candidatesTokenCount || 0, thinking: u.thoughtsTokenCount || 0, total: u.totalTokenCount || 0 };
     } else if (claude) {
+      const model = props.getProperty('CLAUDE_MODEL') || 'claude-haiku-4-5-20251001';
       const res = UrlFetchApp.fetch('https://api.anthropic.com/v1/messages', {
         method: 'post', contentType: 'application/json', muteHttpExceptions: true,
         headers: { 'x-api-key': claude, 'anthropic-version': '2023-06-01' },
         payload: JSON.stringify({
-          model: props.getProperty('CLAUDE_MODEL') || 'claude-haiku-4-5-20251001', max_tokens: 4096, system,
+          model, max_tokens: 4096, system,
           messages: msgs.map((m) => ({ role: m.role, content: m.text })),
         }),
       });
       const out = JSON.parse(res.getContentText() || '{}');
       if (res.getResponseCode() >= 300) return json_({ ok: false, error: 'ai: ' + ((out.error && out.error.message) || res.getResponseCode()) });
       text = (out.content || []).filter((c) => c.type === 'text').map((c) => c.text).join('');
+      const u = out.usage || {};
+      provider = 'claude'; usedModel = out.model || model;
+      usage = { input: u.input_tokens || 0, output: u.output_tokens || 0, thinking: 0, total: (u.input_tokens || 0) + (u.output_tokens || 0) };
     } else {
       return json_({ ok: false, error: 'no_ai_key' });
     }
-    return json_({ ok: true, text: text || '(no answer)', mode });
+    return json_({ ok: true, text: text || '(no answer)', mode, model: usedModel, provider, usage, ms: Date.now() - t0 });
   } catch (err) {
     return json_({ ok: false, error: String(err && err.message || err).slice(0, 200) });
   }
