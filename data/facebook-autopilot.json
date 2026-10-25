@@ -1522,9 +1522,260 @@
    "kind": "post",
    "tried": 8,
    "ok": 7
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T01:35:36.242Z",
+   "kind": "renew",
+   "tried": 35,
+   "ok": 2
   }
  ],
- "renewLog": [],
+ "renewLog": [
+  {
+   "d": "2026-10-25",
+   "t": "L-Shaped Sofa Set — Fabric & Leather",
+   "listed": "2026-10-17",
+   "ok": true
+  },
+  {
+   "d": "2026-10-25",
+   "t": "Student Desk Chair Set — Senior High to Tertiary Level",
+   "listed": "2026-10-17",
+   "ok": true
+  },
+  {
+   "d": "2026-10-25",
+   "t": "Dining Set Collection — 5 Designs, 6 Chairs",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "Jasmine Rice — Long Grain Fragrant Rice",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "TV Stand — Black Marble Top with Drawer",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "10 Seater Foldable Round Table with Chairs",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "Kids Plastic Chair — Stackable, Assorted Colours",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "Kavukçu Wheat Flour — 50kg Baking Flour",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "Tiles & Finishes — Floor & Wall",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "TWYFORD Water Closet — Two-Piece, Premium",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "Sigma 1.5HP Split Air Conditioner (BREEZE-HY12SB)",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "TCL 43\" Smart Android TV — Full HD (43S5400A)",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "A4 & A3 Copy Paper — Rotatrim, PaperOne, Double A",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "Business Cards — 100 or 200 Pieces",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "Auditorium / Conference Chair",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "Strong Glass Centre Table",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "Mesh Secretary Chair — Swivel, Arm Rests",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "Luxury Leather Sofa Set",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "L-Shaped Sectional Sofa — Grey Fabric",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "Wardrobe — 4-Door with Top Cabinets",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "White Dressing Table with Mirror & Stool",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "1.2 m Office Desk with Drawer Unit",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "Mesh Secretary Chair — Ergonomic Swivel",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "Executive Director Chair — Leather, High Back",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "Red Glass Dining Set — 6 Chairs",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "Black Glass Dining Set — 6 High-Back Chairs",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "3D Wallpaper — Brick, Stone & Pattern (per roll)",
+   "listed": "2026-10-15",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "Student Mattress — 2 Sizes",
+   "listed": "2026-10-15",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "TV Stand + Centre Table Set — Marble Top",
+   "listed": "2026-10-15",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "Hair Dressers Washing Bowl with Bar Chair",
+   "listed": "2026-10-15",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "Salon Chair — Hydraulic, Red or Black",
+   "listed": "2026-10-15",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "Kids Plastic Chair — Stackable, Assorted Colours",
+   "listed": "2026-10-15",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "10 Seater Foldable Round Table with Chairs",
+   "listed": "2026-10-14",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  }
+ ],
  "relay": {
   "settings": {
    "join_target": 40,
@@ -1619,5 +1870,160 @@
    "members": {},
    "skipped": []
   }
+ },
+ "selling": {
+  "d": "2026-10-25",
+  "cards": [
+   {
+    "t": "L-Shaped Sofa Set — Fabric & Leather",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-01"
+   },
+   {
+    "t": "Student Desk Chair Set — Senior High to Tertiary Level",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-01"
+   },
+   {
+    "t": "Dining Set Collection — 5 Designs, 6 Chairs",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-01"
+   },
+   {
+    "t": "Jasmine Rice — Long Grain Fragrant Rice",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-01"
+   },
+   {
+    "t": "TV Stand — Black Marble Top with Drawer",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-01"
+   },
+   {
+    "t": "10 Seater Foldable Round Table with Chairs",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-01"
+   },
+   {
+    "t": "Kids Plastic Chair — Stackable, Assorted Colours",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-01"
+   },
+   {
+    "t": "Kavukçu Wheat Flour — 50kg Baking Flour",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-01"
+   },
+   {
+    "t": "Tiles & Finishes — Floor & Wall",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-01"
+   },
+   {
+    "t": "TWYFORD Water Closet — Two-Piece, Premium",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-01"
+   },
+   {
+    "t": "Sigma 1.5HP Split Air Conditioner (BREEZE-HY12SB)",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-01"
+   },
+   {
+    "t": "TCL 43\" Smart Android TV — Full HD (43S5400A)",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-01"
+   },
+   {
+    "t": "A4 & A3 Copy Paper — Rotatrim, PaperOne, Double A",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-01"
+   },
+   {
+    "t": "Business Cards — 100 or 200 Pieces",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-01"
+   },
+   {
+    "t": "Auditorium / Conference Chair",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-01"
+   },
+   {
+    "t": "Strong Glass Centre Table",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-01"
+   },
+   {
+    "t": "Mesh Secretary Chair — Swivel, Arm Rests",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-01"
+   },
+   {
+    "t": "Luxury Leather Sofa Set",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-01"
+   },
+   {
+    "t": "L-Shaped Sectional Sofa — Grey Fabric",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-01"
+   },
+   {
+    "t": "Wardrobe — 4-Door with Top Cabinets",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-01"
+   },
+   {
+    "t": "White Dressing Table with Mirror & Stool",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-01"
+   },
+   {
+    "t": "1.2 m Office Desk with Drawer Unit",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-01"
+   },
+   {
+    "t": "Mesh Secretary Chair — Ergonomic Swivel",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-01"
+   },
+   {
+    "t": "Executive Director Chair — Leather, High Back",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-01"
+   },
+   {
+    "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-01"
+   }
+  ]
  }
 }
