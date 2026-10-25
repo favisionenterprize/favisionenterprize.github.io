@@ -549,8 +549,9 @@
    "id": "18020874123",
    "name": "I LOVE GHANAIAN FOOD",
    "url": "https://www.facebook.com/groups/18020874123/",
-   "active": true,
-   "added": "2026-10-25"
+   "active": false,
+   "added": "2026-10-25",
+   "off_why": "Post box didn't open"
   },
   {
    "id": "391960286954584",
@@ -604,7 +605,7 @@
    "url": "https://www.facebook.com/groups/755614535841357/",
    "active": false,
    "added": "2026-10-25",
-   "off_why": "Post box didn't open"
+   "off_why": "Not a member of this group"
   },
   {
    "id": "7064480850327890",
@@ -2976,6 +2977,96 @@
    "ok": false,
    "now": true,
    "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:38:13.338Z",
+   "p": "FAV-014",
+   "g": "226910456304636",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:39:48.631Z",
+   "p": "FAV-014",
+   "g": "18020874123",
+   "ok": false,
+   "now": true,
+   "why": "Post box didn't open"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:40:13.321Z",
+   "p": "FAV-014",
+   "g": "391960286954584",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:42:54.759Z",
+   "p": "FAV-014",
+   "g": "583352032851222",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:46:14.602Z",
+   "p": "FAV-014",
+   "g": "1371907773293669",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:46:43.313Z",
+   "p": "FAV-014",
+   "g": "1968925946751585",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:47:12.055Z",
+   "p": "FAV-014",
+   "g": "789579941115543",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:47:40.544Z",
+   "p": "FAV-014",
+   "g": "homedecorinspirations",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:48:07.786Z",
+   "p": "FAV-014",
+   "g": "755614535841357",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:48:34.964Z",
+   "p": "FAV-014",
+   "g": "7064480850327890",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
   }
  ],
  "resets": {},
@@ -3484,6 +3575,13 @@
   {
    "d": "2026-10-25",
    "t": "2026-10-25T10:48:53.794Z",
+   "kind": "post",
+   "tried": 10,
+   "ok": 3
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T10:49:17.409Z",
    "kind": "post",
    "tried": 10,
    "ok": 3
