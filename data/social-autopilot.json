@@ -4696,6 +4696,15 @@
    "ok": false,
    "now": true,
    "why": "TikTok didn't open the post details"
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T01:42:05.379Z",
+   "net": "tiktok",
+   "k": "box:FAV-014",
+   "p": "FAV-014",
+   "ok": true,
+   "now": true
   }
  ],
  "runs": [
@@ -5814,6 +5823,13 @@
    "kind": "tiktok",
    "tried": 1,
    "ok": 0
+  },
+  {
+   "d": "2026-10-25",
+   "t": "2026-10-25T01:42:57.210Z",
+   "kind": "tiktok",
+   "tried": 1,
+   "ok": 1
   }
  ]
 }
