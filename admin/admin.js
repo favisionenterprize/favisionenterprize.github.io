@@ -1111,7 +1111,7 @@
   (async function init() {
     // Deep links: /admin/#invoices, #orders, #customers, #leads, #prospects, #profilekit, #sales … open those screens directly.
     const deepLink = () => {
-      const sel = { "#invoices": "[data-invoices]", "#orders": "[data-orders]", "#customers": "[data-customers]", "#leads": "[data-leads]", "#catalog": "[data-catalog]", "#boxads": "[data-boxads]", "#aiplan": "[data-aiplan]", "#brands": "[data-brands]", "#prospects": "[data-prospects]", "#profilekit": "[data-profilekit]", "#sales": "[data-sales]", "#trendvideo": "[data-trendvideo]", "#prime": "[data-prime]" }[location.hash];
+      const sel = { "#invoices": "[data-invoices]", "#orders": "[data-orders]", "#customers": "[data-customers]", "#leads": "[data-leads]", "#catalog": "[data-catalog]", "#boxads": "[data-boxads]", "#aiplan": "[data-aiplan]", "#brands": "[data-brands]", "#prospects": "[data-prospects]", "#profilekit": "[data-profilekit]", "#sales": "[data-sales]", "#trendvideo": "[data-trendvideo]", "#prime": "[data-prime]", "#openitems": "[data-openitems]" }[location.hash];
       const el = sel && document.querySelector(sel);
       if (el) el.click();
       return !!el;

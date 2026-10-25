@@ -17,7 +17,7 @@ try { ({ chromium } = require("playwright")); } catch (e) {
   }
 }
 const ROOT = path.resolve(__dirname, "..") + "/";
-const SCRIPTS = ["admin/captions.js", "admin/igauto.js", "admin/ttshop.js", "admin/socauto.js", "admin/vidauto.js", "admin/trendvideo.js", "admin/engage.js", "admin/mkauto.js", "admin/profiles.js", "admin/viral.js", "admin/ttcaptions.js", "admin/boost.js", "admin/fixall.js", "admin/brands.js", "admin/aiplan.js", "admin/brandstamp.js", "admin/relay.js", "admin/fbauto.js", "admin/prime.js"];
+const SCRIPTS = ["admin/captions.js", "admin/igauto.js", "admin/ttshop.js", "admin/socauto.js", "admin/vidauto.js", "admin/trendvideo.js", "admin/engage.js", "admin/mkauto.js", "admin/profiles.js", "admin/viral.js", "admin/ttcaptions.js", "admin/boost.js", "admin/fixall.js", "admin/brands.js", "admin/aiplan.js", "admin/brandstamp.js", "admin/relay.js", "admin/fbauto.js", "admin/openitems.js", "admin/prime.js"];
 const MIN_TEXT = 150; // a tab with less text than this counts as blank
 
 const files = {};
@@ -129,6 +129,52 @@ async function autopilot(browser, day) {
     if (!pr.todayBtn) problems.push("Prime button missing on the Today tab");
     if (!/Summary|Finished/.test(pr.panel)) problems.push("Prime panel shows no summary: " + pr.panel.slice(0, 120));
     if (!problems.length) console.log(`    ⚡ Prime: ${Object.keys(pr.lanes).length} lanes ${JSON.stringify(pr.lanes)}, ${pr.kinds.length} job kinds started together (first ${Math.max(...pr.first)} ms); non-posting work ${pr.parallel} s side by side vs ${pr.serial} s one by one; mock run ${pr.ms} ms`);
+  }
+  // 🤖 Open items + AI Fix: M9 gate, every source listed, Needs-you rows never acted on, SEO fixes saved, lead replies only
+  // drafted (WhatsApp link, nothing sent), social fixes launched as one runStep chain, every action logged.
+  if (day === today) {
+    const oi = await page.evaluate(async () => {
+      const wait = ms => new Promise(r => setTimeout(r, ms));
+      const O = window.FAV_OPENITEMS, AP = window.FAV_AIPLAN, out = {};
+      await AP.load(); const plan = AP._test.state();
+      window.__files["data/seo-report.json"] = { issues: [{ id: "t1", check: "title", msg: "x", fix: { id: "title:test.html", kind: "title", page: "test.html", value: "Test title" } }] };
+      window.FAV_LEADS = { _test: { get: () => [{ k: "e:9", status: "New", editable: true, name: "Ama Mensah", phone: "0240000002", product: "Student desk", message: "price for 60?" }] } };
+      plan.rules.find(r => r.id === "M9").status = "proposed";
+      out.off = (await O.fixAll({ auto: true })).error || "";
+      plan.rules.find(r => r.id === "M9").status = "approved";
+      window.confirm = () => true;
+      const jobs = []; const onMsg = e => { if (e.data && e.data.type === "favauto-start") jobs.push(e.data.job); }; window.addEventListener("message", onMsg);
+      document.documentElement.dataset.favautoExt = "5"; document.documentElement.dataset.favautoMode = "live"; document.documentElement.dataset.favautoUs = "1";
+      await O.load(true); await O._test.loadSeo();
+      const list = O.items();
+      out.n = list.length; out.srcs = [...new Set(list.map(i => i.src.split(" · ")[0]))];
+      out.you = list.filter(i => i.act === "you").map(i => i.id);
+      out.youLinks = list.filter(i => i.act === "you").every(i => i.url || i.link);
+      out.learned = list.filter(i => i.learned && i.learned.length).length;
+      const r = await O.fixAll({ auto: true });
+      await wait(400);
+      window.removeEventListener("message", onMsg);
+      out.result = r && !r.error;
+      out.seo = ((window.__files["data/seo-fixes.json"] || {}).applied || []).some(f => f.id === "title:test.html" && f.by === "AI Fix");
+      const lead = r.items.find(i => i.id === "leads");
+      out.draft = lead && lead.drafts && lead.drafts[0] ? lead.drafts[0].text : "";
+      out.log = (window.__files["data/open-items.json"] || { log: [] }).log.length;
+      out.jobs = jobs.map(j => j.kind);
+      out.sentToCustomer = jobs.some(j => /message|send|whatsapp/i.test(j.kind));
+      out.deleted = JSON.stringify(jobs).match(/"(delete|trash|remove)"/) ? true : false;
+      return out;
+    });
+    if (!/Proposed/.test(oi.off)) problems.push("AI Fix ran while rule M9 is only Proposed: " + oi.off);
+    if (!oi.result) problems.push("AI Fix didn't finish");
+    for (const want of ["Customers", "Meta Verified", "Security", "Backend", "Prices", "Leads", "What's in the box", "Brands", "SEO & AI"]) if (!oi.srcs.includes(want)) problems.push("Open items missing source " + want + ": " + oi.srcs.join(", "));
+    for (const id of ["m-metaverified", "m-2fa", "m-apikeys", "m-julius", "m-prices", "leads", "box"]) if (!oi.you.includes(id)) problems.push("Open items: " + id + " should be Needs you");
+    if (!oi.youLinks) problems.push("Open items: a Needs-you row has no link to where to do it");
+    if (!oi.seo) problems.push("AI Fix didn't save the SEO fix to data/seo-fixes.json");
+    if (!/Ama/.test(oi.draft)) problems.push("AI Fix didn't draft the lead reply: " + oi.draft);
+    if (!oi.log) problems.push("AI Fix logged nothing in data/open-items.json");
+    if (oi.sentToCustomer || oi.deleted) problems.push("AI Fix launched a send/delete job: " + oi.jobs.join(","));
+    if (!oi.jobs.length) problems.push("AI Fix didn't launch the social fixes (Fix all / Marketplace / profiles)");
+    if (!problems.length) console.log(`    🤖 Open items: ${oi.n} items from ${oi.srcs.length} sources, ${oi.you.length} need you, ${oi.learned} with "learned from"; AI Fix saved SEO fixes, drafted lead replies, launched ${oi.jobs.length} job(s): ${[...new Set(oi.jobs)].join(", ")}`);
   }
   // 🎬 Trend video card on the Boost tab: one prompt per template, caution line, Copy prompt, Add video → videos library.
   const tv = await page.evaluate(async () => {
@@ -691,7 +737,7 @@ async function marketplace(browser) {
   want(/4 fixed by the button now/.test(r.ttcMock.split) && /1 post over 7 days old/.test(r.ttcMock.split) && /App only/.test(r.ttcMock.split) && r.ttcMock.split.includes(T.app), "split: 3 now, 1 too old, 1 app-only: " + r.ttcMock.split);
   const tt = r.ttc || {};
   want(tt.posts === 4, "Review captions lists the 4 posts the button will fix (3 captions + 1 hashtags only), got " + tt.posts);
-  want(tt.pick === "FAV-014" && /Comment/i.test(tt.text) && /favisionenterprize\.github\.io\/tiktok\//.test(tt.text) && /GH₵650/.test(tt.text) && !/where are you seeing/i.test(tt.text), "classy caption for the student desk post: " + tt.text);
+  want(tt.pick === "FAV-014" && /Comment|Tell us below/i.test(tt.text) && /favisionenterprize\.github\.io\/tiktok\//.test(tt.text) && /GH₵650/.test(tt.text) && !/where are you seeing/i.test(tt.text), "classy caption for the student desk post: " + tt.text);
   want(/favisionenterprize\.github\.io\/tiktok\//.test(tt.general) && /statement/.test(tt.general) && !/GH₵|GHS|₵/.test(tt.general), "no confident product → general caption, no price: " + tt.general);
   want(/^Bold colour, warm welcomes\./.test(tt.prep), "a prepared caption (from the post's photos) is used as is: " + tt.prep);
   want(!r.xss2 && (tt.imgs || []).every(u => /^https:/.test(u)) && (tt.links || []).every(h => /^https:\/\//.test(h)), "TikTok card escapes text and only shows https thumbnails/links: " + JSON.stringify([tt.imgs, tt.links]));

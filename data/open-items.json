@@ -1,0 +1,9 @@
+{
+ "updated": null,
+ "note": "🤖 Open items / AI Fix log. done{} = project items Alexander marked done; history.price = his price choices; learned = what AI Fix based its last run on.",
+ "done": {},
+ "log": [],
+ "history": {
+  "price": []
+ }
+}
