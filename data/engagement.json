@@ -191,7 +191,7 @@
    "url": "https://www.facebook.com/FaVisionEnterprise/videos/442786224559428/",
    "first": "2026-10-13",
    "commented": [],
-   "title": "(20+) Video",
+   "title": "Video",
    "checked": "2026-10-26",
    "likes": 1,
    "comments": 1,
@@ -1123,8 +1123,9 @@
    "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid02xSMDsCH4WFB9hvjCEH1y5QXBAwSm5iQjYgmNSbwnLb6PebdhgjayFNRiVtihFeZ4l",
    "first": "2026-10-26",
    "commented": [],
-   "title": "(20+) Facebook",
-   "checked": "2026-10-26"
+   "title": "Facebook",
+   "checked": "2026-10-26",
+   "likes": 1100
   },
   "https://www.facebook.com/FaVisionEnterprise/posts/pfbid02bEyGCXaz1aT2FJMZvsqZewaAxL9aoxjsLFqebnR6NfKgeEi3xVhfcYqSSp8mjkhgl": {
    "net": "fb",
@@ -1141,7 +1142,16 @@
    "commented": [],
    "title": "Facebook",
    "checked": "2026-10-26",
-   "likes": 997
+   "likes": 7
+  },
+  "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0XhL5HMxdAP9389oT9aPT4dWfRo8f9hmZSSUZYDt32ubXR5ReSrv8Gs1fQoGr4Tsfl": {
+   "net": "fb",
+   "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0XhL5HMxdAP9389oT9aPT4dWfRo8f9hmZSSUZYDt32ubXR5ReSrv8Gs1fQoGr4Tsfl",
+   "first": "2026-10-26",
+   "commented": [],
+   "title": "Facebook",
+   "checked": "2026-10-26",
+   "likes": 7
   }
  },
  "runs": [
@@ -2530,6 +2540,21 @@
    "t": "2026-10-26T04:06:54.622Z",
    "net": "fb",
    "mode": "reply",
+   "posts": 4,
+   "checked": 4,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 560,
+   "stopped": null,
+   "commenting": false
+  },
+  {
+   "d": "2026-10-26",
+   "t": "2026-10-26T04:41:04.786Z",
+   "net": "fb",
+   "mode": "likers",
    "posts": 4,
    "checked": 4,
    "commented": 0,
