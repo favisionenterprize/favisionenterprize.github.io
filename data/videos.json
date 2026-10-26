@@ -1350,7 +1350,7 @@
    "kind": "trend",
    "source": "upload",
    "created": "2026-10-26",
-   "size_mb": 2.4,
+   "size_mb": 2.5,
    "trend": "fa-vision-furnitures",
    "website": {
     "status": "waiting"
@@ -1360,6 +1360,13 @@
    },
    "tiktok": {
     "status": "waiting"
+   },
+   "audio": {
+    "music": "fa-afrobeat-1",
+    "voiceover": "",
+    "voice": "",
+    "own_sound": true,
+    "d": "2026-10-26"
    }
   }
  ],
