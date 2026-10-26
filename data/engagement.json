@@ -150,6 +150,11 @@
    "d": "2026-10-25",
    "net": "tiktok",
    "n": 284
+  },
+  {
+   "d": "2026-10-26",
+   "net": "fb",
+   "n": 560
   }
  ],
  "posts": {
@@ -187,7 +192,7 @@
    "first": "2026-10-13",
    "commented": [],
    "title": "(20+) Video",
-   "checked": "2026-10-21",
+   "checked": "2026-10-26",
    "likes": 1,
    "comments": 1,
    "views": 141
@@ -1112,6 +1117,31 @@
    "checked": "2026-10-23",
    "views": 12,
    "comments": 1
+  },
+  "https://www.facebook.com/FaVisionEnterprise/posts/pfbid02xSMDsCH4WFB9hvjCEH1y5QXBAwSm5iQjYgmNSbwnLb6PebdhgjayFNRiVtihFeZ4l": {
+   "net": "fb",
+   "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid02xSMDsCH4WFB9hvjCEH1y5QXBAwSm5iQjYgmNSbwnLb6PebdhgjayFNRiVtihFeZ4l",
+   "first": "2026-10-26",
+   "commented": [],
+   "title": "(20+) Facebook",
+   "checked": "2026-10-26"
+  },
+  "https://www.facebook.com/FaVisionEnterprise/posts/pfbid02bEyGCXaz1aT2FJMZvsqZewaAxL9aoxjsLFqebnR6NfKgeEi3xVhfcYqSSp8mjkhgl": {
+   "net": "fb",
+   "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid02bEyGCXaz1aT2FJMZvsqZewaAxL9aoxjsLFqebnR6NfKgeEi3xVhfcYqSSp8mjkhgl",
+   "first": "2026-10-26",
+   "commented": [],
+   "title": "(20+) Facebook",
+   "checked": "2026-10-26"
+  },
+  "https://www.facebook.com/1733647601935524": {
+   "net": "fb",
+   "url": "https://www.facebook.com/1733647601935524",
+   "first": "2026-10-26",
+   "commented": [],
+   "title": "Facebook",
+   "checked": "2026-10-26",
+   "likes": 997
   }
  },
  "runs": [
@@ -2494,6 +2524,21 @@
    "followers": null,
    "stopped": "No posts found on your Facebook profile.",
    "commenting": true
+  },
+  {
+   "d": "2026-10-26",
+   "t": "2026-10-26T04:06:54.622Z",
+   "net": "fb",
+   "mode": "reply",
+   "posts": 4,
+   "checked": 4,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 560,
+   "stopped": null,
+   "commenting": false
   }
  ],
  "liked": {}
