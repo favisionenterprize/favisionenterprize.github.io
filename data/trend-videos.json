@@ -1,9 +1,9 @@
 {
  "updated": "2026-10-25",
  "trend": {
+  "max_per_week": 1,
   "name": "Miniature me cleans my profile",
-  "note": "AI-video trend (Oct 2026): a tiny version of the creator climbs out of their own profile picture and tidies, dusts and rearranges the profile grid like a little room.",
-  "max_per_week": 1
+  "note": "AI-video trend (Oct 2026): a tiny version of the creator climbs out of their own profile picture and tidies, dusts and rearranges the profile grid like a little room."
  },
  "tools": [
   {
@@ -96,5 +96,11 @@
    "caption_hint": "Quality rice and canola oil in Kasoa. WhatsApp MANYE OYE REHOBOTH to order."
   }
  ],
- "made": []
+ "made": [
+  {
+   "id": "fa-vision-furnitures",
+   "d": "2026-10-26",
+   "video": "miniature-man-organizing-phone-s-2026102-mvpn8vko"
+  }
+ ]
 }
