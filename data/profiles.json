@@ -46,13 +46,13 @@
    "mode": "pinswap"
   },
   "x": {
-   "d": "2026-10-21",
-   "link": "favisionenterprize.github.io",
-   "pinned": "Pls take Note that office is open for walk in purchases and delivery as well. STUDENT DESKS ARE AVAILABLE IN LARGE QUANTITIES!!!",
-   "linkOk": true,
+   "d": "2026-10-26",
+   "link": null,
+   "pinned": null,
+   "linkOk": false,
    "pinOk": false,
-   "why": "couldn't find a post with “Fresh stock, just arrived” on the profile",
-   "mode": "fix"
+   "why": "",
+   "mode": "check"
   }
  },
  "runs": [
@@ -213,6 +213,13 @@
   {
    "d": "2026-10-26",
    "net": "fb",
+   "mode": "check",
+   "linkOk": false,
+   "pinOk": false
+  },
+  {
+   "d": "2026-10-26",
+   "net": "x",
    "mode": "check",
    "linkOk": false,
    "pinOk": false
