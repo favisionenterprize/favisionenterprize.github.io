@@ -592,14 +592,6 @@
    "off_why": "Post box didn't open"
   },
   {
-   "id": "homedecorinspirations",
-   "name": "Home Decor Ideas & DIY Inspiration",
-   "url": "https://www.facebook.com/groups/homedecorinspirations/",
-   "active": false,
-   "added": "2026-10-25",
-   "off_why": "Post box didn't open"
-  },
-  {
    "id": "755614535841357",
    "name": "🏡✨ Dream Home Interiors Hub ✨🏡",
    "url": "https://www.facebook.com/groups/755614535841357/",
@@ -3682,7 +3674,17 @@
    "why": "Declined 3 of our posts · leave not confirmed",
    "d": "2026-10-25",
    "left": false,
-   "tries": 1
+   "tries": 2
+  },
+  {
+   "id": "homedecorinspirations",
+   "name": "Home Decor Ideas & DIY Inspiration",
+   "url": "https://www.facebook.com/groups/homedecorinspirations/",
+   "why": "Declined 1 of our posts · already left",
+   "d": "2026-10-26",
+   "left": true,
+   "tries": 1,
+   "left_d": "2026-10-26"
   }
  ],
  "joins": [
@@ -4086,7 +4088,7 @@
  "checks": {
   "grow": "2026-10-26",
   "sync": "2026-10-25",
-  "declines": "2026-10-25"
+  "declines": "2026-10-26"
  },
  "rounds": {
   "FAV-014": "2026-10-25T01:36:59.223Z"
@@ -4439,6 +4441,13 @@
    "tried": 0,
    "ok": 0,
    "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile in Facebook, then tap Renew again."
+  },
+  {
+   "d": "2026-10-26",
+   "t": "2026-10-26T04:48:12.153Z",
+   "kind": "declines",
+   "found": 1,
+   "left": 1
   }
  ],
  "renewLog": [
