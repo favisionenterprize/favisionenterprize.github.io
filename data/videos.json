@@ -1379,7 +1379,7 @@
    "kind": "trend",
    "source": "upload",
    "created": "2026-10-26",
-   "size_mb": 3.1,
+   "size_mb": 3.3,
    "trend": "fa-vision-desk",
    "website": {
     "status": "waiting"
@@ -1389,6 +1389,13 @@
    },
    "tiktok": {
     "status": "waiting"
+   },
+   "audio": {
+    "music": "fa-afrobeat-2",
+    "voiceover": "",
+    "voice": "",
+    "own_sound": true,
+    "d": "2026-10-26"
    }
   }
  ],
