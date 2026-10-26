@@ -1122,6 +1122,55 @@
    "members": 63000,
    "source": "autopilot",
    "active": true
+  },
+  {
+   "id": "264043484022478",
+   "name": "Bangalore Furniture Market",
+   "url": "https://www.facebook.com/groups/264043484022478/",
+   "active": true,
+   "added": "2026-10-26"
+  },
+  {
+   "id": "540169077702036",
+   "name": "MaxbBuy Ghana-Online shopping",
+   "url": "https://www.facebook.com/groups/540169077702036/",
+   "active": true,
+   "added": "2026-10-26"
+  },
+  {
+   "id": "963693663767065",
+   "name": "NAKURU furniture limited",
+   "url": "https://www.facebook.com/groups/963693663767065/",
+   "active": true,
+   "added": "2026-10-26"
+  },
+  {
+   "id": "claudeaicommunity",
+   "name": "Claude Ai Community",
+   "url": "https://www.facebook.com/groups/claudeaicommunity/",
+   "active": true,
+   "added": "2026-10-26"
+  },
+  {
+   "id": "1348711550214520",
+   "name": "Artificial Intelligence News • AI Tools • ChatGPT Prompts",
+   "url": "https://www.facebook.com/groups/1348711550214520/",
+   "active": true,
+   "added": "2026-10-26"
+  },
+  {
+   "id": "LakelandUsedFurnitureForSale",
+   "name": "Lakeland Used Furniture & Appliance For Sale",
+   "url": "https://www.facebook.com/groups/LakelandUsedFurnitureForSale/",
+   "active": true,
+   "added": "2026-10-26"
+  },
+  {
+   "id": "1512374675928402",
+   "name": "ABRA/ ILOCOS SUR/ LA UNION/NORTE FURNITURE BUY AND SELL",
+   "url": "https://www.facebook.com/groups/1512374675928402/",
+   "active": true,
+   "added": "2026-10-26"
   }
  ],
  "posts": [
@@ -4096,7 +4145,7 @@
  ],
  "checks": {
   "grow": "2026-10-26",
-  "sync": "2026-10-25",
+  "sync": "2026-10-26",
   "declines": "2026-10-26"
  },
  "rounds": {
