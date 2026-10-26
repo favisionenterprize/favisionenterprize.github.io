@@ -5815,17 +5815,19 @@
    "ok": false,
    "now": true,
    "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-26",
+   "t": "2026-10-26T19:06:13.998Z",
+   "net": "tiktok",
+   "k": "box:FAV-004",
+   "p": "FAV-004",
+   "ok": true,
+   "now": true,
+   "why": "Hillsong Worship: only tracks used lately · no sound"
   }
  ],
  "runs": [
-  {
-   "d": "2026-10-09",
-   "t": "2026-10-09T18:53:59.525Z",
-   "kind": "tiktok",
-   "tried": 0,
-   "ok": 0,
-   "stopped": "TikTok isn't logged in. Log in to FA Vision Enterprise's TikTok in this browser, then run again."
-  },
   {
    "d": "2026-10-09",
    "t": "2026-10-09T19:08:03.191Z",
@@ -7220,6 +7222,13 @@
    "kind": "x",
    "tried": 2,
    "ok": 0
+  },
+  {
+   "d": "2026-10-26",
+   "t": "2026-10-26T19:06:28.304Z",
+   "kind": "tiktok",
+   "tried": 1,
+   "ok": 1
   }
  ]
 }
