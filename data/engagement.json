@@ -195,7 +195,7 @@
    "checked": "2026-10-26",
    "likes": 1,
    "comments": 1,
-   "views": 141
+   "views": 142
   },
   "https://www.instagram.com/p/Dd8TbyNiKK8/": {
    "net": "ig",
@@ -1150,9 +1150,18 @@
    "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0XhL5HMxdAP9389oT9aPT4dWfRo8f9hmZSSUZYDt32ubXR5ReSrv8Gs1fQoGr4Tsfl",
    "first": "2026-10-26",
    "commented": [],
-   "title": "Create stories",
+   "title": "Facebook",
    "checked": "2026-10-26",
-   "likes": 1300
+   "likes": 7
+  },
+  "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0tti2x2ehf5aY7sWgt6ATw57txZKgNVFxSpmMY4BaGo2PfzEWQYgMsQcFt6zq4hWSl": {
+   "net": "fb",
+   "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0tti2x2ehf5aY7sWgt6ATw57txZKgNVFxSpmMY4BaGo2PfzEWQYgMsQcFt6zq4hWSl",
+   "first": "2026-10-26",
+   "commented": [],
+   "title": "Facebook",
+   "checked": "2026-10-26",
+   "likes": 7
   }
  },
  "runs": [
@@ -2610,6 +2619,21 @@
    "followers": 560,
    "stopped": null,
    "commenting": false
+  },
+  {
+   "d": "2026-10-26",
+   "t": "2026-10-26T19:33:16.203Z",
+   "net": "fb",
+   "mode": "comment",
+   "posts": 3,
+   "checked": 3,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 560,
+   "stopped": null,
+   "commenting": true
   }
  ],
  "liked": {}
