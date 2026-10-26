@@ -2129,6 +2129,78 @@
    "k": "card:FAV-029",
    "p": "FAV-029",
    "ok": true
+  },
+  {
+   "d": "2026-10-26",
+   "t": "2026-10-26T00:50:52.671Z",
+   "k": "ad:fav-014-arrived",
+   "p": "FAV-014",
+   "ok": false,
+   "why": "Couldn't find Create"
+  },
+  {
+   "d": "2026-10-26",
+   "t": "2026-10-26T00:51:32.143Z",
+   "k": "card:FAV-002",
+   "p": "FAV-002",
+   "ok": false,
+   "why": "Couldn't find Create"
+  },
+  {
+   "d": "2026-10-26",
+   "t": "2026-10-26T00:52:04.089Z",
+   "k": "box:FAV-025",
+   "p": "FAV-025",
+   "ok": false,
+   "why": "Couldn't find Create"
+  },
+  {
+   "d": "2026-10-26",
+   "t": "2026-10-26T00:52:39.970Z",
+   "k": "card:FAV-018",
+   "p": "FAV-018",
+   "ok": false,
+   "why": "Couldn't find Create"
+  },
+  {
+   "d": "2026-10-26",
+   "t": "2026-10-26T00:53:37.279Z",
+   "k": "tile:fav-008",
+   "p": "FAV-008",
+   "ok": false,
+   "why": "Couldn't find Create"
+  },
+  {
+   "d": "2026-10-26",
+   "t": "2026-10-26T00:54:15.604Z",
+   "k": "card:FAV-010",
+   "p": "FAV-010",
+   "ok": false,
+   "why": "Couldn't find Create"
+  },
+  {
+   "d": "2026-10-26",
+   "t": "2026-10-26T00:55:01.981Z",
+   "k": "box:FAV-021",
+   "p": "FAV-021",
+   "ok": false,
+   "why": "Couldn't find Create"
+  },
+  {
+   "d": "2026-10-26",
+   "t": "2026-10-26T00:55:49.661Z",
+   "k": "card:FAV-030",
+   "p": "FAV-030",
+   "ok": false,
+   "why": "Couldn't find Create"
+  },
+  {
+   "d": "2026-10-26",
+   "t": "2026-10-26T00:56:19.877Z",
+   "k": "card:FAV-023",
+   "p": "FAV-023",
+   "ok": false,
+   "why": "Couldn't find Create"
   }
  ],
  "profile": [
@@ -2251,6 +2323,12 @@
    "followers": 893,
    "following": 2024,
    "posts": 381
+  },
+  {
+   "d": "2026-10-26",
+   "followers": 893,
+   "following": 2026,
+   "posts": 391
   }
  ],
  "runs": [
@@ -3000,6 +3078,13 @@
    "tried": 0,
    "ok": 0,
    "stopped": "Instagram is logged in to a different account. Switch to @favisionent, then tap Run again."
+  },
+  {
+   "d": "2026-10-26",
+   "t": "2026-10-26T00:56:41.196Z",
+   "kind": "ig",
+   "tried": 9,
+   "ok": 0
   }
  ]
 }
