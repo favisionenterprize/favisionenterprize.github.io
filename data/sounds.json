@@ -1,6 +1,6 @@
 {
- "d": "2026-10-25",
- "t": "2026-10-25T01:33:25.581Z",
+ "d": "2026-10-26",
+ "t": "2026-10-26T01:01:26.905Z",
  "settings": {
   "artists_first": true,
   "artists": [
@@ -9,7 +9,29 @@
    "Hillsong Worship"
   ]
  },
- "sounds": [],
+ "sounds": [
+  {
+   "name": "Melody",
+   "artist": "King Promise",
+   "platform": "ig",
+   "rank": 1,
+   "d": "2026-10-26"
+  },
+  {
+   "name": "Dhoom Machale (From \"Dhoom\") (feat. Esha Deol, Uday Chopra, Abhishek Bachchan)Pr",
+   "artist": "Audio imagePritam, Sunidhi Chauhan",
+   "platform": "ig",
+   "rank": 2,
+   "d": "2026-10-26"
+  },
+  {
+   "name": "Dhoom Machale (From \"Dhoom\") (feat. Esha Deol, Uday Chopra, Abhishek Bachchan) P",
+   "artist": "Pritam, Sunidhi Chauhan",
+   "platform": "ig",
+   "rank": 3,
+   "d": "2026-10-26"
+  }
+ ],
  "manual": [],
  "used": [
   {
@@ -716,16 +738,6 @@
   {
    "d": "2026-10-23",
    "platform": "tiktok",
-   "text": "1 post went out without a sound"
-  },
-  {
-   "d": "2026-10-23",
-   "platform": "tiktok",
-   "text": "1 post went out without a sound"
-  },
-  {
-   "d": "2026-10-23",
-   "platform": "tiktok",
    "text": "4 posts went out without a sound"
   },
   {
@@ -950,6 +962,14 @@
    "d": "2026-10-25",
    "platform": "tiktok",
    "text": "1 post went out without a sound"
+  },
+  {
+   "d": "2026-10-26",
+   "text": "no 'Approved for business use' filter seen: check the sounds are in TikTok's Commercial Music Library"
+  },
+  {
+   "d": "2026-10-26",
+   "text": "couldn't read the Creative Center song list"
   }
  ]
 }
