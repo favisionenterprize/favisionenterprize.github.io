@@ -28,13 +28,13 @@
    "mode": "pinswap"
   },
   "fb": {
-   "d": "2026-10-23",
-   "link": "favisionenterprize.github.io",
+   "d": "2026-10-26",
+   "link": null,
    "pinned": null,
-   "linkOk": true,
+   "linkOk": false,
    "pinOk": false,
-   "why": "pin: couldn't find a post with “POV: you just found the perfect student ” on the profile",
-   "mode": "pinswap"
+   "why": "",
+   "mode": "check"
   },
   "ig": {
    "d": "2026-10-23",
@@ -207,6 +207,13 @@
    "d": "2026-10-25",
    "net": "tiktok",
    "mode": "pinswap",
+   "linkOk": false,
+   "pinOk": false
+  },
+  {
+   "d": "2026-10-26",
+   "net": "fb",
+   "mode": "check",
    "linkOk": false,
    "pinOk": false
   }
