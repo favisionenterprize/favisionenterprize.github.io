@@ -3716,6 +3716,15 @@
    "ok": false,
    "now": true,
    "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-26",
+   "t": "2026-10-26T18:14:51.187Z",
+   "p": "FAV-025",
+   "g": "page",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
   }
  ],
  "resets": {},
@@ -4521,6 +4530,13 @@
    "tried": 0,
    "ok": 0,
    "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile in Facebook, then tap Renew again."
+  },
+  {
+   "d": "2026-10-26",
+   "t": "2026-10-26T18:15:08.255Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 0
   }
  ],
  "renewLog": [
