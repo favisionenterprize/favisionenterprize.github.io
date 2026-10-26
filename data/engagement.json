@@ -1125,7 +1125,7 @@
    "commented": [],
    "title": "Facebook",
    "checked": "2026-10-26",
-   "likes": 1100
+   "likes": 247
   },
   "https://www.facebook.com/FaVisionEnterprise/posts/pfbid02bEyGCXaz1aT2FJMZvsqZewaAxL9aoxjsLFqebnR6NfKgeEi3xVhfcYqSSp8mjkhgl": {
    "net": "fb",
@@ -1142,7 +1142,7 @@
    "commented": [],
    "title": "Facebook",
    "checked": "2026-10-26",
-   "likes": 7
+   "likes": 373
   },
   "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0XhL5HMxdAP9389oT9aPT4dWfRo8f9hmZSSUZYDt32ubXR5ReSrv8Gs1fQoGr4Tsfl": {
    "net": "fb",
@@ -1151,7 +1151,7 @@
    "commented": [],
    "title": "Facebook",
    "checked": "2026-10-26",
-   "likes": 7
+   "likes": 3000
   }
  },
  "runs": [
@@ -2562,6 +2562,21 @@
    "invited": 0,
    "thanked": 0,
    "followers": 560,
+   "stopped": null,
+   "commenting": false
+  },
+  {
+   "d": "2026-10-26",
+   "t": "2026-10-26T18:17:33.445Z",
+   "net": "fb",
+   "mode": "reply",
+   "posts": 4,
+   "checked": 4,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": null,
    "stopped": null,
    "commenting": false
   }
