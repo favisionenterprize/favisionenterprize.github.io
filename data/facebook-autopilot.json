@@ -4788,5 +4788,61 @@
  "selling": {
   "d": "2026-10-26",
   "cards": []
- }
+ },
+ "switches": [
+  {
+   "d": "2026-10-26",
+   "brand": true,
+   "fail": "couldn't find the profile menu",
+   "from": "",
+   "t": "2026-10-26T04:41:54.539Z",
+   "to": null,
+   "why": "Alexander Awuku's turn"
+  },
+  {
+   "d": "2026-10-26",
+   "brand": true,
+   "fail": "couldn't find the profile menu",
+   "from": "",
+   "t": "2026-10-26T04:42:23.037Z",
+   "to": null,
+   "why": "F.A Vision Enterprise's turn"
+  },
+  {
+   "d": "2026-10-26",
+   "brand": true,
+   "fail": "couldn't find the profile menu",
+   "from": "",
+   "t": "2026-10-26T04:42:49.898Z",
+   "to": null,
+   "why": "Fa Vision Furnitures's turn"
+  },
+  {
+   "d": "2026-10-26",
+   "brand": true,
+   "fail": "couldn't find the profile menu",
+   "from": "",
+   "t": "2026-10-26T04:43:18.773Z",
+   "to": null,
+   "why": "Oteng Furniture's turn"
+  },
+  {
+   "d": "2026-10-26",
+   "brand": true,
+   "fail": "couldn't find the profile menu",
+   "from": "",
+   "t": "2026-10-26T04:43:45.839Z",
+   "to": null,
+   "why": "Agoodmann Ventures's turn"
+  },
+  {
+   "d": "2026-10-26",
+   "from": "",
+   "to": null,
+   "why": "Manye Oye Rehoboth's turn",
+   "t": "2026-10-26T04:44:13.012Z",
+   "fail": "couldn't find the profile menu",
+   "brand": true
+  }
+ ]
 }
