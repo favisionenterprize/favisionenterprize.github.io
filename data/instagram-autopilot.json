@@ -2300,6 +2300,15 @@
    "ok": false,
    "now": true,
    "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-10-27",
+   "t": "2026-10-27T09:02:50.716Z",
+   "k": "presence:fav-002",
+   "p": "FAV-002",
+   "ok": false,
+   "now": true,
+   "why": "Instagram didn't confirm the post"
   }
  ],
  "profile": [
@@ -3263,6 +3272,13 @@
   {
    "d": "2026-10-27",
    "t": "2026-10-27T09:03:10.586Z",
+   "kind": "ig",
+   "tried": 1,
+   "ok": 0
+  },
+  {
+   "d": "2026-10-27",
+   "t": "2026-10-27T09:03:24.538Z",
    "kind": "ig",
    "tried": 1,
    "ok": 0
