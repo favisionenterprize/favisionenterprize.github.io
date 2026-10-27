@@ -5973,16 +5973,29 @@
    "ok": false,
    "now": true,
    "why": "TikTok didn't open the post details"
+  },
+  {
+   "d": "2026-10-27",
+   "t": "2026-10-27T09:04:19.048Z",
+   "net": "x",
+   "k": "ad:fav-011",
+   "p": "FAV-011",
+   "ok": false,
+   "now": true,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-27",
+   "t": "2026-10-27T09:13:29.006Z",
+   "net": "x",
+   "k": "box:FAV-016",
+   "p": "FAV-016",
+   "ok": false,
+   "now": true,
+   "why": "X didn't confirm the post"
   }
  ],
  "runs": [
-  {
-   "d": "2026-10-13",
-   "t": "2026-10-13T20:59:47.994Z",
-   "kind": "x",
-   "tried": 10,
-   "ok": 4
-  },
   {
    "d": "2026-10-13",
    "t": "2026-10-13T21:52:27.766Z",
@@ -7376,6 +7389,13 @@
    "t": "2026-10-27T08:07:08.271Z",
    "kind": "tiktok",
    "tried": 1,
+   "ok": 0
+  },
+  {
+   "d": "2026-10-27",
+   "t": "2026-10-27T09:13:44.046Z",
+   "kind": "x",
+   "tried": 2,
    "ok": 0
   }
  ]
