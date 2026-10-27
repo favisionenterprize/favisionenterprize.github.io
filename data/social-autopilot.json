@@ -5913,16 +5913,29 @@
    "p": "FAV-005",
    "ok": false,
    "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-27",
+   "t": "2026-10-27T07:04:19.560Z",
+   "net": "x",
+   "k": "ad:fav-011",
+   "p": "FAV-011",
+   "ok": false,
+   "now": true,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-27",
+   "t": "2026-10-27T07:05:21.944Z",
+   "net": "x",
+   "k": "box:FAV-016",
+   "p": "FAV-016",
+   "ok": false,
+   "now": true,
+   "why": "X didn't confirm the post"
   }
  ],
  "runs": [
-  {
-   "d": "2026-10-09",
-   "t": "2026-10-09T19:34:47.682Z",
-   "kind": "tiktok",
-   "tried": 10,
-   "ok": 10
-  },
   {
    "d": "2026-10-10",
    "t": "2026-10-10T08:53:37.989Z",
@@ -7317,6 +7330,13 @@
    "kind": "x",
    "tried": 10,
    "ok": 2
+  },
+  {
+   "d": "2026-10-27",
+   "t": "2026-10-27T07:05:37.067Z",
+   "kind": "x",
+   "tried": 2,
+   "ok": 0
   }
  ]
 }
