@@ -3734,6 +3734,96 @@
    "ok": false,
    "now": true,
    "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-27",
+   "t": "2026-10-27T07:08:03.027Z",
+   "p": "FAV-014",
+   "g": "141628386395466",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-27",
+   "t": "2026-10-27T07:11:30.127Z",
+   "p": "FAV-014",
+   "g": "1357196365220967",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-27",
+   "t": "2026-10-27T07:14:00.178Z",
+   "p": "FAV-014",
+   "g": "2032573490242402",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-27",
+   "t": "2026-10-27T07:16:45.849Z",
+   "p": "FAV-014",
+   "g": "1327918262785727",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-27",
+   "t": "2026-10-27T07:18:47.417Z",
+   "p": "FAV-014",
+   "g": "304784157333828",
+   "ok": false,
+   "now": true,
+   "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-27",
+   "t": "2026-10-27T07:19:15.084Z",
+   "p": "FAV-014",
+   "g": "477872575582629",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-27",
+   "t": "2026-10-27T07:22:39.156Z",
+   "p": "FAV-014",
+   "g": "615328196938048",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-27",
+   "t": "2026-10-27T07:25:23.261Z",
+   "p": "FAV-014",
+   "g": "2239805046286261",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-27",
+   "t": "2026-10-27T07:27:59.782Z",
+   "p": "FAV-014",
+   "g": "192811272610859",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-27",
+   "t": "2026-10-27T07:28:48.207Z",
+   "p": "FAV-014",
+   "g": "273813265241233",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
   }
  ],
  "resets": {},
@@ -4561,6 +4651,13 @@
    "kind": "post",
    "tried": 1,
    "ok": 0
+  },
+  {
+   "d": "2026-10-27",
+   "t": "2026-10-27T07:29:04.195Z",
+   "kind": "post",
+   "tried": 10,
+   "ok": 8
   }
  ],
  "renewLog": [
