@@ -823,13 +823,16 @@
    "t": "2026-10-26T18:15:57.431Z",
    "fav": "Kojo Blak",
    "found": true
+  },
+  {
+   "fav": "Hillsong Worship",
+   "found": false,
+   "platform": "tiktok",
+   "d": "2026-10-27",
+   "t": "2026-10-27T19:46:24.255Z"
   }
  ],
  "notes": [
-  {
-   "d": "2026-10-24",
-   "text": "couldn't confirm the Ghana region on Creative Center"
-  },
   {
    "d": "2026-10-24",
    "text": "no 'Approved for business use' filter seen: check the sounds are in TikTok's Commercial Music Library"
@@ -998,6 +1001,11 @@
   {
    "d": "2026-10-26",
    "text": "no Instagram audio seen on Reels"
+  },
+  {
+   "d": "2026-10-27",
+   "platform": "tiktok",
+   "text": "1 post went out without a sound"
   },
   {
    "d": "2026-10-27",
