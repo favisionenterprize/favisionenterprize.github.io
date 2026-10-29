@@ -3910,6 +3910,51 @@
    "g": "668346343597415",
    "ok": true,
    "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-29",
+   "t": "2026-10-29T06:33:01.428Z",
+   "p": "FAV-014",
+   "g": "329443866631729",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-29",
+   "t": "2026-10-29T06:33:32.689Z",
+   "p": "FAV-014",
+   "g": "718143992098619",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-29",
+   "t": "2026-10-29T06:34:00.383Z",
+   "p": "FAV-014",
+   "g": "msianinteriordesigners",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-29",
+   "t": "2026-10-29T06:34:29.181Z",
+   "p": "FAV-014",
+   "g": "531561801524080",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-29",
+   "t": "2026-10-29T06:36:23.190Z",
+   "p": "FAV-014",
+   "g": "ghanasoftwareservices",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
   }
  ],
  "resets": {},
@@ -4759,6 +4804,14 @@
    "tried": 2,
    "ok": 1,
    "stopped": "Facebook showed \"an unexpected confirmation (“Alexander Awuku F.A Vision Enterprise Fa Vision Furnitures See all profiles Meta Business Suite Sett”) that wasn't started by our step\". Nothing more was posted."
+  },
+  {
+   "d": "2026-10-29",
+   "t": "2026-10-29T06:37:11.677Z",
+   "kind": "post",
+   "tried": 5,
+   "ok": 4,
+   "stopped": "Facebook showed \"an unexpected confirmation (“F.A Vision Enterprise Alexander Awuku Fa Vision Furnitures See all profiles Meta Business Suite Sett”) that wasn't started by our step\". Nothing more was posted."
   }
  ],
  "renewLog": [
