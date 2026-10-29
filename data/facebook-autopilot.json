@@ -3824,6 +3824,22 @@
    "ok": true,
    "now": true,
    "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-29",
+   "t": "2026-10-29T04:46:55.262Z",
+   "p": "FAV-031",
+   "g": "293517128059625",
+   "ok": false,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-29",
+   "t": "2026-10-29T04:47:20.670Z",
+   "p": "FAV-031",
+   "g": "668346343597415",
+   "ok": true,
+   "why": "Waiting for admin approval"
   }
  ],
  "resets": {},
@@ -4665,6 +4681,14 @@
    "kind": "renew",
    "tried": 5,
    "ok": 0
+  },
+  {
+   "d": "2026-10-29",
+   "t": "2026-10-29T04:47:59.418Z",
+   "kind": "post",
+   "tried": 2,
+   "ok": 1,
+   "stopped": "Facebook showed \"an unexpected confirmation (“Alexander Awuku F.A Vision Enterprise Fa Vision Furnitures See all profiles Meta Business Suite Sett”) that wasn't started by our step\". Nothing more was posted."
   }
  ],
  "renewLog": [
