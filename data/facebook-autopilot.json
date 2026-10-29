@@ -4658,6 +4658,13 @@
    "kind": "post",
    "tried": 10,
    "ok": 8
+  },
+  {
+   "d": "2026-10-29",
+   "t": "2026-10-29T04:45:56.561Z",
+   "kind": "renew",
+   "tried": 5,
+   "ok": 0
   }
  ],
  "renewLog": [
@@ -4903,6 +4910,41 @@
    "listed": "2026-10-14",
    "ok": false,
    "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-29",
+   "t": "L-Shaped Sofa Set — Fabric & Leather",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 3 days"
+  },
+  {
+   "d": "2026-10-29",
+   "t": "Student Desk Chair Set — Senior High to Tertiary Level",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 3 days"
+  },
+  {
+   "d": "2026-10-29",
+   "t": "Dining Set Collection — 5 Designs, 6 Chairs",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-29",
+   "t": "Jasmine Rice — Long Grain Fragrant Rice",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-29",
+   "t": "TV Stand — Black Marble Top with Drawer",
+   "listed": "2026-10-17",
+   "ok": false,
+   "why": "Next renewal in 7 days"
   }
  ],
  "relay": {
@@ -5013,8 +5055,39 @@
   }
  },
  "selling": {
-  "d": "2026-10-26",
-  "cards": []
+  "d": "2026-10-29",
+  "cards": [
+   {
+    "t": "L-Shaped Sofa Set — Fabric & Leather",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-01"
+   },
+   {
+    "t": "Student Desk Chair Set — Senior High to Tertiary Level",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-01"
+   },
+   {
+    "t": "Dining Set Collection — 5 Designs, 6 Chairs",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-05"
+   },
+   {
+    "t": "Jasmine Rice — Long Grain Fragrant Rice",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-05"
+   },
+   {
+    "t": "TV Stand — Black Marble Top with Drawer",
+    "listed": "2026-10-17",
+    "status": "Active",
+    "next": "2026-11-05"
+   }
+  ]
  },
  "switches": [
   {
