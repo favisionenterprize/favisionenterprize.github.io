@@ -413,6 +413,18 @@
     "ok": false,
     "why": "already has a full description with the website link",
     "skip": true
+   },
+   "1647779947021525": {
+    "d": "2026-10-31",
+    "ok": false,
+    "why": "already has a full description with the website link",
+    "skip": true
+   },
+   "2992285594459840": {
+    "d": "2026-10-31",
+    "ok": false,
+    "why": "already has a full description with the website link",
+    "skip": true
    }
   }
  },
@@ -745,6 +757,15 @@
    "kind": "scan",
    "net": "x",
    "n": 2,
+   "v": "2026-10-15.4"
+  },
+  {
+   "d": "2026-10-31",
+   "kind": "mkedit",
+   "net": "mk",
+   "tried": 2,
+   "ok": 0,
+   "skip": 2,
    "v": "2026-10-15.4"
   }
  ]
