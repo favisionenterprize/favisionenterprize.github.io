@@ -1,7 +1,7 @@
 {
  "settings": {
   "scan_in_run": true,
-  "list_in_run": false,
+  "list_in_run": true,
   "list_per_run": 3,
   "gap_min_s": 30,
   "gap_max_s": 60,
