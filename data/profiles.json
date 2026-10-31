@@ -46,7 +46,7 @@
    "mode": "check"
   },
   "x": {
-   "d": "2026-10-26",
+   "d": "2026-10-31",
    "link": null,
    "pinned": null,
    "linkOk": false,
@@ -237,6 +237,13 @@
    "mode": "check",
    "linkOk": false,
    "pinOk": true
+  },
+  {
+   "d": "2026-10-31",
+   "net": "x",
+   "mode": "check",
+   "linkOk": false,
+   "pinOk": false
   }
  ]
 }
