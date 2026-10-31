@@ -10,56 +10,16 @@
   "photos": 8
  },
  "scan": {
-  "d": "2026-10-25",
-  "t": "2026-10-25T01:36:25.423Z",
+  "d": "2026-10-31",
+  "t": "2026-10-31T02:52:51.974Z",
   "n": 5,
   "listings": [
    {
-    "t": "L-Shaped Sofa Set — Fabric & Leather",
-    "price": 5500,
-    "status": "Active",
-    "listed": "2026-10-17",
-    "renew": "none"
-   },
-   {
-    "t": "Student Desk Chair Set — Senior High to Tertiary Level",
-    "price": 650,
-    "status": "Active",
-    "listed": "2026-10-17",
-    "renew": "none"
-   },
-   {
-    "t": "Dining Set Collection — 5 Designs, 6 Chairs",
-    "price": 12600,
-    "status": "Active",
-    "listed": "2026-10-17",
-    "renew": "none"
-   },
-   {
-    "t": "Jasmine Rice — Long Grain Fragrant Rice",
-    "price": 400,
-    "status": "Active",
-    "listed": "2026-10-17",
-    "id": "1745025166730387",
-    "renew": "wait",
-    "next": "2026-11-01"
-   },
-   {
-    "t": "TV Stand — Black Marble Top with Drawer",
-    "price": 6950,
-    "status": "Active",
-    "listed": "2026-10-17",
-    "id": "1745025166730387",
-    "renew": "wait",
-    "next": "2026-11-01"
-   },
-   {
-    "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
+    "t": "Red Glass Dining Set — 6 Chairs",
     "price": 12600,
     "status": "Active",
     "listed": "2026-10-31",
-    "id": "2992285594459840",
-    "renew": "wait"
+    "renew": "none"
    },
    {
     "t": "Black Glass Dining Set — 6 High-Back Chairs",
@@ -67,15 +27,35 @@
     "status": "Active",
     "listed": "2026-10-31",
     "id": "1647779947021525",
-    "renew": "wait"
+    "renew": "wait",
+    "next": "2026-11-07"
    },
    {
-    "t": "Red Glass Dining Set — 6 Chairs",
+    "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
     "price": 12600,
     "status": "Active",
     "listed": "2026-10-31",
-    "id": "2350973302310775",
-    "renew": "wait"
+    "id": "2992285594459840",
+    "renew": "wait",
+    "next": "2026-11-07"
+   },
+   {
+    "t": "L-Shaped Sofa Set — Fabric & Leather",
+    "price": 5500,
+    "status": "Active",
+    "listed": "2026-10-17",
+    "id": "1745025166730387",
+    "renew": "wait",
+    "next": "2026-11-01"
+   },
+   {
+    "t": "Student Desk Chair Set — Senior High to Tertiary Level",
+    "price": 650,
+    "status": "Active",
+    "listed": "2026-10-17",
+    "id": "1630630032048162",
+    "renew": "wait",
+    "next": "2026-11-01"
    }
   ]
  },
@@ -801,6 +781,11 @@
    "kind": "list",
    "tried": 3,
    "ok": 3
+  },
+  {
+   "d": "2026-10-31",
+   "kind": "scan",
+   "n": 5
   }
  ],
  "skip": []
