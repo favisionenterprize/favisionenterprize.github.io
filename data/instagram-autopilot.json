@@ -2576,6 +2576,15 @@
    "p": "FAV-018",
    "ok": true,
    "now": true
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T07:02:39.982Z",
+   "k": "card:FAV-018",
+   "p": "FAV-018",
+   "ok": false,
+   "now": true,
+   "why": "Instagram didn't confirm the post"
   }
  ],
  "profile": [
@@ -3749,6 +3758,13 @@
    "kind": "ig",
    "tried": 1,
    "ok": 1
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T07:02:57.012Z",
+   "kind": "ig",
+   "tried": 1,
+   "ok": 0
   }
  ]
 }
