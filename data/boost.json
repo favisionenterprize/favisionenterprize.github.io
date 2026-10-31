@@ -3,10 +3,10 @@
   "auto_sound": true,
   "rotate_days": 3,
   "best_time": false,
-  "stories": true,
-  "first_hour": true,
-  "reels": true,
-  "hooks": true
+  "stories": false,
+  "first_hour": false,
+  "reels": false,
+  "hooks": false
  },
  "pinned": [
   {
