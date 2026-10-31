@@ -56,6 +56,30 @@
     "id": "1630630032048162",
     "renew": "wait",
     "next": "2026-11-01"
+   },
+   {
+    "t": "Dining Set Collection — 5 Designs, 6 Chairs",
+    "price": 12600,
+    "status": "Active",
+    "listed": "2026-10-31",
+    "id": "2364608837666104",
+    "renew": "wait"
+   },
+   {
+    "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
+    "price": 11900,
+    "status": "Active",
+    "listed": "2026-10-31",
+    "id": "1119285277632046",
+    "renew": "wait"
+   },
+   {
+    "t": "Executive Director Chair — Leather, High Back",
+    "price": 9500,
+    "status": "Active",
+    "listed": "2026-10-31",
+    "id": "1800959327892622",
+    "renew": "wait"
    }
   ]
  },
@@ -645,6 +669,36 @@
    "ok": true,
    "id": "2350973302310775",
    "verified": true
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T02:58:48.465Z",
+   "p": "FAV-003",
+   "title": "Dining Set Collection — 5 Designs, 6 Chairs",
+   "price": 12600,
+   "ok": true,
+   "id": "2364608837666104",
+   "verified": true
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T02:59:31.086Z",
+   "p": "FAV-005",
+   "title": "Foldable Wood-Grain Dining Set — 6 Chairs",
+   "price": 11900,
+   "ok": true,
+   "id": "1119285277632046",
+   "verified": true
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T03:00:26.329Z",
+   "p": "FAV-006",
+   "title": "Executive Director Chair — Leather, High Back",
+   "price": 9500,
+   "ok": true,
+   "id": "1800959327892622",
+   "verified": true
   }
  ],
  "runs": [
@@ -786,6 +840,12 @@
    "d": "2026-10-31",
    "kind": "scan",
    "n": 5
+  },
+  {
+   "d": "2026-10-31",
+   "kind": "list",
+   "tried": 3,
+   "ok": 3
   }
  ],
  "skip": []
