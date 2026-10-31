@@ -11,75 +11,49 @@
  },
  "scan": {
   "d": "2026-10-31",
-  "t": "2026-10-31T02:52:51.974Z",
+  "t": "2026-10-31T03:09:17.035Z",
   "n": 5,
   "listings": [
-   {
-    "t": "Red Glass Dining Set — 6 Chairs",
-    "price": 12600,
-    "status": "Active",
-    "listed": "2026-10-31",
-    "renew": "none"
-   },
-   {
-    "t": "Black Glass Dining Set — 6 High-Back Chairs",
-    "price": 4900,
-    "status": "Active",
-    "listed": "2026-10-31",
-    "id": "1647779947021525",
-    "renew": "wait",
-    "next": "2026-11-07"
-   },
-   {
-    "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
-    "price": 12600,
-    "status": "Active",
-    "listed": "2026-10-31",
-    "id": "2992285594459840",
-    "renew": "wait",
-    "next": "2026-11-07"
-   },
-   {
-    "t": "L-Shaped Sofa Set — Fabric & Leather",
-    "price": 5500,
-    "status": "Active",
-    "listed": "2026-10-17",
-    "id": "1745025166730387",
-    "renew": "wait",
-    "next": "2026-11-01"
-   },
-   {
-    "t": "Student Desk Chair Set — Senior High to Tertiary Level",
-    "price": 650,
-    "status": "Active",
-    "listed": "2026-10-17",
-    "id": "1630630032048162",
-    "renew": "wait",
-    "next": "2026-11-01"
-   },
-   {
-    "t": "Dining Set Collection — 5 Designs, 6 Chairs",
-    "price": 12600,
-    "status": "Active",
-    "listed": "2026-10-31",
-    "id": "2364608837666104",
-    "renew": "wait"
-   },
-   {
-    "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
-    "price": 11900,
-    "status": "Active",
-    "listed": "2026-10-31",
-    "id": "1119285277632046",
-    "renew": "wait"
-   },
    {
     "t": "Executive Director Chair — Leather, High Back",
     "price": 9500,
     "status": "Active",
     "listed": "2026-10-31",
+    "renew": "none"
+   },
+   {
+    "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
+    "price": 9500,
+    "status": "Active",
+    "listed": "2026-10-31",
+    "renew": "none"
+   },
+   {
+    "t": "Dining Set Collection — 5 Designs, 6 Chairs",
+    "price": 9500,
+    "status": "Active",
+    "listed": "2026-10-31",
     "id": "1800959327892622",
-    "renew": "wait"
+    "renew": "wait",
+    "next": "2026-11-07"
+   },
+   {
+    "t": "Red Glass Dining Set — 6 Chairs",
+    "price": 9500,
+    "status": "Active",
+    "listed": "2026-10-31",
+    "id": "1800959327892622",
+    "renew": "wait",
+    "next": "2026-11-07"
+   },
+   {
+    "t": "Black Glass Dining Set — 6 High-Back Chairs",
+    "price": 9500,
+    "status": "Active",
+    "listed": "2026-10-31",
+    "id": "1800959327892622",
+    "renew": "wait",
+    "next": "2026-11-07"
    }
   ]
  },
@@ -846,6 +820,11 @@
    "kind": "list",
    "tried": 3,
    "ok": 3
+  },
+  {
+   "d": "2026-10-31",
+   "kind": "scan",
+   "n": 5
   }
  ],
  "skip": []
