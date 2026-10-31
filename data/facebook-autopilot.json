@@ -1,20 +1,20 @@
 {
  "settings": {
-  "daily_limit": 20,
+  "daily_limit": 1,
   "renew_after_days": 7,
   "renew_batch": 20,
   "pause_min_s": 60,
   "pause_max_s": 180,
   "auto_run": false,
   "auto_time": "09:00",
-  "now_limit": 20,
-  "group_rest_hours": 6,
-  "switch_on": true,
+  "now_limit": 1,
+  "group_rest_hours": 72,
+  "switch_on": false,
   "switch_profiles": [],
-  "switch_max": 3,
-  "cleanup_on": true,
-  "grow_on": true,
-  "grow_daily": 20,
+  "switch_max": 1,
+  "cleanup_on": false,
+  "grow_on": false,
+  "grow_daily": 1,
   "grow_min_members": 10000,
   "grow_min_global": 100000,
   "grow_keywords": [
@@ -40,7 +40,7 @@
    "added": "2026-10-22",
    "members": 259000,
    "source": "autopilot",
-   "active": true
+   "active": false
   },
   {
    "id": "718143992098619",
@@ -49,7 +49,7 @@
    "added": "2026-10-22",
    "members": 5700000,
    "source": "autopilot",
-   "active": true
+   "active": false
   },
   {
    "id": "msianinteriordesigners",
@@ -58,7 +58,7 @@
    "added": "2026-10-22",
    "members": 1300000,
    "source": "autopilot",
-   "active": true
+   "active": false
   },
   {
    "id": "531561801524080",
@@ -67,20 +67,20 @@
    "added": "2026-10-22",
    "members": 121000,
    "source": "autopilot",
-   "active": true
+   "active": false
   },
   {
    "id": "ghanasoftwareservices",
    "name": "Ghana Software Developers (Showcase & Services)",
    "url": "https://www.facebook.com/groups/ghanasoftwareservices/",
-   "active": true,
+   "active": false,
    "added": "2026-10-23"
   },
   {
    "id": "2198886853692812",
    "name": "COLSAR AFRICA (Quality Northern Kente & Smock)",
    "url": "https://www.facebook.com/groups/2198886853692812/",
-   "active": true,
+   "active": false,
    "added": "2026-10-23"
   },
   {
@@ -90,7 +90,7 @@
    "added": "2026-10-23",
    "members": 61000,
    "source": "autopilot",
-   "active": true
+   "active": false
   },
   {
    "id": "516679296673025",
@@ -237,7 +237,7 @@
    "added": "2026-10-23",
    "members": 28000,
    "source": "autopilot",
-   "active": true
+   "active": false
   },
   {
    "id": "137653684399760",
@@ -246,7 +246,7 @@
    "added": "2026-10-23",
    "members": 14000,
    "source": "autopilot",
-   "active": true
+   "active": false
   },
   {
    "id": "650579767131006",
@@ -262,287 +262,287 @@
    "id": "hongkongmoms",
    "name": "Hong Kong Moms",
    "url": "https://www.facebook.com/groups/hongkongmoms/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "378971703031985",
    "name": "YOGA PLUS Beginners & Advance Group 🧘🏻‍♂️❤️",
    "url": "https://www.facebook.com/groups/378971703031985/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "572485050049323",
    "name": "Yoga at Home",
    "url": "https://www.facebook.com/groups/572485050049323/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1260426287321668",
    "name": "FASHIONISTAS BUY AND SELL",
    "url": "https://www.facebook.com/groups/1260426287321668/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "980376278667360",
    "name": "wear_with_class",
    "url": "https://www.facebook.com/groups/980376278667360/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "139560271489581",
    "name": "CAPTAIN SMART TV GROUP",
    "url": "https://www.facebook.com/groups/139560271489581/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "180212603087458",
    "name": "Koforidua Flowers ❤️❤️ 💝💝",
    "url": "https://www.facebook.com/groups/180212603087458/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "195199285857356",
    "name": "LAND & HOUSES FOR SALE IN EAST LEGON , OYARIFA, TEMA C1-25,POKUASE,PRAMPRAM",
    "url": "https://www.facebook.com/groups/195199285857356/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "kofitv",
    "name": "KOFI TV Ghana",
    "url": "https://www.facebook.com/groups/kofitv/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "397641595383636",
    "name": "Buy/Sell Computers and Accessories in Ghana 🇬🇭",
    "url": "https://www.facebook.com/groups/397641595383636/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "495508180829744",
    "name": "GH Food Market",
    "url": "https://www.facebook.com/groups/495508180829744/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "535325930759843",
    "name": "Onua Maakye at Onua TV/FM",
    "url": "https://www.facebook.com/groups/535325930759843/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "582376070602961",
    "name": "TRT The Romantic Tribe Gh 🇬🇭 ❤️",
    "url": "https://www.facebook.com/groups/582376070602961/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "613870175328566",
    "name": "Netflix Recommendations",
    "url": "https://www.facebook.com/groups/613870175328566/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "661332781128349",
    "name": "Maveg Online Market",
    "url": "https://www.facebook.com/groups/661332781128349/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "732658637184181",
    "name": "YOLO",
    "url": "https://www.facebook.com/groups/732658637184181/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "748111992059254",
    "name": "Kiribati Buy & Sell & Car Audio",
    "url": "https://www.facebook.com/groups/748111992059254/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "928755090542065",
    "name": "JOHN MAHAMA REINS 2026",
    "url": "https://www.facebook.com/groups/928755090542065/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "claudecommunity",
    "name": "Claude Community",
    "url": "https://www.facebook.com/groups/claudecommunity/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "977797772413869",
    "name": "GHANA TRADE",
    "url": "https://www.facebook.com/groups/977797772413869/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1024060211323777",
    "name": "Digital Dynamo",
    "url": "https://www.facebook.com/groups/1024060211323777/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1145676989186606",
    "name": "ST . JOHN'S �GRAMMAR� SCHOOL��",
    "url": "https://www.facebook.com/groups/1145676989186606/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1152937838806537",
    "name": "Kasoa/Accra Market✅🎁",
    "url": "https://www.facebook.com/groups/1152937838806537/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1307349760454711",
    "name": "ROCK AND ROLL ANNEX GROUP BY DORA FORDJOUR",
    "url": "https://www.facebook.com/groups/1307349760454711/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1367025170347293",
    "name": "FANS OF GENERAL MOSQUITO",
    "url": "https://www.facebook.com/groups/1367025170347293/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1412859638977189",
    "name": "Buy and Sell Hub",
    "url": "https://www.facebook.com/groups/1412859638977189/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1603659139995662",
    "name": "SPRING LIFE",
    "url": "https://www.facebook.com/groups/1603659139995662/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1709817569323257",
    "name": "XTRA MARKET",
    "url": "https://www.facebook.com/groups/1709817569323257/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1754360848215346",
    "name": "furniture manufacturers",
    "url": "https://www.facebook.com/groups/1754360848215346/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1780893349074019",
    "name": "ONLINE MARKET PLACE",
    "url": "https://www.facebook.com/groups/1780893349074019/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1805318230880180",
    "name": "MATTERS OF THE HEART",
    "url": "https://www.facebook.com/groups/1805318230880180/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "2706610592966637",
    "name": "Abena Manokekame Fans",
    "url": "https://www.facebook.com/groups/2706610592966637/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "3408875172467933",
    "name": "PeaceFmOnline",
    "url": "https://www.facebook.com/groups/3408875172467933/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "4343810679056037",
    "name": "Shatta Movement",
    "url": "https://www.facebook.com/groups/4343810679056037/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "287605296209211",
    "name": "Buy And Sell Anything",
    "url": "https://www.facebook.com/groups/287605296209211/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "810777041068177",
    "name": "Marketplace ✅",
    "url": "https://www.facebook.com/groups/810777041068177/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "806092550980651",
    "name": "Facebook ✔ Marketplace items for sale",
    "url": "https://www.facebook.com/groups/806092550980651/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1979530982218307",
    "name": "miss daniella's kitchen",
    "url": "https://www.facebook.com/groups/1979530982218307/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1077214214124042",
    "name": "Food Recipe 🍽️❤️",
    "url": "https://www.facebook.com/groups/1077214214124042/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1978556739022353",
    "name": "FOOD NETWORK NIGERIA",
    "url": "https://www.facebook.com/groups/1978556739022353/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "226910456304636",
    "name": "HOW TO COOK NIGERIA DISHES",
    "url": "https://www.facebook.com/groups/226910456304636/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
@@ -557,14 +557,14 @@
    "id": "391960286954584",
    "name": "Ghanaian & worldwide food recipes",
    "url": "https://www.facebook.com/groups/391960286954584/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "583352032851222",
    "name": "Local food",
    "url": "https://www.facebook.com/groups/583352032851222/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
@@ -611,336 +611,336 @@
    "id": "7445609635478377",
    "name": "Home decor",
    "url": "https://www.facebook.com/groups/7445609635478377/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1446407006272223",
    "name": "Decoration Style",
    "url": "https://www.facebook.com/groups/1446407006272223/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "2230592097068736",
    "name": "Home designs/decoration",
    "url": "https://www.facebook.com/groups/2230592097068736/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1043061015738892",
    "name": "Home Decor Ideas",
    "url": "https://www.facebook.com/groups/1043061015738892/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "591942100541089",
    "name": "My Home",
    "url": "https://www.facebook.com/groups/591942100541089/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "7304103496267231",
    "name": "Home Decor Ideas",
    "url": "https://www.facebook.com/groups/7304103496267231/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1434712039912937",
    "name": "BUY AND SELL IN GHANA VERY GOOD ITEMS",
    "url": "https://www.facebook.com/groups/1434712039912937/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "400333275396635",
    "name": "buy and sell in Ghana",
    "url": "https://www.facebook.com/groups/400333275396635/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "690899876534102",
    "name": "Jobs in Ghana II",
    "url": "https://www.facebook.com/groups/690899876534102/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "447086995366703",
    "name": "Buy & Sell Tonaton (Accra,Tema, Kumasi...)",
    "url": "https://www.facebook.com/groups/447086995366703/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "228215741084312",
    "name": "Expats of Accra, Ghana",
    "url": "https://www.facebook.com/groups/228215741084312/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "341760426512987",
    "name": "JOB OPPORTUNITIES FOR GHANAIAN YOUTHS, JHS AND SHS GRADUATE'S",
    "url": "https://www.facebook.com/groups/341760426512987/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "ghanaiansyouthinohio",
    "name": "GHANAIAN YOUTH IN OHIO, USA",
    "url": "https://www.facebook.com/groups/ghanaiansyouthinohio/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1413399719710873",
    "name": "OK FURNITURE",
    "url": "https://www.facebook.com/groups/1413399719710873/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "726230881287548",
    "name": "Home Decor",
    "url": "https://www.facebook.com/groups/726230881287548/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "331394145989616",
    "name": "Ghana Diaspora Market",
    "url": "https://www.facebook.com/groups/331394145989616/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "54313814491",
    "name": "GHANA'S ONLINE MARKET(Advertise anything for free)",
    "url": "https://www.facebook.com/groups/54313814491/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "301242513998690",
    "name": "Online buyers and sellers in Ghana",
    "url": "https://www.facebook.com/groups/301242513998690/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "334815470014349",
    "name": "Ghana Market Online",
    "url": "https://www.facebook.com/groups/334815470014349/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "702135814877946",
    "name": "JUMIA GHANA ONLINE SHOPPING",
    "url": "https://www.facebook.com/groups/702135814877946/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "141628386395466",
    "name": "Ghana Flea Market",
    "url": "https://www.facebook.com/groups/141628386395466/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1357196365220967",
    "name": "Ghana 🇬🇭 Affiliate Marketers",
    "url": "https://www.facebook.com/groups/1357196365220967/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "2032573490242402",
    "name": "Ghana online market",
    "url": "https://www.facebook.com/groups/2032573490242402/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1327918262785727",
    "name": "How To Make Money Online In Ghana",
    "url": "https://www.facebook.com/groups/1327918262785727/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "304784157333828",
    "name": "Ghana made food market",
    "url": "https://www.facebook.com/groups/304784157333828/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "477872575582629",
    "name": "Market For All Ghanaians",
    "url": "https://www.facebook.com/groups/477872575582629/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "615328196938048",
    "name": "Ghana online marketing and shopping",
    "url": "https://www.facebook.com/groups/615328196938048/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "2239805046286261",
    "name": "GHANA MARKET CENTER",
    "url": "https://www.facebook.com/groups/2239805046286261/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "192811272610859",
    "name": "Ghana Markeplace * Buy Sell Swap* - Ghana 🇬🇭",
    "url": "https://www.facebook.com/groups/192811272610859/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "273813265241233",
    "name": "Ghana Online Marketplace",
    "url": "https://www.facebook.com/groups/273813265241233/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "293517128059625",
    "name": "GHANA'S ADVERTISING & MARKETING GROUP",
    "url": "https://www.facebook.com/groups/293517128059625/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "668346343597415",
    "name": "MARKET-PLACE GH🇬🇭 (BUY AND SELL)",
    "url": "https://www.facebook.com/groups/668346343597415/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1269946696817531",
    "name": "ACCRA RENT MARKET",
    "url": "https://www.facebook.com/groups/1269946696817531/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1622037634799380",
    "name": "GHANA REAL ESTATE MARKET",
    "url": "https://www.facebook.com/groups/1622037634799380/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "688229241385954",
    "name": "BUY AND SELL IN GHANA VERY GOOD ITEMS",
    "url": "https://www.facebook.com/groups/688229241385954/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1470577791000239",
    "name": "GHANA MARKET CIRCLE",
    "url": "https://www.facebook.com/groups/1470577791000239/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "442371862547482",
    "name": "Facebook Market",
    "url": "https://www.facebook.com/groups/442371862547482/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "3475617159237921",
    "name": "Best Place To buy And Sell Your Products In Ghana �",
    "url": "https://www.facebook.com/groups/3475617159237921/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1696919657123063",
    "name": "ACCRA MARKET (SELL AND MAKE MONEY)",
    "url": "https://www.facebook.com/groups/1696919657123063/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1920187655278551",
    "name": "Accra Market Place",
    "url": "https://www.facebook.com/groups/1920187655278551/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1815819631849990",
    "name": "ALL NEEDS BUYING AND SELLING GH.",
    "url": "https://www.facebook.com/groups/1815819631849990/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "367918950553182",
    "name": "Naa Manye Buy And Sell Group",
    "url": "https://www.facebook.com/groups/367918950553182/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1249173612242809",
    "name": "Buy and Sell in Ghana",
    "url": "https://www.facebook.com/groups/1249173612242809/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "143591092853201",
    "name": "Buy, Sell & Trade Within Accra City",
    "url": "https://www.facebook.com/groups/143591092853201/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "1614639703096864",
    "name": "KUMASI & ACCRA BUY & SELL ONLINE GH",
    "url": "https://www.facebook.com/groups/1614639703096864/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "572564200983543",
    "name": "Accra Buy/Sell",
    "url": "https://www.facebook.com/groups/572564200983543/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "116827255684673",
    "name": "Nkawkaw buyers and Sellers",
    "url": "https://www.facebook.com/groups/116827255684673/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
    "id": "992002258429129",
    "name": "TECHIMAN GROUP BUY AND SALE",
    "url": "https://www.facebook.com/groups/992002258429129/",
-   "active": true,
+   "active": false,
    "added": "2026-10-25"
   },
   {
@@ -950,7 +950,7 @@
    "added": "2026-10-26",
    "members": 40000,
    "source": "autopilot",
-   "active": true
+   "active": false
   },
   {
    "id": "883887012847550",
@@ -959,7 +959,7 @@
    "added": "2026-10-26",
    "members": 12000,
    "source": "autopilot",
-   "active": true
+   "active": false
   },
   {
    "id": "3433374753558530",
@@ -968,7 +968,7 @@
    "added": "2026-10-26",
    "members": 2000000,
    "source": "autopilot",
-   "active": true
+   "active": false
   },
   {
    "id": "762804364052457",
@@ -977,7 +977,7 @@
    "added": "2026-10-26",
    "members": 36000,
    "source": "autopilot",
-   "active": true
+   "active": false
   },
   {
    "id": "732498936869107",
@@ -986,7 +986,7 @@
    "added": "2026-10-26",
    "members": 21000,
    "source": "autopilot",
-   "active": true
+   "active": false
   },
   {
    "id": "202260457082921",
@@ -995,7 +995,7 @@
    "added": "2026-10-26",
    "members": 12000,
    "source": "autopilot",
-   "active": true
+   "active": false
   },
   {
    "id": "1661098030735546",
@@ -1004,7 +1004,7 @@
    "added": "2026-10-26",
    "members": 12000,
    "source": "autopilot",
-   "active": true
+   "active": false
   },
   {
    "id": "988634645167316",
@@ -1013,7 +1013,7 @@
    "added": "2026-10-26",
    "members": 723000,
    "source": "autopilot",
-   "active": true
+   "active": false
   },
   {
    "id": "2527153720918496",
@@ -1022,7 +1022,7 @@
    "added": "2026-10-26",
    "members": 381000,
    "source": "autopilot",
-   "active": true
+   "active": false
   },
   {
    "id": "1663261044409334",
@@ -1031,7 +1031,7 @@
    "added": "2026-10-26",
    "members": 211000,
    "source": "autopilot",
-   "active": true
+   "active": false
   },
   {
    "id": "949525260261686",
@@ -1040,7 +1040,7 @@
    "added": "2026-10-26",
    "members": 193000,
    "source": "autopilot",
-   "active": true
+   "active": false
   },
   {
    "id": "708483900679735",
@@ -1049,7 +1049,7 @@
    "added": "2026-10-26",
    "members": 190000,
    "source": "autopilot",
-   "active": true
+   "active": false
   },
   {
    "id": "1409133943163751",
@@ -1058,7 +1058,7 @@
    "added": "2026-10-26",
    "members": 138000,
    "source": "autopilot",
-   "active": true
+   "active": false
   },
   {
    "id": "homedesign",
@@ -1067,7 +1067,7 @@
    "added": "2026-10-26",
    "members": 4800000,
    "source": "autopilot",
-   "active": true
+   "active": false
   },
   {
    "id": "579474839645488",
@@ -1076,7 +1076,7 @@
    "added": "2026-10-26",
    "members": 121000,
    "source": "autopilot",
-   "active": true
+   "active": false
   },
   {
    "id": "2188505244910936",
@@ -1085,7 +1085,7 @@
    "added": "2026-10-26",
    "members": 107000,
    "source": "autopilot",
-   "active": true
+   "active": false
   },
   {
    "id": "583894300973559",
@@ -1094,7 +1094,7 @@
    "added": "2026-10-26",
    "members": 106000,
    "source": "autopilot",
-   "active": true
+   "active": false
   },
   {
    "id": "1992293015494528",
@@ -1103,7 +1103,7 @@
    "added": "2026-10-26",
    "members": 114000,
    "source": "autopilot",
-   "active": true
+   "active": false
   },
   {
    "id": "528332760855246",
@@ -1112,7 +1112,7 @@
    "added": "2026-10-26",
    "members": 24000,
    "source": "autopilot",
-   "active": true
+   "active": false
   },
   {
    "id": "digieconomistgh",
@@ -1121,125 +1121,125 @@
    "added": "2026-10-26",
    "members": 63000,
    "source": "autopilot",
-   "active": true
+   "active": false
   },
   {
    "id": "264043484022478",
    "name": "Bangalore Furniture Market",
    "url": "https://www.facebook.com/groups/264043484022478/",
-   "active": true,
+   "active": false,
    "added": "2026-10-26"
   },
   {
    "id": "540169077702036",
    "name": "MaxbBuy Ghana-Online shopping",
    "url": "https://www.facebook.com/groups/540169077702036/",
-   "active": true,
+   "active": false,
    "added": "2026-10-26"
   },
   {
    "id": "963693663767065",
    "name": "NAKURU furniture limited",
    "url": "https://www.facebook.com/groups/963693663767065/",
-   "active": true,
+   "active": false,
    "added": "2026-10-26"
   },
   {
    "id": "claudeaicommunity",
    "name": "Claude Ai Community",
    "url": "https://www.facebook.com/groups/claudeaicommunity/",
-   "active": true,
+   "active": false,
    "added": "2026-10-26"
   },
   {
    "id": "1348711550214520",
    "name": "Artificial Intelligence News • AI Tools • ChatGPT Prompts",
    "url": "https://www.facebook.com/groups/1348711550214520/",
-   "active": true,
+   "active": false,
    "added": "2026-10-26"
   },
   {
    "id": "LakelandUsedFurnitureForSale",
    "name": "Lakeland Used Furniture & Appliance For Sale",
    "url": "https://www.facebook.com/groups/LakelandUsedFurnitureForSale/",
-   "active": true,
+   "active": false,
    "added": "2026-10-26"
   },
   {
    "id": "1512374675928402",
    "name": "ABRA/ ILOCOS SUR/ LA UNION/NORTE FURNITURE BUY AND SELL",
    "url": "https://www.facebook.com/groups/1512374675928402/",
-   "active": true,
+   "active": false,
    "added": "2026-10-26"
   },
   {
    "id": "bssinaccra",
    "name": "Buy  & Sell New or used in ACCRA (Ghana)",
    "url": "https://www.facebook.com/groups/bssinaccra/",
-   "active": true,
+   "active": false,
    "added": "2026-10-29"
   },
   {
    "id": "Junkatowngh",
    "name": "GH RELOADED🇬🇭",
    "url": "https://www.facebook.com/groups/Junkatowngh/",
-   "active": true,
+   "active": false,
    "added": "2026-10-29"
   },
   {
    "id": "footballtalk24x7",
    "name": "STREAMING NETWORK",
    "url": "https://www.facebook.com/groups/footballtalk24x7/",
-   "active": true,
+   "active": false,
    "added": "2026-10-29"
   },
   {
    "id": "149869398975301",
    "name": "Stonebwoy fans Yard",
    "url": "https://www.facebook.com/groups/149869398975301/",
-   "active": true,
+   "active": false,
    "added": "2026-10-29"
   },
   {
    "id": "weddingandgoodlife",
    "name": "FURNITURE & INTERIORS KENYA.COM",
    "url": "https://www.facebook.com/groups/weddingandgoodlife/",
-   "active": true,
+   "active": false,
    "added": "2026-10-29"
   },
   {
    "id": "169856196719821",
    "name": "Buy & sell furniture in Mumbai",
    "url": "https://www.facebook.com/groups/169856196719821/",
-   "active": true,
+   "active": false,
    "added": "2026-10-29"
   },
   {
    "id": "377992663533329",
    "name": "GHANA 🇬🇭 MARKET PLATFORM",
    "url": "https://www.facebook.com/groups/377992663533329/",
-   "active": true,
+   "active": false,
    "added": "2026-10-29"
   },
   {
    "id": "527646587321586",
    "name": "Furniture lei leh hralhna",
    "url": "https://www.facebook.com/groups/527646587321586/",
-   "active": true,
+   "active": false,
    "added": "2026-10-29"
   },
   {
    "id": "546298091072942",
    "name": "Free Stuff (Food, Furniture and more) All Free",
    "url": "https://www.facebook.com/groups/546298091072942/",
-   "active": true,
+   "active": false,
    "added": "2026-10-29"
   },
   {
    "id": "nppofficial",
    "name": "NPP Official",
    "url": "https://www.facebook.com/groups/nppofficial/",
-   "active": true,
+   "active": false,
    "added": "2026-10-29"
   }
  ],
