@@ -52,6 +52,30 @@
     "id": "1745025166730387",
     "renew": "wait",
     "next": "2026-11-01"
+   },
+   {
+    "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
+    "price": 12600,
+    "status": "Active",
+    "listed": "2026-10-31",
+    "id": "2992285594459840",
+    "renew": "wait"
+   },
+   {
+    "t": "Black Glass Dining Set — 6 High-Back Chairs",
+    "price": 4900,
+    "status": "Active",
+    "listed": "2026-10-31",
+    "id": "1647779947021525",
+    "renew": "wait"
+   },
+   {
+    "t": "Red Glass Dining Set — 6 Chairs",
+    "price": 12600,
+    "status": "Active",
+    "listed": "2026-10-31",
+    "id": "2350973302310775",
+    "renew": "wait"
    }
   ]
  },
@@ -611,6 +635,36 @@
    "ok": true,
    "id": "1745025166730387",
    "verified": true
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T02:49:55.966Z",
+   "p": "FAV-001",
+   "title": "Rainbow Glass-Top Dining Set — 6 Chairs",
+   "price": 12600,
+   "ok": true,
+   "id": "2992285594459840",
+   "verified": true
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T02:50:35.818Z",
+   "p": "FAV-002",
+   "title": "Black Glass Dining Set — 6 High-Back Chairs",
+   "price": 4900,
+   "ok": true,
+   "id": "1647779947021525",
+   "verified": true
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T02:51:11.663Z",
+   "p": "FAV-004",
+   "title": "Red Glass Dining Set — 6 Chairs",
+   "price": 12600,
+   "ok": true,
+   "id": "2350973302310775",
+   "verified": true
   }
  ],
  "runs": [
@@ -741,6 +795,12 @@
    "tried": 0,
    "ok": 0,
    "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile in Facebook, then press the button again."
+  },
+  {
+   "d": "2026-10-31",
+   "kind": "list",
+   "tried": 3,
+   "ok": 3
   }
  ],
  "skip": []
