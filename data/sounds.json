@@ -950,13 +950,16 @@
    "t": "2026-10-31T07:08:44.806Z",
    "fav": "Davido",
    "found": true
+  },
+  {
+   "fav": "Davido",
+   "found": false,
+   "platform": "tiktok",
+   "d": "2026-10-31",
+   "t": "2026-10-31T07:09:37.871Z"
   }
  ],
  "notes": [
-  {
-   "d": "2026-10-25",
-   "text": "couldn't read the Creative Center song list"
-  },
   {
    "d": "2026-10-25",
    "text": "no Instagram audio seen on Reels"
@@ -1185,6 +1188,11 @@
   {
    "d": "2026-10-31",
    "text": "no Instagram audio seen on Reels"
+  },
+  {
+   "d": "2026-10-31",
+   "platform": "tiktok",
+   "text": "1 post went out without a sound"
   }
  ]
 }
