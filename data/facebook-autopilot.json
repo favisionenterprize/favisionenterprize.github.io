@@ -3963,6 +3963,15 @@
    "g": "546213353030012",
    "ok": false,
    "why": "Not a member of this group"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T02:54:44.696Z",
+   "p": "FAV-014",
+   "g": "page",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
   }
  ],
  "resets": {},
@@ -4879,6 +4888,13 @@
    "t": "2026-10-31T02:49:18.367Z",
    "kind": "renew",
    "tried": 45,
+   "ok": 0
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T02:55:12.990Z",
+   "kind": "post",
+   "tried": 1,
    "ok": 0
   }
  ],
