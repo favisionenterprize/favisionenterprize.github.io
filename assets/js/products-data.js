@@ -1098,6 +1098,13 @@ window.FAV_DATA = {
           "price": 12600,
           "checked": "2026-10-31",
           "synced": "2026-10-31"
+        },
+        {
+          "id": "2243652346531121",
+          "title": "Red Glass Dining Set — 6 Chairs",
+          "price": 12600,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
         }
       ],
       "tiktok": 11,
@@ -1466,6 +1473,13 @@ window.FAV_DATA = {
           "price": 4500,
           "checked": "2026-10-17",
           "synced": "2026-10-17"
+        },
+        {
+          "id": "2288544741712735",
+          "title": "1.2 m Office Desk with Drawer Unit",
+          "price": 4500,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
         }
       ],
       "tiktok": 13,
@@ -1562,6 +1576,13 @@ window.FAV_DATA = {
           "price": 7450,
           "checked": "2026-10-17",
           "synced": "2026-10-17"
+        },
+        {
+          "id": "1663412731819082",
+          "title": "White Dressing Table with Mirror & Stool",
+          "price": 7450,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
         }
       ],
       "tiktok": 14,
@@ -1637,6 +1658,13 @@ window.FAV_DATA = {
           "price": 9800,
           "checked": "2026-10-17",
           "synced": "2026-10-17"
+        },
+        {
+          "id": "1861195145056149",
+          "title": "Wardrobe — 4-Door with Top Cabinets",
+          "price": 9800,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
         }
       ],
       "tiktok": 15,
@@ -1709,6 +1737,13 @@ window.FAV_DATA = {
           "price": 15500,
           "checked": "2026-09-29",
           "synced": "2026-09-29"
+        },
+        {
+          "id": "1795716602123500",
+          "title": "L-Shaped Sectional Sofa — Grey Fabric",
+          "price": 15500,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
         }
       ],
       "tiktok": 16,
@@ -1793,6 +1828,13 @@ window.FAV_DATA = {
           "price": 650,
           "checked": "2026-10-17",
           "synced": "2026-10-17"
+        },
+        {
+          "id": "1127519353262570",
+          "title": "Student Desk Chair Set — Senior High to Tertiary Level",
+          "price": 650,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
         }
       ],
       "tiktok": 1,
@@ -1879,6 +1921,13 @@ window.FAV_DATA = {
           "price": 5500,
           "checked": "2026-10-17",
           "synced": "2026-10-17"
+        },
+        {
+          "id": "1717112363343182",
+          "title": "L-Shaped Sofa Set — Fabric & Leather",
+          "price": 5500,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
         }
       ],
       "tiktok": 17,
@@ -1941,6 +1990,13 @@ window.FAV_DATA = {
           "price": 8500,
           "checked": "2026-10-17",
           "synced": "2026-10-17"
+        },
+        {
+          "id": "4446074032373624",
+          "title": "Luxury Leather Sofa Set",
+          "price": 8500,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
         }
       ],
       "material": "Leather",
@@ -1998,6 +2054,13 @@ window.FAV_DATA = {
           "price": 4500,
           "checked": "2026-10-17",
           "synced": "2026-10-17"
+        },
+        {
+          "id": "2175253600084146",
+          "title": "Mesh Secretary Chair — Swivel, Arm Rests",
+          "price": 4500,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
         }
       ],
       "colors": [
@@ -2084,6 +2147,13 @@ window.FAV_DATA = {
           "price": 800,
           "checked": "2026-10-17",
           "synced": "2026-10-17"
+        },
+        {
+          "id": "1136380665421338",
+          "title": "Strong Glass Centre Table",
+          "price": 800,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
         }
       ],
       "tiktok": 19,
@@ -2139,6 +2209,13 @@ window.FAV_DATA = {
           "price": 405,
           "checked": "2026-10-17",
           "synced": "2026-10-17"
+        },
+        {
+          "id": "1416815483490520",
+          "title": "Auditorium / Conference Chair",
+          "price": 405,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
         }
       ],
       "tiktok": 3,
@@ -2186,6 +2263,13 @@ window.FAV_DATA = {
           "price": 450,
           "checked": "2026-10-17",
           "synced": "2026-10-17"
+        },
+        {
+          "id": "1166166089561220",
+          "title": "Business Cards — 100 or 200 Pieces",
+          "price": 450,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
         }
       ],
       "tiktok": 20,
@@ -2256,6 +2340,13 @@ window.FAV_DATA = {
           "price": 450,
           "checked": "2026-10-17",
           "synced": "2026-10-17"
+        },
+        {
+          "id": "1768662847524607",
+          "title": "A4 & A3 Copy Paper — Rotatrim, PaperOne, Double A",
+          "price": 450,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
         }
       ],
       "tiktok": 21,
@@ -2310,6 +2401,13 @@ window.FAV_DATA = {
           "price": 6500,
           "checked": "2026-10-17",
           "synced": "2026-10-17"
+        },
+        {
+          "id": "3354137694974780",
+          "title": "TCL 43\" Smart Android TV — Full HD (43S5400A)",
+          "price": 6500,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
         }
       ],
       "tiktok": 22,
@@ -2395,6 +2493,13 @@ window.FAV_DATA = {
           "price": 6500,
           "checked": "2026-10-17",
           "synced": "2026-10-17"
+        },
+        {
+          "id": "4525420261106354",
+          "title": "Sigma 1.5HP Split Air Conditioner (BREEZE-HY12SB)",
+          "price": 6500,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
         }
       ],
       "tiktok": 23,
@@ -2472,6 +2577,13 @@ window.FAV_DATA = {
           "price": 750,
           "checked": "2026-10-17",
           "synced": "2026-10-17"
+        },
+        {
+          "id": "2224086671498016",
+          "title": "TWYFORD Water Closet — Two-Piece, Premium",
+          "price": 750,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
         }
       ],
       "seller": {
@@ -2553,6 +2665,13 @@ window.FAV_DATA = {
           "price": 1000,
           "checked": "2026-10-17",
           "synced": "2026-10-17"
+        },
+        {
+          "id": "4670669886545967",
+          "title": "Tiles & Finishes — Floor & Wall",
+          "price": 1000,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
         }
       ],
       "seller": {
@@ -2618,6 +2737,13 @@ window.FAV_DATA = {
           "price": 640,
           "checked": "2026-10-17",
           "synced": "2026-10-17"
+        },
+        {
+          "id": "958035296988966",
+          "title": "Kavukçu Wheat Flour — 50kg Baking Flour",
+          "price": 640,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
         }
       ],
       "seller": {
@@ -2690,7 +2816,16 @@ window.FAV_DATA = {
       ],
       "box_title": "What's in the Pack?",
       "box_note": "Priced per roll; one roll covers about 5.3 m².",
-      "in_the_box_confirmed": false
+      "in_the_box_confirmed": false,
+      "facebook_listings": [
+        {
+          "id": "1491505376374254",
+          "title": "3D Wallpaper — Brick, Stone & Pattern (per roll)",
+          "price": 650,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
+        }
+      ]
     },
     {
       "id": "FAV-028",
@@ -2733,6 +2868,13 @@ window.FAV_DATA = {
           "price": 550,
           "checked": "2026-10-17",
           "synced": "2026-10-17"
+        },
+        {
+          "id": "1758577182032952",
+          "title": "Kids Plastic Chair — Stackable, Assorted Colours",
+          "price": 550,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
         }
       ]
     },
@@ -2791,7 +2933,16 @@ window.FAV_DATA = {
           "guess": true
         }
       ],
-      "in_the_box_confirmed": false
+      "in_the_box_confirmed": false,
+      "facebook_listings": [
+        {
+          "id": "1120911594002600",
+          "title": "Salon Chair — Hydraulic, Red or Black",
+          "price": 12500,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
+        }
+      ]
     },
     {
       "id": "FAV-030",
@@ -2843,7 +2994,16 @@ window.FAV_DATA = {
           "guess": true
         }
       ],
-      "in_the_box_confirmed": false
+      "in_the_box_confirmed": false,
+      "facebook_listings": [
+        {
+          "id": "1384118453548720",
+          "title": "Hair Dressers Washing Bowl with Bar Chair",
+          "price": 10950,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
+        }
+      ]
     },
     {
       "id": "FAV-031",
@@ -2883,7 +3043,16 @@ window.FAV_DATA = {
           "icon": "chair"
         }
       ],
-      "in_the_box_confirmed": false
+      "in_the_box_confirmed": false,
+      "facebook_listings": [
+        {
+          "id": "1428254189456183",
+          "title": "10 Seater Foldable Round Table with Chairs",
+          "price": 9650,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
+        }
+      ]
     },
     {
       "id": "FAV-032",
@@ -2937,6 +3106,13 @@ window.FAV_DATA = {
           "price": 6950,
           "checked": "2026-10-17",
           "synced": "2026-10-17"
+        },
+        {
+          "id": "28939580155695472",
+          "title": "TV Stand — Black Marble Top with Drawer",
+          "price": 6950,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
         }
       ]
     },
@@ -2978,7 +3154,16 @@ window.FAV_DATA = {
           "icon": "table"
         }
       ],
-      "in_the_box_confirmed": false
+      "in_the_box_confirmed": false,
+      "facebook_listings": [
+        {
+          "id": "4601770880067087",
+          "title": "TV Stand + Centre Table Set — Marble Top",
+          "price": 16800,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
+        }
+      ]
     },
     {
       "id": "FAV-034",
@@ -3015,7 +3200,16 @@ window.FAV_DATA = {
       ],
       "box_title": "What's in the Pack?",
       "box_size": "27 × 75 in (a larger size is also available)",
-      "in_the_box_confirmed": false
+      "in_the_box_confirmed": false,
+      "facebook_listings": [
+        {
+          "id": "1591100942765211",
+          "title": "Student Mattress — 2 Sizes",
+          "price": 1200,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
+        }
+      ]
     },
     {
       "id": "FAV-035",
@@ -3067,6 +3261,13 @@ window.FAV_DATA = {
           "price": 400,
           "checked": "2026-10-17",
           "synced": "2026-10-17"
+        },
+        {
+          "id": "2091324958936759",
+          "title": "Jasmine Rice — Long Grain Fragrant Rice",
+          "price": 400,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
         }
       ]
     },
@@ -3112,6 +3313,15 @@ window.FAV_DATA = {
           "qty": 1,
           "icon": "table"
         }
+      ],
+      "facebook_listings": [
+        {
+          "id": "1559432725950945",
+          "title": "White Foldable Table — 4-Seater (4ft, Black Frame)",
+          "price": 670,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
+        }
       ]
     },
     {
@@ -3156,6 +3366,15 @@ window.FAV_DATA = {
           "qty": 1,
           "icon": "table"
         }
+      ],
+      "facebook_listings": [
+        {
+          "id": "1471864618146204",
+          "title": "White Foldable Table — 6-Seater (6ft, Black Frame)",
+          "price": 950,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
+        }
       ]
     },
     {
@@ -3199,6 +3418,15 @@ window.FAV_DATA = {
           "item": "Foldable table",
           "qty": 1,
           "icon": "table"
+        }
+      ],
+      "facebook_listings": [
+        {
+          "id": "3376645475870744",
+          "title": "White Foldable Table — 8-Seater (8ft, Black Frame)",
+          "price": 1200,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
         }
       ]
     },
@@ -3245,7 +3473,16 @@ window.FAV_DATA = {
           "icon": "chair"
         }
       ],
-      "box_title": "Pack"
+      "box_title": "Pack",
+      "facebook_listings": [
+        {
+          "id": "1846863210099572",
+          "title": "White Foldable Chair — Black Frame, Handle Slot",
+          "price": 250,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
+        }
+      ]
     },
     {
       "id": "FAV-040",
@@ -3294,6 +3531,15 @@ window.FAV_DATA = {
           "item": "Foldable chairs (packed)",
           "qty": 4,
           "icon": "chair"
+        }
+      ],
+      "facebook_listings": [
+        {
+          "id": "1129518979434975",
+          "title": "White Foldable 4-Seater Set — 4ft Table + 4 Chairs",
+          "price": 1650,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
         }
       ]
     },
@@ -3395,6 +3641,15 @@ window.FAV_DATA = {
           "qty": 8,
           "icon": "chair"
         }
+      ],
+      "facebook_listings": [
+        {
+          "id": "1497192478922661",
+          "title": "White Foldable 8-Seater Set — 8ft Table + 8 Chairs",
+          "price": 3160,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
+        }
       ]
     },
     {
@@ -3439,6 +3694,15 @@ window.FAV_DATA = {
           "item": "Foldable chairs (packed)",
           "qty": 10,
           "icon": "chair"
+        }
+      ],
+      "facebook_listings": [
+        {
+          "id": "1754440730022094",
+          "title": "White Foldable Chairs — Pack of 10 (Black Frame)",
+          "price": 2425,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
         }
       ]
     }
