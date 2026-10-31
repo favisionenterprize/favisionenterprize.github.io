@@ -9709,6 +9709,96 @@
    "ok": true,
    "now": true,
    "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T07:10:56.450Z",
+   "p": "FAV-014",
+   "g": "324514989124170",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T07:13:50.001Z",
+   "p": "FAV-014",
+   "g": "574413890571353",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T07:16:52.604Z",
+   "p": "FAV-014",
+   "g": "1329039178112947",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T07:20:05.740Z",
+   "p": "FAV-014",
+   "g": "3985694091681437",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T07:21:50.070Z",
+   "p": "FAV-014",
+   "g": "169536492639468",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T07:23:49.293Z",
+   "p": "FAV-014",
+   "g": "lovenestconversation",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T07:26:16.346Z",
+   "p": "FAV-014",
+   "g": "920644089831054",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T07:28:09.633Z",
+   "p": "FAV-014",
+   "g": "1773630883255599",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T07:35:16.413Z",
+   "p": "FAV-014",
+   "g": "528899958216212",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T10:18:18.416Z",
+   "p": "FAV-014",
+   "g": "700396103720175",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
   }
  ],
  "resets": {},
@@ -10742,6 +10832,13 @@
   {
    "d": "2026-10-31",
    "t": "2026-10-31T10:15:22.702Z",
+   "kind": "post",
+   "tried": 10,
+   "ok": 10
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T10:18:35.936Z",
    "kind": "post",
    "tried": 10,
    "ok": 10
