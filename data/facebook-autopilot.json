@@ -10085,44 +10085,16 @@
    "kind": "renew",
    "tried": 15,
    "ok": 0
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T03:20:12.942Z",
+   "kind": "renew",
+   "tried": 5,
+   "ok": 0
   }
  ],
  "renewLog": [
-  {
-   "d": "2026-10-25",
-   "t": "White Dressing Table with Mirror & Stool",
-   "listed": "2026-10-17",
-   "ok": false,
-   "why": "Next renewal in 7 days"
-  },
-  {
-   "d": "2026-10-25",
-   "t": "1.2 m Office Desk with Drawer Unit",
-   "listed": "2026-10-17",
-   "ok": false,
-   "why": "Next renewal in 7 days"
-  },
-  {
-   "d": "2026-10-25",
-   "t": "Mesh Secretary Chair — Ergonomic Swivel",
-   "listed": "2026-10-17",
-   "ok": false,
-   "why": "Next renewal in 7 days"
-  },
-  {
-   "d": "2026-10-25",
-   "t": "Executive Director Chair — Leather, High Back",
-   "listed": "2026-10-17",
-   "ok": false,
-   "why": "Next renewal in 7 days"
-  },
-  {
-   "d": "2026-10-25",
-   "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
-   "listed": "2026-10-17",
-   "ok": false,
-   "why": "Next renewal in 7 days"
-  },
   {
    "d": "2026-10-25",
    "t": "Red Glass Dining Set — 6 Chairs",
@@ -11487,6 +11459,41 @@
    "listed": "2026-10-17",
    "ok": false,
    "why": "Next renewal in 5 days"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "Mesh Secretary Chair — Ergonomic Swivel",
+   "listed": "2026-10-31",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "Executive Director Chair — Leather, High Back",
+   "listed": "2026-10-31",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
+   "listed": "2026-10-31",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "Dining Set Collection — 5 Designs, 6 Chairs",
+   "listed": "2026-10-31",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "Red Glass Dining Set — 6 Chairs",
+   "listed": "2026-10-31",
+   "ok": false,
+   "why": "Next renewal in 7 days"
   }
  ],
  "relay": {
@@ -11668,19 +11675,19 @@
     "t": "Mesh Secretary Chair — Ergonomic Swivel",
     "listed": "2026-10-31",
     "status": "Active",
-    "none": "2026-10-31"
+    "next": "2026-11-07"
    },
    {
     "t": "Executive Director Chair — Leather, High Back",
     "listed": "2026-10-31",
     "status": "Active",
-    "none": "2026-10-31"
+    "next": "2026-11-07"
    },
    {
     "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
     "listed": "2026-10-31",
     "status": "Active",
-    "none": "2026-10-31"
+    "next": "2026-11-07"
    },
    {
     "t": "Dining Set Collection — 5 Designs, 6 Chairs",
