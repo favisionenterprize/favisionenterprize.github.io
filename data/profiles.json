@@ -28,7 +28,7 @@
    "mode": "pinswap"
   },
   "fb": {
-   "d": "2026-10-26",
+   "d": "2026-10-31",
    "link": null,
    "pinned": null,
    "linkOk": false,
@@ -220,6 +220,13 @@
   {
    "d": "2026-10-26",
    "net": "x",
+   "mode": "check",
+   "linkOk": false,
+   "pinOk": false
+  },
+  {
+   "d": "2026-10-31",
+   "net": "fb",
    "mode": "check",
    "linkOk": false,
    "pinOk": false
