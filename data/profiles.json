@@ -19,13 +19,13 @@
  },
  "status": {
   "tiktok": {
-   "d": "2026-10-25",
+   "d": "2026-10-31",
    "link": null,
    "pinned": null,
    "linkOk": false,
    "pinOk": false,
-   "why": "pin: couldn't find the post on TikTok (pin it in the app: open the post → ••• → Pin)",
-   "mode": "pinswap"
+   "why": "",
+   "mode": "check"
   },
   "fb": {
    "d": "2026-10-31",
@@ -250,6 +250,13 @@
    "net": "fb",
    "mode": "check",
    "linkOk": true,
+   "pinOk": false
+  },
+  {
+   "d": "2026-10-31",
+   "net": "tiktok",
+   "mode": "check",
+   "linkOk": false,
    "pinOk": false
   }
  ]
