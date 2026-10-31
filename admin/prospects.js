@@ -61,6 +61,32 @@
     return Number(p.price_ghs);
   }
   const verified = x => !!(x.source && x.checked);
+  function messengerUrl(value) {
+    try {
+      const u = new URL(String(value || "").trim());
+      const host = u.hostname.toLowerCase();
+      if (u.protocol !== "https:" || !["facebook.com", "www.facebook.com", "m.facebook.com", "m.me"].includes(host)) return "";
+      if (host === "m.me") {
+        const name = u.pathname.split("/").filter(Boolean)[0] || "";
+        return /^[a-z0-9._-]{3,100}$/i.test(name) ? `https://m.me/${encodeURIComponent(name)}` : "";
+      }
+      if (u.pathname.toLowerCase() === "/profile.php") {
+        const id = u.searchParams.get("id") || "";
+        return /^\d{5,30}$/.test(id) ? `https://m.me/${id}` : "";
+      }
+      const name = u.pathname.split("/").filter(Boolean)[0] || "";
+      if (!/^[a-z0-9._-]{3,100}$/i.test(name) || /^(pages|groups|events|marketplace|watch|login|help|policies|business)$/i.test(name)) return "";
+      return `https://m.me/${encodeURIComponent(name)}`;
+    } catch (e) { return ""; }
+  }
+  function mailtoUrl(email, draft) {
+    const to = String(email || "").trim();
+    if (to.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to)) return "";
+    const match = String(draft || "").match(/^Subject:\s*(.*?)\r?\n\r?\n([\s\S]*)$/i);
+    const subject = match ? match[1].trim() : "F.A Vision Enterprise bulk order";
+    const body = match ? match[2] : String(draft || "");
+    return `mailto:${encodeURIComponent(to).replace(/%40/gi, "@")}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  }
 
   // ---------------------------------------------------------------- AI Plan gate
   function gateMsg(key) {
@@ -77,7 +103,8 @@
     screen = document.createElement("main");
     screen.className = "screen"; screen.id = "screen-prospects"; screen.hidden = true;
     screen.innerHTML = `<div class="dash-head"><div><h1>🏢 Bulk buyers</h1>
-      <p class="muted">Find schools, churches, hotels, offices and other bulk buyers near you, keep the real ones, then get a ready pitch and quote for each. Nothing is ever sent for you: you copy it or open WhatsApp yourself.</p></div>
+      <p class="muted">Find schools, churches, hotels, offices and other bulk buyers near you, keep the real ones, then get a ready pitch and quote for each. Messages are never sent automatically: review the draft, open a channel and press Send yourself.</p>
+      <p class="muted small">Automatic sending is not connected. It requires the official WhatsApp Business Platform, an approved message template, and each recipient's permission. Facebook Messenger cannot cold-message arbitrary prospects. This screen prepares drafts only.</p></div>
       <div class="dash-head-actions"><button class="btn btn-ghost btn-sm" data-go="dash">← My products</button><button class="btn btn-ghost btn-sm" data-leads>📥 Leads</button></div></div>
       <div id="pr-body"><p class="muted">Loading…</p></div>`;
     const last = [...document.querySelectorAll("main.screen")].pop();
@@ -239,6 +266,8 @@
           <label>Unit price (GH₵)<input data-pv="price" type="number" min="1" inputmode="decimal" value="${esc(v.price == null ? "" : v.price)}" placeholder="${p && p.price_ghs ? "catalogue " + esc(catalogPrice(p, v.qty)) : "enter it"}"></label>
           <label>Contact name <small>(stays on this device)</small><input data-pv="contact" value="${esc(v.contact || "")}" placeholder="optional"></label>
           <label>WhatsApp number <small>(stays on this device)</small><input data-pv="phone" inputmode="tel" value="${esc(v.phone || "")}" placeholder="optional"></label>
+          <label>Contact email <small>(stays on this device)</small><input data-pv="email" type="email" value="${esc(v.email || "")}" placeholder="optional"></label>
+          <label>Facebook Page/profile URL <small>(stays on this device)</small><input data-pv="facebook" type="url" value="${esc(v.facebook || "")}" placeholder="https://www.facebook.com/…"></label>
         </div>
         ${p && p.price_ghs && !v.price ? `<div class="pr-row"><button class="btn btn-ghost btn-sm" data-pr="catalog">Use catalogue price ${esc(money(catalogPrice(p, v.qty)))}${p.id === "FAV-014" ? " (GH₵640 each from 50)" : ""}</button></div>` : ""}
         ${qt.stop ? `<div class="pr-stop">✋ ${esc(qt.stop)} The pitch and quote stay blocked until it's filled in.</div>` : `
@@ -248,10 +277,12 @@
         <div class="pr-row">
           <button class="btn btn-ghost btn-sm" data-pr="copy">Copy</button>
           <a class="btn btn-wa btn-sm" target="_blank" rel="noopener" data-pr-wa href="https://wa.me/${waNum.length >= 12 ? esc(waNum) : ""}?text=${encodeURIComponent(text)}">Open WhatsApp</a>
+          <a class="btn btn-ghost btn-sm" target="_blank" rel="noopener" data-pr-messenger href="${esc(messengerUrl(v.facebook) || "#")}" ${messengerUrl(v.facebook) ? "" : 'aria-disabled="true"'}>Open Facebook Messenger</a>
+          <a class="btn btn-ghost btn-sm" data-pr-email href="${esc(mailtoUrl(v.email, text) || "#")}" ${mailtoUrl(v.email, text) ? "" : 'aria-disabled="true"'}>Open email draft</a>
           <button class="btn btn-ghost btn-sm" data-pr="quote">Open quote page</button>
           <button class="btn btn-primary btn-sm" data-pr="lead">Add to Leads</button>
         </div>
-        <p class="muted small">Nothing is sent from here: WhatsApp opens with the text ready and you press send yourself.</p>`}` : ""}
+        <p class="muted small">Nothing is sent from here. WhatsApp opens with the draft ready; Messenger opens the selected Page/profile chat; email opens a draft. Review each and press Send yourself.</p>`}` : ""}
     </article>`;
   }
   function render() {
@@ -341,6 +372,22 @@
     const box = a.closest(".pr-card").querySelector("[data-pv=draft]");
     if (box) a.href = a.href.replace(/\?text=.*$/, "?text=" + encodeURIComponent(box.value));
   }, true);
+  document.addEventListener("click", e => {
+    const a = e.target.closest("[data-pr-messenger],[data-pr-email]");
+    if (!a || screen.hidden) return;
+    const cardEl = a.closest(".pr-card"), x = of(a);
+    const box = cardEl && cardEl.querySelector("[data-pv=draft]");
+    const v = x && priv()[x.id] || {};
+    if (a.matches("[data-pr-messenger]")) {
+      const url = messengerUrl(v.facebook);
+      if (!url) { e.preventDefault(); return toast("Add a valid Facebook Page/profile URL first. Messenger opens its chat only; copy the draft and send it yourself.", true); }
+      a.href = url;
+    } else {
+      const url = mailtoUrl(v.email, box && box.value);
+      if (!url) { e.preventDefault(); return toast("Add a valid contact email first.", true); }
+      a.href = url;
+    }
+  }, true);
   document.addEventListener("change", e => {
     if (screen.hidden || !D) return;
     const t = e.target;
@@ -372,5 +419,5 @@
   });
   window.addEventListener("beforeunload", e => { if (dirty) { e.preventDefault(); e.returnValue = ""; } });
 
-  window.FAV_PROSPECTS = { open: show, load, quote, pitch, _test: { state: () => D, priv, setPriv, parse, CHAIN, set: d => { D = norm(d); } } };
+  window.FAV_PROSPECTS = { open: show, load, quote, pitch, _test: { state: () => D, priv, setPriv, parse, CHAIN, messengerUrl, mailtoUrl, set: d => { D = norm(d); } } };
 })();
