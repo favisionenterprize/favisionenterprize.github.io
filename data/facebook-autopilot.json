@@ -9439,6 +9439,96 @@
    "ok": true,
    "now": true,
    "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T07:11:44.790Z",
+   "p": "FAV-014",
+   "g": "324514989124170",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T07:14:56.765Z",
+   "p": "FAV-014",
+   "g": "574413890571353",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T07:18:05.664Z",
+   "p": "FAV-014",
+   "g": "1329039178112947",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T07:20:44.066Z",
+   "p": "FAV-014",
+   "g": "3985694091681437",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T07:23:31.234Z",
+   "p": "FAV-014",
+   "g": "169536492639468",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T07:25:33.807Z",
+   "p": "FAV-014",
+   "g": "lovenestconversation",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T07:27:27.520Z",
+   "p": "FAV-014",
+   "g": "920644089831054",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T10:03:16.439Z",
+   "p": "FAV-014",
+   "g": "1773630883255599",
+   "ok": false,
+   "now": true,
+   "why": "Facebook didn't confirm the post"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T10:04:41.549Z",
+   "p": "FAV-014",
+   "g": "528899958216212",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T10:06:52.602Z",
+   "p": "FAV-014",
+   "g": "700396103720175",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
   }
  ],
  "resets": {},
@@ -10454,6 +10544,13 @@
    "kind": "post",
    "tried": 10,
    "ok": 10
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T10:07:06.104Z",
+   "kind": "post",
+   "tried": 10,
+   "ok": 9
   }
  ],
  "renewLog": [
