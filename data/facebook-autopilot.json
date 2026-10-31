@@ -9799,6 +9799,15 @@
    "ok": true,
    "now": true,
    "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T18:05:53.224Z",
+   "p": "FAV-004",
+   "g": "page",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
   }
  ],
  "resets": {},
@@ -10856,6 +10865,13 @@
    "t": "2026-10-31T18:04:09.074Z",
    "kind": "renew",
    "tried": 65,
+   "ok": 0
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T18:06:12.470Z",
+   "kind": "post",
+   "tried": 1,
    "ok": 0
   }
  ],
