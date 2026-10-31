@@ -378,6 +378,14 @@
     "listed": "2026-10-31",
     "id": "1754440730022094",
     "renew": "wait"
+   },
+   {
+    "t": "White Foldable 6-Seater Set — 6ft Table + 6 Chairs",
+    "price": 2420,
+    "status": "Active",
+    "listed": "2026-10-31",
+    "id": "1736067490792390",
+    "renew": "wait"
    }
   ]
  },
@@ -1412,6 +1420,16 @@
    "ok": true,
    "id": "1754440730022094",
    "verified": true
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T08:11:19.995Z",
+   "p": "FAV-041",
+   "title": "White Foldable 6-Seater Set — 6ft Table + 6 Chairs",
+   "price": 2420,
+   "ok": true,
+   "id": "1736067490792390",
+   "verified": true
   }
  ],
  "runs": [
@@ -1583,6 +1601,12 @@
    "kind": "list",
    "tried": 38,
    "ok": 37
+  },
+  {
+   "d": "2026-10-31",
+   "kind": "list",
+   "tried": 1,
+   "ok": 1
   }
  ],
  "skip": []
