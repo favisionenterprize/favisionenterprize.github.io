@@ -605,6 +605,36 @@
     "ok": false,
     "why": "already has a full description with the website link",
     "skip": true
+   },
+   "2224086671498016": {
+    "d": "2026-10-31",
+    "ok": false,
+    "why": "already has a full description with the website link",
+    "skip": true
+   },
+   "4670669886545967": {
+    "d": "2026-10-31",
+    "ok": false,
+    "why": "already has a full description with the website link",
+    "skip": true
+   },
+   "958035296988966": {
+    "d": "2026-10-31",
+    "ok": false,
+    "why": "already has a full description with the website link",
+    "skip": true
+   },
+   "1491505376374254": {
+    "d": "2026-10-31",
+    "ok": false,
+    "why": "already has a full description with the website link",
+    "skip": true
+   },
+   "1758577182032952": {
+    "d": "2026-10-31",
+    "ok": false,
+    "why": "already has a full description with the website link",
+    "skip": true
    }
   }
  },
@@ -1048,6 +1078,16 @@
    "skip": 5,
    "v": "2026-10-15.4",
    "more": 20
+  },
+  {
+   "d": "2026-10-31",
+   "kind": "mkedit",
+   "net": "mk",
+   "tried": 5,
+   "ok": 0,
+   "skip": 5,
+   "v": "2026-10-15.4",
+   "more": 15
   }
  ]
 }
