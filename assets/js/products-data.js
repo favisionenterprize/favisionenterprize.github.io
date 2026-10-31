@@ -1354,6 +1354,13 @@ window.FAV_DATA = {
           "price": 9500,
           "checked": "2026-10-17",
           "synced": "2026-10-17"
+        },
+        {
+          "id": "3914962495309738",
+          "title": "Mesh Secretary Chair — Ergonomic Swivel",
+          "price": 9500,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
         }
       ],
       "tiktok": 6,
