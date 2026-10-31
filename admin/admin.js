@@ -127,6 +127,7 @@
   function friendly(err) {
     if (err.status === "signed_out") { expireSession(); return "You've been signed out. Please sign in again."; }
     if (err.status === "no_github_token") return "Sign-in worked, but the backend has no GitHub token yet. In Apps Script → Project Settings → Script properties, add GITHUB_TOKEN.";
+    if (err.status === 403 && /resource not accessible by personal access token/i.test(err.message || "")) return "This GitHub token can't start the workflow. Give its fine-grained token Actions: Read and write for this repository (keep Contents: Read and write for saves), then update GITHUB_TOKEN in Apps Script → Project Settings → Script properties.";
     if (session && (err.status === 401 || err.status === 403 || err.status === 404)) return "The GitHub token saved in Apps Script (GITHUB_TOKEN) was rejected or has expired. Make a new one and replace it there.";
     if (err.status === 401) return "Your token was rejected. It may have expired: sign out and paste a new one.";
     if (err.status === 403) return "Your token can't save changes. On GitHub, give it Contents: Read and write for this repository.";
