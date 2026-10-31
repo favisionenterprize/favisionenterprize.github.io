@@ -5770,15 +5770,82 @@
   "joins": [],
   "posts": [],
   "manual": [],
-  "runs": [],
-  "cur": {
+  "runs": [
+   {
+    "id": "202610310236",
+    "d": "2026-10-31",
+    "t": "2026-10-31T02:50:17.883Z",
+    "dry": false,
+    "joined": 0,
+    "pending": 0,
+    "manual": 0,
+    "dropped": [],
+    "by_profile": [],
+    "by_brand": [
+     {
+      "key": "fav",
+      "name": "F.A Vision Enterprise",
+      "ok": 0,
+      "tried": 0
+     },
+     {
+      "key": "favf",
+      "name": "Fa Vision Furnitures",
+      "ok": 0,
+      "tried": 0
+     },
+     {
+      "key": "oteng",
+      "name": "Oteng Furniture",
+      "ok": 0,
+      "tried": 0
+     },
+     {
+      "key": "agood",
+      "name": "AGOODMANN VENTURES",
+      "ok": 0,
+      "tried": 0
+     }
+    ],
+    "skipped": []
+   }
+  ],
+  "last": {
    "id": "202610310236",
    "d": "2026-10-31",
-   "t": "2026-10-31T02:36:22.225Z",
+   "t": "2026-10-31T02:50:17.883Z",
    "dry": false,
-   "phase": "join",
+   "joined": 0,
+   "pending": 0,
+   "manual": 0,
    "dropped": [],
-   "members": {},
+   "by_profile": [],
+   "by_brand": [
+    {
+     "key": "fav",
+     "name": "F.A Vision Enterprise",
+     "ok": 0,
+     "tried": 0
+    },
+    {
+     "key": "favf",
+     "name": "Fa Vision Furnitures",
+     "ok": 0,
+     "tried": 0
+    },
+    {
+     "key": "oteng",
+     "name": "Oteng Furniture",
+     "ok": 0,
+     "tried": 0
+    },
+    {
+     "key": "agood",
+     "name": "AGOODMANN VENTURES",
+     "ok": 0,
+     "tried": 0
+    }
+   ],
    "skipped": []
   }
  },
