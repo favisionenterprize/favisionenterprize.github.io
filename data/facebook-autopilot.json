@@ -4820,6 +4820,14 @@
    "tried": 0,
    "ok": 0,
    "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile in Facebook, then tap Renew again."
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T01:59:39.051Z",
+   "kind": "renew",
+   "tried": 0,
+   "ok": 0,
+   "stopped": "No listings found on Your listings. Make sure Facebook is on your personal profile."
   }
  ],
  "renewLog": [
@@ -5210,39 +5218,8 @@
   }
  },
  "selling": {
-  "d": "2026-10-29",
-  "cards": [
-   {
-    "t": "L-Shaped Sofa Set — Fabric & Leather",
-    "listed": "2026-10-17",
-    "status": "Active",
-    "next": "2026-11-01"
-   },
-   {
-    "t": "Student Desk Chair Set — Senior High to Tertiary Level",
-    "listed": "2026-10-17",
-    "status": "Active",
-    "next": "2026-11-01"
-   },
-   {
-    "t": "Dining Set Collection — 5 Designs, 6 Chairs",
-    "listed": "2026-10-17",
-    "status": "Active",
-    "next": "2026-11-05"
-   },
-   {
-    "t": "Jasmine Rice — Long Grain Fragrant Rice",
-    "listed": "2026-10-17",
-    "status": "Active",
-    "next": "2026-11-05"
-   },
-   {
-    "t": "TV Stand — Black Marble Top with Drawer",
-    "listed": "2026-10-17",
-    "status": "Active",
-    "next": "2026-11-05"
-   }
-  ]
+  "d": "2026-10-31",
+  "cards": []
  },
  "switches": [
   {
