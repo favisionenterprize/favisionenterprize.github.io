@@ -920,6 +920,13 @@ window.FAV_DATA = {
           "price": 4900,
           "checked": "2026-10-31",
           "synced": "2026-10-31"
+        },
+        {
+          "id": "1099854756218327",
+          "title": "Black Glass Dining Set — 6 High-Back Chairs",
+          "price": 4900,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
         }
       ],
       "tiktok": 9,
@@ -1000,6 +1007,13 @@ window.FAV_DATA = {
         },
         {
           "id": "2364608837666104",
+          "title": "Dining Set Collection — 5 Designs, 6 Chairs",
+          "price": 12600,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
+        },
+        {
+          "id": "3065610803785489",
           "title": "Dining Set Collection — 5 Designs, 6 Chairs",
           "price": 12600,
           "checked": "2026-10-31",
