@@ -3591,6 +3591,15 @@ window.FAV_DATA = {
           "qty": 6,
           "icon": "chair"
         }
+      ],
+      "facebook_listings": [
+        {
+          "id": "1736067490792390",
+          "title": "White Foldable 6-Seater Set — 6ft Table + 6 Chairs",
+          "price": 2420,
+          "checked": "2026-10-31",
+          "synced": "2026-10-31"
+        }
       ]
     },
     {
