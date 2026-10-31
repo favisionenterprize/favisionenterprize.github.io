@@ -2746,6 +2746,21 @@
    "followers": null,
    "stopped": null,
    "commenting": true
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T03:13:58.730Z",
+   "net": "tiktok",
+   "mode": "stats",
+   "posts": 0,
+   "checked": 0,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": null,
+   "stopped": "No posts found on your TikTok profile.",
+   "commenting": true
   }
  ],
  "liked": {}
