@@ -403,6 +403,12 @@
     "ok": false,
     "why": "no “Edit” in the post's menu",
     "mode": "set"
+   },
+   "DfAIZuSCJ35": {
+    "d": "2026-10-31",
+    "ok": false,
+    "why": "no “Edit” in the post's menu",
+    "mode": "set"
    }
   }
  },
@@ -842,6 +848,15 @@
    "skip": 0,
    "v": "2026-10-15.4",
    "more": 1
+  },
+  {
+   "d": "2026-10-31",
+   "kind": "fxfix",
+   "net": "ig",
+   "tried": 1,
+   "ok": 0,
+   "skip": 0,
+   "v": "2026-10-15.4"
   }
  ]
 }
