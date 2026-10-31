@@ -6458,16 +6458,29 @@
    "p": "FAV-014",
    "ok": false,
    "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T03:28:29.145Z",
+   "net": "x",
+   "k": "box:FAV-017",
+   "p": "FAV-017",
+   "ok": false,
+   "now": true,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T03:30:14.231Z",
+   "net": "x",
+   "k": "box:FAV-018",
+   "p": "FAV-018",
+   "ok": false,
+   "now": true,
+   "why": "X didn't confirm the post"
   }
  ],
  "runs": [
-  {
-   "d": "2026-10-18",
-   "t": "2026-10-18T01:59:24.327Z",
-   "kind": "x",
-   "tried": 10,
-   "ok": 0
-  },
   {
    "d": "2026-10-18",
    "t": "2026-10-18T02:00:54.179Z",
@@ -7864,6 +7877,13 @@
    "tried": 0,
    "ok": 0,
    "stopped": "TikTok isn't logged in. Log in to FA Vision Enterprise's TikTok in this browser, then run again."
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T03:30:28.559Z",
+   "kind": "x",
+   "tried": 2,
+   "ok": 0
   }
  ]
 }
