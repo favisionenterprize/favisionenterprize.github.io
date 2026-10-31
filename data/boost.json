@@ -376,6 +376,14 @@
    "p": null,
    "ok": false,
    "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-31",
+   "net": "fb",
+   "v": "fav-001-short",
+   "p": "FAV-001",
+   "ok": false,
+   "why": "Post button stayed off"
   }
  ],
  "runs": []
