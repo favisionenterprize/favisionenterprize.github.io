@@ -6463,13 +6463,6 @@
  "runs": [
   {
    "d": "2026-10-18",
-   "t": "2026-10-18T01:58:33.993Z",
-   "kind": "x",
-   "tried": 10,
-   "ok": 0
-  },
-  {
-   "d": "2026-10-18",
    "t": "2026-10-18T01:59:24.327Z",
    "kind": "x",
    "tried": 10,
@@ -7863,6 +7856,14 @@
    "kind": "x",
    "tried": 1,
    "ok": 0
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T03:11:21.851Z",
+   "kind": "tiktok",
+   "tried": 0,
+   "ok": 0,
+   "stopped": "TikTok isn't logged in. Log in to FA Vision Enterprise's TikTok in this browser, then run again."
   }
  ]
 }
