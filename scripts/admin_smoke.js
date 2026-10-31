@@ -824,7 +824,7 @@ async function seo(browser, shot) {
   await page.addStyleTag({ content: fs.readFileSync(ROOT + "admin/admin.css", "utf8") });
   await page.evaluate(({ files }) => {
     window.__saves = []; window.__gh = []; window.__ghFail = false; window.confirm = () => true;
-    let fx = files["data/seo-fixes.json"] || { applied: [] };
+    let fx = { applied: [] };
     window.FAV_ADMIN = { signedIn: () => true, toast: () => {}, busy: () => {}, friendly: e => e.message,
       readJsonFile: async (p, fb) => p === "data/seo-fixes.json" ? fx : (files[p] || fb),
       saveJson: async (p, m, msg, fb) => { fx = m(JSON.parse(JSON.stringify(fx || fb))); window.__saves.push({ p, msg, fx }); return fx; },
@@ -1099,7 +1099,13 @@ async function prospects(browser) {
   const posts = [];
   const page = await plainPage(browser, problems, async pg => pg.route("https://backend.smoke.test/**", r => { posts.push(r.request().postData()); r.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ok: true, customers: [] }) }); }));
   for (const f of ["admin/captions.js", "admin/aiplan.js", "admin/leads.js", "admin/prospects.js", "assets/js/invoice.js"]) await page.addScriptTag({ content: fs.readFileSync(ROOT + f, "utf8") });
-  await page.evaluate(() => { window.__museReply = p => ({ ok: true, text: JSON.stringify({ prospects: [
+  await page.evaluate(async () => {
+    const plan = await window.FAV_AIPLAN.load(true);
+    const rule = plan.rules.find(r => r.id === "S5");
+    if (!rule) throw new Error("AI Plan is missing the S5 rule");
+    rule.status = "proposed";
+  });
+  await page.evaluate(() => { window.__files["data/prospects.json"] = { updated: null, prospects: [] }; window.__museReply = p => ({ ok: true, text: JSON.stringify({ prospects: [
     { name: "Bright Future Academy", area: "Kasoa", why: "Private JHS/SHS, growing", source_url: "https://www.google.com/maps/place/bright-future" },
     { name: "Hope Montessori School", area: "Kasoa", why: "Basic school", source_url: "" },
     { name: "KFC Kasoa", area: "Kasoa", why: "restaurant", source_url: "https://kfc.com.gh", chain: false },
@@ -1169,6 +1175,12 @@ async function profilekit(browser) {
   const problems = [], want = (ok, m) => { if (!ok) problems.push(m); };
   const page = await plainPage(browser, problems);
   for (const f of ["admin/aiplan.js", "admin/brands.js", "admin/profilekit.js"]) await page.addScriptTag({ content: fs.readFileSync(ROOT + f, "utf8") });
+  await page.evaluate(async () => {
+    const plan = await window.FAV_AIPLAN.load(true);
+    const rule = plan.rules.find(r => r.id === "M6");
+    if (!rule) throw new Error("AI Plan is missing the M6 rule");
+    rule.status = "proposed";
+  });
   await page.evaluate(() => document.querySelector("[data-profilekit]").click());
   await page.waitForTimeout(300);
   const st = await page.evaluate(() => ({ hash: location.hash, cards: document.querySelectorAll("[data-pk]").length, brands: document.querySelectorAll("[data-pk-sel=brand] option").length, off: /AI writing is off/.test(document.querySelector("#pk-body").innerText) }));
