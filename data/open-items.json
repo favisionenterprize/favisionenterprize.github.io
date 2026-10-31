@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-31T01:59:07.260Z",
+ "updated": "2026-10-31T02:22:48.706Z",
  "note": "🤖 Open items / AI Fix log. done{} = project items Alexander marked done; history.price = his price choices; learned = what AI Fix based its last run on.",
  "done": {},
  "log": [
@@ -872,6 +872,145 @@
   },
   {
    "t": "2026-10-31T01:59:00.843Z",
+   "id": "m-apikeys",
+   "src": "Backend",
+   "action": "needs you: API keys are yours to enter",
+   "result": "waiting"
+  },
+  {
+   "t": "2026-10-31T02:22:43.416Z",
+   "id": "fx-ig",
+   "src": "Fix all · Instagram",
+   "action": "left to the ⚡ Prime lanes",
+   "result": "running",
+   "learned": "the classy caption style you kept"
+  },
+  {
+   "t": "2026-10-31T02:22:43.416Z",
+   "id": "fx-x",
+   "src": "Fix all · X",
+   "action": "left to the ⚡ Prime lanes",
+   "result": "running",
+   "learned": "the classy caption style you kept"
+  },
+  {
+   "t": "2026-10-31T02:22:43.416Z",
+   "id": "ttcaps",
+   "src": "TikTok",
+   "action": "left to the ⚡ Prime lanes",
+   "result": "running",
+   "learned": "classy captions (your TikTok setting)"
+  },
+  {
+   "t": "2026-10-31T02:22:43.416Z",
+   "id": "mk-missing",
+   "src": "Marketplace",
+   "action": "left to the ⚡ Prime lanes",
+   "result": "running",
+   "learned": "no \"Don't list\" choices yet"
+  },
+  {
+   "t": "2026-10-31T02:22:43.416Z",
+   "id": "pro-fb",
+   "src": "Profile · Facebook Page",
+   "action": "left to the ⚡ Prime lanes",
+   "result": "running"
+  },
+  {
+   "t": "2026-10-31T02:22:43.416Z",
+   "id": "pro-x",
+   "src": "Profile · X",
+   "action": "left to the ⚡ Prime lanes",
+   "result": "running"
+  },
+  {
+   "t": "2026-10-31T02:22:43.416Z",
+   "id": "m-missing8",
+   "src": "Marketplace",
+   "action": "left to the ⚡ Prime lanes",
+   "result": "running"
+  },
+  {
+   "t": "2026-10-31T02:22:43.416Z",
+   "id": "m-bios",
+   "src": "Profiles",
+   "action": "left to the ⚡ Prime lanes",
+   "result": "running"
+  },
+  {
+   "t": "2026-10-31T02:22:43.416Z",
+   "id": "fx-web",
+   "src": "Website",
+   "action": "needs you: Web copy goes live only after you approve it (your Seek rule)",
+   "result": "waiting",
+   "learned": "no Seek approvals yet"
+  },
+  {
+   "t": "2026-10-31T02:22:43.417Z",
+   "id": "mk-price",
+   "src": "Marketplace",
+   "action": "needs you: Rule S4: only you change prices",
+   "result": "waiting",
+   "learned": "no price choices logged yet"
+  },
+  {
+   "t": "2026-10-31T02:22:43.417Z",
+   "id": "pro-tiktok",
+   "src": "Profile · TikTok",
+   "action": "needs you: TikTok only allows this in its phone app",
+   "result": "waiting"
+  },
+  {
+   "t": "2026-10-31T02:22:43.417Z",
+   "id": "pro-ig",
+   "src": "Profile · Instagram",
+   "action": "needs you: Instagram only allows this in its phone app",
+   "result": "waiting"
+  },
+  {
+   "t": "2026-10-31T02:22:43.417Z",
+   "id": "box",
+   "src": "What's in the box",
+   "action": "needs you: Only you know what's really in the carton",
+   "result": "waiting"
+  },
+  {
+   "t": "2026-10-31T02:22:43.417Z",
+   "id": "viral",
+   "src": "Go-viral settings",
+   "action": "needs you: Account settings are yours",
+   "result": "waiting"
+  },
+  {
+   "t": "2026-10-31T02:22:43.417Z",
+   "id": "m-julius",
+   "src": "Customers",
+   "action": "needs you: Sending messages to customers is yours",
+   "result": "waiting"
+  },
+  {
+   "t": "2026-10-31T02:22:43.417Z",
+   "id": "m-prices",
+   "src": "Prices",
+   "action": "needs you: Rule S4: only you change prices",
+   "result": "waiting"
+  },
+  {
+   "t": "2026-10-31T02:22:43.417Z",
+   "id": "m-metaverified",
+   "src": "Meta Verified",
+   "action": "needs you: Payments and subscriptions are yours",
+   "result": "waiting"
+  },
+  {
+   "t": "2026-10-31T02:22:43.418Z",
+   "id": "m-2fa",
+   "src": "Security",
+   "action": "needs you: Account security settings are yours",
+   "result": "waiting"
+  },
+  {
+   "t": "2026-10-31T02:22:43.418Z",
    "id": "m-apikeys",
    "src": "Backend",
    "action": "needs you: API keys are yours to enter",
