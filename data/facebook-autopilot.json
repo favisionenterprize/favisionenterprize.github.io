@@ -3955,6 +3955,14 @@
    "ok": false,
    "now": true,
    "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T02:23:53.836Z",
+   "p": "FAV-030",
+   "g": "546213353030012",
+   "ok": false,
+   "why": "Not a member of this group"
   }
  ],
  "resets": {},
@@ -4836,6 +4844,13 @@
    "tried": 0,
    "ok": 0,
    "stopped": "No listings found on Your listings. Make sure Facebook is on your personal profile."
+  },
+  {
+   "d": "2026-10-31",
+   "t": "2026-10-31T02:24:40.853Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 0
   }
  ],
  "renewLog": [
