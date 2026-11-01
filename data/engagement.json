@@ -170,6 +170,11 @@
    "d": "2026-10-31",
    "net": "fb",
    "n": 561
+  },
+  {
+   "d": "2026-11-01",
+   "net": "fb",
+   "n": 562
   }
  ],
  "posts": {
@@ -206,8 +211,8 @@
    "url": "https://www.facebook.com/FaVisionEnterprise/videos/442786224559428/",
    "first": "2026-10-13",
    "commented": [],
-   "title": "Facebook",
-   "checked": "2026-10-31",
+   "title": "(20+) Video",
+   "checked": "2026-11-01",
    "likes": 1,
    "comments": 1,
    "views": 142
@@ -1234,6 +1239,24 @@
    "title": "FA Vision Enterprise on X: \"L-Shaped Sectional Sofa: GH₵ 15,500 (we can talk). WhatsApp 05",
    "checked": "2026-10-31",
    "views": 30
+  },
+  "https://www.facebook.com/FaVisionEnterprise/posts/pfbid02xPqjYR33sSKUxFm5W5DWfPvGr5zonPhaYXRd3MV3VrU7rsEnjvZxqNJws43XSXurl": {
+   "net": "fb",
+   "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid02xPqjYR33sSKUxFm5W5DWfPvGr5zonPhaYXRd3MV3VrU7rsEnjvZxqNJws43XSXurl",
+   "first": "2026-11-01",
+   "commented": [],
+   "title": "(20+) Facebook",
+   "checked": "2026-11-01",
+   "likes": 12
+  },
+  "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0XepaxaicXTR5Lxdjpm4jkspQzaVbxTTeaxMss2C9JQx66VuqR1KL6XfqCJq7LSjBl": {
+   "net": "fb",
+   "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0XepaxaicXTR5Lxdjpm4jkspQzaVbxTTeaxMss2C9JQx66VuqR1KL6XfqCJq7LSjBl",
+   "first": "2026-11-01",
+   "commented": [],
+   "title": "(20+) Facebook",
+   "checked": "2026-11-01",
+   "likes": 51000
   }
  },
  "runs": [
@@ -2885,6 +2908,21 @@
    "thanked": 0,
    "followers": 561,
    "stopped": "Stopped by you.",
+   "commenting": false
+  },
+  {
+   "d": "2026-11-01",
+   "t": "2026-11-01T12:42:43.725Z",
+   "net": "fb",
+   "mode": "reply",
+   "posts": 3,
+   "checked": 3,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 562,
+   "stopped": null,
    "commenting": false
   }
  ],
