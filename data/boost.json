@@ -481,6 +481,14 @@
    "p": "FAV-007",
    "ok": false,
    "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-11-01",
+   "net": "fb",
+   "v": "fav-008-short",
+   "p": "FAV-008",
+   "ok": false,
+   "why": "Couldn't find the post box"
   }
  ],
  "runs": []
