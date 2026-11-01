@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-31T08:22:12Z",
+ "generated": "2026-11-01T09:08:23Z",
  "mode": "full",
  "score": 80,
  "prev_score": 80,
@@ -1245,7 +1245,7 @@
       "kb": 302,
       "requests": 48,
       "img_no_alt": 0,
-      "secs": 0.4,
+      "secs": 0.3,
       "keywords": []
      },
      {
@@ -1266,7 +1266,7 @@
       "kb": 282,
       "requests": 48,
       "img_no_alt": 0,
-      "secs": 0.3,
+      "secs": 0.4,
       "keywords": []
      },
      {
@@ -1308,7 +1308,7 @@
       "kb": 193,
       "requests": 6,
       "img_no_alt": 3,
-      "secs": 0.2,
+      "secs": 0.3,
       "keywords": []
      }
     ],
@@ -1388,7 +1388,7 @@
       "kb": 134,
       "requests": 121,
       "img_no_alt": 1,
-      "secs": 1.2,
+      "secs": 1.0,
       "keywords": []
      },
      {
@@ -1409,7 +1409,7 @@
       "kb": 163,
       "requests": 128,
       "img_no_alt": 1,
-      "secs": 0.5,
+      "secs": 0.7,
       "keywords": []
      },
      {
@@ -1430,11 +1430,11 @@
       "kb": 94,
       "requests": 102,
       "img_no_alt": 0,
-      "secs": 0.6,
+      "secs": 0.5,
       "keywords": []
      },
      {
-      "url": "https://furniturecityghana.com/product/cs-12rg/",
+      "url": "https://furniturecityghana.com/product/se230-r/",
       "title": true,
       "title_len": 30,
       "description": false,
@@ -1492,7 +1492,7 @@
       "kb": 366,
       "requests": 129,
       "img_no_alt": 26,
-      "secs": 0.4,
+      "secs": 0.5,
       "keywords": []
      }
     ],
@@ -1502,9 +1502,32 @@
    {
     "name": "Casa Trasacco",
     "url": "https://www.casatrasacco.com/",
-    "status": "HTTP 500",
-    "pages": [],
-    "sitemap": true
+    "status": "ok",
+    "pages": [
+     {
+      "url": "https://www.casatrasacco.com/cgi-sys/suspendedpage.cgi",
+      "title": true,
+      "title_len": 17,
+      "description": false,
+      "h1": 0,
+      "og": false,
+      "canonical": false,
+      "viewport": true,
+      "schema": [],
+      "phone": false,
+      "accra": false,
+      "whatsapp": false,
+      "blog": false,
+      "faq": false,
+      "kb": 7,
+      "requests": 2,
+      "img_no_alt": 0,
+      "secs": 0.9,
+      "keywords": []
+     }
+    ],
+    "sitemap": false,
+    "https": true
    },
    {
     "name": "Furnart",
@@ -1563,6 +1586,18 @@
       "no LocalBusiness schema (address/phone for Google Maps & AI)",
       "heavy home page (366 KB HTML, 129 files)",
       "26 images without alt text",
+      "no phone number on the home page",
+      "targets none of our keywords in title/H1"
+     ]
+    },
+    {
+     "who": "Casa Trasacco",
+     "weak": [
+      "no meta description",
+      "no LocalBusiness schema (address/phone for Google Maps & AI)",
+      "no FAQ",
+      "no H1",
+      "no link-preview tags",
       "no phone number on the home page",
       "targets none of our keywords in title/H1"
      ]
@@ -1686,6 +1721,11 @@
   },
   {
    "d": "2026-10-31",
+   "score": 80,
+   "ai": 0
+  },
+  {
+   "d": "2026-11-01",
    "score": 80,
    "ai": 0
   }
