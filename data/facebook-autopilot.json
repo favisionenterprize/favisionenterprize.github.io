@@ -9816,6 +9816,15 @@
    "g": "543018068696925",
    "ok": true,
    "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-01",
+   "t": "2026-11-01T08:30:55.945Z",
+   "p": "FAV-005",
+   "g": "page",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
   }
  ],
  "resets": {},
@@ -10895,6 +10904,13 @@
    "kind": "post",
    "tried": 1,
    "ok": 1
+  },
+  {
+   "d": "2026-11-01",
+   "t": "2026-11-01T08:31:23.106Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 0
   }
  ],
  "renewLog": [
