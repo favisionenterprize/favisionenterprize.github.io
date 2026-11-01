@@ -2664,6 +2664,14 @@
    "ok": false,
    "now": true,
    "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-11-01",
+   "t": "2026-11-01T08:05:28.638Z",
+   "k": "presence:fav-001",
+   "p": "FAV-001",
+   "ok": true,
+   "now": true
   }
  ],
  "profile": [
@@ -2804,6 +2812,12 @@
    "followers": 893,
    "following": 2026,
    "posts": 437
+  },
+  {
+   "d": "2026-11-01",
+   "followers": 893,
+   "following": 2026,
+   "posts": 441
   }
  ],
  "runs": [
@@ -3907,6 +3921,13 @@
    "kind": "ig",
    "tried": 1,
    "ok": 0
+  },
+  {
+   "d": "2026-11-01",
+   "t": "2026-11-01T08:05:46.602Z",
+   "kind": "ig",
+   "tried": 1,
+   "ok": 1
   }
  ]
 }
