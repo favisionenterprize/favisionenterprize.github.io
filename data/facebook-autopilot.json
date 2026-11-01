@@ -9959,6 +9959,15 @@
    "ok": false,
    "now": true,
    "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-11-01",
+   "t": "2026-11-01T13:17:53.177Z",
+   "p": "FAV-007",
+   "g": "page",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
   }
  ],
  "resets": {},
@@ -11073,6 +11082,13 @@
    "kind": "renew",
    "tried": 22,
    "ok": 5
+  },
+  {
+   "d": "2026-11-01",
+   "t": "2026-11-01T13:18:13.575Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 0
   }
  ],
  "renewLog": [
