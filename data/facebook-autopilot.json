@@ -10058,6 +10058,96 @@
    "ok": true,
    "now": true,
    "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-01",
+   "t": "2026-11-01T14:06:04.555Z",
+   "p": "FAV-014",
+   "g": "yogacentre",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-01",
+   "t": "2026-11-01T14:06:41.532Z",
+   "p": "FAV-014",
+   "g": "YogaWithMasterAvi",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-01",
+   "t": "2026-11-01T14:07:12.852Z",
+   "p": "FAV-014",
+   "g": "hongkongfoodies",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-01",
+   "t": "2026-11-01T14:08:13.465Z",
+   "p": "FAV-014",
+   "g": "774721909803495",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-01",
+   "t": "2026-11-01T14:08:49.487Z",
+   "p": "FAV-014",
+   "g": "expathongkong",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-01",
+   "t": "2026-11-01T14:09:31.620Z",
+   "p": "FAV-014",
+   "g": "554754680575159",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-01",
+   "t": "2026-11-01T14:10:11.496Z",
+   "p": "FAV-014",
+   "g": "1815408142089205",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-01",
+   "t": "2026-11-01T14:10:56.506Z",
+   "p": "FAV-014",
+   "g": "382413244540323",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-01",
+   "t": "2026-11-01T14:11:50.390Z",
+   "p": "FAV-014",
+   "g": "344868140476885",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-01",
+   "t": "2026-11-01T14:12:46.338Z",
+   "p": "FAV-014",
+   "g": "1559139351477117",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
   }
  ],
  "resets": {},
@@ -11183,6 +11273,13 @@
   {
    "d": "2026-11-01",
    "t": "2026-11-01T14:10:59.027Z",
+   "kind": "post",
+   "tried": 10,
+   "ok": 10
+  },
+  {
+   "d": "2026-11-01",
+   "t": "2026-11-01T14:13:02.809Z",
    "kind": "post",
    "tried": 10,
    "ok": 10
