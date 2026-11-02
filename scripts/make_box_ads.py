@@ -1,19 +1,16 @@
 #!/usr/bin/env python3
-""""What's in the Box?" ads (oraimo-style) for every product in data/products.json.
+"""Editorial "What's in the Box?" ads for every product in data/products.json.
 
     python3 scripts/make_box_ads.py              # every product with a photo
     python3 scripts/make_box_ads.py FAV-014      # one or more products
 
 Output: assets/images/ads/box/box-<id>.jpg (1080 x 1350 feed) and box-<id>-story.jpg (1080 x 1920).
 
-Look: pure black background, big white "What's in the Box?" title (box_title, e.g. "What's in the Bag?"),
-the product drawn as thin white line art made from its own first photo (edge detection on a white
-studio shot, GrabCut cut-out + edges on a room photo; a clean photo cut-out or framed photo when the
-lines would be messy), "<short name> ×1", model / ref, a dimensions strip (only when the product's
-"dimensions" or "box_size" holds a real measurement: never made up), a row of line icons drawn in code
-for each `in_the_box` item ("Item ×qty"), the price, F.A Vision branding (partner products: the
-seller's name and WhatsApp) and a white "Order on WhatsApp" pill. While `in_the_box_confirmed` is false
-a small "typical contents" note goes under the button.
+Look: refined editorial product card inspired by the supplied materials-and-technology reference:
+warm white canvas, ink-blue type, soft peach/blue accents, an airy product-photo panel, precise
+dimensions (only when present in the product data), and a clean grid of illustrated included items.
+The price, seller and WhatsApp call to action sit together in a navy footer. Unconfirmed contents
+remain clearly labelled so the artwork never implies that guesses are verified.
 
 Data (data/products.json, per product): in_the_box [{item, qty, icon, guess?}], box_title?, box_note?,
 box_size?, in_the_box_confirmed. Admin: "📦 What's in the Box ads" screen (admin/boxads.js, #boxads).
@@ -35,20 +32,26 @@ except ImportError:          # no OpenCV: framed photos instead of line art
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "assets/images/ads/box"
 W = 1080
-BLACK, WHITE, SOFT, DIM = (0, 0, 0), (255, 255, 255), (200, 200, 206), (130, 130, 138)
-FONT_DIRS = [ROOT / "assets/fonts", Path("/usr/share/fonts/truetype/google-fonts")]
+INK, WHITE, SOFT, MUTED = (25, 38, 82), (255, 255, 255), (80, 91, 119), (111, 121, 145)
+CANVAS, PANEL, PALE_BLUE = (248, 249, 252), (255, 255, 255), (237, 241, 249)
+PEACH, BORDER = (242, 176, 139), (226, 231, 240)
+FONT_DIRS = [ROOT / "assets/fonts", Path("/usr/share/fonts/truetype/google-fonts"), Path("C:/Windows/Fonts")]
 
-# How the main product is drawn. "line" = white line art, "cutout" = photo cut out on black,
-# "card" = framed photo. Picked by eye for photos where the automatic choice looks messy.
+# How the main product is drawn. "line" = ink-blue line art, "cutout" = photo cut out,
+# "card" = framed photo, "illustration" = a drawn product when the catalogue photo is misleading.
 ART = {
     **{k: "line" for k in ("FAV-002", "FAV-006", "FAV-007", "FAV-008", "FAV-014", "FAV-017", "FAV-019",
                            "FAV-021", "FAV-022", "FAV-032")},
+    "FAV-043": "illustration",
     **{k: "card" for k in ("FAV-018", "FAV-023", "FAV-031", "FAV-001", "FAV-003", "FAV-004", "FAV-005", "FAV-009", "FAV-010", "FAV-011",
                            "FAV-015", "FAV-016", "FAV-020", "FAV-024", "FAV-025", "FAV-026", "FAV-027",
                            "FAV-028", "FAV-029", "FAV-030", "FAV-033", "FAV-034", "FAV-035")},
 }
-# Which photo to draw from (default: the first one).
-PHOTO = {}
+# Prefer the clean catalogue photo over the embedded sizing/pricing graphic for these sets.
+PHOTO = {
+    f"FAV-{number:03d}": f"assets/images/products/fav-{number:03d}-1.jpg"
+    for number in range(39, 44)
+}
 
 
 # ------------------------------------------------------------------ text helpers
@@ -57,7 +60,11 @@ def font(weight, size):
         p = d / f"Poppins-{weight}.ttf"
         if p.exists():
             return ImageFont.truetype(str(p), size)
-    return ImageFont.truetype("DejaVuSans-Bold.ttf" if weight == "Bold" else "DejaVuSans.ttf", size)
+    if weight == "Bold":
+        fallback = Path("C:/Windows/Fonts/arialbd.ttf")
+        return ImageFont.truetype(str(fallback), size) if fallback.exists() else ImageFont.truetype("arialbd.ttf", size)
+    fallback = Path("C:/Windows/Fonts/arial.ttf")
+    return ImageFont.truetype(str(fallback), size) if fallback.exists() else ImageFont.truetype("arial.ttf", size)
 
 
 def fit_font(d, text, weight, size, maxw, minsize=18):
@@ -122,16 +129,12 @@ def dims_of(p):
     raw = p.get("box_size") or p.get("dimensions") or ""
     if not MEASURE.search(raw):
         return [], ""
-    order = ""
-    m = re.search(r"\((L\s*×\s*W\s*×\s*H)\)", raw)
-    if m:
-        order = m.group(1).replace(" ", " ")
-        raw = raw.replace(m.group(0), "")
+    raw = re.sub(r"\s*\(L\s*×\s*W\s*×\s*H\)\s*", "", raw, flags=re.I)
     out = []
     for seg in [s.strip(" ;,.") for s in raw.split(";") if s.strip(" ;,.")]:
-        mm = re.match(r"^([A-Za-z][A-Za-z ]{1,14}?)\s+(\d.*)$", seg)
+        mm = re.match(r"^([A-Za-z][A-Za-z &/-]{1,20}?)\s+(.+)$", seg)
         out.append((mm.group(1).upper(), mm.group(2)) if mm else ("SIZE", seg))
-    return out[:3], order
+    return out[:3], ""
 
 
 def price_line(p):
@@ -248,10 +251,50 @@ def line_art(info, box_w, box_h):
     return im.point(lambda v: min(255, int(v * 1.5)))
 
 
+def folding_chair_illustration(box_w, box_h):
+    scale = 3
+    canvas = Image.new("RGBA", (400 * scale, 460 * scale), (0, 0, 0, 0))
+    d = ImageDraw.Draw(canvas)
+
+    def point(x, y):
+        return (x * scale, y * scale)
+
+    def line(points, width=12, fill=INK):
+        d.line([point(x, y) for x, y in points], fill=(*fill, 255), width=width * scale, joint="curve")
+
+    line([(123, 158), (123, 221), (70, 418)])
+    line([(278, 158), (278, 220), (238, 418)])
+    line([(145, 226), (184, 418)])
+    line([(316, 242), (292, 418)])
+    line([(106, 292), (292, 345)], 9)
+    line([(295, 292), (118, 345)], 9)
+    d.ellipse((point(96, 282), point(116, 302)), fill=(*PEACH, 255), outline=(*INK, 255), width=4 * scale)
+    d.ellipse((point(285, 282), point(305, 302)), fill=(*PEACH, 255), outline=(*INK, 255), width=4 * scale)
+    d.rounded_rectangle((point(105, 40), point(286, 177)), radius=24 * scale,
+                        fill=(252, 253, 255, 255), outline=(*INK, 255), width=8 * scale)
+    d.rounded_rectangle((point(170, 57), point(222, 71)), radius=7 * scale, fill=PALE_BLUE)
+    d.polygon([point(94, 207), point(269, 207), point(322, 240), point(145, 240)],
+              fill=(250, 251, 253, 255), outline=(*INK, 255))
+    d.line([point(94, 207), point(269, 207), point(322, 240), point(145, 240), point(94, 207)],
+           fill=(*INK, 255), width=8 * scale, joint="curve")
+    d.line([point(61, 425), point(81, 425)], fill=(*INK, 255), width=8 * scale)
+    d.line([point(228, 425), point(248, 425)], fill=(*INK, 255), width=8 * scale)
+    d.line([point(174, 425), point(194, 425)], fill=(*INK, 255), width=8 * scale)
+    d.line([point(282, 425), point(302, 425)], fill=(*INK, 255), width=8 * scale)
+
+    target = min(box_w / 400, box_h / 460)
+    size = (max(1, int(400 * target)), max(1, int(460 * target)))
+    canvas = canvas.resize((size[0] * scale, size[1] * scale), Image.Resampling.LANCZOS)
+    canvas = canvas.resize(size, Image.Resampling.LANCZOS)
+    return canvas.convert("RGB"), canvas.getchannel("A")
+
+
 def product_art(p, box_w, box_h):
     """(RGB image, L mask) of the main product fitted inside box_w x box_h."""
     path = ROOT / (PHOTO.get(p["id"]) or p["images"][0])
     mode = ART.get(p["id"])
+    if mode == "illustration":
+        return folding_chair_illustration(box_w, box_h)
     info = None
     if cv2 is not None and mode != "card":
         info = analyse(path)
@@ -268,7 +311,7 @@ def product_art(p, box_w, box_h):
         mode = "card"
     if mode == "line":
         im = line_art(info, box_w, box_h)
-        return Image.new("RGB", im.size, WHITE), im
+        return Image.new("RGB", im.size, INK), im
     if mode == "cutout":
         x0, y0, x1, y1 = info["bbox"]
         s, orig = info["s"], info["orig"]
@@ -563,7 +606,7 @@ def contact(p, business):
 
 def compose(p, business, H):
     story = H > 1500
-    img = Image.new("RGB", (W, H), BLACK)
+    img = Image.new("RGB", (W, H), CANVAS)
     d = ImageDraw.Draw(img)
     items = [x for x in (p.get("in_the_box") or []) if x.get("item")][:8]
     title = clean_text(p.get("box_title") or "What's in the Box?")
@@ -573,130 +616,148 @@ def compose(p, business, H):
     seller_name, wa, partner = contact(p, business)
 
     pad = 64
-    single = len(items) <= 1
-    top = 120 if story else 48
-    title_f = fit_font(d, title, "Bold", 104 if story else 86, W - 2 * pad, 60)
-    f_it = font("Medium", 26 if story else 23)
-    f_q = font("Bold", 26 if story else 23)
-    # vertical budget
-    cols = 3 if len(items) in (3, 5, 6) else 4
-    rows = 0 if single else (len(items) + cols - 1) // cols
-    icon_s = 116 if story else 92
-    cell_h = icon_s + 16 + 2 * (f_it.size + 6) + (24 if story else 14)
-    grid_h = rows * cell_h
-    dims_h = 74 if dims else 0
-    meta_h = 44
-    footer_h = 300 if story else 226
-    title_h = title_f.size + 30
-    hero_cap_h = 64
-    base_gap = 50 if story else 22
-    fixed = top + title_h + hero_cap_h + meta_h + dims_h + grid_h + footer_h + base_gap * 3
-    hero_max = (1040 if story else 820) if single else (860 if story else 620)
-    hero_h = max(280, min(H - fixed, hero_max))
-    slack = max(0, H - fixed - hero_h)
-    gap = base_gap + slack // 4
+    top = 84 if story else 42
+    logo = Image.open(ROOT / "assets/images/logo-512.png").convert("RGBA")
+    logo.thumbnail((54, 54))
+    img.paste(logo, (pad, top), logo)
+    d.text((pad + 68, top + 18), "F.A VISION ENTERPRISE", font=font("Bold", 18 if story else 16), fill=INK, anchor="lm")
+    d.text((pad + 68, top + 40), "THOUGHTFUL HOME & LIVING", font=font("Regular", 13 if story else 12), fill=MUTED, anchor="lm")
+    tag = "PRODUCT DETAILS"
+    tag_f = font("Bold", 14)
+    tag_w = d.textlength(tag, font=tag_f) + 32
+    d.rounded_rectangle((W - pad - tag_w, top + 7, W - pad, top + 45), 19, fill=PALE_BLUE)
+    d.text((W - pad - tag_w / 2, top + 26), tag, font=tag_f, fill=INK, anchor="mm")
 
-    y = top + slack // 4
-    d.text((W / 2, y + title_f.size / 2), title, font=title_f, fill=WHITE, anchor="mm")
-    y += title_h + gap
+    title_y = top + (88 if story else 75)
+    title_f = fit_font(d, title, "Bold", 76 if story else 66, W - 2 * pad, 42)
+    d.text((pad, title_y), title, font=title_f, fill=INK)
+    sub = "A closer look at every piece included with your order."
+    d.text((pad, title_y + title_f.size + 8), sub, font=font("Regular", 22 if story else 18), fill=MUTED)
 
-    # hero
-    art, mask = product_art(p, W - 2 * pad - 40, hero_h)
-    img.paste(art, ((W - art.width) // 2, int(y + (hero_h - art.height) / 2)), mask)
-    y += hero_h + 10
-    if single and items:
-        cap = f"{clean_text(items[0]['item'])} {qty_text(items[0].get('qty', 1))}"
-    else:
-        cap = f"{name} ×1"
-    d.text((W / 2, y + 26), cap, font=fit_font(d, cap, "Medium", 44 if story else 40, W - 2 * pad, 24), fill=WHITE, anchor="mm")
-    y += hero_cap_h - 10
-    meta = "  ·  ".join(x for x in [name if single and items else "", f"Model {model}" if model else "", f"Ref {p['id']}"] if x)
-    d.text((W / 2, y + 14), meta, font=fit_font(d, meta, "Regular", 26 if story else 24, W - 2 * pad, 16), fill=DIM, anchor="mm")
-    y += meta_h
+    hero_y = title_y + title_f.size + (64 if story else 56)
+    hero_h = 650 if story else 430
+    hero_box = (pad, hero_y, W - pad, hero_y + hero_h)
+    shadow = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    ImageDraw.Draw(shadow).rounded_rectangle(
+        (pad, hero_y + 8, W - pad, hero_y + hero_h + 8), 30, fill=(25, 38, 82, 24)
+    )
+    img = Image.alpha_composite(img.convert("RGBA"), shadow.filter(ImageFilter.GaussianBlur(14))).convert("RGB")
+    d = ImageDraw.Draw(img)
+    d.rounded_rectangle(hero_box, 28, fill=PANEL, outline=BORDER, width=2)
+    split_x = pad + int((W - 2 * pad) * 0.56)
+    d.ellipse((pad + 26, hero_y + hero_h * 0.18, split_x - 8, hero_y + hero_h * 0.83), fill=(250, 239, 232))
+    art, mask = product_art(p, split_x - pad - 54, hero_h - 62)
+    img.paste(art, (pad + 27 + (split_x - pad - 54 - art.width) // 2,
+                    hero_y + 31 + (hero_h - 62 - art.height) // 2), mask)
+    d = ImageDraw.Draw(img)
+
+    detail_x = split_x + 18
+    detail_w = W - pad - detail_x - 26
+    d.text((detail_x, hero_y + 68), "YOUR ORDER", font=font("Bold", 16), fill=PEACH)
+    name_lines = wrap(d, name, fit_font(d, name, "Bold", 38 if story else 32, detail_w, 22), detail_w, 3)
+    name_font = fit_font(d, name, "Bold", 38 if story else 32, detail_w, 22)
+    name_y = hero_y + 104
+    for line in name_lines:
+        d.text((detail_x, name_y), line, font=name_font, fill=INK)
+        name_y += name_font.size + 8
+    meta = "  ·  ".join(x for x in [f"Model {model}" if model else "", f"Ref {p['id']}"] if x)
+    d.text((detail_x, name_y + 8), meta, font=fit_font(d, meta, "Regular", 18, detail_w, 14), fill=MUTED)
     if dims:
-        y += 4
-        f_lab, f_val = font("Bold", 22 if story else 20), font("Medium", 30 if story else 28)
-        chips = [(lab, clean_text(val)) for lab, val in dims]
-
-        def measure():
-            ws = [d.textlength(lab, font=f_lab) + d.textlength(v, font=f_val) + 64 for lab, v in chips]
-            return ws, sum(ws) + 18 * (len(chips) - 1) + (d.textlength(order, font=f_lab) + 24 if order else 0)
-        widths, total = measure()
-        while total > W - 2 * pad and f_val.size > 18:
-            f_val, f_lab = font("Medium", f_val.size - 2), font("Bold", max(14, f_lab.size - 1))
-            widths, total = measure()
-        x = (W - total) / 2
-        for (lab, v), wdt in zip(chips, widths):
-            d.rounded_rectangle((x, y, x + wdt, y + 54), 27, outline=WHITE, width=2)
-            d.text((x + 24, y + 27), lab, font=f_lab, fill=SOFT, anchor="lm")
-            d.text((x + 24 + d.textlength(lab, font=f_lab) + 16, y + 27), v, font=f_val, fill=WHITE, anchor="lm")
-            x += wdt + 18
+        dim_y = name_y + 70
+        d.line((detail_x, dim_y, W - pad - 24, dim_y), fill=BORDER, width=2)
+        for lab, val in dims[:3]:
+            dim_y += 25
+            d.text((detail_x, dim_y), clean_text(lab).upper(), font=font("Bold", 13), fill=MUTED)
+            dim_y += 24
+            d.text((detail_x, dim_y), clean_text(val), font=fit_font(d, clean_text(val), "Medium", 23, detail_w, 16), fill=INK)
+            dim_y += 26
         if order:
-            d.text((x + 6, y + 27), order, font=f_lab, fill=DIM, anchor="lm")
-        y += dims_h - 4
-
-    # contents grid: line icon + "Item ×qty" (qty in bold white on the last line)
-    if rows:
-        y += gap // 2
-        d.line((pad + 40, y, W - pad - 40, y), fill=(48, 48, 52), width=2)
-        y += gap // 2 + (14 if story else 8)
-        cw = (W - 2 * pad) / cols
-        for r in range(rows):
-            row = items[r * cols:(r + 1) * cols]
-            x0 = pad + (W - 2 * pad - cw * len(row)) / 2
-            for i, itx in enumerate(row):
-                cx = x0 + cw * i + cw / 2
-                img.paste(WHITE, (int(cx - icon_s / 2), int(y)), icon(itx.get("icon") or "carton", icon_s))
-                q = " " + qty_text(itx.get("qty", 1))
-                qw = d.textlength(q, font=f_q)
-                lines = wrap(d, clean_text(itx["item"]), f_it, cw - 16, 2)
-                if d.textlength(lines[-1], font=f_it) + qw > cw - 16:
-                    lines.append("")
-                    lines = lines[-3:] if len(lines) > 3 else lines
-                ty = y + icon_s + 16
-                for k, ln in enumerate(lines):
-                    last = k == len(lines) - 1
-                    tw = d.textlength(ln, font=f_it) + (qw if last else 0)
-                    tx = cx - tw / 2
-                    d.text((tx, ty), ln, font=f_it, fill=SOFT)
-                    if last:
-                        d.text((tx + d.textlength(ln, font=f_it) + (0 if ln else -d.textlength(" ", font=f_q)), ty - 1), q, font=f_q, fill=WHITE)
-                    ty += f_it.size + 6
-            y += cell_h
-    # footer: price, brand + WhatsApp, pill
-    fy = H - footer_h + (20 if story else 0)
-    pl = price_line(p)
-    d.text((W / 2, fy + 34), pl, font=fit_font(d, pl, "Bold", 54 if story else 48, W - 2 * pad, 28), fill=WHITE, anchor="mm")
-    fy += 92 if story else 84
-    # brand (left) + pill (right)
-    by = fy + 8
-    if not partner:
-        logo = Image.open(ROOT / "assets/images/logo-512.png").convert("RGBA")
-        logo.thumbnail((76, 76))
-        disc = Image.new("L", (84, 84), 0)
-        ImageDraw.Draw(disc).ellipse((0, 0, 83, 83), fill=255)
-        img.paste(WHITE, (pad, by - 4), disc)
-        img.paste(logo, (pad + 4, by), logo)
-        bx = pad + 100
+            d.text((detail_x, min(hero_y + hero_h - 28, dim_y + 2)), order.upper(), font=font("Bold", 12), fill=MUTED)
     else:
-        bx = pad
-    fb = fit_font(d, seller_name, "Bold", 30, 430 if not partner else 520, 18)
-    d.text((bx, by + 22), seller_name, font=fb, fill=WHITE, anchor="lm")
-    d.text((bx, by + 58), f"WhatsApp {wa}", font=font("Medium", 26), fill=SOFT, anchor="lm")
+        d.text((detail_x, min(hero_y + hero_h - 42, name_y + 68)),
+               "Product reference", font=font("Regular", 16), fill=MUTED)
+
+    section_y = hero_y + hero_h + (38 if story else 28)
+    section_title = "INCLUDED WITH YOUR ORDER"
+    d.text((pad, section_y), section_title, font=font("Bold", 20 if story else 17), fill=INK)
+    count_text = f"{len(items)} COMPONENT{'S' if len(items) != 1 else ''}"
+    count_f = font("Bold", 13)
+    count_w = d.textlength(count_text, font=count_f) + 24
+    d.rounded_rectangle((W - pad - count_w, section_y - 4, W - pad, section_y + 26), 15, fill=(250, 239, 232))
+    d.text((W - pad - count_w / 2, section_y + 11), count_text, font=count_f, fill=INK, anchor="mm")
+    d.line((pad, section_y + 40, W - pad, section_y + 40), fill=BORDER, width=2)
+
+    cols = 4 if len(items) >= 4 else (3 if len(items) == 3 else 2)
+    rows = (len(items) + cols - 1) // cols
+    gap = 14
+    grid_y = section_y + 58
+    cell_h = 170 if story else 148
+    available_w = W - 2 * pad
+    cell_w = (available_w - gap * (cols - 1)) / cols
+    icon_s = 68 if story else 58
+    item_font = font("Medium", 18 if story else 16)
+    for row_index in range(rows):
+        row = items[row_index * cols:(row_index + 1) * cols]
+        row_w = cell_w * len(row) + gap * (len(row) - 1)
+        x0 = pad + (available_w - row_w) / 2
+        for item_index, item in enumerate(row):
+            x = x0 + item_index * (cell_w + gap)
+            y = grid_y + row_index * (cell_h + gap)
+            d.rounded_rectangle((x, y, x + cell_w, y + cell_h), 18, fill=PANEL, outline=BORDER, width=2)
+            cx = x + cell_w / 2
+            iy = y + 13
+            d.ellipse((cx - icon_s / 2, iy, cx + icon_s / 2, iy + icon_s), fill=PALE_BLUE)
+            icon_mask = icon(item.get("icon") or "carton", icon_s - 14)
+            img.paste(INK, (int(cx - (icon_s - 14) / 2), int(iy + 7)), icon_mask)
+            d = ImageDraw.Draw(img)
+            quantity = qty_text(item.get("qty", 1))
+            qf = font("Bold", 13)
+            qw = d.textlength(quantity, font=qf) + 18
+            d.rounded_rectangle((x + cell_w - qw - 8, y + 9, x + cell_w - 8, y + 33), 12, fill=(250, 239, 232))
+            d.text((x + cell_w - qw / 2 - 8, y + 21), quantity, font=qf, fill=INK, anchor="mm")
+            lines = wrap(d, clean_text(item["item"]), item_font, cell_w - 18, 2)
+            text_y = iy + icon_s + 10
+            for line in lines:
+                d.text((cx, text_y), line, font=item_font, fill=INK, anchor="mt")
+                text_y += item_font.size + 5
+            if item.get("guess") and not p.get("in_the_box_confirmed"):
+                d.text((cx, y + cell_h - 12), "TYPICAL CONTENT", font=font("Bold", 10), fill=MUTED, anchor="ms")
+
+    footer_h = 240 if story else 205
+    footer_y = H - footer_h - (48 if story else 38)
+    d.rounded_rectangle((pad, footer_y, W - pad, footer_y + footer_h), 26, fill=INK)
+    d.text((pad + 28, footer_y + 38), "PRICE", font=font("Bold", 13), fill=(190, 202, 231))
+    price = price_line(p)
+    d.text((pad + 28, footer_y + 60), price,
+           font=fit_font(d, price, "Bold", 38 if story else 32, 570, 23), fill=WHITE)
+    logo = Image.open(ROOT / "assets/images/logo-512.png").convert("RGBA")
+    logo.thumbnail((42, 42))
+    if not partner:
+        d.ellipse((pad + 26, footer_y + footer_h - 74, pad + 74, footer_y + footer_h - 26), fill=WHITE)
+        img.paste(logo, (pad + 29, footer_y + footer_h - 71), logo)
+        d = ImageDraw.Draw(img)
+        brand_x = pad + 86
+    else:
+        brand_x = pad + 28
+    brand_y = footer_y + footer_h - 63
+    d.text((brand_x, brand_y), seller_name, font=fit_font(d, seller_name, "Bold", 18, 360, 14), fill=WHITE, anchor="lm")
+    d.text((brand_x, brand_y + 26), f"WhatsApp {wa}", font=font("Regular", 16), fill=(214, 220, 235), anchor="lm")
     cta = "Order on WhatsApp"
-    fc = font("Bold", 30)
-    cw_ = d.textlength(cta, font=fc) + 76
-    px1 = W - pad
-    d.rounded_rectangle((px1 - cw_, by + 4, px1, by + 76), 36, fill=WHITE)
-    d.text((px1 - cw_ / 2, by + 40), cta, font=fc, fill=BLACK, anchor="mm")
+    cta_f = font("Bold", 20)
+    cta_w = d.textlength(cta, font=cta_f) + 42
+    cta_x = W - pad - cta_w - 26
+    cta_y = footer_y + footer_h // 2 - 25
+    d.rounded_rectangle((cta_x, cta_y, cta_x + cta_w, cta_y + 52), 26, fill=WHITE)
+    d.text((cta_x + cta_w / 2, cta_y + 26), cta, font=cta_f, fill=INK, anchor="mm")
     note = []
     if p.get("seller"):
-        note.append("Sold & delivered by " + seller_name + " (partner of F.A Vision)")
+        note.append("Sold by " + seller_name + ", an F.A Vision partner")
     if not p.get("in_the_box_confirmed"):
-        note.append("Typical contents shown, please confirm on WhatsApp")
+        note.append("Contents are typical; confirm exact inclusions on WhatsApp")
     if note:
         nt = "  ·  ".join(note)
-        d.text((W / 2, H - (60 if story else 34)), nt, font=fit_font(d, nt, "Regular", 20, W - 2 * pad, 14), fill=DIM, anchor="mm")
+        d.text((W / 2, H - (28 if story else 20)), nt,
+               font=fit_font(d, nt, "Regular", 15 if story else 13, W - 2 * pad, 10), fill=MUTED, anchor="mm")
     return img
 
 

@@ -940,9 +940,16 @@ async function aiplan(browser, shot) {
     window.__saves = []; window.__toasts = []; window.__confirms = 0; let disk = JSON.parse(JSON.stringify(plan));
     window.confirm = () => { window.__confirms++; return true; };
     window.__disk = () => disk;
+    window.__aiCalls = [];
     window.FAV_ADMIN = { busy: () => {}, friendly: String, toast: (m, bad) => window.__toasts.push((bad ? "✗ " : "") + m),
       readJsonFile: async () => JSON.parse(JSON.stringify(disk)),
-      saveJson: async (f, mutate, msg) => { disk = mutate(JSON.parse(JSON.stringify(disk))); window.__saves.push(f + ": " + msg); return JSON.parse(JSON.stringify(disk)); } };
+      saveJson: async (f, mutate, msg) => { disk = mutate(JSON.parse(JSON.stringify(disk))); window.__saves.push(f + ": " + msg); return JSON.parse(JSON.stringify(disk)); },
+      backendSigned: async payload => {
+        window.__aiCalls.push(payload);
+        if (payload.action === "ai_status") return { ok: true, primary: "gemini", providers: { gemini: { configured: true, model: "gemini-test" }, claude: { configured: false }, pexels: { configured: false } } };
+        if (payload.action === "muse") return { ok: true, text: "FA Vision AI connection is working.", provider: "gemini", model: "gemini-test", ms: 125 };
+        return { ok: false, error: "unexpected_action" };
+      } };
   }, plan);
   await page.addScriptTag({ content: fs.readFileSync(ROOT + "admin/aiplan.js", "utf8") });
   await page.evaluate(() => document.querySelector("[data-aiplan]").click());
@@ -950,6 +957,13 @@ async function aiplan(browser, shot) {
   const st = await page.evaluate(() => ({ rules: document.querySelectorAll(".ap-rule[data-rid]").length, hash: location.hash }));
   if (st.rules !== plan.rules.length) problems.push(`AI Plan shows ${st.rules} rules, expected ${plan.rules.length}`);
   if (st.hash !== "#aiplan") problems.push("deep link #aiplan not set");
+  const ready = await page.locator(".ap-ai").innerText();
+  if (!ready.includes("Gemini key is configured") || !ready.includes("gemini-test")) problems.push("AI runtime readiness doesn't show the configured provider");
+  await page.click("[data-ai-test]");
+  await page.waitForFunction(() => document.querySelector(".ap-ai")?.innerText.includes("Connection verified"));
+  const aiCalls = await page.evaluate(() => window.__aiCalls.map(x => x.action));
+  if (aiCalls.join(",") !== "ai_status,muse") problems.push("AI status/test did not use the signed-in backend: " + aiCalls.join(","));
+  await page.evaluate(() => { window.__confirms = 0; });
   if (plan.rules.some(r => !r.id || !r.task || !["ai", "draft", "human"].includes(r.line) || !["allow", "approve", "block"].includes(r.setting))) problems.push("data/ai-plan.json has a rule with a bad id/task/line/setting");
   if (shot) await page.screenshot({ path: shot, fullPage: false });
   const g = await page.evaluate(() => { const G = window.FAV_AIPLAN; return { renew: G.gate("renew", "t"), ig: G.gate("ig", "t"), engage: G.gate("engage:fb", "t"), other: G.gate("nothing-covers-this", "t") }; });
