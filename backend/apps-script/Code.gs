@@ -161,6 +161,7 @@ function handlePost_(e) {
   if (data.action === 'github') return githubProxy_(data);
   if (data.action === 'posting_report') return postingReportNow_(data);
   if (data.action === 'session_alert') return sessionAlert_(data);
+  if (data.action === 'ai_status') return aiStatus_(data);
   if (data.action === 'muse') return museAsk_(data);
   if (data.action === 'trends') return trends_(data);
   if (data.action === 'seek') return seek_(data);
@@ -288,55 +289,209 @@ function findOrderRow_(sh, ref) {
   return 0;
 }
 
+function moneyCents_(value) {
+  const amount = Number(value);
+  return Number.isFinite(amount) ? Math.round(amount * 100) : NaN;
+}
+
+function orderError_(code) {
+  const err = new Error(code);
+  err.code = code;
+  throw err;
+}
+
+function cataloguePriceCents_(product) {
+  if (product && (product.in_stock === false || product.available === false)) orderError_('unavailable_product');
+  const cents = moneyCents_(product && product.price_ghs);
+  if (!Number.isSafeInteger(cents) || cents <= 0) orderError_('invalid_catalogue_price');
+  return cents;
+}
+
+function orderQuantity_(value) {
+  const qty = Number(value);
+  if (!Number.isInteger(qty) || qty < 1 || qty > 500) orderError_('invalid_quantity');
+  return qty;
+}
+
+function quoteOrder_(data) {
+  let qty = 1;
+  let unitCents = 0;
+  let productLabel = '';
+  if (Array.isArray(data.items) && data.items.length) {
+    if (data.items.length > 40) orderError_('too_many_items');
+    const lines = [];
+    data.items.forEach((item) => {
+      const id = String((item && item.id) || '').trim();
+      if (!id) orderError_('invalid_product');
+      const product = findProduct_(id);
+      if (!product) orderError_('unknown_product');
+      const itemQty = orderQuantity_(item.qty);
+      const priceCents = cataloguePriceCents_(product);
+      unitCents += priceCents * itemQty;
+      if (!Number.isSafeInteger(unitCents)) orderError_('invalid_order_total');
+      const colour = item.colour ? ` ${cleanCell_(item.colour)}` : '';
+      lines.push(`${cleanCell_(product.name || id)} (${cleanCell_(id)})${colour} x${itemQty}`);
+    });
+    productLabel = `Room design: ${lines.join(', ')}`.slice(0, 500);
+  } else {
+    const id = String(data.product_id || '').trim();
+    if (!id) orderError_('invalid_product');
+    const product = findProduct_(id);
+    if (!product) orderError_('unknown_product');
+    qty = orderQuantity_(data.quantity);
+    const priceCents = cataloguePriceCents_(product);
+    unitCents = priceCents;
+    productLabel = `${cleanCell_(product.name || id)} (${cleanCell_(id)})`;
+  }
+  const totalCents = unitCents * qty;
+  if (!Number.isSafeInteger(totalCents) || totalCents <= 0) orderError_('invalid_order_total');
+  return { qty, unitCents, totalCents, productLabel };
+}
+
+function orderPlanCode_(value) {
+  const plan = String(value || '').trim().toLowerCase();
+  if (['full', 'deposit', 'delivery', 'walkin'].indexOf(plan) >= 0) return plan;
+  if (/deposit/.test(plan)) return 'deposit';
+  if (/full/.test(plan)) return 'full';
+  if (/walk|showroom/.test(plan)) return 'walkin';
+  if (/deliver|completion|ready/.test(plan)) return 'delivery';
+  return '';
+}
+
+function depositPercent_() {
+  const url = (PropertiesService.getScriptProperties().getProperty('SITE_URL') || BUSINESS.website).replace(/\/?$/, '/');
+  const business = siteJson_(url + 'data/business.json');
+  const configured = Number(business && business.payments && business.payments.deposit_percent) || 50;
+  return Math.min(90, Math.max(10, configured));
+}
+
+function paymentAmountCents_(plan, totalCents, depositPercent) {
+  if (plan === 'full') return totalCents;
+  if (plan === 'deposit') {
+    const percent = depositPercent == null ? depositPercent_() : Number(depositPercent);
+    if (!Number.isFinite(percent) || percent < 10 || percent > 90) orderError_('invalid_deposit_configuration');
+    const depositCents = Math.round(totalCents * percent / 100);
+    if (!Number.isSafeInteger(depositCents) || depositCents <= 0) orderError_('invalid_payment_amount');
+    return depositCents;
+  }
+  if (plan === 'delivery' || plan === 'walkin') return 0;
+  orderError_('invalid_payment_plan');
+}
+
+function paymentPlanLabel_(plan, depositPercent) {
+  if (plan === 'full') return 'Pay in full now';
+  if (plan === 'deposit') return `Pay ${depositPercent}% deposit now`;
+  if (plan === 'walkin') return 'Walk in & pay at showroom';
+  return 'Pay on delivery';
+}
+
+function orderStatus_(plan, verified, mismatch, isService) {
+  if (verified) return plan === 'deposit' ? 'Deposit paid' : 'Paid';
+  if (mismatch) return 'Payment review required';
+  if (plan === 'walkin') return 'Reserved, pay at showroom';
+  if (plan === 'delivery') return isService ? 'Pay on completion' : 'Pay on delivery';
+  return 'Payment review required';
+}
+
+function orderRow_(data, quote, planLabel, paidCents, method, verification, status, notes) {
+  return [
+    new Date(), cleanCell_(data.reference), cleanCell_(data.name), cleanCell_(data.phone), cleanCell_(data.email),
+    cleanCell_(quote.productLabel), quote.qty, quote.unitCents / 100, quote.totalCents / 100,
+    cleanCell_(planLabel), cleanCell_(method), paidCents / 100, Math.max(0, quote.totalCents - paidCents) / 100,
+    cleanCell_(data.area), cleanCell_(status), cleanCell_(verification), notes.join(' '), 'New',
+  ];
+}
+
+function orderIdentity_(data, quote, plan) {
+  const items = Array.isArray(data.items) ? data.items.map((item) => ({
+    id: String(item.id || ''),
+    qty: Number(item.qty),
+    colour: String(item.colour || ''),
+  })) : [];
+  return {
+    productId: String(data.product_id || ''),
+    quantity: quote.qty,
+    items,
+    plan,
+  };
+}
+
+function orderIdentityMatches_(tx, expected) {
+  const fields = paymentMetadata_(tx);
+  if (fields.product_id !== expected.productId || Number(fields.quantity) !== expected.quantity ||
+      fields.plan_code !== expected.plan || !fields.items_json) return false;
+  try {
+    const items = JSON.parse(fields.items_json);
+    if (!Array.isArray(items)) return false;
+    const normalized = items.map((item) => ({
+      id: String(item.id || ''),
+      qty: Number(item.qty),
+      colour: String(item.colour || ''),
+    }));
+    return JSON.stringify(normalized) === JSON.stringify(expected.items);
+  } catch (err) {
+    return false;
+  }
+}
+
 function recordOrder_(data) {
   const ref = cleanCell_(data.reference);
   if (!/^FAV-[A-Z0-9]{6,20}$/.test(ref)) return json_({ ok: false, error: 'bad reference' });
-
-  // Re-price from the live catalogue: the browser's numbers are never trusted.
-  const notes = [];
-  let product, qty, unit;
-  if (Array.isArray(data.items) && data.items.length) {
-    // Room Designer orders: several catalogue items in one order, each re-priced.
-    qty = 1;
-    unit = 0;
-    const lines = [];
-    data.items.slice(0, 40).forEach((it) => {
-      const p = findProduct_(it.id);
-      const q = Math.max(1, Math.min(500, parseInt(it.qty, 10) || 1));
-      const price = p && p.price_ghs ? Number(p.price_ghs) : Number(it.price_ghs) || 0;
-      if (!p) notes.push(`${cleanCell_(it.id)} not found in catalogue; price from website.`);
-      unit += price * q;
-      lines.push(`${cleanCell_(it.id)}${it.colour ? ' ' + cleanCell_(it.colour) : ''} x${q}`);
-    });
-    product = { price_ghs: unit };
-    data.product = `${data.product}: ${lines.join(', ')}`.slice(0, 500);
-  } else {
-    product = findProduct_(data.product_id);
-    qty = Math.max(1, Math.min(500, parseInt(data.quantity, 10) || 1));
-    unit = product && product.price_ghs ? Number(product.price_ghs) : Number(data.unit_price) || 0;
-    if (!product) notes.push('Product not found in catalogue; price from website.');
+  let quote;
+  try {
+    quote = quoteOrder_(data);
+  } catch (err) {
+    Logger.log(`Order quote failed for ${ref}: ${err}`);
+    return json_({ ok: false, error: err && err.code ? err.code : 'catalogue_unavailable' });
   }
-  const total = unit * qty;
-  if (Number(data.total) !== total) notes.push(`Website total ${data.total} vs catalogue ${total}.`);
+  const plan = orderPlanCode_(data.plan);
+  if (!plan) return json_({ ok: false, error: 'invalid_payment_plan' });
+  let depositPercent = null;
+  try {
+    if (plan === 'deposit') depositPercent = depositPercent_();
+  } catch (err) {
+    Logger.log(`Payment configuration lookup failed for ${ref}: ${err}`);
+    return json_({ ok: false, error: 'payment_configuration_unavailable' });
+  }
+  let expectedDueCents;
+  try {
+    expectedDueCents = paymentAmountCents_(plan, quote.totalCents, depositPercent);
+  } catch (err) {
+    Logger.log(`Payment amount calculation failed for ${ref}: ${err}`);
+    return json_({ ok: false, error: err && err.code ? err.code : 'invalid_payment_amount' });
+  }
+  const planLabel = paymentPlanLabel_(plan, depositPercent);
+  const notes = [];
+  if (Number.isFinite(moneyCents_(data.unit_price)) && moneyCents_(data.unit_price) !== quote.unitCents) {
+    notes.push(`Website unit price ${data.unit_price} vs catalogue ${quote.unitCents / 100}.`);
+  }
+  if (moneyCents_(data.total) !== quote.totalCents) {
+    notes.push(`Website total ${data.total} vs catalogue ${quote.totalCents / 100}.`);
+  }
+  if (moneyCents_(data.amount_due) !== expectedDueCents) {
+    notes.push(`Website amount due ${data.amount_due} vs expected GHS ${expectedDueCents / 100}.`);
+  }
 
   let verification = 'Not required (nothing paid online)';
-  let paidNow = 0;
+  let paidCents = 0;
   let method = cleanCell_(data.method);
-  if (Number(data.amount_due) > 0) {
-    const v = verifyPaystack_(ref);
+  let verified = false;
+  let paymentMismatch = false;
+  const identity = orderIdentity_(data, quote, plan);
+  if (expectedDueCents > 0) {
+    const v = verifyPaystack_(ref, expectedDueCents / 100, identity);
     verification = v.note;
-    paidNow = v.amount;
-    if (v.channel) method = v.channel;
-    if (!v.ok && !v.configured) verification = 'UNVERIFIED: check your MoMo wallet / Paystack dashboard';
+    verified = v.ok;
+    paymentMismatch = !!(v.amountMismatch || v.orderMismatch);
+    if (v.ok) {
+      paidCents = moneyCents_(v.amount);
+      if (v.channel) method = v.channel;
+    }
+    if (paymentMismatch) notes.push(v.note);
   }
-  if (paidNow && data.plan === 'full' && paidNow + 0.01 < total) notes.push(`UNDERPAID: expected GHS ${total}.`);
-
-  const row = [
-    new Date(), ref, cleanCell_(data.name), cleanCell_(data.phone), cleanCell_(data.email),
-    cleanCell_(`${data.product} (${data.product_id})`), qty, unit, total,
-    cleanCell_(data.plan_label || data.plan), method, paidNow, Math.max(0, total - paidNow),
-    cleanCell_(data.area), cleanCell_(data.status), verification, notes.join(' '), 'New',
-  ];
+  const isService = /^SVC-/.test(String(data.product_id || ''));
+  const status = orderStatus_(plan, verified, paymentMismatch, isService);
+  const row = orderRow_(Object.assign({}, data, { reference: ref }), quote, planLabel, paidCents, method, verification, status, notes);
 
   const lock = LockService.getScriptLock();
   lock.waitLock(10000);
@@ -348,11 +503,20 @@ function recordOrder_(data) {
       // The webhook or hourly sync got here first: fill in the customer's details, keep payment facts.
       isNew = false;
       const cur = sh.getRange(r, 1, 1, row.length).getValues()[0];
+      const existingPlan = orderPlanCode_(cur[ORDER_COL.PaymentOption - 1]);
+      if (moneyCents_(cur[ORDER_COL.TotalGHS - 1]) !== quote.totalCents ||
+          existingPlan !== plan || String(cur[ORDER_COL.Product - 1]) !== quote.productLabel) {
+        return json_({ ok: false, error: 'reference_conflict' });
+      }
       const merged = row.map((v, i) => {
         const h = HEADERS.Orders[i];
         if (h === 'Timestamp' || h === 'Progress') return cur[i] || v;
         if (h === 'Notes' || h === 'Status') return v;
-        if (h === 'PaidNowGHS' || h === 'BalanceGHS' || h === 'Verification' || h === 'Method') return cur[ORDER_COL.PaidNowGHS - 1] ? cur[i] : v;
+        if (h === 'PaidNowGHS' || h === 'BalanceGHS' || h === 'Verification' || h === 'Method') {
+          const currentPaidCents = moneyCents_(cur[ORDER_COL.PaidNowGHS - 1]);
+          const currentVerified = String(cur[ORDER_COL.Verification - 1] || '').indexOf('VERIFIED by Paystack:') === 0;
+          return currentVerified && currentPaidCents === expectedDueCents && expectedDueCents > 0 ? cur[i] : v;
+        }
         return v || cur[i];
       });
       sh.getRange(r, 1, 1, merged.length).setValues([merged]);
@@ -363,8 +527,8 @@ function recordOrder_(data) {
     lock.releaseLock();
   }
 
-  if (isNew) notifyOrder_(ref, data.name, data.phone, `${data.product} × ${qty}`, total, data.plan_label || data.plan, paidNow, verification, data.area, notes);
-  return json_({ ok: true });
+  if (isNew) notifyOrder_(ref, data.name, data.phone, quote.productLabel, quote.totalCents / 100, planLabel, paidCents / 100, verification, data.area, notes);
+  return json_({ ok: true, payment_status: status });
 }
 
 function notifyOrder_(ref, name, phone, item, total, plan, paid, verification, area, notes) {
@@ -381,25 +545,57 @@ function notifyOrder_(ref, name, phone, item, total, plan, paid, verification, a
     `Orders sheet: ${SpreadsheetApp.getActive().getUrl()}`);
 }
 
-// Asks Paystack directly whether the payment with this reference succeeded.
-// Set PAYSTACK_SECRET_KEY (sk_live_… / sk_test_…) in Project Settings -> Script properties.
-// Never put the secret key in the website.
-function verifyPaystack_(reference) {
+// Fetches a successful GHS transaction. This alone does not verify the order amount.
+function fetchPaystack_(reference) {
   const key = PropertiesService.getScriptProperties().getProperty('PAYSTACK_SECRET_KEY');
   if (!key) return { ok: false, configured: false, amount: 0, note: 'UNVERIFIED: set PAYSTACK_SECRET_KEY' };
   try {
     const res = UrlFetchApp.fetch('https://api.paystack.co/transaction/verify/' + encodeURIComponent(reference), {
       headers: { Authorization: 'Bearer ' + key }, muteHttpExceptions: true,
     });
+    if (res.getResponseCode && res.getResponseCode() >= 400) {
+      return { ok: false, configured: true, amount: 0, note: `Paystack verification HTTP ${res.getResponseCode()}` };
+    }
     const body = JSON.parse(res.getContentText());
     const tx = body && body.data;
     if (!body.status || !tx) return { ok: false, configured: true, amount: 0, note: 'NOT FOUND on Paystack (manual MoMo? check your wallet)' };
     if (tx.status !== 'success' || tx.currency !== 'GHS') return { ok: false, configured: true, amount: 0, note: `Paystack: ${tx.status} ${tx.currency}` };
-    const amount = (tx.amount || 0) / 100;
-    return { ok: true, configured: true, amount, channel: channelName_(tx), tx, note: `VERIFIED by Paystack: GHS ${amount}` };
+    if (String(tx.reference || '') !== String(reference)) return { ok: false, configured: true, amount: 0, note: 'Paystack reference mismatch' };
+    const amountCents = Number(tx.amount);
+    if (!Number.isSafeInteger(amountCents) || amountCents <= 0) return { ok: false, configured: true, amount: 0, note: 'Paystack returned an invalid amount' };
+    return { ok: true, configured: true, amount: amountCents / 100, amountCents, channel: channelName_(tx), tx };
   } catch (err) {
+    Logger.log(`Paystack verification failed for ${reference}: ${err}`);
     return { ok: false, configured: true, amount: 0, note: 'Verification error: ' + err };
   }
+}
+
+function verifyPaystackAmount_(payment, expectedAmount, expectedIdentity) {
+  if (!payment.ok) return payment;
+  if (expectedIdentity && !orderIdentityMatches_(payment.tx, expectedIdentity)) {
+    return {
+      ok: false, configured: true, amount: 0, orderMismatch: true,
+      note: 'ORDER MISMATCH: Paystack reference is not linked to this product and payment plan',
+    };
+  }
+  const expectedCents = moneyCents_(expectedAmount);
+  if (!Number.isSafeInteger(expectedCents) || expectedCents <= 0) {
+    return { ok: false, configured: true, amount: 0, note: 'Invalid server-derived payment amount' };
+  }
+  if (payment.amountCents !== expectedCents) {
+    const received = payment.amountCents / 100;
+    return {
+      ok: false, configured: true, amount: 0, receivedAmount: received, amountMismatch: true,
+      note: `AMOUNT MISMATCH: expected GHS ${expectedCents / 100}, received GHS ${received}`,
+    };
+  }
+  return Object.assign({}, payment, { ok: true, note: `VERIFIED by Paystack: GHS ${payment.amount}` });
+}
+
+// Set PAYSTACK_SECRET_KEY (sk_live_… / sk_test_…) in Project Settings -> Script properties.
+// Never put the secret key in the website.
+function verifyPaystack_(reference, expectedAmount, expectedIdentity) {
+  return verifyPaystackAmount_(fetchPaystack_(reference), expectedAmount, expectedIdentity);
 }
 
 function channelName_(tx) {
@@ -408,42 +604,134 @@ function channelName_(tx) {
   return tx.channel || '';
 }
 
-// Records a Paystack payment that isn't in the sheet yet, or marks an existing order verified.
+function paymentMetadata_(tx) {
+  const fields = {};
+  ((tx.metadata && tx.metadata.custom_fields) || []).forEach((field) => {
+    if (field && field.variable_name) fields[field.variable_name] = field.value;
+  });
+  return fields;
+}
+
+function depositPercentFromLabel_(label) {
+  const match = String(label || '').match(/(\d+(?:\.\d+)?)\s*%/);
+  return match ? Math.min(90, Math.max(10, Number(match[1]))) : depositPercent_();
+}
+
+// Records a payment only when its order amount can be derived from the catalogue.
 function upsertPaystackPayment_(reference) {
   if (!/^FAV-[A-Z0-9]{6,20}$/.test(String(reference))) return false; // not a website payment
-  const v = verifyPaystack_(reference);
-  if (!v.ok) return false;
+  const payment = fetchPaystack_(reference);
+  if (!payment.ok) return false;
+  const fields = paymentMetadata_(payment.tx);
+  const plan = orderPlanCode_(fields.plan_code);
+  if (!plan || !fields.product_id || !fields.quantity || fields.items_json == null) {
+    Logger.log(`Paystack payment ${reference} is missing trusted order metadata; manual review is required.`);
+    return false;
+  }
+  let items;
+  try {
+    items = JSON.parse(fields.items_json);
+  } catch (err) {
+    Logger.log(`Paystack payment ${reference} has invalid item metadata: ${err}`);
+    return false;
+  }
+  if (!Array.isArray(items)) return false;
+  const data = {
+    reference,
+    name: fields.customer,
+    phone: fields.phone,
+    email: payment.tx.customer && payment.tx.customer.email,
+    product_id: fields.product_id,
+    quantity: fields.quantity,
+    items,
+    plan,
+    area: fields.delivery,
+    method: payment.channel,
+  };
+  let quote;
+  try {
+    quote = quoteOrder_(data);
+  } catch (err) {
+    Logger.log(`Paystack payment ${reference} could not be priced from the catalogue: ${err}`);
+    return false;
+  }
+  const identity = orderIdentity_(data, quote, plan);
   const lock = LockService.getScriptLock();
   lock.waitLock(10000);
+  let created = null;
+  let changed = false;
   try {
     const sh = ordersSheet_();
     const r = findOrderRow_(sh, reference);
     if (r) {
       const range = sh.getRange(r, 1, 1, HEADERS.Orders.length);
       const cur = range.getValues()[0];
-      if (String(cur[ORDER_COL.Verification - 1]).indexOf('VERIFIED') === 0) return false;
-      const total = Number(cur[ORDER_COL.TotalGHS - 1]) || v.amount;
+      const totalCents = moneyCents_(cur[ORDER_COL.TotalGHS - 1]);
+      const currentPlan = orderPlanCode_(cur[ORDER_COL.PaymentOption - 1]);
+      if (!Number.isSafeInteger(totalCents) || totalCents <= 0 || currentPlan !== plan ||
+          totalCents !== quote.totalCents || String(cur[ORDER_COL.Product - 1]) !== quote.productLabel) {
+        Logger.log(`Paystack payment ${reference} has no valid order total or payment plan.`);
+        return false;
+      }
+      const depositPercent = plan === 'deposit' ? depositPercentFromLabel_(cur[ORDER_COL.PaymentOption - 1]) : null;
+      let expectedCents;
+      try {
+        expectedCents = paymentAmountCents_(plan, totalCents, depositPercent);
+      } catch (err) {
+        Logger.log(`Paystack payment ${reference} has an invalid expected amount: ${err}`);
+        return false;
+      }
+      const v = verifyPaystackAmount_(payment, expectedCents / 100, identity);
+      if (!v.ok) {
+        Logger.log(`Paystack payment ${reference} was not matched: ${v.note}`);
+        return false;
+      }
+      if (String(cur[ORDER_COL.Verification - 1]).indexOf('VERIFIED by Paystack:') === 0 &&
+          moneyCents_(cur[ORDER_COL.PaidNowGHS - 1]) === expectedCents) return false;
       cur[ORDER_COL.PaidNowGHS - 1] = v.amount;
-      cur[ORDER_COL.BalanceGHS - 1] = Math.max(0, total - v.amount);
+      cur[ORDER_COL.BalanceGHS - 1] = Math.max(0, totalCents - expectedCents) / 100;
       cur[ORDER_COL.Method - 1] = v.channel;
       cur[ORDER_COL.Verification - 1] = v.note;
+      cur[ORDER_COL.Status - 1] = orderStatus_(plan, true, false, false);
       range.setValues([cur]);
-      return true;
+      changed = true;
+    } else {
+      let depositPercent = null;
+      try {
+        if (plan === 'deposit') depositPercent = depositPercent_();
+      } catch (err) {
+        Logger.log(`Paystack payment ${reference} could not load payment configuration: ${err}`);
+        return false;
+      }
+      let expectedCents;
+      try {
+        expectedCents = paymentAmountCents_(plan, quote.totalCents, depositPercent);
+      } catch (err) {
+        Logger.log(`Paystack payment ${reference} has an invalid expected amount: ${err}`);
+        return false;
+      }
+      const v = verifyPaystackAmount_(payment, expectedCents / 100, identity);
+      if (!v.ok) {
+        Logger.log(`Paystack payment ${reference} was not matched: ${v.note}`);
+        return false;
+      }
+      const planLabel = paymentPlanLabel_(plan, depositPercent);
+      const status = orderStatus_(plan, true, false, /^SVC-/.test(String(fields.product_id)));
+      const notes = ['Recorded from Paystack; the customer did not return to the site.'];
+      const row = orderRow_(data, quote, planLabel, expectedCents, v.channel, v.note, status, notes);
+      sh.appendRow(row);
+      created = { data, quote, planLabel, v, status };
+      changed = true;
     }
-    const f = {};
-    ((v.tx.metadata && v.tx.metadata.custom_fields) || []).forEach((c) => { f[c.variable_name] = c.value; });
-    sh.appendRow([
-      new Date(v.tx.paid_at || v.tx.created_at || Date.now()), reference, cleanCell_(f.customer),
-      cleanCell_(f.phone), cleanCell_(v.tx.customer && v.tx.customer.email), cleanCell_(f.product), '', '', '',
-      cleanCell_(f.plan), v.channel, v.amount, '', cleanCell_(f.delivery), 'Paid (recorded by Paystack)', v.note,
-      'Customer did not return to the website after paying; confirm the order details.', 'New',
-    ]);
-    notifyOrder_(reference, f.customer, f.phone, f.product, v.amount, f.plan, v.amount, v.note, f.delivery,
-      ['Recorded from Paystack; the customer did not return to the site.']);
-    return true;
   } finally {
     lock.releaseLock();
   }
+  if (created) {
+    notifyOrder_(reference, created.data.name, created.data.phone, created.quote.productLabel,
+      created.quote.totalCents / 100, created.planLabel, created.v.amount, created.v.note,
+      created.data.area, ['Recorded from Paystack; the customer did not return to the site.']);
+  }
+  return changed;
 }
 
 // Hourly safety net: pulls the last 3 days of successful Paystack payments.
@@ -694,27 +982,28 @@ function createSheet_(name) {
 const CATALOG_CACHE_ = {};
 // Fetches a data file from the live site once per request.
 function siteJson_(url) {
-  if (!CATALOG_CACHE_[url]) CATALOG_CACHE_[url] = JSON.parse(UrlFetchApp.fetch(url, { muteHttpExceptions: true }).getContentText());
+  if (!Object.prototype.hasOwnProperty.call(CATALOG_CACHE_, url)) {
+    const res = UrlFetchApp.fetch(url, { muteHttpExceptions: true });
+    if (res.getResponseCode && res.getResponseCode() >= 400) throw new Error(`Catalogue request failed (HTTP ${res.getResponseCode()})`);
+    CATALOG_CACHE_[url] = JSON.parse(res.getContentText());
+  }
   return CATALOG_CACHE_[url];
 }
 
 function findProduct_(id) {
-  try {
-    const url = (PropertiesService.getScriptProperties().getProperty('SITE_URL') || BUSINESS.website).replace(/\/?$/, '/');
-    // AI Studio services (/studio/) are priced in data/services.json, one price per option.
-    if (/^SVC-/.test(String(id))) {
-      const svc = siteJson_(url + 'data/services.json');
-      for (const s of svc.services || []) {
-        const o = (s.options || []).find((x) => x.id === id);
-        if (o) return { id: o.id, name: `${s.name}: ${o.label}`, price_ghs: o.price_ghs };
-      }
-      return null;
+  const url = (PropertiesService.getScriptProperties().getProperty('SITE_URL') || BUSINESS.website).replace(/\/?$/, '/');
+  // AI Studio services (/studio/) are priced in data/services.json, one price per option.
+  if (/^SVC-/.test(String(id))) {
+    const svc = siteJson_(url + 'data/services.json');
+    for (const s of svc.services || []) {
+      const o = (s.options || []).find((x) => x.id === id);
+      if (o) return { id: o.id, name: `${s.name}: ${o.label}`, price_ghs: o.price_ghs };
     }
-    const list = siteJson_(url + 'data/products.json');
-    return (Array.isArray(list) ? list : list.products || []).find((p) => p.id === id) || null;
-  } catch (err) {
     return null;
   }
+  const list = siteJson_(url + 'data/products.json');
+  if (!Array.isArray(list) && (!list || !Array.isArray(list.products))) throw new Error('Invalid product catalogue response');
+  return (Array.isArray(list) ? list : list.products).find((p) => p.id === id) || null;
 }
 
 // ---------- Invoices ----------
@@ -1292,14 +1581,42 @@ const MUSE_MODES = {
   assistant: 'You are Muse, a practical personal assistant for Alexander Awuku: business owner (F.A Vision Enterprise and partner businesses) and banking operations professional in Accra. Give clear, direct, action-ready answers. Use tables or steps when they help.',
   code: 'You are Muse in code mode. Write complete, working code the user can copy and run (HTML/CSS/JS, Python, Google Apps Script, Excel/Sheets formulas, Bash). Put each file in one fenced code block with the language, then 1-3 short lines on how to run it. Prefer simple, dependency-free solutions that work on a phone or a basic laptop.',
 };
+function aiStatus_(data) {
+  if (!sessionValid_(data.session)) return json_({ ok: false, error: 'signed_out' });
+  const props = authProps_();
+  const gemini = !!props.getProperty('GEMINI_API_KEY');
+  const claude = !!props.getProperty('ANTHROPIC_API_KEY');
+  return json_({
+    ok: true,
+    primary: gemini ? 'gemini' : claude ? 'claude' : '',
+    providers: {
+      gemini: { configured: gemini, model: gemini ? props.getProperty('GEMINI_MODEL') || 'gemini-2.5-flash' : '' },
+      claude: { configured: claude, model: claude ? props.getProperty('CLAUDE_MODEL') || 'claude-haiku-4-5-20251001' : '' },
+      pexels: { configured: !!props.getProperty('PEXELS_API_KEY') },
+    },
+    museRequestsPerHour: 120,
+    credentialValuesReturned: false,
+    connectionTested: false,
+  });
+}
+
+function claimMuseRequest_() {
+  const lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    const cache = CacheService.getScriptCache();
+    const slot = 'muse_' + Utilities.formatDate(new Date(), 'GMT', 'yyyyMMddHH');
+    const count = Number(cache.get(slot) || 0);
+    if (count >= 120) return false;
+    cache.put(slot, String(count + 1), 3600);
+    return true;
+  } finally {
+    lock.releaseLock();
+  }
+}
+
 function museAsk_(data) {
   if (!sessionValid_(data.session)) return json_({ ok: false, error: 'signed_out' });
-  const cache = CacheService.getScriptCache();
-  const slot = 'muse_' + Utilities.formatDate(new Date(), 'GMT', 'yyyyMMddHH');
-  const n = Number(cache.get(slot) || 0);
-  if (n >= 120) return json_({ ok: false, error: 'busy' });
-  cache.put(slot, String(n + 1), 3600);
-  const props = authProps_();
   const mode = MUSE_MODES[data.mode] ? data.mode : 'assistant';
   const system = MUSE_MODES[mode] + '\n\nBusiness facts: ' + BUSINESS.name + ', ' + BUSINESS.address + '. Phones ' + BUSINESS.phones +
     '. WhatsApp 057 264 6176. Website ' + BUSINESS.website + '.' + (data.context ? '\n\nContext from the app:\n' + String(data.context).slice(0, 6000) : '');
@@ -1307,9 +1624,12 @@ function museAsk_(data) {
     .map((m) => ({ role: m.role === 'assistant' ? 'assistant' : 'user', text: String(m.text || '').slice(0, 8000) }))
     .filter((m) => m.text);
   if (!msgs.length || msgs[msgs.length - 1].role !== 'user') return json_({ ok: false, error: 'empty' });
+  const props = authProps_();
+  const gem = props.getProperty('GEMINI_API_KEY');
+  const claude = props.getProperty('ANTHROPIC_API_KEY');
+  if (!gem && !claude) return json_({ ok: false, error: 'no_ai_key' });
+  if (!claimMuseRequest_()) return json_({ ok: false, error: 'busy' });
   try {
-    const gem = props.getProperty('GEMINI_API_KEY');
-    const claude = props.getProperty('ANTHROPIC_API_KEY');
     let text = '', usedModel = '', provider = '', usage = null;
     const t0 = Date.now();
     if (gem) {
