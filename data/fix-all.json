@@ -415,20 +415,13 @@
  "x": {
   "scan": {
    "d": "2026-11-02",
-   "t": "2026-11-02T12:19:38.537Z",
+   "t": "2026-11-02T12:24:56.398Z",
    "n": 100,
    "posts": [
     {
      "id": "1662447925388099587",
      "url": "https://x.com/FaVisionEnt/status/1662447925388099587",
      "text": "Pls take Note that office is open for walk in purchases and delivery as well. STUDENT DESKS ARE AVAILABLE IN LARGE QUANTITIES!!!",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "2116819365374881950",
-     "url": "https://x.com/FaVisionEnt/status/2116819365374881950",
-     "text": "Make study time more comfortable with our student desk and chair, paired here with a dining set. Explore practical furniture for home, school, and office. Message FA Vision Enterprise to enquire or order. #FAVisionEnterprise #StudentDesk #FurnitureGhana",
      "kind": "post",
      "alt": ""
     },
@@ -1115,6 +1108,13 @@
      "id": "1740266435119845665",
      "url": "https://x.com/FaVisionEnt/status/1740266435119845665",
      "text": "“You can’t wait until life isn’t hard anymore, before you decide to be happy.” ~ Jane Marczewski",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2108338610013614334",
+     "url": "https://x.com/FaVisionEnt/status/2108338610013614334",
+     "text": "📍 Where are you seeing this from? Tell us in the comments 👇 Then like, share and follow F.A Vision Enterprise for more. 👉 Page: https:// facebook.com/FaVisionEnterp rise … · 🌐 Shop: https:// favisionenterprize.github.io",
      "kind": "post",
      "alt": ""
     }
@@ -1949,6 +1949,13 @@
    "tried": 4,
    "ok": 0,
    "skip": 0,
+   "v": "2026-10-15.4"
+  },
+  {
+   "d": "2026-11-02",
+   "kind": "scan",
+   "net": "x",
+   "n": 100,
    "v": "2026-10-15.4"
   },
   {
