@@ -67,6 +67,13 @@
    "p": "FAV-014",
    "ok": false,
    "why": "Instagram is logged in to a different account. Switch to @favisionent, then tap Run again."
+  },
+  {
+   "d": "2026-11-02",
+   "net": "fb",
+   "p": "FAV-014",
+   "ok": false,
+   "why": "Couldn't find the post box"
   }
  ],
  "stories": [
