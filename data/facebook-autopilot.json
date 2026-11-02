@@ -10175,6 +10175,96 @@
    "ok": false,
    "now": true,
    "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-11-02",
+   "t": "2026-11-02T10:14:32.878Z",
+   "p": "FAV-014",
+   "g": "yogananda.biography",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-02",
+   "t": "2026-11-02T10:18:49.061Z",
+   "p": "FAV-014",
+   "g": "1859326047895223",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-02",
+   "t": "2026-11-02T10:20:42.516Z",
+   "p": "FAV-014",
+   "g": "yogaaddicts",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-02",
+   "t": "2026-11-02T10:23:32.199Z",
+   "p": "FAV-014",
+   "g": "1685391472805501",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-02",
+   "t": "2026-11-02T10:26:02.568Z",
+   "p": "FAV-014",
+   "g": "669396103909483",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-02",
+   "t": "2026-11-02T10:29:24.842Z",
+   "p": "FAV-014",
+   "g": "551555492167086",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-02",
+   "t": "2026-11-02T10:31:30.428Z",
+   "p": "FAV-014",
+   "g": "265472447130060",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-02",
+   "t": "2026-11-02T10:35:08.874Z",
+   "p": "FAV-014",
+   "g": "1968589503781042",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-02",
+   "t": "2026-11-02T10:38:30.196Z",
+   "p": "FAV-014",
+   "g": "worldyogacommunity",
+   "ok": false,
+   "now": true,
+   "why": "Post box didn't open"
+  },
+  {
+   "d": "2026-11-02",
+   "t": "2026-11-02T10:39:44.043Z",
+   "p": "FAV-014",
+   "g": "yogameme",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
   }
  ],
  "resets": {},
@@ -11345,6 +11435,13 @@
    "kind": "post",
    "tried": 1,
    "ok": 0
+  },
+  {
+   "d": "2026-11-02",
+   "t": "2026-11-02T10:40:18.777Z",
+   "kind": "post",
+   "tried": 10,
+   "ok": 9
   }
  ],
  "renewLog": [
