@@ -10265,6 +10265,14 @@
    "ok": true,
    "now": true,
    "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-02",
+   "t": "2026-11-02T12:18:32.326Z",
+   "p": "FAV-043",
+   "g": "hkmoms",
+   "ok": false,
+   "why": "Couldn't find the post box"
   }
  ],
  "resets": {},
@@ -11450,6 +11458,13 @@
    "tried": 0,
    "ok": 0,
    "stopped": "No listings found on Your listings. Make sure Facebook is on your personal profile."
+  },
+  {
+   "d": "2026-11-02",
+   "t": "2026-11-02T12:18:47.287Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 0
   }
  ],
  "renewLog": [
