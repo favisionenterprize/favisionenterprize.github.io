@@ -11442,6 +11442,14 @@
    "kind": "post",
    "tried": 10,
    "ok": 9
+  },
+  {
+   "d": "2026-11-02",
+   "t": "2026-11-02T12:17:40.643Z",
+   "kind": "renew",
+   "tried": 0,
+   "ok": 0,
+   "stopped": "No listings found on Your listings. Make sure Facebook is on your personal profile."
   }
  ],
  "renewLog": [
@@ -13012,38 +13020,7 @@
  },
  "selling": {
   "d": "2026-11-02",
-  "cards": [
-   {
-    "t": "Dinning Table and chairs",
-    "listed": "2026-05-03",
-    "status": "In stock",
-    "next": "2026-11-09"
-   },
-   {
-    "t": "3 sets 🚽 Brand-New TWYFORD Two-Piece Water Closet",
-    "listed": "2026-05-03",
-    "status": "In stock",
-    "next": "2026-11-09"
-   },
-   {
-    "t": "Kids Round Desk",
-    "listed": "2026-05-03",
-    "status": "In stock",
-    "next": "2026-11-09"
-   },
-   {
-    "t": "6 Seat Dinning Sets 🍽",
-    "listed": "2026-05-03",
-    "status": "In stock",
-    "next": "2026-11-09"
-   },
-   {
-    "t": "A4 paper",
-    "listed": "2026-05-17",
-    "status": "In stock",
-    "next": "2026-11-09"
-   }
-  ]
+  "cards": []
  },
  "switches": [
   {
