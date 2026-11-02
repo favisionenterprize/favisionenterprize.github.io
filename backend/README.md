@@ -30,7 +30,9 @@ Every website order lands in the **Orders** tab and in your email, and shows on 
 2. Paystack calls the backend the moment a payment succeeds, even if the customer closes the page (webhook, step 3 below);
 3. `syncPaystack` runs every hour and adds any Paystack payment still missing.
 
-Each online payment is confirmed with Paystack's API and re-priced from your catalogue. Anything that doesn't check out is marked **UNVERIFIED**, **NOT FOUND** or **UNDERPAID** and appears under **Needs checking** in the admin.
+The backend fetches product/service prices from the live catalogue; browser-supplied prices are not a fallback. It also derives the expected full/deposit amount, then checks the Paystack reference, GHS currency, exact amount, and order metadata before recording a payment as verified. Missing catalogue/config data, an amount mismatch, or an order/reference mismatch is not marked paid and needs review.
+
+The checkout sends product IDs, quantities, Room Designer item IDs, and a payment-plan code in Paystack metadata so a webhook that arrives before the checkout POST can rebuild the same server-priced order. Deploy `assets/js/checkout.js` and `backend/apps-script/Code.gs` together; older checkout code does not send this metadata and its payment will require manual review. Run `node scripts/backend_payment_test.js` for the 20-case local regression suite. It uses mocked Apps Script and Paystack services only; it does not validate the live deployment.
 
 One-time setup, after the steps above:
 
@@ -40,7 +42,7 @@ One-time setup, after the steps above:
 4. **Publish the new version.** **Deploy → Manage deployments → ✎ Edit → Version: New version → Deploy**. This keeps the same web app URL.
 5. **Open the admin Orders screen.** On the website admin, tap **Orders & payments** and paste the **ADMIN_KEY** from Script properties. Change an order's progress there (Confirmed → Delivered → Balance paid) and it saves to the Sheet.
 
-Manual MoMo transfers (to your MoMo number, without Paystack) are recorded as orders marked **UNVERIFIED**. Check your wallet for the reference, then move the order along in the admin.
+Manual MoMo/GhanaPay transfers (without a matching Paystack transaction) are recorded as unpaid orders requiring review. Check the wallet/dashboard and the reference before updating the order in the admin.
 
 If your phone numbers or address change, update the `BUSINESS` block at the top of `Code.gs` as well as `data/business.json`.
 
@@ -119,6 +121,8 @@ Muse signs in with the same email and password as /admin/ and asks the backend (
 - or `ANTHROPIC_API_KEY`: Claude key from https://console.anthropic.com. Optional `CLAUDE_MODEL`, default `claude-haiku-4-5-20251001`.
 
 Without a key, Muse's Create tab still works using built-in templates. Usage is capped at 120 AI requests an hour.
+
+The admin's **AI Plan** screen can now check whether Gemini/Claude/Pexels properties are present without returning their values. A configured key is not proof that the provider accepts it; use **Test AI response** to send one short, explicit test request. That action can count toward provider limits or billing. The hourly Muse limit is claimed under a script lock and only after the request is valid. Deploy the updated `Code.gs` for these checks and safeguards to take effect.
 
 ## Sending a batch email campaign
 
