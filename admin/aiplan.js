@@ -22,6 +22,7 @@
   const DEPTS = ["Sales", "Marketing", "Support", "Finance", "Workshop", "Staff"];
   const EMPTY = { owner: "Alexander Awuku", paused: false, paused_at: null, rules: [] };
   let P = null, dirty = false, loading = null, asked = {};
+  let aiStatus = null, aiStatusLoading = false, aiStatusError = "", aiTestMessage = "";
 
   // ---------------------------------------------------------------- data
   function normalise(p) {
@@ -179,6 +180,8 @@
 .ap-steps{font-size:12px;color:#5f6368}.ap-conf{display:flex;align-items:center;gap:6px;font-size:14px}.ap-hr input[type=number],.ap-hr input[name=desk_product]{font:inherit;font-size:13px;padding:4px 6px;border:1px solid #dadce0;border-radius:6px}.ap-bar{position:sticky;bottom:0;display:flex;gap:10px;justify-content:flex-end;padding:10px;background:rgba(255,255,255,.95);border-top:1px solid #e3e7ee}
 .ap-prules{border-color:#bcd3f2}.ap-prule{display:grid;grid-template-columns:44px 1fr;gap:10px;padding:10px 14px;border-top:1px solid #f1f3f6}.ap-prule:first-of-type{border-top:0}.ap-pill.ok{background:#e3f4ea;color:#1b6b3a}.ap-pill.no{background:#fdecea;color:#b3261e}.ap-rule-on{color:#1b6b3a}
 .ap-log{font-size:12px;color:#3c4043;max-height:220px;overflow:auto;margin:0;padding-left:18px}
+.ap-ai{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:14px 16px;background:linear-gradient(120deg,#f3f6fc,#fff 68%,#fff5ee);border:1px solid #dfe5f0;border-radius:14px}
+.ap-ai-copy{min-width:220px;flex:1}.ap-ai-copy b{color:#192652}.ap-ai-tools{display:flex;flex-wrap:wrap;gap:8px}.ap-ai-state{font-size:13px;color:#5f6368}.ap-ai-state.good{color:#1b6b3a}.ap-ai-state.bad{color:#a52a23}
 @media (max-width:600px){.ap-rule{grid-template-columns:1fr}.ap-id{padding:0}}`;
     document.head.appendChild(st);
   }
@@ -195,8 +198,51 @@
     $("#ap-body").innerHTML = `<p class="muted">Loading…</p>`;
     if (!dirty) await load(true);
     render();
+    refreshAiStatus();
   }
   const opts = (map, cur) => Object.keys(map).map(k => `<option value="${k}"${k === cur ? " selected" : ""}>${esc(map[k])}</option>`).join("");
+  async function refreshAiStatus() {
+    aiStatusLoading = true; aiStatusError = ""; aiTestMessage = ""; render();
+    try {
+      if (!A().backendSigned) throw new Error("The signed-in backend is unavailable.");
+      const result = await A().backendSigned({ action: "ai_status" });
+      if (!result || !result.ok) throw new Error(result && result.error === "signed_out" ? "Sign in again to check AI settings." : "Could not read AI settings.");
+      aiStatus = result;
+    } catch (err) {
+      aiStatus = null;
+      aiStatusError = String(err && err.message || err);
+    } finally {
+      aiStatusLoading = false;
+      render();
+    }
+  }
+  function aiReadiness() {
+    let detail = "Checking private Apps Script settings…", stateClass = "";
+    if (!aiStatusLoading && aiStatusError) {
+      detail = aiStatusError;
+      stateClass = "bad";
+    } else if (!aiStatusLoading && aiStatus) {
+      const p = aiStatus.providers || {};
+      if (aiStatus.primary) {
+        const active = p[aiStatus.primary] || {};
+        const label = aiStatus.primary === "gemini" ? "Gemini" : "Claude";
+        detail = `${label} key is configured${active.model ? ` · ${active.model}` : ""}. Credentials are hidden; run the explicit test to verify the connection.`;
+        stateClass = "good";
+      } else {
+        detail = "No Gemini or Claude key is configured. Muse can still use its built-in templates.";
+        stateClass = "bad";
+      }
+    }
+    const pexels = aiStatus && aiStatus.providers && aiStatus.providers.pexels;
+    return `<section class="ap-ai" aria-live="polite">
+      <div class="ap-ai-copy"><b>✨ AI runtime readiness</b><div class="ap-ai-state ${stateClass}">${esc(detail)}</div>
+        ${pexels ? `<div class="ap-ai-state">Pexels image search: ${pexels.configured ? "key configured" : "not configured"} · Openverse remains available.</div>` : ""}
+        ${aiTestMessage ? `<div class="ap-ai-state">${esc(aiTestMessage)}</div>` : ""}
+      </div>
+      <div class="ap-ai-tools"><button class="btn btn-ghost btn-sm" data-ai-refresh${aiStatusLoading ? " disabled" : ""}>Refresh status</button>
+        <button class="btn btn-primary btn-sm" data-ai-test${!aiStatus || !aiStatus.primary || aiStatusLoading ? " disabled" : ""}>Test AI response</button></div>
+    </section>`;
+  }
   function badge() {
     const b = $("#ap-badge"); if (!b || !P) return;
     const n = P.rules.filter(r => r.status === "proposed").length;
@@ -211,6 +257,7 @@
     let logRows = [];
     try { logRows = JSON.parse(localStorage.getItem("fa-aiplan-log") || "[]"); } catch (e) { /* none */ }
     $("#ap-body").innerHTML = `
+      ${aiReadiness()}
       <div class="ap-pause${P.paused ? " on" : ""}">
         <div><b>${P.paused ? "⏸ Everything is paused" : "▶ Automations are running"}</b><br>
         <span class="muted">${P.paused ? `Paused ${esc(String(P.paused_at || "").replace("T", " ").slice(0, 16))}. No autopilot step runs until you resume.` : "Each autopilot step checks its rule below before it runs."}</span></div>
@@ -271,6 +318,20 @@
   document.addEventListener("click", async e => {
     if (e.target.closest("[data-aiplan]")) { e.preventDefault(); show(); return; }
     if (screen.hidden || !P) return;
+    if (e.target.closest("[data-ai-refresh]")) { await refreshAiStatus(); return; }
+    if (e.target.closest("[data-ai-test]")) {
+      if (!window.confirm("Send one short test prompt to the configured AI provider? This uses one request and may count against provider limits or billing.")) return;
+      aiTestMessage = "Testing the configured provider…"; render();
+      try {
+        const result = await A().backendSigned({ action: "muse", mode: "assistant", messages: [{ role: "user", text: "Reply with exactly: FA Vision AI connection is working." }] });
+        if (!result || !result.ok) throw new Error(result && result.error === "no_ai_key" ? "No usable AI key is configured." : "The AI test failed. Refresh status and check the Apps Script logs.");
+        aiTestMessage = `Connection verified · ${result.provider || "AI"}${result.model ? ` · ${result.model}` : ""}${result.ms ? ` · ${(result.ms / 1000).toFixed(1)}s` : ""}.`;
+      } catch (err) {
+        aiTestMessage = String(err && err.message || err);
+      }
+      render();
+      return;
+    }
     if (e.target.closest("[data-ap-pause]")) {
       const on = !P.paused;
       if (on && !window.confirm("Pause every automation now? Nothing will post, reply or renew until you press Resume.")) return;
