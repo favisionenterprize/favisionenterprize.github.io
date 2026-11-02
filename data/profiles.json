@@ -37,13 +37,13 @@
    "mode": "check"
   },
   "ig": {
-   "d": "2026-10-31",
+   "d": "2026-11-02",
    "link": null,
-   "pinned": "Fresh stock, just arrived! 🎒📚\nOur new consignment of height-adjustable student desk & chair sets is IN STOCK now, for ",
+   "pinned": null,
    "linkOk": false,
-   "pinOk": true,
-   "why": "",
-   "mode": "check"
+   "pinOk": false,
+   "why": "pin: couldn't find the post on Instagram (pin it in the app: open the post → ••• → Pin)",
+   "mode": "pinswap"
   },
   "x": {
    "d": "2026-10-31",
@@ -256,6 +256,13 @@
    "d": "2026-10-31",
    "net": "tiktok",
    "mode": "check",
+   "linkOk": false,
+   "pinOk": false
+  },
+  {
+   "d": "2026-11-02",
+   "net": "ig",
+   "mode": "pinswap",
    "linkOk": false,
    "pinOk": false
   }
