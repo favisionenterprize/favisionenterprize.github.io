@@ -60,6 +60,13 @@
    "net": "tiktok",
    "p": "FAV-014",
    "ok": true
+  },
+  {
+   "d": "2026-11-02",
+   "net": "ig",
+   "p": "FAV-014",
+   "ok": false,
+   "why": "Instagram is logged in to a different account. Switch to @favisionent, then tap Run again."
   }
  ],
  "stories": [
