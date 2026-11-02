@@ -97,7 +97,7 @@ Every product has a designed strategy ad (1080 × 1350, the size Facebook, Insta
 
 ## "What's in the Box?" ads
 
-`python3 scripts/make_box_ads.py` builds a black, oraimo-style "What's in the Box?" ad for every product (`assets/images/ads/box/box-<id>.jpg` feed and `-story.jpg`), from `in_the_box` in `data/products.json` (item, quantity, icon; plus optional `box_title`, `box_note`, `box_size`). Check and correct each list in the admin under **📦 What's in the Box ads** (`/admin/#boxads`) and tick **✓ Confirmed**; the ads rebuild automatically. The same ads show on product pages, in the product view and in the homepage section **How our products arrive**, and rotate into the social autopilot.
+`python3 scripts/make_box_ads.py` builds a premium editorial "What's in the Box?" guide for every product (`assets/images/ads/box/box-<id>.jpg` feed and `-story.jpg`). The design uses a warm-white canvas, ink-blue type, subtle peach accents, a product hero, verified catalogue dimensions and illustrated contents cards; price and WhatsApp ordering stay prominent. Content comes from `in_the_box` in `data/products.json` (item, quantity, icon; plus optional `box_title`, `box_note`, `box_size`). Check and correct each list in the admin under **📦 What's in the Box ads** (`/admin/#boxads`) and tick **✓ Confirmed**; the ads rebuild automatically. The same ads show on product pages, in the product view and in the homepage section **How our products arrive**, and rotate into the social autopilot.
 
 ## Price sync (website ↔ Facebook Marketplace)
 
