@@ -1289,6 +1289,13 @@
    "d": "2026-11-02",
    "kind": "scan",
    "n": 5
+  },
+  {
+   "d": "2026-11-02",
+   "kind": "list",
+   "tried": 0,
+   "ok": 0,
+   "stopped": "Facebook kept sending the tab to another page. Stopped."
   }
  ],
  "skip": []
