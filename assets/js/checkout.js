@@ -318,6 +318,10 @@ window.FAV_CHECKOUT = (function () {
           { display_name: "Phone", variable_name: "phone", value: order.phone },
           { display_name: "Product", variable_name: "product", value: `${order.product} (${order.product_id}) × ${order.quantity}` },
           { display_name: "Payment", variable_name: "plan", value: order.plan_label },
+          { display_name: "Product ID", variable_name: "product_id", value: String(order.product_id || "") },
+          { display_name: "Quantity", variable_name: "quantity", value: String(order.quantity || "") },
+          { display_name: "Order items", variable_name: "items_json", value: JSON.stringify((order.items || []).map(i => ({ id: i.id, qty: i.qty, colour: i.colour || "" }))) },
+          { display_name: "Payment plan code", variable_name: "plan_code", value: String(order.plan || "") },
           { display_name: "Balance", variable_name: "balance", value: C.formatPrice(order.balance) },
           { display_name: "Delivery", variable_name: "delivery", value: order.area }
         ]
