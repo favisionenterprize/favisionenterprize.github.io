@@ -1,6 +1,6 @@
 # F.A Vision Enterprise: ready-to-paste listings
 
-Generated 2026-10-21. Regenerate after editing `data/products.json`.
+Generated 2026-11-03. Regenerate after editing `data/products.json`.
 
 ## FAV-001 · Rainbow Glass-Top Dining Set — 6 Chairs
 
@@ -35,7 +35,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-001
 ```
@@ -52,7 +53,7 @@ Ref: FAV-001
 • Great for homes, restaurants and lounges
 💰 GH₵ 12,600
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -61,7 +62,7 @@ Ref: FAV-001
 ```
 Looking for a quality rainbow glass-top dining set — 6 chairs? Tempered-glass top, easy to wipe clean.
 Available at Odorkor, Accra. GH₵ 12,600.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -70,7 +71,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ Rainbow Glass-Top Dining Set — 6 Chairs
 GH₵ 12,600 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -78,7 +79,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 Rainbow Glass-Top Dining Set — 6 Chairs 🔥
 GH₵ 12,600
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Rainbow%20Glass-Top%20Dining%20Set%20%E2%80%94%206%20Chairs%20%28FAV-001%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Rainbow%20Glass-Top%20Dining%20Set%20%E2%80%94%206%20Chairs%20%28FAV-001%29.
 ```
 
 ## FAV-002 · Black Glass Dining Set — 6 High-Back Chairs
@@ -114,7 +115,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-002
 ```
@@ -131,7 +133,7 @@ Ref: FAV-002
 • Modern look for homes and offices
 💰 GH₵ 4,900
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -140,7 +142,7 @@ Ref: FAV-002
 ```
 Looking for a quality black glass dining set — 6 high-back chairs? Black tempered-glass top.
 Available at Odorkor, Accra. GH₵ 4,900.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -149,7 +151,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ Black Glass Dining Set — 6 High-Back Chairs
 GH₵ 4,900 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -157,7 +159,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 Black Glass Dining Set — 6 High-Back Chairs 🔥
 GH₵ 4,900
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Black%20Glass%20Dining%20Set%20%E2%80%94%206%20High-Back%20Chairs%20%28FAV-002%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Black%20Glass%20Dining%20Set%20%E2%80%94%206%20High-Back%20Chairs%20%28FAV-002%29.
 ```
 
 ## FAV-003 · Dining Set Collection — 5 Designs, 6 Chairs
@@ -194,7 +196,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-003
 ```
@@ -211,7 +214,7 @@ Ref: FAV-003
 • Delivery and assembly in Accra
 💰 GH₵ 12,600
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -220,7 +223,7 @@ Ref: FAV-003
 ```
 Looking for a quality dining set collection — 5 designs, 6 chairs? 5 designs in the showroom.
 Available at Odorkor, Accra. GH₵ 12,600.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -229,7 +232,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ Dining Set Collection — 5 Designs, 6 Chairs
 GH₵ 12,600 | Made to order in your size and colour
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -237,7 +240,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 Dining Set Collection — 5 Designs, 6 Chairs 🔥
 GH₵ 12,600
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Dining%20Set%20Collection%20%E2%80%94%205%20Designs%2C%206%20Chairs%20%28FAV-003%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Dining%20Set%20Collection%20%E2%80%94%205%20Designs%2C%206%20Chairs%20%28FAV-003%29.
 ```
 
 ## FAV-004 · Red Glass Dining Set — 6 Chairs
@@ -273,7 +276,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-004
 ```
@@ -290,7 +294,7 @@ Ref: FAV-004
 • Stands out in any dining room
 💰 GH₵ 12,600
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -299,7 +303,7 @@ Ref: FAV-004
 ```
 Looking for a quality red glass dining set — 6 chairs? Glossy red-brown glass top.
 Available at Odorkor, Accra. GH₵ 12,600.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -308,7 +312,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ Red Glass Dining Set — 6 Chairs
 GH₵ 12,600 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -316,7 +320,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 Red Glass Dining Set — 6 Chairs 🔥
 GH₵ 12,600
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Red%20Glass%20Dining%20Set%20%E2%80%94%206%20Chairs%20%28FAV-004%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Red%20Glass%20Dining%20Set%20%E2%80%94%206%20Chairs%20%28FAV-004%29.
 ```
 
 ## FAV-005 · Foldable Wood-Grain Dining Set — 6 Chairs
@@ -352,7 +356,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-005
 ```
@@ -369,7 +374,7 @@ Ref: FAV-005
 • Perfect for apartments and events
 💰 GH₵ 11,900
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -378,7 +383,7 @@ Ref: FAV-005
 ```
 Looking for a quality foldable wood-grain dining set — 6 chairs? Folds away to save space.
 Available at Odorkor, Accra. GH₵ 11,900.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -387,7 +392,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ Foldable Wood-Grain Dining Set — 6 Chairs
 GH₵ 11,900 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -395,7 +400,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 Foldable Wood-Grain Dining Set — 6 Chairs 🔥
 GH₵ 11,900
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Foldable%20Wood-Grain%20Dining%20Set%20%E2%80%94%206%20Chairs%20%28FAV-005%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Foldable%20Wood-Grain%20Dining%20Set%20%E2%80%94%206%20Chairs%20%28FAV-005%29.
 ```
 
 ## FAV-006 · Executive Director Chair — Leather, High Back
@@ -431,7 +436,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-006
 ```
@@ -448,7 +454,7 @@ Ref: FAV-006
 • Bulk prices for offices
 💰 GH₵ 9,500
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -457,7 +463,7 @@ Ref: FAV-006
 ```
 Looking for a quality executive director chair — leather, high back? High back with thick padding.
 Available at Odorkor, Accra. GH₵ 9,500.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -466,7 +472,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ Executive Director Chair — Leather, High Back
 GH₵ 9,500 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -474,7 +480,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 Executive Director Chair — Leather, High Back 🔥
 GH₵ 9,500
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Executive%20Director%20Chair%20%E2%80%94%20Leather%2C%20High%20Back%20%28FAV-006%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Executive%20Director%20Chair%20%E2%80%94%20Leather%2C%20High%20Back%20%28FAV-006%29.
 ```
 
 ## FAV-007 · Mesh Secretary Chair — Ergonomic Swivel
@@ -510,7 +516,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-007
 ```
@@ -527,7 +534,7 @@ Ref: FAV-007
 • Bulk discounts for offices and schools
 💰 GH₵ 9,500
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -536,7 +543,7 @@ Ref: FAV-007
 ```
 Looking for a quality mesh secretary chair — ergonomic swivel? Breathable mesh back with lumbar support.
 Available at Odorkor, Accra. GH₵ 9,500.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -545,7 +552,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ Mesh Secretary Chair — Ergonomic Swivel
 GH₵ 9,500 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -553,7 +560,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 Mesh Secretary Chair — Ergonomic Swivel 🔥
 GH₵ 9,500
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Mesh%20Secretary%20Chair%20%E2%80%94%20Ergonomic%20Swivel%20%28FAV-007%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Mesh%20Secretary%20Chair%20%E2%80%94%20Ergonomic%20Swivel%20%28FAV-007%29.
 ```
 
 ## FAV-008 · 1.2 m Office Desk with Drawer Unit
@@ -589,7 +596,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-008
 ```
@@ -606,7 +614,7 @@ Ref: FAV-008
 • Ideal for home offices and workstations
 💰 GH₵ 4,500
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -615,7 +623,7 @@ Ref: FAV-008
 ```
 Looking for a quality 1.2 m office desk with drawer unit? 1.2 m work surface.
 Available at Odorkor, Accra. GH₵ 4,500.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -624,7 +632,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ 1.2 m Office Desk with Drawer Unit
 GH₵ 4,500 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -632,7 +640,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 1.2 m Office Desk with Drawer Unit 🔥
 GH₵ 4,500
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%201.2%20m%20Office%20Desk%20with%20Drawer%20Unit%20%28FAV-008%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%201.2%20m%20Office%20Desk%20with%20Drawer%20Unit%20%28FAV-008%29.
 ```
 
 ## FAV-009 · White Dressing Table with Mirror & Stool
@@ -668,7 +676,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-009
 ```
@@ -685,7 +694,7 @@ Ref: FAV-009
 • Perfect for bedrooms and campus rooms
 💰 GH₵ 7,450
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -694,7 +703,7 @@ Ref: FAV-009
 ```
 Looking for a quality white dressing table with mirror & stool? Arched mirror with side shelves.
 Available at Odorkor, Accra. GH₵ 7,450.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -703,7 +712,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ White Dressing Table with Mirror & Stool
 GH₵ 7,450 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -711,7 +720,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 White Dressing Table with Mirror & Stool 🔥
 GH₵ 7,450
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20White%20Dressing%20Table%20with%20Mirror%20%26%20Stool%20%28FAV-009%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20White%20Dressing%20Table%20with%20Mirror%20%26%20Stool%20%28FAV-009%29.
 ```
 
 ## FAV-010 · Wardrobe — 4-Door with Top Cabinets
@@ -748,7 +757,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-010
 ```
@@ -765,7 +775,7 @@ Ref: FAV-010
 • Delivered and assembled
 💰 GH₵ 9,800
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -774,7 +784,7 @@ Ref: FAV-010
 ```
 Looking for a quality wardrobe — 4-door with top cabinets? 4 doors plus top cabinets.
 Available at Odorkor, Accra. GH₵ 9,800.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -783,7 +793,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ Wardrobe — 4-Door with Top Cabinets
 GH₵ 9,800 | Made to order in your size and colour
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -791,7 +801,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 Wardrobe — 4-Door with Top Cabinets 🔥
 GH₵ 9,800
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Wardrobe%20%E2%80%94%204-Door%20with%20Top%20Cabinets%20%28FAV-010%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Wardrobe%20%E2%80%94%204-Door%20with%20Top%20Cabinets%20%28FAV-010%29.
 ```
 
 ## FAV-011 · L-Shaped Sectional Sofa — Grey Fabric
@@ -828,7 +838,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-011
 ```
@@ -845,7 +856,7 @@ Ref: FAV-011
 • Wholesale prices for bulk orders
 💰 GH₵ 15,500
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -854,7 +865,7 @@ Ref: FAV-011
 ```
 Looking for a quality l-shaped sectional sofa — grey fabric? Seats 5–6 comfortably.
 Available at Odorkor, Accra. GH₵ 15,500.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -863,7 +874,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ L-Shaped Sectional Sofa — Grey Fabric
 GH₵ 15,500 | Made to order in your size and colour
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -871,7 +882,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 L-Shaped Sectional Sofa — Grey Fabric 🔥
 GH₵ 15,500
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20L-Shaped%20Sectional%20Sofa%20%E2%80%94%20Grey%20Fabric%20%28FAV-011%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20L-Shaped%20Sectional%20Sofa%20%E2%80%94%20Grey%20Fabric%20%28FAV-011%29.
 ```
 
 ## FAV-014 · Student Desk Chair Set — Senior High to Tertiary Level
@@ -907,7 +918,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-014
 ```
@@ -924,7 +936,7 @@ Ref: FAV-014
 • Suitable for SHS through university
 💰 GH₵ 650
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -933,7 +945,7 @@ Ref: FAV-014
 ```
 Looking for a quality student desk chair set — senior high to tertiary level? Desk 60.5 × 40 × 75.5 cm and chair 38.5 × 40 × 76 cm (L × W × H).
 Available at Odorkor, Accra. GH₵ 650.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -942,7 +954,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ Student Desk Chair Set — Senior High to Tertiary Level
 GH₵ 650 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -950,7 +962,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 Student Desk Chair Set — Senior High to Tertiary Level 🔥
 GH₵ 650
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Student%20Desk%20Chair%20Set%20%E2%80%94%20Senior%20High%20to%20Tertiary%20Level%20%28FAV-014%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Student%20Desk%20Chair%20Set%20%E2%80%94%20Senior%20High%20to%20Tertiary%20Level%20%28FAV-014%29.
 ```
 
 ## FAV-015 · L-Shaped Sofa Set — Fabric & Leather
@@ -983,7 +995,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-015
 ```
@@ -1000,7 +1013,7 @@ Ref: FAV-015
 • Bulk prices for hotels, lounges & Airbnbs
 💰 GH₵ 5,500
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -1009,7 +1022,7 @@ Ref: FAV-015
 ```
 Looking for a quality l-shaped sofa set — fabric & leather? Modern L-shaped design.
 Available at Odorkor, Accra. GH₵ 5,500.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -1018,7 +1031,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ L-Shaped Sofa Set — Fabric & Leather
 GH₵ 5,500 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -1026,7 +1039,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 L-Shaped Sofa Set — Fabric & Leather 🔥
 GH₵ 5,500
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20L-Shaped%20Sofa%20Set%20%E2%80%94%20Fabric%20%26%20Leather%20%28FAV-015%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20L-Shaped%20Sofa%20Set%20%E2%80%94%20Fabric%20%26%20Leather%20%28FAV-015%29.
 ```
 
 ## FAV-016 · Luxury Leather Sofa Set
@@ -1060,7 +1073,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-016
 ```
@@ -1077,7 +1091,7 @@ Ref: FAV-016
 • Wholesale & bulk deals for resellers
 💰 GH₵ 8,500
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -1086,7 +1100,7 @@ Ref: FAV-016
 ```
 Looking for a quality luxury leather sofa set? Premium leather.
 Available at Odorkor, Accra. GH₵ 8,500.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -1095,7 +1109,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ Luxury Leather Sofa Set
 GH₵ 8,500 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -1103,7 +1117,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 Luxury Leather Sofa Set 🔥
 GH₵ 8,500
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Luxury%20Leather%20Sofa%20Set%20%28FAV-016%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Luxury%20Leather%20Sofa%20Set%20%28FAV-016%29.
 ```
 
 ## FAV-017 · Mesh Secretary Chair — Swivel, Arm Rests
@@ -1137,7 +1151,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-017
 ```
@@ -1154,7 +1169,7 @@ Ref: FAV-017
 • Bulk prices for offices
 💰 GH₵ 4,500
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -1163,7 +1178,7 @@ Ref: FAV-017
 ```
 Looking for a quality mesh secretary chair — swivel, arm rests? Breathable mesh back.
 Available at Odorkor, Accra. GH₵ 4,500.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -1172,7 +1187,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ Mesh Secretary Chair — Swivel, Arm Rests
 GH₵ 4,500 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -1180,7 +1195,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 Mesh Secretary Chair — Swivel, Arm Rests 🔥
 GH₵ 4,500
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Mesh%20Secretary%20Chair%20%E2%80%94%20Swivel%2C%20Arm%20Rests%20%28FAV-017%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Mesh%20Secretary%20Chair%20%E2%80%94%20Swivel%2C%20Arm%20Rests%20%28FAV-017%29.
 ```
 
 ## FAV-018 · Strong Glass Centre Table
@@ -1212,7 +1227,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-018
 ```
@@ -1228,7 +1244,7 @@ Ref: FAV-018
 • Fits any living room
 💰 GH₵ 800
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -1237,7 +1253,7 @@ Ref: FAV-018
 ```
 Looking for a quality strong glass centre table? Tempered glass top.
 Available at Odorkor, Accra. GH₵ 800.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -1246,7 +1262,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ Strong Glass Centre Table
 GH₵ 800 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -1254,7 +1270,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 Strong Glass Centre Table 🔥
 GH₵ 800
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Strong%20Glass%20Centre%20Table%20%28FAV-018%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Strong%20Glass%20Centre%20Table%20%28FAV-018%29.
 ```
 
 ## FAV-019 · Auditorium / Conference Chair
@@ -1287,7 +1303,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-019
 ```
@@ -1304,7 +1321,7 @@ Ref: FAV-019
 • Buy 100, get 2 free or free delivery
 💰 GH₵ 405
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -1313,7 +1330,7 @@ Ref: FAV-019
 ```
 Looking for a quality auditorium / conference chair? Stackable steel frame.
 Available at Odorkor, Accra. GH₵ 405.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -1322,7 +1339,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ Auditorium / Conference Chair
 GH₵ 405 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -1330,7 +1347,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 Auditorium / Conference Chair 🔥
 GH₵ 405
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Auditorium%20/%20Conference%20Chair%20%28FAV-019%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Auditorium%20/%20Conference%20Chair%20%28FAV-019%29.
 ```
 
 ## FAV-020 · Business Cards — 100 or 200 Pieces
@@ -1361,7 +1378,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-020
 ```
@@ -1376,7 +1394,7 @@ Ref: FAV-020
 • Printed at Omanjor
 💰 GH₵ 450
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -1385,7 +1403,7 @@ Ref: FAV-020
 ```
 Looking for a quality business cards — 100 or 200 pieces? Design included.
 Available at Odorkor, Accra. GH₵ 450.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -1394,7 +1412,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ Business Cards — 100 or 200 Pieces
 GH₵ 450 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -1402,7 +1420,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 Business Cards — 100 or 200 Pieces 🔥
 GH₵ 450
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Business%20Cards%20%E2%80%94%20100%20or%20200%20Pieces%20%28FAV-020%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Business%20Cards%20%E2%80%94%20100%20or%20200%20Pieces%20%28FAV-020%29.
 ```
 
 ## FAV-021 · A4 & A3 Copy Paper — Rotatrim, PaperOne, Double A
@@ -1435,7 +1453,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-021
 ```
@@ -1452,7 +1471,7 @@ Ref: FAV-021
 • Wholesale & retail, fast delivery
 💰 GH₵ 450
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -1461,7 +1480,7 @@ Ref: FAV-021
 ```
 Looking for a quality a4 & a3 copy paper — rotatrim, paperone, double a? A4 & A3 sizes.
 Available at Odorkor, Accra. GH₵ 450.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -1470,7 +1489,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ A4 & A3 Copy Paper — Rotatrim, PaperOne, Double A
 GH₵ 450 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -1478,7 +1497,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 A4 & A3 Copy Paper — Rotatrim, PaperOne, Double A 🔥
 GH₵ 450
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20A4%20%26%20A3%20Copy%20Paper%20%E2%80%94%20Rotatrim%2C%20PaperOne%2C%20Double%20A%20%28FAV-021%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20A4%20%26%20A3%20Copy%20Paper%20%E2%80%94%20Rotatrim%2C%20PaperOne%2C%20Double%20A%20%28FAV-021%29.
 ```
 
 ## FAV-022 · TCL 43" Smart Android TV — Full HD (43S5400A)
@@ -1510,7 +1529,8 @@ TCL S5400A 43-inch Full HD LED Smart TV with Android TV, Google Assistant voice 
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-022
 ```
@@ -1527,7 +1547,7 @@ Ref: FAV-022
 • Built-in Wi-Fi
 💰 GH₵ 6,500
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -1536,7 +1556,7 @@ Ref: FAV-022
 ```
 Looking for a quality tcl 43" smart android tv — full hd (43s5400a)? 43" Full HD LED.
 Available at Odorkor, Accra. GH₵ 6,500.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -1545,7 +1565,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ TCL 43" Smart Android TV — Full HD (43S5400A)
 GH₵ 6,500 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -1553,7 +1573,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 TCL 43" Smart Android TV — Full HD (43S5400A) 🔥
 GH₵ 6,500
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20TCL%2043%22%20Smart%20Android%20TV%20%E2%80%94%20Full%20HD%20%2843S5400A%29%20%28FAV-022%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20TCL%2043%22%20Smart%20Android%20TV%20%E2%80%94%20Full%20HD%20%2843S5400A%29%20%28FAV-022%29.
 ```
 
 ## FAV-023 · Sigma 1.5HP Split Air Conditioner (BREEZE-HY12SB)
@@ -1585,7 +1605,8 @@ Sigma 1.5HP split air conditioner, R410A refrigerant, model BREEZE-HY12SB. Energ
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-023
 ```
@@ -1602,7 +1623,7 @@ Ref: FAV-023
 • Delivery available
 💰 GH₵ 6,500
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -1611,7 +1632,7 @@ Ref: FAV-023
 ```
 Looking for a quality sigma 1.5hp split air conditioner (breeze-hy12sb)? 1.5HP split unit.
 Available at Odorkor, Accra. GH₵ 6,500.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -1620,7 +1641,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ Sigma 1.5HP Split Air Conditioner (BREEZE-HY12SB)
 GH₵ 6,500 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -1628,7 +1649,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 Sigma 1.5HP Split Air Conditioner (BREEZE-HY12SB) 🔥
 GH₵ 6,500
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Sigma%201.5HP%20Split%20Air%20Conditioner%20%28BREEZE-HY12SB%29%20%28FAV-023%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Sigma%201.5HP%20Split%20Air%20Conditioner%20%28BREEZE-HY12SB%29%20%28FAV-023%29.
 ```
 
 ## FAV-024 · TWYFORD Water Closet — Two-Piece, Premium
@@ -1662,7 +1683,8 @@ Brand-new two-piece TWYFORD water closet: high-quality ceramic, sleek modern des
 Price negotiable for bulk orders.
 🚚 Contact us for delivery.
 📍 Kantamanto, near Grandview Hotel, UTC, close to Barclays Bank, Mamleshie Rd, Accra
-📞 Call / WhatsApp: 027 747 7752 / 024 477 2036
+📞 Call: 027 747 7752 / 024 477 2036
+📲 WhatsApp: 027 747 7752
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-024
 ```
@@ -1739,7 +1761,8 @@ Anti-skid floor tiles, glossy and matte wall tiles, tile grout and adhesive, plu
 Price negotiable for bulk orders.
 🚚 Contact us for delivery.
 📍 Kantamanto, near Grandview Hotel, UTC, close to Barclays Bank, Mamleshie Rd, Accra
-📞 Call / WhatsApp: 027 747 7752 / 024 477 2036
+📞 Call: 027 747 7752 / 024 477 2036
+📲 WhatsApp: 027 747 7752
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-025
 ```
@@ -1815,7 +1838,8 @@ Kavukçu wheat flour, the professional baker's choice: strong dough, reliable yi
 
 🚚 Contact us for delivery.
 📍 Accra, Ghana
-📞 Call / WhatsApp: 055 543 4994 / 055 703 3525
+📞 Call: 055 543 4994 / 055 703 3525
+📲 WhatsApp: 055 543 4994
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-026
 ```
@@ -1891,7 +1915,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-027
 ```
@@ -1907,7 +1932,7 @@ Ref: FAV-027
 • Rolls worked out free in AI Studio
 💰 GH₵ 650
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -1916,7 +1941,7 @@ Ref: FAV-027
 ```
 Looking for a quality 3d wallpaper — brick, stone & pattern (per roll)? Brick, stone & pattern designs.
 Available at Odorkor, Accra. GH₵ 650.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -1925,7 +1950,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ 3D Wallpaper — Brick, Stone & Pattern (per roll)
 GH₵ 650 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -1933,7 +1958,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 3D Wallpaper — Brick, Stone & Pattern (per roll) 🔥
 GH₵ 650
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%203D%20Wallpaper%20%E2%80%94%20Brick%2C%20Stone%20%26%20Pattern%20%28per%20roll%29%20%28FAV-027%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%203D%20Wallpaper%20%E2%80%94%20Brick%2C%20Stone%20%26%20Pattern%20%28per%20roll%29%20%28FAV-027%29.
 ```
 
 ## FAV-028 · Kids Plastic Chair — Stackable, Assorted Colours
@@ -1965,7 +1990,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-028
 ```
@@ -1981,7 +2007,7 @@ Ref: FAV-028
 • Bulk orders welcome
 💰 GH₵ 550
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -1990,7 +2016,7 @@ Ref: FAV-028
 ```
 Looking for a quality kids plastic chair — stackable, assorted colours? Stackable, saves space.
 Available at Odorkor, Accra. GH₵ 550.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -1999,7 +2025,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ Kids Plastic Chair — Stackable, Assorted Colours
 GH₵ 550 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -2007,7 +2033,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 Kids Plastic Chair — Stackable, Assorted Colours 🔥
 GH₵ 550
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Kids%20Plastic%20Chair%20%E2%80%94%20Stackable%2C%20Assorted%20Colours%20%28FAV-028%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Kids%20Plastic%20Chair%20%E2%80%94%20Stackable%2C%20Assorted%20Colours%20%28FAV-028%29.
 ```
 
 ## FAV-029 · Salon Chair — Hydraulic, Red or Black
@@ -2040,7 +2066,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-029
 ```
@@ -2056,7 +2083,7 @@ Ref: FAV-029
 • Red or black finish
 💰 GH₵ 12,500
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -2065,7 +2092,7 @@ Ref: FAV-029
 ```
 Looking for a quality salon chair — hydraulic, red or black? Hydraulic height adjustment.
 Available at Odorkor, Accra. GH₵ 12,500.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -2074,7 +2101,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ Salon Chair — Hydraulic, Red or Black
 GH₵ 12,500 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -2082,7 +2109,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 Salon Chair — Hydraulic, Red or Black 🔥
 GH₵ 12,500
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Salon%20Chair%20%E2%80%94%20Hydraulic%2C%20Red%20or%20Black%20%28FAV-029%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Salon%20Chair%20%E2%80%94%20Hydraulic%2C%20Red%20or%20Black%20%28FAV-029%29.
 ```
 
 ## FAV-030 · Hair Dressers Washing Bowl with Bar Chair
@@ -2114,7 +2141,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-030
 ```
@@ -2130,7 +2158,7 @@ Ref: FAV-030
 • For salons and barbering shops
 💰 GH₵ 10,950
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -2139,7 +2167,7 @@ Ref: FAV-030
 ```
 Looking for a quality hair dressers washing bowl with bar chair? Washing bowl with attached chair.
 Available at Odorkor, Accra. GH₵ 10,950.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -2148,7 +2176,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ Hair Dressers Washing Bowl with Bar Chair
 GH₵ 10,950 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -2156,7 +2184,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 Hair Dressers Washing Bowl with Bar Chair 🔥
 GH₵ 10,950
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Hair%20Dressers%20Washing%20Bowl%20with%20Bar%20Chair%20%28FAV-030%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Hair%20Dressers%20Washing%20Bowl%20with%20Bar%20Chair%20%28FAV-030%29.
 ```
 
 ## FAV-031 · 10 Seater Foldable Round Table with Chairs
@@ -2188,7 +2216,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-031
 ```
@@ -2204,7 +2233,7 @@ Ref: FAV-031
 • Great for events
 💰 GH₵ 9,650
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -2213,7 +2242,7 @@ Ref: FAV-031
 ```
 Looking for a quality 10 seater foldable round table with chairs? Seats 10 people.
 Available at Odorkor, Accra. GH₵ 9,650.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -2222,7 +2251,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ 10 Seater Foldable Round Table with Chairs
 GH₵ 9,650 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -2230,7 +2259,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 10 Seater Foldable Round Table with Chairs 🔥
 GH₵ 9,650
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%2010%20Seater%20Foldable%20Round%20Table%20with%20Chairs%20%28FAV-031%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%2010%20Seater%20Foldable%20Round%20Table%20with%20Chairs%20%28FAV-031%29.
 ```
 
 ## FAV-032 · TV Stand — Black Marble Top with Drawer
@@ -2262,7 +2291,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-032
 ```
@@ -2278,7 +2308,7 @@ Ref: FAV-032
 • Side cabinet
 💰 GH₵ 6,950
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -2287,7 +2317,7 @@ Ref: FAV-032
 ```
 Looking for a quality tv stand — black marble top with drawer? Marble-effect top.
 Available at Odorkor, Accra. GH₵ 6,950.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -2296,7 +2326,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ TV Stand — Black Marble Top with Drawer
 GH₵ 6,950 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -2304,7 +2334,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 TV Stand — Black Marble Top with Drawer 🔥
 GH₵ 6,950
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20TV%20Stand%20%E2%80%94%20Black%20Marble%20Top%20with%20Drawer%20%28FAV-032%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20TV%20Stand%20%E2%80%94%20Black%20Marble%20Top%20with%20Drawer%20%28FAV-032%29.
 ```
 
 ## FAV-033 · TV Stand + Centre Table Set — Marble Top
@@ -2336,7 +2366,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-033
 ```
@@ -2352,7 +2383,7 @@ Ref: FAV-033
 • Storage drawers
 💰 GH₵ 16,800
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -2361,7 +2392,7 @@ Ref: FAV-033
 ```
 Looking for a quality tv stand + centre table set — marble top? TV stand and centre table set.
 Available at Odorkor, Accra. GH₵ 16,800.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -2370,7 +2401,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ TV Stand + Centre Table Set — Marble Top
 GH₵ 16,800 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -2378,7 +2409,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 TV Stand + Centre Table Set — Marble Top 🔥
 GH₵ 16,800
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20TV%20Stand%20%2B%20Centre%20Table%20Set%20%E2%80%94%20Marble%20Top%20%28FAV-033%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20TV%20Stand%20%2B%20Centre%20Table%20Set%20%E2%80%94%20Marble%20Top%20%28FAV-033%29.
 ```
 
 ## FAV-034 · Student Mattress — 2 Sizes
@@ -2410,7 +2441,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-034
 ```
@@ -2426,7 +2458,7 @@ Ref: FAV-034
 • Bulk orders welcome
 💰 GH₵ 1,200
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -2435,7 +2467,7 @@ Ref: FAV-034
 ```
 Looking for a quality student mattress — 2 sizes? GH₵1,200 – GH₵1,300 by size.
 Available at Odorkor, Accra. GH₵ 1,200.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -2444,7 +2476,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ Student Mattress — 2 Sizes
 GH₵ 1,200 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -2452,7 +2484,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 Student Mattress — 2 Sizes 🔥
 GH₵ 1,200
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Student%20Mattress%20%E2%80%94%202%20Sizes%20%28FAV-034%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20Student%20Mattress%20%E2%80%94%202%20Sizes%20%28FAV-034%29.
 ```
 
 ## FAV-035 · Jasmine Rice — Long Grain Fragrant Rice
@@ -2485,7 +2517,8 @@ Natural, fragrant long-grain jasmine rice (Thai Hom Mali) with a sweet aroma. 25
 
 🚚 Contact us for delivery.
 📍 Kasoa, near Amanfrom Taxi Rank
-📞 Call / WhatsApp: 053 570 0722
+📞 Call: 053 570 0722
+📲 WhatsApp: 053 570 0722
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-035
 ```
@@ -2564,7 +2597,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-036
 ```
@@ -2581,7 +2615,7 @@ Ref: FAV-036
 • Bulk: 10% off 50+, 15% off 100+
 💰 GH₵ 670
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -2590,7 +2624,7 @@ Ref: FAV-036
 ```
 Looking for a quality white foldable table — 4-seater (4ft, black frame)? Seats 4 — 2 per side.
 Available at Odorkor, Accra. GH₵ 670.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -2599,7 +2633,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ White Foldable Table — 4-Seater (4ft, Black Frame)
 GH₵ 670 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -2607,7 +2641,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 White Foldable Table — 4-Seater (4ft, Black Frame) 🔥
 GH₵ 670
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20White%20Foldable%20Table%20%E2%80%94%204-Seater%20%284ft%2C%20Black%20Frame%29%20%28FAV-036%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20White%20Foldable%20Table%20%E2%80%94%204-Seater%20%284ft%2C%20Black%20Frame%29%20%28FAV-036%29.
 ```
 
 ## FAV-037 · White Foldable Table — 6-Seater (6ft, Black Frame)
@@ -2643,7 +2677,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-037
 ```
@@ -2660,7 +2695,7 @@ Ref: FAV-037
 • Bulk: 10% off 50+, 15% off 100+
 💰 GH₵ 950
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -2669,7 +2704,7 @@ Ref: FAV-037
 ```
 Looking for a quality white foldable table — 6-seater (6ft, black frame)? Seats 6 — 3 per side.
 Available at Odorkor, Accra. GH₵ 950.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -2678,7 +2713,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ White Foldable Table — 6-Seater (6ft, Black Frame)
 GH₵ 950 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -2686,7 +2721,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 White Foldable Table — 6-Seater (6ft, Black Frame) 🔥
 GH₵ 950
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20White%20Foldable%20Table%20%E2%80%94%206-Seater%20%286ft%2C%20Black%20Frame%29%20%28FAV-037%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20White%20Foldable%20Table%20%E2%80%94%206-Seater%20%286ft%2C%20Black%20Frame%29%20%28FAV-037%29.
 ```
 
 ## FAV-038 · White Foldable Table — 8-Seater (8ft, Black Frame)
@@ -2722,7 +2757,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-038
 ```
@@ -2739,7 +2775,7 @@ Ref: FAV-038
 • Bulk: 10% off 50+, 15% off 100+
 💰 GH₵ 1,200
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -2748,7 +2784,7 @@ Ref: FAV-038
 ```
 Looking for a quality white foldable table — 8-seater (8ft, black frame)? Seats 8 — 4 per side.
 Available at Odorkor, Accra. GH₵ 1,200.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -2757,7 +2793,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ White Foldable Table — 8-Seater (8ft, Black Frame)
 GH₵ 1,200 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -2765,7 +2801,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 White Foldable Table — 8-Seater (8ft, Black Frame) 🔥
 GH₵ 1,200
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20White%20Foldable%20Table%20%E2%80%94%208-Seater%20%288ft%2C%20Black%20Frame%29%20%28FAV-038%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20White%20Foldable%20Table%20%E2%80%94%208-Seater%20%288ft%2C%20Black%20Frame%29%20%28FAV-038%29.
 ```
 
 ## FAV-039 · White Foldable Chair — Black Frame, Handle Slot
@@ -2801,7 +2837,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-039
 ```
@@ -2818,7 +2855,7 @@ Ref: FAV-039
 • Bulk: 10% off 50+, 15% off 100+
 💰 GH₵ 250
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -2827,7 +2864,7 @@ Ref: FAV-039
 ```
 Looking for a quality white foldable chair — black frame, handle slot? Handle slot for easy carrying.
 Available at Odorkor, Accra. GH₵ 250.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -2836,7 +2873,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ White Foldable Chair — Black Frame, Handle Slot
 GH₵ 250 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -2844,7 +2881,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 White Foldable Chair — Black Frame, Handle Slot 🔥
 GH₵ 250
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20White%20Foldable%20Chair%20%E2%80%94%20Black%20Frame%2C%20Handle%20Slot%20%28FAV-039%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20White%20Foldable%20Chair%20%E2%80%94%20Black%20Frame%2C%20Handle%20Slot%20%28FAV-039%29.
 ```
 
 ## FAV-040 · White Foldable 4-Seater Set — 4ft Table + 4 Chairs
@@ -2880,7 +2917,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-040
 ```
@@ -2897,7 +2935,7 @@ Ref: FAV-040
 • Bulk: 10% off 50+, 15% off 100+
 💰 GH₵ 1,650
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -2906,7 +2944,7 @@ Ref: FAV-040
 ```
 Looking for a quality white foldable 4-seater set — 4ft table + 4 chairs? 4ft table + 4 chairs.
 Available at Odorkor, Accra. GH₵ 1,650.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -2915,7 +2953,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ White Foldable 4-Seater Set — 4ft Table + 4 Chairs
 GH₵ 1,650 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -2923,7 +2961,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 White Foldable 4-Seater Set — 4ft Table + 4 Chairs 🔥
 GH₵ 1,650
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20White%20Foldable%204-Seater%20Set%20%E2%80%94%204ft%20Table%20%2B%204%20Chairs%20%28FAV-040%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20White%20Foldable%204-Seater%20Set%20%E2%80%94%204ft%20Table%20%2B%204%20Chairs%20%28FAV-040%29.
 ```
 
 ## FAV-041 · White Foldable 6-Seater Set — 6ft Table + 6 Chairs
@@ -2959,7 +2997,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-041
 ```
@@ -2976,7 +3015,7 @@ Ref: FAV-041
 • Bulk: 10% off 50+, 15% off 100+
 💰 GH₵ 2,420
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -2985,7 +3024,7 @@ Ref: FAV-041
 ```
 Looking for a quality white foldable 6-seater set — 6ft table + 6 chairs? 6ft table + 6 chairs.
 Available at Odorkor, Accra. GH₵ 2,420.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -2994,7 +3033,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ White Foldable 6-Seater Set — 6ft Table + 6 Chairs
 GH₵ 2,420 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -3002,7 +3041,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 White Foldable 6-Seater Set — 6ft Table + 6 Chairs 🔥
 GH₵ 2,420
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20White%20Foldable%206-Seater%20Set%20%E2%80%94%206ft%20Table%20%2B%206%20Chairs%20%28FAV-041%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20White%20Foldable%206-Seater%20Set%20%E2%80%94%206ft%20Table%20%2B%206%20Chairs%20%28FAV-041%29.
 ```
 
 ## FAV-042 · White Foldable 8-Seater Set — 8ft Table + 8 Chairs
@@ -3038,7 +3077,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-042
 ```
@@ -3055,7 +3095,7 @@ Ref: FAV-042
 • Bulk: 10% off 50+, 15% off 100+
 💰 GH₵ 3,160
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -3064,7 +3104,7 @@ Ref: FAV-042
 ```
 Looking for a quality white foldable 8-seater set — 8ft table + 8 chairs? 8ft table + 8 chairs.
 Available at Odorkor, Accra. GH₵ 3,160.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -3073,7 +3113,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ White Foldable 8-Seater Set — 8ft Table + 8 Chairs
 GH₵ 3,160 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -3081,7 +3121,7 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 White Foldable 8-Seater Set — 8ft Table + 8 Chairs 🔥
 GH₵ 3,160
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20White%20Foldable%208-Seater%20Set%20%E2%80%94%208ft%20Table%20%2B%208%20Chairs%20%28FAV-042%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20White%20Foldable%208-Seater%20Set%20%E2%80%94%208ft%20Table%20%2B%208%20Chairs%20%28FAV-042%29.
 ```
 
 ## FAV-043 · White Foldable Chairs — Pack of 10 (Black Frame)
@@ -3117,7 +3157,8 @@ Price negotiable for bulk orders.
 💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.
 🚚 Delivery available across Accra and to Tema, Koforidua, Central Region and Kumasi (fee depends on location).
 📍 Showroom: Tarazzo Road, opposite Pacific, Odorkor, Accra, Greater Accra, Ghana (also Omanjor and Kasoa)
-📞 Call / WhatsApp: 057 264 6176 / 020 747 3267 / 054 614 8923
+📞 Call: 057 264 6176 / 020 747 3267 / 054 614 8923
+📲 WhatsApp: 020 747 3267
 🌐 https://favisionenterprize.github.io/
 Ref: FAV-043
 ```
@@ -3134,7 +3175,7 @@ Ref: FAV-043
 • Bulk: 10% off 50+, 15% off 100+
 💰 GH₵ 2,425
 📍 Odorkor, Accra, delivery available
-📞 WhatsApp 057 264 6176
+📞 WhatsApp 020 747 3267
 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
@@ -3143,7 +3184,7 @@ Ref: FAV-043
 ```
 Looking for a quality white foldable chairs — pack of 10 (black frame)? 10 chairs in a pack.
 Available at Odorkor, Accra. GH₵ 2,425.
-Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+Send us a message or WhatsApp 020 747 3267 to order. #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 **Variant 3**
@@ -3152,7 +3193,7 @@ Send us a message or WhatsApp 057 264 6176 to order. #FAVisionEnterprise #Furnit
 NEW FROM F.A VISION ✨ White Foldable Chairs — Pack of 10 (Black Frame)
 GH₵ 2,425 | Ready for pickup
 Homes • Offices • Schools
-DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
+DM or call 020 747 3267 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #WholesaleFurnitureGhana
 ```
 
 ### WhatsApp status
@@ -3160,5 +3201,5 @@ DM or call 057 264 6176 #FAVisionEnterprise #FurnitureGhana #AccraFurniture #Who
 ```
 White Foldable Chairs — Pack of 10 (Black Frame) 🔥
 GH₵ 2,425
-Order: https://wa.me/233572646176?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20White%20Foldable%20Chairs%20%E2%80%94%20Pack%20of%2010%20%28Black%20Frame%29%20%28FAV-043%29.
+Order: https://wa.me/233207473267?text=Hello%20F.A%20Vision%2C%20I%27m%20interested%20in%20the%20White%20Foldable%20Chairs%20%E2%80%94%20Pack%20of%2010%20%28Black%20Frame%29%20%28FAV-043%29.
 ```
