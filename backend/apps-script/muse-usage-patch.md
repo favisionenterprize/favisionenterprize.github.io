@@ -33,7 +33,7 @@ function museAsk_(data) {
   const props = authProps_();
   const mode = MUSE_MODES[data.mode] ? data.mode : 'assistant';
   const system = MUSE_MODES[mode] + '\n\nBusiness facts: ' + BUSINESS.name + ', ' + BUSINESS.address + '. Phones ' + BUSINESS.phones +
-    '. WhatsApp 057 264 6176. Website ' + BUSINESS.website + '.' + (data.context ? '\n\nContext from the app:\n' + String(data.context).slice(0, 6000) : '');
+    '. WhatsApp ' + BUSINESS.whatsapp + '. Website ' + BUSINESS.website + '.' + (data.context ? '\n\nContext from the app:\n' + String(data.context).slice(0, 6000) : '');
   const msgs = (Array.isArray(data.messages) ? data.messages : []).slice(-16)
     .map((m) => ({ role: m.role === 'assistant' ? 'assistant' : 'user', text: String(m.text || '').slice(0, 8000) }))
     .filter((m) => m.text);
@@ -111,7 +111,7 @@ function museAsk_(data) {
   const props = authProps_();
   const mode = MUSE_MODES[data.mode] ? data.mode : 'assistant';
   const system = MUSE_MODES[mode] + '\n\nBusiness facts: ' + BUSINESS.name + ', ' + BUSINESS.address + '. Phones ' + BUSINESS.phones +
-    '. WhatsApp 057 264 6176. Website ' + BUSINESS.website + '.' + (data.context ? '\n\nContext from the app:\n' + String(data.context).slice(0, 6000) : '');
+    '. WhatsApp ' + BUSINESS.whatsapp + '. Website ' + BUSINESS.website + '.' + (data.context ? '\n\nContext from the app:\n' + String(data.context).slice(0, 6000) : '');
   const msgs = (Array.isArray(data.messages) ? data.messages : []).slice(-16)
     .map((m) => ({ role: m.role === 'assistant' ? 'assistant' : 'user', text: String(m.text || '').slice(0, 8000) }))
     .filter((m) => m.text);
