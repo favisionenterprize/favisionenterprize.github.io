@@ -11473,6 +11473,14 @@
    "tried": 0,
    "ok": 0,
    "stopped": "No listings found on Your listings. Make sure Facebook is on your personal profile."
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T08:47:40.467Z",
+   "kind": "renew",
+   "tried": 0,
+   "ok": 0,
+   "stopped": "No listings found on Your listings. Make sure Facebook is on your personal profile."
   }
  ],
  "renewLog": [
@@ -13042,7 +13050,7 @@
   }
  },
  "selling": {
-  "d": "2026-11-02",
+  "d": "2026-11-03",
   "cards": []
  },
  "switches": [
