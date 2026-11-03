@@ -10290,6 +10290,96 @@
    "ok": false,
    "now": true,
    "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T17:07:42.057Z",
+   "p": "FAV-014",
+   "g": "1320134591480018",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T17:08:37.262Z",
+   "p": "FAV-014",
+   "g": "805710142441606",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T17:09:08.755Z",
+   "p": "FAV-014",
+   "g": "okxcryptotrading",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T17:09:38.657Z",
+   "p": "FAV-014",
+   "g": "663617694887161",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T17:10:11.528Z",
+   "p": "FAV-014",
+   "g": "hongkongexpatservices",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T17:10:42.193Z",
+   "p": "FAV-014",
+   "g": "1582077365412060",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T17:11:14.856Z",
+   "p": "FAV-014",
+   "g": "529142240518946",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T17:12:03.261Z",
+   "p": "FAV-014",
+   "g": "HKHUB",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T17:12:36.360Z",
+   "p": "FAV-014",
+   "g": "ashtangayogahongkong",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T17:13:16.434Z",
+   "p": "FAV-014",
+   "g": "2274076586299428",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
   }
  ],
  "resets": {},
@@ -11526,6 +11616,13 @@
    "kind": "post",
    "tried": 1,
    "ok": 0
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T17:13:45.812Z",
+   "kind": "post",
+   "tried": 10,
+   "ok": 9
   }
  ],
  "renewLog": [
