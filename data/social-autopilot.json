@@ -7270,16 +7270,29 @@
    "ok": false,
    "now": true,
    "why": "Post button stayed off · artist not available in picker: Hillsong Worship · no sound"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T18:02:41.133Z",
+   "net": "x",
+   "k": "box:FAV-017",
+   "p": "FAV-017",
+   "ok": false,
+   "now": true,
+   "why": "X didn't confirm the post"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T18:54:38.260Z",
+   "net": "x",
+   "k": "box:FAV-018",
+   "p": "FAV-018",
+   "ok": false,
+   "now": true,
+   "why": "X didn't confirm the post"
   }
  ],
  "runs": [
-  {
-   "d": "2026-10-23",
-   "t": "2026-10-23T07:44:10.072Z",
-   "kind": "x",
-   "tried": 2,
-   "ok": 0
-  },
   {
    "d": "2026-10-23",
    "t": "2026-10-23T07:45:25.781Z",
@@ -8673,6 +8686,13 @@
    "t": "2026-11-03T17:56:49.645Z",
    "kind": "tiktok",
    "tried": 1,
+   "ok": 0
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T18:58:16.255Z",
+   "kind": "x",
+   "tried": 2,
    "ok": 0
   }
  ]
