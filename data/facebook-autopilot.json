@@ -11481,44 +11481,16 @@
    "tried": 0,
    "ok": 0,
    "stopped": "No listings found on Your listings. Make sure Facebook is on your personal profile."
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T13:38:36.142Z",
+   "kind": "renew",
+   "tried": 5,
+   "ok": 0
   }
  ],
  "renewLog": [
-  {
-   "d": "2026-11-01",
-   "t": "Dinning Set",
-   "listed": "2026-10-31",
-   "ok": false,
-   "why": "Next renewal in 3 days"
-  },
-  {
-   "d": "2026-11-01",
-   "t": "Dinning Set",
-   "listed": "2026-10-31",
-   "ok": false,
-   "why": "Next renewal in 3 days"
-  },
-  {
-   "d": "2026-11-01",
-   "t": "Secretary Chair",
-   "listed": "2026-10-31",
-   "ok": false,
-   "why": "Next renewal in 3 days"
-  },
-  {
-   "d": "2026-11-01",
-   "t": "1.2m Desk for GH4500 in a flat pack",
-   "listed": "2026-10-31",
-   "ok": false,
-   "why": "Next renewal in 3 days"
-  },
-  {
-   "d": "2026-11-01",
-   "t": "Elegant Tiles & Finishes 🏠",
-   "listed": "2026-10-31",
-   "ok": false,
-   "why": "Next renewal in 3 days"
-  },
   {
    "d": "2026-11-01",
    "t": "Living room sofa",
@@ -12863,6 +12835,41 @@
    "listed": "2026-05-03",
    "ok": false,
    "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "Dinning Table and chairs",
+   "listed": "2026-05-03",
+   "ok": false,
+   "why": "Next renewal in 5 days"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "3 sets 🚽 Brand-New TWYFORD Two-Piece Water Closet",
+   "listed": "2026-05-03",
+   "ok": false,
+   "why": "Next renewal in 5 days"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "Kids Round Desk",
+   "listed": "2026-05-03",
+   "ok": false,
+   "why": "Next renewal in 5 days"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "6 Seat Dinning Sets 🍽",
+   "listed": "2026-05-03",
+   "ok": false,
+   "why": "Next renewal in 5 days"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "A4 paper",
+   "listed": "2026-05-17",
+   "ok": false,
+   "why": "Next renewal in 5 days"
   }
  ],
  "relay": {
@@ -13051,7 +13058,38 @@
  },
  "selling": {
   "d": "2026-11-03",
-  "cards": []
+  "cards": [
+   {
+    "t": "Dinning Table and chairs",
+    "listed": "2026-05-03",
+    "status": "In stock",
+    "next": "2026-11-08"
+   },
+   {
+    "t": "3 sets 🚽 Brand-New TWYFORD Two-Piece Water Closet",
+    "listed": "2026-05-03",
+    "status": "In stock",
+    "next": "2026-11-08"
+   },
+   {
+    "t": "Kids Round Desk",
+    "listed": "2026-05-03",
+    "status": "In stock",
+    "next": "2026-11-08"
+   },
+   {
+    "t": "6 Seat Dinning Sets 🍽",
+    "listed": "2026-05-03",
+    "status": "In stock",
+    "next": "2026-11-08"
+   },
+   {
+    "t": "A4 paper",
+    "listed": "2026-05-17",
+    "status": "In stock",
+    "next": "2026-11-08"
+   }
+  ]
  },
  "switches": [
   {
