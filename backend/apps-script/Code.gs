@@ -26,7 +26,7 @@ const BUSINESS = {
   name: 'F.A Vision Enterprise',
   address: 'Tarazzo Road, opposite Pacific, Odorkor, Accra',
   email: 'favisionenterprise1@gmail.com',
-  whatsapp: '233572646176',
+  whatsapp: '233207473267',
   phones: '057 264 6176 / 020 747 3267 / 054 614 8923',
   website: 'https://favisionenterprize.github.io/',
 };
@@ -118,7 +118,7 @@ function setup() {
 // Entry points: any unexpected error is logged in full (Apps Script → Executions)
 // but the website / admin only ever sees a short, safe message, never a stack
 // trace, file name or line number.
-const SAFE_ERROR_ = 'Service temporarily unavailable. Please try again or WhatsApp us on 057 264 6176.';
+const SAFE_ERROR_ = 'Service temporarily unavailable. Please try again or WhatsApp us on 020 747 3267.';
 
 function doPost(e) {
   try {
@@ -1619,7 +1619,7 @@ function museAsk_(data) {
   if (!sessionValid_(data.session)) return json_({ ok: false, error: 'signed_out' });
   const mode = MUSE_MODES[data.mode] ? data.mode : 'assistant';
   const system = MUSE_MODES[mode] + '\n\nBusiness facts: ' + BUSINESS.name + ', ' + BUSINESS.address + '. Phones ' + BUSINESS.phones +
-    '. WhatsApp 057 264 6176. Website ' + BUSINESS.website + '.' + (data.context ? '\n\nContext from the app:\n' + String(data.context).slice(0, 6000) : '');
+    '. WhatsApp 020 747 3267. Website ' + BUSINESS.website + '.' + (data.context ? '\n\nContext from the app:\n' + String(data.context).slice(0, 6000) : '');
   const msgs = (Array.isArray(data.messages) ? data.messages : []).slice(-16)
     .map((m) => ({ role: m.role === 'assistant' ? 'assistant' : 'user', text: String(m.text || '').slice(0, 8000) }))
     .filter((m) => m.text);
