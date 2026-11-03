@@ -10273,6 +10273,14 @@
    "g": "hkmoms",
    "ok": false,
    "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T15:59:38.396Z",
+   "p": "FAV-034",
+   "g": "388218122475178",
+   "ok": true,
+   "why": "Waiting for admin approval"
   }
  ],
  "resets": {},
@@ -11495,6 +11503,13 @@
    "kind": "renew",
    "tried": 176,
    "ok": 0
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T15:59:52.595Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 1
   }
  ],
  "renewLog": [
