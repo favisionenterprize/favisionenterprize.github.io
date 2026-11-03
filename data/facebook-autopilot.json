@@ -10281,6 +10281,15 @@
    "g": "388218122475178",
    "ok": true,
    "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T16:03:50.297Z",
+   "p": "FAV-010",
+   "g": "page",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
   }
  ],
  "resets": {},
@@ -11510,6 +11519,13 @@
    "kind": "post",
    "tried": 1,
    "ok": 1
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T16:04:05.002Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 0
   }
  ],
  "renewLog": [
