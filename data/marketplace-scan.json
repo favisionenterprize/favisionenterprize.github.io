@@ -58,6 +58,30 @@
     "id": "1187793556727494",
     "renew": "wait",
     "next": "2026-11-09"
+   },
+   {
+    "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
+    "price": 12600,
+    "status": "Active",
+    "listed": "2026-11-03",
+    "id": "1132565479739007",
+    "renew": "wait"
+   },
+   {
+    "t": "Red Glass Dining Set — 6 Chairs",
+    "price": 12600,
+    "status": "Active",
+    "listed": "2026-11-03",
+    "id": "2243652346531121",
+    "renew": "wait"
+   },
+   {
+    "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
+    "price": 11900,
+    "status": "Active",
+    "listed": "2026-11-03",
+    "id": "1665138258314174",
+    "renew": "wait"
    }
   ]
  },
@@ -1102,6 +1126,36 @@
    "ok": true,
    "id": "1736067490792390",
    "verified": true
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T16:00:41.302Z",
+   "p": "FAV-001",
+   "title": "Rainbow Glass-Top Dining Set — 6 Chairs",
+   "price": 12600,
+   "ok": true,
+   "id": "1132565479739007",
+   "verified": true
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T16:01:20.073Z",
+   "p": "FAV-004",
+   "title": "Red Glass Dining Set — 6 Chairs",
+   "price": 12600,
+   "ok": true,
+   "id": "2243652346531121",
+   "verified": true
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T16:01:57.990Z",
+   "p": "FAV-005",
+   "title": "Foldable Wood-Grain Dining Set — 6 Chairs",
+   "price": 11900,
+   "ok": true,
+   "id": "1665138258314174",
+   "verified": true
   }
  ],
  "runs": [
@@ -1296,6 +1350,12 @@
    "tried": 0,
    "ok": 0,
    "stopped": "Facebook kept sending the tab to another page. Stopped."
+  },
+  {
+   "d": "2026-11-03",
+   "kind": "list",
+   "tried": 3,
+   "ok": 3
   }
  ],
  "skip": []
