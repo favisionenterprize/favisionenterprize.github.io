@@ -10380,6 +10380,96 @@
    "ok": false,
    "now": true,
    "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T17:07:01.227Z",
+   "p": "FAV-014",
+   "g": "1320134591480018",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T17:08:13.518Z",
+   "p": "FAV-014",
+   "g": "805710142441606",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T17:08:45.933Z",
+   "p": "FAV-014",
+   "g": "okxcryptotrading",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T17:09:25.644Z",
+   "p": "FAV-014",
+   "g": "663617694887161",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T17:09:59.566Z",
+   "p": "FAV-014",
+   "g": "hongkongexpatservices",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T17:10:32.942Z",
+   "p": "FAV-014",
+   "g": "1582077365412060",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T17:11:09.498Z",
+   "p": "FAV-014",
+   "g": "529142240518946",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T17:12:04.214Z",
+   "p": "FAV-014",
+   "g": "HKHUB",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T17:12:41.752Z",
+   "p": "FAV-014",
+   "g": "ashtangayogahongkong",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T17:13:22.187Z",
+   "p": "FAV-014",
+   "g": "2274076586299428",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
   }
  ],
  "resets": {},
@@ -11620,6 +11710,13 @@
   {
    "d": "2026-11-03",
    "t": "2026-11-03T17:13:45.812Z",
+   "kind": "post",
+   "tried": 10,
+   "ok": 9
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T17:14:09.822Z",
    "kind": "post",
    "tried": 10,
    "ok": 9
