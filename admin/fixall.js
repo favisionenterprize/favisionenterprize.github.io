@@ -108,7 +108,7 @@
   function captionFor(post, net) {
     const p = guess(post.text + " " + (post.alt || ""));
     const w = W();
-    const text = w ? w.write(p, { net }) : `${p ? shortName(p) + ". " : ""}Quality furniture in Accra. WhatsApp 0572646176 to order. #FAVisionEnterprise`;
+    const text = w ? w.write(p, { net }) : `${p ? shortName(p) + ". " : ""}Quality furniture in Accra. WhatsApp 020 747 3267 to order. #FAVisionEnterprise`;
     let tags = "";
     try { tags = w ? w.tags(p, net, null, true) : ""; } catch (e) { tags = ""; }
     return { p, text, tags: tags || "#FAVisionEnterprise #AccraFurniture #FurnitureGhana" };

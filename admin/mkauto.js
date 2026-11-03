@@ -229,7 +229,7 @@
     const first = String(t.name || "").trim().split(/\s+/)[0] || "there";
     const last = ((t.msgs || []).filter(m => !m.me).pop() || {}).text || t.snippet || "";
     const s = p && p.seller;
-    const wa = C.localPhone ? C.localPhone((s && s.whatsapp) || B.whatsapp || "+233572646176") : "057 264 6176";
+    const wa = C.localPhone ? C.localPhone((s && s.whatsapp) || B.whatsapp || "+233207473267") : "020 747 3267";
     const phones = [].concat((s && s.phones) || B.phones || []).map(x => C.localPhone ? C.localPhone(x) : x).filter(x => x !== wa).slice(0, 2).join(" / ");
     const lines = [`Hi ${first}, thank you for your message${p ? ` about the ${shortName(p)}` : ""}! 🙏`];
     if (p) {

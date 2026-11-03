@@ -67,7 +67,7 @@
     const W = window.FAV_CAPTIONS;
     if (W && W.write) return W.write(p, { net: net || "share", box: true });
     const items = (p.in_the_box || []).map(x => `✅ ${x.item} ×${x.qty}`).join("\n");
-    const wa = (p.seller && p.seller.whatsapp) || (A().business ? A().business().whatsapp : "") || "0572646176";
+    const wa = (p.seller && p.seller.whatsapp) || (A().business ? A().business().whatsapp : "") || "+233207473267";
     const t = `📦 What's in the box? ${short(p)}\n\n${items}\n\n💰 ${C().formatPrice ? C().formatPrice(p.price_ghs) : p.price_ghs}\n📲 WhatsApp ${wa} to order.\n#FAVisionEnterprise #AccraFurniture`;
     return W && W.ensure ? W.ensure(t, p, { net: net || "share" }) : t;
   }

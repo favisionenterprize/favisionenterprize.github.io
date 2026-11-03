@@ -148,7 +148,7 @@
     const qt = quote(x);
     if (qt.stop) return "";
     const B = A().business ? A().business() || {} : {}, p = qt.p, v = priv()[x.id] || {};
-    const wa = (window.FAV_CONFIG && window.FAV_CONFIG.localPhone ? window.FAV_CONFIG.localPhone(B.whatsapp || "+233572646176") : "057 264 6176");
+    const wa = (window.FAV_CONFIG && window.FAV_CONFIG.localPhone ? window.FAV_CONFIG.localPhone(B.whatsapp || "+233207473267") : "020 747 3267");
     const hello = v.contact ? `Hello ${String(v.contact).split(/\s+/)[0]},` : `Hello ${x.name} team,`;
     const what = p ? short(p) : "furniture";
     const fit = { school: "your classrooms", church: "your church and events", hotel: "your rooms and lounges", office: "your office", hostel: "your hostel rooms", events: "your event centre", restaurant: "your restaurant" }[x.type] || "your space";
@@ -182,7 +182,9 @@
     if (why) return toast(`AI pitch is off: ${why}. Approve rule S5 in 🧭 AI Plan.`, true);
     if (!gate("prospects:pitch")) return;
     const p = qt.p;
-    const facts = `Prospect: ${x.name} (${TYPES[x.type]}, ${x.area}). Product: ${p ? p.name : x.product}. ${p && p.highlights ? "Highlights: " + p.highlights.join("; ") + "." : ""} Quote: ${qt.line}. Link: ${p ? SITE + "p/" + p.id + ".html" : SITE}. Showroom Tarazzo Road, opposite Pacific, Odorkor. Delivery across Accra, Tema and Kasoa. WhatsApp 057 264 6176, call 020 747 3267.`;
+    const B = A().business ? A().business() || {} : {};
+    const wa = window.FAV_CONFIG && window.FAV_CONFIG.localPhone ? window.FAV_CONFIG.localPhone(B.whatsapp || "+233207473267") : "020 747 3267";
+    const facts = `Prospect: ${x.name} (${TYPES[x.type]}, ${x.area}). Product: ${p ? p.name : x.product}. ${p && p.highlights ? "Highlights: " + p.highlights.join("; ") + "." : ""} Quote: ${qt.line}. Link: ${p ? SITE + "p/" + p.id + ".html" : SITE}. Showroom Tarazzo Road, opposite Pacific, Odorkor. Delivery across Accra, Tema and Kasoa. WhatsApp ${wa}, call 020 747 3267.`;
     if (A().busy) A().busy("Asking your AI for a pitch draft…");
     try {
       const r = await A().backendSigned({ action: "muse", mode: "content", context: facts, messages: [{ role: "user", text: "Write ONE short, warm WhatsApp message (max 90 words, plain text, at most 2 emojis, no hashtags) from Alexander of F.A Vision Enterprise to this prospect, offering the product with the exact quote line. Use only these facts; never invent prices, discounts, stock or delivery dates. Say \"we sell\", never \"we make\". End with the WhatsApp number." }] });

@@ -27,7 +27,7 @@
   const otherBrand = o => !!(o && o.brand && !o.brand.default);
   function facts(p, o) {
     const B = biz(), s = p && p.seller, br = o && o.brand;
-    const wa = local((s && s.whatsapp) || (br && br.whatsapp) || B.whatsapp || "0572646176");
+    const wa = local((s && s.whatsapp) || (br && br.whatsapp) || B.whatsapp || "+233207473267");
     const calls = [].concat((s && s.phones) || (br && br.phones && br.phones.length ? br.phones : null) || B.phones || []).map(local).filter(Boolean);
     const link = otherBrand(o) ? "" : p ? `${site()}p/${p.id}.html` : site();
     return { B, s, wa, calls, link, br };

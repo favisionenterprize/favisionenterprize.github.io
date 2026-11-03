@@ -15,6 +15,10 @@
   const NETS = { fb: "Facebook Page", ig: "Instagram", x: "X", tiktok: "TikTok" };
   const PAGE = "facebook.com/FaVisionEnterprise", SITE = "favisionenterprize.github.io";
   const LINKS = ` 👉 Page: ${PAGE} · 🌐 Shop: ${SITE}`;
+  const defaultWhatsApp = () => {
+    const B = A.business ? A.business() || {} : {};
+    return C.localPhone ? C.localPhone(B.whatsapp || "+233207473267") : "020 747 3267";
+  };
   const EMPTY = {
     settings: {
       text: "📍 Where are you seeing this from? Tell us in the comments 👇 Then like, share and follow F.A Vision Enterprise for more.",
@@ -27,7 +31,7 @@
       likers_per_comment: 4, max_likers: 60, thank_nets: { fb: true, ig: true, x: true, tiktok: true },
       // Buy-intent comments ("MINE", "price"…, the ask in the classy TikTok captions) get this reply instead.
       kw_on: true, kw_words: "mine, price, how much, interested, i want, want it, details, available, yes, dm, inbox",
-      kw_text: "Hi {name}! 🙌 WhatsApp 057 264 6176 for the details and delivery price, or shop at favisionenterprize.github.io/tiktok/"
+      kw_text: `Hi {name}! 🙌 WhatsApp ${defaultWhatsApp()} for the details and delivery price, or shop at favisionenterprize.github.io/tiktok/`
     },
     followers: [], posts: {}, runs: [], liked: {}
   };

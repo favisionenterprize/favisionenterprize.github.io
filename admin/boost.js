@@ -183,7 +183,7 @@
     if (!p) return skip(then, "No product for today's story.");
     const ad = ((A.business().promos || {}).ads || []).find(a => a.product === p.id && !/-arrived$/.test(a.id));
     // Story text (gated in fbauto.launch: description, call to action, one hashtag).
-    const wa = C.localPhone ? C.localPhone((p.seller && p.seller.whatsapp) || A.business().whatsapp || "0572646176") : "0572646176";
+    const wa = C.localPhone ? C.localPhone((p.seller && p.seller.whatsapp) || A.business().whatsapp || "+233207473267") : "020 747 3267";
     const job = { kind: "story", dry: !!dry, p: p.id, img: location.origin + "/" + (ad ? `assets/images/ads/${ad.id}.jpg` : p.images[0]), text: `${shortName(p)} · ${C.formatPrice(p.price_ghs)}\n📲 WhatsApp ${wa} to order\nfavisionenterprize.github.io/p/${p.id}.html`, then: then && then.length ? then : null };
     F().launch("https://www.facebook.com/stories/create", job);
     tag(job, { what: "story", net: "fb", p: p.id });

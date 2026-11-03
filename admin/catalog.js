@@ -13,6 +13,10 @@
   const screen = $("#screen-catalog");
   if (!C || !A || !screen) return;
   const esc = C.escapeHtml;
+  const business = () => (A.business ? A.business() : {}) || {};
+  const localPhone = n => C.localPhone ? C.localPhone(n) : n;
+  const wa = () => localPhone(business().whatsapp || "+233207473267");
+  const callPhones = () => [].concat(business().phones || []).map(localPhone).filter(Boolean).join(" / ");
 
   const SITE = "https://favisionenterprize.github.io";
   const FEED = SITE + "/output/meta-catalog.csv";
@@ -271,7 +275,7 @@
   // WhatsApp Business catalog: Meta Shops aren't offered in Ghana, so this is the in-chat shop.
   const waDesc = p => [p.description, ...(p.highlights || []).slice(0, 4).map(h => "✅ " + h),
     (onOffer(p) ? `Offer price (was GH₵${Number(p.was_price_ghs).toLocaleString("en-GH")})` : p.negotiable ? "Price negotiable" : "Fixed price") + ". Delivery across Accra.",
-    "📍 Odorkor · Omanjor · Kasoa", "📞 020 747 3267 · 057 264 6176"].filter(Boolean).join("\n");
+    "📍 Odorkor · Omanjor · Kasoa", callPhones() && `📞 Call: ${callPhones()}`, `📲 WhatsApp: ${wa()}`].filter(Boolean).join("\n");
   function waCsv() {
     const q = v => `"${String(v == null ? "" : v).replace(/"/g, '""')}"`;
     const rows = [["Item code", "Item name", "Price (GHS)", "Description", "Website link", "Photo links"]]
@@ -329,7 +333,7 @@
         <h3>Ad text</h3>
         <textarea rows="4" readonly id="ch-adtext">Quality furniture for homes, offices &amp; schools 🛋️ Delivered across Accra.
 Get {{product.name}} for {{product.price}} at F.A Vision Enterprise · Odorkor, Omanjor &amp; Kasoa.
-Order on WhatsApp: 020 747 3267 · 057 264 6176</textarea>
+Order on WhatsApp: ${esc(wa())}</textarea>
         <div class="ch-actions"><button class="btn btn-primary btn-sm" data-copy-el="#ch-adtext">Copy ad text</button>
           <button class="btn btn-ghost btn-sm" data-copy="{{product.name}} · {{product.price}}">Copy headline</button></div>
       </div>
@@ -372,7 +376,7 @@ Order on WhatsApp: 020 747 3267 · 057 264 6176</textarea>
         <div class="card ch-sec"><h2>🖼 Image templates</h2>
           <p class="small">Add a branded frame and live price tag to every catalog photo automatically, in ads only. Your website photos stay clean and the price on the image always matches the feed.</p>
           <ol class="small"><li>Open ${ext(L.templates, "Image templates")} → <b>Create template</b>.</li>
-          <li>Frame colour <b>#0d55af</b> (brand blue); add a <b>Price</b> overlay (red <b>#f42c2c</b>, white text) top-left; add the text <b>“Order on WhatsApp · 057 264 6176”</b> at the bottom.</li>
+          <li>Frame colour <b>#0d55af</b> (brand blue); add a <b>Price</b> overlay (red <b>#f42c2c</b>, white text) top-left; add the text <b>“Order on WhatsApp · ${esc(wa())}”</b> at the bottom.</li>
           <li>Apply it to the set <b>All furniture</b>; pick it in a catalog ad under <b>Creative → Catalog options</b>.</li></ol></div>
         <div class="card ch-sec"><h2>💬 WhatsApp catalog</h2>
           <p class="small">Meta Shops aren't available in Ghana (Commerce Manager shows the shop as Hidden; leave it connected, don't press Disconnect). Your WhatsApp Business catalog is the in-chat shop instead.</p>
