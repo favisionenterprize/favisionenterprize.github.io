@@ -43,7 +43,7 @@ window.FAV_DATA = {
         "google_name": "FA Vision Enterprise Kasoa Branch"
       }
     ],
-    "whatsapp": "+233572646176",
+    "whatsapp": "+233207473267",
     "phones": [
       "+233572646176",
       "+233207473267",
