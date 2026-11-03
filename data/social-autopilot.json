@@ -7260,16 +7260,19 @@
    "ok": true,
    "now": true,
    "why": "Hillsong Worship: only tracks used lately · no sound"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T17:55:35.878Z",
+   "net": "tiktok",
+   "k": "ad:fav-025",
+   "p": "FAV-025",
+   "ok": false,
+   "now": true,
+   "why": "Post button stayed off · artist not available in picker: Hillsong Worship · no sound"
   }
  ],
  "runs": [
-  {
-   "d": "2026-10-23",
-   "t": "2026-10-23T03:54:18.360Z",
-   "kind": "x",
-   "tried": 2,
-   "ok": 0
-  },
   {
    "d": "2026-10-23",
    "t": "2026-10-23T07:44:10.072Z",
@@ -8664,6 +8667,13 @@
    "kind": "tiktok",
    "tried": 1,
    "ok": 1
+  },
+  {
+   "d": "2026-11-03",
+   "t": "2026-11-03T17:56:49.645Z",
+   "kind": "tiktok",
+   "tried": 1,
+   "ok": 0
   }
  ]
 }
