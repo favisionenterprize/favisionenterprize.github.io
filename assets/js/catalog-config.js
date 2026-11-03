@@ -95,7 +95,7 @@ window.FAV_CONFIG = (function () {
     return String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   }
 
-  // "+233572646176" -> "057 264 6176"
+  // "+233207473267" -> "020 747 3267"
   function localPhone(number) {
     let d = String(number).replace(/\D/g, "");
     if (d.startsWith("233")) d = "0" + d.slice(3);

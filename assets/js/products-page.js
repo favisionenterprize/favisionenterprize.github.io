@@ -8,7 +8,7 @@
   const { esc, money, groupProducts, searchText } = N;
   const ROOT = "../";
   const SITE = String(business.website || "https://favisionenterprize.github.io/").replace(/\/?$/, "/");
-  const WA = String(business.whatsapp || "+233572646176").replace(/\D/g, "");
+  const WA = String(business.whatsapp || "+233207473267").replace(/\D/g, "");
   const $ = s => document.querySelector(s);
 
   const groups = groupProducts(products);
