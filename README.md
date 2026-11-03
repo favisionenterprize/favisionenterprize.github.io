@@ -226,7 +226,7 @@ The first campaign, student desks for school proprietors, is in [`marketing/camp
 
 ## Contact
 
-WhatsApp 057 264 6176 · Call 020 747 3267 / 057 264 6176 / 054 614 8923 · [Facebook](https://www.facebook.com/FaVisionEnterprise) · https://favisionenterprize.github.io/
+WhatsApp 020 747 3267 · Call 020 747 3267 / 057 264 6176 / 054 614 8923 · [Facebook](https://www.facebook.com/FaVisionEnterprise) · https://favisionenterprize.github.io/
 
 ## Locations
 
