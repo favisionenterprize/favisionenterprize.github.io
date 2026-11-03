@@ -44,7 +44,7 @@ def load():
 
 
 def local(number):
-    """+233572646176 -> 057 264 6176, the format Ghanaian buyers dial."""
+    """Convert a Ghanaian number to the local format buyers dial."""
     digits = "".join(c for c in number if c.isdigit())
     if digits.startswith("233"):
         digits = "0" + digits[3:]
@@ -101,7 +101,8 @@ def marketplace_description(business, product):
         None if product.get("seller") else "💳 Pay in full, pay 50% now and the rest on delivery, pay on delivery in Accra, or walk in and pay at the showroom.",
         f"🚚 {business['delivery_note']}",
         f"📍 {business['address']}" if product.get("seller") else f"📍 Showroom: {business['address']} (also Omanjor and Kasoa)",
-        f"📞 Call / WhatsApp: {' / '.join(local(n) for n in business['phones'])}",
+        f"📞 Call: {' / '.join(local(n) for n in business['phones'])}",
+        f"📲 WhatsApp: {local(business['whatsapp'])}",
         f"🌐 {site}" if site else None,
         f"Ref: {product['id']}",
     ]
