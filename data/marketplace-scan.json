@@ -10,78 +10,75 @@
   "photos": 8
  },
  "scan": {
-  "d": "2026-11-02",
-  "t": "2026-11-02T10:05:04.683Z",
-  "n": 5,
+  "d": "2026-11-04",
+  "t": "2026-11-04T22:24:52.080Z",
+  "n": 8,
   "listings": [
    {
-    "t": "Dinning Table and chairs",
-    "price": 9500,
-    "status": "In stock",
-    "listed": "2026-05-03",
-    "id": "2764209867278266",
-    "renew": "wait",
-    "next": "2026-11-09"
-   },
-   {
-    "t": "3 sets 🚽 Brand-New TWYFORD Two-Piece Water Closet",
-    "price": 9500,
-    "status": "In stock",
-    "listed": "2026-05-03",
-    "id": "966037972699978",
-    "renew": "wait",
-    "next": "2026-11-09"
-   },
-   {
-    "t": "Kids Round Desk",
-    "price": 9500,
-    "status": "In stock",
-    "listed": "2026-05-03",
-    "id": "2100080194183471",
-    "renew": "wait",
-    "next": "2026-11-09"
-   },
-   {
-    "t": "6 Seat Dinning Sets 🍽",
-    "price": 9500,
-    "status": "In stock",
-    "listed": "2026-05-03",
-    "id": "1697321451275502",
-    "renew": "wait",
-    "next": "2026-11-09"
-   },
-   {
-    "t": "A4 paper",
-    "price": 9500,
-    "status": "In stock",
-    "listed": "2026-05-03",
-    "id": "1187793556727494",
-    "renew": "wait",
-    "next": "2026-11-09"
-   },
-   {
-    "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
-    "price": 12600,
+    "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
+    "price": 11900,
     "status": "Active",
     "listed": "2026-11-03",
-    "id": "1132565479739007",
-    "renew": "wait"
+    "renew": "none"
    },
    {
     "t": "Red Glass Dining Set — 6 Chairs",
     "price": 12600,
     "status": "Active",
     "listed": "2026-11-03",
-    "id": "2243652346531121",
-    "renew": "wait"
+    "renew": "none"
    },
    {
-    "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
-    "price": 11900,
+    "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
+    "price": 12600,
     "status": "Active",
     "listed": "2026-11-03",
+    "renew": "none"
+   },
+   {
+    "t": "White Foldable Chairs — Pack of 10 (Black Frame)",
+    "price": 2425,
+    "status": "Active",
+    "listed": "2026-10-31",
     "id": "1665138258314174",
-    "renew": "wait"
+    "renew": "wait",
+    "next": "2026-11-10"
+   },
+   {
+    "t": "White Foldable 8-Seater Set — 8ft Table + 8 Chairs",
+    "price": 3160,
+    "status": "Active",
+    "listed": "2026-10-31",
+    "id": "1665138258314174",
+    "renew": "wait",
+    "next": "2026-11-10"
+   },
+   {
+    "t": "White Foldable 4-Seater Set — 4ft Table + 4 Chairs",
+    "price": 1650,
+    "status": "Active",
+    "listed": "2026-10-31",
+    "id": "1665138258314174",
+    "renew": "wait",
+    "next": "2026-11-10"
+   },
+   {
+    "t": "White Foldable Chair — Black Frame, Handle Slot",
+    "price": 250,
+    "status": "Active",
+    "listed": "2026-10-31",
+    "id": "1665138258314174",
+    "renew": "wait",
+    "next": "2026-11-10"
+   },
+   {
+    "t": "White Foldable Table — 4-Seater (4ft, Black Frame)",
+    "price": 670,
+    "status": "Active",
+    "listed": "2026-10-31",
+    "id": "1665138258314174",
+    "renew": "wait",
+    "next": "2026-11-10"
    }
   ]
  },
@@ -1356,6 +1353,11 @@
    "kind": "list",
    "tried": 3,
    "ok": 3
+  },
+  {
+   "d": "2026-11-04",
+   "kind": "scan",
+   "n": 8
   }
  ],
  "skip": []
