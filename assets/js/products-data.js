@@ -1808,6 +1808,10 @@ window.FAV_DATA = {
       "custom_order": false,
       "in_stock": true,
       "images": [
+        "assets/images/products/fav-014-web-mw2pa30x-1.jpg",
+        "assets/images/products/fav-014-web-mw2pa30x-2.jpg",
+        "assets/images/products/fav-014-web-mw2pa30x-3.jpg",
+        "assets/images/products/fav-014-web-mw2pa30x-4.jpg",
         "assets/images/products/fav-014-muk5690f-1.jpg",
         "assets/images/products/fav-014-muk5690f-3.jpg",
         "assets/images/products/fav-014-muk5690f-5.jpg",
@@ -1893,7 +1897,37 @@ window.FAV_DATA = {
         }
       ],
       "box_note": "Knock-down packing: wood/plastic parts in a carton with bubble wrap, metal frames wrapped in nylon fabric. Delivery & school set-up available.",
-      "in_the_box_confirmed": false
+      "in_the_box_confirmed": false,
+      "image_credits": [
+        {
+          "path": "assets/images/products/fav-014-web-mw2pa30x-1.jpg",
+          "src": "Openverse",
+          "creator": "U.S. National Archives",
+          "page": "https://www.rawpixel.com/image/8766023/photo-image-vintage-table-room",
+          "license": "CC0"
+        },
+        {
+          "path": "assets/images/products/fav-014-web-mw2pa30x-2.jpg",
+          "src": "Openverse",
+          "creator": "Tamarcus Brown",
+          "page": "https://stocksnap.io/photo/student-school-1KOT8HDPAX",
+          "license": "CC0"
+        },
+        {
+          "path": "assets/images/products/fav-014-web-mw2pa30x-3.jpg",
+          "src": "Openverse",
+          "creator": "Tamarcus Brown",
+          "page": "https://stocksnap.io/photo/student-school-KBTSP7FFIY",
+          "license": "CC0"
+        },
+        {
+          "path": "assets/images/products/fav-014-web-mw2pa30x-4.jpg",
+          "src": "Openverse",
+          "creator": "",
+          "page": "https://www.rawpixel.com/image/5905909/photo-image-background-paper-public-domain",
+          "license": "CC0"
+        }
+      ]
     },
     {
       "id": "FAV-015",
