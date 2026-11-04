@@ -42,8 +42,8 @@
    "pinned": "Fresh stock, just arrived! 🎒📚\nOur new consignment of height-adjustable student desk & chair sets is IN STOCK now, for ",
    "linkOk": false,
    "pinOk": true,
-   "why": "Instagram lets you change the website link only in its phone app (Edit profile → Links)",
-   "mode": "fix"
+   "why": "",
+   "mode": "check"
   },
   "x": {
    "d": "2026-11-04",
@@ -314,6 +314,13 @@
    "mode": "fix",
    "linkOk": false,
    "pinOk": false
+  },
+  {
+   "d": "2026-11-04",
+   "net": "ig",
+   "mode": "check",
+   "linkOk": false,
+   "pinOk": true
   }
  ]
 }
