@@ -571,6 +571,36 @@
     "ok": false,
     "why": "no “Edit” in the post's menu",
     "mode": "set"
+   },
+   "DfMy2gzCHfI": {
+    "d": "2026-11-04",
+    "ok": false,
+    "why": "no “Edit” in the post's menu",
+    "mode": "set"
+   },
+   "DfMyu44CBvb": {
+    "d": "2026-11-04",
+    "ok": false,
+    "why": "no “Edit” in the post's menu",
+    "mode": "set"
+   },
+   "DfMyqm0CCJh": {
+    "d": "2026-11-04",
+    "ok": false,
+    "why": "no “Edit” in the post's menu",
+    "mode": "set"
+   },
+   "DfMrwikiKGG": {
+    "d": "2026-11-04",
+    "ok": false,
+    "why": "no “Edit” in the post's menu",
+    "mode": "set"
+   },
+   "DfMk9P6iKXO": {
+    "d": "2026-11-04",
+    "ok": false,
+    "why": "no “Edit” in the post's menu",
+    "mode": "set"
    }
   }
  },
@@ -2214,6 +2244,16 @@
    "skip": 0,
    "v": "2026-10-15.4",
    "more": 8
+  },
+  {
+   "d": "2026-11-04",
+   "kind": "fxfix",
+   "net": "ig",
+   "tried": 5,
+   "ok": 0,
+   "skip": 0,
+   "v": "2026-10-15.4",
+   "more": 3
   }
  ]
 }
