@@ -15,7 +15,9 @@
     "d": "2026-10-07"
    },
    "youtube": {
-    "status": "waiting"
+    "status": "failed",
+    "why": "YouTube didn't open the video details",
+    "d": "2026-11-04"
    },
    "audio": {
     "music": "fa-afrobeat-1",
@@ -42,7 +44,9 @@
     "d": "2026-10-07"
    },
    "youtube": {
-    "status": "waiting"
+    "status": "failed",
+    "why": "YouTube didn't open the video details",
+    "d": "2026-11-04"
    },
    "audio": {
     "music": "fa-afrobeat-2",
@@ -69,7 +73,9 @@
     "d": "2026-10-07"
    },
    "youtube": {
-    "status": "waiting"
+    "status": "failed",
+    "why": "policy / account-quality warning: “Black Glass Dining Set – GH₵ 4,900 in Ghana #Shorts Saving... Details Video elements Checks Visibility Visibility Choose”",
+    "d": "2026-11-04"
    },
    "audio": {
     "music": "fa-afrobeat-3",
