@@ -12904,6 +12904,14 @@
    "tried": 104,
    "ok": 63,
    "stopped": "Stopped by you."
+  },
+  {
+   "d": "2026-11-04",
+   "t": "2026-11-04T18:21:01.020Z",
+   "kind": "renew",
+   "tried": 0,
+   "ok": 0,
+   "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile in Facebook, then tap Renew again."
   }
  ],
  "renewLog": [
