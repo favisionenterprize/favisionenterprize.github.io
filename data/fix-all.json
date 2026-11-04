@@ -541,6 +541,36 @@
     "ok": false,
     "why": "no “Edit” in the post's menu",
     "mode": "set"
+   },
+   "DfO4bdYvgXf": {
+    "d": "2026-11-04",
+    "ok": false,
+    "why": "no “More options” button on the post",
+    "mode": "set"
+   },
+   "DfNOBlunydL": {
+    "d": "2026-11-04",
+    "ok": false,
+    "why": "no “More options” button on the post",
+    "mode": "set"
+   },
+   "DfMzZhDCAuZ": {
+    "d": "2026-11-04",
+    "ok": false,
+    "why": "no “Edit” in the post's menu",
+    "mode": "set"
+   },
+   "DfMzIXwCDHz": {
+    "d": "2026-11-04",
+    "ok": false,
+    "why": "no “Edit” in the post's menu",
+    "mode": "set"
+   },
+   "DfMzAUDiDQJ": {
+    "d": "2026-11-04",
+    "ok": false,
+    "why": "no “Edit” in the post's menu",
+    "mode": "set"
    }
   }
  },
@@ -2174,6 +2204,16 @@
    "skip": 0,
    "v": "2026-10-15.4",
    "more": 13
+  },
+  {
+   "d": "2026-11-04",
+   "kind": "fxfix",
+   "net": "ig",
+   "tried": 5,
+   "ok": 0,
+   "skip": 0,
+   "v": "2026-10-15.4",
+   "more": 8
   }
  ]
 }
