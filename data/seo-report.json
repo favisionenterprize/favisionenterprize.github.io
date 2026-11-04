@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-03T09:27:33Z",
+ "generated": "2026-11-04T09:02:52Z",
  "mode": "full",
  "score": 80,
  "prev_score": 80,
@@ -141,7 +141,7 @@
     "Service",
     "WebSite"
    ],
-   "bytes": 510558,
+   "bytes": 502127,
    "requests": 14,
    "redirect": false,
    "in_sitemap": true
@@ -160,7 +160,7 @@
     "ItemList",
     "ListItem"
    ],
-   "bytes": 257275,
+   "bytes": 248844,
    "requests": 8,
    "redirect": false,
    "in_sitemap": true
@@ -176,7 +176,7 @@
     "Smart help for your home, school and business"
    ],
    "schema": [],
-   "bytes": 354067,
+   "bytes": 345636,
    "requests": 10,
    "redirect": false,
    "in_sitemap": true
@@ -208,7 +208,7 @@
     "Shop our TikTok furniture"
    ],
    "schema": [],
-   "bytes": 285700,
+   "bytes": 277269,
    "requests": 9,
    "redirect": false,
    "in_sitemap": true
@@ -224,7 +224,7 @@
     "See it in action"
    ],
    "schema": [],
-   "bytes": 240951,
+   "bytes": 232520,
    "requests": 5,
    "redirect": false,
    "in_sitemap": true
@@ -1266,7 +1266,7 @@
       "kb": 282,
       "requests": 48,
       "img_no_alt": 0,
-      "secs": 0.5,
+      "secs": 0.4,
       "keywords": []
      },
      {
@@ -1385,10 +1385,10 @@
       "whatsapp": true,
       "blog": false,
       "faq": false,
-      "kb": 133,
-      "requests": 120,
+      "kb": 135,
+      "requests": 122,
       "img_no_alt": 1,
-      "secs": 0.6,
+      "secs": 0.5,
       "keywords": []
      },
      {
@@ -1409,7 +1409,7 @@
       "kb": 163,
       "requests": 128,
       "img_no_alt": 1,
-      "secs": 0.4,
+      "secs": 1.0,
       "keywords": []
      },
      {
@@ -1430,13 +1430,13 @@
       "kb": 94,
       "requests": 102,
       "img_no_alt": 0,
-      "secs": 0.4,
+      "secs": 0.8,
       "keywords": []
      },
      {
-      "url": "https://furniturecityghana.com/product/bedroom-25/",
+      "url": "https://furniturecityghana.com/product/cs-06g/",
       "title": true,
-      "title_len": 30,
+      "title_len": 29,
       "description": false,
       "h1": 1,
       "og": false,
@@ -1448,8 +1448,8 @@
       "whatsapp": true,
       "blog": false,
       "faq": false,
-      "kb": 118,
-      "requests": 119,
+      "kb": 115,
+      "requests": 114,
       "img_no_alt": 2,
       "secs": 0.5,
       "keywords": []
@@ -1492,7 +1492,7 @@
       "kb": 366,
       "requests": 129,
       "img_no_alt": 26,
-      "secs": 0.3,
+      "secs": 0.1,
       "keywords": []
      }
     ],
@@ -1551,7 +1551,7 @@
       "no FAQ",
       "no H1",
       "no link-preview tags",
-      "heavy home page (133 KB HTML, 120 files)",
+      "heavy home page (135 KB HTML, 122 files)",
       "no phone number on the home page",
       "targets none of our keywords in title/H1"
      ]
@@ -1701,6 +1701,11 @@
   },
   {
    "d": "2026-11-03",
+   "score": 80,
+   "ai": 0
+  },
+  {
+   "d": "2026-11-04",
    "score": 80,
    "ai": 0
   }
