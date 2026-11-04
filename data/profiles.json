@@ -335,6 +335,13 @@
    "mode": "check",
    "linkOk": true,
    "pinOk": false
+  },
+  {
+   "d": "2026-11-04",
+   "net": "ig",
+   "mode": "check",
+   "linkOk": false,
+   "pinOk": true
   }
  ]
 }
