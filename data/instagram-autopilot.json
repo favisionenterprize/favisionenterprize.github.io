@@ -2732,6 +2732,15 @@
    "k": "presence:fav-009",
    "p": "FAV-009",
    "ok": true
+  },
+  {
+   "d": "2026-11-05",
+   "t": "2026-11-05T19:32:53.745Z",
+   "k": "card:FAV-016",
+   "p": "FAV-016",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find Create"
   }
  ],
  "profile": [
@@ -2878,6 +2887,12 @@
    "followers": 893,
    "following": 2027,
    "posts": 447
+  },
+  {
+   "d": "2026-11-05",
+   "followers": 894,
+   "following": 2027,
+   "posts": 466
   }
  ],
  "runs": [
@@ -4192,6 +4207,13 @@
    "tried": 0,
    "ok": 0,
    "stopped": "Instagram is logged in to a different account. Switch to @favisionent, then tap Run again."
+  },
+  {
+   "d": "2026-11-05",
+   "t": "2026-11-05T19:33:25.216Z",
+   "kind": "ig",
+   "tried": 1,
+   "ok": 0
   }
  ]
 }
