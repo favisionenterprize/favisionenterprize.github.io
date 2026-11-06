@@ -934,6 +934,13 @@ window.FAV_DATA = {
           "price": 4900,
           "checked": "2026-10-31",
           "synced": "2026-10-31"
+        },
+        {
+          "id": "1148687584515257",
+          "title": "Black Glass Dining Set — 6 High-Back Chairs",
+          "price": 4900,
+          "checked": "2026-11-06",
+          "synced": "2026-11-06"
         }
       ],
       "tiktok": 9,
@@ -1025,6 +1032,13 @@ window.FAV_DATA = {
           "price": 12600,
           "checked": "2026-10-31",
           "synced": "2026-10-31"
+        },
+        {
+          "id": "1539755117914364",
+          "title": "Dining Set Collection — 5 Designs, 6 Chairs",
+          "price": 12600,
+          "checked": "2026-11-06",
+          "synced": "2026-11-06"
         }
       ],
       "tiktok": 10,
@@ -1287,6 +1301,13 @@ window.FAV_DATA = {
           "price": 9500,
           "checked": "2026-10-31",
           "synced": "2026-10-31"
+        },
+        {
+          "id": "2270407220420650",
+          "title": "Executive Director Chair — Leather, High Back",
+          "price": 9500,
+          "checked": "2026-11-06",
+          "synced": "2026-11-06"
         }
       ],
       "tiktok": 5,
