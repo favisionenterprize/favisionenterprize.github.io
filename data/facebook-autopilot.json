@@ -11689,6 +11689,15 @@
    "ok": false,
    "now": true,
    "why": "Post button stayed off"
+  },
+  {
+   "d": "2026-11-06",
+   "t": "2026-11-06T01:27:28.163Z",
+   "p": "FAV-024",
+   "g": "page",
+   "ok": false,
+   "now": true,
+   "why": "Post button stayed off"
   }
  ],
  "resets": {},
@@ -12984,6 +12993,13 @@
   {
    "d": "2026-11-06",
    "t": "2026-11-06T01:08:44.382Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 0
+  },
+  {
+   "d": "2026-11-06",
+   "t": "2026-11-06T01:27:43.240Z",
    "kind": "post",
    "tried": 1,
    "ok": 0
