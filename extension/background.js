@@ -117,8 +117,15 @@ async function doInstall(force) {
   const us = await userScriptsOn();
   const st = await chrome.storage.local.get("installed");
   const want = us && live ? "live:" + live.hash : "bundled:" + chrome.runtime.getManifest().version + ":" + us;
-  if (st.installed === want && !force) return status();
   try {
+    if (st.installed === want && !force) {
+      const currentContent = await chrome.scripting.getRegisteredContentScripts();
+      const currentUser = us ? await chrome.userScripts.getScripts() : [];
+      const expectedContent = us && live ? [] : BUNDLED.map(x => x.id);
+      const expectedUser = us && live ? live.scripts.map(x => x.id) : [];
+      const sameIds = (actual, expected) => actual.length === expected.length && expected.every(id => actual.some(x => x.id === id));
+      if (sameIds(currentContent, expectedContent) && sameIds(currentUser, expectedUser)) return status();
+    }
     if (us) {
       await chrome.userScripts.configureWorld({ messaging: true });
       const old = await chrome.userScripts.getScripts();
