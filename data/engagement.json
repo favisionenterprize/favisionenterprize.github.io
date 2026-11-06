@@ -210,6 +210,11 @@
    "d": "2026-11-06",
    "net": "fb",
    "n": 562
+  },
+  {
+   "d": "2026-11-06",
+   "net": "tiktok",
+   "n": 285
   }
  ],
  "posts": {
@@ -3503,6 +3508,21 @@
    "followers": null,
    "stopped": "No posts found on your X profile.",
    "commenting": false
+  },
+  {
+   "d": "2026-11-06",
+   "t": "2026-11-06T21:32:02.771Z",
+   "net": "tiktok",
+   "mode": "stats",
+   "posts": 0,
+   "checked": 0,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 285,
+   "stopped": "No posts found on your TikTok profile.",
+   "commenting": true
   }
  ],
  "liked": {}
