@@ -13058,65 +13058,16 @@
    "tried": 0,
    "ok": 0,
    "stopped": "No listings found on Your listings. Make sure Facebook is on your personal profile."
+  },
+  {
+   "d": "2026-11-06",
+   "t": "2026-11-06T21:18:22.160Z",
+   "kind": "renew",
+   "tried": 8,
+   "ok": 0
   }
  ],
  "renewLog": [
-  {
-   "d": "2026-11-03",
-   "t": "Mesh Secretary Chair — Ergonomic Swivel",
-   "listed": "2026-08-03",
-   "ok": false,
-   "why": "Next renewal in 1 days"
-  },
-  {
-   "d": "2026-11-03",
-   "t": "Black Glass Dining Set — 6 High-Back Chairs",
-   "listed": "2026-08-03",
-   "ok": false,
-   "why": "Next renewal in 1 days"
-  },
-  {
-   "d": "2026-11-03",
-   "t": "Executive Director Chair — Leather, High Back",
-   "listed": "2026-08-03",
-   "ok": false,
-   "why": "Next renewal in 1 days"
-  },
-  {
-   "d": "2026-11-03",
-   "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
-   "listed": "2026-08-03",
-   "ok": false,
-   "why": "Next renewal in 1 days"
-  },
-  {
-   "d": "2026-11-03",
-   "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
-   "listed": "2026-08-01",
-   "ok": false,
-   "why": "Next renewal in 1 days"
-  },
-  {
-   "d": "2026-11-03",
-   "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
-   "listed": "2026-07-26",
-   "ok": false,
-   "why": "Next renewal in 1 days"
-  },
-  {
-   "d": "2026-11-03",
-   "t": "Mesh Secretary Chair — Ergonomic Swivel",
-   "listed": "2026-07-26",
-   "ok": false,
-   "why": "Next renewal in 1 days"
-  },
-  {
-   "d": "2026-11-03",
-   "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
-   "listed": "2026-07-26",
-   "ok": false,
-   "why": "Next renewal in 1 days"
-  },
   {
    "d": "2026-11-03",
    "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
@@ -14427,6 +14378,62 @@
    "t": "Dinning Sets with Chairs",
    "listed": "2026-07-26",
    "ok": true
+  },
+  {
+   "d": "2026-11-06",
+   "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
+   "listed": "2026-11-03",
+   "ok": false,
+   "why": "Next renewal in 4 days"
+  },
+  {
+   "d": "2026-11-06",
+   "t": "Red Glass Dining Set — 6 Chairs",
+   "listed": "2026-11-03",
+   "ok": false,
+   "why": "Next renewal in 4 days"
+  },
+  {
+   "d": "2026-11-06",
+   "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
+   "listed": "2026-11-03",
+   "ok": false,
+   "why": "Next renewal in 4 days"
+  },
+  {
+   "d": "2026-11-06",
+   "t": "White Foldable Chairs — Pack of 10 (Black Frame)",
+   "listed": "2026-10-31",
+   "ok": false,
+   "why": "Next renewal in 1 days"
+  },
+  {
+   "d": "2026-11-06",
+   "t": "White Foldable 8-Seater Set — 8ft Table + 8 Chairs",
+   "listed": "2026-10-31",
+   "ok": false,
+   "why": "Next renewal in 1 days"
+  },
+  {
+   "d": "2026-11-06",
+   "t": "White Foldable 4-Seater Set — 4ft Table + 4 Chairs",
+   "listed": "2026-10-31",
+   "ok": false,
+   "why": "Next renewal in 1 days"
+  },
+  {
+   "d": "2026-11-06",
+   "t": "White Foldable Chair — Black Frame, Handle Slot",
+   "listed": "2026-10-31",
+   "ok": false,
+   "why": "Next renewal in 1 days"
+  },
+  {
+   "d": "2026-11-06",
+   "t": "White Foldable Table — 4-Seater (4ft, Black Frame)",
+   "listed": "2026-10-31",
+   "ok": false,
+   "why": "Next renewal in 1 days"
   }
  ],
  "relay": {
@@ -14615,7 +14622,56 @@
  },
  "selling": {
   "d": "2026-11-06",
-  "cards": []
+  "cards": [
+   {
+    "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
+    "listed": "2026-11-03",
+    "status": "Active",
+    "next": "2026-11-10"
+   },
+   {
+    "t": "Red Glass Dining Set — 6 Chairs",
+    "listed": "2026-11-03",
+    "status": "Active",
+    "next": "2026-11-10"
+   },
+   {
+    "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
+    "listed": "2026-11-03",
+    "status": "Active",
+    "next": "2026-11-10"
+   },
+   {
+    "t": "White Foldable Chairs — Pack of 10 (Black Frame)",
+    "listed": "2026-10-31",
+    "status": "Active",
+    "next": "2026-11-07"
+   },
+   {
+    "t": "White Foldable 8-Seater Set — 8ft Table + 8 Chairs",
+    "listed": "2026-10-31",
+    "status": "Active",
+    "next": "2026-11-07"
+   },
+   {
+    "t": "White Foldable 4-Seater Set — 4ft Table + 4 Chairs",
+    "listed": "2026-10-31",
+    "status": "Active",
+    "next": "2026-11-07"
+   },
+   {
+    "t": "White Foldable Chair — Black Frame, Handle Slot",
+    "listed": "2026-10-31",
+    "status": "Active",
+    "next": "2026-11-07"
+   },
+   {
+    "t": "White Foldable Table — 4-Seater (4ft, Black Frame)",
+    "listed": "2026-10-31",
+    "status": "Active",
+    "next": "2026-11-07"
+   }
+  ]
  },
  "switches": [
   {
