@@ -238,7 +238,7 @@
    "commented": [],
    "title": "(20+) Facebook",
    "checked": "2026-11-06",
-   "likes": 1100,
+   "likes": 5100,
    "comments": 1,
    "views": 142
   },
@@ -1436,16 +1436,16 @@
    "commented": [],
    "title": "(20+) Facebook",
    "checked": "2026-11-06",
-   "likes": 551
+   "likes": 554
   },
   "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0XnU6vwkLi6iw3iQmt68WFZA17Ee56g6RQJRpgvFkcvyjCf1SWHZCr5D6podZQJs3l": {
    "net": "fb",
    "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0XnU6vwkLi6iw3iQmt68WFZA17Ee56g6RQJRpgvFkcvyjCf1SWHZCr5D6podZQJs3l",
    "first": "2026-11-06",
    "commented": [],
-   "title": "(20+) Tertiary Student Desk is available. Hurry... - F.A Vision Enterprise",
+   "title": "(20+) Facebook",
    "checked": "2026-11-06",
-   "likes": 552
+   "likes": 554
   }
  },
  "runs": [
@@ -3323,6 +3323,21 @@
    "followers": null,
    "stopped": null,
    "commenting": true
+  },
+  {
+   "d": "2026-11-06",
+   "t": "2026-11-06T01:10:40.378Z",
+   "net": "fb",
+   "mode": "reply",
+   "posts": 3,
+   "checked": 3,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 562,
+   "stopped": null,
+   "commenting": false
   }
  ],
  "liked": {}
