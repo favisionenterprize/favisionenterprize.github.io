@@ -168,6 +168,18 @@
     "ok": false,
     "why": "no “More options” button on the post",
     "mode": "set"
+   },
+   "DfUMVikCPB9": {
+    "d": "2026-11-06",
+    "ok": false,
+    "why": "no “Edit” in the post's menu",
+    "mode": "set"
+   },
+   "DfUCDbavxVI": {
+    "d": "2026-11-06",
+    "ok": false,
+    "why": "no “More options” button on the post",
+    "mode": "set"
    }
   }
  },
@@ -985,6 +997,15 @@
    "skip": 0,
    "v": "2026-10-15.4",
    "more": 2
+  },
+  {
+   "d": "2026-11-06",
+   "kind": "fxfix",
+   "net": "ig",
+   "tried": 2,
+   "ok": 0,
+   "skip": 0,
+   "v": "2026-10-15.4"
   }
  ]
 }
