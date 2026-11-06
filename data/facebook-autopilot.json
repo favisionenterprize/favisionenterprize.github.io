@@ -12963,6 +12963,14 @@
    "tried": 118,
    "ok": 33,
    "stopped": "Facebook showed \"an unexpected confirmation (“Alexander Awuku Agoodmann Ventures F.A Vision Enterprise See all profiles Meta Business Suite Settin”) that wasn't started by our step\". Renewing stopped."
+  },
+  {
+   "d": "2026-11-06",
+   "t": "2026-11-06T01:03:08.180Z",
+   "kind": "renew",
+   "tried": 0,
+   "ok": 0,
+   "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile in Facebook, then tap Renew again."
   }
  ],
  "renewLog": [
