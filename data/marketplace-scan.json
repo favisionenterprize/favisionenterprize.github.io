@@ -1153,6 +1153,15 @@
    "ok": true,
    "id": "1665138258314174",
    "verified": true
+  },
+  {
+   "d": "2026-11-06",
+   "t": "2026-11-06T08:10:54.769Z",
+   "p": "FAV-002",
+   "title": "Black Glass Dining Set — 6 High-Back Chairs",
+   "price": 4900,
+   "ok": false,
+   "why": "the Marketplace form didn't open"
   }
  ],
  "runs": [
@@ -1386,6 +1395,13 @@
    "tried": 0,
    "ok": 0,
    "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile in Facebook, then press the button again."
+  },
+  {
+   "d": "2026-11-06",
+   "kind": "list",
+   "tried": 1,
+   "ok": 0,
+   "stopped": "Facebook kept sending the tab to another page. Stopped."
   }
  ],
  "skip": []
