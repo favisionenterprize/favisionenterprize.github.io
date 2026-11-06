@@ -20,6 +20,134 @@ const ROOT = path.resolve(__dirname, "..") + "/";
 const SCRIPTS = ["admin/captions.js", "admin/igauto.js", "admin/ttshop.js", "admin/socauto.js", "admin/vidauto.js", "admin/trendvideo.js", "admin/engage.js", "admin/mkauto.js", "admin/profiles.js", "admin/viral.js", "admin/ttcaptions.js", "admin/boost.js", "admin/fixall.js", "admin/brands.js", "admin/aiplan.js", "admin/brandstamp.js", "admin/relay.js", "admin/fbauto.js", "admin/openitems.js", "admin/prime.js"];
 const MIN_TEXT = 150; // a tab with less text than this counts as blank
 
+function extensionRecoverySmoke(startFailures, failureMessage) {
+  const vm = require("vm");
+  const assert = require("assert");
+  const initialFailures = startFailures;
+  const source = fs.readFileSync(ROOT + "extension/admin.js", "utf8");
+  const calls = [], posted = [], listeners = {};
+  const root = { dataset: {} };
+  const window = {
+    addEventListener: (name, fn) => { listeners[name] = fn; },
+    postMessage: (data, origin) => posted.push({ data, origin })
+  };
+  const runtime = {
+    lastError: null,
+    sendMessage(message, callback) {
+      calls.push(message.type);
+      const respond = (error, response) => {
+        const previous = this.lastError;
+        this.lastError = error;
+        callback(response);
+        this.lastError = previous;
+      };
+      if (message.type === "start" && startFailures > 0) {
+        startFailures--;
+        respond({ message: failureMessage }, undefined);
+      } else if (message.type === "hello") respond(null, { mode: "live", userScripts: true, version: "test", shell: "5.5.0" });
+      else respond(null, { ok: true });
+    }
+  };
+  const context = {
+    document: { documentElement: root, addEventListener() {} },
+    window, chrome: { runtime, storage: { local: { get: (_key, callback) => callback({}), set() {} } } },
+    location: { origin: "https://favisionenterprize.github.io" },
+    localStorage: { getItem: () => "" }, sessionStorage: { getItem: () => "" }, setInterval() {}
+  };
+  vm.runInNewContext(source, context);
+  calls.length = 0;
+  listeners.message({ source: window, origin: context.location.origin, data: { type: "favauto-start", url: "https://www.facebook.com/", job: { kind: "test" } } });
+  const recoverable = /receiving end does not exist|could not establish connection|extension context invalidated/i.test(failureMessage);
+  assert.deepStrictEqual(calls, initialFailures && recoverable ? ["start", "hello", "start"] : ["start"]);
+  const failures = posted.filter(x => x.data.type === "favauto-start-failed");
+  assert.strictEqual(failures.length, initialFailures > 0 && !(recoverable && initialFailures === 1) ? 1 : 0);
+  if (failures.length) assert.match(failures[0].data.error, new RegExp(failureMessage.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+}
+extensionRecoverySmoke(1, "Could not establish connection. Receiving end does not exist.");
+extensionRecoverySmoke(2, "Could not establish connection. Receiving end does not exist.");
+extensionRecoverySmoke(1, "The message port closed before a response was received.");
+
+async function extensionDispatcherSmoke() {
+  const vm = require("vm");
+  const assert = require("assert");
+  const source = fs.readFileSync(ROOT + "extension/background.js", "utf8");
+  async function createBackground({ userScripts = false, handlerScripts = [] } = {}) {
+    const listeners = [], contentScripts = [], liveScripts = [];
+    const local = {
+      installed: userScripts ? "live:test-hash" : "bundled:5.5.0:false",
+      live: { at: Date.now(), hash: "test-hash", version: "test", scripts: handlerScripts }
+    };
+    const session = {}, navigations = [];
+    const event = () => ({ addListener() {} });
+    const runtimeEvent = { addListener: fn => listeners.push(fn) };
+    const chrome = {
+      runtime: { onInstalled: event(), onStartup: event(), onMessage: runtimeEvent, getManifest: () => ({ version: "5.5.0" }) },
+      alarms: { create() {}, onAlarm: event() },
+      action: { onClicked: event(), setBadgeBackgroundColor() {}, setBadgeText() {}, setTitle() {} },
+      notifications: { onClicked: event(), create() {}, clear() {} },
+      tabs: { onRemoved: event(), async update(id, options) { if (options.url) navigations.push({ id, ...options }); return { id }; }, async create() {} },
+      storage: {
+        local: {
+          async get(keys) {
+            if (typeof keys === "string") return { [keys]: local[keys] };
+            if (Array.isArray(keys)) return Object.fromEntries(keys.map(key => [key, local[key]]));
+            return { ...local };
+          },
+          async set(values) { Object.assign(local, values); }
+        },
+        session: {
+          async get(keys) { return keys == null ? { ...session } : Object.fromEntries((Array.isArray(keys) ? keys : [keys]).map(key => [key, session[key]])); },
+          async set(values) { Object.assign(session, values); },
+          async remove(key) { delete session[key]; }
+        }
+      },
+      scripting: {
+        async getRegisteredContentScripts() { return contentScripts.slice(); },
+        async unregisterContentScripts() { contentScripts.length = 0; },
+        async registerContentScripts(scripts) { contentScripts.push(...scripts); }
+      }
+    };
+    if (userScripts) chrome.userScripts = {
+      async getScripts() { return liveScripts.slice(); },
+      async configureWorld() {},
+      async unregister() { liveScripts.length = 0; },
+      async register(scripts) { liveScripts.push(...scripts); }
+    };
+    vm.runInNewContext(source, {
+      chrome, fetch: async () => { throw new Error("Unexpected network request in dispatcher test"); },
+      setTimeout: () => 0, clearTimeout() {}, console, URL
+    });
+    return {
+      listeners, contentScripts, liveScripts, navigations, session,
+      async send(message) {
+        return new Promise(resolve => {
+          const sender = { tab: { id: 17 } };
+          for (const listener of listeners) listener(message, sender, resolve);
+        });
+      }
+    };
+  }
+  const fb = await createBackground();
+  const fbResult = await fb.send({ type: "start", url: "https://www.facebook.com/groups/123", job: { id: "fb1", kind: "post" } });
+  assert.strictEqual(fbResult.ok, true);
+  assert(fb.contentScripts.some(script => script.id === "fb-autopilot"), "stale bundled registration was not repaired");
+  assert.strictEqual(fb.navigations.length, 1, "Facebook job did not navigate after repair");
+  assert.strictEqual(fb.session.job17.kind, "post");
+
+  const socialManifest = [{ id: "social", file: "social.js", matches: ["https://x.com/*", "https://www.tiktok.com/*"] }];
+  const social = await createBackground({ userScripts: true, handlerScripts: socialManifest });
+  const socialResult = await social.send({ type: "start", url: "https://www.tiktok.com/tiktokstudio/upload", job: { id: "tt1", kind: "tiktok" } });
+  assert.strictEqual(socialResult.ok, true);
+  assert(social.liveScripts.some(script => script.id === "social"), "stale live registration was not repaired");
+  assert.strictEqual(social.navigations.length, 1, "social job did not navigate after repair");
+
+  const missing = await createBackground({ userScripts: true, handlerScripts: [{ id: "dialogs", matches: ["https://x.com/*"] }] });
+  const missingResult = await missing.send({ type: "start", url: "https://x.com/compose/post", job: { id: "x1", kind: "x" } });
+  assert.strictEqual(missingResult.ok, false, "missing handler was incorrectly accepted");
+  assert.match(missingResult.error, /x script \(social\).*isn't registered/i);
+  assert.strictEqual(missing.navigations.length, 0, "missing handler navigated without running");
+}
+
 const files = {};
 for (const f of fs.readdirSync(ROOT + "data")) if (f.endsWith(".json")) files["data/" + f] = JSON.parse(fs.readFileSync(ROOT + "data/" + f, "utf8"));
 
@@ -97,7 +225,7 @@ async function autopilot(browser, day) {
       await P.start({ inline: true });
       // the add-on: answer each job at once (nothing posted), with the steps it carried
       const answered = new Set();
-      for (let i = 0; i < 400; i++) {
+      for (let i = 0; i < 1000; i++) {
         await wait(60);
         for (const j of jobs.filter(x => !answered.has(x.job.id))) {
           answered.add(j.job.id);
@@ -137,12 +265,22 @@ async function autopilot(browser, day) {
       const wait = ms => new Promise(r => setTimeout(r, ms));
       const O = window.FAV_OPENITEMS, AP = window.FAV_AIPLAN, out = {};
       await AP.load(); const plan = AP._test.state();
+      window.__files["data/marketplace-scan.json"] = { settings: {}, scan: { d: new Date().toLocaleDateString("en-CA"), listings: [] }, listed: [], runs: [], skip: [] };
+      await window.FAV_MKAUTO.load(true);
       window.__files["data/seo-report.json"] = { issues: [{ id: "t1", check: "title", msg: "x", fix: { id: "title:test.html", kind: "title", page: "test.html", value: "Test title" } }] };
       window.FAV_LEADS = { _test: { get: () => [{ k: "e:9", status: "New", editable: true, name: "Ama Mensah", phone: "0240000002", product: "Student desk", message: "price for 60?" }] } };
       plan.rules.find(r => r.id === "M9").status = "proposed";
       out.off = (await O.fixAll({ auto: true })).error || "";
       plan.rules.find(r => r.id === "M9").status = "approved";
       window.confirm = () => true;
+      const FX = window.FAV_FIXALL, TTC = window.FAV_TTCAPS;
+      document.documentElement.dataset.favautoExt = "5";
+      document.documentElement.dataset.favautoMode = "bundled";
+      const preflight = TTC.preflight;
+      TTC.preflight = async opts => { opts.alarm('The add-on is not in automatic-update (live) mode; enable "Allow user scripts".'); return false; };
+      await FX.startScan("fb");
+      out.liveModeBlock = FX._test.alert();
+      TTC.preflight = preflight;
       const jobs = []; const onMsg = e => { if (e.data && e.data.type === "favauto-start") jobs.push(e.data.job); }; window.addEventListener("message", onMsg);
       document.documentElement.dataset.favautoExt = "5"; document.documentElement.dataset.favautoMode = "live"; document.documentElement.dataset.favautoUs = "1";
       await O.load(true); await O._test.loadSeo();
@@ -151,6 +289,14 @@ async function autopilot(browser, day) {
       out.you = list.filter(i => i.act === "you").map(i => i.id);
       out.youLinks = list.filter(i => i.act === "you").every(i => i.url || i.link);
       out.learned = list.filter(i => i.learned && i.learned.length).length;
+      const mk = window.FAV_MKAUTO && window.FAV_MKAUTO.state(), scanDay = mk && mk.scan && mk.scan.d;
+      if (mk && mk.scan) {
+        mk.scan.d = "2020-01-01";
+        const stale = O.items();
+        out.staleMarketplace = stale.find(i => i.id === "mk-scan")?.what || "";
+        out.staleMarketplaceCounts = stale.some(i => ["mk-missing", "mk-price", "mk-dups"].includes(i.id));
+        mk.scan.d = scanDay;
+      }
       const r = await O.fixAll({ auto: true });
       await wait(400);
       window.removeEventListener("message", onMsg);
@@ -166,9 +312,11 @@ async function autopilot(browser, day) {
     });
     if (!/Proposed/.test(oi.off)) problems.push("AI Fix ran while rule M9 is only Proposed: " + oi.off);
     if (!oi.result) problems.push("AI Fix didn't finish");
+    if (!/Allow user scripts/.test(oi.liveModeBlock || "")) problems.push("Fix all did not show the live-update setup instructions: " + oi.liveModeBlock);
     for (const want of ["Customers", "Meta Verified", "Security", "Backend", "Prices", "Leads", "What's in the box", "Brands", "SEO & AI"]) if (!oi.srcs.includes(want)) problems.push("Open items missing source " + want + ": " + oi.srcs.join(", "));
-    for (const id of ["m-metaverified", "m-2fa", "m-apikeys", "m-julius", "m-prices", "leads", "box"]) if (!oi.you.includes(id)) problems.push("Open items: " + id + " should be Needs you");
+    for (const id of ["m-metaverified", "m-2fa", "m-apikeys", "m-julius", "m-prices", "m-secure-orchestrator", "m-vendor-marketplace", "leads", "box"]) if (!oi.you.includes(id)) problems.push("Open items: " + id + " should be Needs you");
     if (!oi.youLinks) problems.push("Open items: a Needs-you row has no link to where to do it");
+    if (!/old/.test(oi.staleMarketplace) || oi.staleMarketplaceCounts) problems.push("Open items treated stale Marketplace results as current: " + JSON.stringify([oi.staleMarketplace, oi.staleMarketplaceCounts]));
     if (!oi.seo) problems.push("AI Fix didn't save the SEO fix to data/seo-fixes.json");
     if (!/Ama/.test(oi.draft)) problems.push("AI Fix didn't draft the lead reply: " + oi.draft);
     if (!oi.log) problems.push("AI Fix logged nothing in data/open-items.json");
@@ -194,6 +342,21 @@ async function autopilot(browser, day) {
     inp.dispatchEvent(new Event("change", { bubbles: true })); await wait(200);
     V.addFiles = real; V.state().videos = V.state().videos.filter(v => v.id !== "trend-test");
     out.opts = got; out.made = (window.FAV_TRENDVID.state().made || []).slice(-1)[0] || null;
+    window.FAV_FBAUTO._test.setTab("videos"); await wait(100);
+    const desk = document.querySelector('[data-vid-src="desk"]');
+    out.deskButton = !!desk;
+    if (desk) {
+      desk.click(); await wait(100);
+      const campaign = document.querySelector("#fa-body");
+      out.deskCampaign = {
+        note: campaign && /already embedded on the website/i.test(campaign.innerText),
+        product: !!campaign.querySelector('a[href="../p/FAV-014.html"]'),
+        reel: !!campaign.querySelector('[data-vid-card="fb-desk-container-offload"] iframe'),
+        oldAudioHeld: !!campaign.querySelector('[data-vid-card="tiktok-29-why-schools"] .vid-hold') &&
+          ["web-on", "yt", "tt"].every(k => campaign.querySelector(`[data-vid-card="tiktok-29-why-schools"] [data-vid="${k}"]`)?.disabled),
+        count: campaign.querySelectorAll(".vid-card").length
+      };
+    }
     return out;
   });
   const tvT = files["data/trend-videos.json"].templates.length;
@@ -204,6 +367,7 @@ async function autopilot(browser, day) {
     if (!(tv.copied > 100)) problems.push("Trend video Copy prompt copied nothing");
     if (!tv.opts || tv.opts.kind !== "trend" || tv.opts.source !== "upload" || !tv.opts.trend) problems.push("Add video didn't go into the videos library as a trend video: " + JSON.stringify(tv.opts));
     if (!tv.made || !tv.made.video) problems.push("Add video wasn't logged in data/trend-videos.json made[]");
+    if (!tv.deskButton || !tv.deskCampaign || !tv.deskCampaign.note || !tv.deskCampaign.product || !tv.deskCampaign.reel || !tv.deskCampaign.oldAudioHeld || !tv.deskCampaign.count) problems.push("FAV-014 campaign filter does not show the existing reel/product or hold the old deposit-audio video");
   }
   for (const b of new Set(files["data/trend-videos.json"].templates.map(t => t.brand))) if (!files["data/brands.json"].brands.some(x => x.id === b)) problems.push("trend-videos.json template for unknown brand " + b);
   // Hourly posting steps from the AI Plan (hr:<net>:<n>, desk:<product>:<groups>) launch real add-on jobs.
@@ -345,9 +509,13 @@ async function leads(browser) {
       orders: [{ ref: "FAV-TEST1", when: new Date().toISOString(), product: "Sofa", total: 100, balance: 0, progress: "Delivered" }], invoices: [] }] }) }));
   await page.goto("http://smoke.test/admin/");
   await page.evaluate(({ files, ESC }) => {
-    localStorage.setItem("fav-orders-key", "smoke");
     window.FAV_CONFIG = { escapeHtml: (0, eval)(ESC), formatPrice: n => "GH₵" + n };
-    window.FAV_ADMIN = { business: () => Object.assign({}, files["data/business.json"], { enquiry_endpoint: "https://backend.smoke.test/exec" }), products: () => files["data/products.json"], toast: () => {} };
+    window.FAV_ADMIN = { business: () => Object.assign({}, files["data/business.json"], { enquiry_endpoint: "https://backend.smoke.test/exec" }),
+      products: () => files["data/products.json"], toast: () => {}, hasBackendSession: () => true,
+      backendSigned: async payload => {
+        const res = await fetch("https://backend.smoke.test/exec", { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) });
+        return res.json();
+      } };
   }, { files, ESC });
   await page.addScriptTag({ content: fs.readFileSync(ROOT + "admin/leads.js", "utf8") });
   await page.evaluate(() => document.querySelector("[data-leads]").click());
@@ -456,7 +624,8 @@ async function marketplace(browser) {
     const d0 = new Date().toLocaleDateString("en-CA");
     window.__files["data/sounds.json"] = { d: "2026-01-01", sounds: [
       { name: "Afro Vibes Commercial", artist: "CML", platform: "tiktok", rank: 1 }, { name: "Highlife Groove", artist: "CML", platform: "tiktok", rank: 2 },
-      { name: "<img src=x onerror=window.__xss=4>Evil", artist: "x", platform: "tiktok", rank: 3 }, { name: "Reel Tune", artist: "Meta", platform: "ig", rank: 1 } ],
+      { name: "<img src=x onerror=window.__xss=4>Evil", artist: "x", platform: "tiktok", rank: 3 }, { name: "Reel Tune", artist: "Meta", platform: "ig", rank: 1 },
+      { name: "Accra Reel Beat", artist: "Meta", platform: "ig", rank: 2 } ],
       manual: [], used: [{ name: "Afro Vibes Commercial", platform: "tiktok", d: d0 }], notes: [] };
     window.__files["data/boost.json"] = { settings: { best_time: false }, pinned: [], stories: [], reels: [], runs: [] };
     window.__files["data/engagement.json"] = Object.assign({}, files["data/engagement.json"], { posts: { "https://www.tiktok.com/@fav/video/1": { net: "tiktok", url: "https://www.tiktok.com/@fav/video/1", title: "Luxury Leather Sofa Set in Accra", likes: 900, comments: 80, shares: 40, views: 30000 } } });
@@ -570,7 +739,7 @@ async function marketplace(browser) {
     out.ttcAfter = card();
     // The add-on doesn't answer / has old scripts: a red message, no job.
     TC._test.statusMs(300);
-    const goTry = async () => { window.__jobs = []; document.querySelector("#ttc-card [data-ttc='go']").click(); await wait(1200); TC._test.setRun(null);
+    const goTry = async () => { window.__jobs = []; document.querySelector("#ttc-card [data-ttc='go']").click(); await wait(1600); TC._test.setRun(null);
       const el = document.querySelector("#ttc-alert"); return { jobs: window.__jobs.length, alert: el && !el.hidden ? el.textContent : "", toast: (window.__toasts || []).slice(-1)[0] || "" }; };
     const savedAddon = window.__addon;
     window.__addon = null; out.ttcNoAddon = await goTry();
@@ -655,12 +824,12 @@ async function marketplace(browser) {
     FX._test.setRun(null);
     // The big button: add-on check, then the Facebook Page scan first
     window.__jobs = [];
-    document.querySelector("#fx-card [data-fx=all]").click(); await wait(1200);
+    document.querySelector("#fx-card [data-fx=all]").click(); await wait(2000);
     out.fxAll = window.__jobs[0] && window.__jobs[0].job;
     FX._test.setRun(null);
     const keepAddon = window.__addon;
     window.__addon = null; window.__jobs = [];
-    document.querySelector("#fx-card [data-fx=all]").click(); await wait(1200);
+    document.querySelector("#fx-card [data-fx=all]").click(); await wait(2000);
     out.fxSilent = { jobs: window.__jobs.length, alert: (document.querySelector("#fx-alert") || {}).hidden === false ? document.querySelector("#fx-alert").textContent : "" };
     window.__addon = keepAddon;
     window.__toasts = (window.__toasts || []).filter(t => !/add-on|Fix all|Facebook Page:/i.test(t));
@@ -674,6 +843,8 @@ async function marketplace(browser) {
     out.sound1 = BS.soundFor("tiktok"); out.sound2 = BS.soundFor("tiktok", [out.sound1 && out.sound1.name]);
     const tj = window.FAV_SOCAUTO.job("tiktok", { products: ["FAV-014", "FAV-016"], limit: 2 });
     out.ttSounds = tj ? tj.job.q.map(x => x.sound && x.sound.name) : [];
+    const ij = window.FAV_IGAUTO.job({ products: ["FAV-014", "FAV-016"], limit: 2 });
+    out.igSounds = ij ? ij.job.q.map(x => x.sound && x.sound.name) : [];
     out.favour = BS.favour();
     out.inSlot = BS.inSlot();
     BS.state().settings.best_time = true;
@@ -701,7 +872,7 @@ async function marketplace(browser) {
     const ac = document.querySelector("#boost-artists-card");
     out.artistCard = ac ? ac.innerText : "";
     const fm = document.querySelector("#boost-artists");
-    fm.elements.add.value = "Sarkodie"; fm.requestSubmit(); await wait(300);
+    fm.elements.add.value = "Tems"; fm.requestSubmit(); await wait(300);
     out.afterAdd = window.__files["data/sounds.json"].settings.artists.slice();
     document.querySelector("[data-boost-artist-del='1']").click(); await wait(300);
     out.afterDel = window.__files["data/sounds.json"].settings.artists.slice();
@@ -789,15 +960,17 @@ async function marketplace(browser) {
   want(b.text > 500 && !b.xss && !b.imgs, "Boost tab draws and escapes sound names: " + JSON.stringify(b));
   want(r.sound1 && r.sound1.name === "Highlife Groove" && r.sound2 && r.sound2.name !== "Highlife Groove" && r.sound2.name !== "Afro Vibes Commercial", "sound rotation skips sounds used in the last 3 days: " + JSON.stringify([r.sound1, r.sound2]));
   want(r.ttSounds.length === 2 && r.ttSounds[0] && r.ttSounds[0] !== r.ttSounds[1], "each TikTok post gets a different trending sound: " + JSON.stringify(r.ttSounds));
+  want(r.igSounds.length === 2 && r.igSounds[0] && r.igSounds[0] !== r.igSounds[1], "each Instagram image post gets a different trending sound: " + JSON.stringify(r.igSounds));
   want(r.favour.includes("FAV-016"), "What's working picks the top post's product (FAV-016): " + JSON.stringify(r.favour));
   want(r.inSlot ? r.defer.length === 5 : (r.defer.join() === "renew,mkscan" && r.queue && r.queue.steps.join() === "post,ig,tiktok"), "best-time posting holds the posting steps until the next slot: " + JSON.stringify([r.inSlot, r.defer, r.queue]));
   want(r.refreshTT && r.refreshTT.kind === "tiktok" && r.refreshTT.q.length === 1 && r.refreshTT.q[0].p === "FAV-014" && r.refreshTT.q[0].sound && (r.refreshTT.then || [])[0] === "pinswap:tiktok", "Refresh pinned on TikTok posts FAV-014 with a sound, then pins: " + JSON.stringify(r.refreshTT).slice(0, 300));
   want(r.refreshIG && r.refreshIG.q[0].video && /\.mp4$/.test(r.refreshIG.q[0].img) && (r.refreshIG.then || [])[0] === "pinswap:ig", "Refresh pinned on Instagram posts our Short as a Reel: " + JSON.stringify(r.refreshIG && r.refreshIG.q[0]).slice(0, 300));
   want(r.pinStore && r.pinStore.tiktok && r.pinStore.tiktok.pin && /Fresh stock/.test(r.pinStore.tiktok.unpin), "new post to pin and old one to unpin are remembered: " + JSON.stringify(r.pinStore));
-  want(r.artistsDefault.join() === "Davido,Kojo Blak,Hillsong Worship" && r.favs.length === 2 && r.favs[0] && r.favs[0] !== r.favs[1], "favourite artists: default list, a different artist each post: " + JSON.stringify([r.artistsDefault, r.favs]));
-  want(r.favNext && r.favNext.fav === "Hillsong Worship" && r.favNext.avoid.includes("Fall") && r.favNext.name, "next post tries the artist tried longest ago, avoids the track used lately, keeps a trending fallback: " + JSON.stringify(r.favNext));
+  const artistSeed = JSON.parse(fs.readFileSync(ROOT + "data/sounds.json", "utf8")).settings.artists;
+  want(r.artistsDefault.join() === artistSeed.join() && r.artistsDefault.length >= 12 && r.favs.length === 2 && r.favs[0] && r.favs[0] !== r.favs[1], "favourite artists: broad default list, a different artist each post: " + JSON.stringify([r.artistsDefault, r.favs]));
+  want(r.favNext && r.favNext.fav === artistSeed.find(a => !["Davido", "Kojo Blak"].includes(a)) && r.favNext.avoid.includes("Fall") && r.favNext.name, "next post tries the artist tried longest ago, avoids the track used lately, keeps a trending fallback: " + JSON.stringify(r.favNext));
   want(r.stats.find(x => x.a === "Davido").found === 1 && r.stats.find(x => x.a === "Kojo Blak").missing === 1 && /found 1/.test(r.artistCard) && /not available 1/.test(r.artistCard), "Boost tab shows found / not available per artist: " + JSON.stringify(r.stats) + " " + r.artistCard.slice(0, 200));
-  want(r.afterAdd.join() === "Davido,Kojo Blak,Hillsong Worship,Sarkodie" && r.afterDel.join() === "Davido,Hillsong Worship,Sarkodie", "artists can be added and removed (data/sounds.json settings.artists): " + JSON.stringify([r.afterAdd, r.afterDel]));
+  want(r.afterAdd.join() === artistSeed.concat("Tems").join() && r.afterDel.join() === artistSeed.filter((_, i) => i !== 1).concat("Tems").join(), "artists can be added and removed (data/sounds.json settings.artists): " + JSON.stringify([r.afterAdd, r.afterDel]));
   want(r.timers === 3 && r.used.includes("Highlife Groove"), "after a TikTok post: 3 first-hour reply checks and the sound noted: " + JSON.stringify([r.timers, r.used]));
   want(!r.steps.includes("mklist"), "listing must be off in the daily run by default: " + r.steps.join());
   (r.toasts || []).filter(t => t.startsWith("✗")).forEach(t => problems.push("error toast: " + t));
@@ -1100,7 +1273,15 @@ async function plainPage(browser, problems, extra) {
       toast: (m, bad) => window.__toasts.push((bad ? "✗ " : "") + m),
       readJsonFile: async (f, e) => JSON.parse(JSON.stringify(window.__files[f] || e)),
       saveJson: async (f, m, msg, e) => { window.__files[f] = m(JSON.parse(JSON.stringify(window.__files[f] || e))); window.__saves.push(f); return JSON.parse(JSON.stringify(window.__files[f])); },
-      backendSigned: async payload => { window.__muse.push(payload); return window.__museReply ? window.__museReply(payload) : { ok: false, error: "no_ai_key" }; } };
+      hasBackendSession: () => true,
+      backendSigned: async payload => {
+        if (payload.action === "muse") {
+          window.__muse.push(payload);
+          return window.__museReply ? window.__museReply(payload) : { ok: false, error: "no_ai_key" };
+        }
+        const res = await fetch("https://backend.smoke.test/exec", { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) });
+        return res.json();
+      } };
   }, { files, ESC });
   return page;
 }
@@ -1155,7 +1336,8 @@ async function prospects(browser) {
   await page.click(sel + " [data-pr=catalog]"); await page.waitForTimeout(100);
   const draft = await page.evaluate(s => (document.querySelector(s + " [data-pv=draft]") || {}).value || "", sel);
   want(/60 × Student Desk Chair Set @ GH₵640 = GH₵38,400/.test(draft), "catalogue bulk price (GH₵640 from 50) not in the pitch: " + draft.slice(0, 200));
-  want(/we sell/i.test(draft) && !/we make/i.test(draft) && /057 ?264 ?6176/.test(draft), "pitch must say 'we sell' and carry the F.A Vision WhatsApp");
+  const expectedWhatsApp = files["data/business.json"].whatsapp.replace(/^\+233/, "0");
+  want(/we sell/i.test(draft) && !/we make/i.test(draft) && draft.includes(expectedWhatsApp), "pitch must say 'we sell' and carry the configured F.A Vision WhatsApp");
   await page.click(sel + " [data-pr=kind][data-k=email]"); await page.waitForTimeout(80);
   want(/^Subject: /.test(await page.evaluate(s => document.querySelector(s + " [data-pv=draft]").value, sel)), "email pitch has no subject line");
   await page.fill(sel + " [data-pv=phone]", "0240000001"); await page.dispatchEvent(sel + " [data-pv=phone]", "change"); await page.waitForTimeout(80);
@@ -1167,7 +1349,7 @@ async function prospects(browser) {
   want(await page.evaluate(() => /PROFORMA INVOICE/.test((window.__opened.slice(-1)[0] || { doc: { html: "" } }).doc.html) && /Bright Future Academy/.test(window.__opened.slice(-1)[0].doc.html)), "quote page didn't open as a proforma for the prospect");
   await page.click(sel + " [data-pr=lead]"); await page.waitForTimeout(250);
   const lead = posts.map(x => { try { return JSON.parse(x); } catch (e) { return null; } }).filter(Boolean).find(x => x.source === "prospect");
-  want(lead && lead.organisation === "Bright Future Academy" && lead.phone === "0240000001" && /GH₵38,400/.test(lead.message), "Add to Leads didn't post a prospect lead: " + JSON.stringify(lead));
+  want(lead && lead.action === "create_enquiry" && lead.organisation === "Bright Future Academy" && lead.phone === "0240000001" && /GH₵38,400/.test(lead.message), "Add to Leads didn't post a session-authenticated prospect lead: " + JSON.stringify(lead));
   want(await page.evaluate(() => document.documentElement.scrollWidth) <= 392, "Bulk buyers screen scrolls sideways on a phone");
   if (process.env.PROSPECTS_SHOT) await page.screenshot({ path: process.env.PROSPECTS_SHOT, fullPage: true });
   // save: only public fields reach the repo
@@ -1234,37 +1416,36 @@ async function profilekit(browser) {
 // Record a sale posts the existing order + update_order actions.
 async function sales(browser) {
   const problems = [], want = (ok, m) => { if (!ok) problems.push(m); };
-  const posts = [], gets = [];
+  const posts = [];
   const now = Date.now(), iso = d => new Date(now - d * 864e5).toISOString();
   const ORD = [
-    { Timestamp: iso(1), Reference: "FAV-A1", Product: "Student Desk Chair Set — Senior High (FAV-014)", Quantity: 60, TotalGHS: 38400, PaidNowGHS: 19200, BalanceGHS: 19200, PaymentOption: "Pay a deposit", Progress: "Confirmed", Notes: "" },
-    { Timestamp: iso(3), Reference: "FAV-A2", Product: "Luxury Leather Sofa Set · via TikTok (FAV-016)", Quantity: 1, TotalGHS: 8500, PaidNowGHS: 8500, BalanceGHS: 0, PaymentOption: "Pay in full", Progress: "Delivered", Notes: "" },
-    { Timestamp: iso(5), Reference: "FAV-A3", Product: "Centre Table (FAV-018)", Quantity: 2, TotalGHS: 1600, PaidNowGHS: 0, BalanceGHS: 0, PaymentOption: "Walk-in sale (recorded in admin)", Progress: "Balance paid", Notes: "Channel: walk-in · recorded in admin" },
-    { Timestamp: iso(8), Reference: "FAV-A4", Product: "Centre Table (FAV-018)", Quantity: 1, TotalGHS: 800, PaidNowGHS: 0, BalanceGHS: 800, PaymentOption: "Pay on delivery", Progress: "Cancelled", Notes: "" },
-    { Timestamp: iso(60), Reference: "FAV-A5", Product: "Office Chair (FAV-017)", Quantity: 1, TotalGHS: 4500, PaidNowGHS: 4500, BalanceGHS: 0, PaymentOption: "Pay in full", Progress: "Delivered", Notes: "Channel: marketplace" }];
+    { Timestamp: iso(1), Reference: "FAV-A1", Product: "Student Desk Chair Set — Senior High (FAV-014)", Quantity: 60, TotalGHS: 38400, PaidNowGHS: 19200, ReceivedGHS: 19200, BalanceGHS: 19200, PaymentOption: "Pay a deposit", Progress: "Confirmed", Notes: "" },
+    { Timestamp: iso(3), Reference: "FAV-A2", Product: "Luxury Leather Sofa Set · via TikTok (FAV-016)", Quantity: 1, TotalGHS: 8500, PaidNowGHS: 8500, ReceivedGHS: 8500, BalanceGHS: 0, PaymentOption: "Pay in full", Progress: "Delivered", Notes: "" },
+    { Timestamp: iso(5), Reference: "FAV-A3", Product: "Centre Table (FAV-018)", Quantity: 2, TotalGHS: 1600, PaidNowGHS: 0, ReceivedGHS: 1600, BalanceGHS: 0, PaymentOption: "Walk-in sale (recorded in admin)", Progress: "Balance paid", Notes: "Channel: walk-in · recorded in admin" },
+    { Timestamp: iso(8), Reference: "FAV-A4", Product: "Centre Table (FAV-018)", Quantity: 1, TotalGHS: 800, PaidNowGHS: 0, ReceivedGHS: 0, BalanceGHS: 800, PaymentOption: "Pay on delivery", Progress: "Cancelled", Notes: "" },
+    { Timestamp: iso(60), Reference: "FAV-A5", Product: "Office Chair (FAV-017)", Quantity: 1, TotalGHS: 4500, PaidNowGHS: 4500, ReceivedGHS: 4500, BalanceGHS: 0, PaymentOption: "Pay in full", Progress: "Delivered", Notes: "Channel: marketplace" }];
   const page = await plainPage(browser, problems, async pg => pg.route("https://backend.smoke.test/**", r => {
-    const u = new URL(r.request().url());
-    if (r.request().method() === "POST") { posts.push(JSON.parse(r.request().postData())); return r.fulfill({ status: 200, contentType: "application/json", body: '{"ok":true}' }); }
-    gets.push(u.searchParams.get("action"));
-    if (u.searchParams.get("action") === "orders") return r.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ok: true, orders: ORD }) });
-    return r.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ok: true, customers: [{ name: "X", enquiries: [{ row: 2, when: iso(2), source: "whatsapp", status: "Won" }] }] }) });
+    const body = JSON.parse(r.request().postData());
+    posts.push(body);
+    if (body.action === "orders") return r.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ok: true, orders: ORD }) });
+    if (body.action === "customers") return r.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ok: true, customers: [{ name: "X", enquiries: [{ row: 2, when: iso(2), source: "whatsapp", status: "Won" }] }] }) });
+    return r.fulfill({ status: 200, contentType: "application/json", body: '{"ok":true}' });
   }));
-  await page.evaluate(() => localStorage.setItem("fav-orders-key", "smoke"));
   await page.addScriptTag({ content: fs.readFileSync(ROOT + "admin/sales.js", "utf8") });
   await page.evaluate(() => document.querySelector("[data-sales]").click());
   await page.waitForTimeout(500);
   const st = await page.evaluate(() => ({ hash: location.hash, tiles: [...document.querySelectorAll("#sl-body .stat")].map(s => s.innerText.split("\n")[0]), svgs: document.querySelectorAll("#sl-body svg").length, bars: document.querySelectorAll(".sl-chrow").length, rows: document.querySelectorAll(".sl-table tbody tr").length, ch: [...document.querySelectorAll(".sl-chrow")].map(r => r.innerText.replace(/\s+/g, " ")), w: document.documentElement.scrollWidth }));
   want(st.hash === "#sales", "deep link #sales not set");
-  want(st.tiles.length === 4, "expected 4 KPI tiles, got " + st.tiles.length);
-  want(JSON.stringify(st.tiles) === JSON.stringify(["GH₵48,500", "3", "GH₵16,167", "GH₵19,200"]), "KPI tiles wrong (30 days, cancelled left out): " + JSON.stringify(st.tiles));
+  want(st.tiles.length === 5, "expected 5 KPI tiles, got " + st.tiles.length);
+  want(JSON.stringify(st.tiles) === JSON.stringify(["GH₵29,300", "GH₵48,500", "3", "GH₵9,767", "GH₵19,200"]), "KPI tiles wrong (30 days, cancelled left out): " + JSON.stringify(st.tiles));
   want(st.svgs === 1 && st.bars === 5, "expected the 30-day SVG chart and 5 channel bars: " + JSON.stringify([st.svgs, st.bars]));
   want(st.rows === 3, "by-product table should have 3 rows for 30 days: " + st.rows);
-  want(/TikTok.*8,500/.test(st.ch.join("|")) && /Walk-in.*1,600/.test(st.ch.join("|")) && /WhatsApp.*\+1 won/.test(st.ch.join("|")), "channels wrong: " + JSON.stringify(st.ch));
+  want(/TikTok.*8,500/.test(st.ch.join("|")) && /Walk-in.*1,600/.test(st.ch.join("|")) && /WhatsApp.*GH₵0.*\+1 won/.test(st.ch.join("|")), "channels wrong: " + JSON.stringify(st.ch));
   want(st.w <= 392, "sales screen scrolls sideways on a phone: " + st.w);
   if (process.env.SALES_SHOT) await page.screenshot({ path: process.env.SALES_SHOT, fullPage: true });
-  want(gets.includes("orders") && gets.includes("customers"), "didn't read orders + customers");
+  want(posts.some(p => p.action === "orders") && posts.some(p => p.action === "customers"), "didn't read orders + customers through the signed backend");
   await page.click("[data-sl-period='0']"); await page.waitForTimeout(400);
-  want(await page.evaluate(() => document.querySelector("#sl-body .stat b").innerText) === "GH₵53,000", "All time revenue wrong");
+  want(await page.evaluate(() => document.querySelector("#sl-body .stat b").innerText) === "GH₵33,800", "All time revenue wrong");
   await page.click("[data-sl-rec]"); await page.waitForTimeout(100);
   await page.fill("#sl-rec-form [name=name]", "Walk-in buyer"); await page.selectOption("#sl-rec-form [name=product]", "FAV-014"); await page.fill("#sl-rec-form [name=qty]", "2");
   await page.click("#sl-rec-form [type=submit]"); await page.waitForTimeout(2200);
@@ -1278,6 +1459,8 @@ async function sales(browser) {
 }
 
 (async () => {
+  await extensionDispatcherSmoke();
+  console.log("✓ Extension dispatcher: stale Facebook and social registrations auto-repair; missing handlers fail before navigation");
   const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
   let failed = 0;
   for (const day of [...dates].sort()) {

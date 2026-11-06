@@ -10,6 +10,8 @@ The backend is a Google Sheet with an Apps Script attached. It costs nothing, ne
 | **Expenses** | Materials, wages, transport, rent |
 | **Summary** | Total sales, cash received, outstanding balances, profit, monthly sales vs expenses |
 | **CampaignLog** | Every campaign email sent, with the result |
+| **CampaignRecipients** | Per-campaign recipient claims and delivery results, preventing duplicate sends |
+| **BalancePayments** | Audited payments recorded when an order balance is settled |
 | **Orders** | Every website order and payment: option chosen, amount paid online, balance, delivery, Paystack verification, progress |
 
 ## One-time setup (about 10 minutes)
@@ -28,19 +30,19 @@ Every website order lands in the **Orders** tab and in your email, and shows on 
 
 1. the website sends the order when the customer finishes checkout;
 2. Paystack calls the backend the moment a payment succeeds, even if the customer closes the page (webhook, step 3 below);
-3. `syncPaystack` runs every hour and adds any Paystack payment still missing.
+3. `syncPaystack` runs every hour, paginates the successful Paystack transactions from the last three days, and adds any payment still missing.
 
 The backend fetches product/service prices from the live catalogue; browser-supplied prices are not a fallback. It also derives the expected full/deposit amount, then checks the Paystack reference, GHS currency, exact amount, and order metadata before recording a payment as verified. Missing catalogue/config data, an amount mismatch, or an order/reference mismatch is not marked paid and needs review.
 
-The checkout sends product IDs, quantities, Room Designer item IDs, and a payment-plan code in Paystack metadata so a webhook that arrives before the checkout POST can rebuild the same server-priced order. Deploy `assets/js/checkout.js` and `backend/apps-script/Code.gs` together; older checkout code does not send this metadata and its payment will require manual review. Run `node scripts/backend_payment_test.js` for the 20-case local regression suite. It uses mocked Apps Script and Paystack services only; it does not validate the live deployment.
+The checkout sends product IDs, quantities, Room Designer item IDs, and a payment-plan code in Paystack metadata so a webhook that arrives before the checkout POST can rebuild the same server-priced order. `syncPaystack` paginates through the three-day transaction window (up to 100 pages per run) and raises an explicit error if the API fails or that safety limit is reached. Re-running `setup()` updates only the backend-owned Summary cells; it does not clear unrelated notes or formatting. Versioned schema migration appends missing trailing columns and stops on reordered, mismatched, or unknown extra headers rather than risking shifted or ignored data. General migrations for unconfirmed legacy layouts remain intentionally unsupported. Deploy `assets/js/checkout.js` and `backend/apps-script/Code.gs` together; older checkout code does not send this metadata and its payment will require manual review. Run `node scripts/backend_payment_test.js` for the local mocked regression suite covering payments, migration, sessions, invoices, campaigns, reporting, CRM and SMS; it does not validate the live deployment.
 
 One-time setup, after the steps above:
 
-1. **Update the code.** Paste the latest [`apps-script/Code.gs`](apps-script/Code.gs) over the old one and save. Run **`setup`** again and approve the new permissions. It adds the **Orders** tab, creates an **ADMIN_KEY** and starts the hourly Paystack sync.
+1. **Update the code.** Paste the latest [`apps-script/Code.gs`](apps-script/Code.gs) over the old one and save. Run **`setup`** again and approve any new permissions. It adds the required tabs and starts the hourly Paystack sync.
 2. **Add your Paystack secret key.** In **Project Settings → Script properties**, add `PAYSTACK_SECRET_KEY` = your `sk_live_…` key (or `sk_test_…` while testing). It only ever lives here, never on the website.
 3. **Point Paystack at the backend.** In Paystack, open **Settings → API Keys & Webhooks** and set **Live Webhook URL** (and Test Webhook URL) to your web app URL.
 4. **Publish the new version.** **Deploy → Manage deployments → ✎ Edit → Version: New version → Deploy**. This keeps the same web app URL.
-5. **Open the admin Orders screen.** On the website admin, tap **Orders & payments** and paste the **ADMIN_KEY** from Script properties. Change an order's progress there (Confirmed → Delivered → Balance paid) and it saves to the Sheet.
+5. **Sign in to the website admin** with the configured owner email and password. Orders, Customers, Invoices and other admin actions use that session; do not paste an admin key into the browser.
 
 Manual MoMo/GhanaPay transfers (without a matching Paystack transaction) are recorded as unpaid orders requiring review. Check the wallet/dashboard and the reference before updating the order in the admin.
 
@@ -48,7 +50,7 @@ If your phone numbers or address change, update the `BUSINESS` block at the top 
 
 ## SMS alerts to your phone
 
-The backend texts you for every customer request: website enquiries, taps on any WhatsApp button (including the student-desk promo order), checkout orders (MoMo, card, deposit, pay on delivery, walk in) and invoice requests. Email alerts keep working as before.
+The backend texts you for every customer request: website enquiries, taps on any WhatsApp button (including the student-desk promo order), checkout orders (MoMo, card, deposit, pay on delivery, walk in) and invoice requests. Rate-limit reservations are lock-protected; failed provider requests release the attempt while accepted sends are tracked separately. Email alerts keep working as before.
 
 1. Create an account at [arkesel.com](https://arkesel.com) (Ghana SMS provider) and top up a small amount. Texts are paid per message, roughly a few pesewas each.
 2. Request a sender ID such as `FAVision` (max 11 characters) and wait for approval.
@@ -63,10 +65,10 @@ Nothing is sent until `SMS_API_KEY` and `SMS_TO` are set, and alerts are capped 
 
 ## Invoices
 
-1. Paste the latest `Code.gs`, save, run **`setup`** again (it adds the **Invoices** tab) and approve the new **Google Drive** permission. The script saves invoice PDFs to a Drive folder called **FA Vision Invoices** and shares each one by link.
+1. Paste the latest `Code.gs`, save, run **`setup`** again (it adds the **Invoices** tab) and approve the new **Google Drive** permission. The script saves invoice PDFs to a Drive folder called **FA Vision Invoices** and currently shares each one by link. **Owner decision still required:** these links may expose personal or tax details; do not treat the current sharing mode as a privacy approval.
 2. **Deploy → Manage deployments → ✎ Edit → Version: New version → Deploy** (same URL).
 3. Invoice numbers continue from **100683** (the paper series PINV100683). To start elsewhere, set the script property **INVOICE_SEQ** to the last number used.
-4. In the website admin open **Invoices**, paste the same **ADMIN_KEY** as for Orders, and requests from the website appear there. **Generate invoice** numbers it, saves the PDF, emails it to the customer (if ticked) and fills in the row.
+4. Sign in to the website admin; requests from the website appear in **Invoices**. **Generate invoice** numbers it, saves the PDF, emails it to the customer (if ticked) and fills in the row. Repeating the same save reuses the invoice row and Drive PDF; manual invoices use a stable ID derived from their requested invoice number.
 
 
 ## Customers (CRM) and WhatsApp replies
@@ -76,7 +78,7 @@ Nothing is sent until `SMS_API_KEY` and `SMS_TO` are set, and alerts are capped 
 - move an enquiry along **New → Contacted → Quoted → Won / Lost**,
 - add a dated note and a **follow-up date** (cards whose date has come are flagged "Follow up"),
 - pick a ready-made **WhatsApp reply** (price, photos, how to pay, delivery update, balance reminder, thank you, follow up) and send it in one tap,
-- see order history, total spent, balance owed and invoice PDFs.
+- see order history, gross value booked, confirmed payments, unverified payments, balance owed and invoice PDFs. The legacy `spentGHS` field represents confirmed receipts, not the full order value.
 
 Anyone who only tapped a WhatsApp button on the website has no phone number yet, so they are counted at the top ("WhatsApp chats opened") rather than listed.
 

@@ -38,6 +38,8 @@ const SHEETS = {
   EXPENSES: 'Expenses',
   SUMMARY: 'Summary',
   CAMPAIGN_LOG: 'CampaignLog',
+  CAMPAIGN_RECIPIENTS: 'CampaignRecipients',
+  BALANCE_PAYMENTS: 'BalancePayments',
   ORDERS: 'Orders',
   INVOICES: 'Invoices',
 };
@@ -48,24 +50,20 @@ const HEADERS = {
   Sales: ['Date', 'Customer', 'Product', 'Quantity', 'UnitPriceGHS', 'TotalGHS', 'AmountPaidGHS', 'BalanceGHS', 'Notes'],
   Expenses: ['Date', 'Category', 'Description', 'AmountGHS', 'PaidTo', 'Notes'],
   CampaignLog: ['Timestamp', 'Campaign', 'Email', 'Result'],
+  CampaignRecipients: ['Campaign', 'Email', 'Status', 'ClaimedAt', 'SentAt', 'Error'],
+  BalancePayments: ['Timestamp', 'Reference', 'AmountGHS', 'Method', 'PaymentReference', 'Actor'],
   Orders: ['Timestamp', 'Reference', 'Customer', 'Phone', 'Email', 'Product', 'Quantity', 'UnitPriceGHS', 'TotalGHS',
     'PaymentOption', 'Method', 'PaidNowGHS', 'BalanceGHS', 'Delivery', 'Status', 'Verification', 'Notes', 'Progress'],
   Invoices: ['Timestamp', 'RequestId', 'Kind', 'OrderRef', 'Customer', 'Organisation', 'Phone', 'Email', 'Address', 'TIN', 'PO',
-    'Items', 'Status', 'InvoiceNo', 'InvoiceDate', 'TotalGHS', 'BalanceGHS', 'PdfUrl', 'Notes'],
+    'Items', 'Status', 'InvoiceNo', 'InvoiceDate', 'TotalGHS', 'BalanceGHS', 'PdfUrl', 'Notes', 'PdfFileId', 'PdfHash'],
 };
+const SCHEMA_VERSION_ = 2;
 
 // ---------- Setup ----------
 
 function setup() {
   const ss = SpreadsheetApp.getActive();
-  Object.keys(HEADERS).forEach((name) => {
-    const sh = ss.getSheetByName(name) || ss.insertSheet(name);
-    if (sh.getLastRow() === 0) {
-      sh.appendRow(HEADERS[name]);
-      sh.setFrozenRows(1);
-      sh.getRange(1, 1, 1, HEADERS[name].length).setFontWeight('bold');
-    }
-  });
+  migrateSheets_(ss);
 
   // Row formulas for Sales totals and balances.
   const sales = ss.getSheetByName(SHEETS.SALES);
@@ -73,7 +71,6 @@ function setup() {
   sales.getRange('H2').setFormula('=ARRAYFORMULA(IF(D2:D="",,F2:F-G2:G))');
 
   const summary = ss.getSheetByName(SHEETS.SUMMARY) || ss.insertSheet(SHEETS.SUMMARY);
-  summary.clear();
   summary.getRange('A1:B1').setValues([['Metric', 'Value']]).setFontWeight('bold');
   summary.getRange('A2:B8').setValues([
     ['Total sales (GHS)', '=SUM(Sales!F2:F)'],
@@ -98,10 +95,6 @@ function setup() {
   if (!props.getProperty('NOTIFY_EMAIL')) {
     props.setProperty('NOTIFY_EMAIL', Session.getEffectiveUser().getEmail());
   }
-  // Admin key for the website's /admin/ Orders screen.
-  if (!props.getProperty('ADMIN_KEY')) {
-    props.setProperty('ADMIN_KEY', Utilities.getUuid().replace(/-/g, '').slice(0, 20));
-  }
   // Hourly Paystack sync (safety net for payments whose customer closed the page).
   if (!ScriptApp.getProjectTriggers().some((t) => t.getHandlerFunction() === 'syncPaystack')) {
     ScriptApp.newTrigger('syncPaystack').timeBased().everyHours(1).create();
@@ -110,7 +103,41 @@ function setup() {
   if (!ScriptApp.getProjectTriggers().some((t) => t.getHandlerFunction() === 'sendPostingReport')) {
     ScriptApp.newTrigger('sendPostingReport').timeBased().everyDays(1).atHour(21).create();
   }
-  Logger.log('Admin key for the Orders screen: ' + props.getProperty('ADMIN_KEY'));
+}
+
+function migrateSheets_(ss) {
+  const props = PropertiesService.getScriptProperties();
+  let version = Number(props.getProperty('SCHEMA_VERSION') || 0);
+  if (!Number.isInteger(version) || version > SCHEMA_VERSION_) throw new Error('Unsupported sheet schema version');
+  Object.keys(HEADERS).forEach((name) => {
+    const sh = ss.getSheetByName(name) || ss.insertSheet(name);
+    const lastColumn = Math.max(sh.getLastColumn(), 0);
+    if (sh.getLastRow() === 0) {
+      sh.getRange(1, 1, 1, HEADERS[name].length).setValues([HEADERS[name]]);
+      sh.setFrozenRows(1);
+      sh.getRange(1, 1, 1, HEADERS[name].length).setFontWeight('bold');
+      return;
+    }
+    const present = lastColumn ? sh.getRange(1, 1, 1, lastColumn).getValues()[0].map((h) => String(h || '').trim()) : [];
+    const shared = Math.min(present.length, HEADERS[name].length);
+    for (let i = 0; i < shared; i++) {
+      if (present[i] !== HEADERS[name][i]) {
+        throw new Error(`Cannot migrate ${name}: column ${i + 1} is "${present[i] || '(blank)'}", expected "${HEADERS[name][i]}"; no data was moved`);
+      }
+    }
+    if (present.length > HEADERS[name].length) {
+      const extra = present.slice(HEADERS[name].length).find((h) => h);
+      if (extra) {
+        throw new Error(`Cannot migrate ${name}: unexpected column after "${HEADERS[name][HEADERS[name].length - 1]}": "${extra}"; no data was moved`);
+      }
+    }
+    if (present.length < HEADERS[name].length) {
+      const missing = HEADERS[name].slice(present.length);
+      sh.getRange(1, present.length + 1, 1, missing.length).setValues([missing]);
+      sh.getRange(1, present.length + 1, 1, missing.length).setFontWeight('bold');
+    }
+  });
+  if (version < SCHEMA_VERSION_) props.setProperty('SCHEMA_VERSION', String(SCHEMA_VERSION_));
 }
 
 // ---------- Web endpoints ----------
@@ -159,6 +186,7 @@ function handlePost_(e) {
   if (data.action === 'logout') return adminLogout_(data);
   if (data.action === 'session') return json_(sessionValid_(data.session) ? { ok: true } : { ok: false, error: 'signed_out' });
   if (data.action === 'github') return githubProxy_(data);
+  if (['orders', 'customers', 'invoices'].indexOf(data.action) >= 0) return adminData_(data);
   if (data.action === 'posting_report') return postingReportNow_(data);
   if (data.action === 'session_alert') return sessionAlert_(data);
   if (data.action === 'ai_status') return aiStatus_(data);
@@ -169,10 +197,19 @@ function handlePost_(e) {
   if (data.action === 'update_order') return updateOrder_(data);
   if (data.action === 'save_invoice') return saveInvoice_(data);
   if (data.action === 'update_enquiry') return updateEnquiry_(data);
+  if (data.action === 'create_enquiry') {
+    if (!sessionValid_(data.session)) return json_({ ok: false, error: 'signed_out' });
+    return createEnquiry_(data);
+  }
   if (!data.name) return json_({ ok: false, error: 'name required' });
   if (data.action === 'invoice_request') return recordInvoiceRequest_(data);
   if (data.action === 'order') return recordOrder_(data);
 
+  return createEnquiry_(data);
+}
+
+function createEnquiry_(data) {
+  if (!data.name) return json_({ ok: false, error: 'name required' });
   const clean = (v) => String(v || '').slice(0, 1000).replace(/^[=+\-@]/, "'$&");
   const lock = LockService.getScriptLock();
   lock.waitLock(10000);
@@ -206,6 +243,9 @@ function handlePost_(e) {
 //   SMS_SENDER   approved sender ID, max 11 characters (default FAVision)
 // Nothing is sent until SMS_API_KEY and SMS_TO are set. Capped at 40 texts an hour.
 function sendSms_(text) {
+  let slot = '';
+  let reserved = false;
+  let providerAccepted = false;
   try {
     const props = PropertiesService.getScriptProperties();
     const key = props.getProperty('SMS_API_KEY');
@@ -213,10 +253,17 @@ function sendSms_(text) {
       .map((n) => n.replace(/\D/g, '').replace(/^0/, '233')).filter((n) => n.length >= 12);
     if (!key || !to.length) return;
     const cache = CacheService.getScriptCache();
-    const slot = 'sms_' + Utilities.formatDate(new Date(), 'GMT', 'yyyyMMddHH');
-    const count = Number(cache.get(slot) || 0);
-    if (count >= 40) return;
-    cache.put(slot, String(count + 1), 3600);
+    slot = 'sms_' + Utilities.formatDate(new Date(), 'GMT', 'yyyyMMddHH');
+    const reservationLock = LockService.getScriptLock();
+    let reservationHeld = false;
+    reservationLock.waitLock(10000);
+    reservationHeld = true;
+    try {
+      const attempts = Number(cache.get(slot + '_attempts') || 0);
+      if (attempts >= 40) return;
+      cache.put(slot + '_attempts', String(attempts + 1), 3600);
+      reserved = true;
+    } finally { if (reservationHeld) reservationLock.releaseLock(); }
     const message = String(text).replace(/\s+/g, ' ').replace(/^'/, '').trim().slice(0, 300);
     const res = UrlFetchApp.fetch('https://sms.arkesel.com/api/v2/sms/send', {
       method: 'post',
@@ -225,8 +272,31 @@ function sendSms_(text) {
       payload: JSON.stringify({ sender: (props.getProperty('SMS_SENDER') || 'FAVision').slice(0, 11), message, recipients: to }),
       muteHttpExceptions: true,
     });
-    if (res.getResponseCode() >= 300) Logger.log('SMS failed: ' + res.getContentText());
+    const status = res.getResponseCode();
+    if (status < 200 || status >= 300) throw new Error('Arkesel returned HTTP ' + status);
+    providerAccepted = true;
+    const successLock = LockService.getScriptLock();
+    let successHeld = false;
+    successLock.waitLock(10000);
+    successHeld = true;
+    try {
+      const successKey = slot + '_success';
+      cache.put(successKey, String(Number(cache.get(successKey) || 0) + 1), 3600);
+    } finally { if (successHeld) successLock.releaseLock(); }
   } catch (err) {
+    if (reserved && !providerAccepted) {
+      const lock = LockService.getScriptLock();
+      let held = false;
+      try {
+        lock.waitLock(10000);
+        held = true;
+        const cache = CacheService.getScriptCache();
+        const attempts = Number(cache.get(slot + '_attempts') || 0);
+        if (attempts > 0) cache.put(slot + '_attempts', String(attempts - 1), 3600);
+      } catch (releaseError) {
+        Logger.log('SMS quota reservation release failed: ' + releaseError);
+      } finally { if (held) lock.releaseLock(); }
+    }
     Logger.log('SMS error: ' + err); // never block the request because of SMS
   }
 }
@@ -244,19 +314,16 @@ function handleGet_(e) {
       ? '<p style="font-family:sans-serif">You have been unsubscribed from FA Vision Enterprise emails.</p>'
       : '<p style="font-family:sans-serif">This link is no longer valid.</p>');
   }
-  if (p.action === 'orders') {
-    if (!checkAdmin_(p.key)) return json_({ ok: false, error: 'not allowed' });
-    return json_({ ok: true, orders: listOrders_(), progress: PROGRESS, sheet: SpreadsheetApp.getActive().getUrl() });
-  }
-  if (p.action === 'customers') {
-    if (!checkAdmin_(p.key)) return json_({ ok: false, error: 'not allowed' });
-    return json_(Object.assign({ ok: true, statuses: ENQUIRY_STATUS, sheet: SpreadsheetApp.getActive().getUrl() }, listCustomers_()));
-  }
-  if (p.action === 'invoices') {
-    if (!checkAdmin_(p.key)) return json_({ ok: false, error: 'not allowed' });
-    return json_({ ok: true, requests: listInvoices_(), next: nextInvoiceNumbers_(), sheet: SpreadsheetApp.getActive().getUrl() });
-  }
+  if (['orders', 'customers', 'invoices'].indexOf(p.action) >= 0) return json_({ ok: false, error: 'method_not_allowed' });
   return json_({ ok: true, service: 'FA Vision Enterprise backend' });
+}
+
+function adminData_(data) {
+  if (!sessionValid_(data.session)) return json_({ ok: false, error: 'signed_out' });
+  const sheet = SpreadsheetApp.getActive().getUrl();
+  if (data.action === 'orders') return json_({ ok: true, orders: listOrders_(), progress: PROGRESS, sheet });
+  if (data.action === 'customers') return json_(Object.assign({ ok: true, statuses: ENQUIRY_STATUS, sheet }, listCustomers_()));
+  return json_({ ok: true, requests: listInvoices_(), next: nextInvoiceNumbers_(), sheet });
 }
 
 function json_(obj) {
@@ -277,6 +344,8 @@ HEADERS.Orders.forEach((h, i) => { ORDER_COL[h] = i + 1; });
 const PROGRESS = ['New', 'Confirmed', 'In production', 'Ready', 'Delivered', 'Balance paid', 'Cancelled'];
 
 const cleanCell_ = (v) => String(v == null ? '' : v).slice(0, 500).replace(/^[=+\-@]/, "'$&");
+const htmlEscape_ = (v) => String(v == null ? '' : v).replace(/[&<>"']/g, (c) =>
+  ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 function ordersSheet_() {
   return SpreadsheetApp.getActive().getSheetByName(SHEETS.ORDERS) || createSheet_(SHEETS.ORDERS);
@@ -739,21 +808,47 @@ function syncPaystack() {
   const key = PropertiesService.getScriptProperties().getProperty('PAYSTACK_SECRET_KEY');
   if (!key) return 0;
   const from = new Date(Date.now() - 3 * 864e5).toISOString();
-  const res = UrlFetchApp.fetch(`https://api.paystack.co/transaction?status=success&perPage=100&from=${encodeURIComponent(from)}`, {
-    headers: { Authorization: 'Bearer ' + key }, muteHttpExceptions: true,
-  });
-  const list = (JSON.parse(res.getContentText()).data) || [];
+  const perPage = 100;
+  const maxPages = 100;
   let added = 0;
-  list.forEach((tx) => { if (upsertPaystackPayment_(tx.reference)) added++; });
+  let page = 1;
+  let pageCount = null;
+  while (page <= maxPages) {
+    const url = `https://api.paystack.co/transaction?status=success&perPage=${perPage}&page=${page}&from=${encodeURIComponent(from)}`;
+    const res = UrlFetchApp.fetch(url, {
+      headers: { Authorization: 'Bearer ' + key }, muteHttpExceptions: true,
+    });
+    const responseCode = res.getResponseCode ? res.getResponseCode() : 200;
+    if (responseCode >= 400) throw new Error(`Paystack sync failed for page ${page}: HTTP ${responseCode}`);
+    let body;
+    try {
+      body = JSON.parse(res.getContentText());
+    } catch (err) {
+      throw new Error(`Paystack sync returned invalid JSON for page ${page}: ${err}`);
+    }
+    if (!body || body.status !== true || !Array.isArray(body.data)) {
+      throw new Error(`Paystack sync returned an invalid response for page ${page}`);
+    }
+    const pagination = body.meta && (body.meta.pagination || body.meta);
+    if (pagination && pagination.pageCount != null) {
+      const reportedPageCount = Number(pagination.pageCount);
+      if (!Number.isSafeInteger(reportedPageCount) || reportedPageCount < 0 ||
+          (reportedPageCount === 0 && body.data.length > 0)) {
+        throw new Error(`Paystack sync returned an invalid page count for page ${page}`);
+      }
+      pageCount = reportedPageCount;
+    }
+    body.data.forEach((tx) => {
+      if (tx && tx.reference && upsertPaystackPayment_(tx.reference)) added++;
+    });
+    if (pageCount === 0 || (pageCount != null ? page >= pageCount : body.data.length < perPage)) break;
+    if (page === maxPages) throw new Error(`Paystack sync reached the ${maxPages}-page safety limit; remaining transactions were not checked`);
+    page++;
+  }
   return added;
 }
 
 // ---------- Admin API (used by the website's /admin/ Orders screen) ----------
-
-function checkAdmin_(key) {
-  const want = PropertiesService.getScriptProperties().getProperty('ADMIN_KEY');
-  return !!want && String(key || '') === want;
-}
 
 // ---------- Admin sign-in: email + password, reset code by email ----------
 //
@@ -834,7 +929,7 @@ function endAllSessions_() {
 }
 
 function signedIn_(remember) {
-  return json_({ ok: true, session: newSession_(remember), key: authProps_().getProperty('ADMIN_KEY') || '', email: adminEmail_() });
+  return json_({ ok: true, session: newSession_(remember), email: adminEmail_() });
 }
 
 function adminLogin_(data) {
@@ -911,7 +1006,8 @@ function githubProxy_(data) {
   if (!token) return json_({ ok: false, error: 'no_github_token' });
   const method = String(data.method || 'GET').toUpperCase();
   const path = String(data.path || '');
-  if (['GET', 'POST', 'PATCH'].indexOf(method) < 0 || path.charAt(0) !== '/' || path.indexOf('..') >= 0) {
+  const body = githubProxyBody_(data.body);
+  if (!body.ok || !githubProxyAllowed_(method, path, body.value)) {
     return json_({ ok: false, error: 'bad request' });
   }
   const repo = authProps_().getProperty('GITHUB_REPO') || DEFAULT_GITHUB_REPO;
@@ -923,9 +1019,67 @@ function githubProxy_(data) {
   if (data.body != null) { opts.contentType = 'application/json'; opts.payload = typeof data.body === 'string' ? data.body : JSON.stringify(data.body); }
   const res = UrlFetchApp.fetch('https://api.github.com/repos/' + repo + path, opts);
   const text = res.getContentText();
-  let body = null;
-  try { body = text ? JSON.parse(text) : null; } catch (e) { body = { message: text.slice(0, 300) }; }
-  return json_({ ok: true, status: res.getResponseCode(), body: body });
+  let responseBody = null;
+  try { responseBody = text ? JSON.parse(text) : null; } catch (e) { responseBody = { message: text.slice(0, 300) }; }
+  return json_({ ok: true, status: res.getResponseCode(), body: responseBody });
+}
+
+function githubProxyBody_(value) {
+  if (value == null) return { ok: true, value: null };
+  let body = value;
+  if (typeof value === 'string') {
+    if (value.length > 30 * 1024 * 1024) return { ok: false };
+    try { body = JSON.parse(value); } catch (e) { return { ok: false }; }
+  }
+  if (!body || typeof body !== 'object' || Array.isArray(body)) return { ok: false };
+  return { ok: true, value: body };
+}
+
+function githubWritablePath_(path) {
+  if (!path || path.length > 240 || path.charAt(0) === '/' || path.indexOf('\\') >= 0 ||
+      path.split('/').some((part) => part === '.' || part === '..')) return false;
+  return /^data\/[A-Za-z0-9._-]+\.json$/.test(path) ||
+    /^assets\/images\/[A-Za-z0-9._/-]+\.(?:png|jpe?g|webp|gif)$/i.test(path) ||
+    /^assets\/videos\/uploads\/[A-Za-z0-9._/-]+\.(?:mp4|mov|m4v|webm)$/i.test(path) ||
+    path === 'assets/js/products-data.js';
+}
+
+function githubProxyAllowed_(method, path, body) {
+  if (path.length > 500 || !path.startsWith('/') || /(?:\.\.|%|\\|#|\/\/)/.test(path)) return false;
+  if (method === 'GET') {
+    return /^\/git\/ref\/heads\/main$/.test(path) ||
+      /^\/git\/commits\/[a-f0-9]{40}$/i.test(path) ||
+      /^\/contents\/data\/[A-Za-z0-9._-]+\.json\?ref=(?:main|[a-f0-9]{40})$/i.test(path);
+  }
+  if (!body) return false;
+  if (method === 'POST' && path === '/git/blobs') {
+    return Object.keys(body).every((k) => ['content', 'encoding'].indexOf(k) >= 0) &&
+      body.encoding === 'base64' && typeof body.content === 'string' &&
+      body.content.length <= 28 * 1024 * 1024 && /^[A-Za-z0-9+/]*={0,2}$/.test(body.content);
+  }
+  if (method === 'POST' && path === '/git/trees') {
+    return Object.keys(body).every((k) => ['base_tree', 'tree'].indexOf(k) >= 0) &&
+      /^[a-f0-9]{40}$/i.test(String(body.base_tree || '')) && Array.isArray(body.tree) &&
+      body.tree.length > 0 && body.tree.length <= 25 && body.tree.every((entry) =>
+        entry && typeof entry === 'object' && githubWritablePath_(String(entry.path || '')) &&
+        entry.type === 'blob' && entry.mode === '100644' &&
+        (entry.sha === null || /^[a-f0-9]{40}$/i.test(String(entry.sha || '')) ||
+          (typeof entry.content === 'string' && entry.content.length <= 2 * 1024 * 1024)));
+  }
+  if (method === 'POST' && path === '/git/commits') {
+    return Object.keys(body).every((k) => ['message', 'tree', 'parents'].indexOf(k) >= 0) &&
+      typeof body.message === 'string' && body.message.length > 0 && body.message.length <= 200 &&
+      /^[a-f0-9]{40}$/i.test(String(body.tree || '')) && Array.isArray(body.parents) &&
+      body.parents.length === 1 && /^[a-f0-9]{40}$/i.test(String(body.parents[0] || ''));
+  }
+  if (method === 'PATCH' && path === '/git/refs/heads/main') {
+    return Object.keys(body).every((k) => ['sha', 'force'].indexOf(k) >= 0) &&
+      /^[a-f0-9]{40}$/i.test(String(body.sha || '')) && body.force !== true;
+  }
+  if (method === 'POST' && /^\/actions\/workflows\/(?:seo-watch|rebuild-ads)\.yml\/dispatches$/.test(path)) {
+    return Object.keys(body).every((k) => k === 'ref') && body.ref === 'main';
+  }
+  return false;
 }
 
 // Run once from the editor if you are ever locked out of the admin page and
@@ -943,24 +1097,50 @@ function listOrders_() {
   const sh = ordersSheet_();
   if (sh.getLastRow() < 2) return [];
   const rows = sh.getRange(2, 1, sh.getLastRow() - 1, HEADERS.Orders.length).getValues();
+  const balancePaid = {};
+  rowsOf_(SHEETS.BALANCE_PAYMENTS).forEach((p) => {
+    const ref = String(p.Reference || '');
+    if (ref) balancePaid[ref] = (balancePaid[ref] || 0) + (Number(p.AmountGHS) || 0);
+  });
   return rows.slice(-500).reverse().map((r) => {
     const o = {};
     HEADERS.Orders.forEach((h, i) => { o[h] = r[i] instanceof Date ? r[i].toISOString() : r[i]; });
+    const verified = String(o.Verification || '').indexOf('VERIFIED by Paystack:') === 0;
+    o.ReceivedGHS = (verified ? Number(o.PaidNowGHS) || 0 : 0) + (balancePaid[String(o.Reference || '')] || 0);
     return o;
   });
 }
 
 function updateOrder_(data) {
-  if (!checkAdmin_(data.key)) return json_({ ok: false, error: 'not allowed' });
+  if (!sessionValid_(data.session)) return json_({ ok: false, error: 'signed_out' });
   const ref = String(data.reference || '');
+  if (!ref) return json_({ ok: false, error: 'reference required' });
+  if (data.progress && PROGRESS.indexOf(data.progress) < 0) return json_({ ok: false, error: 'invalid progress' });
   const lock = LockService.getScriptLock();
   lock.waitLock(10000);
   try {
     const sh = ordersSheet_();
     const r = findOrderRow_(sh, ref);
     if (!r) return json_({ ok: false, error: 'order not found' });
+    if (data.progress === 'Balance paid') {
+      const current = sh.getRange(r, 1, 1, HEADERS.Orders.length).getValues()[0];
+      const balanceCents = moneyCents_(current[ORDER_COL.BalanceGHS - 1]);
+      const paidCents = moneyCents_(data.paid_amount);
+      const method = String(data.payment_method || '').trim().slice(0, 40);
+      const paymentRef = cleanCell_(data.payment_reference || '');
+      if (!Number.isSafeInteger(balanceCents) || balanceCents <= 0 ||
+          !Number.isSafeInteger(paidCents) || paidCents !== balanceCents ||
+          !/^(cash|mobile money|bank transfer|card|other)$/i.test(method) ||
+          (!/^cash$/i.test(method) && !paymentRef)) {
+        return json_({ ok: false, error: 'balance_payment_details_required' });
+      }
+      if (String(current[ORDER_COL.Progress - 1]) === 'Cancelled') return json_({ ok: false, error: 'cancelled_order' });
+      const ledger = SpreadsheetApp.getActive().getSheetByName(SHEETS.BALANCE_PAYMENTS) ||
+        createSheet_(SHEETS.BALANCE_PAYMENTS);
+      ledger.appendRow([new Date(), ref, paidCents / 100, method, paymentRef, adminEmail_()]);
+      sh.getRange(r, ORDER_COL.BalanceGHS).setValue(0);
+    }
     if (data.progress && PROGRESS.indexOf(data.progress) !== -1) sh.getRange(r, ORDER_COL.Progress).setValue(data.progress);
-    if (data.progress === 'Balance paid') sh.getRange(r, ORDER_COL.BalanceGHS).setValue(0);
     if (data.note) {
       const cell = sh.getRange(r, ORDER_COL.Notes);
       cell.setValue([cell.getValue(), cleanCell_(data.note)].filter(String).join(' | '));
@@ -1082,7 +1262,7 @@ function nextInvoiceNumbers_() {
 }
 
 function saveInvoice_(data) {
-  if (!checkAdmin_(data.key)) return json_({ ok: false, error: 'not allowed' });
+  if (!sessionValid_(data.session)) return json_({ ok: false, error: 'signed_out' });
   const inv = data.invoice || {};
   const html = String(data.html || '');
   if (!html || html.length > 500000) return json_({ ok: false, error: 'no invoice' });
@@ -1092,11 +1272,16 @@ function saveInvoice_(data) {
   let number, url, row;
   try {
     const sh = invoicesSheet_();
+    const requestedNumber = cleanCell_(inv.number);
+    const requestId = cleanCell_(data.request_id || (requestedNumber ? 'ADMIN-' + requestedNumber : ''));
+    if (!requestId) return json_({ ok: false, error: 'request id required' });
+    const oldRequestRow = findRow_(sh, INVOICE_COL.RequestId, requestId);
+    const previousNumber = oldRequestRow ? cleanCell_(sh.getRange(oldRequestRow, INVOICE_COL.InvoiceNo).getValue()) : '';
     // Keep numbers unique: if the number the admin used is already taken by a
     // different invoice, give this one the next free number.
-    number = cleanCell_(inv.number);
+    number = previousNumber || requestedNumber;
     const taken = findRow_(sh, INVOICE_COL.InvoiceNo, number);
-    const same = taken && data.request_id && sh.getRange(taken, INVOICE_COL.RequestId).getValue() === data.request_id;
+    const same = taken && sh.getRange(taken, INVOICE_COL.RequestId).getValue() === requestId;
     const digits = parseInt(String(number).replace(/\D/g, ''), 10) || 0;
     if (!number || (taken && !same)) {
       const prefix = String(number).replace(/\d+$/, '') || 'INV';
@@ -1105,37 +1290,55 @@ function saveInvoice_(data) {
     const used = parseInt(number.replace(/\D/g, ''), 10) || digits;
     if (used > invoiceSeq_()) props.setProperty('INVOICE_SEQ', String(used));
 
-    const finalHtml = html.split(cleanCell_(inv.number)).join(number);
-    const pdf = Utilities.newBlob(finalHtml, 'text/html', number + '.html').getAs('application/pdf').setName(`${number} - ${cleanCell_(inv.customer_name || 'invoice')}.pdf`);
-    const folders = DriveApp.getFoldersByName(INVOICE_FOLDER);
-    const folder = folders.hasNext() ? folders.next() : DriveApp.createFolder(INVOICE_FOLDER);
-    const file = folder.createFile(pdf);
-    file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+    const originalNumber = requestedNumber;
+    const finalHtml = originalNumber ? html.split(originalNumber).join(number) : html;
+    const pdfHash = sha256Hex_(number + '\n' + finalHtml);
+    const oldHash = oldRequestRow ? String(sh.getRange(oldRequestRow, INVOICE_COL.PdfHash).getValue() || '') : '';
+    const oldFileId = oldRequestRow ? String(sh.getRange(oldRequestRow, INVOICE_COL.PdfFileId).getValue() || '') : '';
+    let file, fileId;
+    if (oldFileId && oldHash === pdfHash) {
+      file = DriveApp.getFileById(oldFileId);
+      fileId = oldFileId;
+    } else {
+      const pdf = Utilities.newBlob(finalHtml, 'text/html', number + '.html').getAs('application/pdf').setName(`${number} - ${cleanCell_(inv.customer_name || 'invoice')}.pdf`);
+      const folders = DriveApp.getFoldersByName(INVOICE_FOLDER);
+      const folder = folders.hasNext() ? folders.next() : DriveApp.createFolder(INVOICE_FOLDER);
+      file = folder.createFile(pdf);
+      file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+      fileId = file.getId();
+    }
     url = file.getUrl();
 
     const values = {
       Kind: inv.kind_label, OrderRef: inv.order_ref, Customer: inv.customer_name, Organisation: inv.organisation,
       Phone: inv.phone, Email: inv.email, Address: inv.address, TIN: inv.tin, PO: inv.po, Status: 'Invoice sent',
-      InvoiceNo: number, InvoiceDate: inv.issue_date, TotalGHS: Number(inv.total) || 0, BalanceGHS: Number(inv.balance) || 0, PdfUrl: url,
+      InvoiceNo: number, InvoiceDate: inv.issue_date, TotalGHS: Number(inv.total) || 0, BalanceGHS: Number(inv.balance) || 0,
+      PdfUrl: url, PdfFileId: fileId, PdfHash: pdfHash,
     };
-    row = findRow_(sh, INVOICE_COL.RequestId, data.request_id);
+    row = oldRequestRow || findRow_(sh, INVOICE_COL.RequestId, requestId);
     if (!row) {
-      sh.appendRow(HEADERS.Invoices.map((h) => (h === 'Timestamp' ? new Date() : h === 'RequestId' ? cleanCell_(data.request_id || 'ADMIN-' + number) : '')));
+      sh.appendRow(HEADERS.Invoices.map((h) => (h === 'Timestamp' ? new Date() : h === 'RequestId' ? requestId : '')));
       row = sh.getLastRow();
     }
     Object.keys(values).forEach((h) => {
       if (values[h] !== undefined && values[h] !== '') sh.getRange(row, INVOICE_COL[h]).setValue(typeof values[h] === 'number' ? values[h] : cleanCell_(values[h]));
     });
 
-    if (data.email_customer && /^\S+@\S+\.\S+$/.test(inv.email || '')) {
+    const emailedAlready = oldHash === pdfHash && oldRequestRow &&
+      /^Emailed\b/.test(String(sh.getRange(row, INVOICE_COL.Notes).getValue() || ''));
+    if (data.email_customer && !emailedAlready && /^\S+@\S+\.\S+$/.test(inv.email || '')) {
+      const recipient = htmlEscape_(cleanCell_(inv.customer_name || 'Customer'));
+      const kind = htmlEscape_(cleanCell_(inv.kind_label || 'invoice'));
+      const safeNumber = htmlEscape_(number);
+      const safeUrl = htmlEscape_(url);
       MailApp.sendEmail({
         to: inv.email,
         replyTo: BUSINESS.email,
         name: BUSINESS.name,
-        subject: `${inv.kind_label || 'Invoice'} ${number} from ${BUSINESS.name}`,
-        htmlBody: `<p>Dear ${cleanCell_(inv.customer_name || 'Customer')},</p><p>Please find attached ${cleanCell_(inv.kind_label || 'invoice').toLowerCase()} <b>${number}</b> ` +
+        subject: `${cleanCell_(inv.kind_label || 'Invoice')} ${number} from ${BUSINESS.name}`,
+        htmlBody: `<p>Dear ${recipient},</p><p>Please find attached ${kind.toLowerCase()} <b>${safeNumber}</b> ` +
           `for GHS ${Number(inv.total).toFixed(2)}${Number(inv.balance) && Number(inv.balance) !== Number(inv.total) ? ` (balance due GHS ${Number(inv.balance).toFixed(2)})` : ''}.</p>` +
-          `<p>You can also view it here: <a href="${url}">${url}</a></p><p>Thank you for choosing ${BUSINESS.name}.<br>${BUSINESS.phones}<br>${BUSINESS.website}</p>`,
+          `<p>You can also view it here: <a href="${safeUrl}">${safeUrl}</a></p><p>Thank you for choosing ${htmlEscape_(BUSINESS.name)}.<br>${htmlEscape_(BUSINESS.phones)}<br>${htmlEscape_(BUSINESS.website)}</p>`,
         attachments: [pdf],
       });
       sh.getRange(row, INVOICE_COL.Notes).setValue('Emailed ' + new Date().toISOString().slice(0, 10));
@@ -1209,7 +1412,9 @@ function sendCampaign(campaignId) {
     if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) continue;
     if (row[col.Status] === 'Unsubscribed') continue;
     if (c.segment && row[col.Segment] !== c.segment) continue;
-    if (row[col.LastCampaign] === campaignId) continue;
+    const legacySentAt = row[col.LastCampaign] === campaignId ? row[col.LastSentAt] : '';
+    const claimRow = claimCampaignRecipient_(campaignId, email, legacySentAt);
+    if (!claimRow) continue;
 
     let token = row[col.Token];
     if (!token) {
@@ -1225,16 +1430,73 @@ function sendCampaign(campaignId) {
     };
     try {
       MailApp.sendEmail({ to: email, subject: fill_(c.subject, vars, true), htmlBody: fill_(c.html, vars), name: BUSINESS.name });
-      sh.getRange(r + 1, col.LastCampaign + 1, 1, 2).setValues([[campaignId, new Date()]]);
-      log.appendRow([new Date(), campaignId, email, 'sent']);
-      sent++;
-      quota--;
     } catch (err) {
-      log.appendRow([new Date(), campaignId, email, 'error: ' + err.message]);
+      completeCampaignRecipient_(claimRow, 'error', err && err.message || err);
+      log.appendRow([new Date(), campaignId, email, 'error: ' + (err && err.message || err)]);
+      continue;
     }
+    completeCampaignRecipient_(claimRow, 'sent', '');
+    sh.getRange(r + 1, col.LastCampaign + 1, 1, 2).setValues([[campaignId, new Date()]]);
+    log.appendRow([new Date(), campaignId, email, 'sent']);
+    sent++;
+    quota--;
   }
   Logger.log(`Sent ${sent} emails. Remaining quota today: ${MailApp.getRemainingDailyQuota()}`);
   return sent;
+}
+
+function claimCampaignRecipient_(campaignId, email, legacySentAt) {
+  const lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    const sh = SpreadsheetApp.getActive().getSheetByName(SHEETS.CAMPAIGN_RECIPIENTS) ||
+      createSheet_(SHEETS.CAMPAIGN_RECIPIENTS);
+    const rows = sh.getLastRow() > 1
+      ? sh.getRange(2, 1, sh.getLastRow() - 1, HEADERS.CampaignRecipients.length).getValues()
+      : [];
+    const normalizedEmail = String(email).trim().toLowerCase();
+    const i = rows.findIndex((r) => String(r[0]) === String(campaignId) && String(r[1]).trim().toLowerCase() === normalizedEmail);
+    const now = new Date();
+    if (i >= 0) {
+      const state = String(rows[i][2] || '');
+      const row = i + 2;
+      if (legacySentAt) {
+        sh.getRange(row, 3, 1, 4).setValues([[
+          'sent', rows[i][3] || legacySentAt, rows[i][4] || legacySentAt, 'migrated from Clients.LastCampaign',
+        ]]);
+        return 0;
+      }
+      const claimedAt = rows[i][3] instanceof Date ? rows[i][3].getTime() : new Date(rows[i][3]).getTime();
+      if (state === 'sent' || (state === 'claimed' && Number.isFinite(claimedAt) && now.getTime() - claimedAt < 30 * 60 * 1000)) return 0;
+      sh.getRange(row, 3, 1, HEADERS.CampaignRecipients.length - 2).setValues([['claimed', now, '', '']]);
+      return row;
+    }
+    if (legacySentAt) {
+      sh.appendRow([campaignId, normalizedEmail, 'sent', legacySentAt, legacySentAt, 'migrated from Clients.LastCampaign']);
+      return 0;
+    }
+    sh.appendRow([campaignId, normalizedEmail, 'claimed', now, '', '']);
+    return sh.getLastRow();
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function completeCampaignRecipient_(row, status, error) {
+  const lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    const sh = SpreadsheetApp.getActive().getSheetByName(SHEETS.CAMPAIGN_RECIPIENTS);
+    if (!sh || row < 2 || row > sh.getLastRow()) throw new Error('Campaign claim not found');
+    sh.getRange(row, 3, 1, 4).setValues([[
+      status,
+      sh.getRange(row, 4).getValue(),
+      status === 'sent' ? new Date() : '',
+      String(error || '').slice(0, 300),
+    ]]);
+  } finally {
+    lock.releaseLock();
+  }
 }
 
 /** Creates a daily 9am trigger so a large list is worked through automatically. */
@@ -1309,12 +1571,17 @@ function rowsOf_(name) {
 
 function listCustomers_() {
   const people = {};
+  const balancePaid = {};
+  rowsOf_(SHEETS.BALANCE_PAYMENTS).forEach((p) => {
+    const ref = String(p.Reference || '');
+    if (ref) balancePaid[ref] = (balancePaid[ref] || 0) + (Number(p.AmountGHS) || 0);
+  });
   let anonymousWhatsApp = 0;
   const person = (phone, name, org, email) => {
     const k = phoneKey_(phone) || ('email:' + String(email || '').toLowerCase()) || '';
     if (k === 'email:') return null;
     const p = people[k] || (people[k] = { key: k, name: '', organisation: '', phone: '', email: '', sources: [],
-      enquiries: [], orders: [], invoices: [], spentGHS: 0, balanceGHS: 0, last: '' });
+      enquiries: [], orders: [], invoices: [], spentGHS: 0, bookedGHS: 0, paidGHS: 0, unverifiedGHS: 0, balanceGHS: 0, last: '' });
     if (name && !p.name) p.name = String(name);
     if (org && !p.organisation) p.organisation = String(org);
     if (phone && !p.phone) p.phone = String(phone);
@@ -1338,9 +1605,17 @@ function listCustomers_() {
     const p = person(o.Phone, o.Customer, '', o.Email);
     if (!p) return;
     p.orders.push({ ref: o.Reference, when: o.Timestamp, product: o.Product, quantity: o.Quantity, total: o.TotalGHS,
-      balance: o.BalanceGHS, progress: o.Progress });
+      balance: o.BalanceGHS, paidNow: o.PaidNowGHS, verification: o.Verification, progress: o.Progress });
     if (o.Progress !== 'Cancelled') {
-      p.spentGHS += Number(o.TotalGHS) || 0;
+      const total = Number(o.TotalGHS) || 0;
+      const paidNow = Number(o.PaidNowGHS) || 0;
+      p.bookedGHS += total;
+      const verifiedPaidNow = String(o.Verification || '').indexOf('VERIFIED by Paystack:') === 0 ? paidNow : 0;
+      if (verifiedPaidNow) p.paidGHS += verifiedPaidNow;
+      else if (paidNow > 0) p.unverifiedGHS += paidNow;
+      const settledBalance = balancePaid[String(o.Reference || '')] || 0;
+      p.paidGHS += settledBalance;
+      p.spentGHS += verifiedPaidNow + settledBalance;
       p.balanceGHS += Number(o.BalanceGHS) || 0;
     }
     touch(p, o.Timestamp, 'order');
@@ -1358,7 +1633,7 @@ function listCustomers_() {
 }
 
 function updateEnquiry_(data) {
-  if (!checkAdmin_(data.key)) return json_({ ok: false, error: 'not allowed' });
+  if (!sessionValid_(data.session)) return json_({ ok: false, error: 'signed_out' });
   const row = Number(data.row);
   const lock = LockService.getScriptLock();
   lock.waitLock(10000);
@@ -1410,16 +1685,24 @@ function postingReportNow_(data) {
 function sendPostingReport() {
   const day = Utilities.formatDate(new Date(), 'Africa/Accra', 'yyyy-MM-dd');
   const site = (authProps_().getProperty('SITE_URL') || BUSINESS.website).replace(/\/?$/, '/');
-  const get = (path) => { try { return JSON.parse(UrlFetchApp.fetch(site + path + '?t=' + Date.now(), { muteHttpExceptions: true }).getContentText()); } catch (e) { return {}; } };
+  const get = (path) => {
+    const res = UrlFetchApp.fetch(site + path + '?t=' + Date.now(), { muteHttpExceptions: true });
+    const status = res.getResponseCode();
+    if (status < 200 || status >= 300) throw new Error(`Posting report source ${path} failed (HTTP ${status})`);
+    const body = JSON.parse(res.getContentText());
+    if (!body || typeof body !== 'object') throw new Error(`Posting report source ${path} returned invalid JSON`);
+    return body;
+  };
   const fb = get('data/facebook-autopilot.json');
   const ig = get('data/instagram-autopilot.json');
   const products = {};
   const list = get('data/products.json');
-  (Array.isArray(list) ? list : []).forEach((p) => { products[p.id] = String(p.name).split(' — ')[0]; });
-  // Skip if today's report already covers everything done today.
-  const last = authProps_().getProperty('LAST_POSTING_REPORT') || '';
-  const latest = [].concat(fb.posts || [], fb.runs || [], ig.posts || [], ig.runs || []).filter((x) => x.d === day).map((x) => x.t || '').sort().pop() || '';
-  if (last.slice(0, 10) === day && last >= latest) return;
+  (Array.isArray(list) ? list : Array.isArray(list.products) ? list.products : []).forEach((p) => { products[p.id] = String(p.name).split(' — ')[0]; });
+  const latest = latestPostingActivity_(day, fb, ig);
+  const props = authProps_();
+  const lastSent = props.getProperty('LAST_POSTING_REPORT') || '';
+  const through = props.getProperty('POSTING_REPORT_THROUGH') || '';
+  if (lastSent.slice(0, 10) === day && (!latest || through >= latest)) return;
   sendPostingReport_(day, fb, ig, products);
 }
 
@@ -1432,7 +1715,18 @@ function sendPostingReport_(day, fb, ig, products) {
     name: BUSINESS.name + ' autopilot',
     attachments: [Utilities.newBlob(r.csv, 'text/csv', 'fa-vision-posting-' + day + '.csv')],
   });
-  authProps_().setProperty('LAST_POSTING_REPORT', new Date().toISOString());
+  const props = authProps_();
+  props.setProperty('POSTING_REPORT_THROUGH', latestPostingActivity_(day, fb, ig));
+  props.setProperty('LAST_POSTING_REPORT', new Date().toISOString());
+}
+
+function latestPostingActivity_(day, fb, ig) {
+  const events = [].concat(fb.renewLog || [], fb.posts || [], fb.runs || [], ig.posts || [], ig.runs || []);
+  return events.filter((x) => x && x.d === day && x.t)
+    .map((x) => String(x.t))
+    .filter((t) => /^\d{4}-\d\d-\d\dT/.test(t))
+    .sort()
+    .pop() || '';
 }
 
 function buildPostingReport_(day, fb, ig, products) {
@@ -1520,6 +1814,7 @@ function buildPostingReport_(day, fb, ig, products) {
 // Run from the editor to see a sample report in your inbox straight away.
 function testPostingReport() {
   authProps_().deleteProperty('LAST_POSTING_REPORT');
+  authProps_().deleteProperty('POSTING_REPORT_THROUGH');
   sendPostingReport();
 }
 
@@ -1529,6 +1824,8 @@ function testPostingReport() {
 // Emailed to REPORT_EMAIL like the posting report.
 function sessionAlert_(data) {
   if (!sessionValid_(data.session)) return json_({ ok: false, error: 'signed_out' });
+  let milestoneKey = '';
+  let milestoneClaim = '';
   try {
     const h = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     const day = /^\d{4}-\d{2}-\d{2}$/.test(data.day) ? data.day : Utilities.formatDate(new Date(), 'Africa/Accra', 'yyyy-MM-dd');
@@ -1540,9 +1837,20 @@ function sessionAlert_(data) {
     const milestone = data.kind === 'milestone';
     const relayDone = data.kind === 'relay_done';   // Profile relay finished (admin/relay.js): joins per profile, posts per Page
     if (milestone) {
-      const k = 'ALERT20_' + day;
-      if (authProps_().getProperty(k)) return json_({ ok: true, to: reportEmail_(), already: true });
-      authProps_().setProperty(k, '1');
+      milestoneKey = 'ALERT20_' + day;
+      const lock = LockService.getScriptLock();
+      lock.waitLock(10000);
+      try {
+        const props = authProps_();
+        const current = props.getProperty(milestoneKey) || '';
+        const claimedAt = Number((current.match(/^pending:(\d+):/) || [])[1] || 0);
+        if (current === 'sent') return json_({ ok: true, to: reportEmail_(), already: true });
+        if (claimedAt && Date.now() - claimedAt < 15 * 60 * 1000) return json_({ ok: false, error: 'milestone_alert_pending' });
+        milestoneClaim = 'pending:' + Date.now() + ':' + randomToken_();
+        props.setProperty(milestoneKey, milestoneClaim);
+      } finally {
+        lock.releaseLock();
+      }
     }
     const subject = relayDone
       ? `FA Vision: Profile relay done — ${h(t.joined_today || 0)} groups joined (${day})`
@@ -1563,8 +1871,18 @@ function sessionAlert_(data) {
       `<h3>Removed today (declined our posts)</h3>${list(removed.map((r) => `<li>${h(r.name)} — ${h(r.why)} · ${r.left ? 'left on Facebook' : 'still to leave on Facebook'}</li>`))}` +
       `<p style="color:#777;font-size:12px">Sent by your FA Vision admin (Social autopilot). The full day's report follows when the run ends.</p></div>`;
     MailApp.sendEmail({ to: reportEmail_(), subject, htmlBody: html, body: subject, name: BUSINESS.name });
+    if (milestoneKey) authProps_().setProperty(milestoneKey, 'sent');
     return json_({ ok: true, to: reportEmail_() });
   } catch (err) {
+    if (milestoneKey && milestoneClaim) {
+      const lock = LockService.getScriptLock();
+      lock.waitLock(10000);
+      try {
+        if (authProps_().getProperty(milestoneKey) === milestoneClaim) authProps_().deleteProperty(milestoneKey);
+      } finally {
+        lock.releaseLock();
+      }
+    }
     return json_({ ok: false, error: String(err && err.message || err).slice(0, 200) });
   }
 }
@@ -1856,18 +2174,61 @@ function trends_(data) {
   return ContentService.createTextOutput(body).setMimeType(ContentService.MimeType.JSON);
 }
 // Download one approved photo (the admin resizes it and commits it to the website).
+const SEEK_IMAGE_HOSTS_ = [
+  'images.pexels.com', 'images.unsplash.com', 'cdn.pixabay.com',
+  'upload.wikimedia.org', 'live.staticflickr.com', 'images.flickr.com',
+];
+
+function seekImageUrl_(value) {
+  const url = String(value || '').trim();
+  const match = url.match(/^https:\/\/([^/?#:@]+)(?::(\d+))?(?:[/?#]|$)/i);
+  if (!match || (match[2] && match[2] !== '443')) return false;
+  return SEEK_IMAGE_HOSTS_.indexOf(match[1].toLowerCase()) >= 0;
+}
+
+function seekRedirect_(current, location) {
+  const next = String(location || '').trim();
+  if (/^https:\/\//i.test(next)) return next;
+  if (next.indexOf('//') === 0) return 'https:' + next;
+  const origin = String(current).match(/^(https:\/\/[^/?#]+)/i);
+  if (origin && next.charAt(0) === '/') return origin[1] + next;
+  return '';
+}
+
 function seekFetch_(data) {
   if (!sessionValid_(data.session)) return json_({ ok: false, error: 'signed_out' });
   if (!seekBudget_()) return json_({ ok: false, error: 'busy' });
-  const url = String(data.url || '');
-  if (!/^https:\/\/[^\s/]+\.[^\s/]+\//.test(url) || /^https:\/\/(localhost|127\.|10\.|192\.168\.|169\.254\.)/.test(url)) return json_({ ok: false, error: 'bad_url' });
+  let url = String(data.url || '');
+  if (!seekImageUrl_(url)) return json_({ ok: false, error: 'bad_url' });
   try {
-    const r = UrlFetchApp.fetch(url, { muteHttpExceptions: true, followRedirects: true, headers: { 'User-Agent': 'FAVisionAdmin/1.0 (+https://favisionenterprize.github.io)' } });
-    if (r.getResponseCode() >= 300) return json_({ ok: false, error: 'HTTP ' + r.getResponseCode() });
-    const blob = r.getBlob();
-    const type = String(blob.getContentType() || '');
-    if (!/^image\/(jpeg|png|webp)/.test(type)) return json_({ ok: false, error: 'not_an_image' });
-    const bytes = blob.getBytes();
+    let r = null;
+    for (let redirects = 0; redirects <= 3; redirects++) {
+      if (!seekImageUrl_(url)) return json_({ ok: false, error: 'bad_redirect' });
+      r = UrlFetchApp.fetch(url, {
+        muteHttpExceptions: true, followRedirects: false,
+        headers: { 'User-Agent': 'FAVisionAdmin/1.0 (+https://favisionenterprize.github.io)' },
+      });
+      const code = r.getResponseCode();
+      if (code >= 300 && code < 400) {
+        const headers = r.getHeaders() || {};
+        const locationKey = Object.keys(headers).find((k) => k.toLowerCase() === 'location');
+        const destination = seekRedirect_(url, locationKey && headers[locationKey]);
+        if (!destination || redirects === 3) return json_({ ok: false, error: 'bad_redirect' });
+        url = destination;
+        continue;
+      }
+      if (code < 200 || code >= 300) return json_({ ok: false, error: 'HTTP ' + code });
+      break;
+    }
+    if (!r) return json_({ ok: false, error: 'download_failed' });
+    const headers = r.getHeaders() || {};
+    const contentTypeKey = Object.keys(headers).find((k) => k.toLowerCase() === 'content-type');
+    const type = String(contentTypeKey ? headers[contentTypeKey] : r.getBlob().getContentType() || '').split(';')[0].trim();
+    if (!/^image\/(jpeg|png|webp)$/i.test(type)) return json_({ ok: false, error: 'not_an_image' });
+    const lengthKey = Object.keys(headers).find((k) => k.toLowerCase() === 'content-length');
+    const declaredLength = Number(lengthKey && headers[lengthKey]);
+    if (Number.isFinite(declaredLength) && declaredLength > 12 * 1024 * 1024) return json_({ ok: false, error: 'too_big' });
+    const bytes = r.getContent();
     if (bytes.length > 12 * 1024 * 1024) return json_({ ok: false, error: 'too_big' });
     return json_({ ok: true, type, b64: Utilities.base64Encode(bytes) });
   } catch (e) {
