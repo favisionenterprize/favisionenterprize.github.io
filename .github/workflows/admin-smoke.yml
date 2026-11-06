@@ -9,6 +9,7 @@ on:
       - ".github/workflows/admin-smoke.yml"
       - "admin/**"
       - "data/**"
+      - "extension/admin.js"
       - "scripts/admin_smoke.js"
   push:
     branches: [main]
@@ -16,6 +17,7 @@ on:
       - ".github/workflows/admin-smoke.yml"
       - "admin/**"
       - "data/**"
+      - "extension/admin.js"
       - "scripts/admin_smoke.js"
   workflow_dispatch:
 
