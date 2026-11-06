@@ -33,8 +33,8 @@
    "pinned": null,
    "linkOk": true,
    "pinOk": false,
-   "why": "",
-   "mode": "check"
+   "why": "couldn't find a post with “Fresh stock, just arrived” on the profile",
+   "mode": "fix"
   },
   "ig": {
    "d": "2026-11-06",
@@ -363,6 +363,13 @@
    "mode": "check",
    "linkOk": false,
    "pinOk": true
+  },
+  {
+   "d": "2026-11-06",
+   "net": "fb",
+   "mode": "fix",
+   "linkOk": true,
+   "pinOk": false
   }
  ]
 }
