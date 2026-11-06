@@ -24,8 +24,8 @@
    "pinned": null,
    "linkOk": false,
    "pinOk": false,
-   "why": "couldn't find the post on TikTok (pin it in the app: open the post → ••• → Pin) · couldn't find Edit profile",
-   "mode": "fix"
+   "why": "",
+   "mode": "check"
   },
   "fb": {
    "d": "2026-11-06",
@@ -425,6 +425,13 @@
    "net": "fb",
    "mode": "check",
    "linkOk": true,
+   "pinOk": false
+  },
+  {
+   "d": "2026-11-06",
+   "net": "tiktok",
+   "mode": "check",
+   "linkOk": false,
    "pinOk": false
   }
  ]
