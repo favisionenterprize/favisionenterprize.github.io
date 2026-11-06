@@ -22,7 +22,48 @@
   }
  },
  "x": {
-  "scan": null,
+  "scan": {
+   "d": "2026-11-06",
+   "t": "2026-11-06T02:55:08.368Z",
+   "n": 5,
+   "posts": [
+    {
+     "id": "1662447925388099587",
+     "url": "https://x.com/FaVisionEnt/status/1662447925388099587",
+     "text": "Pls take Note that office is open for walk in purchases and delivery as well. STUDENT DESKS ARE AVAILABLE IN LARGE QUANTITIES!!!",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2117614987325907170",
+     "url": "https://x.com/FaVisionEnt/status/2117614987325907170",
+     "text": "Student Desk Chair Set: GH₵ 650, price negotiable a set · GH₵640 each from 50 sets. WhatsApp 020 747 3267 to order https:// favisionenterprize.github.io/p/FAV-014.html #VisitGhana #HomeDecorGhana Tell us where you're seeing this video from, then like, share & follow!",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2116819365374881950",
+     "url": "https://x.com/FaVisionEnt/status/2116819365374881950",
+     "text": "Make study time more comfortable with our student desk and chair, paired here with a dining set. Explore practical furniture for home, school, and office. Message FA Vision Enterprise to enquire or order. #FAVisionEnterprise #StudentDesk #FurnitureGhana",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2115167647612682674",
+     "url": "https://x.com/FaVisionEnt/status/2115167647612682674",
+     "text": "What's in the box? Luxury Leather Sofa Set: Leather sofa set, Sofa legs. GH₵ 8,500. WhatsApp 057 264 6176 https:// favisionenterprize.github.io/p/FAV-016.html #ExploreGhana #HomeGoals Where are you watching this ad from? Like, share & follow us!",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2115167568403321166",
+     "url": "https://x.com/FaVisionEnt/status/2115167568403321166",
+     "text": "L-Shaped Sectional Sofa: GH₵ 15,500 (negotiable). WhatsApp 057 264 6176 to order https:// favisionenterprize.github.io/p/FAV-011.html #MovingToGhana #HomeDecorGhana Where are you watching this ad from? Like, share & follow us!",
+     "kind": "post",
+     "alt": ""
+    }
+   ]
+  },
   "replied": {}
  },
  "mk": {
@@ -36,6 +77,13 @@
    "tried": 1,
    "ok": 0,
    "skip": 0,
+   "v": "2026-10-15.4"
+  },
+  {
+   "d": "2026-11-06",
+   "kind": "scan",
+   "net": "x",
+   "n": 5,
    "v": "2026-10-15.4"
   }
  ]
