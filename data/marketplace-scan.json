@@ -355,6 +355,30 @@
     "id": "2364608837666104",
     "renew": "wait",
     "next": "2026-11-07"
+   },
+   {
+    "t": "Black Glass Dining Set — 6 High-Back Chairs",
+    "price": 4900,
+    "status": "Active",
+    "listed": "2026-11-06",
+    "id": "1148687584515257",
+    "renew": "wait"
+   },
+   {
+    "t": "Dining Set Collection — 5 Designs, 6 Chairs",
+    "price": 12600,
+    "status": "Active",
+    "listed": "2026-11-06",
+    "id": "1539755117914364",
+    "renew": "wait"
+   },
+   {
+    "t": "Executive Director Chair — Leather, High Back",
+    "price": 9500,
+    "status": "Active",
+    "listed": "2026-11-06",
+    "id": "2270407220420650",
+    "renew": "wait"
    }
   ]
  },
@@ -1438,6 +1462,36 @@
    "price": 4900,
    "ok": false,
    "why": "the Marketplace form didn't open"
+  },
+  {
+   "d": "2026-11-06",
+   "t": "2026-11-06T21:19:46.832Z",
+   "p": "FAV-002",
+   "title": "Black Glass Dining Set — 6 High-Back Chairs",
+   "price": 4900,
+   "ok": true,
+   "id": "1148687584515257",
+   "verified": true
+  },
+  {
+   "d": "2026-11-06",
+   "t": "2026-11-06T21:20:25.598Z",
+   "p": "FAV-003",
+   "title": "Dining Set Collection — 5 Designs, 6 Chairs",
+   "price": 12600,
+   "ok": true,
+   "id": "1539755117914364",
+   "verified": true
+  },
+  {
+   "d": "2026-11-06",
+   "t": "2026-11-06T21:21:46.991Z",
+   "p": "FAV-006",
+   "title": "Executive Director Chair — Leather, High Back",
+   "price": 9500,
+   "ok": true,
+   "id": "2270407220420650",
+   "verified": true
   }
  ],
  "runs": [
@@ -1688,6 +1742,12 @@
    "d": "2026-11-06",
    "kind": "scan",
    "n": 38
+  },
+  {
+   "d": "2026-11-06",
+   "kind": "list",
+   "tried": 3,
+   "ok": 3
   }
  ],
  "skip": []
