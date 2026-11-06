@@ -13026,6 +13026,14 @@
    "kind": "post",
    "tried": 1,
    "ok": 1
+  },
+  {
+   "d": "2026-11-06",
+   "t": "2026-11-06T08:10:03.383Z",
+   "kind": "renew",
+   "tried": 0,
+   "ok": 0,
+   "stopped": "No listings found on Your listings. Make sure Facebook is on your personal profile."
   }
  ],
  "renewLog": [
@@ -14582,57 +14590,8 @@
   }
  },
  "selling": {
-  "d": "2026-11-04",
-  "cards": [
-   {
-    "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
-    "listed": "2026-11-03",
-    "status": "Active",
-    "none": "2026-11-04"
-   },
-   {
-    "t": "Red Glass Dining Set — 6 Chairs",
-    "listed": "2026-11-03",
-    "status": "Active",
-    "none": "2026-11-04"
-   },
-   {
-    "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
-    "listed": "2026-11-03",
-    "status": "Active",
-    "next": "2026-11-10"
-   },
-   {
-    "t": "White Foldable Chairs — Pack of 10 (Black Frame)",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-07"
-   },
-   {
-    "t": "White Foldable 8-Seater Set — 8ft Table + 8 Chairs",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-07"
-   },
-   {
-    "t": "White Foldable 4-Seater Set — 4ft Table + 4 Chairs",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-07"
-   },
-   {
-    "t": "White Foldable Chair — Black Frame, Handle Slot",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-07"
-   },
-   {
-    "t": "White Foldable Table — 4-Seater (4ft, Black Frame)",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-07"
-   }
-  ]
+  "d": "2026-11-06",
+  "cards": []
  },
  "switches": [
   {
