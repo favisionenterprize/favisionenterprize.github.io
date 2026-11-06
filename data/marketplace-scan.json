@@ -10,8 +10,8 @@
   "photos": 8
  },
  "scan": {
-  "d": "2026-11-04",
-  "t": "2026-11-04T22:24:52.080Z",
+  "d": "2026-11-06",
+  "t": "2026-11-06T09:46:31.115Z",
   "n": 8,
   "listings": [
    {
@@ -19,66 +19,72 @@
     "price": 11900,
     "status": "Active",
     "listed": "2026-11-03",
-    "renew": "none"
+    "id": "1665138258314174",
+    "renew": "wait",
+    "next": "2026-11-11"
    },
    {
     "t": "Red Glass Dining Set — 6 Chairs",
-    "price": 12600,
+    "price": 11900,
     "status": "Active",
     "listed": "2026-11-03",
-    "renew": "none"
+    "id": "1422600906375620",
+    "renew": "wait",
+    "next": "2026-11-11"
    },
    {
     "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
-    "price": 12600,
+    "price": 11900,
     "status": "Active",
     "listed": "2026-11-03",
-    "renew": "none"
+    "id": "1132565479739007",
+    "renew": "wait",
+    "next": "2026-11-11"
    },
    {
     "t": "White Foldable Chairs — Pack of 10 (Black Frame)",
     "price": 2425,
     "status": "Active",
     "listed": "2026-10-31",
-    "id": "1665138258314174",
+    "id": "1754440730022094",
     "renew": "wait",
-    "next": "2026-11-10"
+    "next": "2026-11-07"
    },
    {
     "t": "White Foldable 8-Seater Set — 8ft Table + 8 Chairs",
-    "price": 3160,
+    "price": 2425,
     "status": "Active",
     "listed": "2026-10-31",
-    "id": "1665138258314174",
+    "id": "1497192478922661",
     "renew": "wait",
-    "next": "2026-11-10"
+    "next": "2026-11-07"
    },
    {
     "t": "White Foldable 4-Seater Set — 4ft Table + 4 Chairs",
-    "price": 1650,
+    "price": 2425,
     "status": "Active",
     "listed": "2026-10-31",
-    "id": "1665138258314174",
+    "id": "1129518979434975",
     "renew": "wait",
-    "next": "2026-11-10"
+    "next": "2026-11-07"
    },
    {
     "t": "White Foldable Chair — Black Frame, Handle Slot",
-    "price": 250,
+    "price": 2425,
     "status": "Active",
     "listed": "2026-10-31",
-    "id": "1665138258314174",
+    "id": "1846863210099572",
     "renew": "wait",
-    "next": "2026-11-10"
+    "next": "2026-11-07"
    },
    {
     "t": "White Foldable Table — 4-Seater (4ft, Black Frame)",
-    "price": 670,
+    "price": 2425,
     "status": "Active",
     "listed": "2026-10-31",
-    "id": "1665138258314174",
+    "id": "1559432725950945",
     "renew": "wait",
-    "next": "2026-11-10"
+    "next": "2026-11-07"
    }
   ]
  },
@@ -1402,6 +1408,11 @@
    "tried": 1,
    "ok": 0,
    "stopped": "Facebook kept sending the tab to another page. Stopped."
+  },
+  {
+   "d": "2026-11-06",
+   "kind": "scan",
+   "n": 8
   }
  ],
  "skip": []
