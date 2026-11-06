@@ -3,9 +3,17 @@
 name: Admin smoke test
 
 on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/admin-smoke.yml"
+      - "admin/**"
+      - "data/**"
+      - "scripts/admin_smoke.js"
   push:
     branches: [main]
     paths:
+      - ".github/workflows/admin-smoke.yml"
       - "admin/**"
       - "data/**"
       - "scripts/admin_smoke.js"
@@ -13,7 +21,7 @@ on:
 
 jobs:
   smoke:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
