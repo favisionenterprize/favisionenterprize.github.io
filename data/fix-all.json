@@ -24,8 +24,8 @@
  "x": {
   "scan": {
    "d": "2026-11-06",
-   "t": "2026-11-06T02:55:08.368Z",
-   "n": 5,
+   "t": "2026-11-06T05:04:33.471Z",
+   "n": 9,
    "posts": [
     {
      "id": "1662447925388099587",
@@ -59,6 +59,34 @@
      "id": "2115167568403321166",
      "url": "https://x.com/FaVisionEnt/status/2115167568403321166",
      "text": "L-Shaped Sectional Sofa: GH₵ 15,500 (negotiable). WhatsApp 057 264 6176 to order https:// favisionenterprize.github.io/p/FAV-011.html #MovingToGhana #HomeDecorGhana Where are you watching this ad from? Like, share & follow us!",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2114794989150437526",
+     "url": "https://x.com/FaVisionEnt/status/2114794989150437526",
+     "text": "L-Shaped Sectional Sofa: GH₵ 15,500, price negotiable. WhatsApp 057 264 6176 to order https:// favisionenterprize.github.io/p/FAV-011.html #Ghana #HomeGoals Tell us where you're seeing this ad from, then like, share & follow!",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2114302861173776535",
+     "url": "https://x.com/FaVisionEnt/status/2114302861173776535",
+     "text": "L-Shaped Sectional Sofa: GH₵ 15,500 (we can talk). WhatsApp 057 264 6176 to order https:// favisionenterprize.github.io/p/FAV-011.html #Akwaaba #GhanaFurniture Tell us where you're seeing this from, then like, share & follow!",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2114291900211511565",
+     "url": "https://x.com/FaVisionEnt/status/2114291900211511565",
+     "text": "White Foldable 4-Seater Set: GH₵ 1,650, price negotiable. WhatsApp 057 264 6176 to order https:// favisionenterprize.github.io/p/FAV-040.html #AccraGhana #FurnitureAccra Tell us where you're seeing this ad from, then like, share & follow!",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2114290757440045492",
+     "url": "https://x.com/FaVisionEnt/status/2114290757440045492",
+     "text": "What's in the box? Hair Dressers Washing Bowl with Bar Chair: Washing bowl, Attached padded chair, Tap & hose, Fittings pack. GH₵ 10,950. WhatsApp 057 264 6176 #Akwaaba #HomeGoals Where are you seeing this ad from? Reply, then like, share & follow us!",
      "kind": "post",
      "alt": ""
     }
@@ -95,6 +123,13 @@
    "skip": 0,
    "v": "2026-10-15.4",
    "stopped": "Unknown job."
+  },
+  {
+   "d": "2026-11-06",
+   "kind": "scan",
+   "net": "x",
+   "n": 9,
+   "v": "2026-10-15.4"
   }
  ]
 }
