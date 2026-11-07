@@ -167,11 +167,43 @@ chrome.runtime.onMessage.addListener((msg, sender, reply) => {
   return true;
 });
 
-// Sites a run may open: the add-on's own scripts' sites.
-async function allowedStart(url) {
-  const st = await chrome.storage.local.get("live");
-  const patterns = BUNDLED.concat((st.live && st.live.scripts) || []).flatMap(x => x.matches);
-  return patterns.some(p => new RegExp("^" + p.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, ".*") + "$").test(url));
+const START_SCRIPTS = {
+  post: ["Facebook", "fb-autopilot"],
+  renew: ["Facebook", "fb-autopilot"],
+  import: ["Facebook", "fb-autopilot"],
+  declines: ["Facebook", "fb-autopilot"],
+  grow: ["Facebook", "fb-autopilot"],
+  ig: ["Instagram", "instagram"],
+  x: ["X", "social"],
+  tiktok: ["TikTok", "social"],
+  youtube: ["YouTube", "youtube"],
+  mkscan: ["Marketplace", "marketplace"],
+  mklist: ["Marketplace", "marketplace"],
+  mkinbox: ["Marketplace", "marketplace"],
+  mkedit: ["Marketplace", "marketplace"],
+  engage: ["engagement", "engage"],
+  profile: ["profile", "profile"],
+  ttscan: ["TikTok captions", "ttcaptions"],
+  ttfix: ["TikTok captions", "ttcaptions"],
+  fxscan: ["Fix all", "fixall"],
+  fxfix: ["Fix all", "fixall"],
+  fxreply: ["Fix all", "fixall"],
+  story: ["story", "boost"],
+  sounds: ["sound picker", "boost"]
+};
+async function allowedStart(url, job) {
+  const [name, id] = START_SCRIPTS[job.kind] || [];
+  if (!id) throw new Error(`No extension script is configured for ${job.kind} jobs`);
+  const st = await chrome.storage.local.get("installed");
+  const registered = String(st.installed || "").startsWith("live:")
+    ? await chrome.userScripts.getScripts()
+    : await chrome.scripting.getRegisteredContentScripts();
+  const script = registered.find(x => x.id === id);
+  if (!script) throw new Error(`${name} script (${id}) isn't registered`);
+  const matches = script.matches || [];
+  const allowed = matches.some(pattern => new RegExp("^" + pattern.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, ".*") + "$").test(url));
+  if (!allowed) throw new Error(`${name} script (${id}) isn't registered for ${url}`);
+  return true;
 }
 
 // Messages come from the add-on's own content scripts (bundled mode) and from
@@ -197,8 +229,8 @@ listen((msg, sender, reply) => {
     if (!msg.job || !msg.job.kind) { reply({ ok: false }); return; }
     // Fetch the latest scripts first, so every run uses what's on the website now.
     install(false)
-      .then(() => allowedStart(String(msg.url)))
-      .then(ok => { if (!ok) throw new Error("not an autopilot site"); return chrome.storage.session.set({ [key]: msg.job }); })
+      .then(() => allowedStart(String(msg.url), msg.job))
+      .then(() => chrome.storage.session.set({ [key]: msg.job }))
       .then(() => chrome.tabs.update(tabId, { url: msg.url }))
       .then(() => reply({ ok: true }), err => reply({ ok: false, error: String(err) }));
     return true;

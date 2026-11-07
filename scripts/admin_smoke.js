@@ -142,9 +142,9 @@ async function extensionDispatcherSmoke() {
   assert.strictEqual(social.navigations.length, 1, "social job did not navigate after repair");
 
   const missing = await createBackground({ userScripts: true, handlerScripts: [{ id: "dialogs", matches: ["https://x.com/*"] }] });
-  const missingResult = await missing.send({ type: "start", url: "https://x.com/compose/post", job: { id: "x1", kind: "x" } });
+  const missingResult = await missing.send({ type: "start", url: "https://www.tiktok.com/tiktokstudio/upload", job: { id: "tt1", kind: "tiktok" } });
   assert.strictEqual(missingResult.ok, false, "missing handler was incorrectly accepted");
-  assert.match(missingResult.error, /x script \(social\).*isn't registered/i);
+  assert.match(missingResult.error, /TikTok script \(social\).*isn't registered/i);
   assert.strictEqual(missing.navigations.length, 0, "missing handler navigated without running");
 }
 
