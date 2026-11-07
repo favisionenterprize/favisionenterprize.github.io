@@ -215,6 +215,11 @@
    "d": "2026-11-06",
    "net": "tiktok",
    "n": 285
+  },
+  {
+   "d": "2026-11-07",
+   "net": "x",
+   "n": 298
   }
  ],
  "posts": {
@@ -370,7 +375,7 @@
    "url": "https://x.com/FaVisionEnt/status/1662447925388099587",
    "first": "2026-10-13",
    "commented": [],
-   "checked": "2026-11-06",
+   "checked": "2026-11-07",
    "likes": 3,
    "comments": 6,
    "shares": 2,
@@ -1511,6 +1516,13 @@
    "commented": [],
    "title": "Fresh stock, just arrived! 🎒📚 Our new... - F.A Vision Enterprise",
    "checked": "2026-11-06"
+  },
+  "https://x.com/FaVisionEnt/status/2119210010160791919": {
+   "net": "x",
+   "url": "https://x.com/FaVisionEnt/status/2119210010160791919",
+   "first": "2026-11-07",
+   "commented": [],
+   "checked": "2026-11-07"
   }
  },
  "runs": [
@@ -3553,6 +3565,21 @@
    "followers": 285,
    "stopped": "No posts found on your TikTok profile.",
    "commenting": false
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T23:43:10.241Z",
+   "net": "x",
+   "mode": "stats",
+   "posts": 2,
+   "checked": 2,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 298,
+   "stopped": null,
+   "commenting": true
   }
  ],
  "liked": {}
