@@ -1039,6 +1039,13 @@ window.FAV_DATA = {
           "price": 12600,
           "checked": "2026-11-06",
           "synced": "2026-11-06"
+        },
+        {
+          "id": "1677564277557874",
+          "title": "Dining Set Collection — 5 Designs, 6 Chairs",
+          "price": 12600,
+          "checked": "2026-11-07",
+          "synced": "2026-11-07"
         }
       ],
       "tiktok": 10,
@@ -1308,6 +1315,13 @@ window.FAV_DATA = {
           "price": 9500,
           "checked": "2026-11-06",
           "synced": "2026-11-06"
+        },
+        {
+          "id": "1008318385656152",
+          "title": "Executive Director Chair — Leather, High Back",
+          "price": 9500,
+          "checked": "2026-11-07",
+          "synced": "2026-11-07"
         }
       ],
       "tiktok": 5,
