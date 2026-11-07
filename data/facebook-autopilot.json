@@ -11937,6 +11937,96 @@
    "ok": true,
    "now": true,
    "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T11:07:20.230Z",
+   "p": "FAV-014",
+   "g": "736022859346669",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T11:10:46.478Z",
+   "p": "FAV-014",
+   "g": "1024580214893201",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T11:13:12.996Z",
+   "p": "FAV-014",
+   "g": "529666480875413",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T11:13:48.803Z",
+   "p": "FAV-014",
+   "g": "328565174443670",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T11:14:29.941Z",
+   "p": "FAV-014",
+   "g": "175162353823750",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T11:17:31.871Z",
+   "p": "FAV-014",
+   "g": "433233306075040",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T11:20:32.076Z",
+   "p": "FAV-014",
+   "g": "297839381138160",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T11:22:33.762Z",
+   "p": "FAV-014",
+   "g": "1758276397875629",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T11:25:51.368Z",
+   "p": "FAV-014",
+   "g": "461960315943081",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T11:28:48.784Z",
+   "p": "FAV-014",
+   "g": "2350652831731838",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
   }
  ],
  "resets": {},
@@ -13306,6 +13396,13 @@
   {
    "d": "2026-11-07",
    "t": "2026-11-07T11:26:47.858Z",
+   "kind": "post",
+   "tried": 10,
+   "ok": 8
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T11:29:08.029Z",
    "kind": "post",
    "tried": 10,
    "ok": 8
