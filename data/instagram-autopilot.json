@@ -3009,13 +3009,6 @@
  "runs": [
   {
    "d": "2026-10-07",
-   "t": "2026-10-07T10:34:16.453Z",
-   "kind": "ig",
-   "tried": 3,
-   "ok": 3
-  },
-  {
-   "d": "2026-10-07",
    "t": "2026-10-07T17:34:20.377Z",
    "kind": "ig",
    "tried": 10,
@@ -4472,6 +4465,14 @@
   {
    "d": "2026-11-07",
    "t": "2026-11-07T13:01:47.416Z",
+   "kind": "ig",
+   "tried": 0,
+   "ok": 0,
+   "stopped": "Instagram is logged in to a different account. Switch to @favisionent, then tap Run again."
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T14:01:28.740Z",
    "kind": "ig",
    "tried": 0,
    "ok": 0,
