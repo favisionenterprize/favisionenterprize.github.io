@@ -238,6 +238,22 @@
     "listed": "2026-10-31",
     "id": "4446074032373624",
     "renew": "ready"
+   },
+   {
+    "t": "Dining Set Collection — 5 Designs, 6 Chairs",
+    "price": 12600,
+    "status": "Active",
+    "listed": "2026-11-07",
+    "id": "1677564277557874",
+    "renew": "wait"
+   },
+   {
+    "t": "Executive Director Chair — Leather, High Back",
+    "price": 9500,
+    "status": "Active",
+    "listed": "2026-11-07",
+    "id": "1008318385656152",
+    "renew": "wait"
    }
   ]
  },
@@ -1351,6 +1367,35 @@
    "ok": true,
    "id": "2270407220420650",
    "verified": true
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T09:12:56.983Z",
+   "p": "FAV-002",
+   "title": "Black Glass Dining Set — 6 High-Back Chairs",
+   "price": 4900,
+   "ok": false,
+   "why": "couldn't pick the category"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T09:13:34.445Z",
+   "p": "FAV-003",
+   "title": "Dining Set Collection — 5 Designs, 6 Chairs",
+   "price": 12600,
+   "ok": true,
+   "id": "1677564277557874",
+   "verified": true
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T09:14:59.473Z",
+   "p": "FAV-006",
+   "title": "Executive Director Chair — Leather, High Back",
+   "price": 9500,
+   "ok": true,
+   "id": "1008318385656152",
+   "verified": true
   }
  ],
  "runs": [
@@ -1612,6 +1657,12 @@
    "d": "2026-11-07",
    "kind": "scan",
    "n": 28
+  },
+  {
+   "d": "2026-11-07",
+   "kind": "list",
+   "tried": 3,
+   "ok": 2
   }
  ],
  "skip": []
