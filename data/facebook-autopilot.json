@@ -12207,6 +12207,96 @@
    "ok": false,
    "now": true,
    "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T17:06:13.506Z",
+   "p": "FAV-014",
+   "g": "676028904970756",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T17:08:34.665Z",
+   "p": "FAV-014",
+   "g": "968743035497423",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T17:11:51.837Z",
+   "p": "FAV-014",
+   "g": "1188146491374311",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T17:12:21.933Z",
+   "p": "FAV-014",
+   "g": "1229551567203129",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T17:15:01.103Z",
+   "p": "FAV-014",
+   "g": "846228426160339",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T17:17:46.575Z",
+   "p": "FAV-014",
+   "g": "425333306006639",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T17:20:18.908Z",
+   "p": "FAV-014",
+   "g": "690490999765696",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T17:23:35.495Z",
+   "p": "FAV-014",
+   "g": "839631155147546",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T17:26:49.377Z",
+   "p": "FAV-014",
+   "g": "6238174109629576",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T17:29:56.250Z",
+   "p": "FAV-014",
+   "g": "diyhomegardeninterior",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
   }
  ],
  "resets": {},
@@ -13600,6 +13690,13 @@
    "kind": "post",
    "tried": 10,
    "ok": 2
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T17:30:17.180Z",
+   "kind": "post",
+   "tried": 10,
+   "ok": 9
   }
  ],
  "renewLog": [
