@@ -11757,6 +11757,96 @@
    "ok": false,
    "now": true,
    "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T07:18:24.413Z",
+   "p": "FAV-014",
+   "g": "496479381477694",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T07:20:02.794Z",
+   "p": "FAV-014",
+   "g": "128781830486923",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T07:23:17.241Z",
+   "p": "FAV-014",
+   "g": "258292888312070",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T07:27:45.426Z",
+   "p": "FAV-014",
+   "g": "1367312881586038",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T07:29:29.897Z",
+   "p": "FAV-014",
+   "g": "903725730806521",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T07:32:40.839Z",
+   "p": "FAV-014",
+   "g": "566173797987331",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T07:34:49.652Z",
+   "p": "FAV-014",
+   "g": "1709973933043009",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T07:36:15.655Z",
+   "p": "FAV-014",
+   "g": "742321899626809",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T07:39:23.288Z",
+   "p": "FAV-014",
+   "g": "374401417177968",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T07:42:24.505Z",
+   "p": "FAV-014",
+   "g": "4350141225031707",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
   }
  ],
  "resets": {},
@@ -13115,6 +13205,13 @@
    "tried": 0,
    "ok": 0,
    "stopped": "No listings found on Your listings. Make sure Facebook is on your personal profile."
+  },
+  {
+   "d": "2026-11-07",
+   "t": "2026-11-07T07:42:40.650Z",
+   "kind": "post",
+   "tried": 10,
+   "ok": 10
   }
  ],
  "renewLog": [
