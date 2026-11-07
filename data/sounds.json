@@ -1366,10 +1366,6 @@
  "notes": [
   {
    "d": "2026-11-01",
-   "text": "couldn't read the Creative Center song list"
-  },
-  {
-   "d": "2026-11-01",
    "platform": "tiktok",
    "text": "1 post went out without a sound"
   },
@@ -1551,6 +1547,11 @@
   {
    "d": "2026-11-07",
    "text": "couldn't read the Creative Center song list"
+  },
+  {
+   "d": "2026-11-07",
+   "platform": "tiktok",
+   "text": "1 post went out without a sound"
   },
   {
    "d": "2026-11-07",
