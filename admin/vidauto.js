@@ -18,11 +18,37 @@
   const F = () => window.FAV_FBAUTO;
   const CAP = () => window.FAV_CAPTIONS;
   const today = () => new Date().toLocaleDateString("en-CA");
+  const SEARCH_CONSOLE = "https://search.google.com/search-console/performance/search-analytics?resource_id=sc-domain%3Afavisionenterprize.github.io";
+  const CONTENT_KEY = "fa-weekly-content";
+  const CONTENT_STAGES = [["idea", "Idea"], ["scripted", "Script & storyboard"], ["recording", "Record / edit"], ["review", "Review"], ["approved", "Approved for manual posting"]];
   const plural = (n, w) => `${n} ${w}${n === 1 ? "" : "s"}`;
   const NETS = { website: "Website", youtube: "YouTube", tiktok: "TikTok" };
-  const SRC = { all: "All", tiktok: "My TikTok videos", generated: "Made from ads", upload: "Added by me" };
+  const SRC = { all: "All", tiktok: "My TikTok videos", generated: "Made from ads", upload: "Added by me", desk: "FAV-014 school campaign" };
   let S = null, view = "waiting", src = "all", armed = null;
   const drafts = {};   // id → { text, edited }: the description shown on each card (a fresh one after every posting)
+  let contentPlanError = "";
+  let contentPlans = readContentPlans();
+  const productById = id => A.products().find(p => p.id === id) || null;
+
+  function readContentPlans() {
+    try {
+      const value = JSON.parse(localStorage.getItem(CONTENT_KEY) || "[]");
+      if (!Array.isArray(value)) { contentPlanError = "The saved weekly plan is not a list. It was left unchanged; fix or remove the fa-weekly-content entry in this browser's local storage before editing."; return []; }
+      return value.filter(x => x && typeof x.id === "string").slice(-30);
+    } catch (e) { contentPlanError = "Couldn't read the saved weekly plan from this browser. It was left unchanged."; return []; }
+  }
+  function saveContentPlans() {
+    if (contentPlanError) { A.toast(contentPlanError, true); return false; }
+    try { localStorage.setItem(CONTENT_KEY, JSON.stringify(contentPlans.slice(-30))); }
+    catch (e) { contentPlanError = "Couldn't save the weekly content plan in this browser."; A.toast(contentPlanError, true); return false; }
+    return true;
+  }
+  const contentPlan = id => contentPlans.find(x => x.id === id);
+  const saveContentPlan = plan => {
+    if (!plan) return false;
+    plan.updated = today();
+    return saveContentPlans();
+  };
 
   function normalise(s) {
     s = s || JSON.parse(JSON.stringify(EMPTY));
@@ -35,6 +61,7 @@
   const rerender = () => { if (F() && F().render) F().render(); };
   const product = v => (v.product && A.products().find(p => p.id === v.product)) || null;
   const isStudio = v => /^ai-studio/.test(v.id);
+  const postingHold = v => String(v && v.audio && v.audio.hold_reason || "");
   // Facebook videos too long to copy (e.g. the desk offloading videos) play from Facebook itself.
   const fbFrame = u => /^https:\/\/www\.facebook\.com\/FaVisionEnterprise\/videos\/\d+\/?$/.test(String(u || ""))
     ? `<iframe class="vid-embed" src="https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(u)}&show_text=false" loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen style="border:0;width:100%;aspect-ratio:9/16;max-height:420px"></iframe>`
@@ -129,6 +156,7 @@
     await save(s => { const v = s.videos.find(x => x.id === id); if (v) v[net] = { ...rec, d: today() }; return s; }, msg);
   }
   async function toWebsite(v, on) {
+    if (on && postingHold(v)) return A.toast(`Replace this video before posting: ${postingHold(v)}`, true);
     A.busy(on ? "Putting the video on your website…" : "Taking the video off your website…");
     try {
       if (on) await setNet(v.id, "website", { status: "posted", title: titleFor(v, "website"), description: textFor(v, "share") }, `Videos: show ${v.id} on the website`);
@@ -148,7 +176,11 @@
     if (fb.needExt()) return;
     if (!fb.liveAddon()) return A.toast("YouTube needs the add-on's automatic updates switched on (Today tab, top).", true);
     if (!shellOk()) return A.toast("Reload the add-on once in edge://extensions (it needs permission for YouTube), then refresh this page and try again.", true);
-    const vids = ids.map(id => S.videos.find(v => v.id === id)).filter(v => v && v.file);
+    const selected = ids.map(id => S.videos.find(v => v.id === id)).filter(v => v && v.file);
+    const held = selected.filter(postingHold);
+    if (held.length) A.toast(`${plural(held.length, "video")} held back until the source audio is replaced.`, true);
+    const vids = selected.filter(v => !postingHold(v));
+    if (!vids.length) return;
     if (!vids.length) return A.toast("No videos to upload.", true);
     const q = vids.map(v => ({ k: v.id, file: location.origin + "/" + v.file, title: titleFor(v, "youtube"), description: textFor(v, "youtube") }));
     vids.forEach(reroll);
@@ -184,6 +216,7 @@
     catch (e) { const a = document.createElement("textarea"); a.value = t; document.body.appendChild(a); a.select(); const ok = document.execCommand("copy"); a.remove(); return ok; }
   }
   async function toTikTok(v) {
+    if (postingHold(v)) return A.toast(`Replace this video before posting: ${postingHold(v)}`, true);
     await copy(textFor(v, "tiktok"));
     const a = document.createElement("a");
     a.href = "../" + v.file; a.download = v.file.split("/").pop();
@@ -203,13 +236,14 @@
   }
   const productOptions = sel => A.products().map(x => `<option value="${esc(x.id)}" ${x.id === sel ? "selected" : ""}>${esc(x.id)} · ${esc(String(x.name).split(" — ")[0])}</option>`).join("");
   function card(v) {
-    const p = product(v), d = draft(v);
+    const p = product(v), d = draft(v), hold = postingHold(v);
     return `<article class="vid-card" data-vid-card="${esc(v.id)}">
       ${v.embed ? fbFrame(v.embed) : `<video src="../${esc(v.file)}" ${v.poster ? `poster="../${esc(v.poster)}"` : ""} controls preload="none" playsinline></video>`}
       <div class="vid-info">
         <h3>${esc(junkName(v.title) ? (p ? String(p.name).split(" — ")[0] : "Video " + (v.created || "")) : v.title)}</h3>
-        <p class="muted fa-small">${esc(SRC[v.source] || v.source || "")} · ${esc(v.created || "")}${p ? " · " + esc(p.id) : ""}${v.size_mb ? " · " + v.size_mb + " MB" : ""}</p>
+        <p class="muted fa-small">${esc(SRC[v.source] || v.source || "")} · ${esc(v.created || "")}${p ? ` · <a href="../p/${encodeURIComponent(p.id)}.html" target="_blank" rel="noopener">${esc(p.id)} product page ↗</a>` : ""}${v.size_mb ? " · " + v.size_mb + " MB" : ""}</p>
         ${v.audio ? `<p class="fa-small vid-audio">♪ ${esc(String(v.audio.music || "").replace("fa-afrobeat-", "Afrobeat beat "))}${v.audio.voiceover ? ` · 🎙 “${esc(v.audio.voiceover)}”` : v.audio.own_sound ? " under your own sound" : ""}</p>` : `<p class="fa-small muted">♪ Afrobeat + voice-over are being added (a few minutes after upload)</p>`}
+        ${hold ? `<p class="fa-small bad vid-hold">On hold: ${esc(hold)}</p>` : ""}
         <div class="vid-tags">${badge(v, "website")}${badge(v, "youtube")}${badge(v, "tiktok")}</div>
         <label class="vid-desc">Description for the next posting <small class="muted">(a new one is written after each posting; edit it if you like)</small>
           <textarea rows="6" data-vid-draft="${esc(v.id)}">${esc(d.text)}</textarea></label>
@@ -219,9 +253,9 @@
           ${v.embed ? `<a class="btn btn-ghost btn-sm" href="${esc(v.embed)}" target="_blank" rel="noopener">Open on Facebook</a>` : `<a class="btn btn-ghost btn-sm" href="../${esc(v.file)}" download>Download</a>`}
         </div>
         <div class="vid-actions">
-          ${v.website.status === "posted" ? `<button class="btn btn-ghost btn-sm" data-vid="web-off" data-id="${esc(v.id)}">Remove from website</button>` : `<button class="btn btn-sell btn-sm" data-vid="web-on" data-id="${esc(v.id)}">Post to website</button>`}
-          ${v.embed ? "" : `<button class="btn btn-sell btn-sm" data-vid="yt" data-id="${esc(v.id)}">${v.youtube.status === "posted" ? "Post to YouTube again" : "Post to YouTube"}</button>
-          <button class="btn btn-ghost btn-sm" data-vid="tt" data-id="${esc(v.id)}">TikTok (copy + download)</button>`}
+          ${v.website.status === "posted" ? `<button class="btn btn-ghost btn-sm" data-vid="web-off" data-id="${esc(v.id)}">Remove from website</button>` : `<button class="btn btn-sell btn-sm" data-vid="web-on" data-id="${esc(v.id)}" ${hold ? `disabled title="${esc(hold)}"` : ""}>Post to website</button>`}
+          ${v.embed ? "" : `<button class="btn btn-sell btn-sm" data-vid="yt" data-id="${esc(v.id)}" ${hold ? `disabled title="${esc(hold)}"` : ""}>${v.youtube.status === "posted" ? "Post to YouTube again" : "Post to YouTube"}</button>
+          <button class="btn btn-ghost btn-sm" data-vid="tt" data-id="${esc(v.id)}" ${hold ? `disabled title="${esc(hold)}"` : ""}>TikTok (copy + download)</button>`}
         </div>
         <details class="vid-more"><summary>More</summary>
           <div class="vid-actions">
@@ -296,11 +330,55 @@
   });
 
   const isWaiting = v => v.website.status !== "posted" && v.youtube.status !== "posted";
-  const inSrc = v => src === "all" || (v.source || "upload") === src;
+  const inSrc = v => src === "all" || (src === "desk" ? v.product === "FAV-014" : (v.source || "upload") === src);
+  function renderWeekly() {
+    const netNames = { fb: "Facebook", ig: "Instagram", x: "X", tiktok: "TikTok" };
+    const cards = contentPlans.slice().reverse().map(plan => {
+      const p = productById(plan.product), linked = vidOf(plan.video), stage = CONTENT_STAGES.some(x => x[0] === plan.stage) ? plan.stage : "idea";
+      const caps = plan.captions || {};
+      return `<article class="cw-plan" data-content-plan="${esc(plan.id)}">
+        <header><div><b>${esc(p ? String(p.name).split(" — ")[0] : "General video idea")}</b><small class="muted"> · updated ${esc(plan.updated || plan.created || "")}</small></div>
+          <label>Stage <select data-plan-field="stage">${CONTENT_STAGES.map(([k, label]) => `<option value="${k}" ${stage === k ? "selected" : ""}>${label}</option>`).join("")}</select></label></header>
+        <label>Common customer question or search intent <input data-plan-field="question" maxlength="180" value="${esc(plan.question || "")}" placeholder="Use a generalised question, not someone's private details"></label>
+        <label>Video idea / useful takeaway <textarea data-plan-field="idea" rows="2">${esc(plan.idea || "")}</textarea></label>
+        <label>Opening hook <textarea data-plan-field="hook" rows="2">${esc(plan.hook || "")}</textarea></label>
+        <label>Storyboard / shots to record <textarea data-plan-field="storyboard" rows="3">${esc(plan.storyboard || "")}</textarea></label>
+        <label>Related video <select data-plan-field="video"><option value="">Not attached yet</option>${S.videos.map(v => `<option value="${esc(v.id)}" ${v.id === plan.video ? "selected" : ""}>${esc(junkName(v.title) ? v.id : v.title)}</option>`).join("")}</select></label>
+        ${linked ? `<p class="cw-related">Video library: <b>${esc(junkName(linked.title) ? linked.id : linked.title)}</b> · <a href="#videos" data-plan-videos>Open Videos &amp; YouTube</a></p>` : ""}
+        ${p ? `<p class="cw-links">SEO landing page: <a href="../p/${encodeURIComponent(p.id)}.html" target="_blank" rel="noopener">${esc(p.id)} product page ↗</a></p>` : `<p class="cw-links">Choose a product to link this post to an indexable product page.</p>`}
+        <div class="fa-actions">${Object.entries(netNames).map(([net, label]) => `<button type="button" class="btn btn-ghost btn-sm" data-plan-caption="${net}">Draft ${label} caption</button>`).join("")}
+          <a class="btn btn-ghost btn-sm" href="${SEARCH_CONSOLE}" target="_blank" rel="noopener">Check Google Search performance ↗</a>
+          <button type="button" class="btn btn-danger btn-sm" data-plan-delete>Remove idea</button></div>
+        ${Object.entries(caps).filter(([net]) => netNames[net]).map(([net, text]) => `<label>${netNames[net]} caption draft <textarea data-plan-caption-text="${net}" rows="4">${esc(text)}</textarea><button type="button" class="btn btn-ghost btn-sm" data-plan-copy="${net}">Copy ${netNames[net]} draft</button></label>`).join("")}
+        <p class="muted fa-small">Captions are drafts only. Approved means ready for your review and manual posting; it does not schedule or publish anything.</p>
+      </article>`;
+    }).join("");
+    return `<section class="fa-card" id="weekly-content">
+      <header><h2>Weekly content workflow</h2><span class="fa-big">${contentPlans.length}</span></header>
+      <p class="muted">Turn a common buyer question into one useful idea, a hook and a simple storyboard. Record or animate original footage, attach it from this library, review network-specific captions, then mark it approved. Product links are indexable landing pages; use Search Console to measure organic clicks and impressions rather than assuming a social post ranks. Plans and drafts stay in this browser.</p>
+      ${contentPlanError ? `<p class="error">${esc(contentPlanError)}</p>` : ""}
+      <form class="fa-settings cw-add" id="weekly-plan-add">
+        <label>Product or topic <select name="product"><option value="">General / no product</option>${productOptions(null)}</select></label>
+        <label>Common customer question or search intent <input name="question" maxlength="180" required placeholder="e.g. What should a school check before buying student desks?"></label>
+        <label>One useful takeaway / video idea <textarea name="idea" rows="2" required></textarea></label>
+        <label>Opening hook <input name="hook" maxlength="180" placeholder="First 1–2 seconds"></label>
+        <label>Storyboard / shots to record <textarea name="storyboard" rows="3" placeholder="Show the real product, key detail, and closing shot"></textarea></label>
+        <button class="btn btn-primary" type="submit" ${contentPlanError ? "disabled" : ""}>+ Add to this week's plan</button>
+      </form>
+      ${cards ? `<div class="cw-list">${cards}</div>` : `<p class="muted">No ideas planned yet. Add the first audience question above.</p>`}
+    </section>`;
+  }
+  if (!document.getElementById("weekly-content-style")) {
+    const st = document.createElement("style"); st.id = "weekly-content-style";
+    st.textContent = `.cw-add,.cw-list{display:grid;gap:10px}.cw-plan{display:grid;gap:8px;padding:12px;border:1px solid #e3e7ee;border-radius:10px;background:#fff}.cw-plan header{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.cw-plan label{display:grid;gap:4px;font-size:13px;color:#5f6368}.cw-plan input,.cw-plan textarea,.cw-plan select{font:inherit;font-size:14px;padding:7px 9px;border:1px solid #dadce0;border-radius:8px;min-width:0;width:100%;box-sizing:border-box;background:#fff}.cw-plan textarea{resize:vertical}.cw-related,.cw-links{margin:0;font-size:13px}`;
+    document.head.appendChild(st);
+  }
   function renderTab() {
     if (!S) return `<p class="muted">Loading…</p>`;
     const all = S.videos.filter(inSrc);
     const waiting = all.filter(isWaiting);
+    const ytReady = waiting.filter(v => v.file && !postingHold(v));
     const done = all.filter(v => !isWaiting(v));
     const list = (view === "waiting" ? waiting : view === "posted" ? done : all).slice().reverse();
     const hasExt = !!document.documentElement.dataset.favautoExt;
@@ -309,11 +387,16 @@
         <p class="muted">Every video you make or add waits here until you post it to your <b>website</b> (favisionenterprize.github.io/videos), <b>YouTube</b> or <b>TikTok</b>. Each posting gets a new description with a call to action.</p>
         ${hasExt && !shellOk() ? `<p class="fa-ext bad">For YouTube, reload the add-on once: edge://extensions → FA Vision Autopilot → ↻ Reload, then refresh this page.</p>` : ""}
         <div class="fa-actions">
-          <button class="btn btn-sell" data-vid="yt-all" ${waiting.length ? "" : "disabled"}>Post all ${waiting.length} waiting to YouTube</button>
+          <button class="btn btn-sell" data-vid="yt-all" ${ytReady.length ? "" : "disabled"}>Post ${ytReady.length} ready to YouTube</button>
           <button class="btn btn-ghost" data-vid="yt-test">Test YouTube (no posting)</button>
         </div>
       </section>
+      ${renderWeekly()}
       ${renderGrowth()}
+      ${src === "desk" ? `<section class="fa-card"><header><h2>FAV-014 · Student desk campaign</h2><span class="muted">Website reel: already published</span></header>
+        <p class="muted">The Facebook container-offload reel is already embedded on the website. It is a Facebook embed, not a local video file; add a rights-cleared source file below before preparing uploads for other networks. Keep school outreach relevant and reviewed—do not repeat promotional comments under unrelated posts.</p>
+        <a class="btn btn-ghost btn-sm" href="../p/FAV-014.html" target="_blank" rel="noopener">Open the student desk page</a>
+      </section>` : ""}
       <section class="fa-card">
         <header><h2>Add videos from your computer or phone</h2></header>
         <form class="fa-settings" id="vid-add">
@@ -330,16 +413,81 @@
 
   // ------------------------------------------------------------------ events
   const vidOf = id => S && S.videos.find(v => v.id === id);
+  const planOf = el => { const card = el.closest("[data-content-plan]"); return card && contentPlan(card.dataset.contentPlan); };
+  document.addEventListener("click", async e => {
+    const b = e.target.closest && e.target.closest("[data-plan-caption],[data-plan-copy],[data-plan-delete],[data-plan-videos]");
+    if (!b) return;
+    if (b.matches("[data-plan-videos]")) {
+      e.preventDefault();
+      if (F() && F().open) await F().open("videos");
+      return;
+    }
+    const plan = planOf(b);
+    if (!plan) return;
+    if (b.matches("[data-plan-delete]")) {
+      if (!window.confirm("Remove this local content idea and its caption drafts?")) return;
+      contentPlans = contentPlans.filter(x => x.id !== plan.id); saveContentPlans(); return rerender();
+    }
+    const net = b.dataset.planCaption || b.dataset.planCopy;
+    if (!net || !["fb", "ig", "x", "tiktok"].includes(net)) return;
+    if (b.matches("[data-plan-copy]")) {
+      const box = b.closest(".cw-plan").querySelector(`[data-plan-caption-text="${net}"]`);
+      if (!box || !box.value.trim()) return A.toast("Generate a caption draft first.", true);
+      return copy(box.value);
+    }
+    const writer = CAP();
+    if (!writer || !writer.write) return A.toast("Caption tools are not loaded.", true);
+    try {
+      const p = productById(plan.product);
+      plan.captions = plan.captions || {};
+      plan.captions[net] = writer.write(p, { net, subject: plan.idea || plan.question || "" });
+      if (saveContentPlan(plan) !== false) rerender();
+    } catch (err) { A.toast(A.friendly(err), true); }
+  });
+  document.addEventListener("input", e => {
+    const t = e.target.closest && e.target.closest("[data-plan-field],[data-plan-caption-text]");
+    const plan = t && planOf(t);
+    if (!plan) return;
+    if (t.dataset.planCaptionText) {
+      plan.captions = plan.captions || {};
+      plan.captions[t.dataset.planCaptionText] = t.value;
+    } else plan[t.dataset.planField] = t.value;
+    saveContentPlan(plan);
+  });
+  document.addEventListener("change", e => {
+    const t = e.target.closest && e.target.closest("[data-plan-field]");
+    const plan = t && planOf(t);
+    if (!plan) return;
+    plan[t.dataset.planField] = t.value;
+    saveContentPlan(plan);
+    rerender();
+  });
+  document.addEventListener("submit", e => {
+    const form = e.target.closest && e.target.closest("#weekly-plan-add");
+    if (!form) return;
+    e.preventDefault();
+    const question = form.elements.question.value.trim(), idea = form.elements.idea.value.trim();
+    if (!question || !idea) return A.toast("Add a buyer question and one useful idea first.", true);
+    contentPlans.push({
+      id: Date.now().toString(36), product: form.elements.product.value,
+      question: question.slice(0, 180), idea: idea.slice(0, 1000),
+      hook: form.elements.hook.value.trim().slice(0, 180), storyboard: form.elements.storyboard.value.trim().slice(0, 2000),
+      stage: "idea", created: today(), updated: today(), captions: {}
+    });
+    contentPlans = contentPlans.slice(-30);
+    saveContentPlans(); rerender();
+    A.toast("Added to this week's content plan. Nothing was posted.");
+  });
   document.addEventListener("click", async e => {
     const vw = e.target.closest("[data-vid-view]");
     if (vw) { view = vw.dataset.vidView; return rerender(); }
     const sc = e.target.closest("[data-vid-src]");
-    if (sc) { src = sc.dataset.vidSrc; return rerender(); }
+    if (sc) { src = sc.dataset.vidSrc; if (src === "desk") view = "all"; return rerender(); }
     const b = e.target.closest("[data-vid]");
     if (!b || !S) return;
     e.preventDefault();
     const k = b.dataset.vid, v = vidOf(b.dataset.id);
-    if (k === "yt-all") return toYouTube(S.videos.filter(x => isWaiting(x) && inSrc(x)).map(x => x.id), false);
+    if (k === "yt-all") return toYouTube(S.videos.filter(x => isWaiting(x) && inSrc(x) && !postingHold(x)).map(x => x.id), false);
     if (k === "yt-test") return toYouTube([(S.videos[0] || {}).id], true);
     if (!v) return;
     if (k !== "del") armed = null;

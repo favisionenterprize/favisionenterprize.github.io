@@ -11,6 +11,7 @@
   const REPORT = "data/seo-report.json", FIXES = "data/seo-fixes.json", RUN_KEY = "fa-seo-run";
   const WF = "seo-watch.yml";
   const WF_URL = "https://github.com/favisionenterprize/favisionenterprize.github.io/actions/workflows/" + WF;
+  const SEARCH_CONSOLE = "https://search.google.com/search-console/performance/search-analytics?resource_id=sc-domain%3Afavisionenterprize.github.io";
   const COST = { high: 8, medium: 4, low: 1.5 };
   const $ = s => document.querySelector(s);
   const A = () => window.FAV_ADMIN || {};
@@ -262,8 +263,14 @@
         <p class="small muted">Last nightly check: <b>${hhmm(r.generated)}</b>${r.mode === "local" ? " (own pages only)" : ""}${quick ? ` · quick check ${hhmm(quick.at)}` : ""} · AI mentions: <b>${ai.status === "ok" ? ai.share + "%" : "—"}</b></p>
         ${hist.length > 1 ? `<div class="seo-spark" title="Score, last ${hist.length} checks">${hist.map(h => `<i style="height:${Math.max(3, h.score * 0.28)}px" title="${esc(h.d)}: ${h.score}"></i>`).join("")}</div>` : ""}
       </div>
-      <div><button class="btn btn-primary" id="seo-run">▶ Run check now</button><br><button class="btn btn-ghost btn-sm" id="seo-quick" style="margin-top:6px">⚡ Quick check in browser</button></div>
+      <div><button class="btn btn-primary" id="seo-run">▶ Run check now</button><br><button class="btn btn-ghost btn-sm" id="seo-quick" style="margin-top:6px">⚡ Quick check in browser</button><br>
+        <a class="btn btn-ghost btn-sm" href="${SEARCH_CONSOLE}" target="_blank" rel="noopener" style="margin-top:6px">Open Search Console performance ↗</a></div>
     </div><div id="seo-status" hidden style="margin-top:10px"></div></div>
+
+    <div class="card"><h2>Social content → Search</h2>
+      <p class="small">Link product videos and social captions to the matching indexable product page. Then use Google Search Console to compare organic clicks, impressions and queries over time; social engagement alone does not prove a post is ranking in Google. If Search Console opens a property chooser, select the verified F.A Vision domain or URL-prefix property.</p>
+      <p><a class="btn btn-ghost btn-sm" href="${SEARCH_CONSOLE}" target="_blank" rel="noopener">Measure search performance ↗</a></p>
+    </div>
 
     <div class="card"><h2>Top issues</h2>
       ${issues.length ? issues.map(i => `<div class="seo-issue"><div class="seo-row"><div><span class="seo-chip ${i.sev}">${{ high: "Urgent", medium: "Important", low: "Small" }[i.sev]}</span> ${esc(i.msg)}</div>${fixButton(i.fix, done)}</div>${fixPanel(i.fix)}</div>`).join("") : `<p class="muted">No issues found. 🎉</p>`}

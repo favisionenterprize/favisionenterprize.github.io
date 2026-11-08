@@ -223,6 +223,7 @@ async function autopilot(browser, day) {
       out.parallel = Math.max(...Object.values(lanes).map(ks => ks.filter(k => !nonPost.test(k)).reduce((s, k) => s + P.estimate(k), 0)));
       const t0 = Date.now();
       await P.start({ inline: true });
+      out.inspector = P.button().includes("Run Inspector");
       // the add-on: answer each job at once (nothing posted), with the steps it carried
       const answered = new Set();
       for (let i = 0; i < 1000; i++) {
@@ -235,6 +236,7 @@ async function autopilot(browser, day) {
       }
       const s = P.summary();
       out.ms = Date.now() - t0;
+      out.lastResult = !!(s && s.lanes.some(l => l.last && l.last.k));
       out.first = jobs.filter(j => j.at >= t0).slice(0, 6).map(j => j.at - t0);
       out.kinds = [...new Set(jobs.filter(j => j.at >= t0).map(j => j.job.kind))];
       out.slow = jobs.filter(j => j.at >= t0 && /^(post|ig|x|tiktok|engage|fxfix|ttfix|mklist)$/.test(j.job.kind) && (j.job.min !== 8 || j.job.max !== 12 || "wait_first" in j.job)).map(j => j.job.kind + ":" + j.job.min + "-" + j.job.max);
@@ -244,7 +246,6 @@ async function autopilot(browser, day) {
       out.panel = (document.querySelector("#fa-body [data-prime-panel]") || {}).innerText || "";
       out.todayBtn = !!document.querySelector("#fa-body [data-prime-go]");
       window.removeEventListener("message", onMsg);
-      P._test.reset(); F._test.setTab("today");
       return out;
     });
     pr.problems.forEach(p => problems.push("Prime: " + p));
@@ -255,8 +256,11 @@ async function autopilot(browser, day) {
     if (pr.admin !== "done" || pr.done.some(x => !/:(done|stopped)$/.test(x))) problems.push("Prime: not every lane finished: " + JSON.stringify(pr.done));
     if (pr.ms > 60000) problems.push("Prime mock run took " + pr.ms + " ms");
     if (!pr.todayBtn) problems.push("Prime button missing on the Today tab");
+    if (!pr.inspector || !pr.lastResult) problems.push("Prime Run Inspector did not expose lane activity and the latest result");
     if (!/Summary|Finished/.test(pr.panel)) problems.push("Prime panel shows no summary: " + pr.panel.slice(0, 120));
     if (!problems.length) console.log(`    ⚡ Prime: ${Object.keys(pr.lanes).length} lanes ${JSON.stringify(pr.lanes)}, ${pr.kinds.length} job kinds started together (first ${Math.max(...pr.first)} ms); non-posting work ${pr.parallel} s side by side vs ${pr.serial} s one by one; mock run ${pr.ms} ms`);
+    if (process.env.PRIME_SHOT) await page.screenshot({ path: process.env.PRIME_SHOT, fullPage: true });
+    await page.evaluate(() => { window.FAV_PRIME._test.reset(); window.FAV_FBAUTO._test.setTab("today"); });
   }
   // 🤖 Open items + AI Fix: M9 gate, every source listed, Needs-you rows never acted on, SEO fixes saved, lead replies only
   // drafted (WhatsApp link, nothing sent), social fixes launched as one runStep chain, every action logged.
@@ -357,6 +361,33 @@ async function autopilot(browser, day) {
         count: campaign.querySelectorAll(".vid-card").length
       };
     }
+    const form = document.querySelector("#weekly-plan-add");
+    out.weeklyForm = !!form;
+    if (form) {
+      form.elements.product.value = "FAV-014";
+      form.elements.question.value = "What should a school check before buying student desks?";
+      form.elements.idea.value = "Show how the desk fits a classroom and what is included.";
+      form.elements.hook.value = "Planning a classroom refresh?";
+      form.elements.storyboard.value = "Show real desk, tabletop, chair, then classroom arrangement.";
+      form.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true })); await wait(100);
+      let plans = JSON.parse(localStorage.getItem("fa-weekly-content") || "[]");
+      out.weeklyProductLink = !!document.querySelector('#weekly-content a[href="../p/FAV-014.html"]');
+      out.searchConsole = !!document.querySelector('#weekly-content a[href*="search.google.com/search-console"]');
+      let planCard = document.querySelector("[data-content-plan]");
+      const videoSelect = planCard && planCard.querySelector('[data-plan-field="video"]');
+      if (videoSelect && videoSelect.options.length > 1) {
+        videoSelect.value = videoSelect.options[1].value;
+        videoSelect.dispatchEvent(new Event("change", { bubbles: true })); await wait(50);
+      }
+      const cap = document.querySelector('[data-content-plan] [data-plan-caption="ig"]');
+      if (cap) { cap.click(); await wait(50); }
+      planCard = document.querySelector("[data-content-plan]");
+      out.weeklyCaption = !!(planCard && planCard.querySelector('[data-plan-caption-text="ig"]')?.value);
+      const stage = planCard && planCard.querySelector('[data-plan-field="stage"]');
+      if (stage) { stage.value = "approved"; stage.dispatchEvent(new Event("change", { bubbles: true })); await wait(50); }
+      plans = JSON.parse(localStorage.getItem("fa-weekly-content") || "[]");
+      out.weeklyPlan = plans[0] && { stage: plans[0].stage, product: plans[0].product, question: plans[0].question, storyboard: plans[0].storyboard, video: plans[0].video || "" };
+    }
     return out;
   });
   const tvT = files["data/trend-videos.json"].templates.length;
@@ -368,7 +399,9 @@ async function autopilot(browser, day) {
     if (!tv.opts || tv.opts.kind !== "trend" || tv.opts.source !== "upload" || !tv.opts.trend) problems.push("Add video didn't go into the videos library as a trend video: " + JSON.stringify(tv.opts));
     if (!tv.made || !tv.made.video) problems.push("Add video wasn't logged in data/trend-videos.json made[]");
     if (!tv.deskButton || !tv.deskCampaign || !tv.deskCampaign.note || !tv.deskCampaign.product || !tv.deskCampaign.reel || !tv.deskCampaign.oldAudioHeld || !tv.deskCampaign.count) problems.push("FAV-014 campaign filter does not show the existing reel/product or hold the old deposit-audio video");
+    if (!tv.weeklyForm || !tv.weeklyProductLink || !tv.searchConsole || !tv.weeklyCaption || !tv.weeklyPlan || tv.weeklyPlan.stage !== "approved" || tv.weeklyPlan.product !== "FAV-014" || !tv.weeklyPlan.storyboard) problems.push("Weekly content workflow did not save a reviewed product-linked plan and caption: " + JSON.stringify([tv.weeklyForm, tv.weeklyProductLink, tv.searchConsole, tv.weeklyCaption, tv.weeklyPlan]));
   }
+  if (process.env.WEEKLY_SHOT) await page.screenshot({ path: process.env.WEEKLY_SHOT, fullPage: true });
   for (const b of new Set(files["data/trend-videos.json"].templates.map(t => t.brand))) if (!files["data/brands.json"].brands.some(x => x.id === b)) problems.push("trend-videos.json template for unknown brand " + b);
   // Hourly posting steps from the AI Plan (hr:<net>:<n>, desk:<product>:<groups>) launch real add-on jobs.
   const hrJobs = await page.evaluate(() => {
@@ -1012,6 +1045,7 @@ async function seo(browser, shot) {
   if (st.text.length < MIN_TEXT) problems.push("SEO screen is blank");
   if (!st.text.includes(String(r.score))) problems.push("score " + r.score + " not shown");
   if (st.issues < Math.min(3, r.issues.length)) problems.push(`only ${st.issues} issues drawn of ${r.issues.length}`);
+  if (!st.text.includes("Social content → Search") || !st.text.includes("Measure search performance")) problems.push("SEO screen is missing the social-content/Search Console measurement guidance");
   if (shot) { await page.screenshot({ path: shot, fullPage: true }); }
   let applied = null;
   if (st.fixBtns) {
@@ -1349,7 +1383,7 @@ async function prospects(browser) {
   want(await page.evaluate(() => /PROFORMA INVOICE/.test((window.__opened.slice(-1)[0] || { doc: { html: "" } }).doc.html) && /Bright Future Academy/.test(window.__opened.slice(-1)[0].doc.html)), "quote page didn't open as a proforma for the prospect");
   await page.click(sel + " [data-pr=lead]"); await page.waitForTimeout(250);
   const lead = posts.map(x => { try { return JSON.parse(x); } catch (e) { return null; } }).filter(Boolean).find(x => x.source === "prospect");
-  want(lead && lead.action === "create_enquiry" && lead.organisation === "Bright Future Academy" && lead.phone === "0240000001" && /GH₵38,400/.test(lead.message), "Add to Leads didn't post a session-authenticated prospect lead: " + JSON.stringify(lead));
+  want(lead && lead.source === "prospect" && lead.organisation === "Bright Future Academy" && lead.phone === "0240000001" && /GH₵38,400/.test(lead.message) && !/\.\. Source:/.test(lead.message), "Add to Leads didn't post a prospect lead with a clean quote and source: " + JSON.stringify(lead));
   want(await page.evaluate(() => document.documentElement.scrollWidth) <= 392, "Bulk buyers screen scrolls sideways on a phone");
   if (process.env.PROSPECTS_SHOT) await page.screenshot({ path: process.env.PROSPECTS_SHOT, fullPage: true });
   // save: only public fields reach the repo

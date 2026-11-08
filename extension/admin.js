@@ -8,21 +8,36 @@ const mark = () => {
 if (document.documentElement) mark(); else document.addEventListener("readystatechange", mark, { once: true });
 
 // Each time the admin opens, the add-on fetches the latest scripts from the website.
-function hello(force) {
+function hello(force, done) {
   try {
     chrome.runtime.sendMessage({ type: "hello", force: !!force }, st => {
-      if (!st) return;
-      const d = document.documentElement.dataset;
-      d.favautoMode = st.mode;                // "live" = updates itself, "bundled" = using the copy in the folder
-      d.favautoUs = st.userScripts ? "1" : "";
-      d.favautoVersion = st.version || "";
-      d.favautoShell = st.shell || "";        // add-on version itself (5.1+ may open YouTube)
-      d.favautoError = st.error || "";
-      window.postMessage({ type: "favauto-status", status: st }, location.origin);
+      if (st) {
+        const d = document.documentElement.dataset;
+        d.favautoMode = st.mode;                // "live" = updates itself, "bundled" = using the copy in the folder
+        d.favautoUs = st.userScripts ? "1" : "";
+        d.favautoVersion = st.version || "";
+        d.favautoShell = st.shell || "";        // add-on version itself (5.1+ may open YouTube)
+        d.favautoError = st.error || "";
+        window.postMessage({ type: "favauto-status", status: st }, location.origin);
+      }
+      if (done) done(st);
     });
-  } catch (e) { /* add-on was reloaded: the page needs a refresh */ }
+  } catch (e) {
+    if (done) done(null);
+  }
 }
 hello(false);
+
+function startJob(url, job, retried) {
+  chrome.runtime.sendMessage({ type: "start", url, job }, r => {
+    if (r && r.ok) return;
+    const error = chrome.runtime.lastError && chrome.runtime.lastError.message || "";
+    if (!retried && /receiving end does not exist|could not establish connection|extension context invalidated/i.test(error)) {
+      return hello(true, () => startJob(url, job, true));
+    }
+    window.postMessage({ type: "favauto-start-failed", error }, location.origin);
+  });
+}
 
 window.addEventListener("message", e => {
   if (e.source !== window || e.origin !== location.origin || !e.data) return;
@@ -33,9 +48,7 @@ window.addEventListener("message", e => {
     return;
   }
   if (e.data.type !== "favauto-start") return;
-  chrome.runtime.sendMessage({ type: "start", url: e.data.url, job: e.data.job }, r => {
-    if (!r || !r.ok) window.postMessage({ type: "favauto-start-failed" }, location.origin);
-  });
+  startJob(e.data.url, e.data.job, false);
 });
 
 // 5.3+: give the side panel (FA Vision Agent) your admin sign-in, so it can use your AI through the backend.
