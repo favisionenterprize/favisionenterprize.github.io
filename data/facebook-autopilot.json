@@ -12297,6 +12297,15 @@
    "ok": true,
    "now": true,
    "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-08",
+   "t": "2026-11-08T09:12:26.468Z",
+   "p": "FAV-014",
+   "g": "homedecorationmaster",
+   "ok": false,
+   "now": true,
+   "why": "Facebook didn't confirm the post"
   }
  ],
  "resets": {},
@@ -13697,6 +13706,14 @@
    "kind": "post",
    "tried": 10,
    "ok": 9
+  },
+  {
+   "d": "2026-11-08",
+   "t": "2026-11-08T09:12:53.215Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 0,
+   "stopped": "Facebook showed \"an unexpected confirmation (“Alexander Awuku Agoodmann Ventures F.A Vision Enterprise See all profiles Meta Business Suite Settin”) that wasn't started by our step\". Nothing more was posted."
   }
  ],
  "renewLog": [
