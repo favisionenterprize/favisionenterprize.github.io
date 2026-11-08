@@ -88,14 +88,17 @@
       if (n) add({ id: "ttcaps", src: "TikTok", what: `${n} TikTok post${n === 1 ? "" : "s"} with no description or no hashtags.`, fix: "Write classy captions and paste them in TikTok Studio (posts under 7 days old).", steps: ["ttcaps:all"], learned: [L.classy && "classy captions (your TikTok setting)"].filter(Boolean) });
     }
     if (MK && MK.state && MK.state()) {
-      const an = MK.analyse();
-      if (an.scanned) {
+      const scan = MK.state().scan;
+      if (!scan || scan.d !== today()) {
+        add({ id: "mk-scan", src: "Marketplace", what: scan ? `Marketplace scan is old (last scan: ${scan.d || "unknown"}).` : "Marketplace hasn't been scanned yet.", fix: "Read Your listings again (read-only).", steps: ["mkscan"] });
+      } else {
+        const an = MK.analyse();
         const miss = an.missing.filter(p => !L.skipCats.includes(p.category));
         const held = an.missing.length - miss.length;
         if (miss.length) add({ id: "mk-missing", src: "Marketplace", what: `${miss.length} product${miss.length === 1 ? " is" : "s are"} not on Marketplace${held ? ` (${held} more left off like the ones you marked "Don't list")` : ""}.`, fix: "List them: photos, price, description, Odorkor. No groups, no Boost.", steps: ["mklist"], ids: miss.map(p => p.id), learned: [L.skip.length ? `your "Don't list" choices (${L.skip.join(", ")})` : "no \"Don't list\" choices yet"] });
         if (an.mismatch.length) add({ id: "mk-price", src: "Marketplace", what: `${an.mismatch.length} listing price${an.mismatch.length === 1 ? " differs" : "s differ"} from the website.`, fix: "Choose per listing: use the Marketplace price on the site, or edit the listing on Facebook.", you: "Rule S4: only you change prices", link: "#fbauto", tab: "market", learned: [L.price.site + L.price.kept ? `you used the Marketplace price ${L.price.site}× and kept the site price ${L.price.kept}×` : "no price choices logged yet", ruleNote(L, "S4")].filter(Boolean) });
         if (an.dups.length) add({ id: "mk-dups", src: "Marketplace", what: `${an.dups.length} title${an.dups.length === 1 ? " is" : "s are"} listed more than once.`, fix: "Mark the extra ones sold or delete them on Facebook.", you: "Deleting anything is yours", url: "https://www.facebook.com/marketplace/you/selling" });
-      } else add({ id: "mk-scan", src: "Marketplace", what: "Marketplace hasn't been scanned yet.", fix: "Read Your listings (read-only).", steps: ["mkscan"] });
+      }
     }
     if (PRO && PRO.state && PRO.state()) {
       const st = PRO.state().status || {};

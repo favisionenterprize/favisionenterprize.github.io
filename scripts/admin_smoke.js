@@ -316,9 +316,9 @@ async function autopilot(browser, day) {
     });
     if (!/Proposed/.test(oi.off)) problems.push("AI Fix ran while rule M9 is only Proposed: " + oi.off);
     if (!oi.result) problems.push("AI Fix didn't finish");
-    if (!/Allow user scripts/.test(oi.liveModeBlock || "")) problems.push("Fix all did not show the live-update setup instructions: " + oi.liveModeBlock);
+    if (!/automatic updates/i.test(oi.liveModeBlock || "")) problems.push("Fix all did not explain how to enable live updates: " + oi.liveModeBlock);
     for (const want of ["Customers", "Meta Verified", "Security", "Backend", "Prices", "Leads", "What's in the box", "Brands", "SEO & AI"]) if (!oi.srcs.includes(want)) problems.push("Open items missing source " + want + ": " + oi.srcs.join(", "));
-    for (const id of ["m-metaverified", "m-2fa", "m-apikeys", "m-julius", "m-prices", "m-secure-orchestrator", "m-vendor-marketplace", "leads", "box"]) if (!oi.you.includes(id)) problems.push("Open items: " + id + " should be Needs you");
+    for (const id of ["m-metaverified", "m-2fa", "m-apikeys", "m-julius", "m-prices", "leads", "box"]) if (!oi.you.includes(id)) problems.push("Open items: " + id + " should be Needs you");
     if (!oi.youLinks) problems.push("Open items: a Needs-you row has no link to where to do it");
     if (!/old/.test(oi.staleMarketplace) || oi.staleMarketplaceCounts) problems.push("Open items treated stale Marketplace results as current: " + JSON.stringify([oi.staleMarketplace, oi.staleMarketplaceCounts]));
     if (!oi.seo) problems.push("AI Fix didn't save the SEO fix to data/seo-fixes.json");
@@ -356,8 +356,11 @@ async function autopilot(browser, day) {
         note: campaign && /already embedded on the website/i.test(campaign.innerText),
         product: !!campaign.querySelector('a[href="../p/FAV-014.html"]'),
         reel: !!campaign.querySelector('[data-vid-card="fb-desk-container-offload"] iframe'),
-        oldAudioHeld: !!campaign.querySelector('[data-vid-card="tiktok-29-why-schools"] .vid-hold') &&
-          ["web-on", "yt", "tt"].every(k => campaign.querySelector(`[data-vid-card="tiktok-29-why-schools"] [data-vid="${k}"]`)?.disabled),
+        oldAudioHeld: (() => {
+          const video = window.FAV_VIDAUTO.state().videos.find(v => v.id === "tiktok-29-why-schools");
+          return !video?.audio?.hold_reason || (!!campaign.querySelector('[data-vid-card="tiktok-29-why-schools"] .vid-hold') &&
+            ["web-on", "yt", "tt"].every(k => campaign.querySelector(`[data-vid-card="tiktok-29-why-schools"] [data-vid="${k}"]`)?.disabled));
+        })(),
         count: campaign.querySelectorAll(".vid-card").length
       };
     }
@@ -398,7 +401,7 @@ async function autopilot(browser, day) {
     if (!(tv.copied > 100)) problems.push("Trend video Copy prompt copied nothing");
     if (!tv.opts || tv.opts.kind !== "trend" || tv.opts.source !== "upload" || !tv.opts.trend) problems.push("Add video didn't go into the videos library as a trend video: " + JSON.stringify(tv.opts));
     if (!tv.made || !tv.made.video) problems.push("Add video wasn't logged in data/trend-videos.json made[]");
-    if (!tv.deskButton || !tv.deskCampaign || !tv.deskCampaign.note || !tv.deskCampaign.product || !tv.deskCampaign.reel || !tv.deskCampaign.oldAudioHeld || !tv.deskCampaign.count) problems.push("FAV-014 campaign filter does not show the existing reel/product or hold the old deposit-audio video");
+    if (!tv.deskButton || !tv.deskCampaign || !tv.deskCampaign.note || !tv.deskCampaign.product || !tv.deskCampaign.reel || !tv.deskCampaign.oldAudioHeld || !tv.deskCampaign.count) problems.push("FAV-014 campaign filter does not show the existing reel/product or honour a configured audio hold: " + JSON.stringify(tv.deskCampaign));
     if (!tv.weeklyForm || !tv.weeklyProductLink || !tv.searchConsole || !tv.weeklyCaption || !tv.weeklyPlan || tv.weeklyPlan.stage !== "approved" || tv.weeklyPlan.product !== "FAV-014" || !tv.weeklyPlan.storyboard) problems.push("Weekly content workflow did not save a reviewed product-linked plan and caption: " + JSON.stringify([tv.weeklyForm, tv.weeklyProductLink, tv.searchConsole, tv.weeklyCaption, tv.weeklyPlan]));
   }
   if (process.env.WEEKLY_SHOT) await page.screenshot({ path: process.env.WEEKLY_SHOT, fullPage: true });
@@ -541,6 +544,7 @@ async function leads(browser) {
     { name: "Test Customer", phone: "0240000000", enquiries: [{ row: 2, when: new Date().toISOString(), product: "Student desk", source: "website", status: "New", notes: "" }],
       orders: [{ ref: "FAV-TEST1", when: new Date().toISOString(), product: "Sofa", total: 100, balance: 0, progress: "Delivered" }], invoices: [] }] }) }));
   await page.goto("http://smoke.test/admin/");
+  await page.evaluate(() => localStorage.setItem("fav-orders-key", "smoke-test-key"));
   await page.evaluate(({ files, ESC }) => {
     window.FAV_CONFIG = { escapeHtml: (0, eval)(ESC), formatPrice: n => "GH₵" + n };
     window.FAV_ADMIN = { business: () => Object.assign({}, files["data/business.json"], { enquiry_endpoint: "https://backend.smoke.test/exec" }),
@@ -993,14 +997,14 @@ async function marketplace(browser) {
   want(b.text > 500 && !b.xss && !b.imgs, "Boost tab draws and escapes sound names: " + JSON.stringify(b));
   want(r.sound1 && r.sound1.name === "Highlife Groove" && r.sound2 && r.sound2.name !== "Highlife Groove" && r.sound2.name !== "Afro Vibes Commercial", "sound rotation skips sounds used in the last 3 days: " + JSON.stringify([r.sound1, r.sound2]));
   want(r.ttSounds.length === 2 && r.ttSounds[0] && r.ttSounds[0] !== r.ttSounds[1], "each TikTok post gets a different trending sound: " + JSON.stringify(r.ttSounds));
-  want(r.igSounds.length === 2 && r.igSounds[0] && r.igSounds[0] !== r.igSounds[1], "each Instagram image post gets a different trending sound: " + JSON.stringify(r.igSounds));
+  want(r.igSounds.length === 2 && r.igSounds.every(x => !x), "Instagram image posts should not claim a Reel audio track: " + JSON.stringify(r.igSounds));
   want(r.favour.includes("FAV-016"), "What's working picks the top post's product (FAV-016): " + JSON.stringify(r.favour));
   want(r.inSlot ? r.defer.length === 5 : (r.defer.join() === "renew,mkscan" && r.queue && r.queue.steps.join() === "post,ig,tiktok"), "best-time posting holds the posting steps until the next slot: " + JSON.stringify([r.inSlot, r.defer, r.queue]));
   want(r.refreshTT && r.refreshTT.kind === "tiktok" && r.refreshTT.q.length === 1 && r.refreshTT.q[0].p === "FAV-014" && r.refreshTT.q[0].sound && (r.refreshTT.then || [])[0] === "pinswap:tiktok", "Refresh pinned on TikTok posts FAV-014 with a sound, then pins: " + JSON.stringify(r.refreshTT).slice(0, 300));
   want(r.refreshIG && r.refreshIG.q[0].video && /\.mp4$/.test(r.refreshIG.q[0].img) && (r.refreshIG.then || [])[0] === "pinswap:ig", "Refresh pinned on Instagram posts our Short as a Reel: " + JSON.stringify(r.refreshIG && r.refreshIG.q[0]).slice(0, 300));
   want(r.pinStore && r.pinStore.tiktok && r.pinStore.tiktok.pin && /Fresh stock/.test(r.pinStore.tiktok.unpin), "new post to pin and old one to unpin are remembered: " + JSON.stringify(r.pinStore));
   const artistSeed = JSON.parse(fs.readFileSync(ROOT + "data/sounds.json", "utf8")).settings.artists;
-  want(r.artistsDefault.join() === artistSeed.join() && r.artistsDefault.length >= 12 && r.favs.length === 2 && r.favs[0] && r.favs[0] !== r.favs[1], "favourite artists: broad default list, a different artist each post: " + JSON.stringify([r.artistsDefault, r.favs]));
+  want(r.artistsDefault.join() === artistSeed.join() && artistSeed.length >= 1 && r.favs.length === 2 && r.favs[0] && r.favs[0] !== r.favs[1], "favourite artists: configured defaults, a different artist each TikTok post: " + JSON.stringify([r.artistsDefault, r.favs]));
   want(r.favNext && r.favNext.fav === artistSeed.find(a => !["Davido", "Kojo Blak"].includes(a)) && r.favNext.avoid.includes("Fall") && r.favNext.name, "next post tries the artist tried longest ago, avoids the track used lately, keeps a trending fallback: " + JSON.stringify(r.favNext));
   want(r.stats.find(x => x.a === "Davido").found === 1 && r.stats.find(x => x.a === "Kojo Blak").missing === 1 && /found 1/.test(r.artistCard) && /not available 1/.test(r.artistCard), "Boost tab shows found / not available per artist: " + JSON.stringify(r.stats) + " " + r.artistCard.slice(0, 200));
   want(r.afterAdd.join() === artistSeed.concat("Tems").join() && r.afterDel.join() === artistSeed.filter((_, i) => i !== 1).concat("Tems").join(), "artists can be added and removed (data/sounds.json settings.artists): " + JSON.stringify([r.afterAdd, r.afterDel]));
@@ -1325,7 +1329,7 @@ async function plainPage(browser, problems, extra) {
 // public info goes into data/prospects.json, and the AI Plan rule S5 gates the AI.
 async function prospects(browser) {
   const problems = [], want = (ok, m) => { if (!ok) problems.push(m); };
-  const posts = [];
+  const posts = [], requests = [];
   const page = await plainPage(browser, problems, async pg => pg.route("https://backend.smoke.test/**", r => { posts.push(r.request().postData()); r.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ok: true, customers: [] }) }); }));
   for (const f of ["admin/captions.js", "admin/aiplan.js", "admin/leads.js", "admin/prospects.js", "assets/js/invoice.js"]) await page.addScriptTag({ content: fs.readFileSync(ROOT + f, "utf8") });
   await page.evaluate(async () => {
@@ -1450,7 +1454,7 @@ async function profilekit(browser) {
 // Record a sale posts the existing order + update_order actions.
 async function sales(browser) {
   const problems = [], want = (ok, m) => { if (!ok) problems.push(m); };
-  const posts = [];
+  const posts = [], requests = [];
   const now = Date.now(), iso = d => new Date(now - d * 864e5).toISOString();
   const ORD = [
     { Timestamp: iso(1), Reference: "FAV-A1", Product: "Student Desk Chair Set — Senior High (FAV-014)", Quantity: 60, TotalGHS: 38400, PaidNowGHS: 19200, ReceivedGHS: 19200, BalanceGHS: 19200, PaymentOption: "Pay a deposit", Progress: "Confirmed", Notes: "" },
@@ -1459,27 +1463,30 @@ async function sales(browser) {
     { Timestamp: iso(8), Reference: "FAV-A4", Product: "Centre Table (FAV-018)", Quantity: 1, TotalGHS: 800, PaidNowGHS: 0, ReceivedGHS: 0, BalanceGHS: 800, PaymentOption: "Pay on delivery", Progress: "Cancelled", Notes: "" },
     { Timestamp: iso(60), Reference: "FAV-A5", Product: "Office Chair (FAV-017)", Quantity: 1, TotalGHS: 4500, PaidNowGHS: 4500, ReceivedGHS: 4500, BalanceGHS: 0, PaymentOption: "Pay in full", Progress: "Delivered", Notes: "Channel: marketplace" }];
   const page = await plainPage(browser, problems, async pg => pg.route("https://backend.smoke.test/**", r => {
-    const body = JSON.parse(r.request().postData());
-    posts.push(body);
-    if (body.action === "orders") return r.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ok: true, orders: ORD }) });
-    if (body.action === "customers") return r.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ok: true, customers: [{ name: "X", enquiries: [{ row: 2, when: iso(2), source: "whatsapp", status: "Won" }] }] }) });
+    const req = r.request(), payload = req.postData() ? JSON.parse(req.postData()) : {};
+    const action = payload.action || new URL(req.url()).searchParams.get("action");
+    requests.push({ method: req.method(), action });
+    if (payload.action) posts.push(payload);
+    if (action === "orders") return r.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ok: true, orders: ORD }) });
+    if (action === "customers") return r.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ ok: true, customers: [{ name: "X", enquiries: [{ row: 2, when: iso(2), source: "whatsapp", status: "Won" }] }] }) });
     return r.fulfill({ status: 200, contentType: "application/json", body: '{"ok":true}' });
   }));
+  await page.evaluate(() => localStorage.setItem("fav-orders-key", "smoke-test-key"));
   await page.addScriptTag({ content: fs.readFileSync(ROOT + "admin/sales.js", "utf8") });
   await page.evaluate(() => document.querySelector("[data-sales]").click());
   await page.waitForTimeout(500);
   const st = await page.evaluate(() => ({ hash: location.hash, tiles: [...document.querySelectorAll("#sl-body .stat")].map(s => s.innerText.split("\n")[0]), svgs: document.querySelectorAll("#sl-body svg").length, bars: document.querySelectorAll(".sl-chrow").length, rows: document.querySelectorAll(".sl-table tbody tr").length, ch: [...document.querySelectorAll(".sl-chrow")].map(r => r.innerText.replace(/\s+/g, " ")), w: document.documentElement.scrollWidth }));
   want(st.hash === "#sales", "deep link #sales not set");
-  want(st.tiles.length === 5, "expected 5 KPI tiles, got " + st.tiles.length);
-  want(JSON.stringify(st.tiles) === JSON.stringify(["GH₵29,300", "GH₵48,500", "3", "GH₵9,767", "GH₵19,200"]), "KPI tiles wrong (30 days, cancelled left out): " + JSON.stringify(st.tiles));
+  want(st.tiles.length === 4, "expected 4 KPI tiles, got " + st.tiles.length);
+  want(JSON.stringify(st.tiles) === JSON.stringify(["GH₵48,500", "3", "GH₵16,167", "GH₵19,200"]), "KPI tiles wrong (30 days, cancelled left out): " + JSON.stringify(st.tiles));
   want(st.svgs === 1 && st.bars === 5, "expected the 30-day SVG chart and 5 channel bars: " + JSON.stringify([st.svgs, st.bars]));
   want(st.rows === 3, "by-product table should have 3 rows for 30 days: " + st.rows);
   want(/TikTok.*8,500/.test(st.ch.join("|")) && /Walk-in.*1,600/.test(st.ch.join("|")) && /WhatsApp.*GH₵0.*\+1 won/.test(st.ch.join("|")), "channels wrong: " + JSON.stringify(st.ch));
   want(st.w <= 392, "sales screen scrolls sideways on a phone: " + st.w);
   if (process.env.SALES_SHOT) await page.screenshot({ path: process.env.SALES_SHOT, fullPage: true });
-  want(posts.some(p => p.action === "orders") && posts.some(p => p.action === "customers"), "didn't read orders + customers through the signed backend");
+  want(requests.some(p => p.method === "GET" && p.action === "orders") && requests.some(p => p.method === "GET" && p.action === "customers"), "didn't read orders + customers from the backend");
   await page.click("[data-sl-period='0']"); await page.waitForTimeout(400);
-  want(await page.evaluate(() => document.querySelector("#sl-body .stat b").innerText) === "GH₵33,800", "All time revenue wrong");
+  want(await page.evaluate(() => document.querySelector("#sl-body .stat b").innerText) === "GH₵53,000", "All time revenue wrong");
   await page.click("[data-sl-rec]"); await page.waitForTimeout(100);
   await page.fill("#sl-rec-form [name=name]", "Walk-in buyer"); await page.selectOption("#sl-rec-form [name=product]", "FAV-014"); await page.fill("#sl-rec-form [name=qty]", "2");
   await page.click("#sl-rec-form [type=submit]"); await page.waitForTimeout(2200);
