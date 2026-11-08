@@ -2,7 +2,7 @@
  "owner": "Alexander Awuku",
  "paused": false,
  "paused_at": null,
- "updated": "2026-10-25",
+ "updated": "2026-11-08",
  "source": "FA Vision AI Operating System Blueprint",
  "rules": [
   {
@@ -364,18 +364,18 @@
  ],
  "hourly": {
   "on": true,
+  "notify": true,
   "start_hour": 7,
   "end_hour": 21,
-  "notify": true,
   "per_hour": {
-   "ig": 1,
-   "x": 2,
-   "tiktok": 1
+   "ig": 4,
+   "x": 4,
+   "tiktok": 4
   },
   "desk": {
    "on": true,
    "product": "FAV-014",
-   "groups": 10,
+   "groups": 20,
    "every_hours": 3
   }
  }
