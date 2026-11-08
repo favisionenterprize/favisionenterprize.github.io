@@ -19,7 +19,7 @@
  },
  "status": {
   "tiktok": {
-   "d": "2026-11-06",
+   "d": "2026-11-08",
    "link": null,
    "pinned": null,
    "linkOk": false,
@@ -453,6 +453,13 @@
    "net": "x",
    "mode": "check",
    "linkOk": true,
+   "pinOk": false
+  },
+  {
+   "d": "2026-11-08",
+   "net": "tiktok",
+   "mode": "check",
+   "linkOk": false,
    "pinOk": false
   }
  ]
