@@ -10,10 +10,28 @@
   "photos": 8
  },
  "scan": {
-  "d": "2026-11-07",
-  "t": "2026-11-07T09:12:33.173Z",
-  "n": 28,
+  "d": "2026-11-08",
+  "t": "2026-11-08T09:10:48.115Z",
+  "n": 10,
   "listings": [
+   {
+    "t": "Executive Director Chair — Leather, High Back",
+    "price": 9500,
+    "status": "Active",
+    "listed": "2026-11-07",
+    "id": "1008318385656152",
+    "renew": "wait",
+    "next": "2026-11-15"
+   },
+   {
+    "t": "Dining Set Collection — 5 Designs, 6 Chairs",
+    "price": 12600,
+    "status": "Active",
+    "listed": "2026-11-07",
+    "id": "1677564277557874",
+    "renew": "wait",
+    "next": "2026-11-15"
+   },
    {
     "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
     "price": 11900,
@@ -80,180 +98,6 @@
     "listed": "2026-10-31",
     "id": "1559432725950945",
     "renew": "ready"
-   },
-   {
-    "t": "Jasmine Rice — Long Grain Fragrant Rice",
-    "price": 400,
-    "status": "Active",
-    "listed": "2026-10-31",
-    "id": "2091324958936759",
-    "renew": "ready"
-   },
-   {
-    "t": "Student Mattress — 2 Sizes",
-    "price": 1200,
-    "status": "Active",
-    "listed": "2026-10-31",
-    "id": "1591100942765211",
-    "renew": "ready"
-   },
-   {
-    "t": "TV Stand + Centre Table Set — Marble Top",
-    "price": 16800,
-    "status": "Active",
-    "listed": "2026-10-31",
-    "id": "4601770880067087",
-    "renew": "ready"
-   },
-   {
-    "t": "TV Stand — Black Marble Top with Drawer",
-    "price": 6950,
-    "status": "Active",
-    "listed": "2026-10-31",
-    "id": "28939580155695472",
-    "renew": "ready"
-   },
-   {
-    "t": "10 Seater Foldable Round Table with Chairs",
-    "price": 9650,
-    "status": "Active",
-    "listed": "2026-10-31",
-    "id": "1428254189456183",
-    "renew": "ready"
-   },
-   {
-    "t": "Hair Dressers Washing Bowl with Bar Chair",
-    "price": 10950,
-    "status": "Active",
-    "listed": "2026-10-31",
-    "id": "1384118453548720",
-    "renew": "ready"
-   },
-   {
-    "t": "Salon Chair — Hydraulic, Red or Black",
-    "price": 12500,
-    "status": "Active",
-    "listed": "2026-10-31",
-    "id": "1120911594002600",
-    "renew": "ready"
-   },
-   {
-    "t": "Kids Plastic Chair — Stackable, Assorted Colours",
-    "price": 550,
-    "status": "Active",
-    "listed": "2026-10-31",
-    "id": "1758577182032952",
-    "renew": "ready"
-   },
-   {
-    "t": "3D Wallpaper — Brick, Stone & Pattern (per roll)",
-    "price": 650,
-    "status": "Active",
-    "listed": "2026-10-31",
-    "id": "1491505376374254",
-    "renew": "ready"
-   },
-   {
-    "t": "Kavukçu Wheat Flour — 50kg Baking Flour",
-    "price": 640,
-    "status": "Active",
-    "listed": "2026-10-31",
-    "id": "958035296988966",
-    "renew": "ready"
-   },
-   {
-    "t": "Tiles & Finishes — Floor & Wall",
-    "price": 1000,
-    "status": "Active",
-    "listed": "2026-10-31",
-    "renew": "none"
-   },
-   {
-    "t": "TWYFORD Water Closet — Two-Piece, Premium",
-    "price": 750,
-    "status": "Active",
-    "listed": "2026-10-31",
-    "id": "2224086671498016",
-    "renew": "ready"
-   },
-   {
-    "t": "Sigma 1.5HP Split Air Conditioner (BREEZE-HY12SB)",
-    "price": 6500,
-    "status": "Active",
-    "listed": "2026-10-31",
-    "renew": "none"
-   },
-   {
-    "t": "TCL 43\" Smart Android TV — Full HD (43S5400A)",
-    "price": 6500,
-    "status": "Active",
-    "listed": "2026-10-31",
-    "id": "3354137694974780",
-    "renew": "ready"
-   },
-   {
-    "t": "A4 & A3 Copy Paper — Rotatrim, PaperOne, Double A",
-    "price": 450,
-    "status": "Active",
-    "listed": "2026-10-31",
-    "id": "1768662847524607",
-    "renew": "ready"
-   },
-   {
-    "t": "Business Cards — 100 or 200 Pieces",
-    "price": 450,
-    "status": "Active",
-    "listed": "2026-10-31",
-    "id": "1166166089561220",
-    "renew": "ready"
-   },
-   {
-    "t": "Auditorium / Conference Chair",
-    "price": 405,
-    "status": "Active",
-    "listed": "2026-10-31",
-    "id": "1416815483490520",
-    "renew": "ready"
-   },
-   {
-    "t": "Strong Glass Centre Table",
-    "price": 800,
-    "status": "Active",
-    "listed": "2026-10-31",
-    "id": "1136380665421338",
-    "renew": "ready"
-   },
-   {
-    "t": "Mesh Secretary Chair — Swivel, Arm Rests",
-    "price": 4500,
-    "status": "Active",
-    "listed": "2026-10-31",
-    "id": "2175253600084146",
-    "renew": "ready"
-   },
-   {
-    "t": "Luxury Leather Sofa Set",
-    "price": 8500,
-    "status": "Active",
-    "listed": "2026-10-31",
-    "id": "4446074032373624",
-    "renew": "ready"
-   },
-   {
-    "t": "Dining Set Collection — 5 Designs, 6 Chairs",
-    "price": 12600,
-    "status": "Active",
-    "listed": "2026-11-07",
-    "id": "1677564277557874",
-    "renew": "wait"
-   },
-   {
-    "t": "Executive Director Chair — Leather, High Back",
-    "price": 9500,
-    "status": "Active",
-    "listed": "2026-11-07",
-    "id": "1008318385656152",
-    "renew": "wait"
    }
   ]
  },
@@ -1663,6 +1507,11 @@
    "kind": "list",
    "tried": 3,
    "ok": 2
+  },
+  {
+   "d": "2026-11-08",
+   "kind": "scan",
+   "n": 10
   }
  ],
  "skip": []
