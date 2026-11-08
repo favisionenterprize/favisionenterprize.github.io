@@ -8573,16 +8573,47 @@
    "p": "FAV-017",
    "ok": true,
    "why": "Hillsong Worship: only tracks used lately · no sound"
+  },
+  {
+   "d": "2026-11-08",
+   "t": "2026-11-08T14:02:29.277Z",
+   "net": "x",
+   "k": "box:FAV-018",
+   "p": "FAV-018",
+   "ok": true,
+   "now": true
+  },
+  {
+   "d": "2026-11-08",
+   "t": "2026-11-08T14:03:45.338Z",
+   "net": "x",
+   "k": "box:FAV-019",
+   "p": "FAV-019",
+   "ok": false,
+   "now": true,
+   "why": "Post button stayed off"
+  },
+  {
+   "d": "2026-11-08",
+   "t": "2026-11-08T14:04:43.166Z",
+   "net": "x",
+   "k": "box:FAV-020",
+   "p": "FAV-020",
+   "ok": true,
+   "now": true
+  },
+  {
+   "d": "2026-11-08",
+   "t": "2026-11-08T14:06:41.188Z",
+   "net": "x",
+   "k": "box:FAV-021",
+   "p": "FAV-021",
+   "ok": false,
+   "now": true,
+   "why": "X didn't confirm the post"
   }
  ],
  "runs": [
-  {
-   "d": "2026-10-25",
-   "t": "2026-10-25T08:04:46.729Z",
-   "kind": "tiktok",
-   "tried": 1,
-   "ok": 1
-  },
   {
    "d": "2026-10-25",
    "t": "2026-10-25T08:05:11.475Z",
@@ -9977,6 +10008,13 @@
    "kind": "tiktok",
    "tried": 10,
    "ok": 10
+  },
+  {
+   "d": "2026-11-08",
+   "t": "2026-11-08T14:06:57.624Z",
+   "kind": "x",
+   "tried": 4,
+   "ok": 2
   }
  ]
 }
