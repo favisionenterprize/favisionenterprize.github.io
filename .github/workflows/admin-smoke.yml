@@ -15,8 +15,11 @@ on:
   push:
     branches: [main]
     paths:
+      - ".github/workflows/admin-smoke.yml"
       - "admin/**"
       - "data/**"
+      - "extension/admin.js"
+      - "extension/background.js"
       - "scripts/admin_smoke.js"
   workflow_dispatch:
 
