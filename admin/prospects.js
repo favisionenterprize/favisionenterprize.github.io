@@ -139,10 +139,27 @@
   function quote(x) {
     const p = product(x.product), v = priv()[x.id] || {};
     const qty = String(v.qty == null ? "" : v.qty).trim(), price = String(v.price == null ? "" : v.price).trim();
-    if (!qty || !(Number(qty) > 0)) return { stop: "Enter the quantity — I won't guess." };
-    if (!price || !(Number(price) > 0)) return { stop: "Enter the price — I won't guess." };
-    const q = Number(qty), u = Number(price);
-    return { p, qty: q, unit: u, total: q * u, line: `${q} × ${p ? short(p) : x.product} @ ${money(u)} = ${money(q * u)}` };
+    if (!qty || !Number.isSafeInteger(Number(qty)) || Number(qty) < 1) return { stop: "Enter a whole-number quantity — I won't guess." };
+    if (!price || !Number.isFinite(Number(price)) || !(Number(price) > 0)) return { stop: "Enter the price — I won't guess." };
+    const q = Number(qty), u = Number(price), subtotal = q * u;
+    if (!Number.isFinite(subtotal)) return { stop: "That quantity and price are too large to calculate safely." };
+    const deliveryMode = ["pickup", "fee"].includes(v.deliveryMode) ? v.deliveryMode : "confirm";
+    const feeText = String(v.deliveryFee == null ? "" : v.deliveryFee).trim();
+    if (deliveryMode === "fee" && (feeText === "" || !Number.isFinite(Number(feeText)) || Number(feeText) < 0))
+      return { stop: "Enter the delivery fee you confirmed, including 0 only if delivery is confirmed free." };
+    const deliveryFee = deliveryMode === "fee" ? Number(feeText) : 0;
+    const total = subtotal + deliveryFee;
+    if (!Number.isFinite(total)) return { stop: "The product total and delivery fee are too large to calculate safely." };
+    const catalogUnit = catalogPrice(p, q);
+    const savings = catalogUnit && u < catalogUnit ? (catalogUnit - u) * q : 0;
+    const delivery = deliveryMode === "pickup" ? "Pickup selected; confirm collection details" :
+      deliveryMode === "fee" ? `Delivery fee confirmed: ${money(deliveryFee)}` :
+        "Delivery fee and timing not included; confirm separately";
+    const line = `${q} × ${p ? short(p) : x.product} @ ${money(u)} = ${money(subtotal)}` +
+      `${catalogUnit ? ` (catalogue ${money(catalogUnit)}/unit)` : ""}` +
+      `${savings > 0 ? `; offer saves ${money(savings)} vs catalogue` : ""}. ${delivery}.` +
+      ` ${deliveryMode === "fee" ? `Total including delivery: ${money(total)}` : `Product total: ${money(subtotal)}`}`;
+    return { p, qty: q, unit: u, subtotal, total, catalogUnit, savings, deliveryMode, deliveryFee, delivery, line };
   }
   function pitch(x, kind) {
     const qt = quote(x);
@@ -156,9 +173,9 @@
     const cta = window.FAV_CAPTIONS && window.FAV_CAPTIONS.cta && p ? window.FAV_CAPTIONS.cta(p, { net: "share" }) : `📲 WhatsApp ${wa} to order.`;
     const link = p ? `${SITE}p/${p.id}.html` : SITE;
     if (kind === "email") {
-      return `Subject: ${what} for ${x.name}: quote from F.A Vision Enterprise\n\n${hello}\n\nI'm Alexander from F.A Vision Enterprise in Odorkor, Accra. We sell ${what.toLowerCase()} and other furniture for ${fit}, with delivery across Accra, Tema and Kasoa.\n\n${facts ? facts + "\n\n" : ""}Quote: ${qt.line}.\n\nPhotos and details: ${link}\nYou're welcome to see it at our showroom: Tarazzo Road, opposite Pacific, Odorkor.\n\nCall 020 747 3267 or WhatsApp ${wa} and we'll arrange it.\n\nThank you,\nAlexander Awuku\nF.A Vision Enterprise · ${SITE.replace("https://", "")}`;
+      return `Subject: ${what} for ${x.name}: quote from F.A Vision Enterprise\n\n${hello}\n\nI'm Alexander from F.A Vision Enterprise in Odorkor, Accra. We sell ${what.toLowerCase()} and other furniture for ${fit}. Delivery can be arranged; the fee and timing are confirmed before ordering.\n\n${facts ? facts + "\n\n" : ""}Quote: ${qt.line}.\n\nPhotos and details: ${link}\nYou're welcome to see it at our showroom: Tarazzo Road, opposite Pacific, Odorkor.\n\nCall 020 747 3267 or WhatsApp ${wa} and we'll arrange it.\n\nThank you,\nAlexander Awuku\nF.A Vision Enterprise · ${SITE.replace("https://", "")}`;
     }
-    return `${hello} this is Alexander from F.A Vision Enterprise, Odorkor. 👋\n\nWe sell ${what.toLowerCase()} for ${fit}, delivered across Accra, Tema & Kasoa.\n${facts ? facts + "\n" : ""}\n💰 Quote: ${qt.line}\n👉 ${link}\n\n${cta}`;
+    return `${hello} this is Alexander from F.A Vision Enterprise, Odorkor. 👋\n\nWe sell ${what.toLowerCase()} for ${fit}. Delivery can be arranged across Accra, Tema and Kasoa; the fee and timing are confirmed before ordering.\n${facts ? facts + "\n" : ""}\n💰 Quote: ${qt.line}.\n👉 ${link}\n\n${cta}`;
   }
   function openQuote(x) {
     const qt = quote(x);
@@ -168,8 +185,11 @@
     const d = new Date(), valid = new Date(Date.now() + 14 * 864e5);
     const inv = { kind: "proforma", number: "QUOTE-" + d.toISOString().slice(0, 10).replace(/-/g, "") + "-" + x.id.slice(0, 6).toUpperCase(),
       issue_date: d.toISOString().slice(0, 10), due_date: valid.toISOString().slice(0, 10),
-      customer: { organisation: x.name, address: x.area }, lines: [{ description: qt.p ? qt.p.name : x.product, qty: qt.qty, unit_price: qt.unit }],
-      taxes: [], amount_paid: 0, notes: "Quote valid for 14 days. Delivery fee depends on location. A deposit confirms the order." };
+      customer: { organisation: x.name, address: x.area },
+      lines: [{ description: qt.p ? qt.p.name : x.product, qty: qt.qty, unit_price: qt.unit },
+        ...(qt.deliveryMode === "fee" ? [{ description: "Confirmed delivery fee", qty: 1, unit_price: qt.deliveryFee }] : [])],
+      taxes: [], amount_paid: 0,
+      notes: `Quote valid for 14 days. ${qt.deliveryMode === "confirm" ? "Delivery fee and timing are not included; confirm separately." : qt.deliveryMode === "pickup" ? "Pickup selected; confirm collection details." : "Delivery fee entered and confirmed by Alexander."} A deposit confirms the order.` };
     const w = window.open("", "_blank");
     if (!w) return toast("Allow pop-ups for this page to open the quote.", true);
     if (INV && INV.render) { w.document.write(INV.render(inv, B)); w.document.close(); }
@@ -184,7 +204,7 @@
     const p = qt.p;
     const B = A().business ? A().business() || {} : {};
     const wa = window.FAV_CONFIG && window.FAV_CONFIG.localPhone ? window.FAV_CONFIG.localPhone(B.whatsapp || "+233207473267") : "020 747 3267";
-    const facts = `Prospect: ${x.name} (${TYPES[x.type]}, ${x.area}). Product: ${p ? p.name : x.product}. ${p && p.highlights ? "Highlights: " + p.highlights.join("; ") + "." : ""} Quote: ${qt.line}. Link: ${p ? SITE + "p/" + p.id + ".html" : SITE}. Showroom Tarazzo Road, opposite Pacific, Odorkor. Delivery across Accra, Tema and Kasoa. WhatsApp ${wa}, call 020 747 3267.`;
+    const facts = `Prospect: ${x.name} (${TYPES[x.type]}, ${x.area}). Product: ${p ? p.name : x.product}. ${p && p.highlights ? "Highlights: " + p.highlights.join("; ") + "." : ""} Quote: ${qt.line}. Link: ${p ? SITE + "p/" + p.id + ".html" : SITE}. Showroom Tarazzo Road, opposite Pacific, Odorkor. Delivery terms: ${qt.delivery}. WhatsApp ${wa}, call 020 747 3267.`;
     if (A().busy) A().busy("Asking your AI for a pitch draft…");
     try {
       const r = await A().backendSigned({ action: "muse", mode: "content", context: facts, messages: [{ role: "user", text: "Write ONE short, warm WhatsApp message (max 90 words, plain text, at most 2 emojis, no hashtags) from Alexander of F.A Vision Enterprise to this prospect, offering the product with the exact quote line. Use only these facts; never invent prices, discounts, stock or delivery dates. Say \"we sell\", never \"we make\". End with the WhatsApp number." }] });
@@ -265,7 +285,9 @@
       ${x.keep ? `<div class="pr-q">
           <label>Product<select data-pr="product">${products().map(q => `<option value="${esc(q.id)}" ${q.id === x.product ? "selected" : ""}>${esc(q.id)} · ${esc(short(q))}</option>`).join("")}</select></label>
           <label>Quantity<input data-pv="qty" type="number" min="1" inputmode="numeric" value="${esc(v.qty == null ? "" : v.qty)}" placeholder="e.g. 50"></label>
-          <label>Unit price (GH₵)<input data-pv="price" type="number" min="1" inputmode="decimal" value="${esc(v.price == null ? "" : v.price)}" placeholder="${p && p.price_ghs ? "catalogue " + esc(catalogPrice(p, v.qty)) : "enter it"}"></label>
+          <label>Offer unit price (GH₵)<input data-pv="price" type="number" min="0.01" step="0.01" inputmode="decimal" value="${esc(v.price == null ? "" : v.price)}" placeholder="${p && p.price_ghs ? "catalogue " + esc(catalogPrice(p, v.qty)) : "enter it"}"></label>
+          <label>Delivery terms<select data-pv="deliveryMode"><option value="confirm" ${!["pickup", "fee"].includes(v.deliveryMode) ? "selected" : ""}>Confirm fee / timing later</option><option value="pickup" ${v.deliveryMode === "pickup" ? "selected" : ""}>Pickup selected</option><option value="fee" ${v.deliveryMode === "fee" ? "selected" : ""}>Delivery fee confirmed</option></select></label>
+          ${v.deliveryMode === "fee" ? `<label>Confirmed delivery fee (GH₵)<input data-pv="deliveryFee" type="number" min="0" step="0.01" inputmode="decimal" value="${esc(v.deliveryFee == null ? "" : v.deliveryFee)}" placeholder="enter confirmed amount"></label>` : ""}
           <label>Contact name <small>(stays on this device)</small><input data-pv="contact" value="${esc(v.contact || "")}" placeholder="optional"></label>
           <label>WhatsApp number <small>(stays on this device)</small><input data-pv="phone" inputmode="tel" value="${esc(v.phone || "")}" placeholder="optional"></label>
           <label>Contact email <small>(stays on this device)</small><input data-pv="email" type="email" value="${esc(v.email || "")}" placeholder="optional"></label>

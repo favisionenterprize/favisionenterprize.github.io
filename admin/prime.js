@@ -107,13 +107,18 @@
       const cur = current(l); if (cur) { cur.st = cur.st === "run" ? "ok" : cur.st; }
       let s = l.steps.find(x => x.k === k && x.st === "wait");
       if (!s) { s = { k, st: "wait" }; l.steps.push(s); }
-      s.st = "run"; s.t = Date.now(); l.status = "running";
+      s.st = "run"; s.t = Date.now(); l.current = k; l.status = "running";
     });
     watch(k, rest);
   }
   function onSkip(k, why) {
     if (!fast()) return;
-    setL(laneOf(k), l => { const s = l.steps.find(x => x.k === k && (x.st === "run" || x.st === "wait")); if (s) { s.st = "skip"; s.why = why; } });
+    setL(laneOf(k), l => {
+      const s = l.steps.find(x => x.k === k && (x.st === "run" || x.st === "wait"));
+      if (s) { s.st = "skip"; s.why = why; s.t1 = Date.now(); }
+      l.current = "";
+      l.last = { k, st: "skip", why, at: Date.now() };
+    });
   }
   function onResult(out, then) {
     if (!fast() || !out) return;
@@ -123,7 +128,9 @@
     const ok = res.filter(r => r && r.ok).length;
     setL(lane, l => {
       const s = current(l) || l.steps.slice().reverse().find(x => x.st !== "wait");
-      if (s) { s.n = (s.n || 0) + ok; s.of = (s.of || 0) + res.length; s.st = out.stopped && out.stopped !== "Stopped by you." && !out.more ? "fail" : "ok"; if (out.stopped) s.why = out.stopped; }
+      if (s) { s.n = (s.n || 0) + ok; s.of = (s.of || 0) + res.length; s.st = out.stopped && out.stopped !== "Stopped by you." && !out.more ? "fail" : "ok"; s.t1 = Date.now(); if (out.stopped) s.why = out.stopped; }
+      l.current = "";
+      l.last = { k: s && s.k || out.kind, st: s && s.st || "ok", ok, total: res.length, why: out.stopped || "", at: Date.now() };
       if (ok && /^(post|ig|x|tiktok|engage|youtube|story|mklist|fxfix|ttfix)$/.test(out.kind)) l.lastAct = Date.now();
       // A platform warning / security check stops THIS lane (same network + account): nothing more is posted there.
       if (out.stopped && out.stopped !== "Stopped by you." && /blocked|restricted|limit|suspicious|identity|verify|try again later|security|checkpoint|captcha|warning|showed/i.test(out.stopped)) {
@@ -138,7 +145,13 @@
     const lane = x == null ? ss.get("fa-prime-lane") : laneOf(x);
     unwatch(lane);
     if (!lane || !L(lane)) return;
-    setL(lane, l => { const c = current(l); if (c) c.st = "ok"; if (l.status !== "stopped") { l.status = "done"; l.steps.forEach(s => { if (s.st === "wait") { s.st = "skip"; s.why = s.why || "not reached"; } }); } l.t1 = Date.now(); });
+    setL(lane, l => {
+      const c = current(l);
+      if (c) { c.st = "ok"; c.t1 = Date.now(); }
+      l.current = "";
+      if (l.status !== "stopped") { l.status = "done"; l.steps.forEach(s => { if (s.st === "wait") { s.st = "skip"; s.why = s.why || "not reached"; s.t1 = Date.now(); } }); }
+      l.t1 = Date.now();
+    });
   }
   // Wait before the next step on this lane: never less than the floor since the last post/comment on this network.
   function gap(out) {
@@ -264,6 +277,10 @@
       posted: all.reduce((s, x) => s + (x.n || 0), 0), left: Math.max(0, TARGET - (Date.now() - r.at)), ok: all.filter(x => x.st === "ok").length, total: all.length };
   }
   const ICON = { wait: "⏳", run: "▶️", ok: "✅", skip: "⏭", fail: "⛔" };
+  const elapsed = t => {
+    const n = Math.max(0, Math.floor((Date.now() - (Number(t) || Date.now())) / 1000));
+    return `${Math.floor(n / 60)}:${String(n % 60).padStart(2, "0")}`;
+  };
   const NAME = k => ({ renew: "Renew Marketplace listings", post: "Facebook group posts", mkscan: "Marketplace scan", mklist: "List missing products on Marketplace", declines: "Groups that declined posts", sync: "Import groups", grow: "Join new big groups",
     "story:fb": "Facebook story", ig: "Instagram posts", x: "X posts", tiktok: "TikTok posts", sounds: "Trending sounds", "ttcaps:all": "TikTok captions fix", "yt:all": "Videos to YouTube", "prime:relay": "Profile relay", report: "Email the report" }[k]
     || k.replace(/^fx:scan:(\w+)/, "Fix all: scan $1").replace(/^fx:fix:(\w+)/, "Fix all: fix $1").replace(/^profile:(\w+):check/, "Profile check $1").replace(/^engage:(\w+):(\w+)/, "Engagement $1: $2").replace(/^reel:(\w+)/, "Reel on $1"));
@@ -274,6 +291,13 @@
     const finished = !s.running.length;
     const head = finished ? `<b>Finished</b> in ${Math.round(((Math.max(...s.lanes.map(l => l.t1 || l.u || 0)) || Date.now()) - s.r.at) / 1000)} s` : s.left ? `<b class="pr-clock">${mm}:${String(sec).padStart(2, "0")}</b> left of 6:00` : `<b>6:00 reached</b>: the rest carries on in the background at the safe pace`;
     return `<div class="pr-head">${head} · ${s.posted} posts/comments/fixes done · ${s.done} of ${s.lanes.length} lanes done${s.stopped.length ? ` · <span class="pr-bad">${s.stopped.length} stopped</span>` : ""}</div>
+      <details class="pr-inspector" open><summary>Run Inspector · live lane activity</summary><div class="pr-inspector-grid">${s.lanes.map(l => {
+        const active = l.steps.filter(x => x.st === "run"), last = l.last;
+        const doing = active.length ? active.map(x => `${esc(x.label || NAME(x.k))} · ${elapsed(x.t)}`).join("<br>") :
+          l.status === "waiting" ? "Starting…" : l.status === "stopped" ? `Stopped: ${esc(l.stopped || "warning")}` : l.status === "done" ? "No active step" : "Waiting for next step";
+        const outcome = last ? `${esc(NAME(last.k))}: ${esc(last.st)}${last.total ? ` · ${last.ok}/${last.total} successful` : ""}${last.why ? ` · ${esc(String(last.why).slice(0, 100))}` : ""} · ${elapsed(last.at)} ago` : "No completed step yet";
+        return `<div class="pr-inspector-lane"><b>${esc(LANES[l.lane] || l.lane)}</b><div class="pr-inspector-doing">${doing}</div><small>Last result: ${outcome}</small><small>${l.steps.filter(x => x.st === "ok" || x.st === "fail" || x.st === "skip").length}/${l.steps.length} steps resolved</small></div>`;
+      }).join("")}</div></details>
       <div class="pr-lanes">${s.lanes.map(l => `<div class="pr-lane ${l.status}"><div class="pr-lt">${esc(LANES[l.lane] || l.lane)} <small>${esc(l.status === "done" ? "done ✓" : l.status === "stopped" ? "stopped" : l.status === "waiting" ? "starting…" : "running")}</small></div>
         ${l.stopped ? `<div class="pr-bad fa-small">⛔ ${esc(l.stopped)}</div>` : ""}
         <ul>${l.steps.map(x => `<li class="st-${x.st}"><span>${ICON[x.st] || ""} ${esc(x.label || NAME(x.k))}</span><small>${x.of ? `${x.n || 0}/${x.of}` : ""}${x.why ? " · " + esc(String(x.why).slice(0, 80)) : ""}</small></li>`).join("")}</ul></div>`).join("")}</div>
@@ -312,6 +336,9 @@
     const st = document.createElement("style");
     st.textContent = `.prime-btn{font-size:20px;font-weight:800;padding:16px 22px;width:100%;letter-spacing:.02em}.prime-card{margin-bottom:14px}
 .pr-head{margin:10px 0;font-size:15px}.pr-clock{font-size:22px;font-variant-numeric:tabular-nums;color:#0d55af}.pr-bad{color:#d32f2f}
+.pr-inspector{margin:8px 0 12px;border:1px solid #dce5f2;border-radius:10px;padding:9px 11px;background:#f7faff}.pr-inspector>summary{font-weight:700;cursor:pointer}
+.pr-inspector-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:8px;margin-top:8px}.pr-inspector-lane{display:grid;gap:4px;padding:8px;border-radius:8px;background:#fff;border:1px solid #e3e7ee;min-width:0}
+.pr-inspector-lane small{font-size:11px;color:#5f6368;overflow-wrap:anywhere}.pr-inspector-doing{font-size:13px;overflow-wrap:anywhere}
 .pr-lanes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:10px}
 .pr-lane{border:1px solid #e3e7ee;border-radius:10px;padding:8px 10px;background:#fff;min-width:0}.pr-lane.done{border-color:#1f9d55}.pr-lane.stopped{border-color:#d32f2f}
 .pr-lt{font-weight:700;display:flex;justify-content:space-between;gap:6px}.pr-lane ul{list-style:none;margin:6px 0 0;padding:0;font-size:13px}
