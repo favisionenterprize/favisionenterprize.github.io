@@ -98,6 +98,14 @@
     "listed": "2026-10-31",
     "id": "1559432725950945",
     "renew": "ready"
+   },
+   {
+    "t": "Black Glass Dining Set — 6 High-Back Chairs",
+    "price": 4900,
+    "status": "Active",
+    "listed": "2026-11-08",
+    "id": "4125794831063318",
+    "renew": "wait"
    }
   ]
  },
@@ -1240,6 +1248,16 @@
    "ok": true,
    "id": "1008318385656152",
    "verified": true
+  },
+  {
+   "d": "2026-11-08",
+   "t": "2026-11-08T09:11:58.993Z",
+   "p": "FAV-002",
+   "title": "Black Glass Dining Set — 6 High-Back Chairs",
+   "price": 4900,
+   "ok": true,
+   "id": "4125794831063318",
+   "verified": true
   }
  ],
  "runs": [
@@ -1512,6 +1530,13 @@
    "d": "2026-11-08",
    "kind": "scan",
    "n": 10
+  },
+  {
+   "d": "2026-11-08",
+   "kind": "list",
+   "tried": 1,
+   "ok": 1,
+   "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile in Facebook, then press the button again."
   }
  ],
  "skip": []
