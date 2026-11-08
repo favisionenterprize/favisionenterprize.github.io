@@ -1385,15 +1385,59 @@
    "t": "2026-11-08T11:04:41.762Z",
    "fav": "Kojo Blak",
    "found": true
+  },
+  {
+   "name": "Davido",
+   "platform": "tiktok",
+   "d": "2026-11-08",
+   "t": "2026-11-08T14:05:23.271Z",
+   "fav": "Davido",
+   "found": true
+  },
+  {
+   "name": "KOJO BLAK & Oxlade",
+   "platform": "tiktok",
+   "d": "2026-11-08",
+   "t": "2026-11-08T14:05:23.271Z",
+   "fav": "Kojo Blak",
+   "found": true
+  },
+  {
+   "name": "Davido",
+   "platform": "tiktok",
+   "d": "2026-11-08",
+   "t": "2026-11-08T14:05:23.271Z",
+   "fav": "Davido",
+   "found": true
+  },
+  {
+   "name": "KOJO BLAK & Medikal & Beatzvampire",
+   "platform": "tiktok",
+   "d": "2026-11-08",
+   "t": "2026-11-08T14:05:23.271Z",
+   "fav": "Kojo Blak",
+   "found": true
+  },
+  {
+   "name": "Davido",
+   "platform": "tiktok",
+   "d": "2026-11-08",
+   "t": "2026-11-08T14:05:23.271Z",
+   "fav": "Davido",
+   "found": true
+  },
+  {
+   "name": "KOJO BLAK & Medikal & Beatzvampire",
+   "platform": "tiktok",
+   "d": "2026-11-08",
+   "t": "2026-11-08T14:05:23.271Z",
+   "fav": "Kojo Blak",
+   "found": true
   }
  ],
  "notes": [
   {
    "d": "2026-11-04",
-   "text": "no Instagram audio seen on Reels"
-  },
-  {
-   "d": "2026-11-04",
    "text": "couldn't confirm the Ghana region on Creative Center"
   },
   {
@@ -1607,6 +1651,11 @@
   {
    "d": "2026-11-08",
    "text": "no Instagram audio seen on Reels"
+  },
+  {
+   "d": "2026-11-08",
+   "platform": "tiktok",
+   "text": "4 posts went out without a sound"
   }
  ]
 }
