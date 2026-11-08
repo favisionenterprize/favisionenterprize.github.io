@@ -225,6 +225,11 @@
    "d": "2026-11-08",
    "net": "fb",
    "n": 562
+  },
+  {
+   "d": "2026-11-08",
+   "net": "x",
+   "n": 298
   }
  ],
  "posts": {
@@ -380,7 +385,7 @@
    "url": "https://x.com/FaVisionEnt/status/1662447925388099587",
    "first": "2026-10-13",
    "commented": [],
-   "checked": "2026-11-07",
+   "checked": "2026-11-08",
    "likes": 3,
    "comments": 6,
    "shares": 2,
@@ -1511,8 +1516,9 @@
    "url": "https://x.com/FaVisionEnt/status/2118816116562678238",
    "first": "2026-11-06",
    "commented": [],
-   "checked": "2026-11-06",
-   "views": 1
+   "checked": "2026-11-08",
+   "views": 9,
+   "title": "X"
   },
   "https://www.facebook.com/FaVisionEnterprise/posts/pfbid02xMLFDdo3EULaeRfCxM5DsBjcSrFMCukU38aSyff2No2r5qN5XYG81UDsocxC6ZTsl": {
    "net": "fb",
@@ -1527,7 +1533,9 @@
    "url": "https://x.com/FaVisionEnt/status/2119210010160791919",
    "first": "2026-11-07",
    "commented": [],
-   "checked": "2026-11-07"
+   "checked": "2026-11-08",
+   "title": "X",
+   "views": 8
   },
   "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0toh4JUAgPHaZdst4mSy9WuEPpURx9dSUd33EjY9k8doRMLi84tLAwXbBQiJiGqbgl": {
    "net": "fb",
@@ -1548,6 +1556,24 @@
    "checked": "2026-11-08",
    "likes": 90,
    "views": 2
+  },
+  "https://x.com/FaVisionEnt/status/2119098176640799180": {
+   "net": "x",
+   "url": "https://x.com/FaVisionEnt/status/2119098176640799180",
+   "first": "2026-11-08",
+   "commented": [],
+   "title": "FA Vision Enterprise on X: \"📦 What's in the box? Mesh Secretary Chair: Mesh back, Padded ",
+   "checked": "2026-11-08",
+   "views": 13
+  },
+  "https://x.com/FaVisionEnt/status/2119098089365815459": {
+   "net": "x",
+   "url": "https://x.com/FaVisionEnt/status/2119098089365815459",
+   "first": "2026-11-08",
+   "commented": [],
+   "title": "FA Vision Enterprise on X: \"📦 What's in the box? Mesh Secretary Chair: Mesh back, Padded ",
+   "checked": "2026-11-08",
+   "views": 9
   }
  },
  "runs": [
@@ -3618,6 +3644,21 @@
    "invited": 0,
    "thanked": 0,
    "followers": 562,
+   "stopped": null,
+   "commenting": true
+  },
+  {
+   "d": "2026-11-08",
+   "t": "2026-11-08T14:00:01.576Z",
+   "net": "x",
+   "mode": "stats",
+   "posts": 5,
+   "checked": 5,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 298,
    "stopped": null,
    "commenting": true
   }
