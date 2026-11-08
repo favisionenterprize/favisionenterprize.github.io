@@ -1843,10 +1843,6 @@ window.FAV_DATA = {
       "custom_order": false,
       "in_stock": true,
       "images": [
-        "assets/images/products/fav-014-web-mw2pa30x-1.jpg",
-        "assets/images/products/fav-014-web-mw2pa30x-2.jpg",
-        "assets/images/products/fav-014-web-mw2pa30x-3.jpg",
-        "assets/images/products/fav-014-web-mw2pa30x-4.jpg",
         "assets/images/products/fav-014-muk5690f-1.jpg",
         "assets/images/products/fav-014-muk5690f-3.jpg",
         "assets/images/products/fav-014-muk5690f-5.jpg",
