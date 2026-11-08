@@ -941,6 +941,13 @@ window.FAV_DATA = {
           "price": 4900,
           "checked": "2026-11-06",
           "synced": "2026-11-06"
+        },
+        {
+          "id": "4125794831063318",
+          "title": "Black Glass Dining Set — 6 High-Back Chairs",
+          "price": 4900,
+          "checked": "2026-11-08",
+          "synced": "2026-11-08"
         }
       ],
       "tiktok": 9,
