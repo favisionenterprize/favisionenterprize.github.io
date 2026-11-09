@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-08T08:54:50Z",
+ "generated": "2026-11-09T09:40:09Z",
  "mode": "full",
  "score": 80,
  "prev_score": 80,
@@ -141,7 +141,7 @@
     "Service",
     "WebSite"
    ],
-   "bytes": 504588,
+   "bytes": 504562,
    "requests": 14,
    "redirect": false,
    "in_sitemap": true
@@ -160,7 +160,7 @@
     "ItemList",
     "ListItem"
    ],
-   "bytes": 251305,
+   "bytes": 251279,
    "requests": 8,
    "redirect": false,
    "in_sitemap": true
@@ -176,7 +176,7 @@
     "Smart help for your home, school and business"
    ],
    "schema": [],
-   "bytes": 348097,
+   "bytes": 348071,
    "requests": 10,
    "redirect": false,
    "in_sitemap": true
@@ -208,7 +208,7 @@
     "Shop our TikTok furniture"
    ],
    "schema": [],
-   "bytes": 279730,
+   "bytes": 279704,
    "requests": 9,
    "redirect": false,
    "in_sitemap": true
@@ -224,7 +224,7 @@
     "See it in action"
    ],
    "schema": [],
-   "bytes": 234981,
+   "bytes": 234955,
    "requests": 5,
    "redirect": false,
    "in_sitemap": true
@@ -1245,7 +1245,7 @@
       "kb": 302,
       "requests": 48,
       "img_no_alt": 0,
-      "secs": 0.2,
+      "secs": 0.1,
       "keywords": []
      },
      {
@@ -1287,7 +1287,7 @@
       "kb": 191,
       "requests": 5,
       "img_no_alt": 2,
-      "secs": 0.1,
+      "secs": 0.2,
       "keywords": []
      },
      {
@@ -1385,10 +1385,10 @@
       "whatsapp": true,
       "blog": false,
       "faq": false,
-      "kb": 134,
-      "requests": 121,
+      "kb": 135,
+      "requests": 123,
       "img_no_alt": 1,
-      "secs": 0.8,
+      "secs": 4.7,
       "keywords": []
      },
      {
@@ -1409,7 +1409,7 @@
       "kb": 163,
       "requests": 128,
       "img_no_alt": 1,
-      "secs": 0.6,
+      "secs": 4.5,
       "keywords": []
      },
      {
@@ -1430,13 +1430,13 @@
       "kb": 94,
       "requests": 102,
       "img_no_alt": 0,
-      "secs": 0.6,
+      "secs": 3.3,
       "keywords": []
      },
      {
-      "url": "https://furniturecityghana.com/product/anion-memory-foam/",
+      "url": "https://furniturecityghana.com/product/tv-1561g/",
       "title": true,
-      "title_len": 40,
+      "title_len": 31,
       "description": false,
       "h1": 1,
       "og": false,
@@ -1448,10 +1448,10 @@
       "whatsapp": true,
       "blog": false,
       "faq": false,
-      "kb": 115,
+      "kb": 114,
       "requests": 114,
       "img_no_alt": 2,
-      "secs": 0.6,
+      "secs": 1.8,
       "keywords": []
      }
     ],
@@ -1492,7 +1492,7 @@
       "kb": 366,
       "requests": 129,
       "img_no_alt": 26,
-      "secs": 0.6,
+      "secs": 0.3,
       "keywords": []
      }
     ],
@@ -1522,7 +1522,7 @@
       "kb": 0,
       "requests": 1,
       "img_no_alt": 0,
-      "secs": 1.2,
+      "secs": 1.1,
       "keywords": []
      }
     ],
@@ -1574,7 +1574,7 @@
       "no FAQ",
       "no H1",
       "no link-preview tags",
-      "heavy home page (134 KB HTML, 121 files)",
+      "heavy home page (135 KB HTML, 123 files)",
       "no phone number on the home page",
       "targets none of our keywords in title/H1"
      ]
@@ -1761,6 +1761,11 @@
   },
   {
    "d": "2026-11-08",
+   "score": 80,
+   "ai": 0
+  },
+  {
+   "d": "2026-11-09",
    "score": 80,
    "ai": 0
   }
