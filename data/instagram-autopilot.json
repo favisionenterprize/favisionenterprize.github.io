@@ -2840,6 +2840,74 @@
    "ok": false,
    "now": true,
    "why": "Couldn't find Create"
+  },
+  {
+   "d": "2026-11-10",
+   "t": "2026-11-10T09:10:44.338Z",
+   "k": "ad:fav-014",
+   "p": "FAV-014",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-11-10",
+   "t": "2026-11-10T09:11:48.044Z",
+   "k": "box:FAV-038",
+   "p": "FAV-038",
+   "ok": true
+  },
+  {
+   "d": "2026-11-10",
+   "t": "2026-11-10T09:13:52.566Z",
+   "k": "box:FAV-006",
+   "p": "FAV-006",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-11-10",
+   "t": "2026-11-10T09:15:54.325Z",
+   "k": "card:FAV-020",
+   "p": "FAV-020",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-11-10",
+   "t": "2026-11-10T09:16:51.488Z",
+   "k": "box:FAV-032",
+   "p": "FAV-032",
+   "ok": true
+  },
+  {
+   "d": "2026-11-10",
+   "t": "2026-11-10T09:17:47.963Z",
+   "k": "tile:fav-010",
+   "p": "FAV-010",
+   "ok": true
+  },
+  {
+   "d": "2026-11-10",
+   "t": "2026-11-10T09:18:44.541Z",
+   "k": "box:FAV-022",
+   "p": "FAV-022",
+   "ok": true
+  },
+  {
+   "d": "2026-11-10",
+   "t": "2026-11-10T09:21:37.088Z",
+   "k": "card:FAV-027",
+   "p": "FAV-027",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-11-10",
+   "t": "2026-11-10T09:23:45.692Z",
+   "k": "card:FAV-030",
+   "p": "FAV-030",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
   }
  ],
  "profile": [
@@ -3004,16 +3072,15 @@
    "followers": 894,
    "following": 2027,
    "posts": 469
+  },
+  {
+   "d": "2026-11-10",
+   "followers": 895,
+   "following": 2027,
+   "posts": 473
   }
  ],
  "runs": [
-  {
-   "d": "2026-10-16",
-   "t": "2026-10-16T19:35:15.869Z",
-   "kind": "ig",
-   "tried": 10,
-   "ok": 2
-  },
   {
    "d": "2026-10-17",
    "t": "2026-10-17T00:11:52.441Z",
@@ -4489,6 +4556,13 @@
    "tried": 0,
    "ok": 0,
    "stopped": "Instagram is logged in to a different account. Switch to @favisionent, then tap Run again."
+  },
+  {
+   "d": "2026-11-10",
+   "t": "2026-11-10T09:24:05.116Z",
+   "kind": "ig",
+   "tried": 9,
+   "ok": 4
   }
  ]
 }
