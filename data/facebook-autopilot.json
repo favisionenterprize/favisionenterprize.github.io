@@ -15543,15 +15543,6 @@
  "switches": [
   {
    "d": "2026-10-31",
-   "from": "",
-   "to": null,
-   "why": "Manye Oye Rehoboth's turn",
-   "t": "2026-10-31T02:32:28.213Z",
-   "fail": "couldn't find the profile menu",
-   "brand": true
-  },
-  {
-   "d": "2026-10-31",
    "brand": true,
    "fail": "couldn't find the profile menu",
    "from": "",
@@ -15988,6 +15979,15 @@
    "to": null,
    "why": "read F.A Vision Enterprise's groups",
    "t": "2026-11-10T09:32:47.570Z",
+   "fail": "couldn't find the profile menu",
+   "brand": true
+  },
+  {
+   "d": "2026-11-10",
+   "from": "",
+   "to": null,
+   "why": "read Fa Vision Furnitures's groups",
+   "t": "2026-11-10T09:34:17.236Z",
    "fail": "couldn't find the profile menu",
    "brand": true
   }
