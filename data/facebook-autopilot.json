@@ -12314,6 +12314,14 @@
    "g": "2544090229202859",
    "ok": false,
    "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-11-10",
+   "t": "2026-11-10T08:19:09.765Z",
+   "p": "FAV-003",
+   "g": "262425047207034",
+   "ok": true,
+   "why": "first comment not added (post not found)"
   }
  ],
  "resets": {},
@@ -13752,6 +13760,13 @@
    "kind": "renew",
    "tried": 10,
    "ok": 5
+  },
+  {
+   "d": "2026-11-10",
+   "t": "2026-11-10T08:19:25.513Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 1
   }
  ],
  "renewLog": [
