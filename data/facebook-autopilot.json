@@ -15340,6 +15340,11 @@
      "brand": "fav",
      "page": "F.A Vision Enterprise",
      "why": "F.A Vision Enterprise isn't a member of any group yet (the relay joins groups first; pending requests count once accepted)"
+    },
+    {
+     "brand": "favf",
+     "page": "Fa Vision Furnitures",
+     "why": "Fa Vision Furnitures isn't a member of any group yet (the relay joins groups first; pending requests count once accepted)"
     }
    ],
    "join": {
