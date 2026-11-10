@@ -15556,15 +15556,6 @@
    "brand": true,
    "fail": "couldn't find the profile menu",
    "from": "",
-   "t": "2026-10-31T03:21:00.759Z",
-   "to": null,
-   "why": "F.A Vision Enterprise's turn"
-  },
-  {
-   "d": "2026-10-31",
-   "brand": true,
-   "fail": "couldn't find the profile menu",
-   "from": "",
    "t": "2026-10-31T03:21:57.194Z",
    "to": null,
    "why": "Fa Vision Furnitures's turn"
@@ -15998,6 +15989,15 @@
    "to": null,
    "why": "read Oteng Furniture's groups",
    "t": "2026-11-10T09:35:43.113Z",
+   "fail": "couldn't find the profile menu",
+   "brand": true
+  },
+  {
+   "d": "2026-11-10",
+   "from": "",
+   "to": null,
+   "why": "read Agoodmann Ventures's groups",
+   "t": "2026-11-10T09:37:08.295Z",
    "fail": "couldn't find the profile menu",
    "brand": true
   }
