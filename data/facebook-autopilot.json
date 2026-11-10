@@ -15295,26 +15295,14 @@
    "skipped": []
   },
   "cur": {
-   "id": "202611091927",
-   "d": "2026-11-09",
-   "t": "2026-11-09T19:27:07.149Z",
+   "id": "202611100821",
+   "d": "2026-11-10",
+   "t": "2026-11-10T08:21:46.618Z",
    "dry": false,
    "phase": "join",
-   "dropped": [
-    "Alexander Awuku",
-    "F.A Vision Enterprise",
-    "Fa Vision Furnitures",
-    "Oteng Furniture",
-    "Agoodmann Ventures",
-    "Manye Oye Rehoboth"
-   ],
+   "dropped": [],
    "members": {},
-   "skipped": [],
-   "join": {
-    "turn": 0,
-    "kwi": {},
-    "skipBy": {}
-   }
+   "skipped": []
   }
  },
  "selling": {
