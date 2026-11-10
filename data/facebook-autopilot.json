@@ -15350,6 +15350,11 @@
      "brand": "oteng",
      "page": "Oteng Furniture",
      "why": "Oteng Furniture isn't a member of any group yet (the relay joins groups first; pending requests count once accepted)"
+    },
+    {
+     "brand": "agood",
+     "page": "Agoodmann Ventures",
+     "why": "Agoodmann Ventures isn't a member of any group yet (the relay joins groups first; pending requests count once accepted)"
     }
    ],
    "join": {
