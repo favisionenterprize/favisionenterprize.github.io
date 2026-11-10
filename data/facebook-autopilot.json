@@ -15280,17 +15280,90 @@
      }
     ],
     "skipped": []
+   },
+   {
+    "id": "202611100916",
+    "d": "2026-11-10",
+    "t": "2026-11-10T09:38:02.588Z",
+    "dry": false,
+    "joined": 0,
+    "pending": 0,
+    "manual": 0,
+    "dropped": [
+     "Alexander Awuku",
+     "F.A Vision Enterprise",
+     "Fa Vision Furnitures",
+     "Oteng Furniture",
+     "Agoodmann Ventures",
+     "Manye Oye Rehoboth"
+    ],
+    "by_profile": [],
+    "by_brand": [
+     {
+      "key": "fav",
+      "name": "F.A Vision Enterprise",
+      "ok": 0,
+      "tried": 0
+     },
+     {
+      "key": "favf",
+      "name": "Fa Vision Furnitures",
+      "ok": 0,
+      "tried": 0
+     },
+     {
+      "key": "oteng",
+      "name": "Oteng Furniture",
+      "ok": 0,
+      "tried": 0
+     },
+     {
+      "key": "agood",
+      "name": "AGOODMANN VENTURES",
+      "ok": 0,
+      "tried": 0
+     }
+    ],
+    "skipped": [
+     {
+      "brand": "fav",
+      "page": "F.A Vision Enterprise",
+      "why": "F.A Vision Enterprise isn't a member of any group yet (the relay joins groups first; pending requests count once accepted)"
+     },
+     {
+      "brand": "favf",
+      "page": "Fa Vision Furnitures",
+      "why": "Fa Vision Furnitures isn't a member of any group yet (the relay joins groups first; pending requests count once accepted)"
+     },
+     {
+      "brand": "oteng",
+      "page": "Oteng Furniture",
+      "why": "Oteng Furniture isn't a member of any group yet (the relay joins groups first; pending requests count once accepted)"
+     },
+     {
+      "brand": "agood",
+      "page": "Agoodmann Ventures",
+      "why": "Agoodmann Ventures isn't a member of any group yet (the relay joins groups first; pending requests count once accepted)"
+     }
+    ]
    }
   ],
   "last": {
-   "id": "202610310236",
-   "d": "2026-10-31",
-   "t": "2026-10-31T02:50:17.883Z",
+   "id": "202611100916",
+   "d": "2026-11-10",
+   "t": "2026-11-10T09:38:02.588Z",
    "dry": false,
    "joined": 0,
    "pending": 0,
    "manual": 0,
-   "dropped": [],
+   "dropped": [
+    "Alexander Awuku",
+    "F.A Vision Enterprise",
+    "Fa Vision Furnitures",
+    "Oteng Furniture",
+    "Agoodmann Ventures",
+    "Manye Oye Rehoboth"
+   ],
    "by_profile": [],
    "by_brand": [
     {
@@ -15318,23 +15391,6 @@
      "tried": 0
     }
    ],
-   "skipped": []
-  },
-  "cur": {
-   "id": "202611100916",
-   "d": "2026-11-10",
-   "t": "2026-11-10T09:16:33.966Z",
-   "dry": false,
-   "phase": "post",
-   "dropped": [
-    "Alexander Awuku",
-    "F.A Vision Enterprise",
-    "Fa Vision Furnitures",
-    "Oteng Furniture",
-    "Agoodmann Ventures",
-    "Manye Oye Rehoboth"
-   ],
-   "members": {},
    "skipped": [
     {
      "brand": "fav",
@@ -15356,12 +15412,7 @@
      "page": "Agoodmann Ventures",
      "why": "Agoodmann Ventures isn't a member of any group yet (the relay joins groups first; pending requests count once accepted)"
     }
-   ],
-   "join": {
-    "turn": 0,
-    "kwi": {},
-    "skipBy": {}
-   }
+   ]
   }
  },
  "selling": {
