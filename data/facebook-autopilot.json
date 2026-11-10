@@ -13774,6 +13774,14 @@
    "kind": "renew",
    "tried": 141,
    "ok": 0
+  },
+  {
+   "d": "2026-11-10",
+   "t": "2026-11-10T18:33:20.629Z",
+   "kind": "renew",
+   "tried": 0,
+   "ok": 0,
+   "stopped": "No listings found on Your listings. Make sure Facebook is on your personal profile."
   }
  ],
  "renewLog": [
@@ -15417,194 +15425,7 @@
  },
  "selling": {
   "d": "2026-11-10",
-  "cards": [
-   {
-    "t": "Black Glass Dining Set — 6 High-Back Chairs",
-    "listed": "2026-11-08",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "Executive Director Chair — Leather, High Back",
-    "listed": "2026-11-08",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "Dining Set Collection — 5 Designs, 6 Chairs",
-    "listed": "2026-11-08",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
-    "listed": "2026-11-08",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "Red Glass Dining Set — 6 Chairs",
-    "listed": "2026-11-08",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
-    "listed": "2026-11-08",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "White Foldable Chairs — Pack of 10 (Black Frame)",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "White Foldable 8-Seater Set — 8ft Table + 8 Chairs",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "White Foldable 4-Seater Set — 4ft Table + 4 Chairs",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "White Foldable Chair — Black Frame, Handle Slot",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "White Foldable Table — 4-Seater (4ft, Black Frame)",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "Jasmine Rice — Long Grain Fragrant Rice",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "Student Mattress — 2 Sizes",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "TV Stand + Centre Table Set — Marble Top",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "TV Stand — Black Marble Top with Drawer",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "10 Seater Foldable Round Table with Chairs",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "Hair Dressers Washing Bowl with Bar Chair",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "Salon Chair — Hydraulic, Red or Black",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "Kids Plastic Chair — Stackable, Assorted Colours",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "3D Wallpaper — Brick, Stone & Pattern (per roll)",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "Kavukçu Wheat Flour — 50kg Baking Flour",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "Tiles & Finishes — Floor & Wall",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "TWYFORD Water Closet — Two-Piece, Premium",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "Sigma 1.5HP Split Air Conditioner (BREEZE-HY12SB)",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "TCL 43\" Smart Android TV — Full HD (43S5400A)",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "A4 & A3 Copy Paper — Rotatrim, PaperOne, Double A",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "Business Cards — 100 or 200 Pieces",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "Auditorium / Conference Chair",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "Strong Glass Centre Table",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "Mesh Secretary Chair — Swivel, Arm Rests",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-16"
-   },
-   {
-    "t": "Luxury Leather Sofa Set",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-16"
-   }
-  ]
+  "cards": []
  },
  "switches": [
   {
