@@ -847,6 +847,13 @@ window.FAV_DATA = {
           "price": 12600,
           "checked": "2026-11-03",
           "synced": "2026-11-03"
+        },
+        {
+          "id": "1422706476512965",
+          "title": "Rainbow Glass-Top Dining Set — 6 Chairs",
+          "price": 12600,
+          "checked": "2026-11-11",
+          "synced": "2026-11-11"
         }
       ],
       "tiktok": 8,
@@ -1438,6 +1445,13 @@ window.FAV_DATA = {
           "price": 9500,
           "checked": "2026-10-31",
           "synced": "2026-10-31"
+        },
+        {
+          "id": "3616758121808507",
+          "title": "Mesh Secretary Chair — Ergonomic Swivel",
+          "price": 9500,
+          "checked": "2026-11-11",
+          "synced": "2026-11-11"
         }
       ],
       "tiktok": 6,
@@ -1536,6 +1550,13 @@ window.FAV_DATA = {
           "price": 4500,
           "checked": "2026-10-31",
           "synced": "2026-10-31"
+        },
+        {
+          "id": "4636710159921680",
+          "title": "1.2 m Office Desk with Drawer Unit",
+          "price": 4500,
+          "checked": "2026-11-11",
+          "synced": "2026-11-11"
         }
       ],
       "tiktok": 13,
