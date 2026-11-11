@@ -12322,6 +12322,14 @@
    "g": "262425047207034",
    "ok": true,
    "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-11",
+   "t": "2026-11-11T11:04:47.610Z",
+   "p": "FAV-043",
+   "g": "1758101318119665",
+   "ok": true,
+   "why": "Waiting for admin approval"
   }
  ],
  "resets": {},
@@ -13790,6 +13798,13 @@
    "tried": 0,
    "ok": 0,
    "stopped": "No listings found on Your listings. Make sure Facebook is on your personal profile."
+  },
+  {
+   "d": "2026-11-11",
+   "t": "2026-11-11T11:05:27.327Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 1
   }
  ],
  "renewLog": [
