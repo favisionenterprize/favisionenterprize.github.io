@@ -10,10 +10,19 @@
   "photos": 8
  },
  "scan": {
-  "d": "2026-11-08",
-  "t": "2026-11-08T09:10:48.115Z",
+  "d": "2026-11-11",
+  "t": "2026-11-11T10:04:45.559Z",
   "n": 10,
   "listings": [
+   {
+    "t": "Black Glass Dining Set — 6 High-Back Chairs",
+    "price": 4900,
+    "status": "Active",
+    "listed": "2026-11-08",
+    "id": "4125794831063318",
+    "renew": "wait",
+    "next": "2026-11-15"
+   },
    {
     "t": "Executive Director Chair — Leather, High Back",
     "price": 9500,
@@ -21,7 +30,7 @@
     "listed": "2026-11-07",
     "id": "1008318385656152",
     "renew": "wait",
-    "next": "2026-11-15"
+    "next": "2026-11-14"
    },
    {
     "t": "Dining Set Collection — 5 Designs, 6 Chairs",
@@ -30,7 +39,7 @@
     "listed": "2026-11-07",
     "id": "1677564277557874",
     "renew": "wait",
-    "next": "2026-11-15"
+    "next": "2026-11-14"
    },
    {
     "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
@@ -38,8 +47,7 @@
     "status": "Active",
     "listed": "2026-11-03",
     "id": "1665138258314174",
-    "renew": "wait",
-    "next": "2026-11-11"
+    "renew": "wait"
    },
    {
     "t": "Red Glass Dining Set — 6 Chairs",
@@ -47,17 +55,7 @@
     "status": "Active",
     "listed": "2026-11-03",
     "id": "1422600906375620",
-    "renew": "wait",
-    "next": "2026-11-11"
-   },
-   {
-    "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
-    "price": 12600,
-    "status": "Active",
-    "listed": "2026-11-03",
-    "id": "1132565479739007",
-    "renew": "wait",
-    "next": "2026-11-11"
+    "renew": "wait"
    },
    {
     "t": "White Foldable Chairs — Pack of 10 (Black Frame)",
@@ -65,7 +63,8 @@
     "status": "Active",
     "listed": "2026-10-31",
     "id": "1754440730022094",
-    "renew": "ready"
+    "renew": "wait",
+    "next": "2026-11-17"
    },
    {
     "t": "White Foldable 8-Seater Set — 8ft Table + 8 Chairs",
@@ -73,7 +72,8 @@
     "status": "Active",
     "listed": "2026-10-31",
     "id": "1497192478922661",
-    "renew": "ready"
+    "renew": "wait",
+    "next": "2026-11-17"
    },
    {
     "t": "White Foldable 4-Seater Set — 4ft Table + 4 Chairs",
@@ -81,7 +81,8 @@
     "status": "Active",
     "listed": "2026-10-31",
     "id": "1129518979434975",
-    "renew": "ready"
+    "renew": "wait",
+    "next": "2026-11-17"
    },
    {
     "t": "White Foldable Chair — Black Frame, Handle Slot",
@@ -89,7 +90,8 @@
     "status": "Active",
     "listed": "2026-10-31",
     "id": "1846863210099572",
-    "renew": "ready"
+    "renew": "wait",
+    "next": "2026-11-17"
    },
    {
     "t": "White Foldable Table — 4-Seater (4ft, Black Frame)",
@@ -97,15 +99,8 @@
     "status": "Active",
     "listed": "2026-10-31",
     "id": "1559432725950945",
-    "renew": "ready"
-   },
-   {
-    "t": "Black Glass Dining Set — 6 High-Back Chairs",
-    "price": 4900,
-    "status": "Active",
-    "listed": "2026-11-08",
-    "id": "4125794831063318",
-    "renew": "wait"
+    "renew": "wait",
+    "next": "2026-11-17"
    }
   ]
  },
@@ -1537,6 +1532,11 @@
    "tried": 1,
    "ok": 1,
    "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile in Facebook, then press the button again."
+  },
+  {
+   "d": "2026-11-11",
+   "kind": "scan",
+   "n": 10
   }
  ],
  "skip": []
