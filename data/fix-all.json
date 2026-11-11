@@ -203,42 +203,14 @@
  },
  "x": {
   "scan": {
-   "d": "2026-11-08",
-   "t": "2026-11-08T13:57:17.875Z",
-   "n": 5,
+   "d": "2026-11-11",
+   "t": "2026-11-11T11:05:59.159Z",
+   "n": 1,
    "posts": [
     {
      "id": "1662447925388099587",
      "url": "https://x.com/FaVisionEnt/status/1662447925388099587",
      "text": "Pls take Note that office is open for walk in purchases and delivery as well. STUDENT DESKS ARE AVAILABLE IN LARGE QUANTITIES!!!",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "2119210010160791919",
-     "url": "https://x.com/FaVisionEnt/status/2119210010160791919",
-     "text": "Student Desk Chair Set: GH₵ 650 (negotiable) per set (GH₵640 each for 50+). WhatsApp 020 747 3267 to order https:// favisionenterprize.github.io/p/FAV-014.html #GhanaiansAbroad #AccraHomes Tell us where you're seeing this ad from, then like, share & follow!",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "2119098176640799180",
-     "url": "https://x.com/FaVisionEnt/status/2119098176640799180",
-     "text": "What's in the box? Mesh Secretary Chair: Mesh back, Padded seat, Arm rests ×2, Gas-lift cylinder & more. GH₵ 4,500. WhatsApp 020 747 3267 https:// favisionenterprize.github.io/p/FAV-017.html Where are you watching this ad from? Like,… #LivingInGhana #InteriorDesignGhana",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "2119098089365815459",
-     "url": "https://x.com/FaVisionEnt/status/2119098089365815459",
-     "text": "What's in the box? Mesh Secretary Chair: Mesh back, Padded seat, Arm rests ×2, Gas-lift cylinder & more. GH₵ 4,500. WhatsApp 020 747 3267 https:// favisionenterprize.github.io/p/FAV-017.html Where are you seeing this post from? Reply, then like,… #Kumasi #AccraFurniture",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "2118816116562678238",
-     "url": "https://x.com/FaVisionEnt/status/2118816116562678238",
-     "text": "Student Desk Chair Set – GH₵ 650 in Ghana #Shorts https:// youtu.be/-24GDGPGyNQ?si =ewWTjHrNVNVE_tOI … via @YouTube",
      "kind": "post",
      "alt": ""
     }
@@ -407,6 +379,13 @@
    "skip": 0,
    "v": "2026-10-15.4",
    "more": 2
+  },
+  {
+   "d": "2026-11-11",
+   "kind": "scan",
+   "net": "x",
+   "n": 1,
+   "v": "2026-10-15.4"
   }
  ]
 }
