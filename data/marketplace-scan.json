@@ -99,6 +99,14 @@
     "id": "2423489881808901",
     "renew": "wait",
     "next": "2026-11-19"
+   },
+   {
+    "t": "Student Desk Chair Set — Senior High to Tertiary Level",
+    "price": 650,
+    "status": "Active",
+    "listed": "2026-11-12",
+    "id": "1179824968317655",
+    "renew": "wait"
    }
   ]
  },
@@ -1281,6 +1289,16 @@
    "ok": true,
    "id": "4636710159921680",
    "verified": true
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:03:37.846Z",
+   "p": "FAV-014",
+   "title": "Student Desk Chair Set — Senior High to Tertiary Level",
+   "price": 650,
+   "ok": true,
+   "id": "1179824968317655",
+   "verified": true
   }
  ],
  "runs": [
@@ -1581,6 +1599,12 @@
    "d": "2026-11-12",
    "kind": "scan",
    "n": 10
+  },
+  {
+   "d": "2026-11-12",
+   "kind": "list",
+   "tried": 1,
+   "ok": 1
   }
  ],
  "skip": []
