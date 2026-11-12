@@ -1362,7 +1362,9 @@
     "status": "waiting"
    },
    "youtube": {
-    "status": "waiting"
+    "status": "failed",
+    "why": "YouTube didn't open the video details",
+    "d": "2026-11-12"
    },
    "tiktok": {
     "status": "waiting"
@@ -1391,7 +1393,9 @@
     "status": "waiting"
    },
    "youtube": {
-    "status": "waiting"
+    "status": "failed",
+    "why": "YouTube didn't open the video details",
+    "d": "2026-11-12"
    },
    "tiktok": {
     "status": "waiting"
