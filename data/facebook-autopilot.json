@@ -12330,6 +12330,14 @@
    "g": "1758101318119665",
    "ok": true,
    "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:04:19.628Z",
+   "p": "FAV-022",
+   "g": "744434304246480",
+   "ok": true,
+   "why": "Waiting for admin approval"
   }
  ],
  "resets": {},
@@ -13812,6 +13820,13 @@
    "kind": "renew",
    "tried": 15,
    "ok": 0
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:05:14.409Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 1
   }
  ],
  "renewLog": [
