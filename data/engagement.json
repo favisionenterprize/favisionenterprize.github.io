@@ -3763,6 +3763,21 @@
    "followers": null,
    "stopped": "No posts found on your X profile.",
    "commenting": false
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:10:45.930Z",
+   "net": "x",
+   "mode": "stats",
+   "posts": 0,
+   "checked": 0,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": null,
+   "stopped": "No posts found on your X profile.",
+   "commenting": true
   }
  ],
  "liked": {}
