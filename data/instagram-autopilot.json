@@ -2979,6 +2979,74 @@
    "p": "FAV-029",
    "ok": false,
    "why": "Caption box didn't open"
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:02:11.969Z",
+   "k": "ad:fav-014-arrived",
+   "p": "FAV-014",
+   "ok": false,
+   "why": "The Create post window didn't open"
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:03:41.403Z",
+   "k": "box:FAV-015",
+   "p": "FAV-015",
+   "ok": true
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:05:45.534Z",
+   "k": "box:FAV-041",
+   "p": "FAV-041",
+   "ok": true
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:06:48.162Z",
+   "k": "box:FAV-010",
+   "p": "FAV-010",
+   "ok": false,
+   "why": "The Create post window didn't open"
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:08:44.068Z",
+   "k": "presence:fav-008",
+   "p": "FAV-008",
+   "ok": true
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:09:52.501Z",
+   "k": "box:FAV-023",
+   "p": "FAV-023",
+   "ok": false,
+   "why": "The Create post window didn't open"
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:11:15.532Z",
+   "k": "card:FAV-020",
+   "p": "FAV-020",
+   "ok": true
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:11:53.128Z",
+   "k": "box:FAV-026",
+   "p": "FAV-026",
+   "ok": false,
+   "why": "The Create post window didn't open"
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:12:25.202Z",
+   "k": "card:FAV-029",
+   "p": "FAV-029",
+   "ok": false,
+   "why": "The Create post window didn't open"
   }
  ],
  "profile": [
@@ -3158,13 +3226,6 @@
   }
  ],
  "runs": [
-  {
-   "d": "2026-10-18",
-   "t": "2026-10-18T01:40:45.818Z",
-   "kind": "ig",
-   "tried": 5,
-   "ok": 2
-  },
   {
    "d": "2026-10-18",
    "t": "2026-10-18T01:47:07.027Z",
@@ -4641,6 +4702,13 @@
    "kind": "ig",
    "tried": 9,
    "ok": 1
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:12:48.867Z",
+   "kind": "ig",
+   "tried": 9,
+   "ok": 4
   }
  ]
 }
