@@ -346,7 +346,7 @@
    },
    "youtube": {
     "status": "failed",
-    "why": "The upload window didn't open",
+    "why": "YouTube didn't open the video details",
     "d": "2026-11-12"
    },
    "audio": {
