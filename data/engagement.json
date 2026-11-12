@@ -243,13 +243,13 @@
   },
   {
    "d": "2026-11-12",
-   "net": "ig",
-   "n": 897
+   "net": "tiktok",
+   "n": 287
   },
   {
    "d": "2026-11-12",
-   "net": "tiktok",
-   "n": 287
+   "net": "ig",
+   "n": 897
   }
  ],
  "posts": {
@@ -3957,6 +3957,21 @@
    "thanked": 0,
    "followers": 287,
    "stopped": "No posts found on your TikTok profile.",
+   "commenting": true
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:39:04.638Z",
+   "net": "ig",
+   "mode": "stats",
+   "posts": 12,
+   "checked": 12,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 897,
+   "stopped": null,
    "commenting": true
   }
  ],
