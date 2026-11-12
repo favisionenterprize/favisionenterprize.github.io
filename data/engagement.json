@@ -235,6 +235,11 @@
    "d": "2026-11-12",
    "net": "x",
    "n": 298
+  },
+  {
+   "d": "2026-11-12",
+   "net": "fb",
+   "n": 562
   }
  ],
  "posts": {
@@ -1592,7 +1597,7 @@
    "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0twLaGqCQa5BexNnJQL8FktLCjvEsaSyKod6JPgkCtzqzmxqvyXF4DqPU3x8UJ3LDl",
    "first": "2026-11-12",
    "commented": [],
-   "title": "Fresh stock, just arrived! 🎒📚 Our new... - F.A Vision Enterprise",
+   "title": "Facebook",
    "checked": "2026-11-12",
    "likes": 146
   },
@@ -1601,7 +1606,7 @@
    "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0XjxccAWL5KV6QJMkvM7TCu1PsheQbHRFXDkKgHCJsJSbLpJBqa7VSfkuhzU5rozul",
    "first": "2026-11-12",
    "commented": [],
-   "title": "Facebook",
+   "title": "(20+) Facebook",
    "checked": "2026-11-12",
    "likes": 9
   }
@@ -3826,6 +3831,21 @@
    "followers": null,
    "stopped": null,
    "commenting": true
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:21:12.794Z",
+   "net": "fb",
+   "mode": "reply",
+   "posts": 3,
+   "checked": 3,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 562,
+   "stopped": null,
+   "commenting": false
   }
  ],
  "liked": {}
