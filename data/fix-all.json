@@ -110,19 +110,20 @@
     "mode": "set"
    },
    "Dd8TbyNiKK8": {
-    "d": "2026-11-08",
+    "d": "2026-11-12",
     "ok": false,
-    "why": "no “Edit” in the post's menu",
+    "why": "already has a caption and hashtags, left as it is",
+    "skip": true,
     "mode": "set"
    },
    "DYk7xGboiMo": {
-    "d": "2026-11-08",
+    "d": "2026-11-12",
     "ok": false,
     "why": "no “More options” button on the post",
     "mode": "set"
    },
    "C1Tge8mgCKR": {
-    "d": "2026-11-08",
+    "d": "2026-11-12",
     "ok": false,
     "why": "no “More options” button on the post",
     "mode": "set"
@@ -197,6 +198,18 @@
     "d": "2026-11-08",
     "ok": false,
     "why": "no “More options” button on the post",
+    "mode": "set"
+   },
+   "DfnvPnwiL1q": {
+    "d": "2026-11-12",
+    "ok": false,
+    "why": "Instagram didn't confirm the save",
+    "mode": "set"
+   },
+   "DfnvOZ4CAdk": {
+    "d": "2026-11-12",
+    "ok": false,
+    "why": "no “Edit” in the post's menu",
     "mode": "set"
    }
   }
@@ -434,6 +447,16 @@
    "skip": 5,
    "v": "2026-10-15.4",
    "more": 5
+  },
+  {
+   "d": "2026-11-12",
+   "kind": "fxfix",
+   "net": "ig",
+   "tried": 5,
+   "ok": 0,
+   "skip": 1,
+   "v": "2026-10-15.4",
+   "more": 7
   }
  ]
 }
