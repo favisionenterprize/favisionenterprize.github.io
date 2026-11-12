@@ -3047,6 +3047,68 @@
    "p": "FAV-029",
    "ok": false,
    "why": "The Create post window didn't open"
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:05:52.608Z",
+   "k": "ad:fav-014-arrived",
+   "p": "FAV-014",
+   "ok": false,
+   "why": "The Create post window didn't open"
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:06:36.939Z",
+   "k": "box:FAV-001",
+   "p": "FAV-001",
+   "ok": false,
+   "why": "The Create post window didn't open"
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:07:20.447Z",
+   "k": "presence:fav-006",
+   "p": "FAV-006",
+   "ok": false,
+   "why": "The Create post window didn't open"
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:08:17.524Z",
+   "k": "card:FAV-023",
+   "p": "FAV-023",
+   "ok": false,
+   "why": "The Create post window didn't open"
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:10:22.004Z",
+   "k": "card:FAV-015",
+   "p": "FAV-015",
+   "ok": false,
+   "why": "The Create post window didn't open"
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:13:09.491Z",
+   "k": "box:FAV-009",
+   "p": "FAV-009",
+   "ok": false,
+   "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:14:05.885Z",
+   "k": "box:FAV-021",
+   "p": "FAV-021",
+   "ok": true
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:15:00.584Z",
+   "k": "box:FAV-027",
+   "p": "FAV-027",
+   "ok": true
   }
  ],
  "profile": [
@@ -3222,17 +3284,10 @@
    "d": "2026-11-12",
    "followers": 897,
    "following": 2027,
-   "posts": 490
+   "posts": 492
   }
  ],
  "runs": [
-  {
-   "d": "2026-10-18",
-   "t": "2026-10-18T01:47:07.027Z",
-   "kind": "ig",
-   "tried": 5,
-   "ok": 3
-  },
   {
    "d": "2026-10-18",
    "t": "2026-10-18T01:48:12.216Z",
@@ -4709,6 +4764,13 @@
    "kind": "ig",
    "tried": 9,
    "ok": 4
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:15:24.338Z",
+   "kind": "ig",
+   "tried": 8,
+   "ok": 2
   }
  ]
 }
