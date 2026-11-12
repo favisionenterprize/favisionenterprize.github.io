@@ -2908,6 +2908,77 @@
    "p": "FAV-030",
    "ok": false,
    "why": "Instagram didn't confirm the post"
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-11T23:58:41.548Z",
+   "k": "ad:fav-014-arrived",
+   "p": "FAV-014",
+   "ok": false,
+   "why": "The Create post window didn't open"
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:00:05.188Z",
+   "k": "box:FAV-015",
+   "p": "FAV-015",
+   "ok": false,
+   "why": "The Create post window didn't open"
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:03:17.298Z",
+   "k": "box:FAV-041",
+   "p": "FAV-041",
+   "ok": true
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:04:59.620Z",
+   "k": "box:FAV-010",
+   "p": "FAV-010",
+   "ok": false,
+   "why": "Caption box didn't open"
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:06:00.208Z",
+   "k": "presence:fav-008",
+   "p": "FAV-008",
+   "ok": false,
+   "why": "The Create post window didn't open"
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:06:52.324Z",
+   "k": "box:FAV-023",
+   "p": "FAV-023",
+   "ok": false,
+   "why": "The Create post window didn't open"
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:07:30.464Z",
+   "k": "card:FAV-020",
+   "p": "FAV-020",
+   "ok": false,
+   "why": "The Create post window didn't open"
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:08:13.406Z",
+   "k": "box:FAV-026",
+   "p": "FAV-026",
+   "ok": false,
+   "why": "The Create post window didn't open"
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:10:21.140Z",
+   "k": "card:FAV-029",
+   "p": "FAV-029",
+   "ok": false,
+   "why": "Caption box didn't open"
   }
  ],
  "profile": [
@@ -3078,16 +3149,15 @@
    "followers": 895,
    "following": 2027,
    "posts": 473
+  },
+  {
+   "d": "2026-11-12",
+   "followers": 897,
+   "following": 2027,
+   "posts": 490
   }
  ],
  "runs": [
-  {
-   "d": "2026-10-18",
-   "t": "2026-10-18T01:21:01.871Z",
-   "kind": "ig",
-   "tried": 10,
-   "ok": 5
-  },
   {
    "d": "2026-10-18",
    "t": "2026-10-18T01:40:45.818Z",
@@ -4564,6 +4634,13 @@
    "tried": 0,
    "ok": 0,
    "stopped": "Instagram is logged in to a different account. Switch to @favisionent, then tap Run again."
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:10:59.712Z",
+   "kind": "ig",
+   "tried": 9,
+   "ok": 1
   }
  ]
 }
