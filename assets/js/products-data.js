@@ -1912,6 +1912,13 @@ window.FAV_DATA = {
           "price": 650,
           "checked": "2026-10-31",
           "synced": "2026-10-31"
+        },
+        {
+          "id": "1179824968317655",
+          "title": "Student Desk Chair Set — Senior High to Tertiary Level",
+          "price": 650,
+          "checked": "2026-11-12",
+          "synced": "2026-11-12"
         }
       ],
       "tiktok": 1,
