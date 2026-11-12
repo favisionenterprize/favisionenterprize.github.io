@@ -103,6 +103,27 @@
     "id": "1559432725950945",
     "renew": "wait",
     "next": "2026-11-18"
+   },
+   {
+    "t": "Dining Set Collection — 5 Designs, 6 Chairs",
+    "price": 12600,
+    "status": "Active",
+    "listed": "2026-11-12",
+    "renew": "wait"
+   },
+   {
+    "t": "Red Glass Dining Set — 6 Chairs",
+    "price": 12600,
+    "status": "Active",
+    "listed": "2026-11-12",
+    "renew": "wait"
+   },
+   {
+    "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
+    "price": 11900,
+    "status": "Active",
+    "listed": "2026-11-12",
+    "renew": "wait"
    }
   ]
  },
@@ -1295,6 +1316,33 @@
    "ok": true,
    "id": "1179824968317655",
    "verified": true
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:07:19.923Z",
+   "p": "FAV-003",
+   "title": "Dining Set Collection — 5 Designs, 6 Chairs",
+   "price": 12600,
+   "ok": true,
+   "verified": true
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:10:04.292Z",
+   "p": "FAV-004",
+   "title": "Red Glass Dining Set — 6 Chairs",
+   "price": 12600,
+   "ok": true,
+   "verified": true
+  },
+  {
+   "d": "2026-11-12",
+   "t": "2026-11-12T00:11:57.061Z",
+   "p": "FAV-005",
+   "title": "Foldable Wood-Grain Dining Set — 6 Chairs",
+   "price": 11900,
+   "ok": true,
+   "verified": true
   }
  ],
  "runs": [
@@ -1606,6 +1654,12 @@
    "d": "2026-11-12",
    "kind": "scan",
    "n": 10
+  },
+  {
+   "d": "2026-11-12",
+   "kind": "list",
+   "tried": 3,
+   "ok": 3
   }
  ],
  "skip": []
