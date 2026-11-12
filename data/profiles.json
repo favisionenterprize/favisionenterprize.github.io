@@ -28,10 +28,10 @@
    "mode": "check"
   },
   "fb": {
-   "d": "2026-11-11",
-   "link": "favisionenterprize.github.io",
+   "d": "2026-11-12",
+   "link": null,
    "pinned": null,
-   "linkOk": true,
+   "linkOk": false,
    "pinOk": false,
    "why": "",
    "mode": "check"
@@ -479,6 +479,13 @@
   {
    "d": "2026-11-12",
    "net": "x",
+   "mode": "check",
+   "linkOk": false,
+   "pinOk": false
+  },
+  {
+   "d": "2026-11-12",
+   "net": "fb",
    "mode": "check",
    "linkOk": false,
    "pinOk": false
