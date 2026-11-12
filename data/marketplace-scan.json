@@ -11,56 +11,60 @@
  },
  "scan": {
   "d": "2026-11-12",
-  "t": "2026-11-12T00:02:10.102Z",
+  "t": "2026-11-12T00:07:24.783Z",
   "n": 10,
   "listings": [
+   {
+    "t": "Student Desk Chair Set — Senior High to Tertiary Level",
+    "price": 650,
+    "status": "Active",
+    "listed": "2026-11-12",
+    "id": "1179824968317655",
+    "renew": "wait",
+    "next": "2026-11-19"
+   },
    {
     "t": "White Dressing Table with Mirror & Stool",
     "price": 7450,
     "status": "Active",
     "listed": "2026-11-11",
-    "renew": "none"
+    "id": "2423489881808901",
+    "renew": "wait",
+    "next": "2026-11-19"
    },
    {
     "t": "1.2 m Office Desk with Drawer Unit",
     "price": 4500,
     "status": "Active",
     "listed": "2026-11-11",
-    "renew": "none"
+    "id": "4636710159921680",
+    "renew": "wait",
+    "next": "2026-11-19"
    },
    {
     "t": "Mesh Secretary Chair — Ergonomic Swivel",
     "price": 9500,
     "status": "Active",
     "listed": "2026-11-11",
-    "id": "2423489881808901",
+    "id": "3616758121808507",
     "renew": "wait",
-    "next": "2026-11-18"
+    "next": "2026-11-19"
    },
    {
     "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
     "price": 12600,
     "status": "Active",
     "listed": "2026-11-11",
-    "id": "2423489881808901",
+    "id": "1422706476512965",
     "renew": "wait",
-    "next": "2026-11-18"
-   },
-   {
-    "t": "Black Glass Dining Set — 6 High-Back Chairs",
-    "price": 4900,
-    "status": "Active",
-    "listed": "2026-11-08",
-    "id": "2423489881808901",
-    "renew": "wait",
-    "next": "2026-11-18"
+    "next": "2026-11-19"
    },
    {
     "t": "White Foldable Chairs — Pack of 10 (Black Frame)",
     "price": 2425,
     "status": "Active",
     "listed": "2026-10-31",
-    "id": "2423489881808901",
+    "id": "1754440730022094",
     "renew": "wait",
     "next": "2026-11-18"
    },
@@ -69,44 +73,36 @@
     "price": 3160,
     "status": "Active",
     "listed": "2026-10-31",
-    "id": "2423489881808901",
+    "id": "1497192478922661",
     "renew": "wait",
-    "next": "2026-11-19"
+    "next": "2026-11-18"
    },
    {
     "t": "White Foldable 4-Seater Set — 4ft Table + 4 Chairs",
     "price": 1650,
     "status": "Active",
     "listed": "2026-10-31",
-    "id": "2423489881808901",
+    "id": "1129518979434975",
     "renew": "wait",
-    "next": "2026-11-19"
+    "next": "2026-11-18"
    },
    {
     "t": "White Foldable Chair — Black Frame, Handle Slot",
     "price": 250,
     "status": "Active",
     "listed": "2026-10-31",
-    "id": "2423489881808901",
+    "id": "1846863210099572",
     "renew": "wait",
-    "next": "2026-11-19"
+    "next": "2026-11-18"
    },
    {
     "t": "White Foldable Table — 4-Seater (4ft, Black Frame)",
     "price": 670,
     "status": "Active",
     "listed": "2026-10-31",
-    "id": "2423489881808901",
+    "id": "1559432725950945",
     "renew": "wait",
-    "next": "2026-11-19"
-   },
-   {
-    "t": "Student Desk Chair Set — Senior High to Tertiary Level",
-    "price": 650,
-    "status": "Active",
-    "listed": "2026-11-12",
-    "id": "1179824968317655",
-    "renew": "wait"
+    "next": "2026-11-18"
    }
   ]
  },
@@ -1605,6 +1601,11 @@
    "kind": "list",
    "tried": 1,
    "ok": 1
+  },
+  {
+   "d": "2026-11-12",
+   "kind": "scan",
+   "n": 10
   }
  ],
  "skip": []
