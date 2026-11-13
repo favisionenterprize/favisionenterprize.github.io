@@ -1,6 +1,6 @@
 {
- "d": "2026-11-12",
- "t": "2026-11-12T00:06:59.788Z",
+ "d": "2026-11-13",
+ "t": "2026-11-13T16:13:28.146Z",
  "settings": {
   "artists_first": true,
   "artists": [
@@ -1607,18 +1607,6 @@
  "notes": [
   {
    "d": "2026-11-06",
-   "text": "couldn't confirm the Ghana region on Creative Center"
-  },
-  {
-   "d": "2026-11-06",
-   "text": "no 'Approved for business use' filter seen: check the sounds are in TikTok's Commercial Music Library"
-  },
-  {
-   "d": "2026-11-06",
-   "text": "couldn't read the Creative Center song list"
-  },
-  {
-   "d": "2026-11-06",
    "text": "no Instagram audio seen on Reels"
   },
   {
@@ -1827,6 +1815,18 @@
    "d": "2026-11-13",
    "platform": "tiktok",
    "text": "1 post went out without a sound"
+  },
+  {
+   "d": "2026-11-13",
+   "text": "no 'Approved for business use' filter seen: check the sounds are in TikTok's Commercial Music Library"
+  },
+  {
+   "d": "2026-11-13",
+   "text": "couldn't read the Creative Center song list"
+  },
+  {
+   "d": "2026-11-13",
+   "text": "no Instagram audio seen on Reels"
   }
  ]
 }
