@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-12T09:43:52Z",
+ "generated": "2026-11-13T09:26:41Z",
  "mode": "full",
  "score": 80,
  "prev_score": 80,
@@ -1245,7 +1245,7 @@
       "kb": 302,
       "requests": 48,
       "img_no_alt": 0,
-      "secs": 0.1,
+      "secs": 0.3,
       "keywords": []
      },
      {
@@ -1266,7 +1266,7 @@
       "kb": 282,
       "requests": 48,
       "img_no_alt": 0,
-      "secs": 0.2,
+      "secs": 0.4,
       "keywords": []
      },
      {
@@ -1287,7 +1287,7 @@
       "kb": 191,
       "requests": 5,
       "img_no_alt": 2,
-      "secs": 0.2,
+      "secs": 0.4,
       "keywords": []
      },
      {
@@ -1308,7 +1308,7 @@
       "kb": 193,
       "requests": 6,
       "img_no_alt": 3,
-      "secs": 0.2,
+      "secs": 0.3,
       "keywords": []
      }
     ],
@@ -1388,7 +1388,7 @@
       "kb": 133,
       "requests": 120,
       "img_no_alt": 1,
-      "secs": 0.6,
+      "secs": 1.2,
       "keywords": []
      },
      {
@@ -1409,7 +1409,7 @@
       "kb": 163,
       "requests": 128,
       "img_no_alt": 1,
-      "secs": 0.5,
+      "secs": 0.4,
       "keywords": []
      },
      {
@@ -1434,7 +1434,7 @@
       "keywords": []
      },
      {
-      "url": "https://furniturecityghana.com/product/sofas-44/",
+      "url": "https://furniturecityghana.com/product/sofas-70/",
       "title": true,
       "title_len": 28,
       "description": false,
@@ -1492,7 +1492,7 @@
       "kb": 366,
       "requests": 129,
       "img_no_alt": 26,
-      "secs": 0.3,
+      "secs": 0.2,
       "keywords": []
      }
     ],
@@ -1522,7 +1522,7 @@
       "kb": 0,
       "requests": 1,
       "img_no_alt": 0,
-      "secs": 1.0,
+      "secs": 1.6,
       "keywords": []
      }
     ],
@@ -1781,6 +1781,11 @@
   },
   {
    "d": "2026-11-12",
+   "score": 80,
+   "ai": 0
+  },
+  {
+   "d": "2026-11-13",
    "score": 80,
    "ai": 0
   }
