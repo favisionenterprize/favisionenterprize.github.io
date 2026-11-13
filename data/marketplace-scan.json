@@ -10,16 +10,43 @@
   "photos": 8
  },
  "scan": {
-  "d": "2026-11-12",
-  "t": "2026-11-12T00:07:24.783Z",
+  "d": "2026-11-13",
+  "t": "2026-11-13T16:10:51.153Z",
   "n": 10,
   "listings": [
+   {
+    "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
+    "price": 11900,
+    "status": "Active",
+    "listed": "2026-11-12",
+    "id": "1482040917140749",
+    "renew": "wait",
+    "next": "2026-11-19"
+   },
+   {
+    "t": "Red Glass Dining Set — 6 Chairs",
+    "price": 12600,
+    "status": "Active",
+    "listed": "2026-11-12",
+    "id": "2323514301839225",
+    "renew": "wait",
+    "next": "2026-11-19"
+   },
+   {
+    "t": "Dining Set Collection — 5 Designs, 6 Chairs",
+    "price": 12600,
+    "status": "Active",
+    "listed": "2026-11-12",
+    "id": "1482040917140749",
+    "renew": "wait",
+    "next": "2026-11-19"
+   },
    {
     "t": "Student Desk Chair Set — Senior High to Tertiary Level",
     "price": 650,
     "status": "Active",
     "listed": "2026-11-12",
-    "id": "1179824968317655",
+    "id": "1497706559085588",
     "renew": "wait",
     "next": "2026-11-19"
    },
@@ -28,34 +55,7 @@
     "price": 7450,
     "status": "Active",
     "listed": "2026-11-11",
-    "id": "2423489881808901",
-    "renew": "wait",
-    "next": "2026-11-19"
-   },
-   {
-    "t": "1.2 m Office Desk with Drawer Unit",
-    "price": 4500,
-    "status": "Active",
-    "listed": "2026-11-11",
-    "id": "4636710159921680",
-    "renew": "wait",
-    "next": "2026-11-19"
-   },
-   {
-    "t": "Mesh Secretary Chair — Ergonomic Swivel",
-    "price": 9500,
-    "status": "Active",
-    "listed": "2026-11-11",
-    "id": "3616758121808507",
-    "renew": "wait",
-    "next": "2026-11-19"
-   },
-   {
-    "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
-    "price": 12600,
-    "status": "Active",
-    "listed": "2026-11-11",
-    "id": "1422706476512965",
+    "id": "1179824968317655",
     "renew": "wait",
     "next": "2026-11-19"
    },
@@ -64,7 +64,7 @@
     "price": 2425,
     "status": "Active",
     "listed": "2026-10-31",
-    "id": "1754440730022094",
+    "id": "2423489881808901",
     "renew": "wait",
     "next": "2026-11-18"
    },
@@ -73,56 +73,31 @@
     "price": 3160,
     "status": "Active",
     "listed": "2026-10-31",
-    "id": "1497192478922661",
-    "renew": "wait",
-    "next": "2026-11-18"
+    "id": "1132565479739007",
+    "renew": "wait"
    },
    {
     "t": "White Foldable 4-Seater Set — 4ft Table + 4 Chairs",
     "price": 1650,
     "status": "Active",
     "listed": "2026-10-31",
-    "id": "1129518979434975",
-    "renew": "wait",
-    "next": "2026-11-18"
+    "id": "1132565479739007",
+    "renew": "wait"
    },
    {
     "t": "White Foldable Chair — Black Frame, Handle Slot",
     "price": 250,
     "status": "Active",
     "listed": "2026-10-31",
-    "id": "1846863210099572",
-    "renew": "wait",
-    "next": "2026-11-18"
+    "id": "1132565479739007",
+    "renew": "wait"
    },
    {
     "t": "White Foldable Table — 4-Seater (4ft, Black Frame)",
     "price": 670,
     "status": "Active",
     "listed": "2026-10-31",
-    "id": "1559432725950945",
-    "renew": "wait",
-    "next": "2026-11-18"
-   },
-   {
-    "t": "Dining Set Collection — 5 Designs, 6 Chairs",
-    "price": 12600,
-    "status": "Active",
-    "listed": "2026-11-12",
-    "renew": "wait"
-   },
-   {
-    "t": "Red Glass Dining Set — 6 Chairs",
-    "price": 12600,
-    "status": "Active",
-    "listed": "2026-11-12",
-    "renew": "wait"
-   },
-   {
-    "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
-    "price": 11900,
-    "status": "Active",
-    "listed": "2026-11-12",
+    "id": "1132565479739007",
     "renew": "wait"
    }
   ]
@@ -1660,6 +1635,11 @@
    "kind": "list",
    "tried": 3,
    "ok": 3
+  },
+  {
+   "d": "2026-11-13",
+   "kind": "scan",
+   "n": 10
   }
  ],
  "skip": []
