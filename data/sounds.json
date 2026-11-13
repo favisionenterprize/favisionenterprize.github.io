@@ -1578,13 +1578,33 @@
    "t": "2026-11-12T00:26:10.013Z",
    "fav": "Hillsong Worship",
    "found": true
+  },
+  {
+   "name": "Davido & Mayorkun & FOLA",
+   "platform": "tiktok",
+   "d": "2026-11-13",
+   "t": "2026-11-13T15:27:04.596Z",
+   "fav": "Davido",
+   "found": true
+  },
+  {
+   "name": "KOJO BLAK",
+   "platform": "tiktok",
+   "d": "2026-11-13",
+   "t": "2026-11-13T15:27:04.596Z",
+   "fav": "Kojo Blak",
+   "found": true
+  },
+  {
+   "name": "Davido",
+   "platform": "tiktok",
+   "d": "2026-11-13",
+   "t": "2026-11-13T15:27:04.596Z",
+   "fav": "Davido",
+   "found": true
   }
  ],
  "notes": [
-  {
-   "d": "2026-11-06",
-   "text": "no Instagram audio seen on Reels"
-  },
   {
    "d": "2026-11-06",
    "text": "couldn't confirm the Ghana region on Creative Center"
@@ -1802,6 +1822,11 @@
   {
    "d": "2026-11-12",
    "text": "no Instagram audio seen on Reels"
+  },
+  {
+   "d": "2026-11-13",
+   "platform": "tiktok",
+   "text": "1 post went out without a sound"
   }
  ]
 }
