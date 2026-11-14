@@ -534,6 +534,93 @@ async function autopilot(browser, day) {
   return { tabs: res.tabs, problems: [...problems, ...res.problems] };
 }
 
+async function inboxAutomations(browser) {
+  const page = await browser.newPage({ viewport: { width: 390, height: 900 } });
+  const problems = [];
+  page.on("pageerror", e => problems.push("page error: " + e.message));
+  const html = fs.readFileSync(ROOT + "admin/index.html", "utf8").replace(/<script[\s\S]*?<\/script>/g, "");
+  await page.route("http://smoke.test/admin/", r => r.fulfill({ status: 200, contentType: "text/html", body: html }));
+  await page.goto("http://smoke.test/admin/");
+  await page.evaluate(() => {
+    window.__aiRequests = [];
+    window.__savedAutomation = null;
+    window.FAV_ADMIN = {
+      readJsonFile: async () => ({ version: 1, automations: [] }),
+      saveJson: async (_path, mutate) => {
+        window.__savedAutomation = await mutate({ version: 1, automations: [] });
+        return { ok: true };
+      },
+      backendSigned: async payload => {
+        window.__aiRequests.push(payload);
+        return { ok: true, text: "Thanks for contacting F.A Vision Enterprise. What product do you need?" };
+      }
+    };
+  });
+  await page.addScriptTag({ content: fs.readFileSync(ROOT + "admin/inboxauto.js", "utf8") });
+  await page.evaluate(() => document.querySelector("[data-inboxauto]").click());
+  await page.waitForFunction(() => document.querySelectorAll("#inboxauto-list article").length === 8);
+  const autoDrafted = await page.evaluate(() => window.__aiRequests.length);
+  await page.click('[data-inbox-generate="welcome"]');
+  await page.waitForFunction(() => {
+    const box = document.querySelector('[data-inbox-message="welcome"]');
+    return box && box.value.includes("Thanks for contacting");
+  });
+  await page.click('[data-inbox-configured="welcome"]');
+  await page.click("#inboxauto-save");
+  await page.waitForFunction(() => document.querySelector("#inboxauto-status").textContent.includes("Setup drafts saved"));
+  const state = await page.evaluate(() => ({
+    requests: window.__aiRequests,
+    saved: window.__savedAutomation,
+    notice: document.querySelector("#screen-inboxauto .note").textContent
+  }));
+  if (autoDrafted !== 0) problems.push("Opening the screen unexpectedly called AI");
+  if (state.requests.length !== 1 || state.requests[0].action !== "muse") problems.push("Draft generation did not use the mocked Muse endpoint");
+  const welcome = state.saved && state.saved.automations && state.saved.automations.find(item => item.id === "welcome");
+  if (!welcome || !welcome.metaConfigured || !welcome.message.includes("Thanks for contacting")) problems.push("The reviewed draft and self-reported Meta setup marker were not saved");
+  if (!/does not connect to Meta inbox events/.test(state.notice)) problems.push("The screen does not disclose that Meta inbox automation is not connected");
+  await page.close();
+  return { cards: 8, problems };
+}
+
+async function agentWorkbench(browser) {
+  const page = await browser.newPage({ viewport: { width: 390, height: 900 } });
+  const problems = [];
+  page.on("pageerror", e => problems.push("page error: " + e.message));
+  const html = fs.readFileSync(ROOT + "admin/index.html", "utf8").replace(/<script[\s\S]*?<\/script>/g, "");
+  await page.route("http://smoke.test/admin/", r => r.fulfill({ status: 200, contentType: "text/html", body: html }));
+  await page.goto("http://smoke.test/admin/");
+  await page.evaluate(() => {
+    window.__agentRequests = [];
+    window.FAV_ADMIN = {
+      backendSigned: async payload => {
+        window.__agentRequests.push(payload);
+        return { ok: true, text: "<img src=x onerror=alert(1)> draft only" };
+      }
+    };
+  });
+  await page.addScriptTag({ content: fs.readFileSync(ROOT + "admin/agent.js", "utf8") });
+  await page.evaluate(() => document.querySelector("[data-agent]").click());
+  await page.waitForFunction(() => document.querySelectorAll("#agent-skills [data-agent-skill]").length === 3);
+  if (await page.evaluate(() => window.__agentRequests.length)) problems.push("Opening the workbench unexpectedly called AI");
+  await page.click('[data-agent-skill="customer-reply"]');
+  await page.fill("#agent-prompt", "Draft a short, polite answer.");
+  await page.click("#agent-run");
+  await page.waitForFunction(() => document.querySelector("#agent-output").textContent.includes("draft only"));
+  const result = await page.evaluate(() => ({
+    requests: window.__agentRequests,
+    output: document.querySelector("#agent-output").textContent,
+    injected: !!document.querySelector("#agent-output img"),
+    disclosure: document.querySelector("#screen-agent .note").textContent,
+    links: [...document.querySelectorAll("#screen-agent a")].map(link => link.href)
+  }));
+  if (result.requests.length !== 1 || result.requests[0].action !== "muse" || result.requests[0].mode !== "assistant") problems.push("The workbench did not use the mocked FA Vision AI assistant");
+  if (result.injected || !result.output.includes("<img")) problems.push("AI output was not rendered as safe text");
+  if (!/does not run a local model/.test(result.disclosure)) problems.push("The workbench does not disclose that it is not a local model");
+  if (!result.links.some(link => link.includes("github.com/open-jarvis/OpenJarvis"))) problems.push("The official OpenJarvis project link is missing");
+  await page.close();
+  return { skills: 3, problems };
+}
+
 async function leads(browser) {
   const page = await browser.newPage({ viewport: { width: 390, height: 900 } });
   const problems = [];
@@ -1187,6 +1274,8 @@ async function aiplan(browser, shot) {
   if (r1.m1.status !== "retired" || r1.m1.task !== "Post on all socials (test edit)") problems.push("rule edit didn't save: " + JSON.stringify(r1.m1));
   if (r1.ig !== false) problems.push("retired M1 still lets the Instagram step run");
   if (r1.renew !== true) problems.push("retiring M1 stopped renewals (M2) too");
+  await page.selectOption('.ap-rule[data-rid="M1"] select[data-f="status"]', "approved");
+  await page.click("[data-ap-save]"); await page.waitForTimeout(200);
   // Needs approval asks once per run.
   await page.selectOption('.ap-rule[data-rid="M2"] select[data-f="setting"]', "approve");
   await page.click("[data-ap-save]"); await page.waitForTimeout(200);
@@ -1206,9 +1295,15 @@ async function aiplan(browser, shot) {
     document.querySelector("[data-ap-hr-run]").click();
     return { card: !!document.querySelector("#ap-hourly"), steps, runs: window.__runs.slice() };
   });
+  const expectedHourlySteps = ["ig", "x", "tiktok"].flatMap(net => {
+    const count = Math.min(4, Number(plan.hourly.per_hour[net]) || 0);
+    return count > 0 ? [`hr:${net}:${count}`] : [];
+  });
+  if (plan.hourly.desk.on && plan.hourly.desk.product)
+    expectedHourlySteps.push(`desk:${plan.hourly.desk.product}:${Math.min(20, Number(plan.hourly.desk.groups) || 10)}`);
   if (!hr.card) problems.push("Hourly posting card missing");
-  if (JSON.stringify(hr.steps) !== JSON.stringify(["hr:ig:1", "hr:x:2", "hr:tiktok:1", "desk:FAV-014:10"])) problems.push("hourly steps wrong: " + JSON.stringify(hr.steps));
-  if (hr.runs.length !== 1 || hr.runs[0][hr.runs[0].length - 1] !== "report" || !hr.runs[0].includes("desk:FAV-014:10")) problems.push("Run this hour now didn't start the steps: " + JSON.stringify(hr.runs));
+  if (JSON.stringify(hr.steps) !== JSON.stringify(expectedHourlySteps)) problems.push("hourly steps wrong: " + JSON.stringify(hr.steps));
+  if (hr.runs.length !== 1 || JSON.stringify(hr.runs[0]) !== JSON.stringify(expectedHourlySteps.concat("report"))) problems.push("Run this hour now didn't start the expected steps: " + JSON.stringify(hr.runs));
   await page.fill('#ap-hourly input[name="x"]', "9"); await page.fill('#ap-hourly input[name="desk_groups"]', "50");
   await page.click("[data-ap-hr-save]"); await page.waitForTimeout(200);
   const hs = await page.evaluate(() => window.__disk().hourly);
@@ -1513,6 +1608,12 @@ async function sales(browser) {
   const l = await leads(browser);
   if (l.problems.length) { failed++; console.log("✗ Leads"); l.problems.forEach(p => console.log("    " + p)); }
   else console.log(`✓ Leads: ${l.leads} leads drawn`);
+  const ia = await inboxAutomations(browser);
+  if (ia.problems.length) { failed++; console.log("✗ Inbox automations"); ia.problems.forEach(p => console.log("    " + p)); }
+  else console.log(`✓ Inbox automations: ${ia.cards} safe setup drafts`);
+  const aw = await agentWorkbench(browser);
+  if (aw.problems.length) { failed++; console.log("✗ AI Agent & Skills"); aw.problems.forEach(p => console.log("    " + p)); }
+  else console.log(`✓ AI Agent & Skills: ${aw.skills} reusable prompts and safe draft flow`);
   const c = await catalog(browser);
   if (c.problems.length) { failed++; console.log("✗ Facebook catalog"); c.problems.forEach(p => console.log("    " + p)); }
   else console.log(`✓ Facebook catalog: ${c.rows} products, price edit saves`);

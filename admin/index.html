@@ -137,6 +137,8 @@
         <a class="btn btn-ghost" href="artifacts/" target="_blank" rel="noopener">🧰 Artifacts</a>
         <button class="btn btn-ghost" data-boxads>📦 What's in the Box ads</button>
         <button class="btn btn-ghost" data-leads>📥 Leads <span class="ps-badge" id="leads-badge" hidden></span></button>
+        <button class="btn btn-ghost" data-inboxauto>💬 Inbox automations</button>
+        <button class="btn btn-ghost" data-agent>🧠 AI Agent &amp; Skills</button>
         <button class="btn btn-ghost" data-trendvideo>🎬 Trend video</button>
         <button class="btn btn-ghost" data-fbauto>Social autopilot <span class="ps-badge" id="fa-badge" hidden></span></button>
         <button class="btn btn-ghost" data-seek>🔎 Seek <span class="ps-badge" id="seek-badge" hidden></span></button>
@@ -218,6 +220,81 @@
       </div>
     </div>
     <div id="leads-body"></div>
+  </main>
+  <main class="screen" id="screen-inboxauto" hidden>
+    <div class="dash-head">
+      <div>
+        <h1>Inbox automations</h1>
+        <p class="muted">Prepare AI-assisted message drafts for Meta Business Suite. Review and activate each automation there.</p>
+      </div>
+      <div class="dash-head-actions">
+        <button class="btn btn-ghost btn-sm" data-go="dash">← My products</button>
+        <button class="btn btn-ghost btn-sm" id="inboxauto-open-meta">Open Meta automations ↗</button>
+      </div>
+    </div>
+    <div class="note">
+      This setup assistant does not connect to Meta inbox events, send messages, or switch Meta automations on/off. It sends only the generic setup prompt to FA Vision AI. Saved drafts contain no customer conversations and are stored in the public site repository. Confirm all details before copying; business hours are not prefilled because they are unverified.
+    </div>
+    <div id="inboxauto-status" class="note" role="status" aria-live="polite"></div>
+    <div id="inboxauto-list"></div>
+    <section class="card" style="margin:12px 0">
+      <h2>Create automation setup</h2>
+      <form id="inboxauto-create">
+        <label>Name <input id="inboxauto-name" maxlength="80" required placeholder="e.g. Bulk order enquiry"></label>
+        <label>Goal
+          <select id="inboxauto-goal">
+            <option>Create activity</option>
+            <option>Greet people</option>
+            <option>Share information</option>
+          </select>
+        </label>
+        <label>What should it do? <textarea id="inboxauto-guidance" rows="2" maxlength="500" required placeholder="Describe the question this automation should handle."></textarea></label>
+        <div class="row">
+          <label><input type="checkbox" name="inboxauto-channel" value="Messenger" checked> Messenger</label>
+          <label><input type="checkbox" name="inboxauto-channel" value="Instagram"> Instagram</label>
+          <label><input type="checkbox" name="inboxauto-channel" value="WhatsApp"> WhatsApp</label>
+          <button class="btn btn-ghost" type="submit">Create setup</button>
+          <button class="btn" id="inboxauto-save" type="button">Save setup drafts</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <main class="screen" id="screen-agent" hidden>
+    <div class="dash-head">
+      <div>
+        <h1>🧠 AI Agent &amp; Skills</h1>
+        <p class="muted">Reusable, approval-first AI helpers for everyday F.A Vision work.</p>
+      </div>
+      <div class="dash-head-actions">
+        <button class="btn btn-ghost btn-sm" data-go="dash">← My products</button>
+      </div>
+    </div>
+    <div class="note">
+      OpenJarvis-inspired, not an OpenJarvis connection. This workbench sends the selected prompt and your added text to the configured FA Vision AI backend; it does not run a local model, execute tools, publish content, or change records. Do not include customer or other sensitive information. Review every draft before using it.
+    </div>
+    <section class="card" style="margin:12px 0">
+      <h2>Choose a skill, then review the prompt</h2>
+      <div id="agent-skills" class="row"></div>
+      <form id="agent-form">
+        <label for="agent-prompt">Prompt <textarea id="agent-prompt" rows="5" maxlength="3000" required placeholder="Choose a skill or enter a general business question."></textarea></label>
+        <div class="row">
+          <button class="btn btn-primary" id="agent-run" type="submit">Run with FA Vision AI</button>
+          <button class="btn btn-ghost" id="agent-clear" type="button">Clear</button>
+        </div>
+      </form>
+      <div id="agent-output" class="note" role="status" aria-live="polite" style="white-space:pre-wrap"></div>
+    </section>
+    <section class="card" style="margin:12px 0">
+      <h2>Optional: run OpenJarvis locally</h2>
+      <p class="muted">OpenJarvis is a separate local-first AI framework. Install and start it on this device yourself; its quick start serves a browser app at localhost:5173. This admin page does not install it or send data to it.</p>
+      <div class="row">
+        <a class="btn btn-ghost" href="https://github.com/open-jarvis/OpenJarvis" target="_blank" rel="noopener">OpenJarvis on GitHub ↗</a>
+        <a class="btn btn-ghost" href="https://open-jarvis.github.io/OpenJarvis/getting-started/quickstart/" target="_blank" rel="noopener">Quick start ↗</a>
+        <a class="btn btn-ghost" href="https://open-jarvis.github.io/OpenJarvis/user-guide/skills/" target="_blank" rel="noopener">Skills guide ↗</a>
+        <a class="btn btn-ghost" href="http://localhost:5173" target="_blank" rel="noopener">Open local OpenJarvis</a>
+      </div>
+    </section>
   </main>
 
   <!-- ============ FACEBOOK CATALOG (product tags, Shop) ============ -->
@@ -487,6 +564,8 @@
   <script src="sales.js?v=1"></script>
   <script src="openitems.js?v=1"></script>
   <script src="prime.js?v=1"></script>
+  <script src="inboxauto.js?v=1"></script>
+  <script src="agent.js?v=1"></script>
   <script src="../assets/js/invoice.js"></script>
   <script src="invoices.js"></script>
 </body>
