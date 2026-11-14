@@ -491,10 +491,87 @@ async function run(browser, job, startUrl, setup, skip) {
   return { out, state, errors, images };
 }
 
+async function sidePanelReplySmoke(browser) {
+  const page = await browser.newPage();
+  const errors = [];
+  page.on("pageerror", e => errors.push(e.message));
+  const html = fs.readFileSync(ROOT + "extension/sidepanel.html", "utf8").replace(/<script src="sidepanel\.js"><\/script>/, "");
+  await page.setContent(html);
+  await page.evaluate(() => {
+    window.__fetches = [];
+    window.__actions = [];
+    window.__typed = "";
+    window.__replies = [
+      JSON.stringify({ thought: "Draft a helpful response.", action: { type: "type", id: 9, text: "Thanks for asking! Please see the product details on our site.", enter: false } }),
+      JSON.stringify({ thought: "The draft is ready; ask for approval before posting.", action: { type: "click", id: 10 } }),
+      JSON.stringify({ thought: "The user approved the reply.", action: { type: "done", answer: "The approved reply was posted." } })
+    ];
+    window.chrome = {
+      storage: { local: { get: async () => ({ adminSession: "smoke-session" }) }, onChanged: { addListener() {} } },
+      permissions: { contains: async () => true, request: async () => true },
+      tabs: { create: async () => ({ id: 1 }), query: async () => [{ id: 1, url: "https://www.facebook.com/FaVisionEnterprise/posts/1" }], get: async () => ({ id: 1, status: "complete", url: "https://www.facebook.com/FaVisionEnterprise/posts/1" }) },
+      scripting: { executeScript: async ({ func, args }) => {
+        if (func.name === "snapshotInPage") return [{ result: {
+          url: "https://www.facebook.com/FaVisionEnterprise/posts/1", title: "F.A Vision post",
+          elements: `[9] textbox "${window.__typed || "Comment"}"\n[10] button "Post"`,
+          text: window.__typed || "A public F.A Vision product post with one customer comment.", more: false
+        } }];
+        if (func.name === "labelInPage") return [{ result: args[0] === 9 ? { label: "Comment", editable: true } : { label: "Post", editable: false } }];
+        if (func.name === "actInPage") {
+          const action = args[0];
+          window.__actions.push(action.type + (action.type === "click" ? ":post" : ""));
+          if (action.type === "type") window.__typed = action.text;
+          return [{ result: action.type === "click" ? "clicked [" + action.id + "]" : "typed into [" + action.id + "]" }];
+        }
+        return [{ result: null }];
+      } }
+    };
+    window.fetch = (...args) => {
+      window.__fetches.push(args[0]);
+      return Promise.resolve({ json: async () => ({ ok: true, text: window.__replies.shift() || JSON.stringify({ action: { type: "done", answer: "Done." } }) }) });
+    };
+  });
+  await page.addScriptTag({ content: code("sidepanel.js") });
+  await page.click("#reply-comments");
+  const helper = await page.evaluate(() => ({
+    task: document.querySelector("#task").value,
+    started: document.querySelector("#log").children.length > 0,
+    fetches: window.__fetches.length
+  }));
+  await page.click("#go");
+  await page.waitForSelector(".step.ask");
+  const approval = await page.evaluate(() => ({
+    text: document.querySelector(".step.ask").innerText,
+    actions: window.__actions.slice(),
+    fetches: window.__fetches.length
+  }));
+  await page.click(".step.ask [data-yes]");
+  await page.waitForFunction(() => document.querySelector("#log").innerText.includes("The approved reply was posted."));
+  const posted = await page.evaluate(() => window.__actions.includes("click:post"));
+  await page.close();
+  return { helper, approval, posted, errors };
+}
+
 (async () => {
   const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
   const problems = [];
   const want = (c, msg) => { if (!c) problems.push(msg); else console.log("  ✓ " + msg.replace(/:.*$/, "")); };
+  console.log("FA Vision Agent social reply helper (current public post, separate approval, no action until Start)");
+  const replyHelper = await sidePanelReplySmoke(browser);
+  want(/currently open public post/.test(replyHelper.helper.task) && /separate approval/.test(replyHelper.helper.task) && /Do not send DMs/.test(replyHelper.helper.task),
+    "helper fills the task with public-post, verified-facts, no-DM and per-reply approval rules");
+  want(!replyHelper.helper.started && replyHelper.helper.fetches === 0, "choosing the helper does not start the agent or send a request");
+  want(/Exact draft: Thanks for asking! Please see the product details on our site\./.test(replyHelper.approval.text),
+    "the approval prompt shows the exact reply draft");
+  want(!replyHelper.approval.actions.includes("click:post") && replyHelper.approval.fetches === 2,
+    "the post action waits for approval");
+  want(replyHelper.posted, "the post action proceeds after explicit approval");
+  want(!replyHelper.errors.length, "side panel helper has no page errors: " + replyHelper.errors.join("; "));
+  if (process.env.SOCIAL_REPLY_ONLY) {
+    await browser.close();
+    console.log(problems.length ? `\n${problems.length} problem(s):\n  ✗ ` + problems.join("\n  ✗ ") : "\nSocial reply mock check passed.");
+    process.exit(problems.length ? 1 : 0);
+  }
   const item = (p, title, price, imgs) => ({ p, title, price, cats: ["Furniture", "Household"], cond: "New", loc: "Odorkor",
     text: `${title} in stock. WhatsApp 0572646176\n\nOrder or see more: https://favisionenterprize.github.io/p/${p}.html`, imgs, stamp: "fa-vision" });
   const S = "https://favisionenterprize.github.io/assets/images/";

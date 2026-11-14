@@ -7,6 +7,7 @@
 // Needs "Allow on all sites" once (button in the panel) so it can work on any tab.
 const SITE = "https://favisionenterprize.github.io/";
 const BACKEND = "https://script.google.com/macros/s/AKfycbz1P-CLRGiswKLWYDJMPTaOZNhtwH55qIhhCfqNKJllNRZ5Dpro_wcbR7NAVmDFVdjU2w/exec";
+const SOCIAL_REPLY_TASK = `On the currently open public post from one of my own social accounts, review its comments. Draft a concise, helpful public reply for each comment from another person that has not already received a reply from F.A Vision: answer questions or buying-interest using only facts visible in the post or on favisionenterprize.github.io; thank people for genuine positive comments. If the product, price, availability, or answer is unclear, ask me instead of guessing. Skip spam, abuse, complaints, and comments containing private or sensitive information. Do not send DMs, contact people elsewhere, or navigate to another post or account. Before EACH reply is posted, show me the exact reply and wait for my separate approval. Stop immediately if the platform shows a warning.`;
 const $ = s => document.querySelector(s);
 const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -19,6 +20,10 @@ document.querySelectorAll("[data-tab]").forEach(b => b.addEventListener("click",
   if (b.dataset.tab === "scripts") loadLibrary();
 }));
 $("#open-auto").addEventListener("click", () => chrome.tabs.create({ url: SITE + "admin/#fbauto" }));
+$("#reply-comments").addEventListener("click", () => {
+  $("#task").value = SOCIAL_REPLY_TASK;
+  $("#task").focus();
+});
 
 // ------------------------------------------------------------------ AI (through your backend)
 async function session() { return (await chrome.storage.local.get("adminSession")).adminSession || ""; }
@@ -134,9 +139,10 @@ async function settle(tabId) {
 }
 
 // ------------------------------------------------------------------ agent: the loop
-const RISKY = /\b(post|publish|send|submit|pay|buy|purchase|order|checkout|check out|delete|remove|confirm|share|transfer|withdraw|sign up|create account|leave group|unfriend|block|report)\b/i;
+const RISKY = /\b(post|publish|send|submit|reply|comment|respond|pay|buy|purchase|order|checkout|check out|delete|remove|confirm|share|transfer|withdraw|sign up|create account|leave group|unfriend|block|report)\b/i;
 const INSTRUCTIONS = `You are FA Vision Agent. You control the user's own web browser (Microsoft Edge) to finish their task, one step at a time, like a careful human assistant.
 Each turn you get the current page: URL, title, a numbered list of the buttons, links and boxes you can use, and some page text.
+For social comment replies, work only on the user's own public post, never send DMs, and use only verified business facts. Do not invent prices, stock, delivery promises, discounts, or order status. Skip spam, abuse, complaints, and sensitive personal information. Show the exact reply and get separate user approval before posting each one; never batch-post replies. Stop on any platform warning.
 Reply with ONLY one JSON object, no markdown: {"thought":"short reasoning about what you see and what to do next","action":{...}}
 Actions:
 {"type":"search","query":"words"}            search the web (opens Bing results; then read and click them)
@@ -198,6 +204,7 @@ async function runAgent() {
   $("#log").innerHTML = "";
   log(`🎯 <b>${esc(task)}</b>`);
   const history = [];
+  let lastDraft = "";
   const MAX = 30;
   try {
     for (let step = 1; step <= MAX && !stopAsked; step++) {
@@ -245,13 +252,19 @@ async function runAgent() {
         what = a.type === "click" ? `👆 click [${a.id}] ${info ? `"${info.label}"` : ""}`
           : a.type === "type" ? `⌨️ type into [${a.id}] ${info ? `"${info.label}"` : ""}: ${a.text || ""}${a.enter ? " ⏎" : ""}`
           : a.type === "select" ? `☑️ choose "${a.value}" in [${a.id}]` : `↕ scroll ${a.direction || "down"}`;
+        if (a.type === "type") lastDraft = info && info.editable ? String(a.text || "") : "";
         const risky = (a.type === "click" && info && RISKY.test(info.label)) || (a.type === "type" && a.enter && info && info.editable);
         if (a.type === "type" && /\b\d{12,19}\b/.test(String(a.text || ""))) result = "refused: that looks like a card or account number";
         else if (risky) {
           log(said + esc(what));
-          const v = await confirmStep(`${what}\n(on ${snap.url})`);
+          const draftPrefix = lastDraft.trim().slice(0, 40);
+          const draft = a.type === "click" && info && /\b(post|publish|send|submit|reply|comment|respond)\b/i.test(info.label)
+            && draftPrefix && (snap.elements || "").includes(draftPrefix)
+            ? `\nExact draft: ${lastDraft}` : "";
+          const v = await confirmStep(`${what}${draft}\n(on ${snap.url})`);
           if (v === "stop") { stopAsked = true; break; }
           result = v === "yes" ? await inTab(tabId, actInPage, [a]).catch(e => "error: " + e.message) : "the user said skip this; choose another way or finish";
+          if (a.type === "click") lastDraft = "";
           history.push(`${step}. ${what} → ${result}`);
           continue;
         } else result = await inTab(tabId, actInPage, [a]).catch(e => "error: " + e.message);
