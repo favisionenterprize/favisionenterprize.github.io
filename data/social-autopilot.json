@@ -9792,16 +9792,49 @@
    "p": "FAV-033",
    "ok": true,
    "now": true
+  },
+  {
+   "d": "2026-11-15",
+   "t": "2026-11-15T12:15:38.104Z",
+   "net": "tiktok",
+   "k": "presence:fav-002",
+   "p": "FAV-002",
+   "ok": true,
+   "now": true,
+   "why": "Hillsong Worship: only tracks used lately · no sound"
+  },
+  {
+   "d": "2026-11-15",
+   "t": "2026-11-15T12:18:56.657Z",
+   "net": "tiktok",
+   "k": "card:FAV-034",
+   "p": "FAV-034",
+   "ok": false,
+   "now": true,
+   "why": "Post button stayed off · artist not available in picker: Davido · no sound"
+  },
+  {
+   "d": "2026-11-15",
+   "t": "2026-11-15T12:20:54.791Z",
+   "net": "tiktok",
+   "k": "box:FAV-043",
+   "p": "FAV-043",
+   "ok": false,
+   "now": true,
+   "why": "Post button stayed off · artist not available in picker: Kojo Blak · no sound"
+  },
+  {
+   "d": "2026-11-15",
+   "t": "2026-11-15T12:22:55.615Z",
+   "net": "tiktok",
+   "k": "box:FAV-029",
+   "p": "FAV-029",
+   "ok": false,
+   "now": true,
+   "why": "Post button stayed off · Hillsong Worship: only tracks used lately · no sound"
   }
  ],
  "runs": [
-  {
-   "d": "2026-10-26",
-   "t": "2026-10-26T19:04:35.941Z",
-   "kind": "x",
-   "tried": 2,
-   "ok": 0
-  },
   {
    "d": "2026-10-26",
    "t": "2026-10-26T19:06:28.304Z",
@@ -11196,6 +11229,13 @@
    "kind": "x",
    "tried": 4,
    "ok": 4
+  },
+  {
+   "d": "2026-11-15",
+   "t": "2026-11-15T12:23:17.274Z",
+   "kind": "tiktok",
+   "tried": 4,
+   "ok": 1
   }
  ]
 }
