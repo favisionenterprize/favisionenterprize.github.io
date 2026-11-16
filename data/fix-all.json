@@ -332,8 +332,8 @@
  "x": {
   "scan": {
    "d": "2026-11-16",
-   "t": "2026-11-16T01:06:50.009Z",
-   "n": 2,
+   "t": "2026-11-16T02:15:33.322Z",
+   "n": 10,
    "posts": [
     {
      "id": "1662447925388099587",
@@ -346,6 +346,62 @@
      "id": "2122049497081786568",
      "url": "https://x.com/FaVisionEnt/status/2122049497081786568",
      "text": "Office glow-up loading. Desks, chairs and shelves for offices of every size. Get a quote: link in bio. #FAVisionEnterprise",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2121687109773988304",
+     "url": "https://x.com/FaVisionEnt/status/2121687109773988304",
+     "text": "Seen us on Facebook Marketplace? That's us! Search 'F.A Vision Enterprise' there, or see the full catalogue on our website (link in bio). #FAVisionEnterprise",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2121324721648120205",
+     "url": "https://x.com/FaVisionEnt/status/2121324721648120205",
+     "text": "Shop furniture in your pyjamas. Browse, pick and order on https:// favisionenterprize.github.io, the link is in our bio. #FAVisionEnterprise",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2120962334046740686",
+     "url": "https://x.com/FaVisionEnt/status/2120962334046740686",
+     "text": "Come see and feel it before you buy. Odorkor (Tarazzo Rd, opp. Pacific Filling Station), Omanjor and Kasoa. Mon–Sat, 8am–6pm. #FAVisionEnterprise",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2120599944671146440",
+     "url": "https://x.com/FaVisionEnt/status/2120599944671146440",
+     "text": "We deliver AND set up. Accra, Tema, Koforidua, Central Region & Kumasi. Order at https:// favisionenterprize.github.io (link in bio) or message us on Facebook Marketplace. #FAVisionEnterprise",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2120237556260597880",
+     "url": "https://x.com/FaVisionEnt/status/2120237556260597880",
+     "text": "Furniture shopping made easy. Pay with MoMo, Visa/Mastercard, a 50% deposit, on delivery, or in-store at our Odorkor showroom. Shop now: link in bio. #FAVisionEnterprise",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2119875169963417714",
+     "url": "https://x.com/FaVisionEnt/status/2119875169963417714",
+     "text": "POV: your classroom finally stops squeaking. Strong, height-adjustable student desks from FA Vision Enterprise. Shop at https:// favisionenterprize.github.io (link in bio). #FAVisionEnterprise",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2119512780852404351",
+     "url": "https://x.com/FaVisionEnt/status/2119512780852404351",
+     "text": "School proprietors: Student desk & chair sets from GH₵650; GH₵640 each for 50+ sets. Order at https:// favisionenterprize.github.io or find FA Vision Enterprise on Facebook Marketplace. #StudentDesk #FurnitureGhana",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2119430916829274561",
+     "url": "https://x.com/FaVisionEnt/status/2119430916829274561",
+     "text": "What's in the pack? Business Cards: Business cards ×100 or 200, Card design. GH₵ 450. WhatsApp 020 747 3267 https:// favisionenterprize.github.io/p/FAV-020.html #Ghana #OdorkorAccra Tell us where you're seeing this post from, then like, share & follow!",
      "kind": "post",
      "alt": ""
     }
@@ -769,6 +825,13 @@
    "kind": "scan",
    "net": "ig",
    "n": 12,
+   "v": "2026-10-15.4"
+  },
+  {
+   "d": "2026-11-16",
+   "kind": "scan",
+   "net": "x",
+   "n": 10,
    "v": "2026-10-15.4"
   }
  ]
