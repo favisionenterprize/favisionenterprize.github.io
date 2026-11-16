@@ -106,6 +106,30 @@
     "status": "Active",
     "listed": "2026-11-14",
     "renew": "wait"
+   },
+   {
+    "t": "Black Glass Dining Set — 6 High-Back Chairs",
+    "price": 4900,
+    "status": "Active",
+    "listed": "2026-11-16",
+    "id": "1491111966504930",
+    "renew": "wait"
+   },
+   {
+    "t": "Mesh Secretary Chair — Ergonomic Swivel",
+    "price": 9500,
+    "status": "Active",
+    "listed": "2026-11-16",
+    "id": "2421885251953321",
+    "renew": "wait"
+   },
+   {
+    "t": "1.2 m Office Desk with Drawer Unit",
+    "price": 4500,
+    "status": "Active",
+    "listed": "2026-11-16",
+    "id": "4095571497405817",
+    "renew": "wait"
    }
   ]
  },
@@ -1352,6 +1376,36 @@
    "price": 9500,
    "ok": false,
    "why": "couldn't pick the category"
+  },
+  {
+   "d": "2026-11-16",
+   "t": "2026-11-16T02:11:26.871Z",
+   "p": "FAV-002",
+   "title": "Black Glass Dining Set — 6 High-Back Chairs",
+   "price": 4900,
+   "ok": true,
+   "id": "1491111966504930",
+   "verified": true
+  },
+  {
+   "d": "2026-11-16",
+   "t": "2026-11-16T02:12:07.180Z",
+   "p": "FAV-007",
+   "title": "Mesh Secretary Chair — Ergonomic Swivel",
+   "price": 9500,
+   "ok": true,
+   "id": "2421885251953321",
+   "verified": true
+  },
+  {
+   "d": "2026-11-16",
+   "t": "2026-11-16T02:12:48.880Z",
+   "p": "FAV-008",
+   "title": "1.2 m Office Desk with Drawer Unit",
+   "price": 4500,
+   "ok": true,
+   "id": "4095571497405817",
+   "verified": true
   }
  ],
  "runs": [
@@ -1694,6 +1748,12 @@
    "tried": 0,
    "ok": 0,
    "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile in Facebook, then press the button again."
+  },
+  {
+   "d": "2026-11-16",
+   "kind": "list",
+   "tried": 3,
+   "ok": 3
   }
  ],
  "skip": []
