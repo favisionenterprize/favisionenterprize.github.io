@@ -18727,6 +18727,15 @@
    "ok": true,
    "now": true,
    "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-16",
+   "t": "2026-11-16T02:14:40.403Z",
+   "p": "FAV-002",
+   "g": "page",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
   }
  ],
  "resets": {},
@@ -20312,6 +20321,13 @@
    "tried": 0,
    "ok": 0,
    "stopped": "No listings found on Your listings. Make sure Facebook is on your personal profile."
+  },
+  {
+   "d": "2026-11-16",
+   "t": "2026-11-16T02:14:55.981Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 0
   }
  ],
  "renewLog": [
