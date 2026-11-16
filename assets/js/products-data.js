@@ -955,6 +955,13 @@ window.FAV_DATA = {
           "price": 4900,
           "checked": "2026-11-08",
           "synced": "2026-11-08"
+        },
+        {
+          "id": "1491111966504930",
+          "title": "Black Glass Dining Set — 6 High-Back Chairs",
+          "price": 4900,
+          "checked": "2026-11-16",
+          "synced": "2026-11-16"
         }
       ],
       "tiktok": 9,
@@ -1452,6 +1459,13 @@ window.FAV_DATA = {
           "price": 9500,
           "checked": "2026-11-11",
           "synced": "2026-11-11"
+        },
+        {
+          "id": "2421885251953321",
+          "title": "Mesh Secretary Chair — Ergonomic Swivel",
+          "price": 9500,
+          "checked": "2026-11-16",
+          "synced": "2026-11-16"
         }
       ],
       "tiktok": 6,
@@ -1557,6 +1571,13 @@ window.FAV_DATA = {
           "price": 4500,
           "checked": "2026-11-11",
           "synced": "2026-11-11"
+        },
+        {
+          "id": "4095571497405817",
+          "title": "1.2 m Office Desk with Drawer Unit",
+          "price": 4500,
+          "checked": "2026-11-16",
+          "synced": "2026-11-16"
         }
       ],
       "tiktok": 13,
