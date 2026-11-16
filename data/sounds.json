@@ -1696,6 +1696,85 @@
    "platform": "tiktok",
    "d": "2026-11-15",
    "t": "2026-11-15T12:23:42.138Z"
+  },
+  {
+   "name": "Hillsong Worship",
+   "platform": "tiktok",
+   "d": "2026-11-16",
+   "t": "2026-11-16T01:35:17.951Z",
+   "fav": "Hillsong Worship",
+   "found": true
+  },
+  {
+   "name": "KOJO BLAK & Kelvyn Boy",
+   "platform": "tiktok",
+   "d": "2026-11-16",
+   "t": "2026-11-16T01:35:17.951Z",
+   "fav": "Kojo Blak",
+   "found": true
+  },
+  {
+   "name": "Hillsong Worship",
+   "platform": "tiktok",
+   "d": "2026-11-16",
+   "t": "2026-11-16T01:35:17.951Z",
+   "fav": "Hillsong Worship",
+   "found": true
+  },
+  {
+   "name": "Davido & JAZZWRLD & GL_Ceejay",
+   "platform": "tiktok",
+   "d": "2026-11-16",
+   "t": "2026-11-16T01:35:17.951Z",
+   "fav": "Davido",
+   "found": true
+  },
+  {
+   "name": "KOJO BLAK & Kelvyn Boy",
+   "platform": "tiktok",
+   "d": "2026-11-16",
+   "t": "2026-11-16T01:35:17.951Z",
+   "fav": "Kojo Blak",
+   "found": true
+  },
+  {
+   "name": "Hillsong Worship",
+   "platform": "tiktok",
+   "d": "2026-11-16",
+   "t": "2026-11-16T01:35:17.951Z",
+   "fav": "Hillsong Worship",
+   "found": true
+  },
+  {
+   "name": "Davido & JAZZWRLD & GL_Ceejay",
+   "platform": "tiktok",
+   "d": "2026-11-16",
+   "t": "2026-11-16T01:35:17.951Z",
+   "fav": "Davido",
+   "found": true
+  },
+  {
+   "name": "KOJO BLAK & Kelvyn Boy",
+   "platform": "tiktok",
+   "d": "2026-11-16",
+   "t": "2026-11-16T01:35:17.951Z",
+   "fav": "Kojo Blak",
+   "found": true
+  },
+  {
+   "name": "Hillsong Worship",
+   "platform": "tiktok",
+   "d": "2026-11-16",
+   "t": "2026-11-16T01:35:17.951Z",
+   "fav": "Hillsong Worship",
+   "found": true
+  },
+  {
+   "fav": "Davido",
+   "found": false,
+   "platform": "tiktok",
+   "d": "2026-11-16",
+   "t": "2026-11-16T01:35:17.951Z"
   }
  ],
  "notes": [
@@ -1730,11 +1809,6 @@
    "text": "1 post went out without a sound"
   },
   {
-   "d": "2026-11-07",
-   "platform": "tiktok",
-   "text": "1 post went out without a sound"
-  },
-  {
    "d": "2026-11-08",
    "text": "couldn't confirm the Ghana region on Creative Center"
   },
@@ -1919,6 +1993,11 @@
   {
    "d": "2026-11-16",
    "text": "couldn't read the Creative Center song list"
+  },
+  {
+   "d": "2026-11-16",
+   "platform": "tiktok",
+   "text": "1 post went out without a sound"
   }
  ]
 }
