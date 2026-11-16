@@ -476,6 +476,26 @@
     "ok": false,
     "why": "already has a full description with the website link",
     "skip": true
+   },
+   "1482040917140749": {
+    "d": "2026-11-16",
+    "ok": false,
+    "why": "the listing's edit form didn't open (sold, removed, or not your listing?)"
+   },
+   "2323514301839225": {
+    "d": "2026-11-16",
+    "ok": false,
+    "why": "the listing's edit form didn't open (sold, removed, or not your listing?)"
+   },
+   "1497706559085588": {
+    "d": "2026-11-16",
+    "ok": false,
+    "why": "the listing's edit form didn't open (sold, removed, or not your listing?)"
+   },
+   "1132565479739007": {
+    "d": "2026-11-16",
+    "ok": false,
+    "why": "the listing's edit form didn't open (sold, removed, or not your listing?)"
    }
   }
  },
@@ -859,6 +879,16 @@
    "skip": 0,
    "v": "2026-10-15.4",
    "more": 1
+  },
+  {
+   "d": "2026-11-16",
+   "kind": "mkedit",
+   "net": "mk",
+   "tried": 5,
+   "ok": 0,
+   "skip": 0,
+   "v": "2026-10-15.4",
+   "more": 6
   }
  ]
 }
