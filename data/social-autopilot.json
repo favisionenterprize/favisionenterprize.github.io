@@ -9932,16 +9932,18 @@
    "ok": true,
    "now": true,
    "why": "artist not available in picker: don meon · no sound"
+  },
+  {
+   "d": "2026-11-16",
+   "t": "2026-11-16T02:03:56.149Z",
+   "net": "tiktok",
+   "k": "card:FAV-041",
+   "p": "FAV-041",
+   "ok": true,
+   "why": "artist not available in picker: william mc dowell · no sound"
   }
  ],
  "runs": [
-  {
-   "d": "2026-10-27",
-   "t": "2026-10-27T07:06:52.279Z",
-   "kind": "tiktok",
-   "tried": 1,
-   "ok": 1
-  },
   {
    "d": "2026-10-27",
    "t": "2026-10-27T08:05:33.338Z",
@@ -11333,6 +11335,13 @@
   {
    "d": "2026-11-16",
    "t": "2026-11-16T01:56:53.328Z",
+   "kind": "tiktok",
+   "tried": 1,
+   "ok": 1
+  },
+  {
+   "d": "2026-11-16",
+   "t": "2026-11-16T02:04:11.024Z",
    "kind": "tiktok",
    "tried": 1,
    "ok": 1
