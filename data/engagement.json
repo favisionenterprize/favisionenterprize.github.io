@@ -265,6 +265,11 @@
    "d": "2026-11-16",
    "net": "fb",
    "n": 561
+  },
+  {
+   "d": "2026-11-16",
+   "net": "ig",
+   "n": 898
   }
  ],
  "posts": {
@@ -318,7 +323,7 @@
     }
    ],
    "title": "Instagram",
-   "checked": "2026-11-12"
+   "checked": "2026-11-16"
   },
   "https://www.instagram.com/reel/DYk7xGboiMo/": {
    "net": "ig",
@@ -326,7 +331,7 @@
    "first": "2026-10-13",
    "commented": [],
    "title": "Instagram",
-   "checked": "2026-11-12",
+   "checked": "2026-11-16",
    "views": 200
   },
   "https://www.instagram.com/reel/C1Tge8mgCKR/": {
@@ -335,7 +340,7 @@
    "first": "2026-10-13",
    "commented": [],
    "title": "Instagram",
-   "checked": "2026-11-12",
+   "checked": "2026-11-16",
    "views": 2000000
   },
   "https://www.instagram.com/p/DecmM5ViFBJ/": {
@@ -1742,6 +1747,78 @@
    "title": "(20+) Tertiary Student Desk is available. Hurry... - F.A Vision Enterprise",
    "checked": "2026-11-16",
    "likes": 6000
+  },
+  "https://www.instagram.com/p/DfyK1t-iEev/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/DfyK1t-iEev/",
+   "first": "2026-11-16",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-11-16"
+  },
+  "https://www.instagram.com/p/DfyKvvViGgO/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/DfyKvvViGgO/",
+   "first": "2026-11-16",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-11-16"
+  },
+  "https://www.instagram.com/p/DfyKppQCJhJ/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/DfyKppQCJhJ/",
+   "first": "2026-11-16",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-11-16"
+  },
+  "https://www.instagram.com/p/DfyKj5WCLQl/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/DfyKj5WCLQl/",
+   "first": "2026-11-16",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-11-16"
+  },
+  "https://www.instagram.com/p/DfyJggsCMmk/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/DfyJggsCMmk/",
+   "first": "2026-11-16",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-11-16"
+  },
+  "https://www.instagram.com/p/DfyJaKvCNgu/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/DfyJaKvCNgu/",
+   "first": "2026-11-16",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-11-16"
+  },
+  "https://www.instagram.com/p/DfyIi1rCKeL/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/DfyIi1rCKeL/",
+   "first": "2026-11-16",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-11-16"
+  },
+  "https://www.instagram.com/p/DfyIcQrCF3J/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/DfyIcQrCF3J/",
+   "first": "2026-11-16",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-11-16"
+  },
+  "https://www.instagram.com/p/Dfwu4VCiBjr/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/Dfwu4VCiBjr/",
+   "first": "2026-11-16",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-11-16"
   }
  },
  "runs": [
@@ -4129,6 +4206,21 @@
    "followers": null,
    "stopped": "No posts found on your X profile.",
    "commenting": false
+  },
+  {
+   "d": "2026-11-16",
+   "t": "2026-11-16T01:31:32.082Z",
+   "net": "ig",
+   "mode": "stats",
+   "posts": 12,
+   "checked": 12,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 898,
+   "stopped": null,
+   "commenting": true
   }
  ],
  "liked": {}
