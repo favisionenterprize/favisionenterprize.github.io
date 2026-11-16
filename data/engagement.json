@@ -270,6 +270,11 @@
    "d": "2026-11-16",
    "net": "ig",
    "n": 898
+  },
+  {
+   "d": "2026-11-16",
+   "net": "x",
+   "n": 298
   }
  ],
  "posts": {
@@ -425,11 +430,11 @@
    "url": "https://x.com/FaVisionEnt/status/1662447925388099587",
    "first": "2026-10-13",
    "commented": [],
-   "checked": "2026-11-12",
-   "likes": 1,
-   "comments": 2,
+   "checked": "2026-11-16",
+   "likes": 3,
+   "comments": 6,
    "shares": 2,
-   "views": 45,
+   "views": 106,
    "title": "FA Vision Enterprise on X: \"Pls take Note that office is open for walk in purchases and de"
   },
   "https://x.com/FaVisionEnt/status/2110117861666771221": {
@@ -1302,29 +1307,44 @@
    "net": "x",
    "url": "https://x.com/FaVisionEnt/status/2115167647612682674",
    "first": "2026-10-31",
-   "commented": [],
-   "title": "X",
-   "checked": "2026-11-04",
-   "views": 20
+   "commented": [
+    {
+     "d": "before",
+     "text": ""
+    }
+   ],
+   "title": "FA Vision Enterprise on X: \"📦 What's in the box? Luxury Leather Sofa Set: Leather sofa se",
+   "checked": "2026-11-16",
+   "views": 28
   },
   "https://x.com/FaVisionEnt/status/2115167568403321166": {
    "net": "x",
    "url": "https://x.com/FaVisionEnt/status/2115167568403321166",
    "first": "2026-10-31",
-   "commented": [],
+   "commented": [
+    {
+     "d": "before",
+     "text": ""
+    }
+   ],
    "title": "X",
-   "checked": "2026-11-04",
-   "views": 19
+   "checked": "2026-11-16",
+   "views": 39
   },
   "https://x.com/FaVisionEnt/status/2114794989150437526": {
    "net": "x",
    "url": "https://x.com/FaVisionEnt/status/2114794989150437526",
    "first": "2026-10-31",
-   "commented": [],
+   "commented": [
+    {
+     "d": "before",
+     "text": ""
+    }
+   ],
    "title": "X",
-   "checked": "2026-11-04",
+   "checked": "2026-11-16",
    "likes": 1,
-   "views": 31
+   "views": 37
   },
   "https://x.com/FaVisionEnt/status/2114302861173776535": {
    "net": "x",
@@ -1458,19 +1478,25 @@
    "net": "x",
    "url": "https://x.com/FaVisionEnt/status/2117614987325907170",
    "first": "2026-11-04",
-   "commented": [],
+   "commented": [
+    {
+     "d": "before",
+     "text": ""
+    }
+   ],
    "title": "X",
-   "checked": "2026-11-06",
+   "checked": "2026-11-16",
    "likes": 1,
-   "views": 25
+   "views": 36
   },
   "https://x.com/FaVisionEnt/status/2116819365374881950": {
    "net": "x",
    "url": "https://x.com/FaVisionEnt/status/2116819365374881950",
    "first": "2026-11-04",
    "commented": [],
-   "title": "X",
-   "checked": "2026-11-04"
+   "title": "FA Vision Enterprise on X: \"Make study time more comfortable with our student desk and cha",
+   "checked": "2026-11-16",
+   "views": 29
   },
   "https://x.com/FaVisionEnt/status/2114291900211511565": {
    "net": "x",
@@ -1838,6 +1864,37 @@
    "title": "(20+) Tertiary Student Desk is available. Hurry... - F.A Vision Enterprise",
    "checked": "2026-11-16",
    "likes": 2500
+  },
+  "https://x.com/FaVisionEnt/status/2122049497081786568": {
+   "net": "x",
+   "url": "https://x.com/FaVisionEnt/status/2122049497081786568",
+   "first": "2026-11-16",
+   "commented": [],
+   "checked": "2026-11-16",
+   "views": 8
+  },
+  "https://x.com/FaVisionEnt/status/2121687109773988304": {
+   "net": "x",
+   "url": "https://x.com/FaVisionEnt/status/2121687109773988304",
+   "first": "2026-11-16",
+   "commented": [],
+   "checked": "2026-11-16",
+   "views": 6
+  },
+  "https://x.com/FaVisionEnt/status/2121324721648120205": {
+   "net": "x",
+   "url": "https://x.com/FaVisionEnt/status/2121324721648120205",
+   "first": "2026-11-16",
+   "commented": [],
+   "checked": "2026-11-16",
+   "views": 8
+  },
+  "https://x.com/FaVisionEnt/status/2120962334046740686": {
+   "net": "x",
+   "url": "https://x.com/FaVisionEnt/status/2120962334046740686",
+   "first": "2026-11-16",
+   "commented": [],
+   "checked": "2026-11-16"
   }
  },
  "runs": [
@@ -4313,6 +4370,21 @@
    "invited": 0,
    "thanked": 0,
    "followers": 898,
+   "stopped": null,
+   "commenting": true
+  },
+  {
+   "d": "2026-11-16",
+   "t": "2026-11-16T02:11:38.484Z",
+   "net": "x",
+   "mode": "comment",
+   "posts": 10,
+   "checked": 10,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 298,
    "stopped": null,
    "commenting": true
   }
