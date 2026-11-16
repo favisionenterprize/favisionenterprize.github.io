@@ -20304,6 +20304,14 @@
    "tried": 0,
    "ok": 0,
    "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile in Facebook, then tap Renew again."
+  },
+  {
+   "d": "2026-11-16",
+   "t": "2026-11-16T02:10:41.034Z",
+   "kind": "renew",
+   "tried": 0,
+   "ok": 0,
+   "stopped": "No listings found on Your listings. Make sure Facebook is on your personal profile."
   }
  ],
  "renewLog": [
@@ -22004,69 +22012,8 @@
   }
  },
  "selling": {
-  "d": "2026-11-12",
-  "cards": [
-   {
-    "t": "White Dressing Table with Mirror & Stool",
-    "listed": "2026-11-11",
-    "status": "Active",
-    "none": "2026-11-12"
-   },
-   {
-    "t": "1.2 m Office Desk with Drawer Unit",
-    "listed": "2026-11-11",
-    "status": "Active",
-    "none": "2026-11-12"
-   },
-   {
-    "t": "Mesh Secretary Chair — Ergonomic Swivel",
-    "listed": "2026-11-11",
-    "status": "Active",
-    "next": "2026-11-18"
-   },
-   {
-    "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
-    "listed": "2026-11-11",
-    "status": "Active",
-    "next": "2026-11-18"
-   },
-   {
-    "t": "Black Glass Dining Set — 6 High-Back Chairs",
-    "listed": "2026-11-08",
-    "status": "Active",
-    "next": "2026-11-15"
-   },
-   {
-    "t": "White Foldable Chairs — Pack of 10 (Black Frame)",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-17"
-   },
-   {
-    "t": "White Foldable 8-Seater Set — 8ft Table + 8 Chairs",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-17"
-   },
-   {
-    "t": "White Foldable 4-Seater Set — 4ft Table + 4 Chairs",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-17"
-   },
-   {
-    "t": "White Foldable Chair — Black Frame, Handle Slot",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-17"
-   },
-   {
-    "t": "White Foldable Table — 4-Seater (4ft, Black Frame)",
-    "listed": "2026-10-31",
-    "status": "Active",
-    "next": "2026-11-17"
-   }
-  ]
+  "d": "2026-11-16",
+  "cards": []
  },
  "switches": [
   {
