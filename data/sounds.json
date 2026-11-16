@@ -1779,6 +1779,13 @@
    "platform": "tiktok",
    "d": "2026-11-16",
    "t": "2026-11-16T01:35:17.951Z"
+  },
+  {
+   "fav": "don meon",
+   "found": false,
+   "platform": "tiktok",
+   "d": "2026-11-16",
+   "t": "2026-11-16T01:57:05.343Z"
   }
  ],
  "notes": [
@@ -1808,11 +1815,6 @@
    "text": "1 post went out without a sound"
   },
   {
-   "d": "2026-11-07",
-   "platform": "tiktok",
-   "text": "1 post went out without a sound"
-  },
-  {
    "d": "2026-11-08",
    "text": "couldn't confirm the Ghana region on Creative Center"
   },
@@ -1997,6 +1999,11 @@
   {
    "d": "2026-11-16",
    "text": "couldn't read the Creative Center song list"
+  },
+  {
+   "d": "2026-11-16",
+   "platform": "tiktok",
+   "text": "1 post went out without a sound"
   },
   {
    "d": "2026-11-16",
