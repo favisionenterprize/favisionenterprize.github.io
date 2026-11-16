@@ -258,14 +258,21 @@
  },
  "x": {
   "scan": {
-   "d": "2026-11-11",
-   "t": "2026-11-11T11:05:59.159Z",
-   "n": 1,
+   "d": "2026-11-16",
+   "t": "2026-11-16T01:06:50.009Z",
+   "n": 2,
    "posts": [
     {
      "id": "1662447925388099587",
      "url": "https://x.com/FaVisionEnt/status/1662447925388099587",
      "text": "Pls take Note that office is open for walk in purchases and delivery as well. STUDENT DESKS ARE AVAILABLE IN LARGE QUANTITIES!!!",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2122049497081786568",
+     "url": "https://x.com/FaVisionEnt/status/2122049497081786568",
+     "text": "Office glow-up loading. Desks, chairs and shelves for offices of every size. Get a quote: link in bio. #FAVisionEnterprise",
      "kind": "post",
      "alt": ""
     }
@@ -612,6 +619,13 @@
    "tried": 1,
    "ok": 0,
    "skip": 0,
+   "v": "2026-10-15.4"
+  },
+  {
+   "d": "2026-11-16",
+   "kind": "scan",
+   "net": "x",
+   "n": 2,
    "v": "2026-10-15.4"
   }
  ]
