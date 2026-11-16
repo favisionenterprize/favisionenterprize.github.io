@@ -19,13 +19,13 @@
  },
  "status": {
   "tiktok": {
-   "d": "2026-11-12",
+   "d": "2026-11-16",
    "link": null,
-   "pinned": null,
+   "pinned": "Student Desk & Chair Set – from GH₵650 📚 More learning, more comfort. Sturdy and durable, ideal for schools, homes and ",
    "linkOk": false,
    "pinOk": false,
-   "why": "",
-   "mode": "check"
+   "why": "pin: couldn't find the post on TikTok (pin it in the app: open the post → ••• → Pin)",
+   "mode": "pinswap"
   },
   "fb": {
    "d": "2026-11-16",
@@ -538,6 +538,13 @@
    "mode": "check",
    "linkOk": false,
    "pinOk": true
+  },
+  {
+   "d": "2026-11-16",
+   "net": "tiktok",
+   "mode": "pinswap",
+   "linkOk": false,
+   "pinOk": false
   }
  ]
 }
