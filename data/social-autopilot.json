@@ -10197,16 +10197,49 @@
    "p": "FAV-015",
    "ok": true,
    "now": true
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T09:20:14.590Z",
+   "net": "tiktok",
+   "k": "card:FAV-027",
+   "p": "FAV-027",
+   "ok": true,
+   "now": true,
+   "why": "Hillsong Worship: only tracks used lately · no sound"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T09:23:35.840Z",
+   "net": "tiktok",
+   "k": "presence:fav-003",
+   "p": "FAV-003",
+   "ok": true,
+   "now": true,
+   "why": "Kojo Blak: only tracks used lately · no sound"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T09:27:08.977Z",
+   "net": "tiktok",
+   "k": "box:FAV-042",
+   "p": "FAV-042",
+   "ok": true,
+   "now": true,
+   "why": "artist not available in picker: micheal w smith · no sound"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T09:31:42.620Z",
+   "net": "tiktok",
+   "k": "box:FAV-020",
+   "p": "FAV-020",
+   "ok": true,
+   "now": true,
+   "why": "jumbo: only tracks used lately · no sound"
   }
  ],
  "runs": [
-  {
-   "d": "2026-10-27",
-   "t": "2026-10-27T10:04:53.092Z",
-   "kind": "x",
-   "tried": 2,
-   "ok": 0
-  },
   {
    "d": "2026-10-27",
    "t": "2026-10-27T10:05:08.449Z",
@@ -11599,6 +11632,13 @@
    "d": "2026-11-17",
    "t": "2026-11-17T09:19:12.495Z",
    "kind": "x",
+   "tried": 4,
+   "ok": 4
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T09:32:01.411Z",
+   "kind": "tiktok",
    "tried": 4,
    "ok": 4
   }
