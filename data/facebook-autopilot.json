@@ -18736,6 +18736,186 @@
    "ok": false,
    "now": true,
    "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T08:06:11.180Z",
+   "p": "FAV-014",
+   "g": "234760561571602",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T08:09:40.670Z",
+   "p": "FAV-014",
+   "g": "994523464506238",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T08:10:33.848Z",
+   "p": "FAV-014",
+   "g": "671759327593437",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T08:12:00.715Z",
+   "p": "FAV-014",
+   "g": "523491985727729",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T08:14:20.281Z",
+   "p": "FAV-014",
+   "g": "519533053951882",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T08:16:39.799Z",
+   "p": "FAV-014",
+   "g": "support.go4buys",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T08:17:06.902Z",
+   "p": "FAV-014",
+   "g": "768595837413452",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T08:19:09.755Z",
+   "p": "FAV-014",
+   "g": "527676594571625",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T08:22:45.933Z",
+   "p": "FAV-014",
+   "g": "makolastores",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T08:25:21.677Z",
+   "p": "FAV-014",
+   "g": "PristelMediaArts",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T08:28:33.380Z",
+   "p": "FAV-014",
+   "g": "809739201194090",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T08:30:43.152Z",
+   "p": "FAV-014",
+   "g": "4994473480676197",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T08:34:16.299Z",
+   "p": "FAV-014",
+   "g": "122184742434939",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T08:36:59.497Z",
+   "p": "FAV-014",
+   "g": "1793027177596201",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T08:39:14.751Z",
+   "p": "FAV-014",
+   "g": "560991827368822",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T08:41:59.023Z",
+   "p": "FAV-014",
+   "g": "766202033830611",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T08:45:42.522Z",
+   "p": "FAV-014",
+   "g": "108317572964736",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T08:48:44.160Z",
+   "p": "FAV-014",
+   "g": "418406532907724",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T08:49:17.460Z",
+   "p": "FAV-014",
+   "g": "220197416172147",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T08:52:57.014Z",
+   "p": "FAV-014",
+   "g": "867939121602657",
+   "ok": false,
+   "now": true,
+   "why": "Post button stayed off"
   }
  ],
  "resets": {},
@@ -20328,6 +20508,13 @@
    "kind": "post",
    "tried": 1,
    "ok": 0
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T08:54:49.187Z",
+   "kind": "post",
+   "tried": 20,
+   "ok": 16
   }
  ],
  "renewLog": [
