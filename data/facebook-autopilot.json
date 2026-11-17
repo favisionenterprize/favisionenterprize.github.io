@@ -18916,6 +18916,186 @@
    "ok": false,
    "now": true,
    "why": "Post button stayed off"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T13:58:13.399Z",
+   "p": "FAV-014",
+   "g": "620057171806261",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T13:58:41.387Z",
+   "p": "FAV-014",
+   "g": "228101242311915",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T13:59:31.208Z",
+   "p": "FAV-014",
+   "g": "459166852878762",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T14:00:00.282Z",
+   "p": "FAV-014",
+   "g": "2286877568268016",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T14:00:53.063Z",
+   "p": "FAV-014",
+   "g": "1032511438138142",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T14:01:43.634Z",
+   "p": "FAV-014",
+   "g": "370231967704681",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T14:02:36.217Z",
+   "p": "FAV-014",
+   "g": "949837662461703",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T14:03:10.896Z",
+   "p": "FAV-014",
+   "g": "333080100172813",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T14:03:45.036Z",
+   "p": "FAV-014",
+   "g": "1273410094301647",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T14:04:25.258Z",
+   "p": "FAV-014",
+   "g": "739600605253925",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T14:05:25.840Z",
+   "p": "FAV-014",
+   "g": "307074298361510",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T14:06:01.607Z",
+   "p": "FAV-014",
+   "g": "blackbusinessnetworkingcommunity",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T14:06:30.676Z",
+   "p": "FAV-014",
+   "g": "tellitmoms",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T14:07:06.559Z",
+   "p": "FAV-014",
+   "g": "468403685835086",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T14:07:34.894Z",
+   "p": "FAV-014",
+   "g": "936485032390764",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T14:08:33.199Z",
+   "p": "FAV-014",
+   "g": "462768295270407",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T14:09:29.392Z",
+   "p": "FAV-014",
+   "g": "334478350910374",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T14:10:20.163Z",
+   "p": "FAV-014",
+   "g": "455961835149809",
+   "ok": true,
+   "now": true,
+   "why": "Waiting for admin approval"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T14:10:51.838Z",
+   "p": "FAV-014",
+   "g": "128000729380895",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T14:11:39.741Z",
+   "p": "FAV-014",
+   "g": "662742337912709",
+   "ok": true,
+   "now": true,
+   "why": "first comment not added (post not found)"
   }
  ],
  "resets": {},
@@ -20523,6 +20703,13 @@
    "tried": 0,
    "ok": 0,
    "stopped": "No listings found on Your listings. Make sure Facebook is on your personal profile."
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T14:11:55.897Z",
+   "kind": "post",
+   "tried": 20,
+   "ok": 19
   }
  ],
  "renewLog": [
