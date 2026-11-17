@@ -1793,15 +1793,42 @@
    "platform": "tiktok",
    "d": "2026-11-16",
    "t": "2026-11-16T02:04:19.487Z"
+  },
+  {
+   "name": "Jumbo",
+   "platform": "tiktok",
+   "d": "2026-11-17",
+   "t": "2026-11-17T08:05:24.037Z",
+   "fav": "jumbo",
+   "found": true
+  },
+  {
+   "name": "Davido",
+   "platform": "tiktok",
+   "d": "2026-11-17",
+   "t": "2026-11-17T08:05:24.037Z",
+   "fav": "Davido",
+   "found": true
+  },
+  {
+   "name": "KOJO BLAK",
+   "platform": "tiktok",
+   "d": "2026-11-17",
+   "t": "2026-11-17T08:05:24.037Z",
+   "fav": "Kojo Blak",
+   "found": true
+  },
+  {
+   "fav": "micheal w smith",
+   "found": false,
+   "platform": "tiktok",
+   "d": "2026-11-17",
+   "t": "2026-11-17T08:05:24.037Z"
   }
  ],
  "notes": [
   {
    "d": "2026-11-08",
-   "text": "couldn't confirm the Ghana region on Creative Center"
-  },
-  {
-   "d": "2026-11-08",
    "text": "no 'Approved for business use' filter seen: check the sounds are in TikTok's Commercial Music Library"
   },
   {
@@ -2012,6 +2039,11 @@
   {
    "d": "2026-11-16",
    "text": "no Instagram audio seen on Reels"
+  },
+  {
+   "d": "2026-11-17",
+   "platform": "tiktok",
+   "text": "1 post went out without a sound"
   }
  ]
 }
