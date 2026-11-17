@@ -20515,6 +20515,14 @@
    "kind": "post",
    "tried": 20,
    "ok": 16
+  },
+  {
+   "d": "2026-11-17",
+   "t": "2026-11-17T13:45:18.277Z",
+   "kind": "renew",
+   "tried": 0,
+   "ok": 0,
+   "stopped": "No listings found on Your listings. Make sure Facebook is on your personal profile."
   }
  ],
  "renewLog": [
@@ -22215,7 +22223,7 @@
   }
  },
  "selling": {
-  "d": "2026-11-16",
+  "d": "2026-11-17",
   "cards": []
  },
  "switches": [
