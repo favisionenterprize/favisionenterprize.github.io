@@ -1846,15 +1846,18 @@
    "platform": "tiktok",
    "d": "2026-11-17",
    "t": "2026-11-17T08:51:11.641Z"
+  },
+  {
+   "fav": "micheal w smith",
+   "found": false,
+   "platform": "tiktok",
+   "d": "2026-11-17",
+   "t": "2026-11-17T09:32:09.294Z"
   }
  ],
  "notes": [
   {
    "d": "2026-11-08",
-   "text": "couldn't read the Creative Center song list"
-  },
-  {
-   "d": "2026-11-08",
    "text": "no Instagram audio seen on Reels"
   },
   {
@@ -2067,6 +2070,11 @@
    "d": "2026-11-17",
    "platform": "tiktok",
    "text": "3 posts went out without a sound"
+  },
+  {
+   "d": "2026-11-17",
+   "platform": "tiktok",
+   "text": "4 posts went out without a sound"
   }
  ]
 }
