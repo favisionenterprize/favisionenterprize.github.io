@@ -1,6 +1,6 @@
 {
- "d": "2026-11-17",
- "t": "2026-11-17T13:46:24.248Z",
+ "d": "2026-11-18",
+ "t": "2026-11-18T10:45:25.615Z",
  "settings": {
   "artists_first": true,
   "artists": [
@@ -19,7 +19,14 @@
    "artist": "Ergashov",
    "platform": "ig",
    "rank": 1,
-   "d": "2026-11-17"
+   "d": "2026-11-18"
+  },
+  {
+   "name": "Spider-Man 3 Main Title (From Spider-Man 3) [Full-Length Score] Cinematic Legacy",
+   "artist": "Cinematic Legacy",
+   "platform": "ig",
+   "rank": 2,
+   "d": "2026-11-18"
   }
  ],
  "manual": [],
@@ -1878,19 +1885,6 @@
  ],
  "notes": [
   {
-   "d": "2026-11-08",
-   "platform": "tiktok",
-   "text": "3 posts went out without a sound"
-  },
-  {
-   "d": "2026-11-11",
-   "text": "no 'Approved for business use' filter seen: check the sounds are in TikTok's Commercial Music Library"
-  },
-  {
-   "d": "2026-11-11",
-   "text": "couldn't read the Creative Center song list"
-  },
-  {
    "d": "2026-11-11",
    "text": "no 'Approved for business use' filter seen: check the sounds are in TikTok's Commercial Music Library"
   },
@@ -2099,6 +2093,18 @@
    "d": "2026-11-17",
    "platform": "tiktok",
    "text": "4 posts went out without a sound"
+  },
+  {
+   "d": "2026-11-18",
+   "text": "couldn't confirm the Ghana region on Creative Center"
+  },
+  {
+   "d": "2026-11-18",
+   "text": "no 'Approved for business use' filter seen: check the sounds are in TikTok's Commercial Music Library"
+  },
+  {
+   "d": "2026-11-18",
+   "text": "couldn't read the Creative Center song list"
   }
  ]
 }
