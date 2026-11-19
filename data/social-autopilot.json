@@ -10555,16 +10555,94 @@
    "ok": true,
    "now": true,
    "why": "Davido: only tracks used lately · no sound"
+  },
+  {
+   "d": "2026-11-19",
+   "t": "2026-11-19T03:33:51.079Z",
+   "net": "tiktok",
+   "k": "card:FAV-014",
+   "p": "FAV-014",
+   "ok": true
+  },
+  {
+   "d": "2026-11-19",
+   "t": "2026-11-19T03:34:37.940Z",
+   "net": "tiktok",
+   "k": "tile:fav-008",
+   "p": "FAV-008",
+   "ok": true
+  },
+  {
+   "d": "2026-11-19",
+   "t": "2026-11-19T03:35:21.608Z",
+   "net": "tiktok",
+   "k": "tile:fav-003",
+   "p": "FAV-003",
+   "ok": true,
+   "why": "jumbo: only tracks used lately · no sound"
+  },
+  {
+   "d": "2026-11-19",
+   "t": "2026-11-19T03:36:10.643Z",
+   "net": "tiktok",
+   "k": "ad:fav-026",
+   "p": "FAV-026",
+   "ok": true
+  },
+  {
+   "d": "2026-11-19",
+   "t": "2026-11-19T03:37:08.755Z",
+   "net": "tiktok",
+   "k": "card:FAV-005",
+   "p": "FAV-005",
+   "ok": true,
+   "why": "artist not available in picker: don meon · no sound"
+  },
+  {
+   "d": "2026-11-19",
+   "t": "2026-11-19T03:38:04.348Z",
+   "net": "tiktok",
+   "k": "presence:fav-004",
+   "p": "FAV-004",
+   "ok": true,
+   "why": "artist not available in picker: william mc dowell · no sound"
+  },
+  {
+   "d": "2026-11-19",
+   "t": "2026-11-19T03:38:49.527Z",
+   "net": "tiktok",
+   "k": "ad:fav-006",
+   "p": "FAV-006",
+   "ok": true,
+   "why": "artist not available in picker: micheal w smith · no sound"
+  },
+  {
+   "d": "2026-11-19",
+   "t": "2026-11-19T03:39:34.013Z",
+   "net": "tiktok",
+   "k": "presence:fav-007",
+   "p": "FAV-007",
+   "ok": true
+  },
+  {
+   "d": "2026-11-19",
+   "t": "2026-11-19T03:40:20.010Z",
+   "net": "tiktok",
+   "k": "tile:fav-025",
+   "p": "FAV-025",
+   "ok": true
+  },
+  {
+   "d": "2026-11-19",
+   "t": "2026-11-19T03:41:01.751Z",
+   "net": "tiktok",
+   "k": "presence:fav-009",
+   "p": "FAV-009",
+   "ok": true,
+   "why": "jumbo: only tracks used lately · no sound"
   }
  ],
  "runs": [
-  {
-   "d": "2026-10-27",
-   "t": "2026-10-27T14:04:47.211Z",
-   "kind": "x",
-   "tried": 2,
-   "ok": 0
-  },
   {
    "d": "2026-10-27",
    "t": "2026-10-27T14:05:57.160Z",
@@ -11959,6 +12037,13 @@
    "kind": "tiktok",
    "tried": 4,
    "ok": 4
+  },
+  {
+   "d": "2026-11-19",
+   "t": "2026-11-19T03:41:22.943Z",
+   "kind": "tiktok",
+   "tried": 10,
+   "ok": 10
   }
  ]
 }
