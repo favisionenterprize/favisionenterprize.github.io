@@ -447,8 +447,8 @@
  "x": {
   "scan": {
    "d": "2026-11-19",
-   "t": "2026-11-19T04:17:47.815Z",
-   "n": 10,
+   "t": "2026-11-19T04:32:46.946Z",
+   "n": 11,
    "posts": [
     {
      "id": "1662447925388099587",
@@ -461,27 +461,6 @@
      "id": "2123136659973914922",
      "url": "https://x.com/FaVisionEnt/status/2123136659973914922",
      "text": "Back to school in ONE stop. Desks, textbooks, exercise books, stationery and printing (flyers, banners, branded exercise books). FA Vision Enterprise. #FAVisionEnterprise",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "2122774273576296501",
-     "url": "https://x.com/FaVisionEnt/status/2122774273576296501",
-     "text": "Your fabric. Your colour. Your sofa. Upholstered to order by FA Vision Enterprise. DM us or order at https:// favisionenterprize.github.io. #FAVisionEnterprise",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "2122411884062077389",
-     "url": "https://x.com/FaVisionEnt/status/2122411884062077389",
-     "text": "Church, hotel, office, school or home, one supplier for every room. Talk to FA Vision Enterprise. Link in bio. #FAVisionEnterprise",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "2122049497081786568",
-     "url": "https://x.com/FaVisionEnt/status/2122049497081786568",
-     "text": "Office glow-up loading. Desks, chairs and shelves for offices of every size. Get a quote: link in bio. #FAVisionEnterprise",
      "kind": "post",
      "alt": ""
     },
@@ -517,6 +496,34 @@
      "id": "2120237556260597880",
      "url": "https://x.com/FaVisionEnt/status/2120237556260597880",
      "text": "Furniture shopping made easy. Pay with MoMo, Visa/Mastercard, a 50% deposit, on delivery, or in-store at our Odorkor showroom. Shop now: link in bio. #FAVisionEnterprise",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2119875169963417714",
+     "url": "https://x.com/FaVisionEnt/status/2119875169963417714",
+     "text": "POV: your classroom finally stops squeaking. Strong, height-adjustable student desks from FA Vision Enterprise. Shop at https:// favisionenterprize.github.io (link in bio). #FAVisionEnterprise",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2119512780852404351",
+     "url": "https://x.com/FaVisionEnt/status/2119512780852404351",
+     "text": "School proprietors: Student desk & chair sets from GH₵650; GH₵640 each for 50+ sets. Order at https:// favisionenterprize.github.io or find FA Vision Enterprise on Facebook Marketplace. #StudentDesk #FurnitureGhana",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2119430916829274561",
+     "url": "https://x.com/FaVisionEnt/status/2119430916829274561",
+     "text": "What's in the pack? Business Cards: Business cards ×100 or 200, Card design. GH₵ 450. WhatsApp 020 747 3267 https:// favisionenterprize.github.io/p/FAV-020.html #Ghana #OdorkorAccra Tell us where you're seeing this post from, then like, share & follow!",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2119430372362801601",
+     "url": "https://x.com/FaVisionEnt/status/2119430372362801601",
+     "text": "What's in the box? Strong Glass Centre Table: Oval glass top, Sculpted base. GH₵ 800. WhatsApp 020 747 3267 https:// favisionenterprize.github.io/p/FAV-018.html #GhanaiansAbroad #HomeGoals Where are you seeing this ad from? Reply, then like, share & follow us!",
      "kind": "post",
      "alt": ""
     }
@@ -1230,6 +1237,13 @@
    "skip": 0,
    "v": "2026-10-15.4",
    "stopped": "Unknown job."
+  },
+  {
+   "d": "2026-11-19",
+   "kind": "scan",
+   "net": "x",
+   "n": 11,
+   "v": "2026-10-15.4"
   }
  ]
 }
