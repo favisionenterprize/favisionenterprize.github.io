@@ -414,14 +414,14 @@
    },
    "Df6JgbDCPZa": {
     "d": "2026-11-19",
-    "ok": false,
-    "why": "Instagram didn't confirm the save",
+    "ok": true,
+    "why": "caption added",
     "mode": "set"
    },
    "Df6JZyeiOSo": {
     "d": "2026-11-19",
-    "ok": false,
-    "why": "Instagram didn't confirm the save",
+    "ok": true,
+    "why": "caption added",
     "mode": "set"
    },
    "Df6JKWuiLrR": {
@@ -1268,6 +1268,16 @@
    "net": "ig",
    "tried": 5,
    "ok": 0,
+   "skip": 0,
+   "v": "2026-10-15.4",
+   "more": 6
+  },
+  {
+   "d": "2026-11-19",
+   "kind": "fxfix",
+   "net": "ig",
+   "tried": 5,
+   "ok": 2,
    "skip": 0,
    "v": "2026-10-15.4",
    "more": 6
