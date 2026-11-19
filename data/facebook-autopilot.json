@@ -19104,6 +19104,15 @@
    "g": "166671650419914",
    "ok": true,
    "why": "first comment not added (post not found)"
+  },
+  {
+   "d": "2026-11-19",
+   "t": "2026-11-19T04:34:45.137Z",
+   "p": "FAV-003",
+   "g": "page",
+   "ok": false,
+   "now": true,
+   "why": "Post button stayed off"
   }
  ],
  "resets": {},
@@ -20733,6 +20742,13 @@
    "tried": 0,
    "ok": 0,
    "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile in Facebook, then tap Renew again."
+  },
+  {
+   "d": "2026-11-19",
+   "t": "2026-11-19T04:34:59.863Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 0
   }
  ],
  "renewLog": [
