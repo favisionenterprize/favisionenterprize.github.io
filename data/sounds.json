@@ -1,6 +1,6 @@
 {
  "d": "2026-11-19",
- "t": "2026-11-19T03:33:00.215Z",
+ "t": "2026-11-19T04:33:33.927Z",
  "settings": {
   "artists_first": true,
   "artists": [
@@ -15,8 +15,8 @@
  },
  "sounds": [
   {
-   "name": "Mridula (Vocals Only) Nasheedio Beats",
-   "artist": "Nasheedio Beats",
+   "name": "Me And The Devil Instrumental Ergashov",
+   "artist": "Ergashov",
    "platform": "ig",
    "rank": 1,
    "d": "2026-11-19"
@@ -1939,18 +1939,6 @@
  ],
  "notes": [
   {
-   "d": "2026-11-11",
-   "text": "no 'Approved for business use' filter seen: check the sounds are in TikTok's Commercial Music Library"
-  },
-  {
-   "d": "2026-11-11",
-   "text": "couldn't read the Creative Center song list"
-  },
-  {
-   "d": "2026-11-12",
-   "text": "no 'Approved for business use' filter seen: check the sounds are in TikTok's Commercial Music Library"
-  },
-  {
    "d": "2026-11-12",
    "text": "couldn't read the Creative Center song list"
   },
@@ -2160,6 +2148,18 @@
    "d": "2026-11-19",
    "platform": "tiktok",
    "text": "5 posts went out without a sound"
+  },
+  {
+   "d": "2026-11-19",
+   "text": "couldn't confirm the Ghana region on Creative Center"
+  },
+  {
+   "d": "2026-11-19",
+   "text": "no 'Approved for business use' filter seen: check the sounds are in TikTok's Commercial Music Library"
+  },
+  {
+   "d": "2026-11-19",
+   "text": "couldn't read the Creative Center song list"
   }
  ]
 }
