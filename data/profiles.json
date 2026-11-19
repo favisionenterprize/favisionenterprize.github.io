@@ -622,6 +622,13 @@
    "mode": "check",
    "linkOk": false,
    "pinOk": false
+  },
+  {
+   "d": "2026-11-19",
+   "net": "ig",
+   "mode": "check",
+   "linkOk": false,
+   "pinOk": false
   }
  ]
 }
