@@ -28,7 +28,7 @@
    "mode": "pinswap"
   },
   "fb": {
-   "d": "2026-11-17",
+   "d": "2026-11-19",
    "link": "favisionenterprize.github.io",
    "pinned": null,
    "linkOk": true,
@@ -605,6 +605,13 @@
   {
    "d": "2026-11-19",
    "net": "x",
+   "mode": "check",
+   "linkOk": true,
+   "pinOk": false
+  },
+  {
+   "d": "2026-11-19",
+   "net": "fb",
    "mode": "check",
    "linkOk": true,
    "pinOk": false
