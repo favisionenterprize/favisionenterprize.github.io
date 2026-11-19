@@ -19211,6 +19211,15 @@
    "ok": false,
    "now": true,
    "why": "Post button stayed off"
+  },
+  {
+   "d": "2026-11-19",
+   "t": "2026-11-19T04:45:13.614Z",
+   "p": "FAV-004",
+   "g": "page",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
   }
  ],
  "resets": {},
@@ -20855,6 +20864,13 @@
    "tried": 0,
    "ok": 0,
    "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile in Facebook, then tap Renew again."
+  },
+  {
+   "d": "2026-11-19",
+   "t": "2026-11-19T04:46:02.730Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 0
   }
  ],
  "renewLog": [
