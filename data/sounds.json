@@ -1,6 +1,6 @@
 {
- "d": "2026-11-18",
- "t": "2026-11-18T10:45:25.615Z",
+ "d": "2026-11-19",
+ "t": "2026-11-19T03:33:00.215Z",
  "settings": {
   "artists_first": true,
   "artists": [
@@ -15,18 +15,11 @@
  },
  "sounds": [
   {
-   "name": "Me And The Devil Instrumental Ergashov",
-   "artist": "Ergashov",
+   "name": "Mridula (Vocals Only) Nasheedio Beats",
+   "artist": "Nasheedio Beats",
    "platform": "ig",
    "rank": 1,
-   "d": "2026-11-18"
-  },
-  {
-   "name": "Spider-Man 3 Main Title (From Spider-Man 3) [Full-Length Score] Cinematic Legacy",
-   "artist": "Cinematic Legacy",
-   "platform": "ig",
-   "rank": 2,
-   "d": "2026-11-18"
+   "d": "2026-11-19"
   }
  ],
  "manual": [],
@@ -1886,14 +1879,6 @@
  "notes": [
   {
    "d": "2026-11-11",
-   "text": "no 'Approved for business use' filter seen: check the sounds are in TikTok's Commercial Music Library"
-  },
-  {
-   "d": "2026-11-11",
-   "text": "couldn't read the Creative Center song list"
-  },
-  {
-   "d": "2026-11-11",
    "text": "no Instagram audio seen on Reels"
   },
   {
@@ -2104,6 +2089,14 @@
   },
   {
    "d": "2026-11-18",
+   "text": "couldn't read the Creative Center song list"
+  },
+  {
+   "d": "2026-11-19",
+   "text": "no 'Approved for business use' filter seen: check the sounds are in TikTok's Commercial Music Library"
+  },
+  {
+   "d": "2026-11-19",
    "text": "couldn't read the Creative Center song list"
   }
  ]
