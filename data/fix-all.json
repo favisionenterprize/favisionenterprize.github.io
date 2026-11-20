@@ -968,21 +968,21 @@
     "mode": "set"
    },
    "Df2EwJhiMzk": {
-    "d": "2026-11-17",
-    "ok": false,
-    "why": "Instagram didn't confirm the save",
+    "d": "2026-11-20",
+    "ok": true,
+    "why": "caption added",
     "mode": "set"
    },
    "Df2EnUbCJF3": {
-    "d": "2026-11-17",
-    "ok": false,
-    "why": "Instagram didn't confirm the save",
+    "d": "2026-11-20",
+    "ok": true,
+    "why": "caption added",
     "mode": "set"
    },
    "Df2EjG-iLUD": {
-    "d": "2026-11-17",
-    "ok": false,
-    "why": "Instagram didn't confirm the save",
+    "d": "2026-11-20",
+    "ok": true,
+    "why": "caption added",
     "mode": "set"
    },
    "Df1qoJXiEKA": {
@@ -993,15 +993,15 @@
     "mode": "set"
    },
    "Df1j6oUiMLi": {
-    "d": "2026-11-17",
-    "ok": false,
-    "why": "Instagram didn't confirm the save",
+    "d": "2026-11-20",
+    "ok": true,
+    "why": "caption added",
     "mode": "set"
    },
    "Df1gNWOCOK6": {
-    "d": "2026-11-17",
-    "ok": false,
-    "why": "Instagram didn't confirm the save",
+    "d": "2026-11-20",
+    "ok": true,
+    "why": "caption added",
     "mode": "set"
    },
    "Df6JTGQiCmi": {
@@ -2318,6 +2318,16 @@
    "skip": 0,
    "v": "2026-10-15.4",
    "more": 58
+  },
+  {
+   "d": "2026-11-20",
+   "kind": "fxfix",
+   "net": "ig",
+   "tried": 5,
+   "ok": 5,
+   "skip": 0,
+   "v": "2026-10-15.4",
+   "more": 53
   }
  ]
 }
