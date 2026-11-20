@@ -303,13 +303,13 @@
   },
   {
    "d": "2026-11-20",
-   "net": "fb",
-   "n": 563
+   "net": "ig",
+   "n": 898
   },
   {
    "d": "2026-11-20",
-   "net": "ig",
-   "n": 898
+   "net": "fb",
+   "n": 563
   }
  ],
  "posts": {
@@ -346,7 +346,7 @@
    "url": "https://www.facebook.com/FaVisionEnterprise/videos/442786224559428/",
    "first": "2026-10-13",
    "commented": [],
-   "title": "(20+) Facebook",
+   "title": "Facebook",
    "checked": "2026-11-20",
    "likes": 1,
    "comments": 1,
@@ -4881,6 +4881,21 @@
    "followers": 898,
    "stopped": null,
    "commenting": true
+  },
+  {
+   "d": "2026-11-20",
+   "t": "2026-11-20T01:56:03.579Z",
+   "net": "fb",
+   "mode": "reply",
+   "posts": 3,
+   "checked": 3,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 563,
+   "stopped": null,
+   "commenting": false
   }
  ],
  "liked": {}
