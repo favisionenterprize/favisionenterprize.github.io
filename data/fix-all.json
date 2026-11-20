@@ -646,7 +646,7 @@
     "skip": true
    },
    "1482040917140749": {
-    "d": "2026-11-16",
+    "d": "2026-11-20",
     "ok": false,
     "why": "the listing's edit form didn't open (sold, removed, or not your listing?)"
    },
@@ -1573,6 +1573,16 @@
    "ok": 0,
    "skip": 0,
    "v": "2026-10-15.4"
+  },
+  {
+   "d": "2026-11-20",
+   "kind": "mkedit",
+   "net": "mk",
+   "tried": 1,
+   "ok": 0,
+   "skip": 0,
+   "v": "2026-10-15.4",
+   "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile, then try again."
   }
  ]
 }
