@@ -1393,6 +1393,24 @@
     "why": "already has a caption and hashtags, left as it is",
     "skip": true,
     "mode": "set"
+   },
+   "DfmVO00iJT5": {
+    "d": "2026-11-20",
+    "ok": true,
+    "why": "caption added",
+    "mode": "set"
+   },
+   "DfmVOriiK9m": {
+    "d": "2026-11-20",
+    "ok": true,
+    "why": "caption added",
+    "mode": "set"
+   },
+   "DfmPzQ-iPU7": {
+    "d": "2026-11-20",
+    "ok": true,
+    "why": "caption added",
+    "mode": "set"
    }
   }
  },
@@ -2607,6 +2625,15 @@
    "skip": 0,
    "v": "2026-10-15.4",
    "more": 3
+  },
+  {
+   "d": "2026-11-20",
+   "kind": "fxfix",
+   "net": "ig",
+   "tried": 3,
+   "ok": 3,
+   "skip": 0,
+   "v": "2026-10-15.4"
   }
  ]
 }
