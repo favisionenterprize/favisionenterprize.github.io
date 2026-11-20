@@ -1145,20 +1145,20 @@
    },
    "Df8j5IhCMuy": {
     "d": "2026-11-20",
-    "ok": false,
-    "why": "no “Edit” in the post's menu",
+    "ok": true,
+    "why": "caption added",
     "mode": "set"
    },
    "Df8jvx8iIRF": {
     "d": "2026-11-20",
-    "ok": false,
-    "why": "the caption box didn't open",
+    "ok": true,
+    "why": "caption added",
     "mode": "set"
    },
    "Df8joYCCF8F": {
     "d": "2026-11-20",
-    "ok": false,
-    "why": "Instagram didn't confirm the save",
+    "ok": true,
+    "why": "caption added",
     "mode": "set"
    },
    "Df8jjYjCCK5": {
@@ -2206,6 +2206,16 @@
    "net": "ig",
    "n": 100,
    "v": "2026-10-15.4"
+  },
+  {
+   "d": "2026-11-20",
+   "kind": "fxfix",
+   "net": "ig",
+   "tried": 5,
+   "ok": 3,
+   "skip": 0,
+   "v": "2026-10-15.4",
+   "more": 88
   }
  ]
 }
