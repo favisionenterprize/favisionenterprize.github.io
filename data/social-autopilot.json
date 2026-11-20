@@ -10756,16 +10756,96 @@
    "k": "ad:fav-008",
    "p": "FAV-008",
    "ok": true
+  },
+  {
+   "d": "2026-11-20",
+   "t": "2026-11-20T01:39:39.829Z",
+   "net": "tiktok",
+   "k": "tile:fav-014",
+   "p": "FAV-014",
+   "ok": true
+  },
+  {
+   "d": "2026-11-20",
+   "t": "2026-11-20T01:41:18.050Z",
+   "net": "tiktok",
+   "k": "presence:fav-005",
+   "p": "FAV-005",
+   "ok": true
+  },
+  {
+   "d": "2026-11-20",
+   "t": "2026-11-20T01:43:38.182Z",
+   "net": "tiktok",
+   "k": "box:FAV-010",
+   "p": "FAV-010",
+   "ok": true,
+   "why": "artist not available in picker: don meon · no sound"
+  },
+  {
+   "d": "2026-11-20",
+   "t": "2026-11-20T01:45:09.721Z",
+   "net": "tiktok",
+   "k": "card:FAV-011",
+   "p": "FAV-011",
+   "ok": true,
+   "why": "artist not available in picker: william mc dowell · no sound"
+  },
+  {
+   "d": "2026-11-20",
+   "t": "2026-11-20T01:46:13.179Z",
+   "net": "tiktok",
+   "k": "tile:fav-001",
+   "p": "FAV-001",
+   "ok": true,
+   "why": "artist not available in picker: micheal w smith · no sound"
+  },
+  {
+   "d": "2026-11-20",
+   "t": "2026-11-20T01:47:10.142Z",
+   "net": "tiktok",
+   "k": "presence:fav-024",
+   "p": "FAV-024",
+   "ok": true,
+   "why": "jumbo: only tracks used lately · no sound"
+  },
+  {
+   "d": "2026-11-20",
+   "t": "2026-11-20T01:48:08.049Z",
+   "net": "tiktok",
+   "k": "card:FAV-026",
+   "p": "FAV-026",
+   "ok": true
+  },
+  {
+   "d": "2026-11-20",
+   "t": "2026-11-20T01:49:11.520Z",
+   "net": "tiktok",
+   "k": "card:FAV-006",
+   "p": "FAV-006",
+   "ok": true,
+   "why": "artist not available in picker: don meon · no sound"
+  },
+  {
+   "d": "2026-11-20",
+   "t": "2026-11-20T01:50:19.327Z",
+   "net": "tiktok",
+   "k": "box:FAV-004",
+   "p": "FAV-004",
+   "ok": true,
+   "why": "artist not available in picker: william mc dowell · no sound"
+  },
+  {
+   "d": "2026-11-20",
+   "t": "2026-11-20T01:51:21.275Z",
+   "net": "tiktok",
+   "k": "card:FAV-008",
+   "p": "FAV-008",
+   "ok": true,
+   "why": "artist not available in picker: micheal w smith · no sound"
   }
  ],
  "runs": [
-  {
-   "d": "2026-10-27",
-   "t": "2026-10-27T15:26:28.910Z",
-   "kind": "x",
-   "tried": 2,
-   "ok": 0
-  },
   {
    "d": "2026-10-27",
    "t": "2026-10-27T15:27:27.831Z",
@@ -12160,6 +12240,13 @@
    "kind": "x",
    "tried": 4,
    "ok": 4
+  },
+  {
+   "d": "2026-11-20",
+   "t": "2026-11-20T01:51:43.339Z",
+   "kind": "tiktok",
+   "tried": 10,
+   "ok": 10
   }
  ]
 }
