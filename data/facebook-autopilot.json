@@ -22669,60 +22669,6 @@
  },
  "switches": [
   {
-   "d": "2026-10-31",
-   "brand": true,
-   "fail": "couldn't find the profile menu",
-   "from": "",
-   "t": "2026-10-31T08:36:56.033Z",
-   "to": null,
-   "why": "Alexander Awuku's turn"
-  },
-  {
-   "d": "2026-10-31",
-   "brand": true,
-   "fail": "couldn't find the profile menu",
-   "from": "",
-   "t": "2026-10-31T08:37:27.058Z",
-   "to": null,
-   "why": "F.A Vision Enterprise's turn"
-  },
-  {
-   "d": "2026-10-31",
-   "brand": true,
-   "fail": "couldn't find the profile menu",
-   "from": "",
-   "t": "2026-10-31T08:37:56.138Z",
-   "to": null,
-   "why": "Fa Vision Furnitures's turn"
-  },
-  {
-   "d": "2026-10-31",
-   "brand": true,
-   "fail": "couldn't find the profile menu",
-   "from": "",
-   "t": "2026-10-31T08:38:27.663Z",
-   "to": null,
-   "why": "Oteng Furniture's turn"
-  },
-  {
-   "d": "2026-10-31",
-   "brand": true,
-   "fail": "couldn't find the profile menu",
-   "from": "",
-   "t": "2026-10-31T08:38:57.801Z",
-   "to": null,
-   "why": "Agoodmann Ventures's turn"
-  },
-  {
-   "d": "2026-10-31",
-   "from": "",
-   "to": null,
-   "why": "Manye Oye Rehoboth's turn",
-   "t": "2026-10-31T08:39:26.775Z",
-   "fail": "couldn't find the profile menu",
-   "brand": true
-  },
-  {
    "d": "2026-11-01",
    "brand": true,
    "fail": "couldn't find the profile menu",
@@ -23115,6 +23061,60 @@
    "to": null,
    "why": "read Agoodmann Ventures's groups",
    "t": "2026-11-16T01:46:47.553Z",
+   "fail": "couldn't find the profile menu",
+   "brand": true
+  },
+  {
+   "d": "2026-11-20",
+   "brand": true,
+   "fail": "couldn't find the profile menu",
+   "from": "",
+   "t": "2026-11-20T01:58:40.782Z",
+   "to": null,
+   "why": "Alexander Awuku's turn"
+  },
+  {
+   "d": "2026-11-20",
+   "brand": true,
+   "fail": "couldn't find the profile menu",
+   "from": "",
+   "t": "2026-11-20T01:59:12.603Z",
+   "to": null,
+   "why": "F.A Vision Enterprise's turn"
+  },
+  {
+   "d": "2026-11-20",
+   "brand": true,
+   "fail": "couldn't find the profile menu",
+   "from": "",
+   "t": "2026-11-20T01:59:45.781Z",
+   "to": null,
+   "why": "Fa Vision Furnitures's turn"
+  },
+  {
+   "d": "2026-11-20",
+   "brand": true,
+   "fail": "couldn't find the profile menu",
+   "from": "",
+   "t": "2026-11-20T02:00:15.055Z",
+   "to": null,
+   "why": "Oteng Furniture's turn"
+  },
+  {
+   "d": "2026-11-20",
+   "brand": true,
+   "fail": "couldn't find the profile menu",
+   "from": "",
+   "t": "2026-11-20T02:00:45.068Z",
+   "to": null,
+   "why": "Agoodmann Ventures's turn"
+  },
+  {
+   "d": "2026-11-20",
+   "from": "",
+   "to": null,
+   "why": "Manye Oye Rehoboth's turn",
+   "t": "2026-11-20T02:01:13.711Z",
    "fail": "couldn't find the profile menu",
    "brand": true
   }
