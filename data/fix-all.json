@@ -117,13 +117,13 @@
     "mode": "set"
    },
    "DYk7xGboiMo": {
-    "d": "2026-11-19",
+    "d": "2026-11-20",
     "ok": false,
     "why": "no “More options” button on the post",
     "mode": "set"
    },
    "C1Tge8mgCKR": {
-    "d": "2026-11-19",
+    "d": "2026-11-20",
     "ok": false,
     "why": "no “More options” button on the post",
     "mode": "set"
@@ -438,6 +438,25 @@
    },
    "Df6JEK4iFc-": {
     "d": "2026-11-19",
+    "ok": false,
+    "why": "Instagram didn't confirm the save",
+    "mode": "set"
+   },
+   "Df60NwilFm6": {
+    "d": "2026-11-20",
+    "ok": false,
+    "why": "already has a caption and hashtags, left as it is",
+    "skip": true,
+    "mode": "set"
+   },
+   "Df6t4LXiDqW": {
+    "d": "2026-11-20",
+    "ok": false,
+    "why": "Instagram didn't confirm the save",
+    "mode": "set"
+   },
+   "Df6tx_2CAPW": {
+    "d": "2026-11-20",
     "ok": false,
     "why": "Instagram didn't confirm the save",
     "mode": "set"
@@ -1380,6 +1399,16 @@
    "skip": 0,
    "v": "2026-10-15.4",
    "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile, then try again."
+  },
+  {
+   "d": "2026-11-20",
+   "kind": "fxfix",
+   "net": "ig",
+   "tried": 5,
+   "ok": 0,
+   "skip": 1,
+   "v": "2026-10-15.4",
+   "more": 4
   }
  ]
 }
