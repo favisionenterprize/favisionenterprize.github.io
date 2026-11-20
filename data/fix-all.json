@@ -1323,6 +1323,37 @@
     "ok": true,
     "why": "caption added",
     "mode": "set"
+   },
+   "Dft_EV6iB-q": {
+    "d": "2026-11-20",
+    "ok": true,
+    "why": "caption added",
+    "mode": "set"
+   },
+   "Dft--o5iKs9": {
+    "d": "2026-11-20",
+    "ok": true,
+    "why": "caption added",
+    "mode": "set"
+   },
+   "Dft-5OJCFDU": {
+    "d": "2026-11-20",
+    "ok": true,
+    "why": "caption added",
+    "mode": "set"
+   },
+   "Dft8PNsiZE0": {
+    "d": "2026-11-20",
+    "ok": false,
+    "why": "already has a caption and hashtags, left as it is",
+    "skip": true,
+    "mode": "set"
+   },
+   "DfsCl6OCHxC": {
+    "d": "2026-11-20",
+    "ok": true,
+    "why": "caption added",
+    "mode": "set"
    }
   }
  },
@@ -2497,6 +2528,16 @@
    "skip": 0,
    "v": "2026-10-15.4",
    "more": 23
+  },
+  {
+   "d": "2026-11-20",
+   "kind": "fxfix",
+   "net": "ig",
+   "tried": 5,
+   "ok": 4,
+   "skip": 1,
+   "v": "2026-10-15.4",
+   "more": 18
   }
  ]
 }
