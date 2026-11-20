@@ -298,11 +298,6 @@
   },
   {
    "d": "2026-11-20",
-   "net": "x",
-   "n": 298
-  },
-  {
-   "d": "2026-11-20",
    "net": "ig",
    "n": 898
   },
@@ -310,6 +305,11 @@
    "d": "2026-11-20",
    "net": "fb",
    "n": 563
+  },
+  {
+   "d": "2026-11-20",
+   "net": "x",
+   "n": 298
   }
  ],
  "posts": {
@@ -4926,6 +4926,21 @@
    "followers": 563,
    "stopped": null,
    "commenting": false
+  },
+  {
+   "d": "2026-11-20",
+   "t": "2026-11-20T02:00:12.526Z",
+   "net": "x",
+   "mode": "stats",
+   "posts": 2,
+   "checked": 2,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 298,
+   "stopped": null,
+   "commenting": true
   }
  ],
  "liked": {}
