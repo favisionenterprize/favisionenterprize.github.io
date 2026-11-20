@@ -1933,13 +1933,75 @@
    "platform": "tiktok",
    "d": "2026-11-19",
    "t": "2026-11-19T03:41:31.979Z"
+  },
+  {
+   "name": "Djjumbo",
+   "platform": "tiktok",
+   "d": "2026-11-20",
+   "t": "2026-11-20T01:51:58.309Z",
+   "fav": "jumbo",
+   "found": true
+  },
+  {
+   "name": "Hillsong Worship",
+   "platform": "tiktok",
+   "d": "2026-11-20",
+   "t": "2026-11-20T01:51:58.309Z",
+   "fav": "Hillsong Worship",
+   "found": true
+  },
+  {
+   "name": "Hillsong Worship",
+   "platform": "tiktok",
+   "d": "2026-11-20",
+   "t": "2026-11-20T01:51:58.309Z",
+   "fav": "Hillsong Worship",
+   "found": true
+  },
+  {
+   "fav": "don meon",
+   "found": false,
+   "platform": "tiktok",
+   "d": "2026-11-20",
+   "t": "2026-11-20T01:51:58.309Z"
+  },
+  {
+   "fav": "william mc dowell",
+   "found": false,
+   "platform": "tiktok",
+   "d": "2026-11-20",
+   "t": "2026-11-20T01:51:58.309Z"
+  },
+  {
+   "fav": "micheal w smith",
+   "found": false,
+   "platform": "tiktok",
+   "d": "2026-11-20",
+   "t": "2026-11-20T01:51:58.309Z"
+  },
+  {
+   "fav": "don meon",
+   "found": false,
+   "platform": "tiktok",
+   "d": "2026-11-20",
+   "t": "2026-11-20T01:51:58.309Z"
+  },
+  {
+   "fav": "william mc dowell",
+   "found": false,
+   "platform": "tiktok",
+   "d": "2026-11-20",
+   "t": "2026-11-20T01:51:58.309Z"
+  },
+  {
+   "fav": "micheal w smith",
+   "found": false,
+   "platform": "tiktok",
+   "d": "2026-11-20",
+   "t": "2026-11-20T01:51:58.309Z"
   }
  ],
  "notes": [
-  {
-   "d": "2026-11-14",
-   "text": "no 'Approved for business use' filter seen: check the sounds are in TikTok's Commercial Music Library"
-  },
   {
    "d": "2026-11-14",
    "text": "couldn't read the Creative Center song list"
@@ -2157,6 +2219,11 @@
   {
    "d": "2026-11-20",
    "text": "no Instagram audio seen on Reels"
+  },
+  {
+   "d": "2026-11-20",
+   "platform": "tiktok",
+   "text": "7 posts went out without a sound"
   }
  ]
 }
