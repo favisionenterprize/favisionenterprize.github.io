@@ -1354,6 +1354,38 @@
     "ok": true,
     "why": "caption added",
     "mode": "set"
+   },
+   "DfsCQtcCM_G": {
+    "d": "2026-11-20",
+    "ok": true,
+    "why": "caption added",
+    "mode": "set"
+   },
+   "DfsCFZfiObK": {
+    "d": "2026-11-20",
+    "ok": false,
+    "why": "already has a caption and hashtags, left as it is",
+    "skip": true,
+    "mode": "set"
+   },
+   "Dfr6FOniIfj": {
+    "d": "2026-11-20",
+    "ok": true,
+    "why": "caption added",
+    "mode": "set"
+   },
+   "Dfr587OCCtv": {
+    "d": "2026-11-20",
+    "ok": true,
+    "why": "caption added",
+    "mode": "set"
+   },
+   "DfrXczWkxh7": {
+    "d": "2026-11-20",
+    "ok": false,
+    "why": "already has a caption and hashtags, left as it is",
+    "skip": true,
+    "mode": "set"
    }
   }
  },
@@ -2538,6 +2570,16 @@
    "skip": 1,
    "v": "2026-10-15.4",
    "more": 18
+  },
+  {
+   "d": "2026-11-20",
+   "kind": "fxfix",
+   "net": "ig",
+   "tried": 5,
+   "ok": 3,
+   "skip": 2,
+   "v": "2026-10-15.4",
+   "more": 13
   }
  ]
 }
