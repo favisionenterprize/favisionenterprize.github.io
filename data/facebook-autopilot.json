@@ -22639,6 +22639,16 @@
      "why": "Agoodmann Ventures isn't a member of any group yet (the relay joins groups first; pending requests count once accepted)"
     }
    ]
+  },
+  "cur": {
+   "id": "202611200157",
+   "d": "2026-11-20",
+   "t": "2026-11-20T01:57:56.870Z",
+   "dry": false,
+   "phase": "join",
+   "dropped": [],
+   "members": {},
+   "skipped": []
   }
  },
  "selling": {
