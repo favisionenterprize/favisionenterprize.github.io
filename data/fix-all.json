@@ -1005,9 +1005,9 @@
     "mode": "set"
    },
    "Df6JTGQiCmi": {
-    "d": "2026-11-19",
+    "d": "2026-11-20",
     "ok": false,
-    "why": "Instagram didn't confirm the save",
+    "why": "the caption box didn't open",
     "mode": "set"
    },
    "Df6JQguCDEi": {
@@ -1025,7 +1025,7 @@
    "Df6JnwTiJIG": {
     "d": "2026-11-20",
     "ok": false,
-    "why": "Instagram didn't confirm the save",
+    "why": "the caption box didn't open",
     "mode": "set"
    },
    "Df6JgbDCPZa": {
@@ -1079,20 +1079,20 @@
    },
    "Df6tsMiiG0n": {
     "d": "2026-11-20",
-    "ok": false,
-    "why": "Instagram didn't confirm the save",
+    "ok": true,
+    "why": "caption added",
     "mode": "set"
    },
    "Df6tloEiGEp": {
     "d": "2026-11-20",
-    "ok": false,
-    "why": "Instagram didn't confirm the save",
+    "ok": true,
+    "why": "caption added",
     "mode": "set"
    },
    "Df6tanJiEUw": {
     "d": "2026-11-20",
     "ok": false,
-    "why": "Instagram didn't confirm the save",
+    "why": "the caption box didn't open",
     "mode": "set"
    },
    "Df8gZLDiAV0": {
@@ -2236,6 +2236,16 @@
    "skip": 0,
    "v": "2026-10-15.4",
    "more": 78
+  },
+  {
+   "d": "2026-11-20",
+   "kind": "fxfix",
+   "net": "ig",
+   "tried": 5,
+   "ok": 2,
+   "skip": 0,
+   "v": "2026-10-15.4",
+   "more": 73
   }
  ]
 }
