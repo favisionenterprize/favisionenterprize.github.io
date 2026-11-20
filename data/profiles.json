@@ -692,6 +692,13 @@
    "mode": "check",
    "linkOk": false,
    "pinOk": false
+  },
+  {
+   "d": "2026-11-20",
+   "net": "fb",
+   "mode": "check",
+   "linkOk": true,
+   "pinOk": false
   }
  ]
 }
