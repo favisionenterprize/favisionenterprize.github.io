@@ -1,6 +1,6 @@
 {
  "d": "2026-11-20",
- "t": "2026-11-20T01:37:49.467Z",
+ "t": "2026-11-20T02:12:22.646Z",
  "settings": {
   "artists_first": true,
   "artists": [
@@ -13,11 +13,18 @@
  },
  "sounds": [
   {
-   "name": "Me And The Devil Instrumental Ergashov",
-   "artist": "Ergashov",
+   "name": "Yellow",
+   "artist": "Coldplay",
    "platform": "ig",
    "rank": 1,
-   "d": "2026-11-19"
+   "d": "2026-11-20"
+  },
+  {
+   "name": "Ordinary",
+   "artist": "Alex Warren",
+   "platform": "ig",
+   "rank": 2,
+   "d": "2026-11-20"
   }
  ],
  "manual": [],
@@ -2004,15 +2011,6 @@
  "notes": [
   {
    "d": "2026-11-14",
-   "text": "couldn't read the Creative Center song list"
-  },
-  {
-   "d": "2026-11-14",
-   "platform": "tiktok",
-   "text": "1 post went out without a sound"
-  },
-  {
-   "d": "2026-11-14",
    "platform": "tiktok",
    "text": "3 posts went out without a sound"
   },
@@ -2224,6 +2222,14 @@
    "d": "2026-11-20",
    "platform": "tiktok",
    "text": "7 posts went out without a sound"
+  },
+  {
+   "d": "2026-11-20",
+   "text": "no 'Approved for business use' filter seen: check the sounds are in TikTok's Commercial Music Library"
+  },
+  {
+   "d": "2026-11-20",
+   "text": "couldn't read the Creative Center song list"
   }
  ]
 }
