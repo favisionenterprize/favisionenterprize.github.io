@@ -12,8 +12,8 @@
  },
  "ig": {
   "scan": {
-   "d": "2026-11-19",
-   "t": "2026-11-19T04:45:43.526Z",
+   "d": "2026-11-20",
+   "t": "2026-11-20T01:41:35.695Z",
    "n": 12,
    "posts": [
     {
@@ -38,6 +38,48 @@
      "alt": ""
     },
     {
+     "id": "Df60NwilFm6",
+     "url": "https://www.instagram.com/p/Df60NwilFm6/",
+     "text": "",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "Df6t4LXiDqW",
+     "url": "https://www.instagram.com/p/Df6t4LXiDqW/",
+     "text": "",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "Df6tx_2CAPW",
+     "url": "https://www.instagram.com/p/Df6tx_2CAPW/",
+     "text": "",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "Df6tsMiiG0n",
+     "url": "https://www.instagram.com/p/Df6tsMiiG0n/",
+     "text": "",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "Df6tloEiGEp",
+     "url": "https://www.instagram.com/p/Df6tloEiGEp/",
+     "text": "",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "Df6tanJiEUw",
+     "url": "https://www.instagram.com/p/Df6tanJiEUw/",
+     "text": "",
+     "kind": "post",
+     "alt": ""
+    },
+    {
      "id": "Df6JnwTiJIG",
      "url": "https://www.instagram.com/p/Df6JnwTiJIG/",
      "text": "",
@@ -54,48 +96,6 @@
     {
      "id": "Df6JZyeiOSo",
      "url": "https://www.instagram.com/p/Df6JZyeiOSo/",
-     "text": "",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "Df6JTGQiCmi",
-     "url": "https://www.instagram.com/p/Df6JTGQiCmi/",
-     "text": "",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "Df6JQguCDEi",
-     "url": "https://www.instagram.com/p/Df6JQguCDEi/",
-     "text": "",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "Df6JLq3iO81",
-     "url": "https://www.instagram.com/p/Df6JLq3iO81/",
-     "text": "",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "Df6JKWuiLrR",
-     "url": "https://www.instagram.com/p/Df6JKWuiLrR/",
-     "text": "",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "Df6JEuxiDyk",
-     "url": "https://www.instagram.com/p/Df6JEuxiDyk/",
-     "text": "",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "Df6JEK4iFc-",
-     "url": "https://www.instagram.com/p/Df6JEK4iFc-/",
      "text": "",
      "kind": "post",
      "alt": ""
@@ -1356,6 +1356,13 @@
    "skip": 0,
    "v": "2026-10-15.4",
    "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile, then try again."
+  },
+  {
+   "d": "2026-11-20",
+   "kind": "scan",
+   "net": "ig",
+   "n": 12,
+   "v": "2026-10-15.4"
   }
  ]
 }
