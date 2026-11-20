@@ -1172,6 +1172,36 @@
     "ok": true,
     "why": "caption added",
     "mode": "set"
+   },
+   "Df6I-8ViFqB": {
+    "d": "2026-11-20",
+    "ok": false,
+    "why": "the caption box didn't open",
+    "mode": "set"
+   },
+   "Df6IyVDiAfg": {
+    "d": "2026-11-20",
+    "ok": false,
+    "why": "the caption box didn't open",
+    "mode": "set"
+   },
+   "Df6IdcxCCSr": {
+    "d": "2026-11-20",
+    "ok": false,
+    "why": "the caption box didn't open",
+    "mode": "set"
+   },
+   "Df4U2exiCZm": {
+    "d": "2026-11-20",
+    "ok": false,
+    "why": "the caption box didn't open",
+    "mode": "set"
+   },
+   "Df4Pa-QEZk9": {
+    "d": "2026-11-20",
+    "ok": false,
+    "why": "the caption box didn't open",
+    "mode": "set"
    }
   }
  },
@@ -2256,6 +2286,16 @@
    "skip": 0,
    "v": "2026-10-15.4",
    "more": 68
+  },
+  {
+   "d": "2026-11-20",
+   "kind": "fxfix",
+   "net": "ig",
+   "tried": 5,
+   "ok": 0,
+   "skip": 0,
+   "v": "2026-10-15.4",
+   "more": 63
   }
  ]
 }
