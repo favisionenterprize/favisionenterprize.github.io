@@ -48,7 +48,7 @@
   "x": {
    "d": "2026-11-20",
    "link": "favisionenterprize.github.io",
-   "pinned": null,
+   "pinned": "Pls take Note that office is open for walk in purchases and delivery as well. STUDENT DESKS ARE AVAILABLE IN LARGE QUANTITIES!!!",
    "linkOk": true,
    "pinOk": false,
    "why": "",
@@ -670,6 +670,13 @@
    "net": "ig",
    "mode": "check",
    "linkOk": false,
+   "pinOk": false
+  },
+  {
+   "d": "2026-11-20",
+   "net": "x",
+   "mode": "check",
+   "linkOk": true,
    "pinOk": false
   },
   {
