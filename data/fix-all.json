@@ -13,7 +13,7 @@
  "ig": {
   "scan": {
    "d": "2026-11-20",
-   "t": "2026-11-20T01:41:35.695Z",
+   "t": "2026-11-20T01:41:54.250Z",
    "n": 12,
    "posts": [
     {
@@ -1356,6 +1356,13 @@
    "skip": 0,
    "v": "2026-10-15.4",
    "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile, then try again."
+  },
+  {
+   "d": "2026-11-20",
+   "kind": "scan",
+   "net": "ig",
+   "n": 12,
+   "v": "2026-10-15.4"
   },
   {
    "d": "2026-11-20",
