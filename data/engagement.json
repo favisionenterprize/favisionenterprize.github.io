@@ -305,6 +305,11 @@
    "d": "2026-11-20",
    "net": "fb",
    "n": 563
+  },
+  {
+   "d": "2026-11-20",
+   "net": "ig",
+   "n": 898
   }
  ],
  "posts": {
@@ -358,7 +363,7 @@
     }
    ],
    "title": "Instagram",
-   "checked": "2026-11-19"
+   "checked": "2026-11-20"
   },
   "https://www.instagram.com/reel/DYk7xGboiMo/": {
    "net": "ig",
@@ -366,7 +371,7 @@
    "first": "2026-10-13",
    "commented": [],
    "title": "Instagram",
-   "checked": "2026-11-19",
+   "checked": "2026-11-20",
    "views": 200
   },
   "https://www.instagram.com/reel/C1Tge8mgCKR/": {
@@ -375,7 +380,7 @@
    "first": "2026-10-13",
    "commented": [],
    "title": "Instagram",
-   "checked": "2026-11-19",
+   "checked": "2026-11-20",
    "views": 2000000
   },
   "https://www.instagram.com/p/DecmM5ViFBJ/": {
@@ -2087,6 +2092,78 @@
    "title": "(20+) Facebook",
    "checked": "2026-11-20",
    "likes": 11
+  },
+  "https://www.instagram.com/p/Df8gZLDiAV0/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/Df8gZLDiAV0/",
+   "first": "2026-11-20",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-11-20"
+  },
+  "https://www.instagram.com/p/Df8gSZriPFx/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/Df8gSZriPFx/",
+   "first": "2026-11-20",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-11-20"
+  },
+  "https://www.instagram.com/p/Df8gKBzCDOy/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/Df8gKBzCDOy/",
+   "first": "2026-11-20",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-11-20"
+  },
+  "https://www.instagram.com/p/Df8f7KkCPoK/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/Df8f7KkCPoK/",
+   "first": "2026-11-20",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-11-20"
+  },
+  "https://www.instagram.com/p/Df8fvPyiFPE/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/Df8fvPyiFPE/",
+   "first": "2026-11-20",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-11-20"
+  },
+  "https://www.instagram.com/p/Df8fnrICIXm/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/Df8fnrICIXm/",
+   "first": "2026-11-20",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-11-20"
+  },
+  "https://www.instagram.com/p/Df8fc9RCK8D/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/Df8fc9RCK8D/",
+   "first": "2026-11-20",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-11-20"
+  },
+  "https://www.instagram.com/p/Df60NwilFm6/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/Df60NwilFm6/",
+   "first": "2026-11-20",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-11-20"
+  },
+  "https://www.instagram.com/p/Df6t4LXiDqW/": {
+   "net": "ig",
+   "url": "https://www.instagram.com/p/Df6t4LXiDqW/",
+   "first": "2026-11-20",
+   "commented": [],
+   "title": "Instagram",
+   "checked": "2026-11-20"
   }
  },
  "runs": [
@@ -4789,6 +4866,21 @@
    "followers": 563,
    "stopped": null,
    "commenting": false
+  },
+  {
+   "d": "2026-11-20",
+   "t": "2026-11-20T01:54:03.260Z",
+   "net": "ig",
+   "mode": "stats",
+   "posts": 12,
+   "checked": 12,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 898,
+   "stopped": null,
+   "commenting": true
   }
  ],
  "liked": {}
