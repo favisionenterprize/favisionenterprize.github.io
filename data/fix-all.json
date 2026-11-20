@@ -514,8 +514,8 @@
  "x": {
   "scan": {
    "d": "2026-11-20",
-   "t": "2026-11-20T01:58:16.692Z",
-   "n": 2,
+   "t": "2026-11-20T02:02:09.986Z",
+   "n": 10,
    "posts": [
     {
      "id": "1662447925388099587",
@@ -528,6 +528,62 @@
      "id": "2123499048225362208",
      "url": "https://x.com/FaVisionEnt/status/2123499048225362208",
      "text": "Buying for a school, church or office? Request a proforma invoice on our website. Student desk sets are GH₵640 each from 50 sets. Link in bio. #FAVisionEnterprise",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2123136659973914922",
+     "url": "https://x.com/FaVisionEnt/status/2123136659973914922",
+     "text": "Back to school in ONE stop. Desks, textbooks, exercise books, stationery and printing (flyers, banners, branded exercise books). FA Vision Enterprise. #FAVisionEnterprise",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2122774273576296501",
+     "url": "https://x.com/FaVisionEnt/status/2122774273576296501",
+     "text": "Your fabric. Your colour. Your sofa. Upholstered to order by FA Vision Enterprise. DM us or order at https:// favisionenterprize.github.io. #FAVisionEnterprise",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2122411884062077389",
+     "url": "https://x.com/FaVisionEnt/status/2122411884062077389",
+     "text": "Church, hotel, office, school or home, one supplier for every room. Talk to FA Vision Enterprise. Link in bio. #FAVisionEnterprise",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2122049497081786568",
+     "url": "https://x.com/FaVisionEnt/status/2122049497081786568",
+     "text": "Office glow-up loading. Desks, chairs and shelves for offices of every size. Get a quote: link in bio. #FAVisionEnterprise",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2121687109773988304",
+     "url": "https://x.com/FaVisionEnt/status/2121687109773988304",
+     "text": "Seen us on Facebook Marketplace? That's us! Search 'F.A Vision Enterprise' there, or see the full catalogue on our website (link in bio). #FAVisionEnterprise",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2121324721648120205",
+     "url": "https://x.com/FaVisionEnt/status/2121324721648120205",
+     "text": "Shop furniture in your pyjamas. Browse, pick and order on https:// favisionenterprize.github.io, the link is in our bio. #FAVisionEnterprise",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2120962334046740686",
+     "url": "https://x.com/FaVisionEnt/status/2120962334046740686",
+     "text": "Come see and feel it before you buy. Odorkor (Tarazzo Rd, opp. Pacific Filling Station), Omanjor and Kasoa. Mon–Sat, 8am–6pm. #FAVisionEnterprise",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "2120599944671146440",
+     "url": "https://x.com/FaVisionEnt/status/2120599944671146440",
+     "text": "We deliver AND set up. Accra, Tema, Koforidua, Central Region & Kumasi. Order at https:// favisionenterprize.github.io (link in bio) or message us on Facebook Marketplace. #FAVisionEnterprise",
      "kind": "post",
      "alt": ""
     }
@@ -1476,6 +1532,13 @@
    "skip": 0,
    "v": "2026-10-15.4",
    "more": 4
+  },
+  {
+   "d": "2026-11-20",
+   "kind": "scan",
+   "net": "x",
+   "n": 10,
+   "v": "2026-10-15.4"
   }
  ]
 }
