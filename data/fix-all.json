@@ -407,7 +407,7 @@
     "mode": "set"
    },
    "Df6JnwTiJIG": {
-    "d": "2026-11-19",
+    "d": "2026-11-20",
     "ok": false,
     "why": "Instagram didn't confirm the save",
     "mode": "set"
@@ -462,6 +462,18 @@
     "mode": "set"
    },
    "Df6tsMiiG0n": {
+    "d": "2026-11-20",
+    "ok": false,
+    "why": "Instagram didn't confirm the save",
+    "mode": "set"
+   },
+   "Df6tloEiGEp": {
+    "d": "2026-11-20",
+    "ok": false,
+    "why": "Instagram didn't confirm the save",
+    "mode": "set"
+   },
+   "Df6tanJiEUw": {
     "d": "2026-11-20",
     "ok": false,
     "why": "Instagram didn't confirm the save",
@@ -1441,6 +1453,15 @@
    "kind": "scan",
    "net": "ig",
    "n": 12,
+   "v": "2026-10-15.4"
+  },
+  {
+   "d": "2026-11-20",
+   "kind": "fxfix",
+   "net": "ig",
+   "tried": 4,
+   "ok": 0,
+   "skip": 0,
    "v": "2026-10-15.4"
   }
  ]
