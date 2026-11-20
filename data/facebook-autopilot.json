@@ -19237,6 +19237,15 @@
    "ok": false,
    "now": true,
    "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-11-20",
+   "t": "2026-11-20T01:40:17.498Z",
+   "p": "FAV-005",
+   "g": "page",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
   }
  ],
  "resets": {},
@@ -20907,6 +20916,13 @@
   {
    "d": "2026-11-20",
    "t": "2026-11-20T01:39:42.430Z",
+   "kind": "post",
+   "tried": 1,
+   "ok": 0
+  },
+  {
+   "d": "2026-11-20",
+   "t": "2026-11-20T01:40:41.894Z",
    "kind": "post",
    "tried": 1,
    "ok": 0
