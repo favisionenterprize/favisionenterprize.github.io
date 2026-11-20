@@ -348,7 +348,7 @@
    "commented": [],
    "title": "Facebook",
    "checked": "2026-11-20",
-   "likes": 6000,
+   "likes": 695,
    "comments": 1,
    "views": 142
   },
@@ -4990,6 +4990,21 @@
   {
    "d": "2026-11-20",
    "t": "2026-11-20T02:11:35.064Z",
+   "net": "fb",
+   "mode": "stats",
+   "posts": 3,
+   "checked": 3,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 563,
+   "stopped": null,
+   "commenting": true
+  },
+  {
+   "d": "2026-11-20",
+   "t": "2026-11-20T02:13:38.471Z",
    "net": "fb",
    "mode": "stats",
    "posts": 3,
