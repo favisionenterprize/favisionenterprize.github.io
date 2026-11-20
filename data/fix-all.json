@@ -1263,6 +1263,36 @@
     "ok": true,
     "why": "caption added",
     "mode": "set"
+   },
+   "DfuiJeeiF7w": {
+    "d": "2026-11-20",
+    "ok": true,
+    "why": "caption added",
+    "mode": "set"
+   },
+   "DfuRJx0CEwE": {
+    "d": "2026-11-20",
+    "ok": true,
+    "why": "caption added",
+    "mode": "set"
+   },
+   "DfuRDC9CJ99": {
+    "d": "2026-11-20",
+    "ok": true,
+    "why": "caption added",
+    "mode": "set"
+   },
+   "DfuQ9NTCPyU": {
+    "d": "2026-11-20",
+    "ok": true,
+    "why": "caption added",
+    "mode": "set"
+   },
+   "DfuLG29iJH5": {
+    "d": "2026-11-20",
+    "ok": true,
+    "why": "caption added",
+    "mode": "set"
    }
   }
  },
@@ -2417,6 +2447,16 @@
    "skip": 0,
    "v": "2026-10-15.4",
    "more": 33
+  },
+  {
+   "d": "2026-11-20",
+   "kind": "fxfix",
+   "net": "ig",
+   "tried": 5,
+   "ok": 5,
+   "skip": 0,
+   "v": "2026-10-15.4",
+   "more": 28
   }
  ]
 }
