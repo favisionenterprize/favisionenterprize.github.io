@@ -11042,16 +11042,48 @@
    "p": "FAV-027",
    "ok": true,
    "now": true
+  },
+  {
+   "d": "2026-11-21",
+   "t": "2026-11-21T10:08:25.312Z",
+   "net": "tiktok",
+   "k": "card:FAV-028",
+   "p": "FAV-028",
+   "ok": true,
+   "now": true,
+   "why": "Hillsong Worship: only tracks used lately · no sound"
+  },
+  {
+   "d": "2026-11-21",
+   "t": "2026-11-21T10:12:48.994Z",
+   "net": "tiktok",
+   "k": "card:FAV-030",
+   "p": "FAV-030",
+   "ok": true,
+   "now": true
+  },
+  {
+   "d": "2026-11-21",
+   "t": "2026-11-21T10:16:13.532Z",
+   "net": "tiktok",
+   "k": "box:FAV-021",
+   "p": "FAV-021",
+   "ok": true,
+   "now": true,
+   "why": "artist not available in picker: william mc dowell · no sound"
+  },
+  {
+   "d": "2026-11-21",
+   "t": "2026-11-21T10:18:50.834Z",
+   "net": "tiktok",
+   "k": "card:FAV-037",
+   "p": "FAV-037",
+   "ok": true,
+   "now": true,
+   "why": "artist not available in picker: micheal w smith · no sound"
   }
  ],
  "runs": [
-  {
-   "d": "2026-10-27",
-   "t": "2026-10-27T16:04:54.321Z",
-   "kind": "x",
-   "tried": 2,
-   "ok": 0
-  },
   {
    "d": "2026-10-27",
    "t": "2026-10-27T16:05:48.613Z",
@@ -12444,6 +12476,13 @@
    "d": "2026-11-21",
    "t": "2026-11-21T10:07:17.353Z",
    "kind": "x",
+   "tried": 4,
+   "ok": 4
+  },
+  {
+   "d": "2026-11-21",
+   "t": "2026-11-21T10:19:07.506Z",
+   "kind": "tiktok",
    "tried": 4,
    "ok": 4
   }
