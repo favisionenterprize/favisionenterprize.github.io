@@ -11117,16 +11117,48 @@
    "p": "FAV-032",
    "ok": true,
    "now": true
+  },
+  {
+   "d": "2026-11-21",
+   "t": "2026-11-21T19:36:28.167Z",
+   "net": "tiktok",
+   "k": "card:FAV-019",
+   "p": "FAV-019",
+   "ok": true,
+   "now": true,
+   "why": "Hillsong Worship: only tracks used lately · no sound"
+  },
+  {
+   "d": "2026-11-21",
+   "t": "2026-11-21T19:39:02.139Z",
+   "net": "tiktok",
+   "k": "box:FAV-039",
+   "p": "FAV-039",
+   "ok": true,
+   "now": true
+  },
+  {
+   "d": "2026-11-21",
+   "t": "2026-11-21T19:43:52.192Z",
+   "net": "tiktok",
+   "k": "box:FAV-035",
+   "p": "FAV-035",
+   "ok": true,
+   "now": true,
+   "why": "artist not available in picker: don meon · no sound"
+  },
+  {
+   "d": "2026-11-21",
+   "t": "2026-11-21T19:46:57.138Z",
+   "net": "tiktok",
+   "k": "card:FAV-043",
+   "p": "FAV-043",
+   "ok": true,
+   "now": true,
+   "why": "artist not available in picker: william mc dowell · no sound"
   }
  ],
  "runs": [
-  {
-   "d": "2026-10-27",
-   "t": "2026-10-27T16:06:20.267Z",
-   "kind": "tiktok",
-   "tried": 1,
-   "ok": 1
-  },
   {
    "d": "2026-10-27",
    "t": "2026-10-27T17:07:04.565Z",
@@ -12519,6 +12551,13 @@
    "d": "2026-11-21",
    "t": "2026-11-21T19:35:14.032Z",
    "kind": "x",
+   "tried": 4,
+   "ok": 4
+  },
+  {
+   "d": "2026-11-21",
+   "t": "2026-11-21T19:47:12.239Z",
+   "kind": "tiktok",
    "tried": 4,
    "ok": 4
   }
