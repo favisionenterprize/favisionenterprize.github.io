@@ -1416,8 +1416,8 @@
  },
  "x": {
   "scan": {
-   "d": "2026-11-20",
-   "t": "2026-11-20T02:14:15.242Z",
+   "d": "2026-11-22",
+   "t": "2026-11-22T02:49:37.864Z",
    "n": 2,
    "posts": [
     {
@@ -1428,9 +1428,9 @@
      "alt": ""
     },
     {
-     "id": "2123499048225362208",
-     "url": "https://x.com/FaVisionEnt/status/2123499048225362208",
-     "text": "Buying for a school, church or office? Request a proforma invoice on our website. Student desk sets are GH₵640 each from 50 sets. Link in bio. #FAVisionEnterprise",
+     "id": "2124223824644452633",
+     "url": "https://x.com/FaVisionEnt/status/2124223824644452633",
+     "text": "Rate this office setup 1–10. Desks, chairs & shelves from FA Vision Enterprise. Get a quote: link in bio. #FAVisionEnterprise",
      "kind": "post",
      "alt": ""
     }
@@ -2654,6 +2654,13 @@
    "skip": 0,
    "v": "2026-10-15.4",
    "stopped": "Facebook is using your F.A Vision Page, and Pages can't use Marketplace. Switch to your personal profile, then try again."
+  },
+  {
+   "d": "2026-11-22",
+   "kind": "scan",
+   "net": "x",
+   "n": 2,
+   "v": "2026-10-15.4"
   }
  ]
 }
