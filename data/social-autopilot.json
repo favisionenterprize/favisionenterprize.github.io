@@ -11312,16 +11312,99 @@
    "k": "card:FAV-007",
    "p": "FAV-007",
    "ok": true
+  },
+  {
+   "d": "2026-11-22",
+   "t": "2026-11-22T02:57:50.063Z",
+   "net": "tiktok",
+   "k": "box:FAV-014",
+   "p": "FAV-014",
+   "ok": true,
+   "why": "Hillsong Worship: only tracks used lately · no sound"
+  },
+  {
+   "d": "2026-11-22",
+   "t": "2026-11-22T02:58:50.531Z",
+   "net": "tiktok",
+   "k": "tile:fav-026",
+   "p": "FAV-026",
+   "ok": true,
+   "why": "jumbo: only tracks used lately · no sound"
+  },
+  {
+   "d": "2026-11-22",
+   "t": "2026-11-22T03:00:14.564Z",
+   "net": "tiktok",
+   "k": "tile:fav-010",
+   "p": "FAV-010",
+   "ok": true,
+   "why": "artist not available in picker: don meon · no sound"
+  },
+  {
+   "d": "2026-11-22",
+   "t": "2026-11-22T03:00:54.841Z",
+   "net": "tiktok",
+   "k": "card:FAV-017",
+   "p": "FAV-017",
+   "ok": true,
+   "why": "artist not available in picker: william mc dowell · no sound"
+  },
+  {
+   "d": "2026-11-22",
+   "t": "2026-11-22T03:01:40.505Z",
+   "net": "tiktok",
+   "k": "box:FAV-031",
+   "p": "FAV-031",
+   "ok": true,
+   "why": "artist not available in picker: micheal w smith · no sound"
+  },
+  {
+   "d": "2026-11-22",
+   "t": "2026-11-22T03:02:16.562Z",
+   "net": "tiktok",
+   "k": "tile:fav-011",
+   "p": "FAV-011",
+   "ok": true,
+   "why": "Hillsong Worship: only tracks used lately · no sound"
+  },
+  {
+   "d": "2026-11-22",
+   "t": "2026-11-22T03:02:54.978Z",
+   "net": "tiktok",
+   "k": "card:FAV-036",
+   "p": "FAV-036",
+   "ok": true,
+   "why": "jumbo: only tracks used lately · no sound"
+  },
+  {
+   "d": "2026-11-22",
+   "t": "2026-11-22T03:03:40.396Z",
+   "net": "tiktok",
+   "k": "box:FAV-022",
+   "p": "FAV-022",
+   "ok": true,
+   "why": "artist not available in picker: don meon · no sound"
+  },
+  {
+   "d": "2026-11-22",
+   "t": "2026-11-22T03:04:23.843Z",
+   "net": "tiktok",
+   "k": "card:FAV-009",
+   "p": "FAV-009",
+   "ok": true,
+   "why": "artist not available in picker: william mc dowell · no sound"
+  },
+  {
+   "d": "2026-11-22",
+   "t": "2026-11-22T03:05:11.363Z",
+   "net": "tiktok",
+   "k": "ad:fav-001",
+   "p": "FAV-001",
+   "ok": true,
+   "why": "artist not available in picker: micheal w smith · no sound"
   }
  ],
  "runs": [
-  {
-   "d": "2026-10-27",
-   "t": "2026-10-27T19:07:17.193Z",
-   "kind": "tiktok",
-   "tried": 1,
-   "ok": 1
-  },
   {
    "d": "2026-10-27",
    "t": "2026-10-27T19:07:45.857Z",
@@ -12714,6 +12797,13 @@
    "d": "2026-11-22",
    "t": "2026-11-22T02:48:23.015Z",
    "kind": "x",
+   "tried": 10,
+   "ok": 10
+  },
+  {
+   "d": "2026-11-22",
+   "t": "2026-11-22T03:05:25.903Z",
+   "kind": "tiktok",
    "tried": 10,
    "ok": 10
   }
