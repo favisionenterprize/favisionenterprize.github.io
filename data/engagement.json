@@ -310,6 +310,11 @@
    "d": "2026-11-20",
    "net": "fb",
    "n": 563
+  },
+  {
+   "d": "2026-11-22",
+   "net": "x",
+   "n": 297
   }
  ],
  "posts": {
@@ -465,7 +470,7 @@
    "url": "https://x.com/FaVisionEnt/status/1662447925388099587",
    "first": "2026-10-13",
    "commented": [],
-   "checked": "2026-11-20",
+   "checked": "2026-11-22",
    "likes": 3,
    "comments": 7,
    "shares": 2,
@@ -2236,6 +2241,14 @@
    "commented": [],
    "title": "Instagram",
    "checked": "2026-11-20"
+  },
+  "https://x.com/FaVisionEnt/status/2124223824644452633": {
+   "net": "x",
+   "url": "https://x.com/FaVisionEnt/status/2124223824644452633",
+   "first": "2026-11-22",
+   "commented": [],
+   "checked": "2026-11-22",
+   "views": 9
   }
  },
  "runs": [
@@ -5148,6 +5161,21 @@
    "followers": 563,
    "stopped": null,
    "commenting": false
+  },
+  {
+   "d": "2026-11-22",
+   "t": "2026-11-22T02:51:25.077Z",
+   "net": "x",
+   "mode": "stats",
+   "posts": 2,
+   "checked": 2,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 297,
+   "stopped": null,
+   "commenting": true
   }
  ],
  "liked": {}
