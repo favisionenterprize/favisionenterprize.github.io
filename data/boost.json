@@ -770,6 +770,14 @@
    "p": "FAV-006",
    "ok": false,
    "why": "Post box didn't open"
+  },
+  {
+   "d": "2026-11-22",
+   "net": "fb",
+   "v": "fav-007-short",
+   "p": "FAV-007",
+   "ok": false,
+   "why": "Post button stayed off"
   }
  ],
  "runs": []
