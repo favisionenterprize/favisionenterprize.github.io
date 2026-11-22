@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-21T09:40:20Z",
+ "generated": "2026-11-22T09:41:14Z",
  "mode": "full",
  "score": 80,
  "prev_score": 80,
@@ -1245,7 +1245,7 @@
       "kb": 302,
       "requests": 48,
       "img_no_alt": 0,
-      "secs": 0.3,
+      "secs": 0.4,
       "keywords": []
      },
      {
@@ -1308,7 +1308,7 @@
       "kb": 193,
       "requests": 6,
       "img_no_alt": 3,
-      "secs": 0.3,
+      "secs": 0.5,
       "keywords": []
      }
     ],
@@ -1318,38 +1318,9 @@
    {
     "name": "Orca Deco",
     "url": "https://orcadeco.com.gh/",
-    "status": "ok",
-    "pages": [
-     {
-      "url": "https://orcadeco.com.gh/",
-      "title": true,
-      "title_len": 70,
-      "description": true,
-      "h1": 0,
-      "og": true,
-      "canonical": true,
-      "viewport": true,
-      "schema": [
-       "FurnitureStore",
-       "OpeningHoursSpecification",
-       "PostalAddress"
-      ],
-      "phone": false,
-      "accra": true,
-      "whatsapp": false,
-      "blog": false,
-      "faq": false,
-      "kb": 4,
-      "requests": 4,
-      "img_no_alt": 0,
-      "secs": 0.3,
-      "keywords": [
-       "furniture shop Accra"
-      ]
-     }
-    ],
-    "sitemap": false,
-    "https": true
+    "status": "unreachable: timed out",
+    "pages": [],
+    "sitemap": null
    },
    {
     "name": "Phenicia",
@@ -1385,10 +1356,10 @@
       "whatsapp": true,
       "blog": false,
       "faq": false,
-      "kb": 135,
-      "requests": 123,
+      "kb": 134,
+      "requests": 121,
       "img_no_alt": 1,
-      "secs": 0.7,
+      "secs": 0.4,
       "keywords": []
      },
      {
@@ -1409,7 +1380,7 @@
       "kb": 163,
       "requests": 128,
       "img_no_alt": 1,
-      "secs": 0.5,
+      "secs": 0.4,
       "keywords": []
      },
      {
@@ -1434,7 +1405,7 @@
       "keywords": []
      },
      {
-      "url": "https://furniturecityghana.com/product/vintage/",
+      "url": "https://furniturecityghana.com/product/cs-12rg/",
       "title": true,
       "title_len": 30,
       "description": false,
@@ -1451,7 +1422,7 @@
       "kb": 115,
       "requests": 114,
       "img_no_alt": 2,
-      "secs": 0.6,
+      "secs": 0.4,
       "keywords": []
      }
     ],
@@ -1492,7 +1463,7 @@
       "kb": 366,
       "requests": 129,
       "img_no_alt": 26,
-      "secs": 0.5,
+      "secs": 0.3,
       "keywords": []
      }
     ],
@@ -1502,133 +1473,9 @@
    {
     "name": "Casa Trasacco",
     "url": "https://www.casatrasacco.com/",
-    "status": "ok",
-    "pages": [
-     {
-      "url": "https://www.casatrasacco.com/",
-      "title": true,
-      "title_len": 59,
-      "description": true,
-      "h1": 0,
-      "og": false,
-      "canonical": true,
-      "viewport": true,
-      "schema": [
-       "BreadcrumbList",
-       "EntryPoint",
-       "ImageObject",
-       "ListItem",
-       "Organization",
-       "ReadAction",
-       "SearchAction",
-       "WebPage",
-       "WebSite"
-      ],
-      "phone": true,
-      "accra": true,
-      "whatsapp": false,
-      "blog": true,
-      "faq": false,
-      "kb": 212,
-      "requests": 134,
-      "img_no_alt": 23,
-      "secs": 2.6,
-      "keywords": []
-     },
-     {
-      "url": "https://www.casatrasacco.com/living-room-furniture/",
-      "title": true,
-      "title_len": 63,
-      "description": true,
-      "h1": 1,
-      "og": false,
-      "canonical": true,
-      "viewport": true,
-      "schema": [
-       "BreadcrumbList",
-       "EntryPoint",
-       "ImageObject",
-       "ListItem",
-       "Organization",
-       "ReadAction",
-       "SearchAction",
-       "WebPage",
-       "WebSite"
-      ],
-      "phone": true,
-      "accra": false,
-      "whatsapp": false,
-      "blog": true,
-      "faq": false,
-      "kb": 169,
-      "requests": 102,
-      "img_no_alt": 4,
-      "secs": 2.4,
-      "keywords": []
-     },
-     {
-      "url": "https://www.casatrasacco.com/product-category/sofa/",
-      "title": true,
-      "title_len": 59,
-      "description": true,
-      "h1": 1,
-      "og": false,
-      "canonical": true,
-      "viewport": true,
-      "schema": [
-       "BreadcrumbList",
-       "CollectionPage",
-       "EntryPoint",
-       "ImageObject",
-       "ListItem",
-       "Organization",
-       "SearchAction",
-       "WebSite"
-      ],
-      "phone": true,
-      "accra": false,
-      "whatsapp": false,
-      "blog": true,
-      "faq": false,
-      "kb": 213,
-      "requests": 116,
-      "img_no_alt": 12,
-      "secs": 2.5,
-      "keywords": []
-     },
-     {
-      "url": "https://www.casatrasacco.com/product-category/coffee-side-tables/",
-      "title": true,
-      "title_len": 52,
-      "description": true,
-      "h1": 1,
-      "og": false,
-      "canonical": true,
-      "viewport": true,
-      "schema": [
-       "BreadcrumbList",
-       "CollectionPage",
-       "EntryPoint",
-       "ImageObject",
-       "ListItem",
-       "Organization",
-       "SearchAction",
-       "WebSite"
-      ],
-      "phone": true,
-      "accra": false,
-      "whatsapp": false,
-      "blog": true,
-      "faq": false,
-      "kb": 206,
-      "requests": 116,
-      "img_no_alt": 12,
-      "secs": 2.1,
-      "keywords": []
-     }
-    ],
-    "sitemap": true,
-    "https": true
+    "status": "unreachable: timed out",
+    "pages": [],
+    "sitemap": null
    },
    {
     "name": "Furnart",
@@ -1644,17 +1491,9 @@
      "what": "Separate category pages (sofas, beds, office…) that Google can rank one by one",
      "who": [
       "Kpogas Furniture",
-      "Furniture City Ghana",
-      "Casa Trasacco"
+      "Furniture City Ghana"
      ],
      "fix": "Our shop filters live behind #hash links. Product pages + the Products page ItemList are the first step."
-    },
-    {
-     "what": "A blog / news section that brings search traffic",
-     "who": [
-      "Casa Trasacco"
-     ],
-     "fix": "Post a short guide each month, e.g. “How to choose a student desk” (we can add a /guides/ page)."
     }
    ],
    "we_beat": [
@@ -1668,14 +1507,6 @@
      ]
     },
     {
-     "who": "Orca Deco",
-     "weak": [
-      "no FAQ",
-      "no H1",
-      "no phone number on the home page"
-     ]
-    },
-    {
      "who": "Furniture City Ghana",
      "weak": [
       "no meta description",
@@ -1683,7 +1514,7 @@
       "no FAQ",
       "no H1",
       "no link-preview tags",
-      "heavy home page (135 KB HTML, 123 files)",
+      "heavy home page (134 KB HTML, 121 files)",
       "no phone number on the home page",
       "targets none of our keywords in title/H1"
      ]
@@ -1700,21 +1531,9 @@
      ]
     },
     {
-     "who": "Casa Trasacco",
-     "weak": [
-      "no LocalBusiness schema (address/phone for Google Maps & AI)",
-      "no FAQ",
-      "no H1",
-      "no link-preview tags",
-      "heavy home page (212 KB HTML, 134 files)",
-      "23 images without alt text",
-      "targets none of our keywords in title/H1"
-     ]
-    },
-    {
      "who": "Nobody",
      "weak": [
-      "No competitor targets: student desk Ghana, office chairs Accra, dining set Accra price, sofa Odorkor, school furniture Ghana, wholesale furniture Accra, furniture Kasoa. Own these first."
+      "No competitor targets: furniture shop Accra, student desk Ghana, office chairs Accra, dining set Accra price, sofa Odorkor, school furniture Ghana, wholesale furniture Accra, furniture Kasoa. Own these first."
      ]
     }
    ]
@@ -1935,6 +1754,11 @@
   },
   {
    "d": "2026-11-21",
+   "score": 80,
+   "ai": 0
+  },
+  {
+   "d": "2026-11-22",
    "score": 80,
    "ai": 0
   }
