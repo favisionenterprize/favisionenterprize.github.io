@@ -3964,6 +3964,70 @@
    "ok": false,
    "now": true,
    "why": "Couldn't find Create"
+  },
+  {
+   "d": "2026-11-25",
+   "t": "2026-11-25T20:15:58.435Z",
+   "k": "ad:fav-014",
+   "p": "FAV-014",
+   "ok": false,
+   "why": "Couldn't find Create"
+  },
+  {
+   "d": "2026-11-25",
+   "t": "2026-11-25T20:16:27.006Z",
+   "k": "card:FAV-042",
+   "p": "FAV-042",
+   "ok": false,
+   "why": "Couldn't find Create"
+  },
+  {
+   "d": "2026-11-25",
+   "t": "2026-11-25T20:16:57.241Z",
+   "k": "card:FAV-016",
+   "p": "FAV-016",
+   "ok": false,
+   "why": "Couldn't find Create"
+  },
+  {
+   "d": "2026-11-25",
+   "t": "2026-11-25T20:17:26.126Z",
+   "k": "box:FAV-019",
+   "p": "FAV-019",
+   "ok": false,
+   "why": "Couldn't find Create"
+  },
+  {
+   "d": "2026-11-25",
+   "t": "2026-11-25T20:17:54.588Z",
+   "k": "card:FAV-009",
+   "p": "FAV-009",
+   "ok": false,
+   "why": "Couldn't find Create"
+  },
+  {
+   "d": "2026-11-25",
+   "t": "2026-11-25T20:18:25.862Z",
+   "k": "box:FAV-023",
+   "p": "FAV-023",
+   "ok": false,
+   "why": "Couldn't find Create"
+  },
+  {
+   "d": "2026-11-25",
+   "t": "2026-11-25T20:18:58.546Z",
+   "k": "card:FAV-030",
+   "p": "FAV-030",
+   "ok": false,
+   "why": "Couldn't find Create"
+  },
+  {
+   "d": "2026-11-25",
+   "t": "2026-11-25T20:19:28.955Z",
+   "k": "box:FAV-020",
+   "p": "FAV-020",
+   "ok": false,
+   "why": "Couldn't find Create"
   }
  ],
  "profile": [
@@ -4209,13 +4273,6 @@
   }
  ],
  "runs": [
-  {
-   "d": "2026-10-23",
-   "t": "2026-10-23T17:14:34.045Z",
-   "kind": "ig",
-   "tried": 1,
-   "ok": 0
-  },
   {
    "d": "2026-10-23",
    "t": "2026-10-23T17:14:45.363Z",
@@ -5693,6 +5750,13 @@
    "t": "2026-11-25T20:07:06.152Z",
    "kind": "ig",
    "tried": 2,
+   "ok": 0
+  },
+  {
+   "d": "2026-11-25",
+   "t": "2026-11-25T20:20:28.542Z",
+   "kind": "ig",
+   "tried": 8,
    "ok": 0
   }
  ]
