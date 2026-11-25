@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-24T12:23:13Z",
+ "generated": "2026-11-25T11:11:19Z",
  "mode": "full",
  "score": 80,
  "prev_score": 80,
@@ -1245,7 +1245,7 @@
       "kb": 302,
       "requests": 48,
       "img_no_alt": 0,
-      "secs": 0.3,
+      "secs": 0.5,
       "keywords": []
      },
      {
@@ -1266,7 +1266,7 @@
       "kb": 282,
       "requests": 48,
       "img_no_alt": 0,
-      "secs": 0.5,
+      "secs": 0.4,
       "keywords": []
      },
      {
@@ -1287,7 +1287,7 @@
       "kb": 191,
       "requests": 5,
       "img_no_alt": 2,
-      "secs": 0.4,
+      "secs": 0.5,
       "keywords": []
      },
      {
@@ -1308,7 +1308,7 @@
       "kb": 193,
       "requests": 6,
       "img_no_alt": 3,
-      "secs": 0.3,
+      "secs": 0.4,
       "keywords": []
      }
     ],
@@ -1342,7 +1342,7 @@
       "kb": 4,
       "requests": 4,
       "img_no_alt": 0,
-      "secs": 0.2,
+      "secs": 0.3,
       "keywords": [
        "furniture shop Accra"
       ]
@@ -1409,7 +1409,7 @@
       "kb": 163,
       "requests": 128,
       "img_no_alt": 1,
-      "secs": 0.9,
+      "secs": 0.6,
       "keywords": []
      },
      {
@@ -1430,11 +1430,11 @@
       "kb": 94,
       "requests": 102,
       "img_no_alt": 0,
-      "secs": 0.6,
+      "secs": 0.8,
       "keywords": []
      },
      {
-      "url": "https://furniturecityghana.com/product/cs-1004/",
+      "url": "https://furniturecityghana.com/product/karamel/",
       "title": true,
       "title_len": 30,
       "description": false,
@@ -1448,10 +1448,10 @@
       "whatsapp": true,
       "blog": false,
       "faq": false,
-      "kb": 115,
-      "requests": 114,
+      "kb": 119,
+      "requests": 120,
       "img_no_alt": 2,
-      "secs": 0.6,
+      "secs": 0.5,
       "keywords": []
      }
     ],
@@ -1532,7 +1532,7 @@
       "kb": 212,
       "requests": 134,
       "img_no_alt": 23,
-      "secs": 3.2,
+      "secs": 2.3,
       "keywords": []
      },
      {
@@ -1563,7 +1563,7 @@
       "kb": 169,
       "requests": 102,
       "img_no_alt": 4,
-      "secs": 2.3,
+      "secs": 2.0,
       "keywords": []
      },
      {
@@ -1593,7 +1593,7 @@
       "kb": 213,
       "requests": 116,
       "img_no_alt": 12,
-      "secs": 2.4,
+      "secs": 2.0,
       "keywords": []
      },
      {
@@ -1623,7 +1623,7 @@
       "kb": 206,
       "requests": 116,
       "img_no_alt": 12,
-      "secs": 2.2,
+      "secs": 2.1,
       "keywords": []
      }
     ],
@@ -1950,6 +1950,11 @@
   },
   {
    "d": "2026-11-24",
+   "score": 80,
+   "ai": 0
+  },
+  {
+   "d": "2026-11-25",
    "score": 80,
    "ai": 0
   }
