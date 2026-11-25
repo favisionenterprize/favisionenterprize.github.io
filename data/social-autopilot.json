@@ -11486,13 +11486,6 @@
  "runs": [
   {
    "d": "2026-10-27",
-   "t": "2026-10-27T19:46:11.758Z",
-   "kind": "tiktok",
-   "tried": 1,
-   "ok": 1
-  },
-  {
-   "d": "2026-10-27",
    "t": "2026-10-27T20:10:15.910Z",
    "kind": "x",
    "tried": 2,
@@ -12885,6 +12878,14 @@
    "kind": "tiktok",
    "tried": 4,
    "ok": 4
+  },
+  {
+   "d": "2026-11-25",
+   "t": "2026-11-25T19:51:21.111Z",
+   "kind": "x",
+   "tried": 0,
+   "ok": 0,
+   "stopped": "X showed \"payment / subscription: “Home Subscribe For you Following”\". Nothing more was posted."
   }
  ]
 }
