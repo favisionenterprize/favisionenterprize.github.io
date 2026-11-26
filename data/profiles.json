@@ -37,9 +37,9 @@
    "mode": "check"
   },
   "ig": {
-   "d": "2026-11-22",
+   "d": "2026-11-26",
    "link": null,
-   "pinned": "Photo by FA Visi🌐n Enterprise on September 30, 2026. May be an image of table, step stool, trolley, armchair, chair, ra",
+   "pinned": null,
    "linkOk": false,
    "pinOk": false,
    "why": "",
@@ -747,6 +747,13 @@
    "net": "fb",
    "mode": "check",
    "linkOk": true,
+   "pinOk": false
+  },
+  {
+   "d": "2026-11-26",
+   "net": "ig",
+   "mode": "check",
+   "linkOk": false,
    "pinOk": false
   }
  ]
