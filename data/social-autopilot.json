@@ -11481,17 +11481,95 @@
    "ok": true,
    "now": true,
    "why": "artist not available in picker: william mc dowell · no sound"
+  },
+  {
+   "d": "2026-11-26",
+   "t": "2026-11-26T03:06:18.059Z",
+   "net": "tiktok",
+   "k": "ad:fav-014",
+   "p": "FAV-014",
+   "ok": true
+  },
+  {
+   "d": "2026-11-26",
+   "t": "2026-11-26T03:07:36.932Z",
+   "net": "tiktok",
+   "k": "box:FAV-011",
+   "p": "FAV-011",
+   "ok": true,
+   "why": "artist not available in picker: micheal w smith · no sound"
+  },
+  {
+   "d": "2026-11-26",
+   "t": "2026-11-26T03:08:35.523Z",
+   "net": "tiktok",
+   "k": "card:FAV-022",
+   "p": "FAV-022",
+   "ok": true
+  },
+  {
+   "d": "2026-11-26",
+   "t": "2026-11-26T03:09:40.580Z",
+   "net": "tiktok",
+   "k": "tile:fav-002",
+   "p": "FAV-002",
+   "ok": true,
+   "why": "artist not available in picker: don meon · no sound"
+  },
+  {
+   "d": "2026-11-26",
+   "t": "2026-11-26T03:10:57.853Z",
+   "net": "tiktok",
+   "k": "card:FAV-024",
+   "p": "FAV-024",
+   "ok": true,
+   "why": "artist not available in picker: william mc dowell · no sound"
+  },
+  {
+   "d": "2026-11-26",
+   "t": "2026-11-26T03:12:10.450Z",
+   "net": "tiktok",
+   "k": "card:FAV-016",
+   "p": "FAV-016",
+   "ok": true
+  },
+  {
+   "d": "2026-11-26",
+   "t": "2026-11-26T03:13:17.158Z",
+   "net": "tiktok",
+   "k": "box:FAV-040",
+   "p": "FAV-040",
+   "ok": true,
+   "why": "artist not available in picker: micheal w smith · no sound"
+  },
+  {
+   "d": "2026-11-26",
+   "t": "2026-11-26T03:14:22.445Z",
+   "net": "tiktok",
+   "k": "card:FAV-025",
+   "p": "FAV-025",
+   "ok": true
+  },
+  {
+   "d": "2026-11-26",
+   "t": "2026-11-26T03:15:25.773Z",
+   "net": "tiktok",
+   "k": "ad:fav-010",
+   "p": "FAV-010",
+   "ok": true,
+   "why": "artist not available in picker: don meon · no sound"
+  },
+  {
+   "d": "2026-11-26",
+   "t": "2026-11-26T03:16:28.794Z",
+   "net": "tiktok",
+   "k": "tile:fav-007",
+   "p": "FAV-007",
+   "ok": true,
+   "why": "artist not available in picker: william mc dowell · no sound"
   }
  ],
  "runs": [
-  {
-   "d": "2026-10-31",
-   "t": "2026-10-31T02:54:50.207Z",
-   "kind": "tiktok",
-   "tried": 0,
-   "ok": 0,
-   "stopped": "TikTok isn't logged in. Log in to FA Vision Enterprise's TikTok in this browser, then run again."
-  },
   {
    "d": "2026-10-31",
    "t": "2026-10-31T03:09:00.283Z",
@@ -12889,6 +12967,13 @@
    "tried": 0,
    "ok": 0,
    "stopped": "X showed \"payment / subscription: “Home Explore Notifications Follow Chat Calls Grok History Premium Profile More Post FA Vision Furniture @favisionfurnitu”\". Nothing more was posted."
+  },
+  {
+   "d": "2026-11-26",
+   "t": "2026-11-26T03:16:42.326Z",
+   "kind": "tiktok",
+   "tried": 10,
+   "ok": 10
   }
  ]
 }
