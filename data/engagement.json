@@ -368,7 +368,7 @@
    "commented": [],
    "title": "Facebook",
    "checked": "2026-11-26",
-   "likes": 2900,
+   "likes": 520000,
    "comments": 1,
    "views": 142
   },
@@ -5326,6 +5326,21 @@
    "followers": 561,
    "stopped": null,
    "commenting": true
+  },
+  {
+   "d": "2026-11-26",
+   "t": "2026-11-26T03:10:41.019Z",
+   "net": "fb",
+   "mode": "reply",
+   "posts": 3,
+   "checked": 3,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 561,
+   "stopped": null,
+   "commenting": false
   }
  ],
  "liked": {}
