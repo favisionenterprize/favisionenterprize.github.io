@@ -2142,14 +2142,83 @@
    "platform": "tiktok",
    "d": "2026-11-24",
    "t": "2026-11-24T10:04:25.467Z"
+  },
+  {
+   "name": "Jumbo",
+   "platform": "tiktok",
+   "d": "2026-11-26",
+   "t": "2026-11-26T03:16:49.632Z",
+   "fav": "jumbo",
+   "found": true
+  },
+  {
+   "name": "Hillsong Worship & Darlene Zschech",
+   "platform": "tiktok",
+   "d": "2026-11-26",
+   "t": "2026-11-26T03:16:49.632Z",
+   "fav": "Hillsong Worship",
+   "found": true
+  },
+  {
+   "name": "Jumbo",
+   "platform": "tiktok",
+   "d": "2026-11-26",
+   "t": "2026-11-26T03:16:49.632Z",
+   "fav": "jumbo",
+   "found": true
+  },
+  {
+   "name": "Hillsong Worship & Darlene Zschech",
+   "platform": "tiktok",
+   "d": "2026-11-26",
+   "t": "2026-11-26T03:16:49.632Z",
+   "fav": "Hillsong Worship",
+   "found": true
+  },
+  {
+   "fav": "micheal w smith",
+   "found": false,
+   "platform": "tiktok",
+   "d": "2026-11-26",
+   "t": "2026-11-26T03:16:49.632Z"
+  },
+  {
+   "fav": "don meon",
+   "found": false,
+   "platform": "tiktok",
+   "d": "2026-11-26",
+   "t": "2026-11-26T03:16:49.632Z"
+  },
+  {
+   "fav": "william mc dowell",
+   "found": false,
+   "platform": "tiktok",
+   "d": "2026-11-26",
+   "t": "2026-11-26T03:16:49.632Z"
+  },
+  {
+   "fav": "micheal w smith",
+   "found": false,
+   "platform": "tiktok",
+   "d": "2026-11-26",
+   "t": "2026-11-26T03:16:49.632Z"
+  },
+  {
+   "fav": "don meon",
+   "found": false,
+   "platform": "tiktok",
+   "d": "2026-11-26",
+   "t": "2026-11-26T03:16:49.632Z"
+  },
+  {
+   "fav": "william mc dowell",
+   "found": false,
+   "platform": "tiktok",
+   "d": "2026-11-26",
+   "t": "2026-11-26T03:16:49.632Z"
   }
  ],
  "notes": [
-  {
-   "d": "2026-11-16",
-   "platform": "tiktok",
-   "text": "1 post went out without a sound"
-  },
   {
    "d": "2026-11-16",
    "platform": "tiktok",
@@ -2361,6 +2430,11 @@
   {
    "d": "2026-11-26",
    "text": "couldn't read the Creative Center song list"
+  },
+  {
+   "d": "2026-11-26",
+   "platform": "tiktok",
+   "text": "6 posts went out without a sound"
   }
  ]
 }
