@@ -1,6 +1,6 @@
 {
- "d": "2026-11-24",
- "t": "2026-11-24T09:43:27.908Z",
+ "d": "2026-11-26",
+ "t": "2026-11-26T03:05:15.262Z",
  "settings": {
   "artists_first": true,
   "artists": [
@@ -13,11 +13,25 @@
  },
  "sounds": [
   {
-   "name": "To Build A Home (feat. Patrick Watson) The Cinematic Orchestra",
-   "artist": "The Cinematic Orchestra",
+   "name": "Inspire The World",
+   "artist": "DensoMusic",
    "platform": "ig",
    "rank": 1,
-   "d": "2026-11-24"
+   "d": "2026-11-26"
+  },
+  {
+   "name": "Oh la la amour",
+   "artist": "Julio Iglesias",
+   "platform": "ig",
+   "rank": 2,
+   "d": "2026-11-26"
+  },
+  {
+   "name": "Chop Suey!",
+   "artist": "System Of A Down",
+   "platform": "ig",
+   "rank": 3,
+   "d": "2026-11-26"
   }
  ],
  "manual": [],
@@ -2133,14 +2147,6 @@
  "notes": [
   {
    "d": "2026-11-16",
-   "text": "no 'Approved for business use' filter seen: check the sounds are in TikTok's Commercial Music Library"
-  },
-  {
-   "d": "2026-11-16",
-   "text": "couldn't read the Creative Center song list"
-  },
-  {
-   "d": "2026-11-16",
    "platform": "tiktok",
    "text": "1 post went out without a sound"
   },
@@ -2347,6 +2353,14 @@
    "d": "2026-11-24",
    "platform": "tiktok",
    "text": "3 posts went out without a sound"
+  },
+  {
+   "d": "2026-11-26",
+   "text": "no 'Approved for business use' filter seen: check the sounds are in TikTok's Commercial Music Library"
+  },
+  {
+   "d": "2026-11-26",
+   "text": "couldn't read the Creative Center song list"
   }
  ]
 }
