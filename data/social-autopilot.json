@@ -11856,16 +11856,49 @@
    "ok": false,
    "now": true,
    "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-11-26",
+   "t": "2026-11-26T11:07:20.744Z",
+   "net": "tiktok",
+   "k": "ad:fav-008",
+   "p": "FAV-008",
+   "ok": true,
+   "now": true,
+   "why": "Hillsong Worship: only tracks used lately · no sound"
+  },
+  {
+   "d": "2026-11-26",
+   "t": "2026-11-26T11:11:59.862Z",
+   "net": "tiktok",
+   "k": "box:FAV-028",
+   "p": "FAV-028",
+   "ok": true,
+   "now": true,
+   "why": "artist not available in picker: micheal w smith · no sound"
+  },
+  {
+   "d": "2026-11-26",
+   "t": "2026-11-26T11:15:14.628Z",
+   "net": "tiktok",
+   "k": "box:FAV-030",
+   "p": "FAV-030",
+   "ok": true,
+   "now": true,
+   "why": "artist not available in picker: don meon · no sound"
+  },
+  {
+   "d": "2026-11-26",
+   "t": "2026-11-26T11:18:08.693Z",
+   "net": "tiktok",
+   "k": "card:FAV-021",
+   "p": "FAV-021",
+   "ok": true,
+   "now": true,
+   "why": "artist not available in picker: william mc dowell · no sound"
   }
  ],
  "runs": [
-  {
-   "d": "2026-10-31",
-   "t": "2026-10-31T07:04:46.863Z",
-   "kind": "x",
-   "tried": 2,
-   "ok": 0
-  },
   {
    "d": "2026-10-31",
    "t": "2026-10-31T07:05:07.097Z",
@@ -13263,6 +13296,13 @@
    "kind": "x",
    "tried": 4,
    "ok": 0
+  },
+  {
+   "d": "2026-11-26",
+   "t": "2026-11-26T11:18:26.793Z",
+   "kind": "tiktok",
+   "tried": 4,
+   "ok": 4
   }
  ]
 }
