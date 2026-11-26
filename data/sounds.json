@@ -2237,13 +2237,31 @@
    "platform": "tiktok",
    "d": "2026-11-26",
    "t": "2026-11-26T09:24:46.402Z"
+  },
+  {
+   "name": "Djjumbo",
+   "platform": "tiktok",
+   "d": "2026-11-26",
+   "t": "2026-11-26T10:17:34.497Z",
+   "fav": "jumbo",
+   "found": true
+  },
+  {
+   "fav": "don meon",
+   "found": false,
+   "platform": "tiktok",
+   "d": "2026-11-26",
+   "t": "2026-11-26T10:17:34.497Z"
+  },
+  {
+   "fav": "william mc dowell",
+   "found": false,
+   "platform": "tiktok",
+   "d": "2026-11-26",
+   "t": "2026-11-26T10:17:34.497Z"
   }
  ],
  "notes": [
-  {
-   "d": "2026-11-16",
-   "text": "no Instagram audio seen on Reels"
-  },
   {
    "d": "2026-11-17",
    "platform": "tiktok",
@@ -2455,6 +2473,11 @@
    "d": "2026-11-26",
    "platform": "tiktok",
    "text": "4 posts went out without a sound"
+  },
+  {
+   "d": "2026-11-26",
+   "platform": "tiktok",
+   "text": "3 posts went out without a sound"
   }
  ]
 }
