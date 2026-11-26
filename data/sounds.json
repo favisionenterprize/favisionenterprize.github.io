@@ -2216,13 +2216,30 @@
    "platform": "tiktok",
    "d": "2026-11-26",
    "t": "2026-11-26T03:16:49.632Z"
+  },
+  {
+   "fav": "don meon",
+   "found": false,
+   "platform": "tiktok",
+   "d": "2026-11-26",
+   "t": "2026-11-26T09:24:46.402Z"
+  },
+  {
+   "fav": "william mc dowell",
+   "found": false,
+   "platform": "tiktok",
+   "d": "2026-11-26",
+   "t": "2026-11-26T09:24:46.402Z"
+  },
+  {
+   "fav": "micheal w smith",
+   "found": false,
+   "platform": "tiktok",
+   "d": "2026-11-26",
+   "t": "2026-11-26T09:24:46.402Z"
   }
  ],
  "notes": [
-  {
-   "d": "2026-11-16",
-   "text": "couldn't read the Creative Center song list"
-  },
   {
    "d": "2026-11-16",
    "text": "no Instagram audio seen on Reels"
@@ -2433,6 +2450,11 @@
   {
    "d": "2026-11-26",
    "text": "no Instagram audio seen on Reels"
+  },
+  {
+   "d": "2026-11-26",
+   "platform": "tiktok",
+   "text": "4 posts went out without a sound"
   }
  ]
 }
