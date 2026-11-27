@@ -29,9 +29,9 @@
   },
   "fb": {
    "d": "2026-11-27",
-   "link": "https://favisionenterprize.github.io/p/FAV-004.html",
+   "link": "favisionenterprize.github.io",
    "pinned": null,
-   "linkOk": false,
+   "linkOk": true,
    "pinOk": false,
    "why": "",
    "mode": "check"
@@ -56,13 +56,6 @@
   }
  },
  "runs": [
-  {
-   "d": "2026-10-18",
-   "net": "ig",
-   "mode": "fix",
-   "linkOk": false,
-   "pinOk": true
-  },
   {
    "d": "2026-10-18",
    "net": "x",
@@ -754,6 +747,13 @@
    "net": "fb",
    "mode": "check",
    "linkOk": false,
+   "pinOk": false
+  },
+  {
+   "d": "2026-11-27",
+   "net": "fb",
+   "mode": "check",
+   "linkOk": true,
    "pinOk": false
   }
  ]
