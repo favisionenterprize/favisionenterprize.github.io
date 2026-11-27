@@ -75,6 +75,30 @@
     "listed": "2026-11-12",
     "id": "1491111966504930",
     "renew": "wait"
+   },
+   {
+    "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
+    "price": 12600,
+    "status": "Active",
+    "listed": "2026-11-27",
+    "id": "1626214875927297",
+    "renew": "wait"
+   },
+   {
+    "t": "Dining Set Collection — 5 Designs, 6 Chairs",
+    "price": 12600,
+    "status": "Active",
+    "listed": "2026-11-27",
+    "id": "1845703883125402",
+    "renew": "wait"
+   },
+   {
+    "t": "Red Glass Dining Set — 6 Chairs",
+    "price": 12600,
+    "status": "Active",
+    "listed": "2026-11-27",
+    "id": "3039981769701705",
+    "renew": "wait"
    }
   ]
  },
@@ -1351,6 +1375,36 @@
    "ok": true,
    "id": "4095571497405817",
    "verified": true
+  },
+  {
+   "d": "2026-11-27",
+   "t": "2026-11-27T23:03:40.837Z",
+   "p": "FAV-001",
+   "title": "Rainbow Glass-Top Dining Set — 6 Chairs",
+   "price": 12600,
+   "ok": true,
+   "id": "1626214875927297",
+   "verified": true
+  },
+  {
+   "d": "2026-11-27",
+   "t": "2026-11-27T23:04:28.035Z",
+   "p": "FAV-003",
+   "title": "Dining Set Collection — 5 Designs, 6 Chairs",
+   "price": 12600,
+   "ok": true,
+   "id": "1845703883125402",
+   "verified": true
+  },
+  {
+   "d": "2026-11-27",
+   "t": "2026-11-27T23:05:13.003Z",
+   "p": "FAV-004",
+   "title": "Red Glass Dining Set — 6 Chairs",
+   "price": 12600,
+   "ok": true,
+   "id": "3039981769701705",
+   "verified": true
   }
  ],
  "runs": [
@@ -1795,6 +1849,12 @@
    "d": "2026-11-27",
    "kind": "scan",
    "n": 8
+  },
+  {
+   "d": "2026-11-27",
+   "kind": "list",
+   "tried": 3,
+   "ok": 3
   }
  ],
  "skip": []
