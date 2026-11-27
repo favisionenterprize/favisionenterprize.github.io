@@ -340,6 +340,11 @@
    "d": "2026-11-26",
    "net": "tiktok",
    "n": 290
+  },
+  {
+   "d": "2026-11-27",
+   "net": "fb",
+   "n": 562
   }
  ],
  "posts": {
@@ -377,8 +382,8 @@
    "first": "2026-10-13",
    "commented": [],
    "title": "Facebook",
-   "checked": "2026-11-26",
-   "likes": 5900,
+   "checked": "2026-11-27",
+   "likes": 1,
    "comments": 1,
    "views": 142
   },
@@ -2970,6 +2975,24 @@
    "commented": [],
    "title": "TikTok - Make Your Day",
    "checked": "2026-11-26"
+  },
+  "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0tyrnDkr6km7wA2ZrRxWubw5zRRUN31Nyf7MjWarXEajnS9utoVhVDqn47mKscJnTl": {
+   "net": "fb",
+   "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0tyrnDkr6km7wA2ZrRxWubw5zRRUN31Nyf7MjWarXEajnS9utoVhVDqn47mKscJnTl",
+   "first": "2026-11-27",
+   "commented": [],
+   "title": "Facebook",
+   "checked": "2026-11-27",
+   "likes": 4100
+  },
+  "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0XnUpZ6A2FwMPXGbAJSe7rDyTBpSRX4vRNYj1fR1HJnKv9RTCP2RFpF2HYDP4xGp7l": {
+   "net": "fb",
+   "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0XnUpZ6A2FwMPXGbAJSe7rDyTBpSRX4vRNYj1fR1HJnKv9RTCP2RFpF2HYDP4xGp7l",
+   "first": "2026-11-27",
+   "commented": [],
+   "title": "Facebook",
+   "checked": "2026-11-27",
+   "likes": 4100
   }
  },
  "runs": [
@@ -6106,6 +6129,21 @@
    "thanked": 0,
    "followers": null,
    "stopped": "No posts found on your TikTok profile.",
+   "commenting": false
+  },
+  {
+   "d": "2026-11-27",
+   "t": "2026-11-27T23:12:35.964Z",
+   "net": "fb",
+   "mode": "reply",
+   "posts": 3,
+   "checked": 3,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 562,
+   "stopped": null,
    "commenting": false
   }
  ],
