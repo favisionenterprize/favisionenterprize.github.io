@@ -11,78 +11,17 @@
  },
  "scan": {
   "d": "2026-11-27",
-  "t": "2026-11-27T22:59:10.637Z",
-  "n": 8,
+  "t": "2026-11-27T23:46:50.375Z",
+  "n": 10,
   "listings": [
    {
-    "t": "1.2 m Office Desk with Drawer Unit",
-    "price": 4500,
-    "status": "Active",
-    "listed": "2026-11-16",
-    "renew": "none"
-   },
-   {
-    "t": "Mesh Secretary Chair — Ergonomic Swivel",
-    "price": 4500,
-    "status": "Active",
-    "listed": "2026-11-16",
-    "id": "2421885251953321",
-    "renew": "wait"
-   },
-   {
-    "t": "Black Glass Dining Set — 6 High-Back Chairs",
-    "price": 4500,
-    "status": "Active",
-    "listed": "2026-11-16",
-    "renew": "none"
-   },
-   {
-    "t": "Student Desk Chair Set — Senior High to Tertiary Level",
-    "price": 650,
-    "status": "Active",
-    "listed": "2026-11-12",
-    "id": "1491111966504930",
-    "renew": "wait"
-   },
-   {
-    "t": "White Foldable Chairs — Pack of 10 (Black Frame)",
-    "price": 650,
-    "status": "Active",
-    "listed": "2026-11-12",
-    "id": "1491111966504930",
-    "renew": "wait"
-   },
-   {
-    "t": "White Foldable 8-Seater Set — 8ft Table + 8 Chairs",
-    "price": 650,
-    "status": "Active",
-    "listed": "2026-11-12",
-    "id": "1491111966504930",
-    "renew": "wait"
-   },
-   {
-    "t": "White Foldable 4-Seater Set — 4ft Table + 4 Chairs",
-    "price": 650,
-    "status": "Active",
-    "listed": "2026-11-12",
-    "id": "1491111966504930",
-    "renew": "wait"
-   },
-   {
-    "t": "White Foldable Chair — Black Frame, Handle Slot",
-    "price": 650,
-    "status": "Active",
-    "listed": "2026-11-12",
-    "id": "1491111966504930",
-    "renew": "wait"
-   },
-   {
-    "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
+    "t": "Red Glass Dining Set — 6 Chairs",
     "price": 12600,
     "status": "Active",
     "listed": "2026-11-27",
-    "id": "1626214875927297",
-    "renew": "wait"
+    "id": "3039981769701705",
+    "renew": "wait",
+    "next": "2026-12-04"
    },
    {
     "t": "Dining Set Collection — 5 Designs, 6 Chairs",
@@ -90,15 +29,73 @@
     "status": "Active",
     "listed": "2026-11-27",
     "id": "1845703883125402",
-    "renew": "wait"
+    "renew": "wait",
+    "next": "2026-12-04"
    },
    {
-    "t": "Red Glass Dining Set — 6 Chairs",
+    "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
     "price": 12600,
     "status": "Active",
     "listed": "2026-11-27",
-    "id": "3039981769701705",
+    "id": "1626214875927297",
+    "renew": "wait",
+    "next": "2026-12-04"
+   },
+   {
+    "t": "1.2 m Office Desk with Drawer Unit",
+    "price": 4500,
+    "status": "Active",
+    "listed": "2026-11-16",
+    "id": "4095571497405817",
     "renew": "wait"
+   },
+   {
+    "t": "Mesh Secretary Chair — Ergonomic Swivel",
+    "price": 9500,
+    "status": "Active",
+    "listed": "2026-11-16",
+    "id": "2421885251953321",
+    "renew": "wait"
+   },
+   {
+    "t": "Student Desk Chair Set — Senior High to Tertiary Level",
+    "price": 650,
+    "status": "Active",
+    "listed": "2026-11-12",
+    "id": "1179824968317655",
+    "renew": "ready"
+   },
+   {
+    "t": "White Foldable Chairs — Pack of 10 (Black Frame)",
+    "price": 2425,
+    "status": "Active",
+    "listed": "2026-10-31",
+    "id": "1754440730022094",
+    "renew": "ready"
+   },
+   {
+    "t": "White Foldable 8-Seater Set — 8ft Table + 8 Chairs",
+    "price": 3160,
+    "status": "Active",
+    "listed": "2026-10-31",
+    "id": "1497192478922661",
+    "renew": "ready"
+   },
+   {
+    "t": "White Foldable 4-Seater Set — 4ft Table + 4 Chairs",
+    "price": 1650,
+    "status": "Active",
+    "listed": "2026-10-31",
+    "id": "1129518979434975",
+    "renew": "ready"
+   },
+   {
+    "t": "White Foldable Chair — Black Frame, Handle Slot",
+    "price": 250,
+    "status": "Active",
+    "listed": "2026-10-31",
+    "id": "1846863210099572",
+    "renew": "ready"
    }
   ]
  },
@@ -1855,6 +1852,11 @@
    "kind": "list",
    "tried": 3,
    "ok": 3
+  },
+  {
+   "d": "2026-11-27",
+   "kind": "scan",
+   "n": 10
   }
  ],
  "skip": []
