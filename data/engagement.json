@@ -343,13 +343,13 @@
   },
   {
    "d": "2026-11-27",
-   "net": "fb",
-   "n": 562
+   "net": "tiktok",
+   "n": 290
   },
   {
    "d": "2026-11-27",
-   "net": "tiktok",
-   "n": 290
+   "net": "fb",
+   "n": 562
   }
  ],
  "posts": {
@@ -2988,16 +2988,16 @@
    "commented": [],
    "title": "Facebook",
    "checked": "2026-11-27",
-   "likes": 4100
+   "likes": 32
   },
   "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0XnUpZ6A2FwMPXGbAJSe7rDyTBpSRX4vRNYj1fR1HJnKv9RTCP2RFpF2HYDP4xGp7l": {
    "net": "fb",
    "url": "https://www.facebook.com/FaVisionEnterprise/posts/pfbid0XnUpZ6A2FwMPXGbAJSe7rDyTBpSRX4vRNYj1fR1HJnKv9RTCP2RFpF2HYDP4xGp7l",
    "first": "2026-11-27",
    "commented": [],
-   "title": "Facebook",
+   "title": "Tertiary Student Desk is available. Hurry... - F.A Vision Enterprise",
    "checked": "2026-11-27",
-   "likes": 4100
+   "likes": 32
   }
  },
  "runs": [
@@ -6179,6 +6179,21 @@
    "thanked": 0,
    "followers": 290,
    "stopped": "No posts found on your TikTok profile.",
+   "commenting": true
+  },
+  {
+   "d": "2026-11-27",
+   "t": "2026-11-27T23:50:13.016Z",
+   "net": "fb",
+   "mode": "stats",
+   "posts": 3,
+   "checked": 3,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 562,
+   "stopped": null,
    "commenting": true
   }
  ],
