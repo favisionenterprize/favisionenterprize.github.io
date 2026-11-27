@@ -854,6 +854,13 @@ window.FAV_DATA = {
           "price": 12600,
           "checked": "2026-11-11",
           "synced": "2026-11-11"
+        },
+        {
+          "id": "1626214875927297",
+          "title": "Rainbow Glass-Top Dining Set — 6 Chairs",
+          "price": 12600,
+          "checked": "2026-11-27",
+          "synced": "2026-11-27"
         }
       ],
       "tiktok": 8,
@@ -1067,6 +1074,13 @@ window.FAV_DATA = {
           "price": 12600,
           "checked": "2026-11-07",
           "synced": "2026-11-07"
+        },
+        {
+          "id": "1845703883125402",
+          "title": "Dining Set Collection — 5 Designs, 6 Chairs",
+          "price": 12600,
+          "checked": "2026-11-27",
+          "synced": "2026-11-27"
         }
       ],
       "tiktok": 10,
@@ -1154,6 +1168,13 @@ window.FAV_DATA = {
           "price": 12600,
           "checked": "2026-10-31",
           "synced": "2026-10-31"
+        },
+        {
+          "id": "3039981769701705",
+          "title": "Red Glass Dining Set — 6 Chairs",
+          "price": 12600,
+          "checked": "2026-11-27",
+          "synced": "2026-11-27"
         }
       ],
       "tiktok": 11,
