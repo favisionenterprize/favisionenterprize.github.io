@@ -6145,6 +6145,21 @@
    "followers": 562,
    "stopped": null,
    "commenting": false
+  },
+  {
+   "d": "2026-11-27",
+   "t": "2026-11-27T23:45:24.990Z",
+   "net": "fb",
+   "mode": "likers",
+   "posts": 3,
+   "checked": 3,
+   "commented": 0,
+   "replied": 0,
+   "invited": 0,
+   "thanked": 0,
+   "followers": 562,
+   "stopped": null,
+   "commenting": false
   }
  ],
  "liked": {}
