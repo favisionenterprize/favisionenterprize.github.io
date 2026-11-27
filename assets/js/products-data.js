@@ -969,6 +969,13 @@ window.FAV_DATA = {
           "price": 4900,
           "checked": "2026-11-16",
           "synced": "2026-11-16"
+        },
+        {
+          "id": "1147984590934324",
+          "title": "Black Glass Dining Set — 6 High-Back Chairs",
+          "price": 4900,
+          "checked": "2026-11-27",
+          "synced": "2026-11-27"
         }
       ],
       "tiktok": 9,
@@ -1273,6 +1280,13 @@ window.FAV_DATA = {
           "price": 11900,
           "checked": "2026-11-03",
           "synced": "2026-11-03"
+        },
+        {
+          "id": "2679396599162264",
+          "title": "Foldable Wood-Grain Dining Set — 6 Chairs",
+          "price": 11900,
+          "checked": "2026-11-27",
+          "synced": "2026-11-27"
         }
       ],
       "tiktok": 12,
@@ -1364,6 +1378,13 @@ window.FAV_DATA = {
           "price": 9500,
           "checked": "2026-11-07",
           "synced": "2026-11-07"
+        },
+        {
+          "id": "2370148787139577",
+          "title": "Executive Director Chair — Leather, High Back",
+          "price": 9500,
+          "checked": "2026-11-27",
+          "synced": "2026-11-27"
         }
       ],
       "tiktok": 5,
