@@ -1023,6 +1023,24 @@
     "ok": false,
     "why": "already has a full description with the website link",
     "skip": true
+   },
+   "1626214875927297": {
+    "d": "2026-11-27",
+    "ok": false,
+    "why": "already has a full description with the website link",
+    "skip": true
+   },
+   "1845703883125402": {
+    "d": "2026-11-27",
+    "ok": false,
+    "why": "already has a full description with the website link",
+    "skip": true
+   },
+   "3039981769701705": {
+    "d": "2026-11-27",
+    "ok": false,
+    "why": "already has a full description with the website link",
+    "skip": true
    }
   }
  },
@@ -2303,6 +2321,15 @@
    "skip": 5,
    "v": "2026-10-15.4",
    "more": 4
+  },
+  {
+   "d": "2026-11-27",
+   "kind": "mkedit",
+   "net": "mk",
+   "tried": 3,
+   "ok": 0,
+   "skip": 3,
+   "v": "2026-10-15.4"
   }
  ]
 }
