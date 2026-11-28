@@ -10,52 +10,54 @@
   "photos": 8
  },
  "scan": {
-  "d": "2026-11-27",
-  "t": "2026-11-27T23:46:50.375Z",
+  "d": "2026-11-28",
+  "t": "2026-11-28T00:03:51.976Z",
   "n": 10,
   "listings": [
    {
+    "t": "Executive Director Chair — Leather, High Back",
+    "price": 9500,
+    "status": "Active",
+    "listed": "2026-11-27",
+    "id": "2370148787139577",
+    "renew": "wait",
+    "next": "2026-12-05"
+   },
+   {
+    "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
+    "price": 9500,
+    "status": "Active",
+    "listed": "2026-11-27",
+    "id": "2679396599162264",
+    "renew": "wait",
+    "next": "2026-12-05"
+   },
+   {
+    "t": "Black Glass Dining Set — 6 High-Back Chairs",
+    "price": 9500,
+    "status": "Active",
+    "listed": "2026-11-27",
+    "id": "1147984590934324",
+    "renew": "wait",
+    "next": "2026-12-05"
+   },
+   {
     "t": "Red Glass Dining Set — 6 Chairs",
-    "price": 12600,
+    "price": 9500,
     "status": "Active",
     "listed": "2026-11-27",
     "id": "3039981769701705",
     "renew": "wait",
-    "next": "2026-12-04"
+    "next": "2026-12-05"
    },
    {
     "t": "Dining Set Collection — 5 Designs, 6 Chairs",
-    "price": 12600,
+    "price": 9500,
     "status": "Active",
     "listed": "2026-11-27",
     "id": "1845703883125402",
     "renew": "wait",
-    "next": "2026-12-04"
-   },
-   {
-    "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
-    "price": 12600,
-    "status": "Active",
-    "listed": "2026-11-27",
-    "id": "1626214875927297",
-    "renew": "wait",
-    "next": "2026-12-04"
-   },
-   {
-    "t": "1.2 m Office Desk with Drawer Unit",
-    "price": 4500,
-    "status": "Active",
-    "listed": "2026-11-16",
-    "id": "4095571497405817",
-    "renew": "wait"
-   },
-   {
-    "t": "Mesh Secretary Chair — Ergonomic Swivel",
-    "price": 9500,
-    "status": "Active",
-    "listed": "2026-11-16",
-    "id": "2421885251953321",
-    "renew": "wait"
+    "next": "2026-12-05"
    },
    {
     "t": "Student Desk Chair Set — Senior High to Tertiary Level",
@@ -63,63 +65,44 @@
     "status": "Active",
     "listed": "2026-11-12",
     "id": "1179824968317655",
-    "renew": "ready"
+    "renew": "wait",
+    "next": "2026-12-05"
    },
    {
     "t": "White Foldable Chairs — Pack of 10 (Black Frame)",
-    "price": 2425,
+    "price": 650,
     "status": "Active",
-    "listed": "2026-10-31",
+    "listed": "2026-11-12",
     "id": "1754440730022094",
-    "renew": "ready"
+    "renew": "wait",
+    "next": "2026-12-05"
    },
    {
     "t": "White Foldable 8-Seater Set — 8ft Table + 8 Chairs",
-    "price": 3160,
+    "price": 650,
     "status": "Active",
-    "listed": "2026-10-31",
+    "listed": "2026-11-12",
     "id": "1497192478922661",
-    "renew": "ready"
+    "renew": "wait",
+    "next": "2026-12-05"
    },
    {
     "t": "White Foldable 4-Seater Set — 4ft Table + 4 Chairs",
-    "price": 1650,
+    "price": 650,
     "status": "Active",
-    "listed": "2026-10-31",
+    "listed": "2026-11-12",
     "id": "1129518979434975",
-    "renew": "ready"
+    "renew": "wait",
+    "next": "2026-12-05"
    },
    {
     "t": "White Foldable Chair — Black Frame, Handle Slot",
-    "price": 250,
+    "price": 650,
     "status": "Active",
-    "listed": "2026-10-31",
+    "listed": "2026-11-12",
     "id": "1846863210099572",
-    "renew": "ready"
-   },
-   {
-    "t": "Black Glass Dining Set — 6 High-Back Chairs",
-    "price": 4900,
-    "status": "Active",
-    "listed": "2026-11-27",
-    "id": "1147984590934324",
-    "renew": "wait"
-   },
-   {
-    "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
-    "price": 11900,
-    "status": "Active",
-    "listed": "2026-11-27",
-    "id": "2679396599162264",
-    "renew": "wait"
-   },
-   {
-    "t": "Executive Director Chair — Leather, High Back",
-    "price": 9500,
-    "status": "Active",
-    "listed": "2026-11-27",
-    "id": "2370148787139577",
-    "renew": "wait"
+    "renew": "wait",
+    "next": "2026-12-05"
    }
   ]
  },
@@ -1917,6 +1900,11 @@
    "kind": "list",
    "tried": 3,
    "ok": 3
+  },
+  {
+   "d": "2026-11-28",
+   "kind": "scan",
+   "n": 10
   }
  ],
  "skip": []
