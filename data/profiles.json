@@ -19,9 +19,9 @@
  },
  "status": {
   "tiktok": {
-   "d": "2026-11-27",
+   "d": "2026-11-28",
    "link": null,
-   "pinned": null,
+   "pinned": "Classrooms that inspire focus. Desk 60.5 × 40 × 75.5 cm; Chair 38.5 × 40 × 76 cm (L × W × H). Anti-slip floor caps — no ",
    "linkOk": false,
    "pinOk": false,
    "why": "",
@@ -56,13 +56,6 @@
   }
  },
  "runs": [
-  {
-   "d": "2026-10-18",
-   "net": "ig",
-   "mode": "pinswap",
-   "linkOk": false,
-   "pinOk": false
-  },
   {
    "d": "2026-10-21",
    "net": "fb",
@@ -755,6 +748,13 @@
    "net": "fb",
    "mode": "check",
    "linkOk": true,
+   "pinOk": false
+  },
+  {
+   "d": "2026-11-28",
+   "net": "tiktok",
+   "mode": "check",
+   "linkOk": false,
    "pinOk": false
   }
  ]
