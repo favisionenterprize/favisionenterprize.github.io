@@ -905,9 +905,9 @@
     "mode": "set"
    },
    "DgND2PfCCZr": {
-    "d": "2026-11-27",
+    "d": "2026-11-28",
     "ok": false,
-    "why": "no “Edit” in the post's menu",
+    "why": "Instagram didn't confirm the save",
     "mode": "set"
    },
    "DgNDv2BCPoC": {
@@ -2555,6 +2555,15 @@
    "skip": 0,
    "v": "2026-10-15.4",
    "more": 1
+  },
+  {
+   "d": "2026-11-28",
+   "kind": "fxfix",
+   "net": "ig",
+   "tried": 1,
+   "ok": 0,
+   "skip": 0,
+   "v": "2026-10-15.4"
   }
  ]
 }
