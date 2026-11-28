@@ -11976,16 +11976,99 @@
    "ok": true,
    "now": true,
    "why": "artist not available in picker: william mc dowell · no sound"
+  },
+  {
+   "d": "2026-11-28",
+   "t": "2026-11-28T00:03:24.521Z",
+   "net": "x",
+   "k": "tile:fav-014",
+   "p": "FAV-014",
+   "ok": false,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-11-28",
+   "t": "2026-11-28T00:04:03.780Z",
+   "net": "x",
+   "k": "box:FAV-016",
+   "p": "FAV-016",
+   "ok": false,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-11-28",
+   "t": "2026-11-28T00:04:45.027Z",
+   "net": "x",
+   "k": "card:FAV-039",
+   "p": "FAV-039",
+   "ok": false,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-11-28",
+   "t": "2026-11-28T00:05:23.600Z",
+   "net": "x",
+   "k": "ad:fav-008",
+   "p": "FAV-008",
+   "ok": false,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-11-28",
+   "t": "2026-11-28T00:25:30.387Z",
+   "net": "x",
+   "k": "card:FAV-024",
+   "p": "FAV-024",
+   "ok": false,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-11-28",
+   "t": "2026-11-28T00:26:06.931Z",
+   "net": "x",
+   "k": "tile:fav-004",
+   "p": "FAV-004",
+   "ok": false,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-11-28",
+   "t": "2026-11-28T00:26:45.491Z",
+   "net": "x",
+   "k": "card:FAV-026",
+   "p": "FAV-026",
+   "ok": false,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-11-28",
+   "t": "2026-11-28T00:27:23.531Z",
+   "net": "x",
+   "k": "presence:fav-002",
+   "p": "FAV-002",
+   "ok": false,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-11-28",
+   "t": "2026-11-28T00:28:00.010Z",
+   "net": "x",
+   "k": "box:FAV-015",
+   "p": "FAV-015",
+   "ok": false,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-11-28",
+   "t": "2026-11-28T00:28:40.077Z",
+   "net": "x",
+   "k": "tile:fav-010",
+   "p": "FAV-010",
+   "ok": false,
+   "why": "Couldn't find X's post box"
   }
  ],
  "runs": [
-  {
-   "d": "2026-10-31",
-   "t": "2026-10-31T07:06:17.781Z",
-   "kind": "x",
-   "tried": 2,
-   "ok": 0
-  },
   {
    "d": "2026-10-31",
    "t": "2026-10-31T07:07:36.818Z",
@@ -13385,6 +13468,13 @@
    "tried": 0,
    "ok": 0,
    "stopped": "TikTok isn't logged in. Log in to FA Vision Enterprise's TikTok in this browser, then run again."
+  },
+  {
+   "d": "2026-11-28",
+   "t": "2026-11-28T00:29:06.391Z",
+   "kind": "x",
+   "tried": 10,
+   "ok": 0
   }
  ]
 }
