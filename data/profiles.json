@@ -46,23 +46,16 @@
    "mode": "check"
   },
   "x": {
-   "d": "2026-11-22",
-   "link": "favisionenterprize.github.io",
-   "pinned": "Pls take Note that office is open for walk in purchases and delivery as well. STUDENT DESKS ARE AVAILABLE IN LARGE QUANTITIES!!!",
-   "linkOk": true,
+   "d": "2026-11-28",
+   "link": null,
+   "pinned": null,
+   "linkOk": false,
    "pinOk": false,
-   "why": "",
+   "why": "X showed \"payment / subscription: “Home Explore 1 Notifications Chat Grok Profile More Post FA Vision Enterprise @FaVisionEnt Home For you Following NFL NB”\". Stopped.",
    "mode": "check"
   }
  },
  "runs": [
-  {
-   "d": "2026-10-18",
-   "net": "ig",
-   "mode": "fix",
-   "linkOk": false,
-   "pinOk": true
-  },
   {
    "d": "2026-10-18",
    "net": "x",
@@ -755,6 +748,14 @@
    "mode": "check",
    "linkOk": false,
    "pinOk": false
+  },
+  {
+   "d": "2026-11-28",
+   "net": "x",
+   "mode": "check",
+   "linkOk": false,
+   "pinOk": false,
+   "stopped": "X showed \"payment / subscription: “Home Explore 1 Notifications Chat Grok Profile More Post FA Vision Enterprise @FaVisionEnt Home For you Following NFL NB”\". Stopped."
   }
  ]
 }
