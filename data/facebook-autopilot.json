@@ -19536,6 +19536,15 @@
    "ok": false,
    "now": true,
    "why": "Couldn't find the post box"
+  },
+  {
+   "d": "2026-11-28",
+   "t": "2026-11-28T00:18:39.225Z",
+   "p": "FAV-025",
+   "g": "page",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find the post box"
   }
  ],
  "resets": {},
@@ -21354,6 +21363,13 @@
    "t": "2026-11-28T00:04:23.401Z",
    "kind": "renew",
    "tried": 10,
+   "ok": 0
+  },
+  {
+   "d": "2026-11-28",
+   "t": "2026-11-28T00:18:52.923Z",
+   "kind": "post",
+   "tried": 1,
    "ok": 0
   }
  ],
