@@ -12568,6 +12568,20 @@
    "url": "https://www.facebook.com/groups/1884074522406357/",
    "active": true,
    "added": "2026-11-19"
+  },
+  {
+   "id": "464640811703281",
+   "name": "Market Place",
+   "url": "https://www.facebook.com/groups/464640811703281/",
+   "active": true,
+   "added": "2026-11-28"
+  },
+  {
+   "id": "2210925239203556",
+   "name": "Tottenham Hotspur Chat",
+   "url": "https://www.facebook.com/groups/2210925239203556/",
+   "active": true,
+   "added": "2026-11-28"
   }
  ],
  "posts": [
@@ -19951,7 +19965,7 @@
  ],
  "checks": {
   "grow": "2026-10-26",
-  "sync": "2026-11-26",
+  "sync": "2026-11-28",
   "declines": "2026-10-26"
  },
  "rounds": {
