@@ -1363,8 +1363,8 @@
    },
    "youtube": {
     "status": "failed",
-    "why": "YouTube didn't open the video details",
-    "d": "2026-11-12"
+    "why": "The upload window didn't open",
+    "d": "2026-11-28"
    },
    "tiktok": {
     "status": "waiting"
