@@ -12,8 +12,8 @@
  },
  "ig": {
   "scan": {
-   "d": "2026-11-27",
-   "t": "2026-11-27T23:49:29.520Z",
+   "d": "2026-11-28",
+   "t": "2026-11-28T00:25:51.391Z",
    "n": 12,
    "posts": [
     {
@@ -38,64 +38,64 @@
      "alt": ""
     },
     {
+     "id": "DgQ73RBiBGF",
+     "url": "https://www.instagram.com/p/DgQ73RBiBGF/",
+     "text": "",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "DgQ7vIOiEM7",
+     "url": "https://www.instagram.com/p/DgQ7vIOiEM7/",
+     "text": "",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "DgQ7pXaiHdP",
+     "url": "https://www.instagram.com/p/DgQ7pXaiHdP/",
+     "text": "",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "DgQ7j69CDHh",
+     "url": "https://www.instagram.com/p/DgQ7j69CDHh/",
+     "text": "",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "DgQ7eZ1iJZ8",
+     "url": "https://www.instagram.com/p/DgQ7eZ1iJZ8/",
+     "text": "",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "DgQ7Rb9CNY4",
+     "url": "https://www.instagram.com/p/DgQ7Rb9CNY4/",
+     "text": "",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "DgQ7KQxiMW6",
+     "url": "https://www.instagram.com/p/DgQ7KQxiMW6/",
+     "text": "",
+     "kind": "post",
+     "alt": ""
+    },
+    {
+     "id": "DgQ7EkdiGuk",
+     "url": "https://www.instagram.com/p/DgQ7EkdiGuk/",
+     "text": "",
+     "kind": "post",
+     "alt": ""
+    },
+    {
      "id": "DgND2PfCCZr",
      "url": "https://www.instagram.com/p/DgND2PfCCZr/",
-     "text": "",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "DgNDv2BCPoC",
-     "url": "https://www.instagram.com/p/DgNDv2BCPoC/",
-     "text": "",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "DgNDp7mCNNQ",
-     "url": "https://www.instagram.com/p/DgNDp7mCNNQ/",
-     "text": "",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "DgM8-EJCFK2",
-     "url": "https://www.instagram.com/p/DgM8-EJCFK2/",
-     "text": "",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "DgM84KXiFtL",
-     "url": "https://www.instagram.com/p/DgM84KXiFtL/",
-     "text": "",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "DgM8ycaCLC4",
-     "url": "https://www.instagram.com/p/DgM8ycaCLC4/",
-     "text": "",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "DgM2FTFCCNV",
-     "url": "https://www.instagram.com/p/DgM2FTFCCNV/",
-     "text": "",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "DgM1_uWCLnt",
-     "url": "https://www.instagram.com/p/DgM1_uWCLnt/",
-     "text": "",
-     "kind": "post",
-     "alt": ""
-    },
-    {
-     "id": "DgM16TmiDQx",
-     "url": "https://www.instagram.com/p/DgM16TmiDQx/",
      "text": "",
      "kind": "post",
      "alt": ""
@@ -2479,6 +2479,13 @@
    "tried": 4,
    "ok": 0,
    "skip": 4,
+   "v": "2026-10-15.4"
+  },
+  {
+   "d": "2026-11-28",
+   "kind": "scan",
+   "net": "ig",
+   "n": 12,
    "v": "2026-10-15.4"
   }
  ]
