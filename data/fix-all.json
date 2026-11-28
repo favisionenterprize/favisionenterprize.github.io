@@ -1109,12 +1109,31 @@
     "skip": true
    },
    "2679396599162264": {
-    "d": "2026-11-27",
+    "d": "2026-11-28",
     "ok": false,
-    "why": "the listing's edit form didn't open (sold, removed, or not your listing?)"
+    "why": "already has a full description with the website link",
+    "skip": true
    },
    "2370148787139577": {
     "d": "2026-11-27",
+    "ok": false,
+    "why": "already has a full description with the website link",
+    "skip": true
+   },
+   "1431449675686600": {
+    "d": "2026-11-28",
+    "ok": false,
+    "why": "already has a full description with the website link",
+    "skip": true
+   },
+   "1161439143482278": {
+    "d": "2026-11-28",
+    "ok": false,
+    "why": "already has a full description with the website link",
+    "skip": true
+   },
+   "1671470981045343": {
+    "d": "2026-11-28",
     "ok": false,
     "why": "already has a full description with the website link",
     "skip": true
@@ -2451,6 +2470,15 @@
    "tried": 4,
    "ok": 0,
    "skip": 3,
+   "v": "2026-10-15.4"
+  },
+  {
+   "d": "2026-11-28",
+   "kind": "mkedit",
+   "net": "mk",
+   "tried": 4,
+   "ok": 0,
+   "skip": 4,
    "v": "2026-10-15.4"
   }
  ]
