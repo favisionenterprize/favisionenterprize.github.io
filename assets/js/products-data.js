@@ -1723,6 +1723,13 @@ window.FAV_DATA = {
           "price": 7450,
           "checked": "2026-10-31",
           "synced": "2026-10-31"
+        },
+        {
+          "id": "1431449675686600",
+          "title": "White Dressing Table with Mirror & Stool",
+          "price": 7450,
+          "checked": "2026-11-28",
+          "synced": "2026-11-28"
         }
       ],
       "tiktok": 14,
@@ -1805,6 +1812,13 @@ window.FAV_DATA = {
           "price": 9800,
           "checked": "2026-10-31",
           "synced": "2026-10-31"
+        },
+        {
+          "id": "1161439143482278",
+          "title": "Wardrobe — 4-Door with Top Cabinets",
+          "price": 9800,
+          "checked": "2026-11-28",
+          "synced": "2026-11-28"
         }
       ],
       "tiktok": 15,
@@ -1884,6 +1898,13 @@ window.FAV_DATA = {
           "price": 15500,
           "checked": "2026-10-31",
           "synced": "2026-10-31"
+        },
+        {
+          "id": "1671470981045343",
+          "title": "L-Shaped Sectional Sofa — Grey Fabric",
+          "price": 15500,
+          "checked": "2026-11-28",
+          "synced": "2026-11-28"
         }
       ],
       "tiktok": 16,
