@@ -21348,71 +21348,16 @@
    "kind": "post",
    "tried": 1,
    "ok": 0
+  },
+  {
+   "d": "2026-11-28",
+   "t": "2026-11-28T00:04:23.401Z",
+   "kind": "renew",
+   "tried": 10,
+   "ok": 0
   }
  ],
  "renewLog": [
-  {
-   "d": "2026-11-04",
-   "t": "Wardrobe — 4-Door with Top Cabinets",
-   "listed": "2026-08-03",
-   "ok": true
-  },
-  {
-   "d": "2026-11-04",
-   "t": "Dining Set Collection — 5 Designs, 6 Chairs",
-   "listed": "2026-08-03",
-   "ok": true
-  },
-  {
-   "d": "2026-11-04",
-   "t": "Dinning Set with Chairs",
-   "listed": "2026-08-03",
-   "ok": true
-  },
-  {
-   "d": "2026-11-04",
-   "t": "Dinning Set with Chairs",
-   "listed": "2026-08-03",
-   "ok": true
-  },
-  {
-   "d": "2026-11-04",
-   "t": "White Dressing Table with Mirror & Stool",
-   "listed": "2026-07-26",
-   "ok": true
-  },
-  {
-   "d": "2026-11-04",
-   "t": "Rotatrim A4 paper",
-   "listed": "2026-08-03",
-   "ok": true
-  },
-  {
-   "d": "2026-11-04",
-   "t": "Dinning Set with Chairs",
-   "listed": "2026-07-26",
-   "ok": true
-  },
-  {
-   "d": "2026-11-04",
-   "t": "Dinning Sets with Chairs",
-   "listed": "2026-07-26",
-   "ok": true
-  },
-  {
-   "d": "2026-11-06",
-   "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
-   "listed": "2026-11-03",
-   "ok": false,
-   "why": "Next renewal in 4 days"
-  },
-  {
-   "d": "2026-11-06",
-   "t": "Red Glass Dining Set — 6 Chairs",
-   "listed": "2026-11-03",
-   "ok": false,
-   "why": "Next renewal in 4 days"
-  },
   {
    "d": "2026-11-06",
    "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
@@ -22732,6 +22677,76 @@
    "t": "White Foldable Chair — Black Frame, Handle Slot",
    "listed": "2026-10-31",
    "ok": true
+  },
+  {
+   "d": "2026-11-28",
+   "t": "Executive Director Chair — Leather, High Back",
+   "listed": "2026-11-27",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-11-28",
+   "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
+   "listed": "2026-11-27",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-11-28",
+   "t": "Black Glass Dining Set — 6 High-Back Chairs",
+   "listed": "2026-11-27",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-11-28",
+   "t": "Red Glass Dining Set — 6 Chairs",
+   "listed": "2026-11-27",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-11-28",
+   "t": "Dining Set Collection — 5 Designs, 6 Chairs",
+   "listed": "2026-11-27",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-11-28",
+   "t": "Student Desk Chair Set — Senior High to Tertiary Level",
+   "listed": "2026-11-12",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-11-28",
+   "t": "White Foldable Chairs — Pack of 10 (Black Frame)",
+   "listed": "2026-11-12",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-11-28",
+   "t": "White Foldable 8-Seater Set — 8ft Table + 8 Chairs",
+   "listed": "2026-11-12",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-11-28",
+   "t": "White Foldable 4-Seater Set — 4ft Table + 4 Chairs",
+   "listed": "2026-11-12",
+   "ok": false,
+   "why": "Next renewal in 7 days"
+  },
+  {
+   "d": "2026-11-28",
+   "t": "White Foldable Chair — Black Frame, Handle Slot",
+   "listed": "2026-11-12",
+   "ok": false,
+   "why": "Next renewal in 7 days"
   }
  ],
  "relay": {
@@ -23065,67 +23080,67 @@
   }
  },
  "selling": {
-  "d": "2026-11-27",
+  "d": "2026-11-28",
   "cards": [
+   {
+    "t": "Executive Director Chair — Leather, High Back",
+    "listed": "2026-11-27",
+    "status": "Active",
+    "next": "2026-12-05"
+   },
+   {
+    "t": "Foldable Wood-Grain Dining Set — 6 Chairs",
+    "listed": "2026-11-27",
+    "status": "Active",
+    "next": "2026-12-05"
+   },
+   {
+    "t": "Black Glass Dining Set — 6 High-Back Chairs",
+    "listed": "2026-11-27",
+    "status": "Active",
+    "next": "2026-12-05"
+   },
    {
     "t": "Red Glass Dining Set — 6 Chairs",
     "listed": "2026-11-27",
     "status": "Active",
-    "next": "2026-12-04"
+    "next": "2026-12-05"
    },
    {
     "t": "Dining Set Collection — 5 Designs, 6 Chairs",
     "listed": "2026-11-27",
     "status": "Active",
-    "next": "2026-12-04"
-   },
-   {
-    "t": "Rainbow Glass-Top Dining Set — 6 Chairs",
-    "listed": "2026-11-27",
-    "status": "Active",
-    "next": "2026-12-04"
-   },
-   {
-    "t": "1.2 m Office Desk with Drawer Unit",
-    "listed": "2026-11-16",
-    "status": "Active",
-    "none": "2026-11-27"
-   },
-   {
-    "t": "Mesh Secretary Chair — Ergonomic Swivel",
-    "listed": "2026-11-16",
-    "status": "Active",
-    "none": "2026-11-27"
+    "next": "2026-12-05"
    },
    {
     "t": "Student Desk Chair Set — Senior High to Tertiary Level",
     "listed": "2026-11-12",
     "status": "Active",
-    "next": "2026-12-04"
+    "next": "2026-12-05"
    },
    {
     "t": "White Foldable Chairs — Pack of 10 (Black Frame)",
-    "listed": "2026-10-31",
+    "listed": "2026-11-12",
     "status": "Active",
-    "next": "2026-12-04"
+    "next": "2026-12-05"
    },
    {
     "t": "White Foldable 8-Seater Set — 8ft Table + 8 Chairs",
-    "listed": "2026-10-31",
+    "listed": "2026-11-12",
     "status": "Active",
-    "next": "2026-12-04"
+    "next": "2026-12-05"
    },
    {
     "t": "White Foldable 4-Seater Set — 4ft Table + 4 Chairs",
-    "listed": "2026-10-31",
+    "listed": "2026-11-12",
     "status": "Active",
-    "next": "2026-12-04"
+    "next": "2026-12-05"
    },
    {
     "t": "White Foldable Chair — Black Frame, Handle Slot",
-    "listed": "2026-10-31",
+    "listed": "2026-11-12",
     "status": "Active",
-    "next": "2026-12-04"
+    "next": "2026-12-05"
    }
   ]
  },
