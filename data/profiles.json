@@ -28,7 +28,7 @@
    "mode": "check"
   },
   "fb": {
-   "d": "2026-11-27",
+   "d": "2026-11-28",
    "link": "favisionenterprize.github.io",
    "pinned": null,
    "linkOk": true,
@@ -56,13 +56,6 @@
   }
  },
  "runs": [
-  {
-   "d": "2026-10-18",
-   "net": "x",
-   "mode": "fix",
-   "linkOk": true,
-   "pinOk": false
-  },
   {
    "d": "2026-10-18",
    "net": "ig",
@@ -756,6 +749,13 @@
    "linkOk": false,
    "pinOk": false,
    "stopped": "X showed \"payment / subscription: “Home Explore 1 Notifications Chat Grok Profile More Post FA Vision Enterprise @FaVisionEnt Home For you Following NFL NB”\". Stopped."
+  },
+  {
+   "d": "2026-11-28",
+   "net": "fb",
+   "mode": "check",
+   "linkOk": true,
+   "pinOk": false
   }
  ]
 }
