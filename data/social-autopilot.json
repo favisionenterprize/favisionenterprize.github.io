@@ -12066,16 +12066,18 @@
    "p": "FAV-010",
    "ok": false,
    "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-11-28",
+   "t": "2026-11-28T15:01:41.637Z",
+   "net": "tiktok",
+   "k": "presence:fav-014",
+   "p": "FAV-014",
+   "ok": true,
+   "now": true
   }
  ],
  "runs": [
-  {
-   "d": "2026-10-31",
-   "t": "2026-10-31T07:08:49.644Z",
-   "kind": "tiktok",
-   "tried": 1,
-   "ok": 1
-  },
   {
    "d": "2026-10-31",
    "t": "2026-10-31T07:09:28.649Z",
@@ -13476,6 +13478,13 @@
    "tried": 0,
    "ok": 0,
    "stopped": "X showed \"payment / subscription: “Home Explore Notifications Chat Grok Profile More Post FA Vision Enterprise @FaVisionEnt Home Post Get Grok Bot with X P”\". Nothing more was posted."
+  },
+  {
+   "d": "2026-11-28",
+   "t": "2026-11-28T15:01:57.195Z",
+   "kind": "tiktok",
+   "tried": 1,
+   "ok": 1
   }
  ]
 }
