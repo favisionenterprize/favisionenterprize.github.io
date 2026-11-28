@@ -103,6 +103,30 @@
     "id": "1846863210099572",
     "renew": "wait",
     "next": "2026-12-05"
+   },
+   {
+    "t": "White Dressing Table with Mirror & Stool",
+    "price": 7450,
+    "status": "Active",
+    "listed": "2026-11-28",
+    "id": "1431449675686600",
+    "renew": "wait"
+   },
+   {
+    "t": "Wardrobe — 4-Door with Top Cabinets",
+    "price": 9800,
+    "status": "Active",
+    "listed": "2026-11-28",
+    "id": "1161439143482278",
+    "renew": "wait"
+   },
+   {
+    "t": "L-Shaped Sectional Sofa — Grey Fabric",
+    "price": 15500,
+    "status": "Active",
+    "listed": "2026-11-28",
+    "id": "1671470981045343",
+    "renew": "wait"
    }
   ]
  },
@@ -1439,6 +1463,36 @@
    "ok": true,
    "id": "2370148787139577",
    "verified": true
+  },
+  {
+   "d": "2026-11-28",
+   "t": "2026-11-28T00:15:17.003Z",
+   "p": "FAV-009",
+   "title": "White Dressing Table with Mirror & Stool",
+   "price": 7450,
+   "ok": true,
+   "id": "1431449675686600",
+   "verified": true
+  },
+  {
+   "d": "2026-11-28",
+   "t": "2026-11-28T00:15:59.330Z",
+   "p": "FAV-010",
+   "title": "Wardrobe — 4-Door with Top Cabinets",
+   "price": 9800,
+   "ok": true,
+   "id": "1161439143482278",
+   "verified": true
+  },
+  {
+   "d": "2026-11-28",
+   "t": "2026-11-28T00:16:38.791Z",
+   "p": "FAV-011",
+   "title": "L-Shaped Sectional Sofa — Grey Fabric",
+   "price": 15500,
+   "ok": true,
+   "id": "1671470981045343",
+   "verified": true
   }
  ],
  "runs": [
@@ -1905,6 +1959,12 @@
    "d": "2026-11-28",
    "kind": "scan",
    "n": 10
+  },
+  {
+   "d": "2026-11-28",
+   "kind": "list",
+   "tried": 3,
+   "ok": 3
   }
  ],
  "skip": []
