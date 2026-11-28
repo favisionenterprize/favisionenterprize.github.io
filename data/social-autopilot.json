@@ -12075,16 +12075,49 @@
    "p": "FAV-014",
    "ok": true,
    "now": true
+  },
+  {
+   "d": "2026-11-28",
+   "t": "2026-11-28T15:05:41.929Z",
+   "net": "x",
+   "k": "box:FAV-037",
+   "p": "FAV-037",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-11-28",
+   "t": "2026-11-28T15:06:19.045Z",
+   "net": "x",
+   "k": "box:FAV-038",
+   "p": "FAV-038",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-11-28",
+   "t": "2026-11-28T15:06:56.726Z",
+   "net": "x",
+   "k": "box:FAV-039",
+   "p": "FAV-039",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find X's post box"
+  },
+  {
+   "d": "2026-11-28",
+   "t": "2026-11-28T15:07:34.435Z",
+   "net": "x",
+   "k": "box:FAV-041",
+   "p": "FAV-041",
+   "ok": false,
+   "now": true,
+   "why": "Couldn't find X's post box"
   }
  ],
  "runs": [
-  {
-   "d": "2026-10-31",
-   "t": "2026-10-31T07:09:28.649Z",
-   "kind": "tiktok",
-   "tried": 1,
-   "ok": 0
-  },
   {
    "d": "2026-10-31",
    "t": "2026-10-31T07:10:12.525Z",
@@ -13485,6 +13518,13 @@
    "kind": "tiktok",
    "tried": 1,
    "ok": 1
+  },
+  {
+   "d": "2026-11-28",
+   "t": "2026-11-28T15:07:50.731Z",
+   "kind": "x",
+   "tried": 4,
+   "ok": 0
   }
  ]
 }
