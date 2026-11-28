@@ -1,6 +1,6 @@
 {
- "d": "2026-11-27",
- "t": "2026-11-27T23:47:03.812Z",
+ "d": "2026-11-28",
+ "t": "2026-11-28T00:04:05.101Z",
  "settings": {
   "artists_first": true,
   "artists": [
@@ -13,25 +13,32 @@
  },
  "sounds": [
   {
-   "name": "Inspire The World",
-   "artist": "DensoMusic",
+   "name": "Sixième Mouvement",
+   "artist": "Yves Nord",
    "platform": "ig",
    "rank": 1,
-   "d": "2026-11-26"
+   "d": "2026-11-28"
   },
   {
-   "name": "Oh la la amour",
-   "artist": "Julio Iglesias",
+   "name": "Let It All Work Out (feat. Sampha) Lil Wayne",
+   "artist": "Lil Wayne",
    "platform": "ig",
    "rank": 2,
-   "d": "2026-11-26"
+   "d": "2026-11-28"
   },
   {
-   "name": "Chop Suey!",
-   "artist": "System Of A Down",
+   "name": "Jacob and the Stone Emile Mosseri",
+   "artist": "Emile Mosseri",
    "platform": "ig",
    "rank": 3,
-   "d": "2026-11-26"
+   "d": "2026-11-28"
+  },
+  {
+   "name": "HE PAID THE DEBT",
+   "artist": "NK GOD",
+   "platform": "ig",
+   "rank": 4,
+   "d": "2026-11-28"
   }
  ],
  "manual": [],
@@ -2303,16 +2310,6 @@
    "text": "4 posts went out without a sound"
   },
   {
-   "d": "2026-11-17",
-   "platform": "tiktok",
-   "text": "4 posts went out without a sound"
-  },
-  {
-   "d": "2026-11-17",
-   "platform": "tiktok",
-   "text": "4 posts went out without a sound"
-  },
-  {
    "d": "2026-11-18",
    "text": "couldn't confirm the Ghana region on Creative Center"
   },
@@ -2511,6 +2508,14 @@
   {
    "d": "2026-11-27",
    "text": "no Instagram audio seen on Reels"
+  },
+  {
+   "d": "2026-11-28",
+   "text": "no 'Approved for business use' filter seen: check the sounds are in TikTok's Commercial Music Library"
+  },
+  {
+   "d": "2026-11-28",
+   "text": "couldn't read the Creative Center song list"
   }
  ]
 }
